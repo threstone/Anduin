@@ -1,0 +1,1 @@
+node .\dist\gate\src\bin\main.js maxUser=Num(1000) socketListenPort=Num(1001)
