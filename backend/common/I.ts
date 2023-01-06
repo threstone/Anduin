@@ -6,31 +6,39 @@ export interface IGameMessage {
     toJSON(): { [k: string]: any };
 }
 
+export interface IMysqlOption {
+    host: string
+    port: number
+    user: string
+    password: string
+    timezone: string
+}
+
 //启动参数
 export interface ILauncherOption {
-    socketListenPort : number
-    redisServer:string
-    redisPass : string
-    saveRecordHost:String
-    maxUser : number
-    processName:string //进程名称 影响日志命名
+    socketListenPort: number
+    redisServer: string
+    redisPass: string
+    saveRecordHost: String
+    maxUser: number
+    processName: string //进程名称 影响日志命名
 }
 
 //socket server
 export interface ISocketServer {
-    sendMessage(fd:number,message:IGameMessage):void
-    addProtoModule(protobufs:any,handler:any):void
+    sendMessage(fd: number, message: IGameMessage): void
+    addProtoModule(protobufs: any, handler: any): void
 }
 
 //新建日志对象参数
 export interface ILogOption {
-    logName:string
+    logName: string
     //日志类型 普通日志 或者是牌局记录 普通的日志类型一天一个文件 牌局记录 不根据天进行分类 普通日志 存储在logs下 牌局记录存储在 records
-    logType : "log" | "record"  
+    logType: "log" | "record"
     //是否输出到 console
-    toConsole:boolean 
+    toConsole: boolean
     //分类标志
-    cat? : string 
+    cat?: string
 }
 
 
@@ -50,31 +58,31 @@ export interface ILog {
 
 //游戏桌局对象
 export interface IGameTable {
-    gameId : number
-    gameLv : number
+    gameId: number
+    gameLv: number
     gameType: number
-    createTime : number
+    createTime: number
     isDestory: boolean
-    destroyReason : string
-    setGameLv(gameLv:number):void
-    setTableId(gameLv:number):void
-    init_config(gameLv:number,conf : Object):void
-    setTableSeq(seq:string):void
-    onRun(now:number):void
-    isCanJoinNewUser():boolean
-    destoryTable(reason:string):void
-    isBaiRenGame():boolean
-    initBaiRenGame():boolean
-    closeLogFile():void
-    getSeats():IGameSeat[]
+    destroyReason: string
+    setGameLv(gameLv: number): void
+    setTableId(gameLv: number): void
+    init_config(gameLv: number, conf: Object): void
+    setTableSeq(seq: string): void
+    onRun(now: number): void
+    isCanJoinNewUser(): boolean
+    destoryTable(reason: string): void
+    isBaiRenGame(): boolean
+    initBaiRenGame(): boolean
+    closeLogFile(): void
+    getSeats(): IGameSeat[]
 }
 
 //游戏玩家座位对象
 export interface IGameSeat {
-    isRobot : boolean
-    session : any
+    isRobot: boolean
+    session: any
 }
 
 export interface TeaPet {
-   getSockerServer():ISocketServer
+    getSockerServer(): ISocketServer
 }

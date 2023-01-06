@@ -5,14 +5,15 @@ import { CommonUtils } from '../../common/CommonUtils';
 import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
 import { HallConnectorMgr } from './rpc/HallConnectorMgr';
+import { LoginPto } from '../../hall/src/CommonProto';
 
 const logger = getLogger();
 
 export class GlobalVar {
 
-    private static startupParam: ILauncherOption;
-    private static socketServer: SocketServer;
-    private static hallConnectorMgr: HallConnectorMgr
+    public static startupParam: ILauncherOption;
+    public static socketServer: SocketServer;
+    public static hallConnectorMgr: HallConnectorMgr
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -24,6 +25,9 @@ export class GlobalVar {
 
         logger.info('init connector');
         this.initConnector();
+
+
+
     }
 
     private static initConnector() {

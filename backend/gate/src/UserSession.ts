@@ -1,11 +1,12 @@
 
 import * as WS from 'ws';
 export class UserSession {
-    socket: WS
-    connectionTime: number // 连接时间用于做验证
-    remoteAddress: string
-    socketIndex: number //在 SocketServer 的下标
-    
+    socket: WS;
+    connectionTime: number;// 连接时间用于做验证
+    remoteAddress: string;
+    socketIndex: number; //在 SocketServer 的下标
+    uid: number;
+    isAuthorized: boolean;
     close() {
         this.socket.close();
     }

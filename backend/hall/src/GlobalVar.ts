@@ -4,25 +4,29 @@ import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
 import { CommonUtils } from '../../common/CommonUtils';
 import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
+import { DBManager } from './DBManager';
 import * as allProto from './CommonProto';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as mysqlConfig from '../../common/config/mysql.json';
 
 const logger = getLogger();
-
 export class GlobalVar {
 
-    private static startupParam: ILauncherOption;
-    private static socketServer: SocketServer;
+    public static startupParam: ILauncherOption;
+    public static socketServer: SocketServer;
+    public static dbMgr: DBManager;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
         // init logger configuration
         configure(loggerConfig);
-        //init socket server
-        this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
         //initMsgHandler
         this.initMsgHandler();
+        //init socket server
+        this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
+        //init db manager
+        this.dbMgr = new DBManager(mysqlConfig);
     }
 
     /**
@@ -76,7 +80,6 @@ export class GlobalVar {
                     }
                 }
             }
-
         }
     }
 }

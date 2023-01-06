@@ -2,17 +2,18 @@
 import * as RPC from "./RPC"
 import { ILog } from "../I"
 
-let uuid = "6ef03629-a2f2-465e-854d-dd6c17ba333d"
+let uuid = "edd68b12-f3c3-4544-9264-fd6e86d3e8cb"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer {
     private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["login"]
+    private funs_: string[] = ["reqLogin", "reqRegister", "transferToHall"]
     get funs() { return this.funs_ }
     get rpc() { return this.rpcServer };
 
     constructor(port: number, logger: ILog) {
         this.rpcServer.startServer(port, uuid, logger);
+        this.init();
     }
 
     init() {
@@ -25,7 +26,13 @@ export abstract class HallRPCServer {
     }
 
     //登录
-    abstract login(clientId: number, token: string, isDebug: boolean, ip: string, nodeId: number): Promise<Buffer>
+    abstract reqLogin(clientId: number, buff: Buffer): Promise<number>
+
+    //注册
+    abstract reqRegister(clientId: number, buff: Buffer): Promise<Buffer>
+
+    //转发
+    abstract transferToHall(clientId: number, uid: number, buff: Buffer): void
 
     //s2c
     //主动告知网关转发消息
@@ -67,15 +74,39 @@ export abstract class HallRPCClient {
     abstract onClose();
 
     //登录
-    async callLogin(token: string, isDebug: boolean, ip: string, nodeId: number): Promise<Buffer> {
-        let args = [token, isDebug, ip, nodeId]
-        let res: any = await this.rpc.call("login", args)
+    async callReqLogin(buff: Buffer): Promise<number> {
+        let args = [buff]
+        let res: any = await this.rpc.call("reqLogin", args)
         return res
     }
 
-    sendLogin(token: string, isDebug: boolean, ip: string, nodeId: number) {
-        let args = [token, isDebug, ip, nodeId]
-        this.rpc.send("login", args)
+    sendReqLogin(buff: Buffer) {
+        let args = [buff]
+        this.rpc.send("reqLogin", args)
+    }
+
+    //注册
+    async callReqRegister(buff: Buffer): Promise<Buffer> {
+        let args = [buff]
+        let res: any = await this.rpc.call("reqRegister", args)
+        return res
+    }
+
+    sendReqRegister(buff: Buffer) {
+        let args = [buff]
+        this.rpc.send("reqRegister", args)
+    }
+
+    //转发
+    async callTransferToHall(uid: number, buff: Buffer): Promise<void> {
+        let args = [uid, buff]
+        let res: any = await this.rpc.call("transferToHall", args)
+        return res
+    }
+
+    sendTransferToHall(uid: number, buff: Buffer) {
+        let args = [uid, buff]
+        this.rpc.send("transferToHall", args)
     }
 
     //s2c

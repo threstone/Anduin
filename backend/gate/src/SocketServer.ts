@@ -2,6 +2,8 @@ import * as WS from 'ws';
 import * as http from 'http';
 import { UserSession } from './UserSession';
 import { ILog } from '../../common/I';
+import { GlobalVar } from './GlobalVar';
+import { LoginHandler } from './handler/LoginHandler';
 export class SocketServer {
     private clientSocket_: WS.Server
     private clients: UserSession[] = []
@@ -79,9 +81,28 @@ export class SocketServer {
             return;
         }
 
-        // this.routeMsg(userSession, message)
-        // const buffer = message as Buffer;
-        // const cmd = buffer.readInt32LE(0);
-        // const scmd = buffer.readInt32LE(4);
+        this.routeMsg(userSession, message);
     }
+
+    //分发路由消息
+    public routeMsg(userSession: UserSession, message: WS.Data) {
+        const buffer = message as Buffer;
+        const cmd = buffer.readInt32BE(0);
+        const scmd = buffer.readInt32BE(4);
+
+        //只有loginProto协议(cmd == 1)可以跳过登录，其他协议都不允许
+        if (cmd === 1) {
+            LoginHandler.handlerLoginPto(userSession, scmd, buffer);
+            return;
+        }
+
+        if (userSession.isAuthorized !== true) {
+            return;
+        }
+        if (cmd >= 0 && cmd <= 99) {
+            GlobalVar.hallConnectorMgr.getRandLifeLogin().sendTransferToHall(userSession.uid, buffer);
+        }
+    }
+
+
 }
