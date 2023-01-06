@@ -38,6 +38,7 @@ function readFile(rpc_funPath, outputPath) {
         '    get rpc() { return this.rpcServer };\n\n' +
         '    constructor(port: number, logger: ILog) {\n' +
         '        this.rpcServer.startServer(port, uuid, logger);\n' +
+        '        this.init();\n' +
         '    }\n\n' +
         '    init() {\n' +
         '        this.rpc.registerFuns(this)\n' +
@@ -121,12 +122,12 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
                 }
             }
             args += ']'
+            if (strOne.indexOf('Promise<') === -1) {
+                let resultTypeIndex = strOne.lastIndexOf(':');
+                strOne = `${strOne.substring(0, resultTypeIndex + 1)}Promise<${strOne.substring(resultTypeIndex + 1)}>`
+            }
             if (isS2C) {//s2c需要clientid
                 //如果返回值是非Promise对象
-                if (strOne.indexOf('Promise<' === -1)) {
-                    let resultTypeIndex = strOne.lastIndexOf(':');
-                    strOne = `${strOne.substring(0, resultTypeIndex + 1)}Promise<${strOne.substring(resultTypeIndex + 1)}>`
-                }
                 let param = '(clientId:number,' + strOne.substring(startStr + 1, strOne.length)
                 //生成call
                 let header = funName.substring(0, 1)//一个字符小写的

@@ -2,7 +2,7 @@
 import * as RPC from "./RPC"
 import { ILog } from "../I"
 
-let uuid = "76aca904-5b9b-4968-a2e6-eaead899fc93"
+let uuid = "307864a2-0dd4-4c7e-9265-672bee7b84fc"
 
 //服务器的虚函数定义
 export abstract class LogicRPCServer {
@@ -13,6 +13,7 @@ export abstract class LogicRPCServer {
 
     constructor(port: number, logger: ILog) {
         this.rpcServer.startServer(port, uuid, logger);
+        this.init();
     }
 
     init() {
@@ -38,7 +39,7 @@ export abstract class LogicRPCServer {
 
     //s2c
     //剔掉玩家
-    async callKickUser(clientId:number,uid:number,buffer:Buffer):Promise<Promise<boolean>>    {
+    async callKickUser(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
         let res: any = await this.rpc.call(clientId,"kickUser",args)
         return res
@@ -50,7 +51,7 @@ export abstract class LogicRPCServer {
     }
 
     // 转发来自login的消息给前端
-    async callLoginTransfer(clientId:number,uid:number,buffer:Buffer):Promise<Promise<boolean>>    {
+    async callLoginTransfer(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
         let res: any = await this.rpc.call(clientId,"loginTransfer",args)
         return res
@@ -62,7 +63,7 @@ export abstract class LogicRPCServer {
     }
 
     //踢掉所有在线玩家
-    async callKickAllUser(clientId:number,buffer:Buffer):Promise<Promise<string>>    {
+    async callKickAllUser(clientId:number,buffer:Buffer):Promise<string>    {
         let args = [buffer]
         let res: any = await this.rpc.call(clientId,"kickAllUser",args)
         return res
@@ -74,7 +75,7 @@ export abstract class LogicRPCServer {
     }
 
     //踢掉指定在玩某些游戏的玩家
-    async callKickUserByGameId(clientId:number,gameIds:string,buffer:Buffer):Promise<Promise<string>>    {
+    async callKickUserByGameId(clientId:number,gameIds:string,buffer:Buffer):Promise<string>    {
         let args = [gameIds,buffer]
         let res: any = await this.rpc.call(clientId,"kickUserByGameId",args)
         return res
@@ -86,7 +87,7 @@ export abstract class LogicRPCServer {
     }
 
     //主动告知网关转发消息
-    async callTransferToGate(clientId:number,uid:number,buffer:Buffer):Promise<Promise<boolean>>    {
+    async callTransferToGate(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
         let res: any = await this.rpc.call(clientId,"transferToGate",args)
         return res

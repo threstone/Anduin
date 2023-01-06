@@ -1,6 +1,10 @@
 interface HallRPC {
     //登录
-    login(token: string, isDebug: boolean, ip: string, nodeId: number): Promise<Buffer>
+    reqLogin(buff: Buffer): Promise<number>
+    //注册
+    reqRegister(buff: Buffer): Promise<Buffer>
+    //转发
+    transferToHall(uid: number, buff: Buffer): void
     //s2c
     //主动告知网关转发消息
     transferToGate(uid: number, buffer: Buffer): boolean

@@ -1,9 +1,9 @@
 syntax = "proto3";
 package HallPto;
 
-//更换头像
-message C_CHANGE_HEAD{
-	int32 cmd = 1[default = 2]; 
-	int32 scmd = 2[default = 4];
-	int32 headIndex = 3;
-}
+// //更换头像
+// message C_CHANGE_HEAD{
+// 	int32 cmd = 1[default = 2]; 
+// 	int32 scmd = 2[default = 4];
+// 	int32 headIndex = 3;
+// }
