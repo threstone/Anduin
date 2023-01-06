@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="400,400">
+  <displayList>
+    <image id="n13_ru1k" name="bg" src="ru1k6" fileName="common/resource/comp_120_164_1.png" xy="0,0" size="400,400"/>
+    <image id="n14_ru1k" name="accountInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="72,54" size="252,35"/>
+    <text id="n1_ggbm" name="accountInput" xy="72,54" size="252,35" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="" input="true" prompt="  点此输入用户名"/>
+    <image id="n15_ru1k" name="pwdInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="72,121" size="252,35"/>
+    <text id="n3_ggbm" name="pwdInput" xy="72,121" size="252,35" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="" input="true" prompt="  点此输入密码" password="true"/>
+    <image id="n16_ru1k" name="pwdAgainInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="72,188" size="252,35"/>
+    <text id="n6_ggbm" name="pwdAgainInput" xy="72,188" size="252,35" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="" input="true" prompt="  点此再次输入密码" password="true"/>
+    <image id="n17_ru1k" name="nickInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="72,253" size="252,35"/>
+    <text id="n8_ggbm" name="nickInput" xy="72,253" size="252,35" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="" input="true" prompt="  点此输入昵称"/>
+    <component id="n11_ru1k" name="regBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="114,313"/>
+    <loader id="n18_d9zu" name="close" xy="340,2" size="58,62" url="ui://yaux2xporu1k5" autoSize="true"/>
+  </displayList>
+</component>

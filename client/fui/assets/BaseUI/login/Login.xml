@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720" designImageLayer="1" bgColorEnabled="true" bgColor="#6699cc">
+  <displayList>
+    <image id="n17_ru1k" name="accountInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="514,248" size="252,35"/>
+    <text id="n2_inlo" name="accountInput" xy="514,248" size="252,36" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="qqqq" input="true" prompt="  点此输入用户名"/>
+    <image id="n16_ru1k" name="passwordInputBg" src="ru1k7" fileName="common/resource/comp_696_152.png" xy="514,315" size="252,35"/>
+    <text id="n9_ggbm" name="passwordInput" xy="514,315" size="252,36" fontSize="26" color="#3333ff" ubb="true" autoSize="none" text="qqqq" input="true" prompt="  点此输入密码" password="true"/>
+    <component id="n12_ru1k" name="loginBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="446,395"/>
+    <component id="n13_ru1k" name="regBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="661,395"/>
+    <component id="n15_ru1k" name="regCom" src="ru1k3" fileName="login/Register.xml" xy="440,160" visible="false"/>
+  </displayList>
+</component>

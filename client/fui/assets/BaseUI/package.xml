@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="yaux2xpo">
+  <resources>
+    <image id="ru1k1" name="comp_172_65.png" path="/common/resource/"/>
+    <component id="ru1k2" name="Button1.xml" path="/common/btn/"/>
+    <component id="ru1k3" name="Register.xml" path="/login/"/>
+    <component id="ru1k4" name="Login.xml" path="/login/" exported="true"/>
+    <image id="ru1k5" name="comp_58_62.png" path="/common/resource/"/>
+    <image id="ru1k6" name="comp_120_164_1.png" path="/common/resource/" scale="9grid" scale9grid="30,41,60,82"/>
+    <image id="ru1k7" name="comp_696_152.png" path="/common/resource/"/>
+    <component id="ru1k8" name="Hall.xml" path="/" exported="true"/>
+  </resources>
+  <publish name="" genCode="true"/>
+</packageDescription>

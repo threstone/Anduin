@@ -1,0 +1,25 @@
+{
+	"groups": [
+		{
+			"keys": "BaseUI,BaseUI_atlas0,server_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "fui/BaseUI.fui",
+			"type": "bin",
+			"name": "BaseUI"
+		},
+		{
+			"url": "fui/BaseUI_atlas0.png",
+			"type": "image",
+			"name": "BaseUI_atlas0"
+		},
+		{
+			"url": "server.json",
+			"type": "json",
+			"name": "server_json"
+		}
+	]
+}
