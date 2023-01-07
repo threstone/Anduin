@@ -12,6 +12,15 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\allStep.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序1",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\dist\\src\\main.js"
         }
     ]
 }
