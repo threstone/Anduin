@@ -1,15 +1,16 @@
 import { getLogger } from 'log4js';
+import { RedisType } from '../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import * as RpcCommon from '../../common/rpc/RpcCommonHall';
+import * as RpcCommon from '../../common/rpc/rpc_class/RpcCommonHall';
+import { GlobalVar } from './GlobalVar';
 
 const logger = getLogger();
 export class SocketServer extends RpcCommon.HallRPCServer {
-
     async reqRegister(clientId: number, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientId, null, buff);
     }
 
-    async reqLogin(clientId: number, buff: Buffer): Promise<number> {
+    async reqLogin(clientId: number, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientId, null, buff);
     }
 

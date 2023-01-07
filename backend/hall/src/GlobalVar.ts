@@ -9,6 +9,9 @@ import * as allProto from './CommonProto';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as mysqlConfig from '../../common/config/mysql.json';
+import * as redisConfig from '../../common/config/redis.json';
+import { RedisMgr } from '../../common/redis/RedisMgr';
+import { RedisType } from '../../common/ConstDefine';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -16,6 +19,7 @@ export class GlobalVar {
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
     public static dbMgr: DBManager;
+    public static redisMgr: RedisMgr;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -27,6 +31,8 @@ export class GlobalVar {
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
         //init db manager
         this.dbMgr = new DBManager(mysqlConfig);
+        //init redisMgr
+        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo]);
     }
 
     /**

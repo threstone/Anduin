@@ -7,7 +7,7 @@ for (let index = 0; index < dirInfo.length; index++) {
     const fileName = dirInfo[index];
     let flag = fileName.substring(0, fileName.indexOf('.'));
     // flag = flag.charAt(0).toUpperCase() + flag.substring(1);
-    readFile(`./rpc_handler/${fileName}`, `./rpc_class/RpcCommon${flag}.ts`);
+    readFile(`./rpc_handler/${fileName}`, `../../backend/common/rpc/rpc_class/RpcCommon${flag}.ts`);
 }
 
 function readFile(rpc_funPath, outputPath) {
@@ -28,8 +28,8 @@ function readFile(rpc_funPath, outputPath) {
         }
     }
     let funs = createFunLists(1, lineArr, server2clientPos)
-    let serverClass = '//此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts\nimport * as RPC from "./RPC"\n' +
-        'import { ILog } from "../I"\n\n' +
+    let serverClass = '//此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts\nimport * as RPC from "../RPC"\n' +
+        'import { ILog } from "../../I"\n\n' +
         `let uuid = "${uuid}"\n\n` +
         '//服务器的虚函数定义\n' +
         'export abstract class ' + className + 'Server {\n' +
@@ -68,8 +68,8 @@ function readFile(rpc_funPath, outputPath) {
         '\n    get port() { return this.rpc.port }' +
         '\n    get host() { return this.rpc.host }' +
         '\n    get isClose() { return this.rpc.isClose }' +
-        '\n    constructor(host: string, port: number, name: string, logger: ILog) {' +
-        '\n        this.myRpcClient.startClient(host, port, name, uuid, logger)\n    }\n' +
+        '\n    constructor(host: string, port: number, serverName: string, logger: ILog) {' +
+        '\n        this.myRpcClient.startClient(host, port, serverName, uuid, logger)\n    }\n' +
         '\n    init() {' +
         '\n        this.rpc.registerFuns(this)' +
         '\n        this.rpc.onOpen = this.onOpen.bind(this)' +

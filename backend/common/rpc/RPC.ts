@@ -436,10 +436,10 @@ export class RPC_CLIENT extends RPC_BASE {
 
     private _host: string;
     private _port: number;
-    private _name: string
+    private _serverName: string
 
     get name() {
-        return this._name
+        return this._serverName
     }
     get host() {
         return this._host
@@ -475,7 +475,7 @@ export class RPC_CLIENT extends RPC_BASE {
 
         ws_client.on("open", async () => {
             this.isClose = false;
-            logger.log("connect to rpc server success! ", this._name)
+            logger.log("connect to rpc server success! ", this._serverName)
             this.clientId = await this.call('handshake', [this._version])
             this.onOpen()
         })
@@ -488,7 +488,7 @@ export class RPC_CLIENT extends RPC_BASE {
         ws_client.on("close", () => {
             logger.log("rpc server close! ")
             if (this._sessionId == 2) {
-                logger.error("maybe rpc version wrong , please cheack rpc version! ", this.host, this.port, this._name)
+                logger.error("maybe rpc version wrong , please cheack rpc version! ", this.host, this.port, this._serverName)
             }
             this.isClose = true;
             this.onClose()
@@ -522,12 +522,12 @@ export class RPC_CLIENT extends RPC_BASE {
     /**
      * 初始化RPC CLIENT
      */
-    public startClient(host: string, port: number, name: string, version: string, iLog: ILog) {
+    public startClient(host: string, port: number, serverName: string, version: string, iLog: ILog) {
         logger = iLog;
         this._host = host;
         this._port = port;
         this._version = version;
-        this._name = name;
+        this._serverName = serverName;
         this.setReconnectServer()
         this.connectRpcServer();
     }

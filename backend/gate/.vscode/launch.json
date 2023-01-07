@@ -11,6 +11,7 @@
             "program": "${workspaceFolder}\\dist\\gate\\src\\bin\\main.js",
             // "preLaunchTask": "tsc: build - tsconfig.json",
             "args": [
+                "nodeId=gate1",
                 "maxUser=Num(1000)",
                 "socketListenPort=Num(1001)",
             ],
@@ -28,6 +29,7 @@
             //     "${workspaceFolder}/dist/src/*.js"
             // ],
             "args": [
+                "nodeId=gate1",
                 "maxUser=Num(1000)",
                 "socketListenPort=Num(1001)",
             ]

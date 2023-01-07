@@ -2,7 +2,6 @@ import { BaseDao } from './BaseDao';
 import { UserModel } from '../../../db_model/UserModel';
 import { IMysqlOption } from '../../../common/I';
 import { getLogger } from 'log4js';
-import { TBL_UserModel } from './tbl_user_model';
 
 const logger = getLogger();
 export class UserDao extends BaseDao {

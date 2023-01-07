@@ -23,7 +23,18 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         this.AddClick(this.view.regCom.close, this.onRegComCloseClick);
         this.AddClick(this.view.regCom.regBtn, this.onReqReg);
 
-        this.observe('RegisterResult', this.onRegisterResult)
+        this.observe('RegisterResult', this.onRegisterResult);
+        this.observe('LoginResult', this.onLoginResult);
+    }
+
+    onLoginResult(evt: EventData) {
+        const msg: LoginPto.S_LOGIN = evt.data;
+        if (msg.isSuccess) {
+            this.close();
+        } else {
+            this.view.touchable = true;
+            GlobalView.showTips('登录失败了,可能是密码错误,也可能是没有注册', 5000);
+        }
     }
 
     onRegisterResult(evt: EventData) {
@@ -50,7 +61,7 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         let regCom = this.view.regCom;
         if (regCom.accountInput.text.length <= 0 || regCom.pwdInput.text.length <= 0 ||
             regCom.pwdAgainInput.text.length <= 0 || regCom.nickInput.text.length <= 0) {
-            GlobalView.showTips('每一个都要填写哦', 5000)
+            GlobalView.showTips('每一个都要填写哦', 5000);
             return
         }
         if (regCom.pwdInput.text != regCom.pwdAgainInput.text) {

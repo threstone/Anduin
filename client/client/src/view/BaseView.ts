@@ -1,4 +1,11 @@
-abstract class BaseView<T extends fairygui.GComponent>{
+abstract class BaseView<T extends fairygui.GComponent> {
+
+    public static ins<T extends {}>(this: new () => T): T {
+        if (!(<any>this).__instance__) {
+            (<any>this).__instance__ = new this();
+        }
+        return (<any>this).__instance__
+    }
 
     protected view: T;
 

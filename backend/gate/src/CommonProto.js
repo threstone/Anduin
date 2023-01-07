@@ -146,8 +146,7 @@ $root.LoginPto = (function() {
         S_LOGIN.prototype.isSuccess = false;
         S_LOGIN.prototype.nick = "";
         S_LOGIN.prototype.headIndex = 0;
-        S_LOGIN.prototype.roomId = 0;
-        S_LOGIN.prototype.gameId = 0;
+        S_LOGIN.prototype.uid = 0;
 
         S_LOGIN.create = function create(properties) {
             return new S_LOGIN(properties);
@@ -166,10 +165,8 @@ $root.LoginPto = (function() {
                 w.uint32(34).string(m.nick);
             if (m.headIndex != null && Object.hasOwnProperty.call(m, "headIndex"))
                 w.uint32(40).int32(m.headIndex);
-            if (m.roomId != null && Object.hasOwnProperty.call(m, "roomId"))
-                w.uint32(48).int32(m.roomId);
-            if (m.gameId != null && Object.hasOwnProperty.call(m, "gameId"))
-                w.uint32(56).int32(m.gameId);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(48).int32(m.uid);
             return w;
         };
 
@@ -201,11 +198,7 @@ $root.LoginPto = (function() {
                         break;
                     }
                 case 6: {
-                        m.roomId = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.gameId = r.int32();
+                        m.uid = r.int32();
                         break;
                     }
                 default:
@@ -235,11 +228,8 @@ $root.LoginPto = (function() {
             if (d.headIndex != null) {
                 m.headIndex = d.headIndex | 0;
             }
-            if (d.roomId != null) {
-                m.roomId = d.roomId | 0;
-            }
-            if (d.gameId != null) {
-                m.gameId = d.gameId | 0;
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
             }
             return m;
         };
@@ -254,8 +244,7 @@ $root.LoginPto = (function() {
                 d.isSuccess = false;
                 d.nick = "";
                 d.headIndex = 0;
-                d.roomId = 0;
-                d.gameId = 0;
+                d.uid = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -272,11 +261,8 @@ $root.LoginPto = (function() {
             if (m.headIndex != null && m.hasOwnProperty("headIndex")) {
                 d.headIndex = m.headIndex;
             }
-            if (m.roomId != null && m.hasOwnProperty("roomId")) {
-                d.roomId = m.roomId;
-            }
-            if (m.gameId != null && m.hasOwnProperty("gameId")) {
-                d.gameId = m.gameId;
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
             }
             return d;
         };

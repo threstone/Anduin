@@ -85,11 +85,8 @@ declare namespace LoginPto {
         /** S_LOGIN headIndex */
         headIndex?: (number|null);
 
-        /** S_LOGIN roomId */
-        roomId?: (number|null);
-
-        /** S_LOGIN gameId */
-        gameId?: (number|null);
+        /** S_LOGIN uid */
+        uid?: (number|null);
     }
 
     /** Represents a S_LOGIN. */
@@ -116,11 +113,8 @@ declare namespace LoginPto {
         /** S_LOGIN headIndex. */
         public headIndex: number;
 
-        /** S_LOGIN roomId. */
-        public roomId: number;
-
-        /** S_LOGIN gameId. */
-        public gameId: number;
+        /** S_LOGIN uid. */
+        public uid: number;
 
         /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.

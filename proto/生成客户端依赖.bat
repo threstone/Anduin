@@ -1,2 +1,2 @@
-cd ../client/dacc_client/protobuf/
+cd ../client/client/protobuf/
 update.bat

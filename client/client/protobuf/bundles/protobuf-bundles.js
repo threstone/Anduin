@@ -180,8 +180,7 @@ $root.LoginPto = (function() {
          * @property {boolean|null} [isSuccess] S_LOGIN isSuccess
          * @property {string|null} [nick] S_LOGIN nick
          * @property {number|null} [headIndex] S_LOGIN headIndex
-         * @property {number|null} [roomId] S_LOGIN roomId
-         * @property {number|null} [gameId] S_LOGIN gameId
+         * @property {number|null} [uid] S_LOGIN uid
          */
 
         /**
@@ -240,20 +239,12 @@ $root.LoginPto = (function() {
         S_LOGIN.prototype.headIndex = 0;
 
         /**
-         * S_LOGIN roomId.
-         * @member {number} roomId
+         * S_LOGIN uid.
+         * @member {number} uid
          * @memberof LoginPto.S_LOGIN
          * @instance
          */
-        S_LOGIN.prototype.roomId = 0;
-
-        /**
-         * S_LOGIN gameId.
-         * @member {number} gameId
-         * @memberof LoginPto.S_LOGIN
-         * @instance
-         */
-        S_LOGIN.prototype.gameId = 0;
+        S_LOGIN.prototype.uid = 0;
 
         /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.
@@ -277,10 +268,8 @@ $root.LoginPto = (function() {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.nick);
             if (message.headIndex != null && Object.hasOwnProperty.call(message, "headIndex"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.headIndex);
-            if (message.roomId != null && Object.hasOwnProperty.call(message, "roomId"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.roomId);
-            if (message.gameId != null && Object.hasOwnProperty.call(message, "gameId"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.gameId);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
             return writer;
         };
 
@@ -323,11 +312,7 @@ $root.LoginPto = (function() {
                         break;
                     }
                 case 6: {
-                        message.roomId = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.gameId = reader.int32();
+                        message.uid = reader.int32();
                         break;
                     }
                 default:

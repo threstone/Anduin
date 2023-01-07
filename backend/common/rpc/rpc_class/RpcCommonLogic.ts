@@ -1,8 +1,8 @@
 //此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts
-import * as RPC from "./RPC"
-import { ILog } from "../I"
+import * as RPC from "../RPC"
+import { ILog } from "../../I"
 
-let uuid = "307864a2-0dd4-4c7e-9265-672bee7b84fc"
+let uuid = "6f1a1181-b24b-4903-9449-004b4072d648"
 
 //服务器的虚函数定义
 export abstract class LogicRPCServer {
@@ -111,8 +111,8 @@ export abstract class LogicRPCClient {
     get port() { return this.rpc.port }
     get host() { return this.rpc.host }
     get isClose() { return this.rpc.isClose }
-    constructor(host: string, port: number, name: string, logger: ILog) {
-        this.myRpcClient.startClient(host, port, name, uuid, logger)
+    constructor(host: string, port: number, serverName: string, logger: ILog) {
+        this.myRpcClient.startClient(host, port, serverName, uuid, logger)
     }
 
     init() {

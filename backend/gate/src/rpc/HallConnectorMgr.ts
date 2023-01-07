@@ -12,7 +12,7 @@ export class HallConnectorMgr {
         this.logger = logger;
         for (let index = 0; index < loginsConn.length; index++) {
             const login = loginsConn[index];
-            let loginConnServer = new HallConnector(login.ip, login.port, 'Hall_' + login.nodeId, logger);
+            let loginConnServer = new HallConnector(login.ip, login.port, login.nodeId, logger);
             loginConnServer.init();
             this.logins_.set(index, loginConnServer);
         }
