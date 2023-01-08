@@ -1,17 +1,28 @@
-export class ProtoFile {
-    messageMap = new Map<string, ProtoMessage>();
-    packageName: string;
+import { Relationship } from "./Relationship";
 
-    setMessage(message: ProtoMessage) {
-        if (this.messageMap.has(message.messageName)) {
-            throw ''
-        }
-        this.messageMap.set(message.messageName, message)
+export class NamespaceInfo {
+    name: string;
+    messageMap = new Map<string, AttrInfo[]>();
+    enumMap = new Map<string, EnumInfo[]>();
+    constructor(name: string) {
+        this.name = name;
     }
+    relationship: Relationship;
 }
 
-export class ProtoMessage {
-    messageName: string;
-    common: string;
-    endIndex: number;
+export interface EnumInfo {
+    key: string;
+    value: number;
+}
+
+export interface AttrInfo {
+    attrName: string;
+    type: string;
+    id: number;
+    options: Options;
+    rule: string;
+}
+
+export interface Options {
+    default: any;
 }

@@ -4,13 +4,10 @@ import * as configs from '../config';
 
 async function main() {
     let protoBufGenerator = new ProtoBufGenerator();
-    await protoBufGenerator.startGen(configs)
+    await protoBufGenerator.startGen(configs);
 
     let normalBufferGenerator = new NormalBufferGenerator();
     normalBufferGenerator.startGen(configs);
 }
-
-process.on('unhandledRejection', () => {
-})
 
 main(); 

@@ -21,14 +21,13 @@ export class ProtoBufGenerator {
             fs.mkdirSync(config.targetPath)
         }
 
-        let files = config.commonFiles;
         let fileName = '';
-        for (let i = 0; i < files.length; i++) {
-
-            if (path.extname(files[i]) != ".proto") {
+        for (let i = 0; i < config.commonFiles.length; i++) {
+            let filePath = config.commonFiles[i];
+            if (path.extname(filePath) != ".proto") {
                 continue;
             }
-            fileName += ' ' + config.protoFilesRoot + files[i];
+            fileName += ` ${filePath}`;
         }
 
         const jsRealPath = config.targetPath + config.targetName + 'Proto.js';

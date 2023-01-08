@@ -1,6 +1,4 @@
 export interface ToolsConfig {
-    /**proto文件所在目录 */
-    protoFilesRoot: string
     /**protobuf 生成可选 */
     noCreate: boolean,
     /**protobuf 生成可选 */
@@ -11,7 +9,7 @@ export interface ToolsConfig {
     targetName: string
     /**protobuf 生成可选 */
     isJsMin: boolean,
-    /**选择生成的proto文件数组 */
+    /**选择生成的proto文件数组,填写文件相对路径或者绝对路径 */
     commonFiles: string[],
     /**生成类型 */
     generateType: GenerateType
