@@ -1,5 +1,7 @@
 import { BaseDao } from './BaseDao';
 import { UserModel } from '../../../db_model/UserModel';
+import { FriendModel } from '../../../db_model/FriendModel';
+import { AddFriendRecord } from '../../../db_model/AddFriendRecord';
 import { IMysqlOption } from '../../../common/I';
 import { getLogger } from 'log4js';
 
@@ -18,17 +20,8 @@ export class UserDao extends BaseDao {
             logging: false,
         });
         logger.info('user开启数据库连接');
-        this.sequelize_.addModels([UserModel]);
+        this.sequelize_.addModels([UserModel, FriendModel, AddFriendRecord]);
         this.sequelize_.sync();
-
-        // setTimeout(async () => {
-        //     let res = await this.isExist('111');
-        //     let data = new UserModel();
-        //     data.account = 'account';
-        //     data.password = 'password';
-        //     data.nick = 'nick';
-        //     data.save();
-        // }, 5555);
     }
 
     async getUserInfo(account: string, password: string): Promise<UserModel> {

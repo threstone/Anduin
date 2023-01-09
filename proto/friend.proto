@@ -1,0 +1,44 @@
+syntax = "proto3";
+package FriendPto;
+
+//客户端请求好友信息
+message C_FRIEND_INFO{
+	int32 cmd = 1[default = 3]; 
+	int32 scmd = 2[default = 1];
+}
+
+//好友信息返回
+message S_FRIEND_INFO{
+	int32 cmd = 1[default = 3]; 
+	int32 scmd = 2[default = 2];
+	repeated Friend list = 3; 
+}
+
+
+//客户端请求添加好友
+message C_ADD_FRIEND{
+	int32 cmd = 1[default = 3]; 
+	int32 scmd = 2[default = 3];
+	int32 uid = 3;
+}
+
+//请求添加好友结果
+message S_ADD_FRIEND_RESULT{
+	int32 cmd = 1[default = 3]; 
+	int32 scmd = 2[default = 4];
+	bool isSuccess = 3;
+	Friend friend = 4;
+}
+
+//他人请求添加好友
+message S_ADD_FRIEND{
+	int32 cmd = 1[default = 3]; 
+	int32 scmd = 2[default = 4];
+	string nick = 3;
+	int32 uid = 4; 
+}
+
+message Friend{
+	int32 uid = 1;
+	string nick = 2;
+}

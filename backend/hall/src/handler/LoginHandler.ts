@@ -24,7 +24,7 @@ export class LoginHandler extends BaseHandler {
             replyMsg.isSuccess = true;
             replyMsg.headIndex = userInfo.headIndex;
             replyMsg.nick = userInfo.nick;
-            replyMsg.uid = userInfo.id;
+            replyMsg.uid = userInfo.uid;
             //设置玩家信息
             GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${userInfo.id}`, (userInfo as any).dataValues, -1);
             GlobalVar.redisMgr.getClient(RedisType.userGate).setData(`${userInfo.id}`, `${clientId}`, -1);

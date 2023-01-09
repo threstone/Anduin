@@ -112,7 +112,7 @@ export class SocketServer {
             return;
         }
         if (cmd >= 0 && cmd <= 99) {
-            GlobalVar.hallConnectorMgr.getRandLifeLogin().sendTransferToHall(socket.uid, buffer);
+            GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendTransferToHall(socket.uid, buffer);
         }
     }
 }

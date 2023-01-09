@@ -1,4 +1,5 @@
 class LoginModel extends BaseModel {
+
     C_LOGIN(account: string, pwd: string) {
         const msg = new LoginPto.C_LOGIN();
         msg.account = account;
@@ -16,6 +17,10 @@ class LoginModel extends BaseModel {
 
     S_LOGIN(msg: LoginPto.S_LOGIN) {
         this.emit('LoginResult', msg);
+        if (msg.isSuccess) {
+            UserModel.ins().onLogin(msg);
+            HallView.ins().open();
+        }
     }
 
     S_REGISTER(msg: LoginPto.S_REGISTER) {

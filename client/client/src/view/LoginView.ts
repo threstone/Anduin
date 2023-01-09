@@ -1,12 +1,9 @@
 class LoginView extends BaseView<BaseUI.UILogin> {
-
-    constructor() {
-        super(BaseUI.UILogin.createInstance());
-    }
-
     protected init() {
-        this.view.accountInput.text
-        this.view.regBtn.describe.text = '注册'
+        this.view = BaseUI.UILogin.createInstance();
+
+        this.view.accountInput.text;
+        this.view.regBtn.describe.text = '注册';
         this.initRegCom();
     }
 

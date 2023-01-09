@@ -16,10 +16,10 @@ import {
     }],
 })
 export class UserModel extends Model {
-    @Column({ type: DataType.INTEGER, field: 'id', primaryKey: true, autoIncrement: true })
-    id: number
+    @Column({ type: DataType.INTEGER, field: 'uid', primaryKey: true, autoIncrement: true })
+    uid: number
 
-    @Column({ type: DataType.STRING(32), comment: '昵称', field: 'account', allowNull: false })
+    @Column({ type: DataType.STRING(32), comment: '账号', field: 'account', allowNull: false })
     account: string
 
     @Column({ type: DataType.STRING(32), comment: '昵称', field: 'nick', allowNull: false })

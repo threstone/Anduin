@@ -1,0 +1,3 @@
+class HallModel extends BaseModel {
+
+}

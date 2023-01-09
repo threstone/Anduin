@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="286,520">
+  <displayList>
+    <image id="n9_ta2r" name="bg" src="ta2rh" fileName="common/res/comp_142_160_2.png" xy="48,0" size="238,520"/>
+    <list id="n4_ta2r" name="list" xy="66,52" size="200,405" overflow="scroll" lineGap="5" autoClearItems="true">
+      <item url="ui://yaux2xpota2rc"/>
+      <item url="ui://yaux2xpota2rc"/>
+      <item url="ui://yaux2xpota2rc"/>
+      <item url="ui://yaux2xpota2rc"/>
+    </list>
+    <text id="n7_ta2r" name="title" xy="123,5" size="84,29" font="STHupo" fontSize="20" color="#ff0066" text="好友列表"/>
+    <component id="n11_ta2r" name="addBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="78,451" scale="0.7,0.7"/>
+    <component id="n12_ta2r" name="ctrl" src="ta2ri" fileName="common/btn/Button2.xml" xy="0,180"/>
+    <component id="n14_ta2r" name="AddFriendCom" src="ta2rj" fileName="friend/AddFriend.xml" xy="57,210" visible="false"/>
+  </displayList>
+</component>

@@ -29,9 +29,6 @@ class Main extends egret.DisplayObjectContainer {
     private async runGame() {
         await this.loadResource();
         GlobalVar.init(this.stage);
-        // this.initFuiHall()
-        // this.initHandle()
-        // DocumentHelper.init()
     }
 
     private async loadResource() {

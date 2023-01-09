@@ -3,11 +3,6 @@ class TipsView extends BaseClass {
 
     constructor() {
         super();
-        GameDispatcher.getInstance().addEventListener('ShowTips', (evt) => {
-            const data: SystemPto.S_TIPS = evt.data;
-            this.showTips(data.msg, data.hoverTime);
-        }, this);
-
     }
 
     showTips(msg: string, hoverTime: number) {

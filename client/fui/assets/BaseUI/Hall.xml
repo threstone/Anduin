@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1280,720" bgColorEnabled="true" bgColor="#33ff33">
-  <displayList/>
+<component size="1280,720" overflow="hidden" bgColor="#33ff33">
+  <displayList>
+    <graph id="n5_ta2r" name="bg" xy="0,0" size="1280,720" alpha="0.2" type="rect" lineSize="0" fillColor="#ff336666"/>
+    <image id="n3_ta2r" name="n3" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="20,13" size="262,120"/>
+    <text id="n0_ta2r" name="nickText" xy="28,24" size="247,48" fontSize="35" color="#669966" align="center" autoSize="shrink" strokeColor="#000000" text="积木"/>
+    <component id="n4_ta2r" name="friendCom" src="ta2rb" fileName="friend/Friend.xml" xy="1232,100"/>
+    <text id="n7_ta2r" name="uidText" xy="28,79" size="247,48" fontSize="35" color="#669966" align="center" autoSize="shrink" strokeColor="#000000" text="ID:1"/>
+  </displayList>
 </component>

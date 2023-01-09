@@ -1,5 +1,4 @@
 class GlobalView {
-
     public static init(stage: egret.Stage) {
         //init stage
         stage.addChild(fairygui.GRoot.inst.displayObject);
@@ -10,9 +9,7 @@ class GlobalView {
         fairygui.UIPackage.addPackage("BaseUI");
         //bind base ui
         BaseUI.BaseUIBinder.bindAll();
-
         LoginView.ins().open();
-        TipsView.ins();
     }
 
 

@@ -4,6 +4,9 @@ import { GateSocket } from '../GateSocket';
 
 export class LoginHandler {
     public static handlerLoginPto(socket: GateSocket, scmd: number, buffer: Buffer) {
+        if (socket.isAuthorized) {
+            return;
+        }
         const login = GlobalVar.hallConnectorMgr.getRandLifeLogin();
         if (!login) {
             return;

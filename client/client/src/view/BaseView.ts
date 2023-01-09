@@ -1,18 +1,22 @@
 abstract class BaseView<T extends fairygui.GComponent> {
 
-    public static ins<T extends {}>(this: new () => T): T {
+    public static ins<T extends {}>(this: new (...args: any[]) => T, ...args: any[]): T {
         if (!(<any>this).__instance__) {
-            (<any>this).__instance__ = new this();
+            const arr = [];
+            for (let index = 0; index < arguments.length; index++) {
+                arr.push(arguments[index])
+            }
+            (<any>this).__instance__ = new this(...arr);
         }
         return (<any>this).__instance__
     }
 
     protected view: T;
+    public getView(): T { return this.view }
 
     private eventList: EventListenerData[] = [];
 
-    constructor(component: T) {
-        this.view = component;
+    constructor() {
         this.init();
     }
 
