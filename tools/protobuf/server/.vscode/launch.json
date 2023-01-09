@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "启动程序",
+            "name": "launch allStep",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -16,7 +16,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "启动程序1",
+            "name": "launch main",
             "skipFiles": [
                 "<node_internals>/**"
             ],

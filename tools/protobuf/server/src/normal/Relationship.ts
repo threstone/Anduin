@@ -24,9 +24,9 @@ export class Relationship {
         let index = -1;
         while ((index = fileText.indexOf('//')) !== -1) {
             //find line end
-            console.log();
+            let maxLen = fileText.length;
             let endIndex = index + 1;
-            while (fileText.charAt(endIndex) !== '\n') {
+            while (fileText.charAt(endIndex) !== '\n' && endIndex < maxLen) {
                 endIndex++;
             }
             fileText = fileText.slice(0, index) + fileText.slice(endIndex);

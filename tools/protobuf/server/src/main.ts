@@ -7,7 +7,7 @@ async function main() {
     await protoBufGenerator.startGen(configs);
 
     let normalBufferGenerator = new NormalBufferGenerator();
-    normalBufferGenerator.startGen(configs);
+    // normalBufferGenerator.startGen(configs);
 }
 
 main(); 

@@ -4,8 +4,7 @@ import * as path from 'path';
 import * as process from 'child_process';
 import { AttrInfo, NamespaceInfo, EnumInfo } from "./ProtoDefine";
 import { Relationship } from "./Relationship";
-
-const TAB = '    ';
+import { Utils } from "./Utils";
 
 export class NormalBufferGenerator {
 
@@ -69,7 +68,6 @@ export class NormalBufferGenerator {
             classText += this.getMessageText(info);
             //end
             classText += '}'
-            console.log(classText);
         });
 
         //写common
@@ -88,6 +86,7 @@ export class NormalBufferGenerator {
         return enumText;
     }
 
+    // TODO message的write工作还没有完成
     private getMessageText(info: NamespaceInfo) {
         let messageMap: Map<string, AttrInfo[]> = info.messageMap;
         let msgText = '';
@@ -95,14 +94,20 @@ export class NormalBufferGenerator {
             msgText += `    class ${msgName} {\n`
             for (let index = 0; index < attrs.length; index++) {
                 const attr = attrs[index];
-                msgText += `        public ${attr.attrName}: ${this.getTypeName(attr.type, info)}`
-                    + `${attr.rule === 'repeated' ? '[]' : ''}`
-                    + ``
+                const isArray = attr.rule === 'repeated';
+                const typeName = this.getTypeName(attr.type, info);
+                // msgText += `        public ${attr.attrName}: ${this.getTypeName(attr.type, info)}`
+                //     + `${isArray ? '[]' : ''}`
+                //设置初始值
                 if (attr.options) {
                     if (typeof (attr.options.default) === 'number') {
                         msgText += ` = ${attr.options.default}\n`
+                    } else {
+                        const isBaseType = Utils.isBaseType(attr.type);
+                        if (isBaseType) {
+                            msgText += ` = ${attr.options.default}\n`
+                        }
                     }
-
                 } else {
                     msgText += '\n';
                 }
@@ -137,19 +142,8 @@ export class NormalBufferGenerator {
             default:
                 let result = this.findAttrTypeInNamespace(type, info, new Set<string>());
                 return result || type;
-            // return this.findAttrType(type, info, new Set<string>());
         }
     }
-
-    // private findAttrType(typeName: string, info: NamespaceInfo) {
-    //     //自己有
-    //     if (info.enumMap.has(typeName) || info.messageMap.has(typeName)) {
-    //         return typeName;
-    //     }
-    //     let findedSet = new Set<string>();
-    //     findedSet.add(info.name)
-    //     //自己没有
-    // }
 
     private findAttrTypeInNamespace(typeName: string, info: NamespaceInfo, findedSet: Set<string>) {
         findedSet.add(info.name);
@@ -168,27 +162,6 @@ export class NormalBufferGenerator {
             return this.findAttrTypeInNamespace(typeName, this.namespaceMap.get(namespace), findedSet);
         }
     }
-
-    // /**
-    //  * @param name namespace name
-    //  */
-    // private getRelateionshipByName(name: string): Relationship {
-    //     this.relationshipMap.forEach((info, realPath) => {
-    //         info.packageName === name
-    //     })
-
-    //     const mapKeys = this.relationshipMap.keys()
-    //     let temp = mapKeys.next();
-    //     while (!temp.done) {
-    //         let realPath = temp.value;
-    //         let tempInfo = this.relationshipMap.get(realPath);
-    //         if (tempInfo.packageName === name) {
-    //             return tempInfo;
-    //         }
-    //         temp = mapKeys.next()
-    //     }
-    //     return;
-    // }
 
     //初始化proto文件的关系网
     private initRelationship(realPath: string) {
@@ -258,7 +231,7 @@ export class NormalBufferGenerator {
         else if (sm.values) {
             this.handlerEnum(key, sm.values, namespaceInfo);
         } else {
-            throw `unkown define :${JSON.stringify(sm)}`;
+            console.error(`未知的定义${key}:${JSON.stringify(sm)}`);
         }
     }
 
@@ -279,4 +252,6 @@ export class NormalBufferGenerator {
         }
         namespaceInfo.enumMap.set(enumName, info);
     }
+
+
 }
