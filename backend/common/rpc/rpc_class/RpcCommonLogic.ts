@@ -2,7 +2,7 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "6f1a1181-b24b-4903-9449-004b4072d648"
+let uuid = "1b8f5c99-0e3b-432e-a39c-b69073a62ab2"
 
 //服务器的虚函数定义
 export abstract class LogicRPCServer {
@@ -21,81 +21,81 @@ export abstract class LogicRPCServer {
          this.rpc.onClose = this.onClose.bind(this)
     }
 
-    onClose(clientId: number) {
+    onClose(clientName: string) {
 
     }
 
     //登录
-    abstract login(clientId:number,token:string,isDebug:boolean,ip:string,nodeId:number):Promise<Buffer>
+    abstract login(clientName: string,token:string,isDebug:boolean,ip:string,nodeId:number):Promise<Buffer>
 
     //转发
-    abstract transfer(clientId:number,buff:Buffer):Promise<Buffer>
+    abstract transfer(clientName: string,buff:Buffer):Promise<Buffer>
 
     //通过token拿uid
-    abstract getUidByToken(clientId:number,token:string):Promise<number>
+    abstract getUidByToken(clientName: string,token:string):Promise<number>
 
     //玩家下线
-    abstract userLogout(clientId:number,uid:number):Promise<boolean>
+    abstract userLogout(clientName: string,uid:number):Promise<boolean>
 
     //s2c
     //剔掉玩家
-    async callKickUser(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
+    async callKickUser(clientName:string,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientId,"kickUser",args)
+        let res: any = await this.rpc.call(clientName,"kickUser", args)
         return res
     }
 
-    sendKickUser(clientId:number,uid:number,buffer:Buffer)    {
+    sendKickUser(clientName:string,uid:number,buffer:Buffer)    {
         let args = [uid,buffer]
-        this.rpc.send(clientId,"kickUser",args)
+        this.rpc.send(clientName,"kickUser",args)
     }
 
     // 转发来自login的消息给前端
-    async callLoginTransfer(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
+    async callLoginTransfer(clientName:string,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientId,"loginTransfer",args)
+        let res: any = await this.rpc.call(clientName,"loginTransfer", args)
         return res
     }
 
-    sendLoginTransfer(clientId:number,uid:number,buffer:Buffer)    {
+    sendLoginTransfer(clientName:string,uid:number,buffer:Buffer)    {
         let args = [uid,buffer]
-        this.rpc.send(clientId,"loginTransfer",args)
+        this.rpc.send(clientName,"loginTransfer",args)
     }
 
     //踢掉所有在线玩家
-    async callKickAllUser(clientId:number,buffer:Buffer):Promise<string>    {
+    async callKickAllUser(clientName:string,buffer:Buffer):Promise<string>    {
         let args = [buffer]
-        let res: any = await this.rpc.call(clientId,"kickAllUser",args)
+        let res: any = await this.rpc.call(clientName,"kickAllUser", args)
         return res
     }
 
-    sendKickAllUser(clientId:number,buffer:Buffer)    {
+    sendKickAllUser(clientName:string,buffer:Buffer)    {
         let args = [buffer]
-        this.rpc.send(clientId,"kickAllUser",args)
+        this.rpc.send(clientName,"kickAllUser",args)
     }
 
     //踢掉指定在玩某些游戏的玩家
-    async callKickUserByGameId(clientId:number,gameIds:string,buffer:Buffer):Promise<string>    {
+    async callKickUserByGameId(clientName:string,gameIds:string,buffer:Buffer):Promise<string>    {
         let args = [gameIds,buffer]
-        let res: any = await this.rpc.call(clientId,"kickUserByGameId",args)
+        let res: any = await this.rpc.call(clientName,"kickUserByGameId", args)
         return res
     }
 
-    sendKickUserByGameId(clientId:number,gameIds:string,buffer:Buffer)    {
+    sendKickUserByGameId(clientName:string,gameIds:string,buffer:Buffer)    {
         let args = [gameIds,buffer]
-        this.rpc.send(clientId,"kickUserByGameId",args)
+        this.rpc.send(clientName,"kickUserByGameId",args)
     }
 
     //主动告知网关转发消息
-    async callTransferToGate(clientId:number,uid:number,buffer:Buffer):Promise<boolean>    {
+    async callTransferToGate(clientName:string,uid:number,buffer:Buffer):Promise<boolean>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientId,"transferToGate",args)
+        let res: any = await this.rpc.call(clientName,"transferToGate", args)
         return res
     }
 
-    sendTransferToGate(clientId:number,uid:number,buffer:Buffer)    {
+    sendTransferToGate(clientName:string,uid:number,buffer:Buffer)    {
         let args = [uid,buffer]
-        this.rpc.send(clientId,"transferToGate",args)
+        this.rpc.send(clientName,"transferToGate",args)
     }
 
 }
@@ -107,12 +107,11 @@ export abstract class LogicRPCClient {
     private funs_: string[] = ["kickUser", "loginTransfer", "kickAllUser", "kickUserByGameId", "transferToGate"]
     get funs() { return this.funs_ }
     get rpc() { return this.myRpcClient }
-    get clientId() { return this.rpc.clientId }
     get port() { return this.rpc.port }
     get host() { return this.rpc.host }
     get isClose() { return this.rpc.isClose }
-    constructor(host: string, port: number, serverName: string, logger: ILog) {
-        this.myRpcClient.startClient(host, port, serverName, uuid, logger)
+    constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {
+        this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)
     }
 
     init() {
@@ -174,18 +173,18 @@ export abstract class LogicRPCClient {
 
     //s2c
     //剔掉玩家
-    abstract kickUser(clientId:number,uid:number,buffer:Buffer):Promise<boolean>
+    abstract kickUser(uid:number,buffer:Buffer):Promise<boolean>
 
     // 转发来自login的消息给前端
-    abstract loginTransfer(clientId:number,uid:number,buffer:Buffer):Promise<boolean>
+    abstract loginTransfer(uid:number,buffer:Buffer):Promise<boolean>
 
     //踢掉所有在线玩家
-    abstract kickAllUser(clientId:number,buffer:Buffer):Promise<string>
+    abstract kickAllUser(buffer:Buffer):Promise<string>
 
     //踢掉指定在玩某些游戏的玩家
-    abstract kickUserByGameId(clientId:number,gameIds:string,buffer:Buffer):Promise<string>
+    abstract kickUserByGameId(gameIds:string,buffer:Buffer):Promise<string>
 
     //主动告知网关转发消息
-    abstract transferToGate(clientId:number,uid:number,buffer:Buffer):Promise<boolean>
+    abstract transferToGate(uid:number,buffer:Buffer):Promise<boolean>
 
 }

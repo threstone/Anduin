@@ -108,12 +108,12 @@ class RPC_BASE {
         });
     }
 
-    onMessage(clientId: number, buf: Buffer, ws: WS) {
+    onMessage(clientName: string, buf: Buffer, ws: WS) {
         try {
             let msgType = buf.readUInt8()
             switch (msgType) {
                 case MessageTypeCall:
-                    this.handlerRequest(clientId, buf.slice(1), ws)
+                    this.handlerRequest(clientName, buf.slice(1), ws)
                     break;
                 case MessageTypeRes:
                     let sessionId = buf.readUInt32LE(1)
@@ -135,7 +135,7 @@ class RPC_BASE {
                         logger.error('handlers not found')
                         return
                     }
-                    let args = this.getArgs(buf.slice(5 + methodLen), clientId)
+                    let args = this.getArgs(buf.slice(5 + methodLen), clientName)
                     func(...args)
                     break;
             }
@@ -146,20 +146,11 @@ class RPC_BASE {
     }
 
     /**
-     * 注册RPC SERVER的服务
-     * @param funcName
-     * @param func
-     */
-    // public registerService( funcName: string, func: Function ) {
-    //     this._handlers.set(funcName, func)
-    // }
-
-    /**
      * 定位请求的方法
      * @param data
      * @param ws
      */
-    protected async handlerRequest(clientId: number, data: Buffer, ws: WS) {
+    protected async handlerRequest(clientName: string, data: Buffer, ws: WS) {
 
         let sessionId = data.readUInt32LE(0)
         let methodLen = data.readUInt32LE(4)
@@ -168,14 +159,17 @@ class RPC_BASE {
         //客户端与服务端版本握手
         if (sessionId == 1) {
             if (methodName == 'handshake') {
-                let args = this.getArgs(data.slice(8 + methodLen), -1)
+                let args = this.getArgs(data.slice(8 + methodLen), clientName);
                 if (args[0] == this._version) {
-                    let resBuf = this.getBufByResult(clientId)
-                    let clinetBuffer = Buffer.alloc(resBuf.length + 4 + 1)
-                    clinetBuffer.writeUInt8(MessageTypeRes)
-                    clinetBuffer.writeUInt32LE(sessionId, 1)
-                    resBuf.copy(clinetBuffer, 5, 0, resBuf.length)
-                    ws.send(clinetBuffer)
+                    let resBuf = this.getBufByResult(true);
+                    let clinetBuffer = Buffer.alloc(resBuf.length + 4 + 1);
+                    clinetBuffer.writeUInt8(MessageTypeRes);
+                    clinetBuffer.writeUInt32LE(sessionId, 1);
+                    resBuf.copy(clinetBuffer, 5, 0, resBuf.length);
+                    ws.send(clinetBuffer);
+                    const tempClientName = args[1];
+                    (this as any as RPC_SERVER).socketMap.set(tempClientName, ws);
+                    (ws as any).clientName = tempClientName;
                     return
                 }
             }
@@ -192,7 +186,7 @@ class RPC_BASE {
             logger.error('handlers not found')
             return
         }
-        let args = this.getArgs(data.slice(8 + methodLen), clientId)
+        let args = this.getArgs(data.slice(8 + methodLen), clientName)
         let res = await func(...args)
         let resBuf = this.getBufByResult(res)
         let clinetBuffer = Buffer.alloc(resBuf.length + 4 + 1)
@@ -377,12 +371,11 @@ class RPC_BASE {
         return clinetBuffer
     }
 
-    private getArgs(data: Buffer, clientId: number): any[] {
-
+    private getArgs(data: Buffer, clientName: string): any[] {
         let res = []
-        //如果clientId为-1 说明自己是客户端,收到的信息是服务器的消息   不需要把clientId传入参数列表中
-        if (clientId != -1) {
-            res.push(clientId)
+        //如果clientName为undefined 说明自己是客户端,收到的信息是服务器的消息   不需要把clientName传入参数列表中
+        if (clientName != undefined) {
+            res.push(clientName)
         }
         let offset = 0
         while (offset != data.length) {
@@ -437,6 +430,7 @@ export class RPC_CLIENT extends RPC_BASE {
     private _host: string;
     private _port: number;
     private _serverName: string
+    private _myName: string
 
     get name() {
         return this._serverName
@@ -476,12 +470,12 @@ export class RPC_CLIENT extends RPC_BASE {
         ws_client.on("open", async () => {
             this.isClose = false;
             logger.log("connect to rpc server success! ", this._serverName)
-            this.clientId = await this.call('handshake', [this._version])
+            let res = await this.call('handshake', [this._version, this._myName])
             this.onOpen()
         })
 
         ws_client.on('message', (msg: Buffer) => {
-            super.onMessage(this.clientId, msg, ws_client)
+            super.onMessage(undefined, msg, ws_client)
         });
 
         //断线重连
@@ -522,30 +516,24 @@ export class RPC_CLIENT extends RPC_BASE {
     /**
      * 初始化RPC CLIENT
      */
-    public startClient(host: string, port: number, serverName: string, version: string, iLog: ILog) {
+    public startClient(host: string, port: number, serverName: string, myName: string, version: string, iLog: ILog) {
         logger = iLog;
         this._host = host;
         this._port = port;
         this._version = version;
         this._serverName = serverName;
+        this._myName = myName;
         this.setReconnectServer()
         this.connectRpcServer();
     }
 }
 
 export class RPC_SERVER extends RPC_BASE {
-
-    private _socketServer: WS.Server
-
     //默认监听端口
     private _defaultListenPort = 8033
 
-    private _clientId = 1;
-    private _socketArr = [];
-
-    get socketArr() {
-        return this._socketArr
-    }
+    private _socketMap = new Map<string, WS>();
+    get socketMap() { return this._socketMap; }
 
     /**
      * 初始化RPC SERVER
@@ -556,14 +544,10 @@ export class RPC_SERVER extends RPC_BASE {
         this._version = version;
         this._sessionId = 2;
         let wss = new WS.Server({ port: listenPort });
-        this._socketServer = wss
         wss.on("connection", (ws: any, req) => {
             logger.log('rpc client connected ', req.connection.remoteAddress + ":" + req.connection.remotePort)
-            ws.index = this._clientId;
-            this._socketArr[ws.index] = ws;
-            this._clientId++
             ws.on('message', (msg: Buffer) => {
-                super.onMessage(ws.index, msg, ws)
+                super.onMessage(ws.clientName, msg, ws)
             });
 
             ws.on("error", (err: Error) => {
@@ -572,30 +556,32 @@ export class RPC_SERVER extends RPC_BASE {
 
             ws.on("close", () => {
                 logger.log("rpc client disconnected! ", req.connection.remoteAddress + ":" + req.connection.remotePort)
-                this._socketArr[ws.index] = null
-                this.onClose(ws.index)
+                this._socketMap.delete(ws.clientName);
+                this.onClose(ws.clientName);
             });
         })
     }
 
-    onClose(clientId: number) {
+    onClose(clientName: string) {
 
     }
 
-    async call(clientId: number, method: string, args: any[]) {
-        if (!this._socketArr[clientId]) {
+    async call(clientName: string, method: string, args: any[]) {
+        const ws = this._socketMap.get(clientName);
+        if (!ws) {
             logger.error(`call error ! client is undefine funcName:${method} args:${args}`)
             return
         }
-        return await super.baseCall(method, args, this._socketArr[clientId])
+        return await super.baseCall(method, args, ws)
     }
 
-    send(clientId: number, method: string, args: any[]) {
-        if (!this._socketArr[clientId]) {
+    send(clientName: string, method: string, args: any[]) {
+        const ws = this._socketMap.get(clientName);
+        if (!ws) {
             logger.error(`send error ! client is undefine funcName:${method} args:${args}`)
             return
         }
-        super.baseSend(method, args, this._socketArr[clientId])
+        super.baseSend(method, args, ws)
     }
 
 }
