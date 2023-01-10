@@ -9,9 +9,11 @@ let configs = [{
         '../../../proto/login.proto',
         '../../../proto/hall.proto',
         '../../../proto/system.proto',
+        '../../../proto/chat.proto',
+        '../../../proto/friend.proto',
     ],
 
-    generateType: GenerateType.NormalBuf
+    generateType: GenerateType.ProtoBuf
 }, {
     noCreate: true,
     noConvert: true,

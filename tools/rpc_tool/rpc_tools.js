@@ -44,7 +44,7 @@ function readFile(rpc_funPath, outputPath) {
         '        this.rpc.registerFuns(this)\n' +
         '         this.rpc.onClose = this.onClose.bind(this)\n' +
         '    }\n\n' +
-        '    onClose(clientId: number) {\n\n' +
+        '    onClose(clientName: string) {\n\n' +
         '    }\n\n'
 
 
@@ -64,12 +64,12 @@ function readFile(rpc_funPath, outputPath) {
         '\n    private myRpcClient = new RPC.RPC_CLIENT()\n' + funs +
         '\n    get funs() { return this.funs_ }' +
         '\n    get rpc() { return this.myRpcClient }' +
-        '\n    get clientId() { return this.rpc.clientId }' +
+        // '\n    get clientName() { return this.rpc.clientName }' +
         '\n    get port() { return this.rpc.port }' +
         '\n    get host() { return this.rpc.host }' +
         '\n    get isClose() { return this.rpc.isClose }' +
-        '\n    constructor(host: string, port: number, serverName: string, logger: ILog) {' +
-        '\n        this.myRpcClient.startClient(host, port, serverName, uuid, logger)\n    }\n' +
+        '\n    constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {' +
+        '\n        this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)\n    }\n' +
         '\n    init() {' +
         '\n        this.rpc.registerFuns(this)' +
         '\n        this.rpc.onOpen = this.onOpen.bind(this)' +
@@ -126,9 +126,9 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
                 let resultTypeIndex = strOne.lastIndexOf(':');
                 strOne = `${strOne.substring(0, resultTypeIndex + 1)}Promise<${strOne.substring(resultTypeIndex + 1)}>`
             }
-            if (isS2C) {//s2c需要clientid
+            if (isS2C) {//s2c需要clientName
                 //如果返回值是非Promise对象
-                let param = '(clientId:number,' + strOne.substring(startStr + 1, strOne.length)
+                let param = '(clientName:string,' + strOne.substring(startStr + 1, strOne.length)
                 //生成call
                 let header = funName.substring(0, 1)//一个字符小写的
                 let upperCase = header.toUpperCase()//转成大写
@@ -136,7 +136,7 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
                 strOne = 'call' + nFunName + param
                 strAll = strAll + '    async ' + strOne + '    {\n'
                 strAll = strAll + args +
-                    '\n        let res: any = await this.rpc.call(clientId,' + '"' + funName + '",args)' +
+                    '\n        let res: any = await this.rpc.call(clientName,' + '"' + funName + '", args)' +
                     '\n        return res' +
                     '\n    }\n\n'
                 //生成send
@@ -144,7 +144,7 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
                 strOne = 'send' + nFunName + param
                 strAll = strAll + '    ' + strOne + '    {\n'
                 strAll = strAll + args +
-                    '\n        this.rpc.send(clientId,' + '"' + funName + '",args)' +
+                    '\n        this.rpc.send(clientName,' + '"' + funName + '",args)' +
                     '\n    }\n\n'
 
             }
@@ -227,14 +227,14 @@ function abstractFuns(start, lineArr, end, isS2C) {
             let oneFun = strOne
             if (isS2C) {
                 let funName = strOne.substring(0, startStr)
-                oneFun = funName + '(clientId:number,' + strOne.substring(startStr + 1, strOne.length)
+                oneFun = funName + '(clientName: string,' + strOne.substring(startStr + 1, strOne.length)
                 oneFun = '    abstract ' + oneFun + '\n'
                 funs += oneFun + '\n'
             }
             else {
                 //call
                 let funName = strOne.substring(0, startStr)
-                oneFun = funName + '(clientId:number,' + strOne.substring(startStr + 1, strOne.length)
+                oneFun = funName + '(' + strOne.substring(startStr + 1, strOne.length)
                 oneFun = '    abstract ' + oneFun + '\n'
                 funs += oneFun + '\n'
             }

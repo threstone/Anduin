@@ -5,6 +5,8 @@ interface HallRPC {
     reqRegister(buff: Buffer): Promise<Buffer>
     //转发
     transferToHall(uid: number, buff: Buffer): void
+    //通知大厅玩家离线
+    userSocketClose(uid: number): void
     //s2c
     //主动告知网关转发消息
     transferToGate(uid: number, buffer: Buffer): void
