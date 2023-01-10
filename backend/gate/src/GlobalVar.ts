@@ -32,6 +32,6 @@ export class GlobalVar {
 
     private static initConnector() {
         //init hallConectorMgr
-        this.hallConnectorMgr = new HallConnectorMgr(logger);
+        this.hallConnectorMgr = new HallConnectorMgr(logger, this.startupParam.nodeId);
     }
 }

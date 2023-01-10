@@ -4,8 +4,8 @@ import { GlobalVar } from '../GlobalVar';
 
 export class BaseHandler {
 
-    static sendMsg(clientId: number, uid: number, message: IGameMessage) {
-        GlobalVar.socketServer.sendTransferToGate(clientId, uid, ProtoBufEncoder.encode(message));
+    static sendMsg(clientName: string, uid: number, message: IGameMessage) {
+        GlobalVar.socketServer.sendTransferToGate(clientName, uid, ProtoBufEncoder.encode(message));
     }
 
 }

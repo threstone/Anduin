@@ -8,11 +8,11 @@ export class HallConnectorMgr {
 
     private logger: ILog;
 
-    constructor(logger: ILog) {
+    constructor(logger: ILog, nodeId: string) {
         this.logger = logger;
         for (let index = 0; index < loginsConn.length; index++) {
             const login = loginsConn[index];
-            let loginConnServer = new HallConnector(login.ip, login.port, login.nodeId, logger);
+            let loginConnServer = new HallConnector(login.ip, login.port, login.nodeId, nodeId, logger);
             loginConnServer.init();
             this.logins_.set(index, loginConnServer);
         }

@@ -7,11 +7,11 @@ export class HallConnector extends RpcCommon.HallRPCClient {
     onClose() {
     }
 
-    transferToGate(clientId: number, uid: number, buffer: Buffer): void {
+    transferToGate(uid: number, buffer: Buffer): void {
         GlobalVar.socketServer.sendBufferByUid(uid, buffer);
     }
 
-    closeUserSocket(clientId: number, uid: number): void {
+    closeUserSocket(uid: number): void {
         GlobalVar.socketServer.closeUserSocket(uid);
     }
 }

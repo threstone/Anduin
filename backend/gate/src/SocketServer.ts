@@ -80,6 +80,7 @@ export class SocketServer {
         this.clientConnectedCount_--;
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
+            GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendUserSocketClose(socket.uid);
         }
     }
 

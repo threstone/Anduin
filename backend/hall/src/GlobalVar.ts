@@ -4,7 +4,6 @@ import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
 import { CommonUtils } from '../../common/CommonUtils';
 import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
-import { DBManager } from './DBManager';
 import * as allProto from './CommonProto';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,14 +11,16 @@ import * as mysqlConfig from '../../common/config/mysql.json';
 import * as redisConfig from '../../common/config/redis.json';
 import { RedisMgr } from '../../common/redis/RedisMgr';
 import { RedisType } from '../../common/ConstDefine';
+import { SequelizeRegister } from './SequelizeRegister';
 
 const logger = getLogger();
 export class GlobalVar {
 
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
-    public static dbMgr: DBManager;
     public static redisMgr: RedisMgr;
+    private static sequelizeRegister: SequelizeRegister
+
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -30,7 +31,7 @@ export class GlobalVar {
         //init socket server
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
         //init db manager
-        this.dbMgr = new DBManager(mysqlConfig);
+        this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr
         this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo]);
     }
