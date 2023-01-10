@@ -20,8 +20,8 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         this.AddClick(this.view.regCom.close, this.onRegComCloseClick);
         this.AddClick(this.view.regCom.regBtn, this.onReqReg);
 
-        this.observe('RegisterResult', this.onRegisterResult);
-        this.observe('LoginResult', this.onLoginResult);
+        this.observe('S_REGISTER', this.onRegisterResult);
+        this.observe('S_LOGIN', this.onLoginResult);
     }
 
     onLoginResult(evt: EventData) {

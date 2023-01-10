@@ -12,13 +12,17 @@
     <image id="ta2r9" name="comp_30_100.png" path="/common/res/" scale="9grid" scale9grid="7,25,14,50"/>
     <image id="ta2ra" name="comp_60_60_4.png" path="/common/res/" scale="9grid" scale9grid="15,15,30,30"/>
     <component id="ta2rb" name="Friend.xml" path="/friend/"/>
-    <component id="ta2rc" name="FriendItem.xml" path="/friend/"/>
+    <component id="ta2rc" name="FriendItem.xml" path="/friend/" exported="true"/>
     <image id="ta2rd" name="comp_jdt_01.png" path="/friend/res/"/>
     <image id="ta2re" name="comp_jdt_02.png" path="/friend/res/"/>
     <image id="ta2rh" name="comp_142_160_2.png" path="/common/res/" scale="9grid" scale9grid="26,59,91,76"/>
     <component id="ta2ri" name="Button2.xml" path="/common/btn/"/>
     <component id="ta2rj" name="AddFriend.xml" path="/friend/"/>
     <image id="ta2rk" name="comp_120_164_6.png" path="/common/res/" scale="9grid" scale9grid="13,23,90,123"/>
+    <component id="ta2rl" name="FriendReq.xml" path="/friend/"/>
+    <component id="ta2rm" name="FriendReqItem.xml" path="/friend/" exported="true"/>
+    <image id="ta2rn" name="comp_66_61.png" path="/common/res/"/>
+    <image id="ta2ro" name="comp_30_30.png" path="/friend/res/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

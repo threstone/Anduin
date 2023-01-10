@@ -15,118 +15,6 @@ $root.ChatPto = (function() {
      */
     var ChatPto = {};
 
-    ChatPto.C_ = (function() {
-
-        /**
-         * Properties of a C_.
-         * @memberof ChatPto
-         * @interface IC_
-         * @property {number|null} [cmd] C_ cmd
-         * @property {number|null} [scmd] C_ scmd
-         */
-
-        /**
-         * Constructs a new C_.
-         * @memberof ChatPto
-         * @classdesc Represents a C_.
-         * @implements IC_
-         * @constructor
-         * @param {ChatPto.IC_=} [properties] Properties to set
-         */
-        function C_(properties) {
-            if (properties)
-                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                    if (properties[keys[i]] != null)
-                        this[keys[i]] = properties[keys[i]];
-        }
-
-        /**
-         * C_ cmd.
-         * @member {number} cmd
-         * @memberof ChatPto.C_
-         * @instance
-         */
-        C_.prototype.cmd = 4;
-
-        /**
-         * C_ scmd.
-         * @member {number} scmd
-         * @memberof ChatPto.C_
-         * @instance
-         */
-        C_.prototype.scmd = 1;
-
-        /**
-         * Encodes the specified C_ message. Does not implicitly {@link ChatPto.C_.verify|verify} messages.
-         * @function encode
-         * @memberof ChatPto.C_
-         * @static
-         * @param {ChatPto.IC_} message C_ message or plain object to encode
-         * @param {$protobuf.Writer} [writer] Writer to encode to
-         * @returns {$protobuf.Writer} Writer
-         */
-        C_.encode = function encode(message, writer) {
-            if (!writer)
-                writer = $Writer.create();
-            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
-                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
-            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            return writer;
-        };
-
-        /**
-         * Decodes a C_ message from the specified reader or buffer.
-         * @function decode
-         * @memberof ChatPto.C_
-         * @static
-         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-         * @param {number} [length] Message length if known beforehand
-         * @returns {ChatPto.C_} C_
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        C_.decode = function decode(reader, length) {
-            if (!(reader instanceof $Reader))
-                reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatPto.C_();
-            while (reader.pos < end) {
-                var tag = reader.uint32();
-                switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                default:
-                    reader.skipType(tag & 7);
-                    break;
-                }
-            }
-            return message;
-        };
-
-        /**
-         * Gets the default type url for C_
-         * @function getTypeUrl
-         * @memberof ChatPto.C_
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.C_";
-        };
-
-        return C_;
-    })();
-
     return ChatPto;
 })();
 
@@ -260,6 +148,7 @@ $root.FriendPto = (function() {
          * @property {number|null} [cmd] S_FRIEND_INFO cmd
          * @property {number|null} [scmd] S_FRIEND_INFO scmd
          * @property {Array.<FriendPto.IFriend>|null} [list] S_FRIEND_INFO list
+         * @property {Array.<FriendPto.IFriend>|null} [reqAddList] S_FRIEND_INFO reqAddList
          */
 
         /**
@@ -272,6 +161,7 @@ $root.FriendPto = (function() {
          */
         function S_FRIEND_INFO(properties) {
             this.list = [];
+            this.reqAddList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -303,6 +193,14 @@ $root.FriendPto = (function() {
         S_FRIEND_INFO.prototype.list = $util.emptyArray;
 
         /**
+         * S_FRIEND_INFO reqAddList.
+         * @member {Array.<FriendPto.IFriend>} reqAddList
+         * @memberof FriendPto.S_FRIEND_INFO
+         * @instance
+         */
+        S_FRIEND_INFO.prototype.reqAddList = $util.emptyArray;
+
+        /**
          * Encodes the specified S_FRIEND_INFO message. Does not implicitly {@link FriendPto.S_FRIEND_INFO.verify|verify} messages.
          * @function encode
          * @memberof FriendPto.S_FRIEND_INFO
@@ -321,6 +219,9 @@ $root.FriendPto = (function() {
             if (message.list != null && message.list.length)
                 for (var i = 0; i < message.list.length; ++i)
                     $root.FriendPto.Friend.encode(message.list[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.reqAddList != null && message.reqAddList.length)
+                for (var i = 0; i < message.reqAddList.length; ++i)
+                    $root.FriendPto.Friend.encode(message.reqAddList[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -354,6 +255,12 @@ $root.FriendPto = (function() {
                         if (!(message.list && message.list.length))
                             message.list = [];
                         message.list.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(message.reqAddList && message.reqAddList.length))
+                            message.reqAddList = [];
+                        message.reqAddList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -509,27 +416,26 @@ $root.FriendPto = (function() {
         return C_ADD_FRIEND;
     })();
 
-    FriendPto.S_ADD_FRIEND_RESULT = (function() {
+    FriendPto.S_ADD_FRIEND_REQ = (function() {
 
         /**
-         * Properties of a S_ADD_FRIEND_RESULT.
+         * Properties of a S_ADD_FRIEND_REQ.
          * @memberof FriendPto
-         * @interface IS_ADD_FRIEND_RESULT
-         * @property {number|null} [cmd] S_ADD_FRIEND_RESULT cmd
-         * @property {number|null} [scmd] S_ADD_FRIEND_RESULT scmd
-         * @property {boolean|null} [isSuccess] S_ADD_FRIEND_RESULT isSuccess
-         * @property {FriendPto.IFriend|null} [friend] S_ADD_FRIEND_RESULT friend
+         * @interface IS_ADD_FRIEND_REQ
+         * @property {number|null} [cmd] S_ADD_FRIEND_REQ cmd
+         * @property {number|null} [scmd] S_ADD_FRIEND_REQ scmd
+         * @property {number|null} [code] S_ADD_FRIEND_REQ code
          */
 
         /**
-         * Constructs a new S_ADD_FRIEND_RESULT.
+         * Constructs a new S_ADD_FRIEND_REQ.
          * @memberof FriendPto
-         * @classdesc Represents a S_ADD_FRIEND_RESULT.
-         * @implements IS_ADD_FRIEND_RESULT
+         * @classdesc Represents a S_ADD_FRIEND_REQ.
+         * @implements IS_ADD_FRIEND_REQ
          * @constructor
-         * @param {FriendPto.IS_ADD_FRIEND_RESULT=} [properties] Properties to set
+         * @param {FriendPto.IS_ADD_FRIEND_REQ=} [properties] Properties to set
          */
-        function S_ADD_FRIEND_RESULT(properties) {
+        function S_ADD_FRIEND_REQ(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -537,75 +443,65 @@ $root.FriendPto = (function() {
         }
 
         /**
-         * S_ADD_FRIEND_RESULT cmd.
+         * S_ADD_FRIEND_REQ cmd.
          * @member {number} cmd
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @instance
          */
-        S_ADD_FRIEND_RESULT.prototype.cmd = 3;
+        S_ADD_FRIEND_REQ.prototype.cmd = 3;
 
         /**
-         * S_ADD_FRIEND_RESULT scmd.
+         * S_ADD_FRIEND_REQ scmd.
          * @member {number} scmd
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @instance
          */
-        S_ADD_FRIEND_RESULT.prototype.scmd = 4;
+        S_ADD_FRIEND_REQ.prototype.scmd = 4;
 
         /**
-         * S_ADD_FRIEND_RESULT isSuccess.
-         * @member {boolean} isSuccess
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * S_ADD_FRIEND_REQ code.
+         * @member {number} code
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @instance
          */
-        S_ADD_FRIEND_RESULT.prototype.isSuccess = false;
+        S_ADD_FRIEND_REQ.prototype.code = 0;
 
         /**
-         * S_ADD_FRIEND_RESULT friend.
-         * @member {FriendPto.IFriend|null|undefined} friend
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
-         * @instance
-         */
-        S_ADD_FRIEND_RESULT.prototype.friend = null;
-
-        /**
-         * Encodes the specified S_ADD_FRIEND_RESULT message. Does not implicitly {@link FriendPto.S_ADD_FRIEND_RESULT.verify|verify} messages.
+         * Encodes the specified S_ADD_FRIEND_REQ message. Does not implicitly {@link FriendPto.S_ADD_FRIEND_REQ.verify|verify} messages.
          * @function encode
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @static
-         * @param {FriendPto.IS_ADD_FRIEND_RESULT} message S_ADD_FRIEND_RESULT message or plain object to encode
+         * @param {FriendPto.IS_ADD_FRIEND_REQ} message S_ADD_FRIEND_REQ message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_ADD_FRIEND_RESULT.encode = function encode(message, writer) {
+        S_ADD_FRIEND_REQ.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.isSuccess != null && Object.hasOwnProperty.call(message, "isSuccess"))
-                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSuccess);
-            if (message.friend != null && Object.hasOwnProperty.call(message, "friend"))
-                $root.FriendPto.Friend.encode(message.friend, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.code);
             return writer;
         };
 
         /**
-         * Decodes a S_ADD_FRIEND_RESULT message from the specified reader or buffer.
+         * Decodes a S_ADD_FRIEND_REQ message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendPto.S_ADD_FRIEND_RESULT} S_ADD_FRIEND_RESULT
+         * @returns {FriendPto.S_ADD_FRIEND_REQ} S_ADD_FRIEND_REQ
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_ADD_FRIEND_RESULT.decode = function decode(reader, length) {
+        S_ADD_FRIEND_REQ.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendPto.S_ADD_FRIEND_RESULT();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendPto.S_ADD_FRIEND_REQ();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -618,10 +514,305 @@ $root.FriendPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.isSuccess = reader.bool();
+                        message.code = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ADD_FRIEND_REQ
+         * @function getTypeUrl
+         * @memberof FriendPto.S_ADD_FRIEND_REQ
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ADD_FRIEND_REQ.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND_REQ";
+        };
+
+        return S_ADD_FRIEND_REQ;
+    })();
+
+    FriendPto.C_ADD_FRIEND_REQ_RESULT = (function() {
+
+        /**
+         * Properties of a C_ADD_FRIEND_REQ_RESULT.
+         * @memberof FriendPto
+         * @interface IC_ADD_FRIEND_REQ_RESULT
+         * @property {number|null} [cmd] C_ADD_FRIEND_REQ_RESULT cmd
+         * @property {number|null} [scmd] C_ADD_FRIEND_REQ_RESULT scmd
+         * @property {boolean|null} [isApprove] C_ADD_FRIEND_REQ_RESULT isApprove
+         * @property {number|null} [uid] C_ADD_FRIEND_REQ_RESULT uid
+         */
+
+        /**
+         * Constructs a new C_ADD_FRIEND_REQ_RESULT.
+         * @memberof FriendPto
+         * @classdesc Represents a C_ADD_FRIEND_REQ_RESULT.
+         * @implements IC_ADD_FRIEND_REQ_RESULT
+         * @constructor
+         * @param {FriendPto.IC_ADD_FRIEND_REQ_RESULT=} [properties] Properties to set
+         */
+        function C_ADD_FRIEND_REQ_RESULT(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_ADD_FRIEND_REQ_RESULT cmd.
+         * @member {number} cmd
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @instance
+         */
+        C_ADD_FRIEND_REQ_RESULT.prototype.cmd = 3;
+
+        /**
+         * C_ADD_FRIEND_REQ_RESULT scmd.
+         * @member {number} scmd
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @instance
+         */
+        C_ADD_FRIEND_REQ_RESULT.prototype.scmd = 5;
+
+        /**
+         * C_ADD_FRIEND_REQ_RESULT isApprove.
+         * @member {boolean} isApprove
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @instance
+         */
+        C_ADD_FRIEND_REQ_RESULT.prototype.isApprove = false;
+
+        /**
+         * C_ADD_FRIEND_REQ_RESULT uid.
+         * @member {number} uid
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @instance
+         */
+        C_ADD_FRIEND_REQ_RESULT.prototype.uid = 0;
+
+        /**
+         * Encodes the specified C_ADD_FRIEND_REQ_RESULT message. Does not implicitly {@link FriendPto.C_ADD_FRIEND_REQ_RESULT.verify|verify} messages.
+         * @function encode
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @static
+         * @param {FriendPto.IC_ADD_FRIEND_REQ_RESULT} message C_ADD_FRIEND_REQ_RESULT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_ADD_FRIEND_REQ_RESULT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.isApprove != null && Object.hasOwnProperty.call(message, "isApprove"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isApprove);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_ADD_FRIEND_REQ_RESULT message from the specified reader or buffer.
+         * @function decode
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {FriendPto.C_ADD_FRIEND_REQ_RESULT} C_ADD_FRIEND_REQ_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_ADD_FRIEND_REQ_RESULT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendPto.C_ADD_FRIEND_REQ_RESULT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.isApprove = reader.bool();
                         break;
                     }
                 case 4: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_ADD_FRIEND_REQ_RESULT
+         * @function getTypeUrl
+         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_ADD_FRIEND_REQ_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendPto.C_ADD_FRIEND_REQ_RESULT";
+        };
+
+        return C_ADD_FRIEND_REQ_RESULT;
+    })();
+
+    FriendPto.S_FRIEND_CHANGE = (function() {
+
+        /**
+         * Properties of a S_FRIEND_CHANGE.
+         * @memberof FriendPto
+         * @interface IS_FRIEND_CHANGE
+         * @property {number|null} [cmd] S_FRIEND_CHANGE cmd
+         * @property {number|null} [scmd] S_FRIEND_CHANGE scmd
+         * @property {number|null} [uid] S_FRIEND_CHANGE uid
+         * @property {boolean|null} [isOnline] S_FRIEND_CHANGE isOnline
+         * @property {FriendPto.IFriend|null} [friend] S_FRIEND_CHANGE friend
+         */
+
+        /**
+         * Constructs a new S_FRIEND_CHANGE.
+         * @memberof FriendPto
+         * @classdesc Represents a S_FRIEND_CHANGE.
+         * @implements IS_FRIEND_CHANGE
+         * @constructor
+         * @param {FriendPto.IS_FRIEND_CHANGE=} [properties] Properties to set
+         */
+        function S_FRIEND_CHANGE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_FRIEND_CHANGE cmd.
+         * @member {number} cmd
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.cmd = 3;
+
+        /**
+         * S_FRIEND_CHANGE scmd.
+         * @member {number} scmd
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.scmd = 6;
+
+        /**
+         * S_FRIEND_CHANGE uid.
+         * @member {number} uid
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.uid = 0;
+
+        /**
+         * S_FRIEND_CHANGE isOnline.
+         * @member {boolean} isOnline
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.isOnline = false;
+
+        /**
+         * S_FRIEND_CHANGE friend.
+         * @member {FriendPto.IFriend|null|undefined} friend
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.friend = null;
+
+        /**
+         * Encodes the specified S_FRIEND_CHANGE message. Does not implicitly {@link FriendPto.S_FRIEND_CHANGE.verify|verify} messages.
+         * @function encode
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @static
+         * @param {FriendPto.IS_FRIEND_CHANGE} message S_FRIEND_CHANGE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_FRIEND_CHANGE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.isOnline != null && Object.hasOwnProperty.call(message, "isOnline"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isOnline);
+            if (message.friend != null && Object.hasOwnProperty.call(message, "friend"))
+                $root.FriendPto.Friend.encode(message.friend, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_FRIEND_CHANGE message from the specified reader or buffer.
+         * @function decode
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {FriendPto.S_FRIEND_CHANGE} S_FRIEND_CHANGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_FRIEND_CHANGE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendPto.S_FRIEND_CHANGE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.isOnline = reader.bool();
+                        break;
+                    }
+                case 5: {
                         message.friend = $root.FriendPto.Friend.decode(reader, reader.uint32());
                         break;
                     }
@@ -634,21 +825,21 @@ $root.FriendPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_ADD_FRIEND_RESULT
+         * Gets the default type url for S_FRIEND_CHANGE
          * @function getTypeUrl
-         * @memberof FriendPto.S_ADD_FRIEND_RESULT
+         * @memberof FriendPto.S_FRIEND_CHANGE
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_ADD_FRIEND_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_FRIEND_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND_RESULT";
+            return typeUrlPrefix + "/FriendPto.S_FRIEND_CHANGE";
         };
 
-        return S_ADD_FRIEND_RESULT;
+        return S_FRIEND_CHANGE;
     })();
 
     FriendPto.S_ADD_FRIEND = (function() {
@@ -659,8 +850,7 @@ $root.FriendPto = (function() {
          * @interface IS_ADD_FRIEND
          * @property {number|null} [cmd] S_ADD_FRIEND cmd
          * @property {number|null} [scmd] S_ADD_FRIEND scmd
-         * @property {string|null} [nick] S_ADD_FRIEND nick
-         * @property {number|null} [uid] S_ADD_FRIEND uid
+         * @property {FriendPto.IFriend|null} [user] S_ADD_FRIEND user
          */
 
         /**
@@ -692,23 +882,15 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.S_ADD_FRIEND
          * @instance
          */
-        S_ADD_FRIEND.prototype.scmd = 4;
+        S_ADD_FRIEND.prototype.scmd = 7;
 
         /**
-         * S_ADD_FRIEND nick.
-         * @member {string} nick
+         * S_ADD_FRIEND user.
+         * @member {FriendPto.IFriend|null|undefined} user
          * @memberof FriendPto.S_ADD_FRIEND
          * @instance
          */
-        S_ADD_FRIEND.prototype.nick = "";
-
-        /**
-         * S_ADD_FRIEND uid.
-         * @member {number} uid
-         * @memberof FriendPto.S_ADD_FRIEND
-         * @instance
-         */
-        S_ADD_FRIEND.prototype.uid = 0;
+        S_ADD_FRIEND.prototype.user = null;
 
         /**
          * Encodes the specified S_ADD_FRIEND message. Does not implicitly {@link FriendPto.S_ADD_FRIEND.verify|verify} messages.
@@ -726,10 +908,8 @@ $root.FriendPto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.nick != null && Object.hasOwnProperty.call(message, "nick"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.nick);
-            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
+            if (message.user != null && Object.hasOwnProperty.call(message, "user"))
+                $root.FriendPto.Friend.encode(message.user, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -760,11 +940,7 @@ $root.FriendPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.nick = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.uid = reader.int32();
+                        message.user = $root.FriendPto.Friend.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -801,6 +977,7 @@ $root.FriendPto = (function() {
          * @interface IFriend
          * @property {number|null} [uid] Friend uid
          * @property {string|null} [nick] Friend nick
+         * @property {boolean|null} [isOnline] Friend isOnline
          */
 
         /**
@@ -835,6 +1012,14 @@ $root.FriendPto = (function() {
         Friend.prototype.nick = "";
 
         /**
+         * Friend isOnline.
+         * @member {boolean} isOnline
+         * @memberof FriendPto.Friend
+         * @instance
+         */
+        Friend.prototype.isOnline = false;
+
+        /**
          * Encodes the specified Friend message. Does not implicitly {@link FriendPto.Friend.verify|verify} messages.
          * @function encode
          * @memberof FriendPto.Friend
@@ -850,6 +1035,8 @@ $root.FriendPto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.uid);
             if (message.nick != null && Object.hasOwnProperty.call(message, "nick"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nick);
+            if (message.isOnline != null && Object.hasOwnProperty.call(message, "isOnline"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isOnline);
             return writer;
         };
 
@@ -877,6 +1064,10 @@ $root.FriendPto = (function() {
                     }
                 case 2: {
                         message.nick = reader.string();
+                        break;
+                    }
+                case 3: {
+                        message.isOnline = reader.bool();
                         break;
                     }
                 default:

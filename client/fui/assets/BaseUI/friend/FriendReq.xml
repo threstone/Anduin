@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="359,520">
+  <displayList>
+    <image id="n1_ta2r" name="bg" src="ta2rh" fileName="common/res/comp_142_160_2.png" xy="0,0" size="359,520"/>
+    <list id="n2_ta2r" name="list" xy="18,52" size="323,405" overflow="scroll" lineGap="5" autoClearItems="true">
+      <item url="ui://yaux2xpota2rm"/>
+      <item url="ui://yaux2xpota2rm"/>
+      <item url="ui://yaux2xpota2rm"/>
+      <item url="ui://yaux2xpota2rm"/>
+    </list>
+    <text id="n3_ta2r" name="title" xy="137,10" size="84,29" font="STHupo" fontSize="20" color="#ff0066" text="请求列表"/>
+    <component id="n4_ta2r" name="closeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="93,452" scale="0.7,0.7"/>
+  </displayList>
+</component>

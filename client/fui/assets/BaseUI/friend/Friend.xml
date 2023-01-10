@@ -8,9 +8,13 @@
       <item url="ui://yaux2xpota2rc"/>
       <item url="ui://yaux2xpota2rc"/>
     </list>
-    <text id="n7_ta2r" name="title" xy="123,5" size="84,29" font="STHupo" fontSize="20" color="#ff0066" text="好友列表"/>
-    <component id="n11_ta2r" name="addBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="78,451" scale="0.7,0.7"/>
+    <text id="n7_ta2r" name="title" xy="123,10" size="84,29" font="STHupo" fontSize="20" color="#ff0066" text="好友列表"/>
     <component id="n12_ta2r" name="ctrl" src="ta2ri" fileName="common/btn/Button2.xml" xy="0,180"/>
     <component id="n14_ta2r" name="AddFriendCom" src="ta2rj" fileName="friend/AddFriend.xml" xy="57,210" visible="false"/>
+    <component id="n11_ta2r" name="showAddFriendBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="28,452" scale="0.5,0.5"/>
+    <component id="n15_ta2r" name="showFriendReqBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="132,452" scale="0.5,0.5"/>
+    <component id="n16_ta2r" name="showReqCom" src="ta2rl" fileName="friend/FriendReq.xml" xy="-73,0" visible="false"/>
+    <image id="n17_ta2r" name="redTips1" src="ta2ro" fileName="friend/res/comp_30_30.png" xy="8,291"/>
+    <image id="n18_ta2r" name="redTips1" src="ta2ro" fileName="friend/res/comp_30_30.png" xy="235,469"/>
   </displayList>
 </component>

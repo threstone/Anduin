@@ -6,7 +6,8 @@ module BaseUI {
 		public bg:fairygui.GImage;
 		public textBg:fairygui.GImage;
 		public uidInput:fairygui.GTextInput;
-		public findBtn:UIButton1;
+		public addBtn:UIButton1;
+		public closeBtn:UIButton1;
 		public static URL:string = "ui://yaux2xpota2rj";
 
 		public static createInstance():UIAddFriend {
@@ -19,7 +20,8 @@ module BaseUI {
 			this.bg = <fairygui.GImage>(this.getChildAt(0));
 			this.textBg = <fairygui.GImage>(this.getChildAt(1));
 			this.uidInput = <fairygui.GTextInput>(this.getChildAt(2));
-			this.findBtn = <UIButton1>(this.getChildAt(3));
+			this.addBtn = <UIButton1>(this.getChildAt(3));
+			this.closeBtn = <UIButton1>(this.getChildAt(4));
 		}
 	}
 }

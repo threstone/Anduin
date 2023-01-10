@@ -6,12 +6,11 @@ class HallView extends BaseView<BaseUI.UIHall>{
     public open(): void {
         super.open();
         this.initView();
-        
+        FriendView.ins();
     }
 
     initView() {
         this.view.nickText.text = UserModel.ins().nick;
         this.view.uidText.text = `ID:${UserModel.ins().uid}`
-        FriendView.ins().initFriendView();
     }
 }

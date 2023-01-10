@@ -1,61 +1,6 @@
 type Long = protobuf.Long;
 // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run build:types'.
 
-/** Namespace ChatPto. */
-declare namespace ChatPto {
-
-    /** Properties of a C_. */
-    interface IC_ {
-
-        /** C_ cmd */
-        cmd?: (number|null);
-
-        /** C_ scmd */
-        scmd?: (number|null);
-    }
-
-    /** Represents a C_. */
-    class C_ implements IC_ {
-
-        /**
-         * Constructs a new C_.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: ChatPto.IC_);
-
-        /** C_ cmd. */
-        public cmd: number;
-
-        /** C_ scmd. */
-        public scmd: number;
-
-        /**
-         * Encodes the specified C_ message. Does not implicitly {@link ChatPto.C_.verify|verify} messages.
-         * @param message C_ message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: ChatPto.IC_, writer?: protobuf.Writer): protobuf.Writer;
-
-        /**
-         * Decodes a C_ message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.C_;
-
-        /**
-         * Gets the default type url for C_
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-}
-
 /** Namespace FriendPto. */
 declare namespace FriendPto {
 
@@ -121,6 +66,9 @@ declare namespace FriendPto {
 
         /** S_FRIEND_INFO list */
         list?: (FriendPto.IFriend[]|null);
+
+        /** S_FRIEND_INFO reqAddList */
+        reqAddList?: (FriendPto.IFriend[]|null);
     }
 
     /** Represents a S_FRIEND_INFO. */
@@ -140,6 +88,9 @@ declare namespace FriendPto {
 
         /** S_FRIEND_INFO list. */
         public list: FriendPto.IFriend[];
+
+        /** S_FRIEND_INFO reqAddList. */
+        public reqAddList: FriendPto.IFriend[];
 
         /**
          * Encodes the specified S_FRIEND_INFO message. Does not implicitly {@link FriendPto.S_FRIEND_INFO.verify|verify} messages.
@@ -224,63 +175,189 @@ declare namespace FriendPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_ADD_FRIEND_RESULT. */
-    interface IS_ADD_FRIEND_RESULT {
+    /** Properties of a S_ADD_FRIEND_REQ. */
+    interface IS_ADD_FRIEND_REQ {
 
-        /** S_ADD_FRIEND_RESULT cmd */
+        /** S_ADD_FRIEND_REQ cmd */
         cmd?: (number|null);
 
-        /** S_ADD_FRIEND_RESULT scmd */
+        /** S_ADD_FRIEND_REQ scmd */
         scmd?: (number|null);
 
-        /** S_ADD_FRIEND_RESULT isSuccess */
-        isSuccess?: (boolean|null);
-
-        /** S_ADD_FRIEND_RESULT friend */
-        friend?: (FriendPto.IFriend|null);
+        /** S_ADD_FRIEND_REQ code */
+        code?: (number|null);
     }
 
-    /** Represents a S_ADD_FRIEND_RESULT. */
-    class S_ADD_FRIEND_RESULT implements IS_ADD_FRIEND_RESULT {
+    /** Represents a S_ADD_FRIEND_REQ. */
+    class S_ADD_FRIEND_REQ implements IS_ADD_FRIEND_REQ {
 
         /**
-         * Constructs a new S_ADD_FRIEND_RESULT.
+         * Constructs a new S_ADD_FRIEND_REQ.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendPto.IS_ADD_FRIEND_RESULT);
+        constructor(properties?: FriendPto.IS_ADD_FRIEND_REQ);
 
-        /** S_ADD_FRIEND_RESULT cmd. */
+        /** S_ADD_FRIEND_REQ cmd. */
         public cmd: number;
 
-        /** S_ADD_FRIEND_RESULT scmd. */
+        /** S_ADD_FRIEND_REQ scmd. */
         public scmd: number;
 
-        /** S_ADD_FRIEND_RESULT isSuccess. */
-        public isSuccess: boolean;
-
-        /** S_ADD_FRIEND_RESULT friend. */
-        public friend?: (FriendPto.IFriend|null);
+        /** S_ADD_FRIEND_REQ code. */
+        public code: number;
 
         /**
-         * Encodes the specified S_ADD_FRIEND_RESULT message. Does not implicitly {@link FriendPto.S_ADD_FRIEND_RESULT.verify|verify} messages.
-         * @param message S_ADD_FRIEND_RESULT message or plain object to encode
+         * Encodes the specified S_ADD_FRIEND_REQ message. Does not implicitly {@link FriendPto.S_ADD_FRIEND_REQ.verify|verify} messages.
+         * @param message S_ADD_FRIEND_REQ message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendPto.IS_ADD_FRIEND_RESULT, writer?: protobuf.Writer): protobuf.Writer;
+        public static encode(message: FriendPto.IS_ADD_FRIEND_REQ, writer?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a S_ADD_FRIEND_RESULT message from the specified reader or buffer.
+         * Decodes a S_ADD_FRIEND_REQ message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_ADD_FRIEND_RESULT
+         * @returns S_ADD_FRIEND_REQ
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_ADD_FRIEND_RESULT;
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_ADD_FRIEND_REQ;
 
         /**
-         * Gets the default type url for S_ADD_FRIEND_RESULT
+         * Gets the default type url for S_ADD_FRIEND_REQ
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_ADD_FRIEND_REQ_RESULT. */
+    interface IC_ADD_FRIEND_REQ_RESULT {
+
+        /** C_ADD_FRIEND_REQ_RESULT cmd */
+        cmd?: (number|null);
+
+        /** C_ADD_FRIEND_REQ_RESULT scmd */
+        scmd?: (number|null);
+
+        /** C_ADD_FRIEND_REQ_RESULT isApprove */
+        isApprove?: (boolean|null);
+
+        /** C_ADD_FRIEND_REQ_RESULT uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a C_ADD_FRIEND_REQ_RESULT. */
+    class C_ADD_FRIEND_REQ_RESULT implements IC_ADD_FRIEND_REQ_RESULT {
+
+        /**
+         * Constructs a new C_ADD_FRIEND_REQ_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendPto.IC_ADD_FRIEND_REQ_RESULT);
+
+        /** C_ADD_FRIEND_REQ_RESULT cmd. */
+        public cmd: number;
+
+        /** C_ADD_FRIEND_REQ_RESULT scmd. */
+        public scmd: number;
+
+        /** C_ADD_FRIEND_REQ_RESULT isApprove. */
+        public isApprove: boolean;
+
+        /** C_ADD_FRIEND_REQ_RESULT uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified C_ADD_FRIEND_REQ_RESULT message. Does not implicitly {@link FriendPto.C_ADD_FRIEND_REQ_RESULT.verify|verify} messages.
+         * @param message C_ADD_FRIEND_REQ_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendPto.IC_ADD_FRIEND_REQ_RESULT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_ADD_FRIEND_REQ_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_ADD_FRIEND_REQ_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.C_ADD_FRIEND_REQ_RESULT;
+
+        /**
+         * Gets the default type url for C_ADD_FRIEND_REQ_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIEND_CHANGE. */
+    interface IS_FRIEND_CHANGE {
+
+        /** S_FRIEND_CHANGE cmd */
+        cmd?: (number|null);
+
+        /** S_FRIEND_CHANGE scmd */
+        scmd?: (number|null);
+
+        /** S_FRIEND_CHANGE uid */
+        uid?: (number|null);
+
+        /** S_FRIEND_CHANGE isOnline */
+        isOnline?: (boolean|null);
+
+        /** S_FRIEND_CHANGE friend */
+        friend?: (FriendPto.IFriend|null);
+    }
+
+    /** Represents a S_FRIEND_CHANGE. */
+    class S_FRIEND_CHANGE implements IS_FRIEND_CHANGE {
+
+        /**
+         * Constructs a new S_FRIEND_CHANGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendPto.IS_FRIEND_CHANGE);
+
+        /** S_FRIEND_CHANGE cmd. */
+        public cmd: number;
+
+        /** S_FRIEND_CHANGE scmd. */
+        public scmd: number;
+
+        /** S_FRIEND_CHANGE uid. */
+        public uid: number;
+
+        /** S_FRIEND_CHANGE isOnline. */
+        public isOnline: boolean;
+
+        /** S_FRIEND_CHANGE friend. */
+        public friend?: (FriendPto.IFriend|null);
+
+        /**
+         * Encodes the specified S_FRIEND_CHANGE message. Does not implicitly {@link FriendPto.S_FRIEND_CHANGE.verify|verify} messages.
+         * @param message S_FRIEND_CHANGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendPto.IS_FRIEND_CHANGE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIEND_CHANGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIEND_CHANGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_FRIEND_CHANGE;
+
+        /**
+         * Gets the default type url for S_FRIEND_CHANGE
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -296,11 +373,8 @@ declare namespace FriendPto {
         /** S_ADD_FRIEND scmd */
         scmd?: (number|null);
 
-        /** S_ADD_FRIEND nick */
-        nick?: (string|null);
-
-        /** S_ADD_FRIEND uid */
-        uid?: (number|null);
+        /** S_ADD_FRIEND user */
+        user?: (FriendPto.IFriend|null);
     }
 
     /** Represents a S_ADD_FRIEND. */
@@ -318,11 +392,8 @@ declare namespace FriendPto {
         /** S_ADD_FRIEND scmd. */
         public scmd: number;
 
-        /** S_ADD_FRIEND nick. */
-        public nick: string;
-
-        /** S_ADD_FRIEND uid. */
-        public uid: number;
+        /** S_ADD_FRIEND user. */
+        public user?: (FriendPto.IFriend|null);
 
         /**
          * Encodes the specified S_ADD_FRIEND message. Does not implicitly {@link FriendPto.S_ADD_FRIEND.verify|verify} messages.
@@ -358,6 +429,9 @@ declare namespace FriendPto {
 
         /** Friend nick */
         nick?: (string|null);
+
+        /** Friend isOnline */
+        isOnline?: (boolean|null);
     }
 
     /** Represents a Friend. */
@@ -374,6 +448,9 @@ declare namespace FriendPto {
 
         /** Friend nick. */
         public nick: string;
+
+        /** Friend isOnline. */
+        public isOnline: boolean;
 
         /**
          * Encodes the specified Friend message. Does not implicitly {@link FriendPto.Friend.verify|verify} messages.

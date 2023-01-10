@@ -2,7 +2,7 @@ syntax = "proto3";
 package ChatPto;
 
 //
-message C_{
-	int32 cmd = 1[default = 4]; 
-	int32 scmd = 2[default = 1];
-}
+// message C_{
+// 	int32 cmd = 1[default = 4]; 
+// 	int32 scmd = 2[default = 1];
+// }

@@ -16,7 +16,7 @@ class LoginModel extends BaseModel {
     }
 
     S_LOGIN(msg: LoginPto.S_LOGIN) {
-        this.emit('LoginResult', msg);
+        this.emit('S_LOGIN', msg);
         if (msg.isSuccess) {
             UserModel.ins().onLogin(msg);
             HallView.ins().open();
@@ -24,6 +24,6 @@ class LoginModel extends BaseModel {
     }
 
     S_REGISTER(msg: LoginPto.S_REGISTER) {
-        this.emit('RegisterResult', msg.code);
+        this.emit('S_REGISTER', msg.code);
     }
 }
