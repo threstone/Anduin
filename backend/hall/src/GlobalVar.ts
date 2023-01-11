@@ -12,6 +12,7 @@ import * as redisConfig from '../../common/config/redis.json';
 import { RedisMgr } from '../../common/redis/RedisMgr';
 import { RedisType } from '../../common/ConstDefine';
 import { SequelizeRegister } from './SequelizeRegister';
+import { DbHelper } from './DbHelper';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -19,8 +20,8 @@ export class GlobalVar {
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
-    private static sequelizeRegister: SequelizeRegister
-
+    private static sequelizeRegister: SequelizeRegister;
+    public static dbHelper: DbHelper;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -34,6 +35,8 @@ export class GlobalVar {
         this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr
         this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo]);
+        
+        this.dbHelper = new DbHelper();
     }
 
     /**

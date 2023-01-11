@@ -27,7 +27,7 @@ message C_ADD_FRIEND{
 message S_ADD_FRIEND_REQ{
 	int32 cmd = 1[default = 3]; 
 	int32 scmd = 2[default = 4];
-	int32 code = 3;//0成功 1缺少uid  2对方还没同意，不要重复请求
+	int32 code = 3;//0成功 1缺少uid  2对方还没同意，不要重复请求 3对方已经是你的好友了 4不能添加自己  5请输入正确的id  6请同意对方的好友请求
 }
 
 //同意或者拒绝好友请求
@@ -38,7 +38,7 @@ message C_ADD_FRIEND_REQ_RESULT{
 	int32 uid = 4;
 }
 
-//好友变动
+//好友变动 新的好友、状态改变
 message S_FRIEND_CHANGE{
 	int32 cmd = 1[default = 3]; 
 	int32 scmd = 2[default = 6];

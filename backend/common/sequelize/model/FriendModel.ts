@@ -2,6 +2,7 @@ import {
     Table, Column, Model, DataType,
 } from 'sequelize-typescript';
 
+
 @Table({
     tableName: 'friend',
     createdAt: false,
@@ -12,8 +13,12 @@ import {
         fields: ['uid', 'friend_uid'],
     }],
 })
+
 export class FriendModel extends Model {
-    @Column({ type: DataType.INTEGER, field: 'uid', primaryKey: true, autoIncrement: true })
+    @Column({ type: DataType.INTEGER, field: 'id', primaryKey: true, autoIncrement: true })
+    id: number
+
+    @Column({ type: DataType.INTEGER, field: 'uid' })
     uid: number
 
     @Column({ type: DataType.INTEGER, comment: '好友id', field: 'friend_uid', allowNull: false })
@@ -32,5 +37,10 @@ export class FriendModel extends Model {
         f2.uid = friendUid;
         f2.friendUId = uid;
         f2.save();
+    }
+
+    static async isFriend(uid: number, friendUid: number) {
+        const res = await FriendModel.count({ where: { uid, friend_uid: friendUid } });
+        return res !== 0;
     }
 }

@@ -6,7 +6,7 @@ abstract class BaseModel extends BaseClass {
         Socket.ins().sendProtoMsg(msg);
     }
 
-    protected emit(eventName: string, data: any) {
+    protected emit(eventName: string, data?: any) {
         GameDispatcher.getInstance().emit(eventName, data)
     }
 

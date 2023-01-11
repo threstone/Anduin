@@ -35,6 +35,10 @@ export class UserModel extends Model {
         return await UserModel.findOne({ where: { account: account, password: password } });
     }
 
+    static async getUserInfoByUid(uid: number): Promise<UserModel> {
+        return await UserModel.findOne({ where: { uid } });
+    }
+
     static async isExist(account: string): Promise<boolean> {
         const res = await UserModel.sequelize.query({ query: 'select 1 from user where account = ?', values: [account] });
         return res[0].length == 1;
