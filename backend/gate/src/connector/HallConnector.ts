@@ -1,7 +1,6 @@
 import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonHall';
 import { GlobalVar } from '../GlobalVar';
 export class HallConnector extends RpcCommon.HallRPCClient {
-
     onOpen() {
     }
     onClose() {

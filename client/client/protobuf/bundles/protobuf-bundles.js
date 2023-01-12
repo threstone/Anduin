@@ -15,6 +15,432 @@ $root.ChatPto = (function() {
      */
     var ChatPto = {};
 
+    ChatPto.C_SEND_PRIVATE_MESSAGE = (function() {
+
+        /**
+         * Properties of a C_SEND_PRIVATE_MESSAGE.
+         * @memberof ChatPto
+         * @interface IC_SEND_PRIVATE_MESSAGE
+         * @property {number|null} [cmd] C_SEND_PRIVATE_MESSAGE cmd
+         * @property {number|null} [scmd] C_SEND_PRIVATE_MESSAGE scmd
+         * @property {number|null} [uid] C_SEND_PRIVATE_MESSAGE uid
+         * @property {string|null} [msg] C_SEND_PRIVATE_MESSAGE msg
+         */
+
+        /**
+         * Constructs a new C_SEND_PRIVATE_MESSAGE.
+         * @memberof ChatPto
+         * @classdesc Represents a C_SEND_PRIVATE_MESSAGE.
+         * @implements IC_SEND_PRIVATE_MESSAGE
+         * @constructor
+         * @param {ChatPto.IC_SEND_PRIVATE_MESSAGE=} [properties] Properties to set
+         */
+        function C_SEND_PRIVATE_MESSAGE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_SEND_PRIVATE_MESSAGE cmd.
+         * @member {number} cmd
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @instance
+         */
+        C_SEND_PRIVATE_MESSAGE.prototype.cmd = 100;
+
+        /**
+         * C_SEND_PRIVATE_MESSAGE scmd.
+         * @member {number} scmd
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @instance
+         */
+        C_SEND_PRIVATE_MESSAGE.prototype.scmd = 1;
+
+        /**
+         * C_SEND_PRIVATE_MESSAGE uid.
+         * @member {number} uid
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @instance
+         */
+        C_SEND_PRIVATE_MESSAGE.prototype.uid = 0;
+
+        /**
+         * C_SEND_PRIVATE_MESSAGE msg.
+         * @member {string} msg
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @instance
+         */
+        C_SEND_PRIVATE_MESSAGE.prototype.msg = "";
+
+        /**
+         * Encodes the specified C_SEND_PRIVATE_MESSAGE message. Does not implicitly {@link ChatPto.C_SEND_PRIVATE_MESSAGE.verify|verify} messages.
+         * @function encode
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @static
+         * @param {ChatPto.IC_SEND_PRIVATE_MESSAGE} message C_SEND_PRIVATE_MESSAGE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_SEND_PRIVATE_MESSAGE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.msg != null && Object.hasOwnProperty.call(message, "msg"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.msg);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_SEND_PRIVATE_MESSAGE message from the specified reader or buffer.
+         * @function decode
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ChatPto.C_SEND_PRIVATE_MESSAGE} C_SEND_PRIVATE_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_SEND_PRIVATE_MESSAGE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatPto.C_SEND_PRIVATE_MESSAGE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.msg = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_SEND_PRIVATE_MESSAGE
+         * @function getTypeUrl
+         * @memberof ChatPto.C_SEND_PRIVATE_MESSAGE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_SEND_PRIVATE_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ChatPto.C_SEND_PRIVATE_MESSAGE";
+        };
+
+        return C_SEND_PRIVATE_MESSAGE;
+    })();
+
+    ChatPto.C_SEND_MESSAGE_TO_ALL = (function() {
+
+        /**
+         * Properties of a C_SEND_MESSAGE_TO_ALL.
+         * @memberof ChatPto
+         * @interface IC_SEND_MESSAGE_TO_ALL
+         * @property {number|null} [cmd] C_SEND_MESSAGE_TO_ALL cmd
+         * @property {number|null} [scmd] C_SEND_MESSAGE_TO_ALL scmd
+         * @property {string|null} [msg] C_SEND_MESSAGE_TO_ALL msg
+         */
+
+        /**
+         * Constructs a new C_SEND_MESSAGE_TO_ALL.
+         * @memberof ChatPto
+         * @classdesc Represents a C_SEND_MESSAGE_TO_ALL.
+         * @implements IC_SEND_MESSAGE_TO_ALL
+         * @constructor
+         * @param {ChatPto.IC_SEND_MESSAGE_TO_ALL=} [properties] Properties to set
+         */
+        function C_SEND_MESSAGE_TO_ALL(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_SEND_MESSAGE_TO_ALL cmd.
+         * @member {number} cmd
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @instance
+         */
+        C_SEND_MESSAGE_TO_ALL.prototype.cmd = 100;
+
+        /**
+         * C_SEND_MESSAGE_TO_ALL scmd.
+         * @member {number} scmd
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @instance
+         */
+        C_SEND_MESSAGE_TO_ALL.prototype.scmd = 2;
+
+        /**
+         * C_SEND_MESSAGE_TO_ALL msg.
+         * @member {string} msg
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @instance
+         */
+        C_SEND_MESSAGE_TO_ALL.prototype.msg = "";
+
+        /**
+         * Encodes the specified C_SEND_MESSAGE_TO_ALL message. Does not implicitly {@link ChatPto.C_SEND_MESSAGE_TO_ALL.verify|verify} messages.
+         * @function encode
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @static
+         * @param {ChatPto.IC_SEND_MESSAGE_TO_ALL} message C_SEND_MESSAGE_TO_ALL message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_SEND_MESSAGE_TO_ALL.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.msg != null && Object.hasOwnProperty.call(message, "msg"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.msg);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_SEND_MESSAGE_TO_ALL message from the specified reader or buffer.
+         * @function decode
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ChatPto.C_SEND_MESSAGE_TO_ALL} C_SEND_MESSAGE_TO_ALL
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_SEND_MESSAGE_TO_ALL.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatPto.C_SEND_MESSAGE_TO_ALL();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.msg = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_SEND_MESSAGE_TO_ALL
+         * @function getTypeUrl
+         * @memberof ChatPto.C_SEND_MESSAGE_TO_ALL
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_SEND_MESSAGE_TO_ALL.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ChatPto.C_SEND_MESSAGE_TO_ALL";
+        };
+
+        return C_SEND_MESSAGE_TO_ALL;
+    })();
+
+    ChatPto.S_CHAT_MESSAGE = (function() {
+
+        /**
+         * Properties of a S_CHAT_MESSAGE.
+         * @memberof ChatPto
+         * @interface IS_CHAT_MESSAGE
+         * @property {number|null} [cmd] S_CHAT_MESSAGE cmd
+         * @property {number|null} [scmd] S_CHAT_MESSAGE scmd
+         * @property {string|null} [msg] S_CHAT_MESSAGE msg
+         * @property {string|null} [nick] S_CHAT_MESSAGE nick
+         * @property {number|null} [uid] S_CHAT_MESSAGE uid
+         */
+
+        /**
+         * Constructs a new S_CHAT_MESSAGE.
+         * @memberof ChatPto
+         * @classdesc Represents a S_CHAT_MESSAGE.
+         * @implements IS_CHAT_MESSAGE
+         * @constructor
+         * @param {ChatPto.IS_CHAT_MESSAGE=} [properties] Properties to set
+         */
+        function S_CHAT_MESSAGE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_CHAT_MESSAGE cmd.
+         * @member {number} cmd
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.cmd = 100;
+
+        /**
+         * S_CHAT_MESSAGE scmd.
+         * @member {number} scmd
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.scmd = 3;
+
+        /**
+         * S_CHAT_MESSAGE msg.
+         * @member {string} msg
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.msg = "";
+
+        /**
+         * S_CHAT_MESSAGE nick.
+         * @member {string} nick
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.nick = "";
+
+        /**
+         * S_CHAT_MESSAGE uid.
+         * @member {number} uid
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.uid = 0;
+
+        /**
+         * Encodes the specified S_CHAT_MESSAGE message. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.
+         * @function encode
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @static
+         * @param {ChatPto.IS_CHAT_MESSAGE} message S_CHAT_MESSAGE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_CHAT_MESSAGE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.msg != null && Object.hasOwnProperty.call(message, "msg"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.msg);
+            if (message.nick != null && Object.hasOwnProperty.call(message, "nick"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.nick);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_CHAT_MESSAGE message from the specified reader or buffer.
+         * @function decode
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {ChatPto.S_CHAT_MESSAGE} S_CHAT_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_CHAT_MESSAGE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.ChatPto.S_CHAT_MESSAGE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.msg = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.nick = reader.string();
+                        break;
+                    }
+                case 5: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_CHAT_MESSAGE
+         * @function getTypeUrl
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_CHAT_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/ChatPto.S_CHAT_MESSAGE";
+        };
+
+        return S_CHAT_MESSAGE;
+    })();
+
     return ChatPto;
 })();
 

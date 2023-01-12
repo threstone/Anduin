@@ -1,8 +1,26 @@
 syntax = "proto3";
 package ChatPto;
 
-//
-// message C_{
-// 	int32 cmd = 1[default = 4]; 
-// 	int32 scmd = 2[default = 1];
-// }
+//私聊信息
+message C_SEND_PRIVATE_MESSAGE{
+	int32 cmd = 1[default = 100]; 
+	int32 scmd = 2[default = 1];
+    int32 uid = 3;
+    string msg = 4;
+}
+
+//全服信息
+message C_SEND_MESSAGE_TO_ALL{
+    int32 cmd = 1[default = 100]; 
+	int32 scmd = 2[default = 2];
+    string msg = 3;
+}
+
+//收到信息
+message S_CHAT_MESSAGE{
+    int32 cmd = 1[default = 100]; 
+	int32 scmd = 2[default = 3];
+    string msg = 3;
+    string nick = 4;
+    int32 uid = 5;//有uid就可以判断是不是自己好友发的
+}

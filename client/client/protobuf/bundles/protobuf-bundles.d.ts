@@ -1,6 +1,199 @@
 type Long = protobuf.Long;
 // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run build:types'.
 
+/** Namespace ChatPto. */
+declare namespace ChatPto {
+
+    /** Properties of a C_SEND_PRIVATE_MESSAGE. */
+    interface IC_SEND_PRIVATE_MESSAGE {
+
+        /** C_SEND_PRIVATE_MESSAGE cmd */
+        cmd?: (number|null);
+
+        /** C_SEND_PRIVATE_MESSAGE scmd */
+        scmd?: (number|null);
+
+        /** C_SEND_PRIVATE_MESSAGE uid */
+        uid?: (number|null);
+
+        /** C_SEND_PRIVATE_MESSAGE msg */
+        msg?: (string|null);
+    }
+
+    /** Represents a C_SEND_PRIVATE_MESSAGE. */
+    class C_SEND_PRIVATE_MESSAGE implements IC_SEND_PRIVATE_MESSAGE {
+
+        /**
+         * Constructs a new C_SEND_PRIVATE_MESSAGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: ChatPto.IC_SEND_PRIVATE_MESSAGE);
+
+        /** C_SEND_PRIVATE_MESSAGE cmd. */
+        public cmd: number;
+
+        /** C_SEND_PRIVATE_MESSAGE scmd. */
+        public scmd: number;
+
+        /** C_SEND_PRIVATE_MESSAGE uid. */
+        public uid: number;
+
+        /** C_SEND_PRIVATE_MESSAGE msg. */
+        public msg: string;
+
+        /**
+         * Encodes the specified C_SEND_PRIVATE_MESSAGE message. Does not implicitly {@link ChatPto.C_SEND_PRIVATE_MESSAGE.verify|verify} messages.
+         * @param message C_SEND_PRIVATE_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: ChatPto.IC_SEND_PRIVATE_MESSAGE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_SEND_PRIVATE_MESSAGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_SEND_PRIVATE_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.C_SEND_PRIVATE_MESSAGE;
+
+        /**
+         * Gets the default type url for C_SEND_PRIVATE_MESSAGE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_SEND_MESSAGE_TO_ALL. */
+    interface IC_SEND_MESSAGE_TO_ALL {
+
+        /** C_SEND_MESSAGE_TO_ALL cmd */
+        cmd?: (number|null);
+
+        /** C_SEND_MESSAGE_TO_ALL scmd */
+        scmd?: (number|null);
+
+        /** C_SEND_MESSAGE_TO_ALL msg */
+        msg?: (string|null);
+    }
+
+    /** Represents a C_SEND_MESSAGE_TO_ALL. */
+    class C_SEND_MESSAGE_TO_ALL implements IC_SEND_MESSAGE_TO_ALL {
+
+        /**
+         * Constructs a new C_SEND_MESSAGE_TO_ALL.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: ChatPto.IC_SEND_MESSAGE_TO_ALL);
+
+        /** C_SEND_MESSAGE_TO_ALL cmd. */
+        public cmd: number;
+
+        /** C_SEND_MESSAGE_TO_ALL scmd. */
+        public scmd: number;
+
+        /** C_SEND_MESSAGE_TO_ALL msg. */
+        public msg: string;
+
+        /**
+         * Encodes the specified C_SEND_MESSAGE_TO_ALL message. Does not implicitly {@link ChatPto.C_SEND_MESSAGE_TO_ALL.verify|verify} messages.
+         * @param message C_SEND_MESSAGE_TO_ALL message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: ChatPto.IC_SEND_MESSAGE_TO_ALL, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_SEND_MESSAGE_TO_ALL message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_SEND_MESSAGE_TO_ALL
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.C_SEND_MESSAGE_TO_ALL;
+
+        /**
+         * Gets the default type url for C_SEND_MESSAGE_TO_ALL
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_CHAT_MESSAGE. */
+    interface IS_CHAT_MESSAGE {
+
+        /** S_CHAT_MESSAGE cmd */
+        cmd?: (number|null);
+
+        /** S_CHAT_MESSAGE scmd */
+        scmd?: (number|null);
+
+        /** S_CHAT_MESSAGE msg */
+        msg?: (string|null);
+
+        /** S_CHAT_MESSAGE nick */
+        nick?: (string|null);
+
+        /** S_CHAT_MESSAGE uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_CHAT_MESSAGE. */
+    class S_CHAT_MESSAGE implements IS_CHAT_MESSAGE {
+
+        /**
+         * Constructs a new S_CHAT_MESSAGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: ChatPto.IS_CHAT_MESSAGE);
+
+        /** S_CHAT_MESSAGE cmd. */
+        public cmd: number;
+
+        /** S_CHAT_MESSAGE scmd. */
+        public scmd: number;
+
+        /** S_CHAT_MESSAGE msg. */
+        public msg: string;
+
+        /** S_CHAT_MESSAGE nick. */
+        public nick: string;
+
+        /** S_CHAT_MESSAGE uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_CHAT_MESSAGE message. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.
+         * @param message S_CHAT_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: ChatPto.IS_CHAT_MESSAGE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_CHAT_MESSAGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_CHAT_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.S_CHAT_MESSAGE;
+
+        /**
+         * Gets the default type url for S_CHAT_MESSAGE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace FriendPto. */
 declare namespace FriendPto {
 

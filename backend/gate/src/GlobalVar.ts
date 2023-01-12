@@ -4,8 +4,9 @@ import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
 import { CommonUtils } from '../../common/CommonUtils';
 import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
-import { HallConnectorMgr } from './rpc/HallConnectorMgr';
-import { LoginPto } from '../../hall/src/CommonProto';
+import { HallConnectorMgr } from './connector/HallConnectorMgr';
+import { RelationConnector } from './connector/RelationConnector';
+import * as relationConn from '../../common/config/relation_node.json';
 
 const logger = getLogger();
 
@@ -14,6 +15,7 @@ export class GlobalVar {
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
     public static hallConnectorMgr: HallConnectorMgr
+    public static loginConnServer: RelationConnector
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -25,13 +27,11 @@ export class GlobalVar {
 
         logger.info('init connector');
         this.initConnector();
-
-
-
     }
 
     private static initConnector() {
         //init hallConectorMgr
         this.hallConnectorMgr = new HallConnectorMgr(logger, this.startupParam.nodeId);
+        this.loginConnServer = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
     }
 }

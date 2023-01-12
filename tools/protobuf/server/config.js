@@ -5,25 +5,35 @@ let configs = [{
     targetPath: '../../../backend/hall/src/',
     targetName: 'Common',
     isJsMin: true,
+    generateType: GenerateType.ProtoBuf,
     commonFiles: [
         '../../../proto/login.proto',
         '../../../proto/hall.proto',
         '../../../proto/system.proto',
         '../../../proto/chat.proto',
         '../../../proto/friend.proto',
-    ],
-
-    generateType: GenerateType.ProtoBuf
+    ]
 }, {
     noCreate: true,
     noConvert: true,
     targetPath: '../../../backend/gate/src/',
     targetName: 'Common',
     isJsMin: true,
+    generateType: GenerateType.ProtoBuf,
     commonFiles: [
         '../../../proto/login.proto',
-    ],
-    generateType: GenerateType.All
+    ]
+}, {
+    noCreate: true,
+    noConvert: true,
+    targetPath: '../../../backend/relation/src/',
+    targetName: 'Common',
+    isJsMin: true,
+    generateType: GenerateType.ProtoBuf,
+    commonFiles: [
+        '../../../proto/friend.proto',
+        '../../../proto/chat.proto',
+    ]
 }];
 
 module.exports = configs;

@@ -21,6 +21,7 @@ export class LoginHandler {
                     socket.uid = msg.uid;
                     GlobalVar.socketServer.addSocketToMap(msg.uid, socket);
                     socket.send(buffer);
+                    GlobalVar.loginConnServer.sendUserOnline(socket.uid);
                 }
             });
         } else if (scmd === LoginPto.C_REGISTER.prototype.scmd) {

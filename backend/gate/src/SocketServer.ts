@@ -80,7 +80,7 @@ export class SocketServer {
         this.clientConnectedCount_--;
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
-            GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendUserSocketClose(socket.uid);
+            GlobalVar.loginConnServer.sendUserOffline(socket.uid);
         }
     }
 
@@ -101,10 +101,10 @@ export class SocketServer {
     private routeMsg(socket: GateSocket, message: WS.Data) {
         const buffer = message as Buffer;
         const cmd = buffer.readInt32BE(0);
-        const scmd = buffer.readInt32BE(4);
 
         //只有loginProto协议(cmd == 1)可以跳过登录，其他协议都不允许
         if (cmd === 1) {
+            const scmd = buffer.readInt32BE(4);
             LoginHandler.handlerLoginPto(socket, scmd, buffer);
             return;
         }

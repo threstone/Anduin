@@ -1,6 +1,7 @@
 
 import * as protobuf from "protobufjs"
 import { IGameMessage, ILog } from "./I"
+import * as fs from 'fs';
 
 let logger: ILog | Console = console;
 export class ProtoBufEncoder {
@@ -8,6 +9,100 @@ export class ProtoBufEncoder {
 	private static protoBufWriter: protobuf.Writer = protobuf.Writer.create()
 	private static protoBufReader: protobuf.Reader = protobuf.Reader.create(Buffer.alloc(1))
 	private static protoBufClass: Map<string, any> = new Map<string, any>()
+
+	/**
+	 * 
+	 * @param log 
+	 * @param allProto 
+	 * @param handlerPath handler
+	 */
+	public static init(log: ILog, allProto?: any, handlerPath?: string) {
+		logger = log;
+		this.addFunToProtobuf();
+		this.autoMapping(allProto, handlerPath);
+	}
+
+	private static addFunToProtobuf() {
+		// 给protobuf的默认编码函数 增加 一个
+		const protoBufAny: any = protobuf
+		protoBufAny.Writer.prototype.finishWithSysCmd = function (sysid: number, cmdid: number) {
+			let head = this.head.next
+			const buf = this.constructor.alloc(this.len + 8)
+			buf.writeInt32BE(sysid, 0)
+			buf.writeInt32BE(cmdid, 4)
+			let pos = 8
+			while (head) {
+				head.fn(head.val, buf, pos)
+				pos += head.len
+				head = head.next
+			}
+			return buf
+		}
+
+		const raw = protoBufAny.Reader.prototype.int64
+
+		protoBufAny.Reader.prototype.int64 = function () {
+			const result = raw.call(this)
+			if (typeof (result) === "number") {
+				return result
+			} else {
+				return result.toNumber()
+			}
+		}
+	}
+
+	private static autoMapping(allProto?: any, handlerPath?: string) {
+		if (!allProto || !handlerPath) {
+			return;
+		}
+		let handlerObj = {};
+		// handlerPath = path.join(__dirname, handlerPath);
+		let files = fs.readdirSync(handlerPath);
+		for (let i = 0; i < files.length; i++) {
+			if (files[i].endsWith('.js')) {
+				let temp = require(handlerPath + '/' + files[i]);
+				for (let key in temp) {
+					if (key.endsWith('Handler')) {
+						if (handlerObj[key]) {
+							logger.error(`重复的handler文件:${key}`);
+							continue;
+						}
+						handlerObj[key] = temp[key];
+					}
+				}
+			}
+		}
+
+		for (const protoKey in allProto) {
+			let protoClass = allProto[protoKey];
+			for (const key in protoClass) {
+				if (key.startsWith('C_') || key.startsWith('S_')) {
+					let temp = protoClass[key];
+					if (temp.prototype.cmd == undefined || !temp.prototype.scmd == undefined) {
+						logger.error(`${protoKey}.${key}不存在cmd scmd, 注册失败!`,);
+						continue;
+					}
+					ProtoBufEncoder.setProtoClass(temp.prototype.cmd, temp.prototype.scmd, temp);
+					if (key.startsWith('S_')) {
+						continue;
+					}
+					let isFind = false;
+					for (const handleName in handlerObj) {
+						let handler = handlerObj[handleName];
+						if (handler[key]) {
+							ProtoBufEncoder.setHandler(temp.prototype.cmd, temp.prototype.scmd, handler[key].bind(handler));
+							logger.info(`注册函数 ${key}`);
+							isFind = true;
+							break;
+						}
+					}
+					if (!isFind && ProtoBufEncoder.getHandlerFunction(temp.prototype.cmd, temp.prototype.scmd) == undefined) {
+						logger.error(`${key} 未找到注册函数`);
+					}
+				}
+			}
+		}
+	}
 
 	public static setHandler(cmd: number, scmd: number, fun: Function) {
 		let protoIndex = cmd + "_" + scmd
@@ -20,7 +115,7 @@ export class ProtoBufEncoder {
 
 	public static setProtoClass(cmd: number, scmd: number, protoClass: any) {
 		let protoIndex = cmd + "_" + scmd
-		if (this.messagehandles_[protoIndex]) {
+		if (ProtoBufEncoder.protoBufClass.has(protoIndex)) {
 			logger.error(`该位置已有protoClass cmd:${cmd} scmd:${scmd}`)
 			return
 		}
@@ -53,37 +148,6 @@ export class ProtoBufEncoder {
 			}
 		}
 	}
-
-	public static init(log: ILog) {
-		logger = log;
-		// 给protobuf的默认编码函数 增加 一个
-		const protoBufAny: any = protobuf
-		protoBufAny.Writer.prototype.finishWithSysCmd = function (sysid: number, cmdid: number) {
-			let head = this.head.next
-			const buf = this.constructor.alloc(this.len + 8)
-			buf.writeInt32BE(sysid, 0)
-			buf.writeInt32BE(cmdid, 4)
-			let pos = 8
-			while (head) {
-				head.fn(head.val, buf, pos)
-				pos += head.len
-				head = head.next
-			}
-			return buf
-		}
-
-		const raw = protoBufAny.Reader.prototype.int64
-
-		protoBufAny.Reader.prototype.int64 = function () {
-			const result = raw.call(this)
-			if (typeof (result) === "number") {
-				return result
-			} else {
-				return result.toNumber()
-			}
-		}
-	}
-
 
 	public static encode(message: IGameMessage): Buffer {
 		if (!message) {

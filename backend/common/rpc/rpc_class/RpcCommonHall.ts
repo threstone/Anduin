@@ -2,12 +2,12 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "ce5ae5c7-c2f9-4bde-a14d-b4dc71ff4200"
+let uuid = "a0fabdb7-e129-472b-a6e7-1b34dca954bd"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer {
     private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["reqLogin", "reqRegister", "transferToHall", "userSocketClose"]
+    private funs_: string[] = ["reqLogin", "reqRegister", "transferToHall"]
     get funs() { return this.funs_ }
     get rpc() { return this.rpcServer };
 
@@ -32,10 +32,7 @@ export abstract class HallRPCServer {
     abstract reqRegister(clientName: string,buff:Buffer):Promise<Buffer>
 
     //转发
-    abstract transferToHall(clientName: string,uid:number,buff:Buffer):void
-
-    //通知大厅玩家离线
-    abstract userSocketClose(clientName: string,uid:number):void
+    abstract transferToHall(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
 
     //s2c
     //主动告知网关转发消息
@@ -112,7 +109,7 @@ export abstract class HallRPCClient {
     }
 
     //转发
-    async callTransferToHall(uid:number,buff:Buffer):Promise<void>    {
+    async callTransferToHall(uid:number,buff:Buffer):Promise<Buffer>    {
         let args = [uid,buff]
         let res: any = await this.rpc.call("transferToHall",args)
         return res
@@ -121,18 +118,6 @@ export abstract class HallRPCClient {
     sendTransferToHall(uid:number,buff:Buffer)    {
         let args = [uid,buff]
         this.rpc.send("transferToHall",args)
-    }
-
-    //通知大厅玩家离线
-    async callUserSocketClose(uid:number):Promise<void>    {
-        let args = [uid]
-        let res: any = await this.rpc.call("userSocketClose",args)
-        return res
-    }
-
-    sendUserSocketClose(uid:number)    {
-        let args = [uid]
-        this.rpc.send("userSocketClose",args)
     }
 
     //s2c
