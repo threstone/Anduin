@@ -4,6 +4,11 @@ module BaseUI {
 
 	export class BaseUIBinder {
 		public static bindAll():void {
+			fairygui.UIObjectFactory.setPackageItemExtension(UIChatBtn.URL, UIChatBtn);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIChatItem.URL, UIChatItem);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniChat.URL, UIMiniChat);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIChat.URL, UIChat);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIButton3.URL, UIButton3);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton1.URL, UIButton1);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegister.URL, UIRegister);
 			fairygui.UIObjectFactory.setPackageItemExtension(UILogin.URL, UILogin);

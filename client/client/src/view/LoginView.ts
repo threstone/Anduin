@@ -12,7 +12,6 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         regCom.regBtn.describe.text = '注册'
     }
 
-
     public open(): void {
         super.open();
         this.AddClick(this.view.loginBtn, this.onLoginBtnClick);
@@ -59,11 +58,15 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         if (regCom.accountInput.text.length <= 0 || regCom.pwdInput.text.length <= 0 ||
             regCom.pwdAgainInput.text.length <= 0 || regCom.nickInput.text.length <= 0) {
             GlobalView.showTips('每一个都要填写哦', 5000);
-            return
+            return;
         }
         if (regCom.pwdInput.text != regCom.pwdAgainInput.text) {
             GlobalView.showTips('两次密码输入不一致', 5000)
-            return
+            return;
+        }
+        if (regCom.accountInput.text.length > 16 || regCom.pwdInput.text.length > 32 || regCom.nickInput.text.length > 8) {
+            GlobalView.showTips('账号不超过长度不超过16个字符,密码长度不超过32个字符,你唱成都不超过8个字符', 5000)
+            return;
         }
 
         LoginModel.ins().C_REGISTER(regCom.accountInput.text, regCom.pwdInput.text, regCom.nickInput.text);
@@ -78,6 +81,10 @@ class LoginView extends BaseView<BaseUI.UILogin> {
         let password = this.view.passwordInput.text;
         if (account.length <= 0 || password.length <= 0) {
             GlobalView.showTips('请输入用户名或密码', 5000);
+            return;
+        }
+        if (password.length > 16 || password.length > 32) {
+            GlobalView.showTips('账号不超过长度不超过16个字符,密码长度不超过32个字符', 5000)
             return;
         }
         //发消息后不允许点击了

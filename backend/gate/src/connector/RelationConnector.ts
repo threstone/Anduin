@@ -5,8 +5,12 @@ export class RelationConnector extends RpcCommon.RelationRPCClient {
     }
     onClose() {
     }
-    
+
     transferToGate(uid: number, buffer: Buffer): void {
         GlobalVar.socketServer.sendBufferByUid(uid, buffer);
+    }
+
+    broadcast(buffer: Buffer): void {
+        GlobalVar.socketServer.broadcast(buffer);
     }
 }

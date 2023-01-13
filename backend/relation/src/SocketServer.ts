@@ -1,19 +1,18 @@
 import { getLogger } from 'log4js';
-import { RedisType } from '../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
 import * as RpcCommon from '../../common/rpc/rpc_class/RpcCommonRelation';
 import { GlobalVar } from './GlobalVar';
 
 const logger = getLogger();
 export class SocketServer extends RpcCommon.RelationRPCServer {
-    userOnline(clientName: string, uid: number): void {
-        //通知好友上线
-
+    userOnline(clientName: string, uid: number, nick: string): void {
+        //玩家上线
+        GlobalVar.userMgr.onUserOnline(clientName, uid, nick);
     }
 
     userOffline(clientName: string, uid: number): void {
-        //通知好友下线
-        
+        //玩家下线
+        GlobalVar.userMgr.onUserOffline(uid);
     }
 
     async transferToChat(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {

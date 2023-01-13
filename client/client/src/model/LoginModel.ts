@@ -15,7 +15,7 @@ class LoginModel extends BaseModel {
         this.sendMsg(msg);
     }
 
-    S_LOGIN(msg: LoginPto.S_LOGIN) {
+    private S_LOGIN(msg: LoginPto.S_LOGIN) {
         this.emit('S_LOGIN', msg);
         if (msg.isSuccess) {
             UserModel.ins().onLogin(msg);
@@ -23,7 +23,7 @@ class LoginModel extends BaseModel {
         }
     }
 
-    S_REGISTER(msg: LoginPto.S_REGISTER) {
+    private S_REGISTER(msg: LoginPto.S_REGISTER) {
         this.emit('S_REGISTER', msg.code);
     }
 }

@@ -790,6 +790,9 @@ export namespace ChatPto {
 
         /** S_CHAT_MESSAGE uid */
         uid?: (number|null);
+
+        /** S_CHAT_MESSAGE isPrivateMsg */
+        isPrivateMsg?: (boolean|null);
     }
 
     /** Represents a S_CHAT_MESSAGE. */
@@ -815,6 +818,9 @@ export namespace ChatPto {
 
         /** S_CHAT_MESSAGE uid. */
         public uid: number;
+
+        /** S_CHAT_MESSAGE isPrivateMsg. */
+        public isPrivateMsg: boolean;
 
         /**
          * Encodes the specified S_CHAT_MESSAGE message. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.

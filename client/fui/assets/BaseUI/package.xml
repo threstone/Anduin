@@ -23,6 +23,22 @@
     <component id="ta2rm" name="FriendReqItem.xml" path="/friend/" exported="true"/>
     <image id="ta2rn" name="comp_66_61.png" path="/common/res/"/>
     <image id="ta2ro" name="comp_30_30.png" path="/friend/res/"/>
+    <component id="fjkip" name="Chat.xml" path="/chat/" exported="true"/>
+    <image id="fjkiq" name="bg.jpg" path="/common/res/"/>
+    <image id="fjkir" name="mailbox_frame.jpg" path="/chat/res/" scale="9grid" scale9grid="35,34,438,502"/>
+    <image id="fjkiu" name="herodetail_arrow_righ.png" path="/chat/res/"/>
+    <image id="fjkiw" name="elitetoggle-.png" path="/chat/res/"/>
+    <image id="fjkix" name="elitetoggle-n.png" path="/chat/res/"/>
+    <component id="fjkiy" name="Button3.xml" path="/common/btn/"/>
+    <image id="fjki10" name="chat_tab_norma.png" path="/chat/res/"/>
+    <component id="fjki11" name="ChatBtn.xml" path="/chat/"/>
+    <component id="fjki13" name="FriendBox.xml" path="/chat/"/>
+    <image id="fjki15" name="equip_craft_number_b.png" path="/chat/res/"/>
+    <component id="fjki17" name="ChatItem.xml" path="/chat/" exported="true"/>
+    <image id="fjki19" name="shop_refresh_cost_b.png" path="/chat/res/" scale="9grid" scale9grid="21,33,54,5"/>
+    <image id="fjki1b" name="excavate_history_button_detail_.png" path="/chat/res/"/>
+    <component id="fjki1d" name="MiniChat.xml" path="/chat/"/>
+    <image id="fjki1h" name="announce_text_bg_blu.png" path="/chat/res/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -22,5 +22,6 @@ message S_CHAT_MESSAGE{
 	int32 scmd = 2[default = 3];
     string msg = 3;
     string nick = 4;
-    int32 uid = 5;//有uid就可以判断是不是自己好友发的
+    int32 uid = 5;
+	bool isPrivateMsg = 6;
 }

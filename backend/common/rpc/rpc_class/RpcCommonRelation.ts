@@ -2,7 +2,7 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "9ca59cba-d7c4-4b60-aefb-e3ba7f832ef7"
+let uuid = "73da275c-7643-4c3c-900d-bb6d640f09b6"
 
 //服务器的虚函数定义
 export abstract class RelationRPCServer {
@@ -26,7 +26,7 @@ export abstract class RelationRPCServer {
     }
 
     //用户上线
-    abstract userOnline(clientName: string,uid:number):void
+    abstract userOnline(clientName: string,uid:number,nick:string):void
 
     //用户离线
     abstract userOffline(clientName: string,uid:number):void
@@ -47,13 +47,25 @@ export abstract class RelationRPCServer {
         this.rpc.send(clientName,"transferToGate",args)
     }
 
+    //广播消息
+    async callBroadcast(clientName:string,buffer:Buffer):Promise<void>    {
+        let args = [buffer]
+        let res: any = await this.rpc.call(clientName,"broadcast", args)
+        return res
+    }
+
+    sendBroadcast(clientName:string,buffer:Buffer)    {
+        let args = [buffer]
+        this.rpc.send(clientName,"broadcast",args)
+    }
+
 }
 
 //客户端的函数定义
 export abstract class RelationRPCClient {
 
     private myRpcClient = new RPC.RPC_CLIENT()
-    private funs_: string[] = ["transferToGate"]
+    private funs_: string[] = ["transferToGate", "broadcast"]
     get funs() { return this.funs_ }
     get rpc() { return this.myRpcClient }
     get port() { return this.rpc.port }
@@ -73,14 +85,14 @@ export abstract class RelationRPCClient {
     abstract onClose();
 
     //用户上线
-    async callUserOnline(uid:number):Promise<void>    {
-        let args = [uid]
+    async callUserOnline(uid:number,nick:string):Promise<void>    {
+        let args = [uid,nick]
         let res: any = await this.rpc.call("userOnline",args)
         return res
     }
 
-    sendUserOnline(uid:number)    {
-        let args = [uid]
+    sendUserOnline(uid:number,nick:string)    {
+        let args = [uid,nick]
         this.rpc.send("userOnline",args)
     }
 
@@ -111,5 +123,8 @@ export abstract class RelationRPCClient {
     //s2c
     //主动告知网关转发消息
     abstract transferToGate(uid:number,buffer:Buffer):void
+
+    //广播消息
+    abstract broadcast(buffer:Buffer):void
 
 }

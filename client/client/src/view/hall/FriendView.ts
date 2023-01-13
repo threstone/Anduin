@@ -8,8 +8,6 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
         FriendModel.ins().C_FRIEND_INFO();
     }
 
-
-
     private initFriendView() {
         GameDispatcher.getInstance().addEventListener('FriendRedShow', this.updateFriendAddInfo, this);
         GameDispatcher.getInstance().addEventListener('FriendUpdate', this.updateFriendInfo, this);
@@ -36,6 +34,10 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
         friendCom.AddFriendCom.addBtn.describe.text = '添加';
         friendCom.AddFriendCom.addBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
             let uid = friendCom.AddFriendCom.uidInput.text;
+            if (uid.length > 10) {
+                GlobalView.showTips('uid异常', 5000)
+                return;
+            }
             friendCom.AddFriendCom.uidInput.text = '';
             //去掉空格
             uid = uid.replace(/ /g, '');
@@ -76,15 +78,18 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
     }
 
     private updateFriendAddInfo() {
-        const reqAddList = FriendModel.ins().serverInfo?.reqAddList;
+        const reqAddList = FriendModel.ins().serverInfo.reqAddList;
+        if (!reqAddList) {
+            return;
+        }
         const list = this.view.showReqCom.list;
         list.removeChildren();
-        for (let index = 0; index < reqAddList?.length; index++) {
+        for (let index = 0; index < reqAddList.length; index++) {
             const reqInfo = reqAddList[index];
             if (reqInfo === null) {
                 continue;
             }
-            const addItem = list.addItem(BaseUI.UIFriendReqItem.URL) as BaseUI.UIFriendReqItem;
+            const addItem = BaseUI.UIFriendReqItem.createInstance();;
             const targetUid = reqInfo.uid;
             addItem.nickText.text = reqInfo.nick;
             addItem.approve.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
@@ -97,6 +102,7 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
                 list.removeChild(addItem);
                 reqAddList[index] = null;
             }, this);
+            list.addChild(addItem);
         }
 
         //红点
@@ -107,13 +113,16 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
     }
 
     private updateFriendInfo() {
-        const list = FriendModel.ins().serverInfo?.list;
+        const list = FriendModel.ins().serverInfo.list;
+        if (!list) {
+            return;
+        }
         this.view.list.removeChildren();
-        for (let index = 0; index < list?.length; index++) {
+        for (let index = 0; index < list.length; index++) {
             const friendInfo = list[index];
-            const friendItem = this.view.list.addItem(BaseUI.UIFriendItem.URL) as BaseUI.UIFriendItem;
+            const friendItem = BaseUI.UIFriendItem.createInstance();
             friendItem.nickText.text = friendInfo.nick;
-            friendItem.onlineImg.visible = friendInfo.isOnline;
+            friendItem.onlineImg.color = friendInfo.isOnline ? 0xFFFFFF : 0xFF0000;
             this.view.list.addChild(friendItem);
         }
 
@@ -122,7 +131,10 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
 
     //检查要添加的好友是否在请求列表中
     private checkReqInfo(targetUid: number) {
-        const reqAddList = FriendModel.ins().serverInfo?.reqAddList;
+        const reqAddList = FriendModel.ins().serverInfo.reqAddList;
+        if (!reqAddList) {
+            return;
+        }
         for (let index = 0; index < reqAddList.length; index++) {
             const reqAdd = reqAddList[index];
             if (reqAdd && reqAdd.uid === targetUid) {

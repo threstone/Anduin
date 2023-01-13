@@ -2,7 +2,7 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "39a2fe85-afd6-4594-b5af-3cbb12a71d79"
+let uuid = "a0c92839-554a-4c69-8412-ef5ebf2cb977"
 
 //服务器的虚函数定义
 export abstract class LogicRPCServer {

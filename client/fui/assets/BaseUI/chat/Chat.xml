@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n4_fjki" name="n4" src="fjkiu" fileName="chat/res/herodetail_arrow_righ.png" xy="743,322">
+      <relation target="n1_fjki" sidePair="left-right"/>
+    </image>
+    <loader id="n24_fjki" name="close" xy="0,0" size="1280,720"/>
+    <image id="n1_fjki" name="chatBg" src="fjkir" fileName="chat/res/mailbox_frame.jpg" xy="0,0" size="743,720"/>
+    <image id="n5_fjki" name="accountInputBg" src="ru1k7" fileName="common/res/comp_696_152.png" xy="34,632" size="548,55"/>
+    <component id="n10_fjki" name="sendBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="588,625"/>
+    <text id="n12_fjki" name="inputText" xy="35,642" size="542,34" fontSize="24" color="#3333ff" align="center" vAlign="middle" ubb="true" autoSize="ellipsis" text="" input="true" prompt="  请点此输入"/>
+    <component id="n15_fjki" name="normalBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="29,17"/>
+    <component id="n16_fjki" name="friendBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="218,17"/>
+    <list id="n22_fjki" name="chatList" xy="35,82" size="682,542" overflow="scroll"/>
+    <text id="n19_fjki" name="n19" xy="843,386" size="254,90" fontSize="12" autoSize="none" text="35   175&#xA;选中颜色：54341D"/>
+    <list id="n18_fjki" name="friendChatList" xy="175,82" size="542,542" group="n23_fjki" overflow="scroll" autoClearItems="true">
+      <item url="ui://yaux2xpofjki17"/>
+      <item url="ui://yaux2xpofjki17"/>
+    </list>
+    <list id="n21_fjki" name="friendList" xy="28,82" size="140,542" group="n23_fjki" overflow="scroll" lineGap="3" autoClearItems="true">
+      <item url="ui://yaux2xpofjki13"/>
+      <item url="ui://yaux2xpofjki13"/>
+      <item url="ui://yaux2xpofjki13"/>
+    </list>
+    <group id="n23_fjki" name="friendGroup" xy="28,82" size="689,542" visible="false" advanced="true"/>
+  </displayList>
+</component>

@@ -295,6 +295,7 @@ $root.ChatPto = (function() {
          * @property {string|null} [msg] S_CHAT_MESSAGE msg
          * @property {string|null} [nick] S_CHAT_MESSAGE nick
          * @property {number|null} [uid] S_CHAT_MESSAGE uid
+         * @property {boolean|null} [isPrivateMsg] S_CHAT_MESSAGE isPrivateMsg
          */
 
         /**
@@ -353,6 +354,14 @@ $root.ChatPto = (function() {
         S_CHAT_MESSAGE.prototype.uid = 0;
 
         /**
+         * S_CHAT_MESSAGE isPrivateMsg.
+         * @member {boolean} isPrivateMsg
+         * @memberof ChatPto.S_CHAT_MESSAGE
+         * @instance
+         */
+        S_CHAT_MESSAGE.prototype.isPrivateMsg = false;
+
+        /**
          * Encodes the specified S_CHAT_MESSAGE message. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.
          * @function encode
          * @memberof ChatPto.S_CHAT_MESSAGE
@@ -374,6 +383,8 @@ $root.ChatPto = (function() {
                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.nick);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+            if (message.isPrivateMsg != null && Object.hasOwnProperty.call(message, "isPrivateMsg"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isPrivateMsg);
             return writer;
         };
 
@@ -413,6 +424,10 @@ $root.ChatPto = (function() {
                     }
                 case 5: {
                         message.uid = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.isPrivateMsg = reader.bool();
                         break;
                     }
                 default:

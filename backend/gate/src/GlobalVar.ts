@@ -33,5 +33,6 @@ export class GlobalVar {
         //init hallConectorMgr
         this.hallConnectorMgr = new HallConnectorMgr(logger, this.startupParam.nodeId);
         this.loginConnServer = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
+        this.loginConnServer.init();
     }
 }

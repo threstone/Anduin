@@ -7,6 +7,9 @@ import { BaseHandler } from './BaseHandler';
 
 export class LoginHandler extends BaseHandler {
     static async C_LOGIN(clientName: string, uid: number, msg: LoginPto.C_LOGIN) {
+        if (!msg.account || !msg.password || msg.account.length > 16 || msg.password.length > 32) {
+            return;
+        }
         const replyMsg = new LoginPto.S_LOGIN();
         const userInfo = await UserModel.getUserInfo(msg.account, msg.password);
         if (!userInfo) {
@@ -34,6 +37,9 @@ export class LoginHandler extends BaseHandler {
     }
 
     static async C_REGISTER(clientId: number, uid: number, msg: LoginPto.C_REGISTER) {
+        if (!msg.nick || !msg.account || !msg.password || msg.account.length > 16 || msg.password.length > 32 || msg.nick.length > 8) {
+            return;
+        }
         const isExist = await UserModel.isExist(msg.account);
         const res = new LoginPto.S_REGISTER();
         res.code = 2;

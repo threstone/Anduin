@@ -907,6 +907,7 @@ $root.ChatPto = (function() {
         S_CHAT_MESSAGE.prototype.msg = "";
         S_CHAT_MESSAGE.prototype.nick = "";
         S_CHAT_MESSAGE.prototype.uid = 0;
+        S_CHAT_MESSAGE.prototype.isPrivateMsg = false;
 
         S_CHAT_MESSAGE.create = function create(properties) {
             return new S_CHAT_MESSAGE(properties);
@@ -925,6 +926,8 @@ $root.ChatPto = (function() {
                 w.uint32(34).string(m.nick);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(40).int32(m.uid);
+            if (m.isPrivateMsg != null && Object.hasOwnProperty.call(m, "isPrivateMsg"))
+                w.uint32(48).bool(m.isPrivateMsg);
             return w;
         };
 
@@ -955,6 +958,10 @@ $root.ChatPto = (function() {
                         m.uid = r.int32();
                         break;
                     }
+                case 6: {
+                        m.isPrivateMsg = r.bool();
+                        break;
+                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -982,6 +989,9 @@ $root.ChatPto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
+            if (d.isPrivateMsg != null) {
+                m.isPrivateMsg = Boolean(d.isPrivateMsg);
+            }
             return m;
         };
 
@@ -995,6 +1005,7 @@ $root.ChatPto = (function() {
                 d.msg = "";
                 d.nick = "";
                 d.uid = 0;
+                d.isPrivateMsg = false;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -1010,6 +1021,9 @@ $root.ChatPto = (function() {
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
+            }
+            if (m.isPrivateMsg != null && m.hasOwnProperty("isPrivateMsg")) {
+                d.isPrivateMsg = m.isPrivateMsg;
             }
             return d;
         };

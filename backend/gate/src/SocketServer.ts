@@ -26,6 +26,12 @@ export class SocketServer {
     //     ProtoBufEncoder.addProtoModule(protoModule, handle)
     // }
 
+    broadcast(buffer: Buffer) {
+        this.socketMap.forEach((socket) => {
+            socket.send(buffer);
+        });
+    }
+
     sendBufferByUid(uid: number, buffer: Buffer) {
         const socket = this.socketMap.get(uid);
         if (socket) {

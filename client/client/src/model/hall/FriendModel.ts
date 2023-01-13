@@ -3,7 +3,17 @@ class FriendModel extends BaseModel {
     private _serverInfo: FriendPto.S_FRIEND_INFO;
     public get serverInfo() { return this._serverInfo }
 
-    emitFriendUpdate() {
+    isFriend(uid: number) {
+        for (let index = 0; index < this._serverInfo.list.length; index++) {
+            const friend = this._serverInfo.list[index];
+            if (friend.uid === uid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private emitFriendUpdate() {
         //排序在线列表
         const arr = this._serverInfo.list;
         arr.sort((a, b) => {
@@ -13,13 +23,13 @@ class FriendModel extends BaseModel {
     }
 
     //好友信息返回
-    S_FRIEND_INFO(msg: FriendPto.S_FRIEND_INFO) {
+    private S_FRIEND_INFO(msg: FriendPto.S_FRIEND_INFO) {
         this._serverInfo = msg;
         this.emitFriendUpdate();
     }
 
     //好友变动
-    S_FRIEND_CHANGE(msg: FriendPto.S_FRIEND_CHANGE) {
+    private S_FRIEND_CHANGE(msg: FriendPto.S_FRIEND_CHANGE) {
         //新的好友
         if (msg.friend) {
             this._serverInfo.list.push(msg.friend);
@@ -36,7 +46,7 @@ class FriendModel extends BaseModel {
     }
 
     //他人请求添加好友
-    S_ADD_FRIEND(msg: FriendPto.S_ADD_FRIEND) {
+    private S_ADD_FRIEND(msg: FriendPto.S_ADD_FRIEND) {
         if (!msg.user) {
             return;
         }
@@ -45,7 +55,7 @@ class FriendModel extends BaseModel {
     }
 
     //返回请求添加好友是否成功
-    S_ADD_FRIEND_REQ(msg: FriendPto.S_ADD_FRIEND_REQ) {
+    private S_ADD_FRIEND_REQ(msg: FriendPto.S_ADD_FRIEND_REQ) {
         if (msg.code === 0) {
             TipsView.ins().showTips('成功请求添加好友', 5000);
         } else if (msg.code === 1) {
