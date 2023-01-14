@@ -32,13 +32,14 @@
     <component id="fjkiy" name="Button3.xml" path="/common/btn/"/>
     <image id="fjki10" name="chat_tab_norma.png" path="/chat/res/"/>
     <component id="fjki11" name="ChatBtn.xml" path="/chat/"/>
-    <component id="fjki13" name="FriendBox.xml" path="/chat/"/>
+    <component id="fjki13" name="ChatFriendBox.xml" path="/chat/" exported="true"/>
     <image id="fjki15" name="equip_craft_number_b.png" path="/chat/res/"/>
     <component id="fjki17" name="ChatItem.xml" path="/chat/" exported="true"/>
     <image id="fjki19" name="shop_refresh_cost_b.png" path="/chat/res/" scale="9grid" scale9grid="21,33,54,5"/>
     <image id="fjki1b" name="excavate_history_button_detail_.png" path="/chat/res/"/>
     <component id="fjki1d" name="MiniChat.xml" path="/chat/"/>
     <image id="fjki1h" name="announce_text_bg_blu.png" path="/chat/res/"/>
+    <component id="fjki1i" name="ChatInputCom.xml" path="/chat/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

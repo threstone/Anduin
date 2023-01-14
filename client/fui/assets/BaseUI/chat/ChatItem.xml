@@ -2,7 +2,7 @@
 <component size="542,43">
   <displayList>
     <text id="n0_fjki" name="nickText" xy="0,9" size="154,25" fontSize="17" color="#00ff00" align="center" vAlign="middle" strokeColor="#000000" text="啊啊啊啊啊啊啊啊："/>
-    <image id="n7_fjki" name="bg" src="fjki19" fileName="chat/res/shop_refresh_cost_b.png" xy="151,0" size="285,43"/>
-    <text id="n8_fjki" name="msg" xy="171,9" size="258,27" fontSize="18" color="#ffff66" autoSize="none" text="最大width3701111"/>
+    <image id="n7_fjki" name="bg" src="fjki19" fileName="chat/res/shop_refresh_cost_b.png" xy="151,0" size="391,43"/>
+    <text id="n8_fjki" name="msg" xy="171,9" size="160,27" fontSize="18" color="#ffff66" text="最大width3701111"/>
   </displayList>
 </component>

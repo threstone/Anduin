@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="140,70">
   <displayList>
-    <graph id="n0_fjki" name="n0" xy="0,0" size="140,70" type="rect" lineSize="0" fillColor="#ff431d01"/>
+    <graph id="n0_fjki" name="bg" xy="0,0" size="140,70" type="rect" lineSize="0" fillColor="#ff431d01"/>
     <text id="n3_fjki" name="nickText" xy="0,0" size="140,45" fontSize="22" color="#00ff00" align="center" autoSize="shrink" strokeColor="#000000" text="qqqqq"/>
     <image id="n1_fjki" name="n1" src="ta2rd" fileName="friend/res/comp_jdt_01.png" xy="7,45" scale="0.6,0.6"/>
     <image id="n2_fjki" name="onlineImg" src="ta2re" fileName="friend/res/comp_jdt_02.png" xy="11,49" scale="0.5,0.5"/>
     <text id="n5_fjki" name="statusText" xy="28,45" size="28,19" fontSize="12" text="离线"/>
-    <image id="n7_fjki" name="numBg" src="fjki15" fileName="chat/equip_craft_number_b.png" xy="107,42" size="26,26" group="n10_fjki"/>
+    <image id="n7_fjki" name="numBg" src="fjki15" fileName="chat/res/equip_craft_number_b.png" xy="107,42" size="26,26" group="n10_fjki"/>
     <text id="n9_fjki" name="newMsgText" xy="107,42" size="26,26" group="n10_fjki" fontSize="12" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" text="1"/>
     <group id="n10_fjki" name="numGroup" xy="107,42" size="26,26" advanced="true"/>
   </displayList>

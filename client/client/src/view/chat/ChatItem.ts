@@ -23,10 +23,12 @@ class ChatItem {
         item.height = item.bg.height;
 
         if (isSelf) {
-            item.nickText.x = item.width - item.nickText.width
-            item.msg.x = 10 + offset;
+            const nickOffset = item.width - item.nickText.width - item.nickText.x
+            item.nickText.x += nickOffset;
+            const bubbleOffset = nickOffset - item.bg.width
+            item.msg.x = 10 + bubbleOffset;
             item.bg.skewY = 180;
-            item.bg.x = item.bg.width + offset;
+            item.bg.x = item.bg.width + bubbleOffset;
         }
         return item;
     }

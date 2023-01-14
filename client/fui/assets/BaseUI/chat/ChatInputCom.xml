@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="683,67">
+  <displayList>
+    <image id="n0_fjki" name="inputBg" src="ru1k7" fileName="common/res/comp_696_152.png" xy="0,7" size="548,55"/>
+    <component id="n1_fjki" name="sendBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="554,0"/>
+    <text id="n2_fjki" name="inputText" xy="1,17" size="542,34" fontSize="24" color="#3333ff" align="center" vAlign="middle" ubb="true" autoSize="ellipsis" text="" input="true" prompt="  请点此输入"/>
+  </displayList>
+</component>

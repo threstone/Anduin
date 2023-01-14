@@ -3,6 +3,16 @@ class FriendModel extends BaseModel {
     private _serverInfo: FriendPto.S_FRIEND_INFO;
     public get serverInfo() { return this._serverInfo }
 
+    isOnline(uid: number) {
+        for (let index = 0; index < this._serverInfo.list.length; index++) {
+            const friend = this._serverInfo.list[index];
+            if (friend.uid === uid) {
+                return friend.isOnline;
+            }
+        }
+        return false;
+    }
+
     isFriend(uid: number) {
         for (let index = 0; index < this._serverInfo.list.length; index++) {
             const friend = this._serverInfo.list[index];

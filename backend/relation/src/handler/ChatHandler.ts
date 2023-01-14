@@ -9,12 +9,17 @@ export class ChatHandler extends BaseHandler {
         if (msg.msg.length > 128) {
             return;
         }
+        const targetUser = GlobalVar.userMgr.getUserInfo(msg.uid);
+        //对方不在线
+        if (!targetUser) {
+            return;
+        }
         const data = new ChatPto.S_CHAT_MESSAGE();
         data.uid = uid;
         data.nick = GlobalVar.userMgr.getUserInfo(uid)?.nick;
         data.msg = msg.msg;
         data.isPrivateMsg = true;
-        this.sendMsg(GlobalVar.userMgr.getUserInfo(uid)?.clientName, msg.uid, data);
+        this.sendMsg(targetUser.clientName, targetUser.uid, data);
     }
 
     //全服信息
