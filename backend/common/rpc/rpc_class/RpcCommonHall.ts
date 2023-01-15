@@ -2,7 +2,7 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "00bd001c-9cce-4b93-80c8-0c2b3fe077e5"
+let uuid = "b452a499-374e-441a-a429-4197f7e7b48a"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer {

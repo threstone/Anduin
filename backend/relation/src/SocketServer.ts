@@ -15,7 +15,7 @@ export class SocketServer extends RpcCommon.RelationRPCServer {
         GlobalVar.userMgr.onUserOffline(uid);
     }
 
-    async transferToChat(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
+    async transferTRelation(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
         const msg = ProtoBufEncoder.decode(buff, 0);
         const fun = ProtoBufEncoder.getHandlerFunction(msg.cmd, msg.scmd);
         if (!fun) {

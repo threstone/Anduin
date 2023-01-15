@@ -1,0 +1,1 @@
+node .\dist\hall\src\bin\main.js socketListenPort=Num(1002)

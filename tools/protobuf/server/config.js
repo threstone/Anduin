@@ -10,7 +10,6 @@ let configs = [{
         '../../../proto/login.proto',
         '../../../proto/hall.proto',
         '../../../proto/system.proto',
-        '../../../proto/chat.proto',
         '../../../proto/friend.proto',
     ]
 }, {

@@ -69,6 +69,12 @@ class ChatView extends BaseView<BaseUI.UIChat>{
                 this.showChatToFriendList(chatInfo);
             }
             const friendBox = ChatFriendBox.getBox(friendInfo.nick, friendInfo.isOnline, chatInfo.unreadNum, isSelect);
+            this.observe('S_CHAT_MESSAGE', (evt: EventData) => {
+                const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
+                if (msg.uid === friendUid && friendUid !== this.selectUid) {
+                    ChatFriendBox.addUnreadNum(friendBox, 1);
+                }
+            });
             this.AddClick(friendBox, this.onFriendBoxClick.bind(this, friendBox, chatInfo, friendUid))
             friendListCom.addChild(friendBox);
         }
@@ -83,7 +89,7 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         const friendListCom = this.view.friendList;
         for (let index = 0; index < friendListCom.numChildren; index++) {
             const box = friendListCom.getChildAt(index) as BaseUI.UIChatFriendBox;
-            ChatFriendBox.selectBox(box, false)
+            ChatFriendBox.selectBox(box, false);
         }
         ChatFriendBox.selectBox(friendBox, true);
         this.showChatToFriendList(chatInfo);
@@ -148,18 +154,27 @@ class ChatView extends BaseView<BaseUI.UIChat>{
 
     private onNewMsg(evt: EventData) {
         const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
+        if(this.selectNomal){
+            ChatModel.ins().clearNormalUnread();
+        }else{
+            ChatModel.ins().clearFriendUnread();
+        }
+        
         //私聊消息
         if (msg.isPrivateMsg) {
-            if (this.selectNomal) {
-                this.view.friendTipsGroup.visible = true;
+            //我选中的
+            if (msg.uid === this.selectUid) {
+                //把这条聊天信息加到list
+                const frinendChatList = this.view.friendChatList;
+                const item = ChatItem.getChatItem(msg.nick, msg.msg, false);
+                frinendChatList.addChild(item);
             }
         }//综合消息
         else {
-            if (!this.selectNomal) {
-                this.view.normalTipsGroup.visible = true;
-                const item = ChatItem.getChatItem(msg.nick, msg.msg, UserModel.ins().uid === msg.uid);
-                this.view.chatList.addChild(item);
-            }
+            const item = ChatItem.getChatItem(msg.nick, msg.msg, UserModel.ins().uid === msg.uid);
+            this.view.chatList.addChild(item);
         }
+
+        this.updateUnreadTips();
     }
 }

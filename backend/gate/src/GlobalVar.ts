@@ -15,7 +15,7 @@ export class GlobalVar {
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
     public static hallConnectorMgr: HallConnectorMgr
-    public static loginConnServer: RelationConnector
+    public static relationConnector: RelationConnector
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -32,7 +32,7 @@ export class GlobalVar {
     private static initConnector() {
         //init hallConectorMgr
         this.hallConnectorMgr = new HallConnectorMgr(logger, this.startupParam.nodeId);
-        this.loginConnServer = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
-        this.loginConnServer.init();
+        this.relationConnector = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
+        this.relationConnector.init();
     }
 }

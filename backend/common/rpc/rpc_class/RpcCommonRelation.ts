@@ -2,12 +2,12 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "73da275c-7643-4c3c-900d-bb6d640f09b6"
+let uuid = "ffeaa4b5-e5d4-4cd3-ad53-72bf7bd33d4f"
 
 //服务器的虚函数定义
 export abstract class RelationRPCServer {
     private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["userOnline", "userOffline", "transferToChat"]
+    private funs_: string[] = ["userOnline", "userOffline", "transferTRelation"]
     get funs() { return this.funs_ }
     get rpc() { return this.rpcServer };
 
@@ -32,7 +32,7 @@ export abstract class RelationRPCServer {
     abstract userOffline(clientName: string,uid:number):void
 
     //转发
-    abstract transferToChat(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
+    abstract transferTRelation(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
 
     //s2c
     //主动告知网关转发消息
@@ -109,15 +109,15 @@ export abstract class RelationRPCClient {
     }
 
     //转发
-    async callTransferToChat(uid:number,buff:Buffer):Promise<Buffer>    {
+    async callTransferTRelation(uid:number,buff:Buffer):Promise<Buffer>    {
         let args = [uid,buff]
-        let res: any = await this.rpc.call("transferToChat",args)
+        let res: any = await this.rpc.call("transferTRelation",args)
         return res
     }
 
-    sendTransferToChat(uid:number,buff:Buffer)    {
+    sendTransferTRelation(uid:number,buff:Buffer)    {
         let args = [uid,buff]
-        this.rpc.send("transferToChat",args)
+        this.rpc.send("transferTRelation",args)
     }
 
     //s2c

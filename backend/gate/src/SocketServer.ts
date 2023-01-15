@@ -86,7 +86,7 @@ export class SocketServer {
         this.clientConnectedCount_--;
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
-            GlobalVar.loginConnServer.sendUserOffline(socket.uid);
+            GlobalVar.relationConnector.sendUserOffline(socket.uid);
         }
     }
 
@@ -120,6 +120,10 @@ export class SocketServer {
         }
         if (cmd >= 0 && cmd <= 99) {
             GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendTransferToHall(socket.uid, buffer);
+        } else if (cmd === 100) {
+            GlobalVar.relationConnector.sendTransferTRelation(socket.uid, buffer);
+        }else{
+            this.logger.error(`unknow routing cmd${cmd}`);
         }
     }
 }
