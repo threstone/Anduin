@@ -19,6 +19,7 @@ class ChatFriendBox {
         box.bg.color = isSelect ? this.selectColor : this.unSelectColor;
     }
 
+    //此颜色说明已经是选中的
     static isSelect(box: BaseUI.UIChatFriendBox) {
         return box.bg.color === this.selectColor;
     }
@@ -36,5 +37,10 @@ class ChatFriendBox {
         curNum += addNum;
         box.newMsgText.text = `${curNum > 99 ? 99 : curNum}`;
         box.numGroup.visible = curNum !== 0;
+    }
+
+    static clearUnreadNum(box: BaseUI.UIChatFriendBox) {
+        box.newMsgText.text = '0';
+        box.numGroup.visible = false;
     }
 }

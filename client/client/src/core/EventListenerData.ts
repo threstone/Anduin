@@ -1,13 +1,13 @@
 class EventListenerData {
 
-    addObject: egret.DisplayObject | fairygui.GObject;
+    addObject: egret.DisplayObject | egret.EventDispatcher;
     type: string;
     listener: Function;
     thisObject: any;
     // useCapture: boolean;
     // priority: number;
 
-    public constructor(addObj: egret.DisplayObject | fairygui.GObject, type: string, func: Function, thisObj: any) {
+    public constructor(addObj: egret.EventDispatcher, type: string, func: Function, thisObj: any) {
         this.addObject = addObj
         this.type = type
         this.listener = func

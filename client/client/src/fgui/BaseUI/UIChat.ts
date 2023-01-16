@@ -36,16 +36,16 @@ module BaseUI {
 			this.normalBtn = <UIChatBtn>(this.getChildAt(5));
 			this.friendBtn = <UIChatBtn>(this.getChildAt(6));
 			this.chatList = <fairygui.GList>(this.getChildAt(7));
-			this.friendChatList = <fairygui.GList>(this.getChildAt(9));
-			this.friendList = <fairygui.GList>(this.getChildAt(10));
-			this.clickTips = <fairygui.GTextField>(this.getChildAt(11));
-			this.friendGroup = <fairygui.GGroup>(this.getChildAt(12));
-			this.nNumBg = <fairygui.GImage>(this.getChildAt(13));
-			this.normalUnRead = <fairygui.GTextField>(this.getChildAt(14));
-			this.normalTipsGroup = <fairygui.GGroup>(this.getChildAt(15));
-			this.fNumBg = <fairygui.GImage>(this.getChildAt(16));
-			this.friendUnRead = <fairygui.GTextField>(this.getChildAt(17));
-			this.friendTipsGroup = <fairygui.GGroup>(this.getChildAt(18));
+			this.friendChatList = <fairygui.GList>(this.getChildAt(8));
+			this.friendList = <fairygui.GList>(this.getChildAt(9));
+			this.clickTips = <fairygui.GTextField>(this.getChildAt(10));
+			this.friendGroup = <fairygui.GGroup>(this.getChildAt(11));
+			this.nNumBg = <fairygui.GImage>(this.getChildAt(12));
+			this.normalUnRead = <fairygui.GTextField>(this.getChildAt(13));
+			this.normalTipsGroup = <fairygui.GGroup>(this.getChildAt(14));
+			this.fNumBg = <fairygui.GImage>(this.getChildAt(15));
+			this.friendUnRead = <fairygui.GTextField>(this.getChildAt(16));
+			this.friendTipsGroup = <fairygui.GGroup>(this.getChildAt(17));
 		}
 	}
 }

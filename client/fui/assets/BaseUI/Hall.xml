@@ -11,5 +11,6 @@
     <component id="n10_fjki" name="fightBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="573,13"/>
     <component id="n11_fjki" name="pveBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="833,13"/>
     <component id="n16_fjki" name="miniChat" src="fjki1d" fileName="chat/MiniChat.xml" xy="9,605"/>
+    <text id="n17_mvhp" name="n17" xy="305,246" size="367,151" fontSize="55" autoSize="none" text="好友栏点击聊天，友谊赛"/>
   </displayList>
 </component>

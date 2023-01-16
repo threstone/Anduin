@@ -11,7 +11,6 @@
     <component id="n15_fjki" name="normalBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="29,17"/>
     <component id="n16_fjki" name="friendBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="218,17"/>
     <list id="n22_fjki" name="chatList" xy="35,82" size="682,542" overflow="scroll"/>
-    <text id="n19_fjki" name="n19" xy="843,386" size="254,90" fontSize="12" autoSize="none" text="35   175&#xA;选中颜色：54341D"/>
     <list id="n18_fjki" name="friendChatList" xy="175,82" size="542,542" group="n23_fjki" overflow="scroll" autoClearItems="true">
       <item url="ui://yaux2xpofjki17"/>
       <item url="ui://yaux2xpofjki17"/>

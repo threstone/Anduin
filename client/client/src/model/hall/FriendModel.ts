@@ -27,7 +27,7 @@ class FriendModel extends BaseModel {
         //排序在线列表
         const arr = this._serverInfo.list;
         arr.sort((a, b) => {
-            return (a.isOnline ? 1 : 0) - (b.isOnline ? 1 : 0)
+            return (b.isOnline ? 1 : 0) - (a.isOnline ? 1 : 0)
         })
         this.emit('FriendUpdate');
     }

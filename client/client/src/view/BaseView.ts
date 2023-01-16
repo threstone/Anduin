@@ -23,7 +23,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
     protected abstract init();
 
     public AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
-        this.addEvent(egret.TouchEvent.TOUCH_TAP, func, this, target);
+        this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 
     /**
@@ -49,17 +49,10 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.eventList.push(eventData);
     }
 
-    public addEvent(event: string, func: Function, thisObject: any, targetObj: egret.DisplayObject | fairygui.GObject = null, useCapture: boolean = false) {
+    public addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any, useCapture: boolean = false) {
         if (targetObj == null) {
             return;
         }
-
-        for (let i = 0, list = this.eventList; i < list.length; ++i) {
-            if (list[i].addObject == targetObj) {
-                return;
-            }
-        }
-
         const eventData = new EventListenerData(targetObj, event, func, thisObject);
         eventData.alive();
         this.eventList.push(eventData);

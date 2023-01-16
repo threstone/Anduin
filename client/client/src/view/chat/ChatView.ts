@@ -3,6 +3,9 @@ class ChatView extends BaseView<BaseUI.UIChat>{
     private selectNomal: boolean;
     private selectUid: number = 0;
 
+    private normalScrollTimerId: number;
+    private friendScrollTimerId: number;
+
     protected init() {
         this.view = BaseUI.UIChat.createInstance();
         this.view.friendBtn.describe.text = '好友';
@@ -18,7 +21,40 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         this.AddClick(this.view.friendBtn, this.changeChannel.bind(this, false))
         this.observe('S_CHAT_MESSAGE', this.onNewMsg)
 
+        //list scroll even
+        this.addEvent(this.view.chatList.scrollPane, fairygui.ScrollPane.SCROLL_END, this.onListScrollEnd.bind(this, this.view.chatList, true), this);
+        this.addEvent(this.view.friendChatList.scrollPane, fairygui.ScrollPane.SCROLL_END, this.onListScrollEnd.bind(this, this.view.friendChatList, false), this);
+        this.addEvent(this.view.chatList.scrollPane, fairygui.ScrollPane.SCROLL, this.onScrool.bind(this, true), this);
+        this.addEvent(this.view.friendChatList.scrollPane, fairygui.ScrollPane.SCROLL, this.onScrool.bind(this, false), this);
+
         this.initChatView();
+    }
+
+    onScrool(isNormal: boolean) {
+        if (isNormal && this.normalScrollTimerId !== -1) {
+            clearTimeout(this.normalScrollTimerId);
+            this.normalScrollTimerId = -1;
+        } else if (!isNormal && this.friendScrollTimerId !== -1) {
+            clearTimeout(this.friendScrollTimerId);
+            this.friendScrollTimerId = -1;
+        }
+    }
+
+    //15秒后自动到最下面
+    private onListScrollEnd(chatList: fairygui.GList, isNormal: boolean) {
+        const timerId = setTimeout(() => {
+            this.scrollToUnder(chatList)
+        }, 1500);
+        if (isNormal) {
+            this.normalScrollTimerId = timerId;
+        } else {
+            this.friendScrollTimerId = timerId;
+        }
+    }
+
+    public close(): void {
+        super.close();
+        HallView.ins().clearMiniChatTips();
     }
 
     private showChatToFriendList(chatInfo: ChatMsgInfo) {
@@ -59,7 +95,9 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         if (!friendInfos) {
             return;
         }
-        for (let index = 0; index < friendInfos.length; index++) {
+
+        const len = friendInfos.length;
+        for (let index = 0; index < len; index++) {
             const friendInfo = friendInfos[index];
             const friendUid = friendInfo.uid;
             const chatInfo = ChatModel.ins().getFriendMsgArr(friendUid);
@@ -71,17 +109,16 @@ class ChatView extends BaseView<BaseUI.UIChat>{
             const friendBox = ChatFriendBox.getBox(friendInfo.nick, friendInfo.isOnline, chatInfo.unreadNum, isSelect);
             this.observe('S_CHAT_MESSAGE', (evt: EventData) => {
                 const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
-                if (msg.uid === friendUid && friendUid !== this.selectUid) {
+                if (msg.isPrivateMsg && msg.uid === friendUid && friendUid !== this.selectUid) {
                     ChatFriendBox.addUnreadNum(friendBox, 1);
                 }
             });
-            this.AddClick(friendBox, this.onFriendBoxClick.bind(this, friendBox, chatInfo, friendUid))
-            friendListCom.addChild(friendBox);
+            this.AddClick(friendBox, this.onFriendBoxClick.bind(this, friendBox, chatInfo, friendUid));
+            friendListCom.addChildAt(friendBox, chatInfo.unreadNum !== 0 ? 0 : friendListCom.numChildren);
         }
     }
 
     private onFriendBoxClick(friendBox: BaseUI.UIChatFriendBox, chatInfo: ChatMsgInfo, friendUid: number) {
-        //此颜色说明已经是选中的
         if (ChatFriendBox.isSelect(friendBox)) {
             return;
         }
@@ -92,6 +129,7 @@ class ChatView extends BaseView<BaseUI.UIChat>{
             ChatFriendBox.selectBox(box, false);
         }
         ChatFriendBox.selectBox(friendBox, true);
+        ChatFriendBox.clearUnreadNum(friendBox);
         this.showChatToFriendList(chatInfo);
         this.selectUid = friendUid;
         this.view.clickTips.visible = false;
@@ -132,7 +170,17 @@ class ChatView extends BaseView<BaseUI.UIChat>{
     }
 
     private sendMsg() {
-        const text = this.selectNomal ? this.view.normalInput.inputText.text : this.view.friendInput.inputText.text;
+        const textInput = this.selectNomal ? this.view.normalInput.inputText : this.view.friendInput.inputText;
+        const text = textInput.text;
+        const wrap = text.match(/\n/g);
+        if (wrap && wrap.length > 15) {
+            GlobalView.showTips(`换行数量太多`, 5000);
+            return;
+        }
+        if (text.length === 0) {
+            GlobalView.showTips(`不能发送空的字符`, 5000);
+            return;
+        }
         if (text.length > 128) {
             GlobalView.showTips(`最多输入128个字符,请减少${128 - text.length}个字符`, 5000);
             return;
@@ -141,25 +189,34 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         //综合消息
         if (this.selectNomal) {
             ChatModel.ins().C_SEND_MESSAGE_TO_ALL(text);
-        }  //私聊消息
-        else if (this.selectUid) {
+            this.scrollToUnder(this.view.chatList);
+        } else if (this.selectUid) {//私聊消息
             //是否在线，不在线就不发
             if (!FriendModel.ins().isOnline(this.selectUid)) {
                 GlobalView.showTips('好友不在线,无法发送消息哦', 5000);
                 return;
             }
             ChatModel.ins().C_SEND_PRIVATE_MESSAGE(this.selectUid, text);
+            const frinendChatList = this.view.friendChatList;
+            const item = ChatItem.getChatItem(UserModel.ins().nick, text, true);
+            frinendChatList.addChild(item);
+            this.scrollToUnder(frinendChatList);
         }
+        textInput.text = '';
+    }
+
+    private scrollToUnder(chatList: fairygui.GList) {
+        chatList.scrollToView(chatList.numChildren - 1);
     }
 
     private onNewMsg(evt: EventData) {
         const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
-        if(this.selectNomal){
+        if (this.selectNomal) {
             ChatModel.ins().clearNormalUnread();
-        }else{
+        } else {
             ChatModel.ins().clearFriendUnread();
         }
-        
+
         //私聊消息
         if (msg.isPrivateMsg) {
             //我选中的
@@ -168,11 +225,21 @@ class ChatView extends BaseView<BaseUI.UIChat>{
                 const frinendChatList = this.view.friendChatList;
                 const item = ChatItem.getChatItem(msg.nick, msg.msg, false);
                 frinendChatList.addChild(item);
+                if (this.friendScrollTimerId === -1) {
+                    this.scrollToUnder(frinendChatList);
+                }
             }
         }//综合消息
         else {
-            const item = ChatItem.getChatItem(msg.nick, msg.msg, UserModel.ins().uid === msg.uid);
+            const isSelf = UserModel.ins().uid === msg.uid;
+            const item = ChatItem.getChatItem(msg.nick, msg.msg, isSelf);
             this.view.chatList.addChild(item);
+            if (this.normalScrollTimerId === -1) {
+                this.scrollToUnder(this.view.chatList);
+            }
+            if (isSelf) {
+                item.x = this.view.chatList.width - item.width;
+            }
         }
 
         this.updateUnreadTips();

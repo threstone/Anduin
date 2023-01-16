@@ -10,7 +10,7 @@ class HallView extends BaseView<BaseUI.UIHall>{
         FriendView.ins();
     }
 
-    initView() {
+    private initView() {
         this.view.nickText.text = UserModel.ins().nick;
         this.view.uidText.text = `ID:${UserModel.ins().uid}`
         this.view.cardGroupBtn.describe.text = '收藏';
@@ -19,16 +19,20 @@ class HallView extends BaseView<BaseUI.UIHall>{
         this.view.settingBtn.describe.text = '设置';
 
         this.AddClick(this.view.miniChat, this.onMiniChatClick);
-        this.observe('S_CHAT_MESSAGE', this.chatMessage);
+        this.observe('S_CHAT_MESSAGE', this.onChatMessage);
     }
 
-    onMiniChatClick() {
+    private onMiniChatClick() {
         ChatView.ins().open();
+        this.clearMiniChatTips();
+    }
+
+    clearMiniChatTips() {
         this.view.miniChat.tipsGroup.visible = false;
         this.unReadNum = 0;
     }
 
-    chatMessage(evt: EventData) {
+    private onChatMessage(evt: EventData) {
         const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
         const miniChat = this.view.miniChat;
         if (msg.isPrivateMsg) {

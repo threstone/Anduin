@@ -16,10 +16,10 @@ class ChatItem {
         if (item.msg.width > 360) {
             item.msg.width = 360;
             item.msg.autoSize = fairygui.AutoSizeType.Height;
-            item.bg.height = item.msg.height + 15;
         } else {
             item.bg.width = item.msg.width + 30;
         }
+        item.bg.height = item.msg.height + 15;
         item.height = item.bg.height;
 
         if (isSelf) {
