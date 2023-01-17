@@ -1,8 +1,3 @@
-interface ChatListInterface {
-    scrollTimerId: number;
-    chatList: fairygui.GList;
-}
-
 class ChatChannel {
     scrollTimerId: number = -1;
     chatList: fairygui.GList;
