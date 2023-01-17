@@ -1,27 +1,56 @@
 class ChatModel extends BaseModel {
 
     private _friendMsgMap = new Map<number, ChatMsgInfo>();
-    allFriendUnreadNum = 0;
+    private allFriendUnreadNum = 0;
 
-    normalMsgInfo = new ChatMsgInfo();
+    private normalMsgInfo = new ChatMsgInfo();
 
-    clearNormalUnread() {
-        this.normalMsgInfo.unreadNum = 0;
+    selectUid: number = -1;
+
+
+    getUnreadNumByType(type: ChatPto.MsgType) {
+        switch (type) {
+            case ChatPto.MsgType.normal:
+                return this.normalMsgInfo.unreadNum;
+            case ChatPto.MsgType.private:
+                return this.allFriendUnreadNum;
+            default:
+                return -1;
+        }
+    }
+
+    clearUnreadByType(type: ChatPto.MsgType) {
+        switch (type) {
+            case ChatPto.MsgType.normal:
+                this.normalMsgInfo.unreadNum = 0;
+                break;
+            case ChatPto.MsgType.private:
+                this.allFriendUnreadNum = 0;
+                break;
+        }
+    }
+
+
+    getMsgArrByType(type: ChatPto.MsgType) {
+        switch (type) {
+            case ChatPto.MsgType.normal:
+                return this.normalMsgInfo.msgArr;
+            case ChatPto.MsgType.private:
+                return this.getFriendMsg(this.selectUid).msgArr;
+        }
     }
 
     /**
      * if uid is undefined,then clear all friend unread num
      * @param uid 
      */
-    clearFriendUnread(uid?: number) {
-        if (uid) {
-            this.getFriendMsgArr(uid).unreadNum = 0;
-        } else {
-            this.allFriendUnreadNum = 0;
-        }
-    }
+    // clearFriendUnread(uid: number) {
+    //     if (uid) {
+    //         this.getFriendMsgArr(uid).unreadNum = 0;
+    //     }
+    // }
 
-    getFriendMsgArr(uid: number) {
+    getFriendMsg(uid: number) {
         let info = this._friendMsgMap.get(uid);
         if (!info) {
             info = new ChatMsgInfo();
@@ -33,10 +62,10 @@ class ChatModel extends BaseModel {
     //收到信息
     private S_CHAT_MESSAGE(msg: ChatPto.S_CHAT_MESSAGE) {
         let info: ChatMsgInfo;
-        if (msg.isPrivateMsg) {
+        if (msg.msgType === ChatPto.MsgType.private) {
             this.allFriendUnreadNum++
-            info = this.getFriendMsgArr(msg.uid);
-        } else {
+            info = this.getFriendMsg(msg.uid);
+        } else if (msg.msgType === ChatPto.MsgType.normal) {
             info = this.normalMsgInfo;
         }
         info.unreadNum++;
@@ -48,18 +77,15 @@ class ChatModel extends BaseModel {
         this.emit('S_CHAT_MESSAGE', msg)
     }
 
-    //全服信息
-    C_SEND_MESSAGE_TO_ALL(message: string) {
-        const msg = new ChatPto.C_SEND_MESSAGE_TO_ALL();
-        msg.msg = message;
-        this.sendMsg(msg);
-    }
 
-    //私聊信息
-    C_SEND_PRIVATE_MESSAGE(uid: number, message: string) {
-        const msg = new ChatPto.C_SEND_PRIVATE_MESSAGE();
+    /**
+     * 如果是私聊信息则必须有uid
+     */
+    C_SEND_MESSAGE(message: string, msgType: ChatPto.MsgType,) {
+        const msg = new ChatPto.C_SEND_MESSAGE();
+        msg.uid = this.selectUid;
         msg.msg = message;
-        msg.uid = uid;
+        msg.msgType = msgType;
         this.sendMsg(msg);
     }
 }

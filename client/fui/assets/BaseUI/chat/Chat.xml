@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1280,720">
   <displayList>
-    <image id="n4_fjki" name="n4" src="fjkiu" fileName="chat/res/herodetail_arrow_righ.png" xy="743,322">
-      <relation target="n1_fjki" sidePair="left-right"/>
-    </image>
-    <loader id="n24_fjki" name="close" xy="0,0" size="1280,720"/>
-    <image id="n1_fjki" name="chatBg" src="fjkir" fileName="chat/res/mailbox_frame.jpg" xy="0,0" size="743,720"/>
-    <component id="n33_fjki" name="friendInput" src="fjki1i" fileName="chat/ChatInputCom.xml" xy="34,625" visible="false"/>
-    <component id="n32_fjki" name="normalInput" src="fjki1i" fileName="chat/ChatInputCom.xml" xy="34,625"/>
-    <component id="n15_fjki" name="normalBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="29,17"/>
-    <component id="n16_fjki" name="friendBtn" src="fjki11" fileName="chat/ChatBtn.xml" xy="218,17"/>
+    <image id="n4_fjki" name="n4" src="fjkiu" fileName="chat/res/herodetail_arrow_righ.png" xy="743,322"/>
+    <graph id="n34_mvhp" name="close" xy="0,0" size="1280,720" alpha="0.25" type="rect" fillColor="#ff000000"/>
+    <loader id="n35_mvhp" name="chatBg" xy="0,0" size="743,720" url="ui://yaux2xpofjkir" fill="scaleFree"/>
     <list id="n22_fjki" name="chatList" xy="35,82" size="682,542" overflow="scroll"/>
     <list id="n18_fjki" name="friendChatList" xy="175,82" size="542,542" group="n23_fjki" overflow="scroll" autoClearItems="true">
       <item url="ui://yaux2xpofjki17"/>
@@ -23,12 +17,10 @@
     <text id="n31_fjki" name="clickTips" xy="443,359" pivot="0.5,0.5" anchor="true" size="393,39" group="n23_fjki" fontSize="28" color="#cabba9" align="center" vAlign="middle" bold="true" text="点击好友名称与好友聊起来吧~">
       <relation target="" sidePair="width-width,height-height,center-center,middle-middle"/>
     </text>
-    <group id="n23_fjki" name="friendGroup" xy="28,82" size="689,542" visible="false" advanced="true"/>
-    <image id="n25_fjki" name="nNumBg" src="fjki15" fileName="chat/res/equip_craft_number_b.png" xy="165,21" size="26,26" group="n27_fjki" scale="1.5,1.5"/>
-    <text id="n26_fjki" name="normalUnRead" xy="174,28" size="21,23" group="n27_fjki" fontSize="15" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" text="99"/>
-    <group id="n27_fjki" name="normalTipsGroup" xy="165,21" size="30,30" visible="false" advanced="true"/>
-    <image id="n28_fjki" name="fNumBg" src="fjki15" fileName="chat/res/equip_craft_number_b.png" xy="355,20" size="26,26" group="n30_fjki" scale="1.5,1.5"/>
-    <text id="n29_fjki" name="friendUnRead" xy="364,27" size="21,23" group="n30_fjki" fontSize="15" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" text="99"/>
-    <group id="n30_fjki" name="friendTipsGroup" xy="355,20" size="30,30" visible="false" advanced="true"/>
+    <group id="n23_fjki" name="friendGroup" xy="28,82" size="689,542" advanced="true"/>
+    <list id="n36_mvhp" name="channelList" xy="29,17" size="677,51" layout="row" overflow="hidden" colGap="6" autoClearItems="true">
+      <item url="ui://yaux2xpofjki11"/>
+      <item url="ui://yaux2xpofjki11"/>
+    </list>
   </displayList>
 </component>

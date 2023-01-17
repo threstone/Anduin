@@ -35,7 +35,7 @@ class HallView extends BaseView<BaseUI.UIHall>{
     private onChatMessage(evt: EventData) {
         const msg: ChatPto.S_CHAT_MESSAGE = evt.data;
         const miniChat = this.view.miniChat;
-        if (msg.isPrivateMsg) {
+        if (msg.msgType === ChatPto.MsgType.private) {
             this.unReadNum++;
             miniChat.tipsGroup.visible = true;
             miniChat.unReadNum.text = `${this.unReadNum}`;

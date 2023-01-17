@@ -8,6 +8,9 @@
     <text id="n2_fjki" name="describe" xy="90,29" pivot="0.5,0.5" anchor="true" size="61,39" fontSize="28" color="#cabba9" align="center" vAlign="middle" bold="true" text="综合">
       <relation target="" sidePair="width-width,height-height,center-center,middle-middle"/>
     </text>
+    <image id="n3_mvhp" name="nNumBg" src="fjki15" fileName="chat/res/equip_craft_number_b.png" xy="138,3" size="26,26" group="n5_mvhp" scale="1.5,1.5"/>
+    <text id="n4_mvhp" name="unReadNum" xy="147,10" size="21,23" group="n5_mvhp" fontSize="15" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" text="99"/>
+    <group id="n5_mvhp" name="tipsGroup" xy="138,3" size="30,30" visible="false" advanced="true"/>
   </displayList>
   <Button/>
 </component>

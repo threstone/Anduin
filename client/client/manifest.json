@@ -52,6 +52,7 @@
 		"bin-debug/view/GlobalView.js",
 		"bin-debug/view/LoginView.js",
 		"bin-debug/view/TipsView.js",
+		"bin-debug/view/chat/ChatChannel.js",
 		"bin-debug/view/chat/ChatFriendBox.js",
 		"bin-debug/view/chat/ChatItem.js",
 		"bin-debug/view/chat/ChatView.js",

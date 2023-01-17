@@ -32,4 +32,12 @@ class ChatItem {
         }
         return item;
     }
+
+    static addItemToList(list: fairygui.GList, nick: string, msg: string, isSelf: boolean) {
+        const item = ChatItem.getChatItem(nick, msg, isSelf);
+        if (isSelf) {
+            item.x = list.width - item.width;
+        }
+        list.addChild(item);
+    }
 }
