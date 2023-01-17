@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="220,120" bgColorEnabled="true">
+<component size="237,520">
   <displayList>
-    <image id="n9_ta2r" name="bg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="0,0" size="220,120"/>
-    <image id="n6_ta2r" name="textBg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="10,6" size="200,50"/>
-    <text id="n1_ta2r" name="uidInput" xy="2,0" size="214,59" fontSize="24" color="#3333ff" align="center" vAlign="middle" ubb="true" autoSize="shrink" text="" input="true" prompt="输入用户唯一id"/>
-    <component id="n3_ta2r" name="addBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="-29,59" scale="0.5,0.5"/>
-    <component id="n13_ta2r" name="closeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="75,60" scale="0.5,0.5"/>
+    <graph id="n14_mvhp" name="close" xy="0,0" size="237,520" alpha="0.01" type="rect" fillColor="#ff000000"/>
+    <image id="n9_ta2r" name="bg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="8,210" size="220,120"/>
+    <image id="n6_ta2r" name="textBg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="18,216" size="200,50"/>
+    <text id="n1_ta2r" name="uidInput" xy="10,210" size="214,59" fontSize="24" color="#3333ff" align="center" vAlign="middle" ubb="true" autoSize="shrink" text="" input="true" prompt="输入用户唯一id"/>
+    <component id="n3_ta2r" name="addBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="-21,269" scale="0.5,0.5"/>
+    <component id="n13_ta2r" name="closeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="83,270" scale="0.5,0.5"/>
   </displayList>
 </component>

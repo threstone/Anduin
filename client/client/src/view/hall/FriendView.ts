@@ -1,6 +1,8 @@
 class FriendView extends BaseView<BaseUI.UIFriend> {
 
     private hallView: HallView;
+    private curSelectUid = -1;
+
     protected init() {
         this.hallView = HallView.ins();
         this.view = this.hallView.getView().friendCom;
@@ -30,6 +32,44 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
             friendCom.showReqCom.visible = false;
         }, this);
 
+        this.initAddcom();
+        this.initOpCom();
+    }
+
+    //点击好友时弹出的操作列表的初始化
+    private initOpCom() {
+        this.view.friendOpCom.close.addClickListener(() => {
+            this.view.friendOpCom.visible = false;
+        }, this);
+
+        const list = this.view.friendOpCom.opList;
+        //add private chat btn
+        const chatBtn = BaseUI.UIButton3.createInstance();
+        chatBtn.addClickListener(() => {
+            if (this.curSelectUid === -1) {
+                return;
+            }
+            ChatView.ins().openInFriendChannel(this.curSelectUid);
+            this.view.friendOpCom.visible = false;
+        }, this)
+        chatBtn.describe.text = '私聊';
+        list.addChild(chatBtn);
+
+        const fightBtn = BaseUI.UIButton3.createInstance();
+        fightBtn.describe.text = '友谊赛';
+        fightBtn.touchable = false;
+        fightBtn.grayed = true;
+        list.addChild(fightBtn);
+
+        //计算list大小
+        list.height = chatBtn.height * list.numChildren;
+    }
+
+    /**
+     * 初始化好友添加控件
+     */
+    private initAddcom() {
+        const friendCom = this.view;
         //添加按钮的点击事件
         friendCom.AddFriendCom.addBtn.describe.text = '添加';
         friendCom.AddFriendCom.addBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
@@ -60,6 +100,9 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
         //关闭添加好友界面
         friendCom.AddFriendCom.closeBtn.describe.text = '关闭';
         friendCom.AddFriendCom.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
+            friendCom.AddFriendCom.visible = false;
+        }, this);
+        friendCom.AddFriendCom.close.addEventListener(egret.TouchEvent.TOUCH_TAP, () => {
             friendCom.AddFriendCom.visible = false;
         }, this);
 
@@ -123,6 +166,12 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
             const friendItem = BaseUI.UIFriendItem.createInstance();
             friendItem.nickText.text = friendInfo.nick;
             friendItem.onlineImg.color = friendInfo.isOnline ? 0xFFFFFF : 0xFF0000;
+            friendItem.addClickListener((data: egret.TouchEvent) => {
+                this.view.friendOpCom.visible = true;
+                let point = this.view.friendOpCom.globalToLocal(data.stageX, data.stageY);
+                this.view.friendOpCom.opList.y = point.y;
+                this.curSelectUid = friendInfo.uid;
+            }, this)
             this.view.list.addChild(friendItem);
         }
 

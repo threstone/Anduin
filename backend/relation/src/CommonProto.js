@@ -952,25 +952,33 @@ $root.ChatPto = (function() {
 
     var ChatPto = {};
 
-    ChatPto.C_SEND_PRIVATE_MESSAGE = (function() {
+    ChatPto.MsgType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "normal"] = 0;
+        values[valuesById[1] = "private"] = 1;
+        return values;
+    })();
 
-        function C_SEND_PRIVATE_MESSAGE(p) {
+    ChatPto.C_SEND_MESSAGE = (function() {
+
+        function C_SEND_MESSAGE(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        C_SEND_PRIVATE_MESSAGE.prototype.cmd = 100;
-        C_SEND_PRIVATE_MESSAGE.prototype.scmd = 1;
-        C_SEND_PRIVATE_MESSAGE.prototype.uid = 0;
-        C_SEND_PRIVATE_MESSAGE.prototype.msg = "";
+        C_SEND_MESSAGE.prototype.cmd = 100;
+        C_SEND_MESSAGE.prototype.scmd = 1;
+        C_SEND_MESSAGE.prototype.uid = 0;
+        C_SEND_MESSAGE.prototype.msg = "";
+        C_SEND_MESSAGE.prototype.msgType = 0;
 
-        C_SEND_PRIVATE_MESSAGE.create = function create(properties) {
-            return new C_SEND_PRIVATE_MESSAGE(properties);
+        C_SEND_MESSAGE.create = function create(properties) {
+            return new C_SEND_MESSAGE(properties);
         };
 
-        C_SEND_PRIVATE_MESSAGE.encode = function encode(m, w) {
+        C_SEND_MESSAGE.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -981,13 +989,15 @@ $root.ChatPto = (function() {
                 w.uint32(24).int32(m.uid);
             if (m.msg != null && Object.hasOwnProperty.call(m, "msg"))
                 w.uint32(34).string(m.msg);
+            if (m.msgType != null && Object.hasOwnProperty.call(m, "msgType"))
+                w.uint32(40).int32(m.msgType);
             return w;
         };
 
-        C_SEND_PRIVATE_MESSAGE.decode = function decode(r, l) {
+        C_SEND_MESSAGE.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.ChatPto.C_SEND_PRIVATE_MESSAGE();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.ChatPto.C_SEND_MESSAGE();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -1007,6 +1017,10 @@ $root.ChatPto = (function() {
                         m.msg = r.string();
                         break;
                     }
+                case 5: {
+                        m.msgType = r.int32();
+                        break;
+                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1015,10 +1029,10 @@ $root.ChatPto = (function() {
             return m;
         };
 
-        C_SEND_PRIVATE_MESSAGE.fromObject = function fromObject(d) {
-            if (d instanceof $root.ChatPto.C_SEND_PRIVATE_MESSAGE)
+        C_SEND_MESSAGE.fromObject = function fromObject(d) {
+            if (d instanceof $root.ChatPto.C_SEND_MESSAGE)
                 return d;
-            var m = new $root.ChatPto.C_SEND_PRIVATE_MESSAGE();
+            var m = new $root.ChatPto.C_SEND_MESSAGE();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -1031,10 +1045,26 @@ $root.ChatPto = (function() {
             if (d.msg != null) {
                 m.msg = String(d.msg);
             }
+            switch (d.msgType) {
+            default:
+                if (typeof d.msgType === "number") {
+                    m.msgType = d.msgType;
+                    break;
+                }
+                break;
+            case "normal":
+            case 0:
+                m.msgType = 0;
+                break;
+            case "private":
+            case 1:
+                m.msgType = 1;
+                break;
+            }
             return m;
         };
 
-        C_SEND_PRIVATE_MESSAGE.toObject = function toObject(m, o) {
+        C_SEND_MESSAGE.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -1043,6 +1073,7 @@ $root.ChatPto = (function() {
                 d.scmd = 1;
                 d.uid = 0;
                 d.msg = "";
+                d.msgType = o.enums === String ? "normal" : 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -1056,128 +1087,24 @@ $root.ChatPto = (function() {
             if (m.msg != null && m.hasOwnProperty("msg")) {
                 d.msg = m.msg;
             }
-            return d;
-        };
-
-        C_SEND_PRIVATE_MESSAGE.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_SEND_PRIVATE_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.C_SEND_PRIVATE_MESSAGE";
-        };
-
-        return C_SEND_PRIVATE_MESSAGE;
-    })();
-
-    ChatPto.C_SEND_MESSAGE_TO_ALL = (function() {
-
-        function C_SEND_MESSAGE_TO_ALL(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_SEND_MESSAGE_TO_ALL.prototype.cmd = 100;
-        C_SEND_MESSAGE_TO_ALL.prototype.scmd = 2;
-        C_SEND_MESSAGE_TO_ALL.prototype.msg = "";
-
-        C_SEND_MESSAGE_TO_ALL.create = function create(properties) {
-            return new C_SEND_MESSAGE_TO_ALL(properties);
-        };
-
-        C_SEND_MESSAGE_TO_ALL.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.msg != null && Object.hasOwnProperty.call(m, "msg"))
-                w.uint32(26).string(m.msg);
-            return w;
-        };
-
-        C_SEND_MESSAGE_TO_ALL.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.ChatPto.C_SEND_MESSAGE_TO_ALL();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.msg = r.string();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_SEND_MESSAGE_TO_ALL.fromObject = function fromObject(d) {
-            if (d instanceof $root.ChatPto.C_SEND_MESSAGE_TO_ALL)
-                return d;
-            var m = new $root.ChatPto.C_SEND_MESSAGE_TO_ALL();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.msg != null) {
-                m.msg = String(d.msg);
-            }
-            return m;
-        };
-
-        C_SEND_MESSAGE_TO_ALL.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 100;
-                d.scmd = 2;
-                d.msg = "";
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.msg != null && m.hasOwnProperty("msg")) {
-                d.msg = m.msg;
+            if (m.msgType != null && m.hasOwnProperty("msgType")) {
+                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] === undefined ? m.msgType : $root.ChatPto.MsgType[m.msgType] : m.msgType;
             }
             return d;
         };
 
-        C_SEND_MESSAGE_TO_ALL.prototype.toJSON = function toJSON() {
+        C_SEND_MESSAGE.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_SEND_MESSAGE_TO_ALL.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_SEND_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/ChatPto.C_SEND_MESSAGE_TO_ALL";
+            return typeUrlPrefix + "/ChatPto.C_SEND_MESSAGE";
         };
 
-        return C_SEND_MESSAGE_TO_ALL;
+        return C_SEND_MESSAGE;
     })();
 
     ChatPto.S_CHAT_MESSAGE = (function() {
@@ -1190,11 +1117,11 @@ $root.ChatPto = (function() {
         }
 
         S_CHAT_MESSAGE.prototype.cmd = 100;
-        S_CHAT_MESSAGE.prototype.scmd = 3;
+        S_CHAT_MESSAGE.prototype.scmd = 2;
         S_CHAT_MESSAGE.prototype.msg = "";
         S_CHAT_MESSAGE.prototype.nick = "";
         S_CHAT_MESSAGE.prototype.uid = 0;
-        S_CHAT_MESSAGE.prototype.isPrivateMsg = false;
+        S_CHAT_MESSAGE.prototype.msgType = 0;
 
         S_CHAT_MESSAGE.create = function create(properties) {
             return new S_CHAT_MESSAGE(properties);
@@ -1213,8 +1140,8 @@ $root.ChatPto = (function() {
                 w.uint32(34).string(m.nick);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(40).int32(m.uid);
-            if (m.isPrivateMsg != null && Object.hasOwnProperty.call(m, "isPrivateMsg"))
-                w.uint32(48).bool(m.isPrivateMsg);
+            if (m.msgType != null && Object.hasOwnProperty.call(m, "msgType"))
+                w.uint32(48).int32(m.msgType);
             return w;
         };
 
@@ -1246,7 +1173,7 @@ $root.ChatPto = (function() {
                         break;
                     }
                 case 6: {
-                        m.isPrivateMsg = r.bool();
+                        m.msgType = r.int32();
                         break;
                     }
                 default:
@@ -1276,8 +1203,21 @@ $root.ChatPto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
-            if (d.isPrivateMsg != null) {
-                m.isPrivateMsg = Boolean(d.isPrivateMsg);
+            switch (d.msgType) {
+            default:
+                if (typeof d.msgType === "number") {
+                    m.msgType = d.msgType;
+                    break;
+                }
+                break;
+            case "normal":
+            case 0:
+                m.msgType = 0;
+                break;
+            case "private":
+            case 1:
+                m.msgType = 1;
+                break;
             }
             return m;
         };
@@ -1288,11 +1228,11 @@ $root.ChatPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 100;
-                d.scmd = 3;
+                d.scmd = 2;
                 d.msg = "";
                 d.nick = "";
                 d.uid = 0;
-                d.isPrivateMsg = false;
+                d.msgType = o.enums === String ? "normal" : 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -1309,8 +1249,8 @@ $root.ChatPto = (function() {
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
             }
-            if (m.isPrivateMsg != null && m.hasOwnProperty("isPrivateMsg")) {
-                d.isPrivateMsg = m.isPrivateMsg;
+            if (m.msgType != null && m.hasOwnProperty("msgType")) {
+                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] === undefined ? m.msgType : $root.ChatPto.MsgType[m.msgType] : m.msgType;
             }
             return d;
         };

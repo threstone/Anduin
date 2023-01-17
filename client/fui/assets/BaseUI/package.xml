@@ -29,7 +29,7 @@
     <image id="fjkiu" name="herodetail_arrow_righ.png" path="/chat/res/"/>
     <image id="fjkiw" name="elitetoggle-.png" path="/chat/res/"/>
     <image id="fjkix" name="elitetoggle-n.png" path="/chat/res/"/>
-    <component id="fjkiy" name="Button3.xml" path="/common/btn/"/>
+    <component id="fjkiy" name="Button3.xml" path="/common/btn/" exported="true"/>
     <image id="fjki10" name="chat_tab_norma.png" path="/chat/res/"/>
     <component id="fjki11" name="ChatBtn.xml" path="/chat/" exported="true"/>
     <component id="fjki13" name="ChatFriendBox.xml" path="/chat/" exported="true"/>
@@ -40,6 +40,7 @@
     <component id="fjki1d" name="MiniChat.xml" path="/chat/"/>
     <image id="fjki1h" name="announce_text_bg_blu.png" path="/chat/res/"/>
     <component id="fjki1i" name="ChatInputCom.xml" path="/chat/" exported="true"/>
+    <component id="mvhp1j" name="FriendOpCom.xml" path="/friend/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

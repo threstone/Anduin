@@ -11,6 +11,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatInputCom.URL, UIChatInputCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChat.URL, UIChat);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton3.URL, UIButton3);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton1.URL, UIButton1);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegister.URL, UIRegister);
 			fairygui.UIObjectFactory.setPackageItemExtension(UILogin.URL, UILogin);

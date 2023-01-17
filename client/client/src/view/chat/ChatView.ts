@@ -19,7 +19,7 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         this.changeChannel(ChatPto.MsgType.normal);
     }
 
-    open(): void {
+    public open(): void {
         super.open();
         this.AddClick(this.view.close, this.close);
         for (let chatType = 0; chatType < this.chatChannelArr.length; chatType++) {
@@ -31,6 +31,14 @@ class ChatView extends BaseView<BaseUI.UIChat>{
         this.observe('S_CHAT_MESSAGE', this.onNewMsg)
 
         this.initChatView();
+    }
+
+    public openInFriendChannel(uid: number) {
+        ChatModel.ins().selectUid = uid;
+        this.changeChannel(ChatPto.MsgType.private);
+        ChatModel.ins().getFriendMsg(uid).unreadNum = 0;
+        this.view.clickTips.visible = false;
+        this.open();
     }
 
     public close(): void {

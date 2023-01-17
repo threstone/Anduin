@@ -40,16 +40,6 @@ class ChatModel extends BaseModel {
         }
     }
 
-    /**
-     * if uid is undefined,then clear all friend unread num
-     * @param uid 
-     */
-    // clearFriendUnread(uid: number) {
-    //     if (uid) {
-    //         this.getFriendMsgArr(uid).unreadNum = 0;
-    //     }
-    // }
-
     getFriendMsg(uid: number) {
         let info = this._friendMsgMap.get(uid);
         if (!info) {

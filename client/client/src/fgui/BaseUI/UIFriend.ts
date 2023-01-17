@@ -8,11 +8,12 @@ module BaseUI {
 		public title:fairygui.GTextField;
 		public ctrl:UIButton2;
 		public redTips1:fairygui.GImage;
-		public AddFriendCom:UIAddFriend;
 		public showAddFriendBtn:UIButton1;
 		public showFriendReqBtn:UIButton1;
 		public redTips2:fairygui.GImage;
 		public showReqCom:UIFriendReq;
+		public AddFriendCom:UIAddFriend;
+		public friendOpCom:UIFriendOpCom;
 		public static URL:string = "ui://yaux2xpota2rb";
 
 		public static createInstance():UIFriend {
@@ -27,11 +28,12 @@ module BaseUI {
 			this.title = <fairygui.GTextField>(this.getChildAt(2));
 			this.ctrl = <UIButton2>(this.getChildAt(3));
 			this.redTips1 = <fairygui.GImage>(this.getChildAt(4));
-			this.AddFriendCom = <UIAddFriend>(this.getChildAt(5));
-			this.showAddFriendBtn = <UIButton1>(this.getChildAt(6));
-			this.showFriendReqBtn = <UIButton1>(this.getChildAt(7));
-			this.redTips2 = <fairygui.GImage>(this.getChildAt(8));
-			this.showReqCom = <UIFriendReq>(this.getChildAt(9));
+			this.showAddFriendBtn = <UIButton1>(this.getChildAt(5));
+			this.showFriendReqBtn = <UIButton1>(this.getChildAt(6));
+			this.redTips2 = <fairygui.GImage>(this.getChildAt(7));
+			this.showReqCom = <UIFriendReq>(this.getChildAt(8));
+			this.AddFriendCom = <UIAddFriend>(this.getChildAt(9));
+			this.friendOpCom = <UIFriendOpCom>(this.getChildAt(10));
 		}
 	}
 }

@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UIAddFriend extends fairygui.GComponent {
+		public close:fairygui.GGraph;
 		public bg:fairygui.GImage;
 		public textBg:fairygui.GImage;
 		public uidInput:fairygui.GTextInput;
@@ -17,11 +18,12 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.bg = <fairygui.GImage>(this.getChildAt(0));
-			this.textBg = <fairygui.GImage>(this.getChildAt(1));
-			this.uidInput = <fairygui.GTextInput>(this.getChildAt(2));
-			this.addBtn = <UIButton1>(this.getChildAt(3));
-			this.closeBtn = <UIButton1>(this.getChildAt(4));
+			this.close = <fairygui.GGraph>(this.getChildAt(0));
+			this.bg = <fairygui.GImage>(this.getChildAt(1));
+			this.textBg = <fairygui.GImage>(this.getChildAt(2));
+			this.uidInput = <fairygui.GTextInput>(this.getChildAt(3));
+			this.addBtn = <UIButton1>(this.getChildAt(4));
+			this.closeBtn = <UIButton1>(this.getChildAt(5));
 		}
 	}
 }

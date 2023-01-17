@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="237,520">
+  <displayList>
+    <graph id="n3_mvhp" name="close" xy="0,0" size="237,520" alpha="0.01" type="rect" fillColor="#ff000000"/>
+    <image id="n0_mvhp" name="bg" src="ta2r9" fileName="common/res/comp_30_100.png" xy="55,142" size="129,201">
+      <relation target="n1_mvhp" sidePair="width-width,height-height,left-left,top-top"/>
+    </image>
+    <list id="n1_mvhp" name="opList" xy="55,142" size="129,201" overflow="scroll" autoClearItems="true">
+      <item url="ui://yaux2xpofjkiy"/>
+      <item url="ui://yaux2xpofjkiy"/>
+      <item url="ui://yaux2xpofjkiy"/>
+    </list>
+  </displayList>
+</component>
