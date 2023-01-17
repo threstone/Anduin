@@ -8,52 +8,6 @@ import { BaseHandler } from './BaseHandler';
 
 const logger = getLogger();
 export class FriendHandler extends BaseHandler {
-    //客户端请求好友信息
-    static async C_FRIEND_INFO(clientName: string, uid: number, msg: FriendPto.C_FRIEND_INFO) {
-        const res = new FriendPto.S_FRIEND_INFO();
-        const promArr = [];
-        //初始化好友请求信息
-        const addInfos = await AddFriendRecordModel.getFriendAddInfo(uid);
-        for (let index = 0; index < addInfos.length; index++) {
-            const fromUid = addInfos[index].fromUid;
-            const addInfo = new FriendPto.Friend();
-            addInfo.uid = fromUid;
-            const prom = GlobalVar.dbHelper.getUserInfo(fromUid, 'nick').then((nick: string) => {
-                addInfo.nick = nick;
-            }).catch((err) => {
-                logger.error(`C_FRIEND_INFO ${fromUid}获取用户昵称出错${err}`);
-            });
-            promArr.push(prom);
-            res.reqAddList.push(addInfo);
-        }
-
-        //初始化好友信息
-        const friendInfos = await FriendModel.getFriendInfo(uid);
-        for (let index = 0; index < friendInfos.length; index++) {
-            const friendUId = friendInfos[index].friendUId;
-            const friendInfo = new FriendPto.Friend();
-            friendInfo.uid = friendUId;
-            const prom = GlobalVar.dbHelper.getUserInfo(friendUId, 'nick').then((nick: string) => {
-                friendInfo.nick = nick;
-            }).catch((err) => {
-                logger.error(`C_FRIEND_INFO ${uid}获取用户昵称出错${err}`);
-            });
-            const onlineInfoPromise = GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${friendUId}`).then((friendClientName) => {
-                if (friendClientName) {
-                    friendInfo.isOnline = true;
-                }
-            }).catch((err) => {
-                logger.error(`C_FRIEND_INFO ${uid}获取用户在线状态出错${err}`);
-            });
-            promArr.push(prom);
-            promArr.push(onlineInfoPromise);
-            res.list.push(friendInfo);
-        }
-
-        await Promise.all(promArr);
-        this.sendMsg(clientName, uid, res);
-    }
-
     //请求添加好友
     static async C_ADD_FRIEND(clientName: string, uid: number, msg: FriendPto.C_ADD_FRIEND) {
         const res = new FriendPto.S_ADD_FRIEND_REQ();
@@ -110,6 +64,10 @@ export class FriendHandler extends BaseHandler {
             res.friend = new FriendPto.Friend();
             res.friend.uid = targetUid;
             res.friend.nick = await GlobalVar.dbHelper.getUserInfo(targetUid, 'nick');
+
+            //成功添加后要将对应的信息加到redis中
+            GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(uid, targetUid);
+            GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(targetUid, uid);
 
             //判断对方是否在线,在线就通知对方
             const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${targetUid}`);

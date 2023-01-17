@@ -7,12 +7,13 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
         this.hallView = HallView.ins();
         this.view = this.hallView.getView().friendCom;
         this.initFriendView();
-        FriendModel.ins().C_FRIEND_INFO();
     }
 
     private initFriendView() {
         GameDispatcher.getInstance().addEventListener('FriendRedShow', this.updateFriendAddInfo, this);
         GameDispatcher.getInstance().addEventListener('FriendUpdate', this.updateFriendInfo, this);
+        this.updateFriendAddInfo();
+        this.updateFriendInfo();
 
         const friendCom = this.view;
         friendCom.showAddFriendBtn.describe.text = '添加好友';
@@ -121,7 +122,7 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
     }
 
     private updateFriendAddInfo() {
-        const reqAddList = FriendModel.ins().serverInfo.reqAddList;
+        const reqAddList = FriendModel.ins().reqAddList;
         if (!reqAddList) {
             return;
         }
@@ -156,7 +157,7 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
     }
 
     private updateFriendInfo() {
-        const list = FriendModel.ins().serverInfo.list;
+        const list = FriendModel.ins().friendList;
         if (!list) {
             return;
         }
@@ -180,7 +181,7 @@ class FriendView extends BaseView<BaseUI.UIFriend> {
 
     //检查要添加的好友是否在请求列表中
     private checkReqInfo(targetUid: number) {
-        const reqAddList = FriendModel.ins().serverInfo.reqAddList;
+        const reqAddList = FriendModel.ins().reqAddList;
         if (!reqAddList) {
             return;
         }

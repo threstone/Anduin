@@ -29,7 +29,7 @@ class ChatView extends BaseView<BaseUI.UIChat>{
             this.initChatList(channel)
         }
         this.observe('S_CHAT_MESSAGE', this.onNewMsg)
-
+        this.observe('FriendUpdate', this.initFriendBoxs)
         this.initChatView();
     }
 
@@ -72,11 +72,17 @@ class ChatView extends BaseView<BaseUI.UIChat>{
             }
         }
 
+        this.initFriendBoxs()
+    }
+    /**
+     * 初始化好友界面左侧的好友框
+     */
+    private initFriendBoxs() {
         //好友列表初始化
         const friendListCom = this.view.friendList;
         friendListCom.removeChildren();
         //排序过后的在线列表
-        const friendInfos = FriendModel.ins().serverInfo.list;
+        const friendInfos = FriendModel.ins().friendList;
         if (!friendInfos) {
             return;
         }
@@ -190,6 +196,9 @@ class ChatView extends BaseView<BaseUI.UIChat>{
      * 将list滑动到底部
      */
     private scrollToUnder(chatList: fairygui.GList) {
+        if (chatList.numChildren === 0) {
+            return;
+        }
         chatList.scrollToView(chatList.numChildren - 1);
     }
 
@@ -198,7 +207,9 @@ class ChatView extends BaseView<BaseUI.UIChat>{
 
         const channel = this.chatChannelArr[msg.msgType];
         const isSelf = UserModel.ins().uid === msg.uid;
-        ChatItem.addItemToList(channel.chatList, msg.nick, msg.msg, isSelf);
+        if (msg.msgType !== ChatPto.MsgType.private || msg.uid === ChatModel.ins().selectUid) {
+            ChatItem.addItemToList(channel.chatList, msg.nick, msg.msg, isSelf);
+        }
         //收到信息的时候如果用户没有滑动list那么scroll到底部
         if (channel.scrollTimerId !== -1) {
             this.scrollToUnder(channel.chatList);

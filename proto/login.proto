@@ -1,4 +1,5 @@
 syntax = "proto3";
+import './friend.proto';
 package LoginPto;
 
 //客户端请求登录
@@ -17,6 +18,8 @@ message S_LOGIN{
 	string nick = 4;
 	int32 headIndex = 5;
 	int32 uid = 6;
+	repeated Friend friendList = 7;
+	repeated Friend reqAddList = 8;
 }
 
 //请求注册

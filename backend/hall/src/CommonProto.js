@@ -135,6 +135,8 @@ $root.LoginPto = (function() {
     LoginPto.S_LOGIN = (function() {
 
         function S_LOGIN(p) {
+            this.friendList = [];
+            this.reqAddList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -147,6 +149,8 @@ $root.LoginPto = (function() {
         S_LOGIN.prototype.nick = "";
         S_LOGIN.prototype.headIndex = 0;
         S_LOGIN.prototype.uid = 0;
+        S_LOGIN.prototype.friendList = $util.emptyArray;
+        S_LOGIN.prototype.reqAddList = $util.emptyArray;
 
         S_LOGIN.create = function create(properties) {
             return new S_LOGIN(properties);
@@ -167,6 +171,14 @@ $root.LoginPto = (function() {
                 w.uint32(40).int32(m.headIndex);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(48).int32(m.uid);
+            if (m.friendList != null && m.friendList.length) {
+                for (var i = 0; i < m.friendList.length; ++i)
+                    $root.FriendPto.Friend.encode(m.friendList[i], w.uint32(58).fork()).ldelim();
+            }
+            if (m.reqAddList != null && m.reqAddList.length) {
+                for (var i = 0; i < m.reqAddList.length; ++i)
+                    $root.FriendPto.Friend.encode(m.reqAddList[i], w.uint32(66).fork()).ldelim();
+            }
             return w;
         };
 
@@ -201,6 +213,18 @@ $root.LoginPto = (function() {
                         m.uid = r.int32();
                         break;
                     }
+                case 7: {
+                        if (!(m.friendList && m.friendList.length))
+                            m.friendList = [];
+                        m.friendList.push($root.FriendPto.Friend.decode(r, r.uint32()));
+                        break;
+                    }
+                case 8: {
+                        if (!(m.reqAddList && m.reqAddList.length))
+                            m.reqAddList = [];
+                        m.reqAddList.push($root.FriendPto.Friend.decode(r, r.uint32()));
+                        break;
+                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -231,6 +255,26 @@ $root.LoginPto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
+            if (d.friendList) {
+                if (!Array.isArray(d.friendList))
+                    throw TypeError(".LoginPto.S_LOGIN.friendList: array expected");
+                m.friendList = [];
+                for (var i = 0; i < d.friendList.length; ++i) {
+                    if (typeof d.friendList[i] !== "object")
+                        throw TypeError(".LoginPto.S_LOGIN.friendList: object expected");
+                    m.friendList[i] = $root.FriendPto.Friend.fromObject(d.friendList[i]);
+                }
+            }
+            if (d.reqAddList) {
+                if (!Array.isArray(d.reqAddList))
+                    throw TypeError(".LoginPto.S_LOGIN.reqAddList: array expected");
+                m.reqAddList = [];
+                for (var i = 0; i < d.reqAddList.length; ++i) {
+                    if (typeof d.reqAddList[i] !== "object")
+                        throw TypeError(".LoginPto.S_LOGIN.reqAddList: object expected");
+                    m.reqAddList[i] = $root.FriendPto.Friend.fromObject(d.reqAddList[i]);
+                }
+            }
             return m;
         };
 
@@ -238,6 +282,10 @@ $root.LoginPto = (function() {
             if (!o)
                 o = {};
             var d = {};
+            if (o.arrays || o.defaults) {
+                d.friendList = [];
+                d.reqAddList = [];
+            }
             if (o.defaults) {
                 d.cmd = 1;
                 d.scmd = 2;
@@ -263,6 +311,18 @@ $root.LoginPto = (function() {
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
+            }
+            if (m.friendList && m.friendList.length) {
+                d.friendList = [];
+                for (var j = 0; j < m.friendList.length; ++j) {
+                    d.friendList[j] = $root.FriendPto.Friend.toObject(m.friendList[j], o);
+                }
+            }
+            if (m.reqAddList && m.reqAddList.length) {
+                d.reqAddList = [];
+                for (var j = 0; j < m.reqAddList.length; ++j) {
+                    d.reqAddList[j] = $root.FriendPto.Friend.toObject(m.reqAddList[j], o);
+                }
             }
             return d;
         };
@@ -526,390 +586,9 @@ $root.LoginPto = (function() {
     return LoginPto;
 })();
 
-$root.HallPto = (function() {
-
-    var HallPto = {};
-
-    return HallPto;
-})();
-
-$root.SystemPto = (function() {
-
-    var SystemPto = {};
-
-    SystemPto.S_TIPS = (function() {
-
-        function S_TIPS(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_TIPS.prototype.cmd = 0;
-        S_TIPS.prototype.scmd = 1;
-        S_TIPS.prototype.msg = "";
-        S_TIPS.prototype.hoverTime = 0;
-
-        S_TIPS.create = function create(properties) {
-            return new S_TIPS(properties);
-        };
-
-        S_TIPS.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.msg != null && Object.hasOwnProperty.call(m, "msg"))
-                w.uint32(26).string(m.msg);
-            if (m.hoverTime != null && Object.hasOwnProperty.call(m, "hoverTime"))
-                w.uint32(32).int32(m.hoverTime);
-            return w;
-        };
-
-        S_TIPS.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.SystemPto.S_TIPS();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.msg = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.hoverTime = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_TIPS.fromObject = function fromObject(d) {
-            if (d instanceof $root.SystemPto.S_TIPS)
-                return d;
-            var m = new $root.SystemPto.S_TIPS();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.msg != null) {
-                m.msg = String(d.msg);
-            }
-            if (d.hoverTime != null) {
-                m.hoverTime = d.hoverTime | 0;
-            }
-            return m;
-        };
-
-        S_TIPS.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 0;
-                d.scmd = 1;
-                d.msg = "";
-                d.hoverTime = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.msg != null && m.hasOwnProperty("msg")) {
-                d.msg = m.msg;
-            }
-            if (m.hoverTime != null && m.hasOwnProperty("hoverTime")) {
-                d.hoverTime = m.hoverTime;
-            }
-            return d;
-        };
-
-        S_TIPS.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_TIPS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/SystemPto.S_TIPS";
-        };
-
-        return S_TIPS;
-    })();
-
-    return SystemPto;
-})();
-
 $root.FriendPto = (function() {
 
     var FriendPto = {};
-
-    FriendPto.C_FRIEND_INFO = (function() {
-
-        function C_FRIEND_INFO(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_FRIEND_INFO.prototype.cmd = 3;
-        C_FRIEND_INFO.prototype.scmd = 1;
-
-        C_FRIEND_INFO.create = function create(properties) {
-            return new C_FRIEND_INFO(properties);
-        };
-
-        C_FRIEND_INFO.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            return w;
-        };
-
-        C_FRIEND_INFO.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendPto.C_FRIEND_INFO();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_FRIEND_INFO.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendPto.C_FRIEND_INFO)
-                return d;
-            var m = new $root.FriendPto.C_FRIEND_INFO();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            return m;
-        };
-
-        C_FRIEND_INFO.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 3;
-                d.scmd = 1;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            return d;
-        };
-
-        C_FRIEND_INFO.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_FRIEND_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.C_FRIEND_INFO";
-        };
-
-        return C_FRIEND_INFO;
-    })();
-
-    FriendPto.S_FRIEND_INFO = (function() {
-
-        function S_FRIEND_INFO(p) {
-            this.list = [];
-            this.reqAddList = [];
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_FRIEND_INFO.prototype.cmd = 3;
-        S_FRIEND_INFO.prototype.scmd = 2;
-        S_FRIEND_INFO.prototype.list = $util.emptyArray;
-        S_FRIEND_INFO.prototype.reqAddList = $util.emptyArray;
-
-        S_FRIEND_INFO.create = function create(properties) {
-            return new S_FRIEND_INFO(properties);
-        };
-
-        S_FRIEND_INFO.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.list != null && m.list.length) {
-                for (var i = 0; i < m.list.length; ++i)
-                    $root.FriendPto.Friend.encode(m.list[i], w.uint32(26).fork()).ldelim();
-            }
-            if (m.reqAddList != null && m.reqAddList.length) {
-                for (var i = 0; i < m.reqAddList.length; ++i)
-                    $root.FriendPto.Friend.encode(m.reqAddList[i], w.uint32(34).fork()).ldelim();
-            }
-            return w;
-        };
-
-        S_FRIEND_INFO.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendPto.S_FRIEND_INFO();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.list && m.list.length))
-                            m.list = [];
-                        m.list.push($root.FriendPto.Friend.decode(r, r.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(m.reqAddList && m.reqAddList.length))
-                            m.reqAddList = [];
-                        m.reqAddList.push($root.FriendPto.Friend.decode(r, r.uint32()));
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_FRIEND_INFO.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendPto.S_FRIEND_INFO)
-                return d;
-            var m = new $root.FriendPto.S_FRIEND_INFO();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.list) {
-                if (!Array.isArray(d.list))
-                    throw TypeError(".FriendPto.S_FRIEND_INFO.list: array expected");
-                m.list = [];
-                for (var i = 0; i < d.list.length; ++i) {
-                    if (typeof d.list[i] !== "object")
-                        throw TypeError(".FriendPto.S_FRIEND_INFO.list: object expected");
-                    m.list[i] = $root.FriendPto.Friend.fromObject(d.list[i]);
-                }
-            }
-            if (d.reqAddList) {
-                if (!Array.isArray(d.reqAddList))
-                    throw TypeError(".FriendPto.S_FRIEND_INFO.reqAddList: array expected");
-                m.reqAddList = [];
-                for (var i = 0; i < d.reqAddList.length; ++i) {
-                    if (typeof d.reqAddList[i] !== "object")
-                        throw TypeError(".FriendPto.S_FRIEND_INFO.reqAddList: object expected");
-                    m.reqAddList[i] = $root.FriendPto.Friend.fromObject(d.reqAddList[i]);
-                }
-            }
-            return m;
-        };
-
-        S_FRIEND_INFO.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.arrays || o.defaults) {
-                d.list = [];
-                d.reqAddList = [];
-            }
-            if (o.defaults) {
-                d.cmd = 3;
-                d.scmd = 2;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.list && m.list.length) {
-                d.list = [];
-                for (var j = 0; j < m.list.length; ++j) {
-                    d.list[j] = $root.FriendPto.Friend.toObject(m.list[j], o);
-                }
-            }
-            if (m.reqAddList && m.reqAddList.length) {
-                d.reqAddList = [];
-                for (var j = 0; j < m.reqAddList.length; ++j) {
-                    d.reqAddList[j] = $root.FriendPto.Friend.toObject(m.reqAddList[j], o);
-                }
-            }
-            return d;
-        };
-
-        S_FRIEND_INFO.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_FRIEND_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_FRIEND_INFO";
-        };
-
-        return S_FRIEND_INFO;
-    })();
 
     FriendPto.C_ADD_FRIEND = (function() {
 
@@ -1600,6 +1279,141 @@ $root.FriendPto = (function() {
     })();
 
     return FriendPto;
+})();
+
+$root.HallPto = (function() {
+
+    var HallPto = {};
+
+    return HallPto;
+})();
+
+$root.SystemPto = (function() {
+
+    var SystemPto = {};
+
+    SystemPto.S_TIPS = (function() {
+
+        function S_TIPS(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_TIPS.prototype.cmd = 0;
+        S_TIPS.prototype.scmd = 1;
+        S_TIPS.prototype.msg = "";
+        S_TIPS.prototype.hoverTime = 0;
+
+        S_TIPS.create = function create(properties) {
+            return new S_TIPS(properties);
+        };
+
+        S_TIPS.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.msg != null && Object.hasOwnProperty.call(m, "msg"))
+                w.uint32(26).string(m.msg);
+            if (m.hoverTime != null && Object.hasOwnProperty.call(m, "hoverTime"))
+                w.uint32(32).int32(m.hoverTime);
+            return w;
+        };
+
+        S_TIPS.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.SystemPto.S_TIPS();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.msg = r.string();
+                        break;
+                    }
+                case 4: {
+                        m.hoverTime = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_TIPS.fromObject = function fromObject(d) {
+            if (d instanceof $root.SystemPto.S_TIPS)
+                return d;
+            var m = new $root.SystemPto.S_TIPS();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.msg != null) {
+                m.msg = String(d.msg);
+            }
+            if (d.hoverTime != null) {
+                m.hoverTime = d.hoverTime | 0;
+            }
+            return m;
+        };
+
+        S_TIPS.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 0;
+                d.scmd = 1;
+                d.msg = "";
+                d.hoverTime = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.msg != null && m.hasOwnProperty("msg")) {
+                d.msg = m.msg;
+            }
+            if (m.hoverTime != null && m.hasOwnProperty("hoverTime")) {
+                d.hoverTime = m.hoverTime;
+            }
+            return d;
+        };
+
+        S_TIPS.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_TIPS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/SystemPto.S_TIPS";
+        };
+
+        return S_TIPS;
+    })();
+
+    return SystemPto;
 })();
 
 module.exports = $root;

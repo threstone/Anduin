@@ -10,6 +10,7 @@ import * as allProto from './CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../common/config/redis.json';
 import { UserMgr } from './UserMgr';
+import * as mysqlConfig from '../../common/config/mysql.json';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -29,7 +30,7 @@ export class GlobalVar {
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
 
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo]);
+        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userRelation]);
 
         this.userMgr = new UserMgr();
     }

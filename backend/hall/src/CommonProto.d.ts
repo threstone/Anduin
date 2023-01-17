@@ -131,6 +131,12 @@ export namespace LoginPto {
 
         /** S_LOGIN uid */
         uid?: (number|null);
+
+        /** S_LOGIN friendList */
+        friendList?: (FriendPto.IFriend[]|null);
+
+        /** S_LOGIN reqAddList */
+        reqAddList?: (FriendPto.IFriend[]|null);
     }
 
     /** Represents a S_LOGIN. */
@@ -159,6 +165,12 @@ export namespace LoginPto {
 
         /** S_LOGIN uid. */
         public uid: number;
+
+        /** S_LOGIN friendList. */
+        public friendList: FriendPto.IFriend[];
+
+        /** S_LOGIN reqAddList. */
+        public reqAddList: FriendPto.IFriend[];
 
         /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.
@@ -448,324 +460,8 @@ export namespace LoginPto {
     }
 }
 
-/** Namespace SystemPto. */
-export namespace SystemPto {
-
-    /** Properties of a S_TIPS. */
-    interface IS_TIPS {
-
-        /** S_TIPS cmd */
-        cmd?: (number|null);
-
-        /** S_TIPS scmd */
-        scmd?: (number|null);
-
-        /** S_TIPS msg */
-        msg?: (string|null);
-
-        /** S_TIPS hoverTime */
-        hoverTime?: (number|null);
-    }
-
-    /** Represents a S_TIPS. */
-    class S_TIPS implements IS_TIPS {
-
-        /**
-         * Constructs a new S_TIPS.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: SystemPto.IS_TIPS);
-
-        /** S_TIPS cmd. */
-        public cmd: number;
-
-        /** S_TIPS scmd. */
-        public scmd: number;
-
-        /** S_TIPS msg. */
-        public msg: string;
-
-        /** S_TIPS hoverTime. */
-        public hoverTime: number;
-
-        /**
-         * Encodes the specified S_TIPS message. Does not implicitly {@link SystemPto.S_TIPS.verify|verify} messages.
-         * @param message S_TIPS message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: SystemPto.IS_TIPS, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_TIPS message, length delimited. Does not implicitly {@link SystemPto.S_TIPS.verify|verify} messages.
-         * @param message S_TIPS message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: SystemPto.IS_TIPS, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_TIPS message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_TIPS
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SystemPto.S_TIPS;
-
-        /**
-         * Decodes a S_TIPS message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_TIPS
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SystemPto.S_TIPS;
-
-        /**
-         * Verifies a S_TIPS message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_TIPS message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_TIPS
-         */
-        public static fromObject(object: { [k: string]: any }): SystemPto.S_TIPS;
-
-        /**
-         * Creates a plain object from a S_TIPS message. Also converts values to other types if specified.
-         * @param message S_TIPS
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: SystemPto.S_TIPS, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_TIPS to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_TIPS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-}
-
 /** Namespace FriendPto. */
 export namespace FriendPto {
-
-    /** Properties of a C_FRIEND_INFO. */
-    interface IC_FRIEND_INFO {
-
-        /** C_FRIEND_INFO cmd */
-        cmd?: (number|null);
-
-        /** C_FRIEND_INFO scmd */
-        scmd?: (number|null);
-    }
-
-    /** Represents a C_FRIEND_INFO. */
-    class C_FRIEND_INFO implements IC_FRIEND_INFO {
-
-        /**
-         * Constructs a new C_FRIEND_INFO.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: FriendPto.IC_FRIEND_INFO);
-
-        /** C_FRIEND_INFO cmd. */
-        public cmd: number;
-
-        /** C_FRIEND_INFO scmd. */
-        public scmd: number;
-
-        /**
-         * Encodes the specified C_FRIEND_INFO message. Does not implicitly {@link FriendPto.C_FRIEND_INFO.verify|verify} messages.
-         * @param message C_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: FriendPto.IC_FRIEND_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_FRIEND_INFO message, length delimited. Does not implicitly {@link FriendPto.C_FRIEND_INFO.verify|verify} messages.
-         * @param message C_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: FriendPto.IC_FRIEND_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_FRIEND_INFO message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendPto.C_FRIEND_INFO;
-
-        /**
-         * Decodes a C_FRIEND_INFO message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendPto.C_FRIEND_INFO;
-
-        /**
-         * Verifies a C_FRIEND_INFO message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_FRIEND_INFO message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_FRIEND_INFO
-         */
-        public static fromObject(object: { [k: string]: any }): FriendPto.C_FRIEND_INFO;
-
-        /**
-         * Creates a plain object from a C_FRIEND_INFO message. Also converts values to other types if specified.
-         * @param message C_FRIEND_INFO
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: FriendPto.C_FRIEND_INFO, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_FRIEND_INFO to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_FRIEND_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIEND_INFO. */
-    interface IS_FRIEND_INFO {
-
-        /** S_FRIEND_INFO cmd */
-        cmd?: (number|null);
-
-        /** S_FRIEND_INFO scmd */
-        scmd?: (number|null);
-
-        /** S_FRIEND_INFO list */
-        list?: (FriendPto.IFriend[]|null);
-
-        /** S_FRIEND_INFO reqAddList */
-        reqAddList?: (FriendPto.IFriend[]|null);
-    }
-
-    /** Represents a S_FRIEND_INFO. */
-    class S_FRIEND_INFO implements IS_FRIEND_INFO {
-
-        /**
-         * Constructs a new S_FRIEND_INFO.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: FriendPto.IS_FRIEND_INFO);
-
-        /** S_FRIEND_INFO cmd. */
-        public cmd: number;
-
-        /** S_FRIEND_INFO scmd. */
-        public scmd: number;
-
-        /** S_FRIEND_INFO list. */
-        public list: FriendPto.IFriend[];
-
-        /** S_FRIEND_INFO reqAddList. */
-        public reqAddList: FriendPto.IFriend[];
-
-        /**
-         * Encodes the specified S_FRIEND_INFO message. Does not implicitly {@link FriendPto.S_FRIEND_INFO.verify|verify} messages.
-         * @param message S_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: FriendPto.IS_FRIEND_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_FRIEND_INFO message, length delimited. Does not implicitly {@link FriendPto.S_FRIEND_INFO.verify|verify} messages.
-         * @param message S_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: FriendPto.IS_FRIEND_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIEND_INFO message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendPto.S_FRIEND_INFO;
-
-        /**
-         * Decodes a S_FRIEND_INFO message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendPto.S_FRIEND_INFO;
-
-        /**
-         * Verifies a S_FRIEND_INFO message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_FRIEND_INFO message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_FRIEND_INFO
-         */
-        public static fromObject(object: { [k: string]: any }): FriendPto.S_FRIEND_INFO;
-
-        /**
-         * Creates a plain object from a S_FRIEND_INFO message. Also converts values to other types if specified.
-         * @param message S_FRIEND_INFO
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: FriendPto.S_FRIEND_INFO, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_FRIEND_INFO to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_FRIEND_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
 
     /** Properties of a C_ADD_FRIEND. */
     interface IC_ADD_FRIEND {
@@ -1391,6 +1087,118 @@ export namespace FriendPto {
 
         /**
          * Gets the default type url for Friend
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace SystemPto. */
+export namespace SystemPto {
+
+    /** Properties of a S_TIPS. */
+    interface IS_TIPS {
+
+        /** S_TIPS cmd */
+        cmd?: (number|null);
+
+        /** S_TIPS scmd */
+        scmd?: (number|null);
+
+        /** S_TIPS msg */
+        msg?: (string|null);
+
+        /** S_TIPS hoverTime */
+        hoverTime?: (number|null);
+    }
+
+    /** Represents a S_TIPS. */
+    class S_TIPS implements IS_TIPS {
+
+        /**
+         * Constructs a new S_TIPS.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: SystemPto.IS_TIPS);
+
+        /** S_TIPS cmd. */
+        public cmd: number;
+
+        /** S_TIPS scmd. */
+        public scmd: number;
+
+        /** S_TIPS msg. */
+        public msg: string;
+
+        /** S_TIPS hoverTime. */
+        public hoverTime: number;
+
+        /**
+         * Encodes the specified S_TIPS message. Does not implicitly {@link SystemPto.S_TIPS.verify|verify} messages.
+         * @param message S_TIPS message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: SystemPto.IS_TIPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_TIPS message, length delimited. Does not implicitly {@link SystemPto.S_TIPS.verify|verify} messages.
+         * @param message S_TIPS message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: SystemPto.IS_TIPS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_TIPS message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_TIPS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): SystemPto.S_TIPS;
+
+        /**
+         * Decodes a S_TIPS message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_TIPS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): SystemPto.S_TIPS;
+
+        /**
+         * Verifies a S_TIPS message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_TIPS message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_TIPS
+         */
+        public static fromObject(object: { [k: string]: any }): SystemPto.S_TIPS;
+
+        /**
+         * Creates a plain object from a S_TIPS message. Also converts values to other types if specified.
+         * @param message S_TIPS
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: SystemPto.S_TIPS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_TIPS to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_TIPS
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

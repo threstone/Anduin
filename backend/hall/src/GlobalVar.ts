@@ -30,10 +30,10 @@ export class GlobalVar {
         this.initMsgHandler();
         //init socket server
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
-        //init db manager
+        //init db register
         this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo]);
+        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo, RedisType.userRelation]);
 
         this.dbHelper = new DbHelper();
     }
@@ -43,6 +43,6 @@ export class GlobalVar {
      */
     static initMsgHandler() {
         const handlerPath = path.join(__dirname, './handler');
-        ProtoBufEncoder.init(logger,allProto,handlerPath);
+        ProtoBufEncoder.init(logger, allProto, handlerPath);
     }
 }

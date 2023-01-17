@@ -1,11 +1,16 @@
+import { getLogger } from 'log4js';
 import { RedisType } from '../../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
+import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
+import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { UserModel } from '../../../common/sequelize/model/UserModel';
-import { LoginPto, SystemPto } from '../CommonProto';
+import { FriendPto, LoginPto, SystemPto } from '../CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
+const logger = getLogger();
 export class LoginHandler extends BaseHandler {
+
     static async C_LOGIN(clientName: string, uid: number, msg: LoginPto.C_LOGIN) {
         if (!msg.account || !msg.password || msg.account.length > 16 || msg.password.length > 32) {
             return;
@@ -15,23 +20,7 @@ export class LoginHandler extends BaseHandler {
         if (!userInfo) {
             replyMsg.isSuccess = false;
         } else {
-            //如果玩家在线,把旧的玩家踢掉
-            const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${userInfo.uid}`);
-            if (oldClient) {
-                let tips = new SystemPto.S_TIPS();
-                tips.msg = '您的账号在别处登录了!';
-                tips.hoverTime = 60000;
-                this.sendMsg(oldClient, userInfo.uid, tips);
-                GlobalVar.socketServer.callCloseUserSocket(oldClient, userInfo.uid);
-            }
-
-            replyMsg.isSuccess = true;
-            replyMsg.headIndex = userInfo.headIndex;
-            replyMsg.nick = userInfo.nick;
-            replyMsg.uid = userInfo.uid;
-            //设置玩家信息
-            GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
-            GlobalVar.redisMgr.getClient(RedisType.userGate).setData(`${userInfo.uid}`, `${clientName}`, -1);
+            await this.onLoginSuccess(clientName, userInfo, replyMsg);
         }
         return ProtoBufEncoder.encode(replyMsg);
     }
@@ -52,5 +41,74 @@ export class LoginHandler extends BaseHandler {
             }
         }
         return ProtoBufEncoder.encode(res);
+    }
+
+    private static async initFriendInfo(uid: number, replyMsg: LoginPto.S_LOGIN) {
+        const promArr = [];
+        //初始化好友请求信息,获取到添加好友信息
+        const addInfos = await AddFriendRecordModel.getFriendAddInfo(uid);
+        for (let index = 0; index < addInfos.length; index++) {
+            const fromUid = addInfos[index].fromUid;
+            const addInfo = new FriendPto.Friend();
+            addInfo.uid = fromUid;
+            const prom = GlobalVar.dbHelper.getUserInfo(fromUid, 'nick').then((nick: string) => {
+                addInfo.nick = nick;
+            }).catch((err) => {
+                logger.error(`C_FRIEND_INFO ${fromUid}获取用户昵称出错${err}`);
+            });
+            promArr.push(prom);
+            replyMsg.reqAddList.push(addInfo);
+        }
+
+        //初始化好友信息,获取到好友信息
+        const friendInfos = await FriendModel.getFriendInfo(uid);
+        const friendUids: number[] = [];
+        for (let index = 0; index < friendInfos.length; index++) {
+            const friendUId = friendInfos[index].friendUId;
+            friendUids.push(friendUId);
+            const friendInfo = new FriendPto.Friend();
+            friendInfo.uid = friendUId;
+            const prom = GlobalVar.dbHelper.getUserInfo(friendUId, 'nick').then((nick: string) => {
+                friendInfo.nick = nick;
+            }).catch((err) => {
+                logger.error(`C_FRIEND_INFO ${uid}获取用户昵称出错${err}`);
+            });
+            const onlineInfoPromise = GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${friendUId}`).then((friendClientName) => {
+                if (friendClientName) {
+                    friendInfo.isOnline = true;
+                }
+            }).catch((err) => {
+                logger.error(`C_FRIEND_INFO ${uid}获取用户在线状态出错${err}`);
+            });
+            promArr.push(prom);
+            promArr.push(onlineInfoPromise);
+            replyMsg.friendList.push(friendInfo);
+        }
+        //将好友信息插入到redis中
+        GlobalVar.redisMgr.getClient(RedisType.userRelation).delete(uid);
+        GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(uid, friendUids);
+        await Promise.all(promArr);
+    }
+
+    private static async onLoginSuccess(clientName: string, userInfo: UserModel, replyMsg: LoginPto.S_LOGIN) {
+        const uid = userInfo.uid;
+        //如果玩家在线,把旧的玩家踢掉
+        const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(uid);
+        if (oldClient) {
+            let tips = new SystemPto.S_TIPS();
+            tips.msg = '您的账号在别处登录了!';
+            tips.hoverTime = 60000;
+            this.sendMsg(oldClient, uid, tips);
+            GlobalVar.socketServer.callCloseUserSocket(oldClient, uid);
+        }
+
+        replyMsg.isSuccess = true;
+        replyMsg.headIndex = userInfo.headIndex;
+        replyMsg.nick = userInfo.nick;
+        replyMsg.uid = uid;
+        //设置玩家信息
+        GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(uid, (userInfo as any).dataValues, -1);
+        GlobalVar.redisMgr.getClient(RedisType.userGate).setData(uid, `${clientName}`, -1);
+        await this.initFriendInfo(uid, replyMsg);
     }
 }

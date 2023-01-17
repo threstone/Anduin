@@ -158,120 +158,6 @@ declare namespace ChatPto {
 /** Namespace FriendPto. */
 declare namespace FriendPto {
 
-    /** Properties of a C_FRIEND_INFO. */
-    interface IC_FRIEND_INFO {
-
-        /** C_FRIEND_INFO cmd */
-        cmd?: (number|null);
-
-        /** C_FRIEND_INFO scmd */
-        scmd?: (number|null);
-    }
-
-    /** Represents a C_FRIEND_INFO. */
-    class C_FRIEND_INFO implements IC_FRIEND_INFO {
-
-        /**
-         * Constructs a new C_FRIEND_INFO.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: FriendPto.IC_FRIEND_INFO);
-
-        /** C_FRIEND_INFO cmd. */
-        public cmd: number;
-
-        /** C_FRIEND_INFO scmd. */
-        public scmd: number;
-
-        /**
-         * Encodes the specified C_FRIEND_INFO message. Does not implicitly {@link FriendPto.C_FRIEND_INFO.verify|verify} messages.
-         * @param message C_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: FriendPto.IC_FRIEND_INFO, writer?: protobuf.Writer): protobuf.Writer;
-
-        /**
-         * Decodes a C_FRIEND_INFO message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.C_FRIEND_INFO;
-
-        /**
-         * Gets the default type url for C_FRIEND_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIEND_INFO. */
-    interface IS_FRIEND_INFO {
-
-        /** S_FRIEND_INFO cmd */
-        cmd?: (number|null);
-
-        /** S_FRIEND_INFO scmd */
-        scmd?: (number|null);
-
-        /** S_FRIEND_INFO list */
-        list?: (FriendPto.IFriend[]|null);
-
-        /** S_FRIEND_INFO reqAddList */
-        reqAddList?: (FriendPto.IFriend[]|null);
-    }
-
-    /** Represents a S_FRIEND_INFO. */
-    class S_FRIEND_INFO implements IS_FRIEND_INFO {
-
-        /**
-         * Constructs a new S_FRIEND_INFO.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: FriendPto.IS_FRIEND_INFO);
-
-        /** S_FRIEND_INFO cmd. */
-        public cmd: number;
-
-        /** S_FRIEND_INFO scmd. */
-        public scmd: number;
-
-        /** S_FRIEND_INFO list. */
-        public list: FriendPto.IFriend[];
-
-        /** S_FRIEND_INFO reqAddList. */
-        public reqAddList: FriendPto.IFriend[];
-
-        /**
-         * Encodes the specified S_FRIEND_INFO message. Does not implicitly {@link FriendPto.S_FRIEND_INFO.verify|verify} messages.
-         * @param message S_FRIEND_INFO message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: FriendPto.IS_FRIEND_INFO, writer?: protobuf.Writer): protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIEND_INFO message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIEND_INFO
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_FRIEND_INFO;
-
-        /**
-         * Gets the default type url for S_FRIEND_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
     /** Properties of a C_ADD_FRIEND. */
     interface IC_ADD_FRIEND {
 
@@ -719,6 +605,12 @@ declare namespace LoginPto {
 
         /** S_LOGIN uid */
         uid?: (number|null);
+
+        /** S_LOGIN friendList */
+        friendList?: (FriendPto.IFriend[]|null);
+
+        /** S_LOGIN reqAddList */
+        reqAddList?: (FriendPto.IFriend[]|null);
     }
 
     /** Represents a S_LOGIN. */
@@ -747,6 +639,12 @@ declare namespace LoginPto {
 
         /** S_LOGIN uid. */
         public uid: number;
+
+        /** S_LOGIN friendList. */
+        public friendList: FriendPto.IFriend[];
+
+        /** S_LOGIN reqAddList. */
+        public reqAddList: FriendPto.IFriend[];
 
         /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.

@@ -1,11 +1,18 @@
 class FriendModel extends BaseModel {
+    private _friendList: FriendPto.IFriend[];
+    get friendList() { return this._friendList }
+    private _reqAddList: FriendPto.IFriend[];
+    get reqAddList() { return this._reqAddList }
 
-    private _serverInfo: FriendPto.S_FRIEND_INFO;
-    public get serverInfo() { return this._serverInfo }
+    onLogin(friendList: FriendPto.IFriend[], reqAddList: FriendPto.IFriend[]) {
+        this._friendList = friendList;
+        this._reqAddList = reqAddList;
+        this.emitFriendUpdate();
+    }
 
     isOnline(uid: number) {
-        for (let index = 0; index < this._serverInfo.list.length; index++) {
-            const friend = this._serverInfo.list[index];
+        for (let index = 0; index < this._friendList.length; index++) {
+            const friend = this._friendList[index];
             if (friend.uid === uid) {
                 return friend.isOnline;
             }
@@ -14,8 +21,8 @@ class FriendModel extends BaseModel {
     }
 
     isFriend(uid: number) {
-        for (let index = 0; index < this._serverInfo.list.length; index++) {
-            const friend = this._serverInfo.list[index];
+        for (let index = 0; index < this._friendList.length; index++) {
+            const friend = this._friendList[index];
             if (friend.uid === uid) {
                 return true;
             }
@@ -25,27 +32,22 @@ class FriendModel extends BaseModel {
 
     private emitFriendUpdate() {
         //排序在线列表
-        const arr = this._serverInfo.list;
+        const arr = this._friendList;
         arr.sort((a, b) => {
             return (b.isOnline ? 1 : 0) - (a.isOnline ? 1 : 0)
         })
         this.emit('FriendUpdate');
     }
 
-    //好友信息返回
-    private S_FRIEND_INFO(msg: FriendPto.S_FRIEND_INFO) {
-        this._serverInfo = msg;
-        this.emitFriendUpdate();
-    }
 
     //好友变动
     private S_FRIEND_CHANGE(msg: FriendPto.S_FRIEND_CHANGE) {
         //新的好友
         if (msg.friend) {
-            this._serverInfo.list.push(msg.friend);
+            this._friendList.push(msg.friend);
         } else {
-            for (let index = 0; index < this._serverInfo.list.length; index++) {
-                const info = this._serverInfo.list[index];
+            for (let index = 0; index < this._friendList.length; index++) {
+                const info = this._friendList[index];
                 if (info.uid === msg.uid) {
                     info.isOnline = msg.isOnline;
                     break;
@@ -60,7 +62,7 @@ class FriendModel extends BaseModel {
         if (!msg.user) {
             return;
         }
-        this.serverInfo.reqAddList.unshift(msg.user);
+        this._reqAddList.unshift(msg.user);
         this.emit('FriendRedShow');
     }
 
@@ -81,12 +83,6 @@ class FriendModel extends BaseModel {
         } else if (msg.code === 6) {
             TipsView.ins().showTips('请同意对方的好友请求', 5000);
         }
-    }
-
-    //客户端请求好友信息
-    C_FRIEND_INFO() {
-        const msg = new FriendPto.C_FRIEND_INFO();
-        this.sendMsg(msg);
     }
 
     //请求添加好友

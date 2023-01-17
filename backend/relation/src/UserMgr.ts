@@ -1,6 +1,6 @@
 import { RedisType } from '../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import { ChatPto } from './CommonProto';
+import { ChatPto, FriendPto } from './CommonProto';
 import { GlobalVar } from './GlobalVar';
 
 export class UserMgr {
@@ -24,21 +24,41 @@ export class UserMgr {
     }
 
     //玩家上线
-    onUserOnline(clientName: string, uid: number, nick: string) {
+    async onUserOnline(clientName: string, uid: number, nick: string) {
         const user = new UserInfo(clientName, uid, nick);
         this._userMap.set(uid, user);
-
-        const data = new ChatPto.S_CHAT_MESSAGE();
-        data.uid = uid;
-        data.nick = nick;
-        data.msg = '啊实打实结果了两个来不了了哔哩哔哩哔哩哔哩12345';
-        GlobalVar.socketServer.sendTransferToGate(GlobalVar.userMgr.getUserInfo(uid)?.clientName, uid, ProtoBufEncoder.encode(data));
+        //通知好友上线
+        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).lRange(uid, 0, -1);
+        const msg = new FriendPto.S_FRIEND_CHANGE();
+        msg.uid = uid;
+        msg.isOnline = true;
+        const buffer = ProtoBufEncoder.encode(msg);
+        for (let index = 0; index < uids.length; index++) {
+            const uid = uids[index];
+            const friendInfo = this._userMap.get(parseInt(uid));
+            if (friendInfo) {
+                GlobalVar.socketServer.sendTransferToGate(friendInfo.clientName, friendInfo.uid, buffer);
+            }
+        }
     }
 
     //玩家下线
-    onUserOffline(uid: number) {
+    async onUserOffline(uid: number) {
         GlobalVar.redisMgr.getClient(RedisType.userGate).delete(`${uid}`);
         this._userMap.delete(uid);
+        //通知好友下线
+        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).lRange(uid, 0, -1);
+        const msg = new FriendPto.S_FRIEND_CHANGE();
+        msg.uid = uid;
+        msg.isOnline = false;
+        const buffer = ProtoBufEncoder.encode(msg);
+        for (let index = 0; index < uids.length; index++) {
+            const uid = uids[index];
+            const friendInfo = this._userMap.get(parseInt(uid));
+            if (friendInfo) {
+                GlobalVar.socketServer.sendTransferToGate(friendInfo.clientName, friendInfo.uid, buffer);
+            }
+        }
     }
 
 }

@@ -60,6 +60,37 @@ export class RedisClientSelf {
     }
 
     /**
+     * 获取列表指定范围内的元素
+     * @stop 如果stop index的值为-1那么将返回所有值
+     */
+    lRange(key: string | number, start: number, stop: number, time_out?: number): Promise<string[]> {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        return this.sendCommand('lrange', [key, start, stop], time_out);
+    }
+
+    /**
+     * 在列表尾部插入一个或多个元素
+     */
+    rPush(key: string | number, value: number[] | string[] | string | number, time_out?: number) {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        const elements = [key];
+        if (Array.isArray(value)) {
+            elements.push(...value);
+        } else {
+            elements.push(value);
+        }
+        return this.sendCommand('rpush', elements, time_out);
+    }
+
+    /**
+     * 获取list长度
+     */
+    lLen(key: string | number, time_out?: number) {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        return this.sendCommand('llen', [key], time_out);
+    }
+
+    /**
      * 订阅消息
      */
     subscribe(channel: string, callBack: Function) {

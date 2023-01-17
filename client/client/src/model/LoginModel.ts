@@ -19,6 +19,7 @@ class LoginModel extends BaseModel {
         this.emit('S_LOGIN', msg);
         if (msg.isSuccess) {
             UserModel.ins().onLogin(msg);
+            FriendModel.ins().onLogin(msg.friendList, msg.reqAddList)
             HallView.ins().open();
         }
     }

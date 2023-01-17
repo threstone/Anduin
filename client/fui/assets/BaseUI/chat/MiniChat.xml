@@ -3,7 +3,7 @@
   <displayList>
     <image id="n6_fjki" name="n6" src="fjki1h" fileName="chat/res/announce_text_bg_blu.png" xy="4,31"/>
     <image id="n0_fjki" name="n0" src="fjki1b" fileName="chat/res/excavate_history_button_detail_.png" xy="0,15"/>
-    <text id="n7_fjki" name="msgText" xy="91,44" size="389,27" fontSize="18" color="#00ccff" vAlign="middle" ubb="true" autoSize="ellipsis" text="[B][color=#0033CC]啊实打实[/color][/B]:123123"/>
+    <text id="n7_fjki" name="msgText" xy="91,44" size="389,27" fontSize="18" color="#00ccff" vAlign="middle" ubb="true" autoSize="ellipsis" autoClearText="true" text="[B][color=#0033CC]啊实打实[/color][/B]:123123"/>
     <image id="n1_fjki" name="numBg" src="fjki15" fileName="chat/res/equip_craft_number_b.png" xy="50,0" size="26,26" group="n8_fjki" scale="1.5,1.5"/>
     <text id="n2_fjki" name="unReadNum" xy="59,7" size="21,23" group="n8_fjki" fontSize="15" color="#ffffff" align="center" vAlign="middle" autoSize="shrink" text="99"/>
     <group id="n8_fjki" name="tipsGroup" xy="50,0" size="30,30" visible="false" advanced="true"/>

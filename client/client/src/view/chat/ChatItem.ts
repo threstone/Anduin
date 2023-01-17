@@ -19,7 +19,7 @@ class ChatItem {
         } else {
             item.bg.width = item.msg.width + 30;
         }
-        item.bg.height = item.msg.height + 15;
+        item.bg.height = item.msg.height + 21;
         item.height = item.bg.height;
 
         if (isSelf) {
