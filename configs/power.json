@@ -1,0 +1,30 @@
+[
+{
+ "id":0,
+ "powerName":"中立"
+  },
+{
+ "id":1,
+ "powerName":"圣堂"
+  },
+{
+ "id":2,
+ "powerName":"亡灵"
+  },
+{
+ "id":3,
+ "powerName":"游牧"
+  },
+{
+ "id":4,
+ "powerName":"自然"
+  },
+{
+ "id":5,
+ "powerName":"堡垒"
+  },
+{
+ "id":6,
+ "powerName":"学院"
+  }
+]

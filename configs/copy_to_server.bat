@@ -1,0 +1,1 @@
+copy /y config.json ..\backend\game\config
