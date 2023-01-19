@@ -8,10 +8,9 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序普通模式",
-            "program": "${workspaceFolder}\\dist\\hall\\src\\bin\\main.js",
-            // "preLaunchTask": "tsc: build - tsconfig.json",
+            "program": "${workspaceFolder}\\dist\\game\\src\\bin\\main.js",
             "args": [
-                "socketListenPort=Num(2001)",
+                "socketListenPort=Num(3001)",
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -22,12 +21,10 @@
             "type": "node",
             "request": "launch",
             "name": "光启动不编译",
-            "program": "${workspaceFolder}\\dist\\hall\\src\\bin\\main.js",
-            // "outFiles": [
-            //     "${workspaceFolder}/dist/src/*.js"
-            // ],
+            "program": "${workspaceFolder}\\dist\\game\\src\\bin\\main.js",
+
             "args": [
-                "socketListenPort=Num(2001)",
+                "socketListenPort=Num(3001)",
             ]
         }
     ]

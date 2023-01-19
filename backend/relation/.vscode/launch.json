@@ -9,7 +9,9 @@
             "request": "launch",
             "name": "启动程序普通模式",
             "program": "${workspaceFolder}\\dist\\relation\\src\\bin\\main.js",
-            "args": [],
+            "args": [
+                "socketListenPort=Num(9001)",
+            ],
             "preLaunchTask": "buildjs",
             "outFiles": [
                 "${workspaceFolder}/dist/src/*.js"
@@ -22,7 +24,7 @@
             "program": "${workspaceFolder}\\dist\\relation\\src\\bin\\main.js",
 
             "args": [
-                "socketListenPort=Num(1003)",
+                "socketListenPort=Num(9001)",
             ]
         }
     ]
