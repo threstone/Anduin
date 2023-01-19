@@ -40,5 +40,8 @@
       "name": "protobuf-bundles",
       "path": "protobuf/bundles"
     }
-  ]
+  ],
+  "vivo": {
+    "usePlugin": true
+  }
 }

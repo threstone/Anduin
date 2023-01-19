@@ -14,6 +14,7 @@ class HallView extends BaseView<BaseUI.UIHall>{
         this.view.nickText.text = UserModel.ins().nick;
         this.view.uidText.text = `ID:${UserModel.ins().uid}`
         this.view.cardGroupBtn.describe.text = '收藏';
+        this.AddClick(this.view.cardGroupBtn, CardsView.ins().open.bind(CardsView.ins()))
         this.view.fightBtn.describe.text = '对战';
         this.view.pveBtn.describe.text = '冒险';
         this.view.settingBtn.describe.text = '设置';

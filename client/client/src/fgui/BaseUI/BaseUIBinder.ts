@@ -22,6 +22,11 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIAddFriend.URL, UIAddFriend);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendReq.URL, UIFriendReq);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendReqItem.URL, UIFriendReqItem);
+			fairygui.UIObjectFactory.setPackageItemExtension(UICard.URL, UICard);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIFeeBtn.URL, UIFeeBtn);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIPowerBtn.URL, UIPowerBtn);
+			fairygui.UIObjectFactory.setPackageItemExtension(UICards.URL, UICards);
+			fairygui.UIObjectFactory.setPackageItemExtension(UICardsBtn.URL, UICardsBtn);
 		}
 	}
 }

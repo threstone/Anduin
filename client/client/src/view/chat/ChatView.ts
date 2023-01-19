@@ -149,11 +149,11 @@ class ChatView extends BaseView<BaseUI.UIChat>{
             const channel = this.chatChannelArr[chatType];
             if (chatType !== type) {
                 channel.btn.tipsGroup.visible = false;
-                channel.btn.bg.color = 0xFFFFFF;
+                channel.btn.grayed = false;
                 channel.inputCom.visible = false;
                 channel.chatList.visible = false;
             } else {
-                channel.btn.bg.color = 0x54341D;
+                channel.btn.grayed = true;
                 channel.inputCom.visible = true;
                 channel.chatList.visible = true;
             }

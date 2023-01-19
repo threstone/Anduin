@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "BaseUI,BaseUI_atlas0,server_json",
+			"keys": "BaseUI,BaseUI_atlas0,server_json,config_json",
 			"name": "preload"
 		}
 	],
@@ -17,9 +17,14 @@
 			"name": "BaseUI_atlas0"
 		},
 		{
-			"url": "server.json",
+			"url": "configs/server.json",
 			"type": "json",
 			"name": "server_json"
+		},
+		{
+			"name": "config_json",
+			"type": "json",
+			"url": "configs/config.json"
 		}
 	]
 }

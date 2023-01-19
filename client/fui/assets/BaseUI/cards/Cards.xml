@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n2_z43k" name="listBg" src="z43k1l" fileName="cards/res/dailylogin_matri.png" xy="1000,0" size="280,720"/>
+    <list id="n0_z43k" name="cardsList" xy="1000,0" size="280,653" overflow="scroll" autoClearItems="true">
+      <item url="ui://yaux2xpoz43k1r"/>
+      <item url="ui://yaux2xpoz43k1r"/>
+      <item url="ui://yaux2xpoz43k1r"/>
+      <item url="ui://yaux2xpoz43k1r"/>
+      <item url="ui://yaux2xpoz43k1r"/>
+      <item url="ui://yaux2xpoz43k1r"/>
+    </list>
+    <image id="n6_z43k" name="bg" src="fjkir" fileName="common/res/mailbox_frame.jpg" xy="0,0" size="1000,720"/>
+    <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1146,653" group="n9_z43k"/>
+    <text id="n8_z43k" name="newCardsTips" xy="1016,668" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
+    <group id="n9_z43k" name="functionGroup" xy="1016,653" size="259,67" advanced="true"/>
+    <list id="n12_z43k" name="powerList" xy="26,17" size="950,51" layout="row" overflow="hidden" colGap="6" autoClearItems="true">
+      <item url="ui://yaux2xpotb7e21"/>
+      <item url="ui://yaux2xpotb7e21"/>
+    </list>
+    <list id="n13_tb7e" name="cardList" xy="26,71" size="1181,736" scale="0.8,0.8" layout="pagination" selectionMode="none" overflow="hidden" colGap="23" lineItemCount="5" lineItemCount2="2" autoItemSize="true">
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+    </list>
+    <list id="n16_tb7e" name="feeBtnList" xy="218,661" size="537,49" layout="pagination" overflow="hidden" colGap="15" lineItemCount="8">
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+    </list>
+    <component id="n18_tb7e" name="allBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="71,654" scale="0.6,0.6"/>
+  </displayList>
+</component>
