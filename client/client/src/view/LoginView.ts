@@ -1,6 +1,6 @@
-class LoginView extends BaseView<BaseUI.UILogin> {
+class LoginView extends BaseView<BaseUI.UILoginCom> {
     protected init() {
-        this.view = BaseUI.UILogin.createInstance();
+        this.view = BaseUI.UILoginCom.createInstance();
 
         this.view.accountInput.text;
         this.view.regBtn.describe.text = '注册';

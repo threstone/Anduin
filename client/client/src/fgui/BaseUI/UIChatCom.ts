@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UIChat extends fairygui.GComponent {
+	export class UIChatCom extends fairygui.GComponent {
 		public close:fairygui.GGraph;
 		public chatBg:fairygui.GLoader;
 		public chatList:fairygui.GList;
@@ -13,8 +13,8 @@ module BaseUI {
 		public channelList:fairygui.GList;
 		public static URL:string = "ui://yaux2xpofjkip";
 
-		public static createInstance():UIChat {
-			return <UIChat>(fairygui.UIPackage.createObject("BaseUI", "Chat"));
+		public static createInstance():UIChatCom {
+			return <UIChatCom>(fairygui.UIPackage.createObject("BaseUI", "ChatCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

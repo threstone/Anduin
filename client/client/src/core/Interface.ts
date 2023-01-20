@@ -24,3 +24,11 @@ interface GameProtoClass {
     cmd: number
     scmd: number
 }
+
+/**
+ * 势力对象
+ */
+interface Power {
+    id: number
+    powerName: string
+}

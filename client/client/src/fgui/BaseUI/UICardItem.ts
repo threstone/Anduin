@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UICard extends fairygui.GComponent {
+	export class UICardItem extends fairygui.GComponent {
 		public cardImg:fairygui.GLoader;
 		public feeBg:fairygui.GGraph;
 		public feeText:fairygui.GTextField;
@@ -17,8 +17,8 @@ module BaseUI {
 		public healthText:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpotb7e1s";
 
-		public static createInstance():UICard {
-			return <UICard>(fairygui.UIPackage.createObject("BaseUI", "Card"));
+		public static createInstance():UICardItem {
+			return <UICardItem>(fairygui.UIPackage.createObject("BaseUI", "CardItem"));
 		}
 
 		protected constructFromXML(xml:any):void {

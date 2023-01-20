@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UIFriend extends fairygui.GComponent {
+	export class UIFriendCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
 		public list:fairygui.GList;
 		public title:fairygui.GTextField;
@@ -16,8 +16,8 @@ module BaseUI {
 		public friendOpCom:UIFriendOpCom;
 		public static URL:string = "ui://yaux2xpota2rb";
 
-		public static createInstance():UIFriend {
-			return <UIFriend>(fairygui.UIPackage.createObject("BaseUI", "Friend"));
+		public static createInstance():UIFriendCom {
+			return <UIFriendCom>(fairygui.UIPackage.createObject("BaseUI", "FriendCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

@@ -2,18 +2,18 @@
 
 module BaseUI {
 
-	export class UILogin extends fairygui.GComponent {
+	export class UILoginCom extends fairygui.GComponent {
 		public accountInputBg:fairygui.GImage;
 		public accountInput:fairygui.GTextInput;
 		public passwordInputBg:fairygui.GImage;
 		public passwordInput:fairygui.GTextInput;
 		public loginBtn:UIButton1;
 		public regBtn:UIButton1;
-		public regCom:UIRegister;
+		public regCom:UIRegisterCom;
 		public static URL:string = "ui://yaux2xporu1k4";
 
-		public static createInstance():UILogin {
-			return <UILogin>(fairygui.UIPackage.createObject("BaseUI", "Login"));
+		public static createInstance():UILoginCom {
+			return <UILoginCom>(fairygui.UIPackage.createObject("BaseUI", "LoginCom"));
 		}
 
 		protected constructFromXML(xml:any):void {
@@ -25,7 +25,7 @@ module BaseUI {
 			this.passwordInput = <fairygui.GTextInput>(this.getChildAt(3));
 			this.loginBtn = <UIButton1>(this.getChildAt(4));
 			this.regBtn = <UIButton1>(this.getChildAt(5));
-			this.regCom = <UIRegister>(this.getChildAt(6));
+			this.regCom = <UIRegisterCom>(this.getChildAt(6));
 		}
 	}
 }

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package CardsPto;
+
+enum MsgType{
+    common = 0;
+    shengTang = 1;
+    wangLing = 2;
+    youMu = 3;
+    ziRan = 4;
+	biLei = 5;
+	xueYuan = 6;
+}
+
+//
+// message S_TIPS{
+// 	int32 cmd = 1[default = 4]; 
+// 	int32 scmd = 2[default = 1];
+// }
+
+

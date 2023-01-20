@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UIRegister extends fairygui.GComponent {
+	export class UIRegisterCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
 		public accountInputBg:fairygui.GImage;
 		public accountInput:fairygui.GTextInput;
@@ -16,8 +16,8 @@ module BaseUI {
 		public close:fairygui.GLoader;
 		public static URL:string = "ui://yaux2xporu1k3";
 
-		public static createInstance():UIRegister {
-			return <UIRegister>(fairygui.UIPackage.createObject("BaseUI", "Register"));
+		public static createInstance():UIRegisterCom {
+			return <UIRegisterCom>(fairygui.UIPackage.createObject("BaseUI", "RegisterCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

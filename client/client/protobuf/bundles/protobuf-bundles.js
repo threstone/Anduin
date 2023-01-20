@@ -6,6 +6,42 @@ var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.ut
 // Exported root namespace
 var $root = $protobuf.roots["default"] || ($protobuf.roots["default"] = {});
 
+$root.CardsPto = (function() {
+
+    /**
+     * Namespace CardsPto.
+     * @exports CardsPto
+     * @namespace
+     */
+    var CardsPto = {};
+
+    /**
+     * MsgType enum.
+     * @name CardsPto.MsgType
+     * @enum {number}
+     * @property {number} common=0 common value
+     * @property {number} shengTang=1 shengTang value
+     * @property {number} wangLing=2 wangLing value
+     * @property {number} youMu=3 youMu value
+     * @property {number} ziRan=4 ziRan value
+     * @property {number} biLei=5 biLei value
+     * @property {number} xueYuan=6 xueYuan value
+     */
+    CardsPto.MsgType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "common"] = 0;
+        values[valuesById[1] = "shengTang"] = 1;
+        values[valuesById[2] = "wangLing"] = 2;
+        values[valuesById[3] = "youMu"] = 3;
+        values[valuesById[4] = "ziRan"] = 4;
+        values[valuesById[5] = "biLei"] = 5;
+        values[valuesById[6] = "xueYuan"] = 6;
+        return values;
+    })();
+
+    return CardsPto;
+})();
+
 $root.ChatPto = (function() {
 
     /**
@@ -410,7 +446,7 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.C_ADD_FRIEND
          * @instance
          */
-        C_ADD_FRIEND.prototype.scmd = 3;
+        C_ADD_FRIEND.prototype.scmd = 1;
 
         /**
          * C_ADD_FRIEND uid.
@@ -537,7 +573,7 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.S_ADD_FRIEND_REQ
          * @instance
          */
-        S_ADD_FRIEND_REQ.prototype.scmd = 4;
+        S_ADD_FRIEND_REQ.prototype.scmd = 2;
 
         /**
          * S_ADD_FRIEND_REQ code.
@@ -665,7 +701,7 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
          * @instance
          */
-        C_ADD_FRIEND_REQ_RESULT.prototype.scmd = 5;
+        C_ADD_FRIEND_REQ_RESULT.prototype.scmd = 3;
 
         /**
          * C_ADD_FRIEND_REQ_RESULT isApprove.
@@ -808,7 +844,7 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.S_FRIEND_CHANGE
          * @instance
          */
-        S_FRIEND_CHANGE.prototype.scmd = 6;
+        S_FRIEND_CHANGE.prototype.scmd = 4;
 
         /**
          * S_FRIEND_CHANGE uid.
@@ -963,7 +999,7 @@ $root.FriendPto = (function() {
          * @memberof FriendPto.S_ADD_FRIEND
          * @instance
          */
-        S_ADD_FRIEND.prototype.scmd = 7;
+        S_ADD_FRIEND.prototype.scmd = 5;
 
         /**
          * S_ADD_FRIEND user.

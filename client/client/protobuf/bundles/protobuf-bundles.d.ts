@@ -1,6 +1,21 @@
 type Long = protobuf.Long;
 // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run build:types'.
 
+/** Namespace CardsPto. */
+declare namespace CardsPto {
+
+    /** MsgType enum. */
+    enum MsgType {
+        common = 0,
+        shengTang = 1,
+        wangLing = 2,
+        youMu = 3,
+        ziRan = 4,
+        biLei = 5,
+        xueYuan = 6
+    }
+}
+
 /** Namespace ChatPto. */
 declare namespace ChatPto {
 

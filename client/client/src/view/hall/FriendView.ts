@@ -1,4 +1,4 @@
-class FriendView extends BaseView<BaseUI.UIFriend> {
+class FriendView extends BaseView<BaseUI.UIFriendCom> {
 
     private hallView: HallView;
     private curSelectUid = -1;

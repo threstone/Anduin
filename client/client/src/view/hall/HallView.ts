@@ -1,7 +1,7 @@
-class HallView extends BaseView<BaseUI.UIHall>{
+class HallView extends BaseView<BaseUI.UIHallCom>{
     unReadNum: number = 0;
     protected init() {
-        this.view = BaseUI.UIHall.createInstance();
+        this.view = BaseUI.UIHallCom.createInstance();
     }
 
     public open(): void {

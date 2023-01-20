@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UICards extends fairygui.GComponent {
+	export class UICardsCom extends fairygui.GComponent {
 		public listBg:fairygui.GImage;
 		public cardsList:fairygui.GList;
 		public bg:fairygui.GImage;
@@ -15,8 +15,8 @@ module BaseUI {
 		public allBtn:UIButton1;
 		public static URL:string = "ui://yaux2xpoz43k1k";
 
-		public static createInstance():UICards {
-			return <UICards>(fairygui.UIPackage.createObject("BaseUI", "Cards"));
+		public static createInstance():UICardsCom {
+			return <UICardsCom>(fairygui.UIPackage.createObject("BaseUI", "CardsCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

@@ -1,10 +1,10 @@
-class ChatView extends BaseView<BaseUI.UIChat>{
+class ChatView extends BaseView<BaseUI.UIChatCom>{
 
     private curChannel: ChatPto.MsgType;
     private chatChannelArr: ChatChannel[];
 
     protected init() {
-        this.view = BaseUI.UIChat.createInstance();
+        this.view = BaseUI.UIChatCom.createInstance();
         this.chatChannelArr = [];
         const channelNameArr = ['综合', '好友'];
         const lists = [this.view.chatList, this.view.friendChatList];

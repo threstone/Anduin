@@ -2,10 +2,10 @@
 
 module BaseUI {
 
-	export class UIHall extends fairygui.GComponent {
+	export class UIHallCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
 		public nickText:fairygui.GTextField;
-		public friendCom:UIFriend;
+		public friendCom:UIFriendCom;
 		public uidText:fairygui.GTextField;
 		public settingBtn:UIButton1;
 		public cardGroupBtn:UIButton1;
@@ -14,8 +14,8 @@ module BaseUI {
 		public miniChat:UIMiniChat;
 		public static URL:string = "ui://yaux2xporu1k8";
 
-		public static createInstance():UIHall {
-			return <UIHall>(fairygui.UIPackage.createObject("BaseUI", "Hall"));
+		public static createInstance():UIHallCom {
+			return <UIHallCom>(fairygui.UIPackage.createObject("BaseUI", "HallCom"));
 		}
 
 		protected constructFromXML(xml:any):void {
@@ -23,7 +23,7 @@ module BaseUI {
 
 			this.bg = <fairygui.GImage>(this.getChildAt(0));
 			this.nickText = <fairygui.GTextField>(this.getChildAt(2));
-			this.friendCom = <UIFriend>(this.getChildAt(3));
+			this.friendCom = <UIFriendCom>(this.getChildAt(3));
 			this.uidText = <fairygui.GTextField>(this.getChildAt(4));
 			this.settingBtn = <UIButton1>(this.getChildAt(5));
 			this.cardGroupBtn = <UIButton1>(this.getChildAt(6));

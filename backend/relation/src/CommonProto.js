@@ -21,7 +21,7 @@ $root.FriendPto = (function() {
         }
 
         C_ADD_FRIEND.prototype.cmd = 3;
-        C_ADD_FRIEND.prototype.scmd = 3;
+        C_ADD_FRIEND.prototype.scmd = 1;
         C_ADD_FRIEND.prototype.uid = 0;
 
         C_ADD_FRIEND.create = function create(properties) {
@@ -89,7 +89,7 @@ $root.FriendPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 3;
-                d.scmd = 3;
+                d.scmd = 1;
                 d.uid = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
@@ -128,7 +128,7 @@ $root.FriendPto = (function() {
         }
 
         S_ADD_FRIEND_REQ.prototype.cmd = 3;
-        S_ADD_FRIEND_REQ.prototype.scmd = 4;
+        S_ADD_FRIEND_REQ.prototype.scmd = 2;
         S_ADD_FRIEND_REQ.prototype.code = 0;
 
         S_ADD_FRIEND_REQ.create = function create(properties) {
@@ -196,7 +196,7 @@ $root.FriendPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 3;
-                d.scmd = 4;
+                d.scmd = 2;
                 d.code = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
@@ -235,7 +235,7 @@ $root.FriendPto = (function() {
         }
 
         C_ADD_FRIEND_REQ_RESULT.prototype.cmd = 3;
-        C_ADD_FRIEND_REQ_RESULT.prototype.scmd = 5;
+        C_ADD_FRIEND_REQ_RESULT.prototype.scmd = 3;
         C_ADD_FRIEND_REQ_RESULT.prototype.isApprove = false;
         C_ADD_FRIEND_REQ_RESULT.prototype.uid = 0;
 
@@ -313,7 +313,7 @@ $root.FriendPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 3;
-                d.scmd = 5;
+                d.scmd = 3;
                 d.isApprove = false;
                 d.uid = 0;
             }
@@ -356,7 +356,7 @@ $root.FriendPto = (function() {
         }
 
         S_FRIEND_CHANGE.prototype.cmd = 3;
-        S_FRIEND_CHANGE.prototype.scmd = 6;
+        S_FRIEND_CHANGE.prototype.scmd = 4;
         S_FRIEND_CHANGE.prototype.uid = 0;
         S_FRIEND_CHANGE.prototype.isOnline = false;
         S_FRIEND_CHANGE.prototype.friend = null;
@@ -446,7 +446,7 @@ $root.FriendPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 3;
-                d.scmd = 6;
+                d.scmd = 4;
                 d.uid = 0;
                 d.isOnline = false;
                 d.friend = null;
@@ -493,7 +493,7 @@ $root.FriendPto = (function() {
         }
 
         S_ADD_FRIEND.prototype.cmd = 3;
-        S_ADD_FRIEND.prototype.scmd = 7;
+        S_ADD_FRIEND.prototype.scmd = 5;
         S_ADD_FRIEND.prototype.user = null;
 
         S_ADD_FRIEND.create = function create(properties) {
@@ -563,7 +563,7 @@ $root.FriendPto = (function() {
             var d = {};
             if (o.defaults) {
                 d.cmd = 3;
-                d.scmd = 7;
+                d.scmd = 5;
                 d.user = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
