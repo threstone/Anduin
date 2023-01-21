@@ -1,16 +1,30 @@
 syntax = "proto3";
 package CardsPto;
 
-enum MsgType{
-    common = 0;
-    shengTang = 1;
-    wangLing = 2;
-    youMu = 3;
-    ziRan = 4;
-	biLei = 5;
-	xueYuan = 6;
+enum PowerType{
+    Common = 0;
+    ShengTang = 1;
+    WangLing = 2;
+    YouMu = 3;
+    ZiRan = 4;
+	BiLei = 5;
+	XueYuan = 6;
 }
 
+enum QualityType{
+	Normal = 0;//普通
+	Rare = 1;//稀有
+	Precious = 2;//珍稀
+	Premium = 3;//极品
+}
+
+enum CardType{
+	Hero = 0;//英雄卡
+	Unit = 1;//单位卡
+	Magic = 2;//法术卡
+	Building = 3;//建筑卡
+	Event = 4;//事件卡
+}
 //
 // message S_TIPS{
 // 	int32 cmd = 1[default = 4]; 

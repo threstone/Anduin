@@ -4,19 +4,22 @@
     <loader id="n13_tb7e" name="cardImg" xy="11,10" size="200,173" url="ui://yaux2xpotb7e1z" fill="scaleMatchWidth" shrinkOnly="true"/>
     <graph id="n16_tb7e" name="feeBg" xy="0,0" size="39,39" group="n18_tb7e" type="regular_polygon" lineColor="#ffffffff" fillColor="#ff0033cc" sides="5" startAngle="-18"/>
     <text id="n17_tb7e" name="feeText" xy="7,7" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
-    <group id="n18_tb7e" name="feeGroup" xy="0,0" size="39,39"/>
+    <group id="n18_tb7e" name="feeGroup" xy="0,0" size="39,39" advanced="true"/>
     <image id="n6_tb7e" name="buttonBg" src="ru1k6" fileName="common/res/comp_120_164_1.png" xy="11,175" size="200,185" group="n14_tb7e"/>
     <text id="n4_tb7e" name="powerText" xy="49,183" size="124,17" group="n14_tb7e" fontSize="10" color="#006666" align="center" autoSize="none" text="圣堂.单位.人类"/>
-    <graph id="n5_tb7e" name="quality" xy="98,320" size="25,25" group="n14_tb7e" type="regular_polygon" lineColor="#ffffffff" fillColor="#ff0033cc" sides="4"/>
+    <graph id="n5_tb7e" name="quality" xy="98,320" size="25,25" group="n14_tb7e" type="regular_polygon" lineColor="#ffffffff" fillColor="#ffff6600" sides="4"/>
     <text id="n7_tb7e" name="cardName" xy="49,200" size="124,26" group="n14_tb7e" fontSize="18" color="#006666" align="center" autoSize="none" text="民兵"/>
-    <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="cards/line.png" xy="19,226" size="184,2" group="n14_tb7e" color="#cccccc"/>
+    <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="common/res/line.png" xy="19,226" size="184,2" group="n14_tb7e" color="#cccccc"/>
     <text id="n9_tb7e" name="desc" xy="22,231" size="180,84" group="n14_tb7e" fontSize="10" autoSize="none" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
     <image id="n2_tb7e" name="atkBg" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="4,329" group="n19_tb7e"/>
     <text id="n11_tb7e" name="atkText" xy="11,333" size="25,27" group="n19_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="99"/>
-    <group id="n19_tb7e" name="atkGroup" xy="4,329" size="39,39" group="n14_tb7e"/>
+    <group id="n19_tb7e" name="atkGroup" xy="4,329" size="39,39" group="n14_tb7e" advanced="true"/>
+    <image id="n22_tb7e" name="times" src="tb7e23" fileName="common/res/hourglas.png" xy="179,325" group="n20_tb7e" scale="0.8,0.8" visible="false"/>
     <image id="n1_tb7e" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="179,331" size="38,32" group="n20_tb7e" aspect="true"/>
     <text id="n12_tb7e" name="healthText" xy="186,333" size="25,27" group="n20_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
-    <group id="n20_tb7e" name="healthGroup" xy="179,331" size="38,32" group="n14_tb7e"/>
-    <group id="n14_tb7e" name="buttonGroup" xy="4,175" size="214,193"/>
+    <group id="n20_tb7e" name="healthGroup" xy="179,325" size="47,58" group="n14_tb7e" advanced="true"/>
+    <group id="n14_tb7e" name="buttonGroup" xy="4,175" size="222,208"/>
+    <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
+    <text id="n23_tb7e" name="cardNum" xy="182,-5" size="43,32" visible="false" fontSize="22" color="#ffcc00" strokeColor="#333399" text="X22"/>
   </displayList>
 </component>

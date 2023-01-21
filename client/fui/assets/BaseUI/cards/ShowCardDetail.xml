@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <graph id="n1_tb7e" name="close" xy="0,0" size="1280,720" alpha="0.5" type="rect" fillColor="#ff000000"/>
+    <component id="n0_tb7e" name="card" src="tb7e1s" fileName="cards/CardItem.xml" xy="389,176"/>
+  </displayList>
+</component>

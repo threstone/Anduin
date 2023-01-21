@@ -4,15 +4,32 @@ type Long = protobuf.Long;
 /** Namespace CardsPto. */
 declare namespace CardsPto {
 
-    /** MsgType enum. */
-    enum MsgType {
-        common = 0,
-        shengTang = 1,
-        wangLing = 2,
-        youMu = 3,
-        ziRan = 4,
-        biLei = 5,
-        xueYuan = 6
+    /** PowerType enum. */
+    enum PowerType {
+        Common = 0,
+        ShengTang = 1,
+        WangLing = 2,
+        YouMu = 3,
+        ZiRan = 4,
+        BiLei = 5,
+        XueYuan = 6
+    }
+
+    /** QualityType enum. */
+    enum QualityType {
+        Normal = 0,
+        Rare = 1,
+        Precious = 2,
+        Premium = 3
+    }
+
+    /** CardType enum. */
+    enum CardType {
+        Hero = 0,
+        Unit = 1,
+        Magic = 2,
+        Building = 3,
+        Event = 4
     }
 }
 

@@ -12,7 +12,9 @@ module BaseUI {
 		public powerList:fairygui.GList;
 		public cardList:fairygui.GList;
 		public feeBtnList:fairygui.GList;
-		public allBtn:UIButton1;
+		public allFeeBtn:UIButton1;
+		public back:fairygui.GLoader;
+		public next:fairygui.GLoader;
 		public static URL:string = "ui://yaux2xpoz43k1k";
 
 		public static createInstance():UICardsCom {
@@ -31,7 +33,9 @@ module BaseUI {
 			this.powerList = <fairygui.GList>(this.getChildAt(6));
 			this.cardList = <fairygui.GList>(this.getChildAt(7));
 			this.feeBtnList = <fairygui.GList>(this.getChildAt(8));
-			this.allBtn = <UIButton1>(this.getChildAt(9));
+			this.allFeeBtn = <UIButton1>(this.getChildAt(9));
+			this.back = <fairygui.GLoader>(this.getChildAt(10));
+			this.next = <fairygui.GLoader>(this.getChildAt(11));
 		}
 	}
 }

@@ -16,26 +16,64 @@ $root.CardsPto = (function() {
     var CardsPto = {};
 
     /**
-     * MsgType enum.
-     * @name CardsPto.MsgType
+     * PowerType enum.
+     * @name CardsPto.PowerType
      * @enum {number}
-     * @property {number} common=0 common value
-     * @property {number} shengTang=1 shengTang value
-     * @property {number} wangLing=2 wangLing value
-     * @property {number} youMu=3 youMu value
-     * @property {number} ziRan=4 ziRan value
-     * @property {number} biLei=5 biLei value
-     * @property {number} xueYuan=6 xueYuan value
+     * @property {number} Common=0 Common value
+     * @property {number} ShengTang=1 ShengTang value
+     * @property {number} WangLing=2 WangLing value
+     * @property {number} YouMu=3 YouMu value
+     * @property {number} ZiRan=4 ZiRan value
+     * @property {number} BiLei=5 BiLei value
+     * @property {number} XueYuan=6 XueYuan value
      */
-    CardsPto.MsgType = (function() {
+    CardsPto.PowerType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "common"] = 0;
-        values[valuesById[1] = "shengTang"] = 1;
-        values[valuesById[2] = "wangLing"] = 2;
-        values[valuesById[3] = "youMu"] = 3;
-        values[valuesById[4] = "ziRan"] = 4;
-        values[valuesById[5] = "biLei"] = 5;
-        values[valuesById[6] = "xueYuan"] = 6;
+        values[valuesById[0] = "Common"] = 0;
+        values[valuesById[1] = "ShengTang"] = 1;
+        values[valuesById[2] = "WangLing"] = 2;
+        values[valuesById[3] = "YouMu"] = 3;
+        values[valuesById[4] = "ZiRan"] = 4;
+        values[valuesById[5] = "BiLei"] = 5;
+        values[valuesById[6] = "XueYuan"] = 6;
+        return values;
+    })();
+
+    /**
+     * QualityType enum.
+     * @name CardsPto.QualityType
+     * @enum {number}
+     * @property {number} Normal=0 Normal value
+     * @property {number} Rare=1 Rare value
+     * @property {number} Precious=2 Precious value
+     * @property {number} Premium=3 Premium value
+     */
+    CardsPto.QualityType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Normal"] = 0;
+        values[valuesById[1] = "Rare"] = 1;
+        values[valuesById[2] = "Precious"] = 2;
+        values[valuesById[3] = "Premium"] = 3;
+        return values;
+    })();
+
+    /**
+     * CardType enum.
+     * @name CardsPto.CardType
+     * @enum {number}
+     * @property {number} Hero=0 Hero value
+     * @property {number} Unit=1 Unit value
+     * @property {number} Magic=2 Magic value
+     * @property {number} Building=3 Building value
+     * @property {number} Event=4 Event value
+     */
+    CardsPto.CardType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Hero"] = 0;
+        values[valuesById[1] = "Unit"] = 1;
+        values[valuesById[2] = "Magic"] = 2;
+        values[valuesById[3] = "Building"] = 3;
+        values[valuesById[4] = "Event"] = 4;
         return values;
     })();
 

@@ -5,12 +5,15 @@ class ConfigMgr extends BaseClass {
         this._allConfig = RES.getRes('config_json');
     }
 
-    getPowerConfig(): Power[] {
+    get powerConfig(): Power[] {
         return this._allConfig['power'];
     }
 
-    getAllCardsInfo(): CardInterface[] {
+    get allCardsInfo(): CardInterface[] {
         return this._allConfig['cards']
     }
 
+    get common(): CommonConfig {
+        return this._allConfig['common']
+    }
 }

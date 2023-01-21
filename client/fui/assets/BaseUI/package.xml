@@ -26,7 +26,7 @@
     <component id="fjkip" name="ChatCom.xml" path="/chat/" exported="true"/>
     <image id="fjkiq" name="bg.jpg" path="/common/res/"/>
     <image id="fjkir" name="mailbox_frame.jpg" path="/common/res/" scale="9grid" scale9grid="35,34,438,502"/>
-    <image id="fjkiu" name="herodetail_arrow_righ.png" path="/chat/res/"/>
+    <image id="fjkiu" name="herodetail_arrow_righ.png" path="/common/res/"/>
     <image id="fjkiw" name="elitetoggle-.png" path="/chat/res/"/>
     <image id="fjkix" name="elitetoggle-n.png" path="/chat/res/"/>
     <component id="fjkiy" name="Button3.xml" path="/common/btn/" exported="true"/>
@@ -47,15 +47,18 @@
     <image id="z43k1p" name="mailbox_maillist_unread_b.png" path="/cards/res/" scale="9grid" scale9grid="111,45,224,44"/>
     <image id="z43k1q" name="mailbox_maillist_read_b.png" path="/cards/res/" scale="9grid" scale9grid="111,41,224,48"/>
     <component id="z43k1r" name="CardsBtn.xml" path="/cards/" exported="true"/>
-    <component id="tb7e1s" name="CardItem.xml" path="/cards/"/>
+    <component id="tb7e1s" name="CardItem.xml" path="/cards/" exported="true"/>
     <image id="tb7e1t" name="handbook_left_arro.png" path="/common/res/"/>
     <image id="tb7e1u" name="herodetail_soulstone_ico.png" path="/common/res/"/>
     <image id="tb7e1v" name="H.png" path="/common/res/"/>
     <image id="tb7e1w" name="guild_battle_ico.png" path="/common/res/"/>
     <image id="tb7e1x" name="line.png" path="/common/res/"/>
     <image id="tb7e1z" name="temp_card.jpg" path="/cards/res/"/>
-    <component id="tb7e20" name="FeeBtn.xml" path="/cards/"/>
+    <component id="tb7e20" name="FeeBtn.xml" path="/cards/" exported="true"/>
     <component id="tb7e21" name="PowerBtn.xml" path="/cards/" exported="true"/>
+    <image id="tb7e22" name="herodetail_arrow_lef.png" path="/common/res/"/>
+    <image id="tb7e23" name="hourglas.png" path="/common/res/"/>
+    <component id="tb7e24" name="ShowCardDetail.xml" path="/cards/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>
