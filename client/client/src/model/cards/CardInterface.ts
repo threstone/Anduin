@@ -1,27 +1,29 @@
 interface CardInterface {
-    cardId: number
+    cardId: number;
 
-    cardName: string
+    cardName: string;
 
-    powerId: number
+    powerId: number;
 
-    cardType: number
+    cardType: number;
 
-    type2: number
+    type2: number;
 
-    attack: number
+    attack: number;
 
-    atkType: number
+    atkType: number;
 
-    health: number
+    health: number;
 
-    fee: number
+    fee: number;
 
-    quality: number
+    quality: number;
 
-    imgId: number
+    imgId: number;
 
-    desc: string
+    desc: string;
 
-    attr: string
+    attr: string;
+
+    count: number;
 }

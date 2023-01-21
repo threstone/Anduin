@@ -41,5 +41,6 @@
     <component id="n18_tb7e" name="allFeeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="71,654" scale="0.6,0.6"/>
     <loader id="n23_tb7e" name="back" xy="2,322" size="51,75" url="ui://yaux2xpotb7e22" autoSize="true"/>
     <loader id="n24_tb7e" name="next" xy="944,322" size="51,75" url="ui://yaux2xpofjkiu" autoSize="true"/>
+    <component id="n25_tb7e" name="cardMake" src="ru1k2" fileName="common/btn/Button1.xml" xy="818,654" scale="0.6,0.6"/>
   </displayList>
 </component>

@@ -11,6 +11,7 @@ let configs = [{
         '../../../proto/hall.proto',
         '../../../proto/system.proto',
         '../../../proto/friend.proto',
+        '../../../proto/cards.proto',
     ]
 }, {
     noCreate: true,

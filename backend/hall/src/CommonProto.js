@@ -1416,4 +1416,1102 @@ $root.SystemPto = (function() {
     return SystemPto;
 })();
 
+$root.CardsPto = (function() {
+
+    var CardsPto = {};
+
+    CardsPto.PowerType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Common"] = 0;
+        values[valuesById[1] = "ShengTang"] = 1;
+        values[valuesById[2] = "WangLing"] = 2;
+        values[valuesById[3] = "YouMu"] = 3;
+        values[valuesById[4] = "ZiRan"] = 4;
+        values[valuesById[5] = "BiLei"] = 5;
+        values[valuesById[6] = "XueYuan"] = 6;
+        return values;
+    })();
+
+    CardsPto.QualityType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Normal"] = 0;
+        values[valuesById[1] = "Rare"] = 1;
+        values[valuesById[2] = "Precious"] = 2;
+        values[valuesById[3] = "Premium"] = 3;
+        return values;
+    })();
+
+    CardsPto.CardType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Hero"] = 0;
+        values[valuesById[1] = "Unit"] = 1;
+        values[valuesById[2] = "Magic"] = 2;
+        values[valuesById[3] = "Building"] = 3;
+        values[valuesById[4] = "Event"] = 4;
+        return values;
+    })();
+
+    CardsPto.Card = (function() {
+
+        function Card(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        Card.prototype.id = 0;
+        Card.prototype.count = 0;
+
+        Card.create = function create(properties) {
+            return new Card(properties);
+        };
+
+        Card.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+                w.uint32(0).int32(m.id);
+            if (m.count != null && Object.hasOwnProperty.call(m, "count"))
+                w.uint32(8).int32(m.count);
+            return w;
+        };
+
+        Card.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.Card();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 0: {
+                        m.id = r.int32();
+                        break;
+                    }
+                case 1: {
+                        m.count = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        Card.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.Card)
+                return d;
+            var m = new $root.CardsPto.Card();
+            if (d.id != null) {
+                m.id = d.id | 0;
+            }
+            if (d.count != null) {
+                m.count = d.count | 0;
+            }
+            return m;
+        };
+
+        Card.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.id = 0;
+                d.count = 0;
+            }
+            if (m.id != null && m.hasOwnProperty("id")) {
+                d.id = m.id;
+            }
+            if (m.count != null && m.hasOwnProperty("count")) {
+                d.count = m.count;
+            }
+            return d;
+        };
+
+        Card.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.Card";
+        };
+
+        return Card;
+    })();
+
+    CardsPto.CardGroup = (function() {
+
+        function CardGroup(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        CardGroup.prototype.groupId = 0;
+        CardGroup.prototype.cards = null;
+        CardGroup.prototype.groupName = "";
+        CardGroup.prototype.powerId = 0;
+
+        CardGroup.create = function create(properties) {
+            return new CardGroup(properties);
+        };
+
+        CardGroup.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
+                w.uint32(0).int32(m.groupId);
+            if (m.cards != null && Object.hasOwnProperty.call(m, "cards"))
+                $root.CardsPto.Card.encode(m.cards, w.uint32(10).fork()).ldelim();
+            if (m.groupName != null && Object.hasOwnProperty.call(m, "groupName"))
+                w.uint32(18).string(m.groupName);
+            if (m.powerId != null && Object.hasOwnProperty.call(m, "powerId"))
+                w.uint32(24).int32(m.powerId);
+            return w;
+        };
+
+        CardGroup.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.CardGroup();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 0: {
+                        m.groupId = r.int32();
+                        break;
+                    }
+                case 1: {
+                        m.cards = $root.CardsPto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                case 2: {
+                        m.groupName = r.string();
+                        break;
+                    }
+                case 3: {
+                        m.powerId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        CardGroup.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.CardGroup)
+                return d;
+            var m = new $root.CardsPto.CardGroup();
+            if (d.groupId != null) {
+                m.groupId = d.groupId | 0;
+            }
+            if (d.cards != null) {
+                if (typeof d.cards !== "object")
+                    throw TypeError(".CardsPto.CardGroup.cards: object expected");
+                m.cards = $root.CardsPto.Card.fromObject(d.cards);
+            }
+            if (d.groupName != null) {
+                m.groupName = String(d.groupName);
+            }
+            switch (d.powerId) {
+            default:
+                if (typeof d.powerId === "number") {
+                    m.powerId = d.powerId;
+                    break;
+                }
+                break;
+            case "Common":
+            case 0:
+                m.powerId = 0;
+                break;
+            case "ShengTang":
+            case 1:
+                m.powerId = 1;
+                break;
+            case "WangLing":
+            case 2:
+                m.powerId = 2;
+                break;
+            case "YouMu":
+            case 3:
+                m.powerId = 3;
+                break;
+            case "ZiRan":
+            case 4:
+                m.powerId = 4;
+                break;
+            case "BiLei":
+            case 5:
+                m.powerId = 5;
+                break;
+            case "XueYuan":
+            case 6:
+                m.powerId = 6;
+                break;
+            }
+            return m;
+        };
+
+        CardGroup.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.groupId = 0;
+                d.cards = null;
+                d.groupName = "";
+                d.powerId = o.enums === String ? "Common" : 0;
+            }
+            if (m.groupId != null && m.hasOwnProperty("groupId")) {
+                d.groupId = m.groupId;
+            }
+            if (m.cards != null && m.hasOwnProperty("cards")) {
+                d.cards = $root.CardsPto.Card.toObject(m.cards, o);
+            }
+            if (m.groupName != null && m.hasOwnProperty("groupName")) {
+                d.groupName = m.groupName;
+            }
+            if (m.powerId != null && m.hasOwnProperty("powerId")) {
+                d.powerId = o.enums === String ? $root.CardsPto.PowerType[m.powerId] === undefined ? m.powerId : $root.CardsPto.PowerType[m.powerId] : m.powerId;
+            }
+            return d;
+        };
+
+        CardGroup.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        CardGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.CardGroup";
+        };
+
+        return CardGroup;
+    })();
+
+    CardsPto.C_REQ_CARDS_INFO = (function() {
+
+        function C_REQ_CARDS_INFO(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_REQ_CARDS_INFO.prototype.cmd = 4;
+        C_REQ_CARDS_INFO.prototype.scmd = 1;
+
+        C_REQ_CARDS_INFO.create = function create(properties) {
+            return new C_REQ_CARDS_INFO(properties);
+        };
+
+        C_REQ_CARDS_INFO.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            return w;
+        };
+
+        C_REQ_CARDS_INFO.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_REQ_CARDS_INFO();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_REQ_CARDS_INFO.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_REQ_CARDS_INFO)
+                return d;
+            var m = new $root.CardsPto.C_REQ_CARDS_INFO();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            return m;
+        };
+
+        C_REQ_CARDS_INFO.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 1;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            return d;
+        };
+
+        C_REQ_CARDS_INFO.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_REQ_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_REQ_CARDS_INFO";
+        };
+
+        return C_REQ_CARDS_INFO;
+    })();
+
+    CardsPto.S_CARDS_INFO = (function() {
+
+        function S_CARDS_INFO(p) {
+            this.cardInfos = [];
+            this.cardGroups = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_CARDS_INFO.prototype.cmd = 4;
+        S_CARDS_INFO.prototype.scmd = 2;
+        S_CARDS_INFO.prototype.cardInfos = $util.emptyArray;
+        S_CARDS_INFO.prototype.cardGroups = $util.emptyArray;
+
+        S_CARDS_INFO.create = function create(properties) {
+            return new S_CARDS_INFO(properties);
+        };
+
+        S_CARDS_INFO.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardInfos != null && m.cardInfos.length) {
+                for (var i = 0; i < m.cardInfos.length; ++i)
+                    $root.CardsPto.Card.encode(m.cardInfos[i], w.uint32(26).fork()).ldelim();
+            }
+            if (m.cardGroups != null && m.cardGroups.length) {
+                for (var i = 0; i < m.cardGroups.length; ++i)
+                    $root.CardsPto.CardGroup.encode(m.cardGroups[i], w.uint32(34).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_CARDS_INFO.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_CARDS_INFO();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(m.cardInfos && m.cardInfos.length))
+                            m.cardInfos = [];
+                        m.cardInfos.push($root.CardsPto.Card.decode(r, r.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(m.cardGroups && m.cardGroups.length))
+                            m.cardGroups = [];
+                        m.cardGroups.push($root.CardsPto.CardGroup.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_CARDS_INFO.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_CARDS_INFO)
+                return d;
+            var m = new $root.CardsPto.S_CARDS_INFO();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardInfos) {
+                if (!Array.isArray(d.cardInfos))
+                    throw TypeError(".CardsPto.S_CARDS_INFO.cardInfos: array expected");
+                m.cardInfos = [];
+                for (var i = 0; i < d.cardInfos.length; ++i) {
+                    if (typeof d.cardInfos[i] !== "object")
+                        throw TypeError(".CardsPto.S_CARDS_INFO.cardInfos: object expected");
+                    m.cardInfos[i] = $root.CardsPto.Card.fromObject(d.cardInfos[i]);
+                }
+            }
+            if (d.cardGroups) {
+                if (!Array.isArray(d.cardGroups))
+                    throw TypeError(".CardsPto.S_CARDS_INFO.cardGroups: array expected");
+                m.cardGroups = [];
+                for (var i = 0; i < d.cardGroups.length; ++i) {
+                    if (typeof d.cardGroups[i] !== "object")
+                        throw TypeError(".CardsPto.S_CARDS_INFO.cardGroups: object expected");
+                    m.cardGroups[i] = $root.CardsPto.CardGroup.fromObject(d.cardGroups[i]);
+                }
+            }
+            return m;
+        };
+
+        S_CARDS_INFO.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.cardInfos = [];
+                d.cardGroups = [];
+            }
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 2;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardInfos && m.cardInfos.length) {
+                d.cardInfos = [];
+                for (var j = 0; j < m.cardInfos.length; ++j) {
+                    d.cardInfos[j] = $root.CardsPto.Card.toObject(m.cardInfos[j], o);
+                }
+            }
+            if (m.cardGroups && m.cardGroups.length) {
+                d.cardGroups = [];
+                for (var j = 0; j < m.cardGroups.length; ++j) {
+                    d.cardGroups[j] = $root.CardsPto.CardGroup.toObject(m.cardGroups[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_CARDS_INFO.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_CARDS_INFO";
+        };
+
+        return S_CARDS_INFO;
+    })();
+
+    CardsPto.C_MAKE_CARD = (function() {
+
+        function C_MAKE_CARD(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_MAKE_CARD.prototype.cmd = 4;
+        C_MAKE_CARD.prototype.scmd = 3;
+        C_MAKE_CARD.prototype.cardId = 0;
+
+        C_MAKE_CARD.create = function create(properties) {
+            return new C_MAKE_CARD(properties);
+        };
+
+        C_MAKE_CARD.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardId != null && Object.hasOwnProperty.call(m, "cardId"))
+                w.uint32(24).int32(m.cardId);
+            return w;
+        };
+
+        C_MAKE_CARD.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_MAKE_CARD();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_MAKE_CARD.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_MAKE_CARD)
+                return d;
+            var m = new $root.CardsPto.C_MAKE_CARD();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardId != null) {
+                m.cardId = d.cardId | 0;
+            }
+            return m;
+        };
+
+        C_MAKE_CARD.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 3;
+                d.cardId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardId != null && m.hasOwnProperty("cardId")) {
+                d.cardId = m.cardId;
+            }
+            return d;
+        };
+
+        C_MAKE_CARD.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_MAKE_CARD";
+        };
+
+        return C_MAKE_CARD;
+    })();
+
+    CardsPto.S_MAKE_CARD = (function() {
+
+        function S_MAKE_CARD(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_MAKE_CARD.prototype.cmd = 4;
+        S_MAKE_CARD.prototype.scmd = 4;
+        S_MAKE_CARD.prototype.cardId = 0;
+        S_MAKE_CARD.prototype.code = 0;
+
+        S_MAKE_CARD.create = function create(properties) {
+            return new S_MAKE_CARD(properties);
+        };
+
+        S_MAKE_CARD.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardId != null && Object.hasOwnProperty.call(m, "cardId"))
+                w.uint32(24).int32(m.cardId);
+            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
+                w.uint32(32).int32(m.code);
+            return w;
+        };
+
+        S_MAKE_CARD.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_MAKE_CARD();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardId = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.code = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_MAKE_CARD.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_MAKE_CARD)
+                return d;
+            var m = new $root.CardsPto.S_MAKE_CARD();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardId != null) {
+                m.cardId = d.cardId | 0;
+            }
+            if (d.code != null) {
+                m.code = d.code | 0;
+            }
+            return m;
+        };
+
+        S_MAKE_CARD.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 4;
+                d.cardId = 0;
+                d.code = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardId != null && m.hasOwnProperty("cardId")) {
+                d.cardId = m.cardId;
+            }
+            if (m.code != null && m.hasOwnProperty("code")) {
+                d.code = m.code;
+            }
+            return d;
+        };
+
+        S_MAKE_CARD.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_MAKE_CARD";
+        };
+
+        return S_MAKE_CARD;
+    })();
+
+    CardsPto.C_DISASSEMBLE_CARD = (function() {
+
+        function C_DISASSEMBLE_CARD(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_DISASSEMBLE_CARD.prototype.cmd = 4;
+        C_DISASSEMBLE_CARD.prototype.scmd = 5;
+        C_DISASSEMBLE_CARD.prototype.cardId = 0;
+
+        C_DISASSEMBLE_CARD.create = function create(properties) {
+            return new C_DISASSEMBLE_CARD(properties);
+        };
+
+        C_DISASSEMBLE_CARD.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardId != null && Object.hasOwnProperty.call(m, "cardId"))
+                w.uint32(24).int32(m.cardId);
+            return w;
+        };
+
+        C_DISASSEMBLE_CARD.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_DISASSEMBLE_CARD();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_DISASSEMBLE_CARD.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_DISASSEMBLE_CARD)
+                return d;
+            var m = new $root.CardsPto.C_DISASSEMBLE_CARD();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardId != null) {
+                m.cardId = d.cardId | 0;
+            }
+            return m;
+        };
+
+        C_DISASSEMBLE_CARD.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 5;
+                d.cardId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardId != null && m.hasOwnProperty("cardId")) {
+                d.cardId = m.cardId;
+            }
+            return d;
+        };
+
+        C_DISASSEMBLE_CARD.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_DISASSEMBLE_CARD";
+        };
+
+        return C_DISASSEMBLE_CARD;
+    })();
+
+    CardsPto.S_DISASSEMBLE_CARD = (function() {
+
+        function S_DISASSEMBLE_CARD(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_DISASSEMBLE_CARD.prototype.cmd = 4;
+        S_DISASSEMBLE_CARD.prototype.scmd = 6;
+        S_DISASSEMBLE_CARD.prototype.cardId = 0;
+        S_DISASSEMBLE_CARD.prototype.code = 0;
+
+        S_DISASSEMBLE_CARD.create = function create(properties) {
+            return new S_DISASSEMBLE_CARD(properties);
+        };
+
+        S_DISASSEMBLE_CARD.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardId != null && Object.hasOwnProperty.call(m, "cardId"))
+                w.uint32(24).int32(m.cardId);
+            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
+                w.uint32(32).int32(m.code);
+            return w;
+        };
+
+        S_DISASSEMBLE_CARD.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_DISASSEMBLE_CARD();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardId = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.code = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_DISASSEMBLE_CARD.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_DISASSEMBLE_CARD)
+                return d;
+            var m = new $root.CardsPto.S_DISASSEMBLE_CARD();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardId != null) {
+                m.cardId = d.cardId | 0;
+            }
+            if (d.code != null) {
+                m.code = d.code | 0;
+            }
+            return m;
+        };
+
+        S_DISASSEMBLE_CARD.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 6;
+                d.cardId = 0;
+                d.code = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardId != null && m.hasOwnProperty("cardId")) {
+                d.cardId = m.cardId;
+            }
+            if (m.code != null && m.hasOwnProperty("code")) {
+                d.code = m.code;
+            }
+            return d;
+        };
+
+        S_DISASSEMBLE_CARD.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_DISASSEMBLE_CARD";
+        };
+
+        return S_DISASSEMBLE_CARD;
+    })();
+
+    CardsPto.C_SAVE_CARDS = (function() {
+
+        function C_SAVE_CARDS(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_SAVE_CARDS.prototype.cmd = 4;
+        C_SAVE_CARDS.prototype.scmd = 7;
+        C_SAVE_CARDS.prototype.cardGroup = null;
+
+        C_SAVE_CARDS.create = function create(properties) {
+            return new C_SAVE_CARDS(properties);
+        };
+
+        C_SAVE_CARDS.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardGroup != null && Object.hasOwnProperty.call(m, "cardGroup"))
+                $root.CardsPto.CardGroup.encode(m.cardGroup, w.uint32(26).fork()).ldelim();
+            return w;
+        };
+
+        C_SAVE_CARDS.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_SAVE_CARDS();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardGroup = $root.CardsPto.CardGroup.decode(r, r.uint32());
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_SAVE_CARDS.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_SAVE_CARDS)
+                return d;
+            var m = new $root.CardsPto.C_SAVE_CARDS();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardGroup != null) {
+                if (typeof d.cardGroup !== "object")
+                    throw TypeError(".CardsPto.C_SAVE_CARDS.cardGroup: object expected");
+                m.cardGroup = $root.CardsPto.CardGroup.fromObject(d.cardGroup);
+            }
+            return m;
+        };
+
+        C_SAVE_CARDS.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 7;
+                d.cardGroup = null;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardGroup != null && m.hasOwnProperty("cardGroup")) {
+                d.cardGroup = $root.CardsPto.CardGroup.toObject(m.cardGroup, o);
+            }
+            return d;
+        };
+
+        C_SAVE_CARDS.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_SAVE_CARDS";
+        };
+
+        return C_SAVE_CARDS;
+    })();
+
+    return CardsPto;
+})();
+
 module.exports = $root;

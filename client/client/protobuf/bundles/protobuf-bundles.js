@@ -77,6 +77,1187 @@ $root.CardsPto = (function() {
         return values;
     })();
 
+    CardsPto.Card = (function() {
+
+        /**
+         * Properties of a Card.
+         * @memberof CardsPto
+         * @interface ICard
+         * @property {number|null} [id] Card id
+         * @property {number|null} [count] Card count
+         */
+
+        /**
+         * Constructs a new Card.
+         * @memberof CardsPto
+         * @classdesc Represents a Card.
+         * @implements ICard
+         * @constructor
+         * @param {CardsPto.ICard=} [properties] Properties to set
+         */
+        function Card(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * Card id.
+         * @member {number} id
+         * @memberof CardsPto.Card
+         * @instance
+         */
+        Card.prototype.id = 0;
+
+        /**
+         * Card count.
+         * @member {number} count
+         * @memberof CardsPto.Card
+         * @instance
+         */
+        Card.prototype.count = 0;
+
+        /**
+         * Encodes the specified Card message. Does not implicitly {@link CardsPto.Card.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.Card
+         * @static
+         * @param {CardsPto.ICard} message Card message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        Card.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                writer.uint32(/* id 0, wireType 0 =*/0).int32(message.id);
+            if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.count);
+            return writer;
+        };
+
+        /**
+         * Decodes a Card message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.Card
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.Card} Card
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        Card.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.Card();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 0: {
+                        message.id = reader.int32();
+                        break;
+                    }
+                case 1: {
+                        message.count = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for Card
+         * @function getTypeUrl
+         * @memberof CardsPto.Card
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.Card";
+        };
+
+        return Card;
+    })();
+
+    CardsPto.CardGroup = (function() {
+
+        /**
+         * Properties of a CardGroup.
+         * @memberof CardsPto
+         * @interface ICardGroup
+         * @property {number|null} [groupId] CardGroup groupId
+         * @property {CardsPto.ICard|null} [cards] CardGroup cards
+         * @property {string|null} [groupName] CardGroup groupName
+         * @property {CardsPto.PowerType|null} [powerId] CardGroup powerId
+         */
+
+        /**
+         * Constructs a new CardGroup.
+         * @memberof CardsPto
+         * @classdesc Represents a CardGroup.
+         * @implements ICardGroup
+         * @constructor
+         * @param {CardsPto.ICardGroup=} [properties] Properties to set
+         */
+        function CardGroup(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * CardGroup groupId.
+         * @member {number} groupId
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.groupId = 0;
+
+        /**
+         * CardGroup cards.
+         * @member {CardsPto.ICard|null|undefined} cards
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.cards = null;
+
+        /**
+         * CardGroup groupName.
+         * @member {string} groupName
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.groupName = "";
+
+        /**
+         * CardGroup powerId.
+         * @member {CardsPto.PowerType} powerId
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.powerId = 0;
+
+        /**
+         * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.CardGroup
+         * @static
+         * @param {CardsPto.ICardGroup} message CardGroup message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        CardGroup.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
+                writer.uint32(/* id 0, wireType 0 =*/0).int32(message.groupId);
+            if (message.cards != null && Object.hasOwnProperty.call(message, "cards"))
+                $root.CardsPto.Card.encode(message.cards, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.groupName != null && Object.hasOwnProperty.call(message, "groupName"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.groupName);
+            if (message.powerId != null && Object.hasOwnProperty.call(message, "powerId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.powerId);
+            return writer;
+        };
+
+        /**
+         * Decodes a CardGroup message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.CardGroup
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.CardGroup} CardGroup
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        CardGroup.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.CardGroup();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 0: {
+                        message.groupId = reader.int32();
+                        break;
+                    }
+                case 1: {
+                        message.cards = $root.CardsPto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 2: {
+                        message.groupName = reader.string();
+                        break;
+                    }
+                case 3: {
+                        message.powerId = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for CardGroup
+         * @function getTypeUrl
+         * @memberof CardsPto.CardGroup
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        CardGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.CardGroup";
+        };
+
+        return CardGroup;
+    })();
+
+    CardsPto.C_REQ_CARDS_INFO = (function() {
+
+        /**
+         * Properties of a C_REQ_CARDS_INFO.
+         * @memberof CardsPto
+         * @interface IC_REQ_CARDS_INFO
+         * @property {number|null} [cmd] C_REQ_CARDS_INFO cmd
+         * @property {number|null} [scmd] C_REQ_CARDS_INFO scmd
+         */
+
+        /**
+         * Constructs a new C_REQ_CARDS_INFO.
+         * @memberof CardsPto
+         * @classdesc Represents a C_REQ_CARDS_INFO.
+         * @implements IC_REQ_CARDS_INFO
+         * @constructor
+         * @param {CardsPto.IC_REQ_CARDS_INFO=} [properties] Properties to set
+         */
+        function C_REQ_CARDS_INFO(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_REQ_CARDS_INFO cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.C_REQ_CARDS_INFO
+         * @instance
+         */
+        C_REQ_CARDS_INFO.prototype.cmd = 4;
+
+        /**
+         * C_REQ_CARDS_INFO scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.C_REQ_CARDS_INFO
+         * @instance
+         */
+        C_REQ_CARDS_INFO.prototype.scmd = 1;
+
+        /**
+         * Encodes the specified C_REQ_CARDS_INFO message. Does not implicitly {@link CardsPto.C_REQ_CARDS_INFO.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.C_REQ_CARDS_INFO
+         * @static
+         * @param {CardsPto.IC_REQ_CARDS_INFO} message C_REQ_CARDS_INFO message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_REQ_CARDS_INFO.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_REQ_CARDS_INFO message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.C_REQ_CARDS_INFO
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.C_REQ_CARDS_INFO} C_REQ_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_REQ_CARDS_INFO.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_REQ_CARDS_INFO();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_REQ_CARDS_INFO
+         * @function getTypeUrl
+         * @memberof CardsPto.C_REQ_CARDS_INFO
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_REQ_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_REQ_CARDS_INFO";
+        };
+
+        return C_REQ_CARDS_INFO;
+    })();
+
+    CardsPto.S_CARDS_INFO = (function() {
+
+        /**
+         * Properties of a S_CARDS_INFO.
+         * @memberof CardsPto
+         * @interface IS_CARDS_INFO
+         * @property {number|null} [cmd] S_CARDS_INFO cmd
+         * @property {number|null} [scmd] S_CARDS_INFO scmd
+         * @property {Array.<CardsPto.ICard>|null} [cardInfos] S_CARDS_INFO cardInfos
+         * @property {Array.<CardsPto.ICardGroup>|null} [cardGroups] S_CARDS_INFO cardGroups
+         */
+
+        /**
+         * Constructs a new S_CARDS_INFO.
+         * @memberof CardsPto
+         * @classdesc Represents a S_CARDS_INFO.
+         * @implements IS_CARDS_INFO
+         * @constructor
+         * @param {CardsPto.IS_CARDS_INFO=} [properties] Properties to set
+         */
+        function S_CARDS_INFO(properties) {
+            this.cardInfos = [];
+            this.cardGroups = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_CARDS_INFO cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.S_CARDS_INFO
+         * @instance
+         */
+        S_CARDS_INFO.prototype.cmd = 4;
+
+        /**
+         * S_CARDS_INFO scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.S_CARDS_INFO
+         * @instance
+         */
+        S_CARDS_INFO.prototype.scmd = 2;
+
+        /**
+         * S_CARDS_INFO cardInfos.
+         * @member {Array.<CardsPto.ICard>} cardInfos
+         * @memberof CardsPto.S_CARDS_INFO
+         * @instance
+         */
+        S_CARDS_INFO.prototype.cardInfos = $util.emptyArray;
+
+        /**
+         * S_CARDS_INFO cardGroups.
+         * @member {Array.<CardsPto.ICardGroup>} cardGroups
+         * @memberof CardsPto.S_CARDS_INFO
+         * @instance
+         */
+        S_CARDS_INFO.prototype.cardGroups = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_CARDS_INFO message. Does not implicitly {@link CardsPto.S_CARDS_INFO.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.S_CARDS_INFO
+         * @static
+         * @param {CardsPto.IS_CARDS_INFO} message S_CARDS_INFO message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_CARDS_INFO.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardInfos != null && message.cardInfos.length)
+                for (var i = 0; i < message.cardInfos.length; ++i)
+                    $root.CardsPto.Card.encode(message.cardInfos[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.cardGroups != null && message.cardGroups.length)
+                for (var i = 0; i < message.cardGroups.length; ++i)
+                    $root.CardsPto.CardGroup.encode(message.cardGroups[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_CARDS_INFO message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.S_CARDS_INFO
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.S_CARDS_INFO} S_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_CARDS_INFO.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_CARDS_INFO();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.cardInfos && message.cardInfos.length))
+                            message.cardInfos = [];
+                        message.cardInfos.push($root.CardsPto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(message.cardGroups && message.cardGroups.length))
+                            message.cardGroups = [];
+                        message.cardGroups.push($root.CardsPto.CardGroup.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_CARDS_INFO
+         * @function getTypeUrl
+         * @memberof CardsPto.S_CARDS_INFO
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_CARDS_INFO";
+        };
+
+        return S_CARDS_INFO;
+    })();
+
+    CardsPto.C_MAKE_CARD = (function() {
+
+        /**
+         * Properties of a C_MAKE_CARD.
+         * @memberof CardsPto
+         * @interface IC_MAKE_CARD
+         * @property {number|null} [cmd] C_MAKE_CARD cmd
+         * @property {number|null} [scmd] C_MAKE_CARD scmd
+         * @property {number|null} [cardId] C_MAKE_CARD cardId
+         */
+
+        /**
+         * Constructs a new C_MAKE_CARD.
+         * @memberof CardsPto
+         * @classdesc Represents a C_MAKE_CARD.
+         * @implements IC_MAKE_CARD
+         * @constructor
+         * @param {CardsPto.IC_MAKE_CARD=} [properties] Properties to set
+         */
+        function C_MAKE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_MAKE_CARD cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.C_MAKE_CARD
+         * @instance
+         */
+        C_MAKE_CARD.prototype.cmd = 4;
+
+        /**
+         * C_MAKE_CARD scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.C_MAKE_CARD
+         * @instance
+         */
+        C_MAKE_CARD.prototype.scmd = 3;
+
+        /**
+         * C_MAKE_CARD cardId.
+         * @member {number} cardId
+         * @memberof CardsPto.C_MAKE_CARD
+         * @instance
+         */
+        C_MAKE_CARD.prototype.cardId = 0;
+
+        /**
+         * Encodes the specified C_MAKE_CARD message. Does not implicitly {@link CardsPto.C_MAKE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.C_MAKE_CARD
+         * @static
+         * @param {CardsPto.IC_MAKE_CARD} message C_MAKE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_MAKE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardId);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_MAKE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.C_MAKE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.C_MAKE_CARD} C_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_MAKE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_MAKE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardId = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_MAKE_CARD
+         * @function getTypeUrl
+         * @memberof CardsPto.C_MAKE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_MAKE_CARD";
+        };
+
+        return C_MAKE_CARD;
+    })();
+
+    CardsPto.S_MAKE_CARD = (function() {
+
+        /**
+         * Properties of a S_MAKE_CARD.
+         * @memberof CardsPto
+         * @interface IS_MAKE_CARD
+         * @property {number|null} [cmd] S_MAKE_CARD cmd
+         * @property {number|null} [scmd] S_MAKE_CARD scmd
+         * @property {number|null} [cardId] S_MAKE_CARD cardId
+         * @property {number|null} [code] S_MAKE_CARD code
+         */
+
+        /**
+         * Constructs a new S_MAKE_CARD.
+         * @memberof CardsPto
+         * @classdesc Represents a S_MAKE_CARD.
+         * @implements IS_MAKE_CARD
+         * @constructor
+         * @param {CardsPto.IS_MAKE_CARD=} [properties] Properties to set
+         */
+        function S_MAKE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_MAKE_CARD cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.S_MAKE_CARD
+         * @instance
+         */
+        S_MAKE_CARD.prototype.cmd = 4;
+
+        /**
+         * S_MAKE_CARD scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.S_MAKE_CARD
+         * @instance
+         */
+        S_MAKE_CARD.prototype.scmd = 4;
+
+        /**
+         * S_MAKE_CARD cardId.
+         * @member {number} cardId
+         * @memberof CardsPto.S_MAKE_CARD
+         * @instance
+         */
+        S_MAKE_CARD.prototype.cardId = 0;
+
+        /**
+         * S_MAKE_CARD code.
+         * @member {number} code
+         * @memberof CardsPto.S_MAKE_CARD
+         * @instance
+         */
+        S_MAKE_CARD.prototype.code = 0;
+
+        /**
+         * Encodes the specified S_MAKE_CARD message. Does not implicitly {@link CardsPto.S_MAKE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.S_MAKE_CARD
+         * @static
+         * @param {CardsPto.IS_MAKE_CARD} message S_MAKE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_MAKE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardId);
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.code);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_MAKE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.S_MAKE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.S_MAKE_CARD} S_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_MAKE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_MAKE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardId = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.code = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_MAKE_CARD
+         * @function getTypeUrl
+         * @memberof CardsPto.S_MAKE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_MAKE_CARD";
+        };
+
+        return S_MAKE_CARD;
+    })();
+
+    CardsPto.C_DISASSEMBLE_CARD = (function() {
+
+        /**
+         * Properties of a C_DISASSEMBLE_CARD.
+         * @memberof CardsPto
+         * @interface IC_DISASSEMBLE_CARD
+         * @property {number|null} [cmd] C_DISASSEMBLE_CARD cmd
+         * @property {number|null} [scmd] C_DISASSEMBLE_CARD scmd
+         * @property {number|null} [cardId] C_DISASSEMBLE_CARD cardId
+         */
+
+        /**
+         * Constructs a new C_DISASSEMBLE_CARD.
+         * @memberof CardsPto
+         * @classdesc Represents a C_DISASSEMBLE_CARD.
+         * @implements IC_DISASSEMBLE_CARD
+         * @constructor
+         * @param {CardsPto.IC_DISASSEMBLE_CARD=} [properties] Properties to set
+         */
+        function C_DISASSEMBLE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_DISASSEMBLE_CARD cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @instance
+         */
+        C_DISASSEMBLE_CARD.prototype.cmd = 4;
+
+        /**
+         * C_DISASSEMBLE_CARD scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @instance
+         */
+        C_DISASSEMBLE_CARD.prototype.scmd = 5;
+
+        /**
+         * C_DISASSEMBLE_CARD cardId.
+         * @member {number} cardId
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @instance
+         */
+        C_DISASSEMBLE_CARD.prototype.cardId = 0;
+
+        /**
+         * Encodes the specified C_DISASSEMBLE_CARD message. Does not implicitly {@link CardsPto.C_DISASSEMBLE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @static
+         * @param {CardsPto.IC_DISASSEMBLE_CARD} message C_DISASSEMBLE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_DISASSEMBLE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardId);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_DISASSEMBLE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.C_DISASSEMBLE_CARD} C_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_DISASSEMBLE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_DISASSEMBLE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardId = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_DISASSEMBLE_CARD
+         * @function getTypeUrl
+         * @memberof CardsPto.C_DISASSEMBLE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_DISASSEMBLE_CARD";
+        };
+
+        return C_DISASSEMBLE_CARD;
+    })();
+
+    CardsPto.S_DISASSEMBLE_CARD = (function() {
+
+        /**
+         * Properties of a S_DISASSEMBLE_CARD.
+         * @memberof CardsPto
+         * @interface IS_DISASSEMBLE_CARD
+         * @property {number|null} [cmd] S_DISASSEMBLE_CARD cmd
+         * @property {number|null} [scmd] S_DISASSEMBLE_CARD scmd
+         * @property {number|null} [cardId] S_DISASSEMBLE_CARD cardId
+         * @property {number|null} [code] S_DISASSEMBLE_CARD code
+         */
+
+        /**
+         * Constructs a new S_DISASSEMBLE_CARD.
+         * @memberof CardsPto
+         * @classdesc Represents a S_DISASSEMBLE_CARD.
+         * @implements IS_DISASSEMBLE_CARD
+         * @constructor
+         * @param {CardsPto.IS_DISASSEMBLE_CARD=} [properties] Properties to set
+         */
+        function S_DISASSEMBLE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_DISASSEMBLE_CARD cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @instance
+         */
+        S_DISASSEMBLE_CARD.prototype.cmd = 4;
+
+        /**
+         * S_DISASSEMBLE_CARD scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @instance
+         */
+        S_DISASSEMBLE_CARD.prototype.scmd = 6;
+
+        /**
+         * S_DISASSEMBLE_CARD cardId.
+         * @member {number} cardId
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @instance
+         */
+        S_DISASSEMBLE_CARD.prototype.cardId = 0;
+
+        /**
+         * S_DISASSEMBLE_CARD code.
+         * @member {number} code
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @instance
+         */
+        S_DISASSEMBLE_CARD.prototype.code = 0;
+
+        /**
+         * Encodes the specified S_DISASSEMBLE_CARD message. Does not implicitly {@link CardsPto.S_DISASSEMBLE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @static
+         * @param {CardsPto.IS_DISASSEMBLE_CARD} message S_DISASSEMBLE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_DISASSEMBLE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardId);
+            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.code);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_DISASSEMBLE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.S_DISASSEMBLE_CARD} S_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_DISASSEMBLE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_DISASSEMBLE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardId = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.code = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_DISASSEMBLE_CARD
+         * @function getTypeUrl
+         * @memberof CardsPto.S_DISASSEMBLE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_DISASSEMBLE_CARD";
+        };
+
+        return S_DISASSEMBLE_CARD;
+    })();
+
+    CardsPto.C_SAVE_CARDS = (function() {
+
+        /**
+         * Properties of a C_SAVE_CARDS.
+         * @memberof CardsPto
+         * @interface IC_SAVE_CARDS
+         * @property {number|null} [cmd] C_SAVE_CARDS cmd
+         * @property {number|null} [scmd] C_SAVE_CARDS scmd
+         * @property {CardsPto.ICardGroup|null} [cardGroup] C_SAVE_CARDS cardGroup
+         */
+
+        /**
+         * Constructs a new C_SAVE_CARDS.
+         * @memberof CardsPto
+         * @classdesc Represents a C_SAVE_CARDS.
+         * @implements IC_SAVE_CARDS
+         * @constructor
+         * @param {CardsPto.IC_SAVE_CARDS=} [properties] Properties to set
+         */
+        function C_SAVE_CARDS(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_SAVE_CARDS cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @instance
+         */
+        C_SAVE_CARDS.prototype.cmd = 4;
+
+        /**
+         * C_SAVE_CARDS scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @instance
+         */
+        C_SAVE_CARDS.prototype.scmd = 7;
+
+        /**
+         * C_SAVE_CARDS cardGroup.
+         * @member {CardsPto.ICardGroup|null|undefined} cardGroup
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @instance
+         */
+        C_SAVE_CARDS.prototype.cardGroup = null;
+
+        /**
+         * Encodes the specified C_SAVE_CARDS message. Does not implicitly {@link CardsPto.C_SAVE_CARDS.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @static
+         * @param {CardsPto.IC_SAVE_CARDS} message C_SAVE_CARDS message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_SAVE_CARDS.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardGroup != null && Object.hasOwnProperty.call(message, "cardGroup"))
+                $root.CardsPto.CardGroup.encode(message.cardGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a C_SAVE_CARDS message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.C_SAVE_CARDS} C_SAVE_CARDS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_SAVE_CARDS.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_SAVE_CARDS();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardGroup = $root.CardsPto.CardGroup.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_SAVE_CARDS
+         * @function getTypeUrl
+         * @memberof CardsPto.C_SAVE_CARDS
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_SAVE_CARDS";
+        };
+
+        return C_SAVE_CARDS;
+    })();
+
     return CardsPto;
 })();
 

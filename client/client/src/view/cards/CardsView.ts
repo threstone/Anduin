@@ -5,6 +5,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     private page: number;
     private powerId: CardsPto.PowerType;
     private fee: number;
+    private isCardMaking: boolean;
     //=========筛选条件结束=========
 
     protected init() {
@@ -37,16 +38,30 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
         //将中立channel移动到最后
         this.view.powerList.addChild(this.view.powerList.removeChildAt(0));
+
+        //初始化卡牌制作按钮
+        this.isCardMaking = false;
+        this.view.cardMake.describe.text = '卡牌制作';
+
+        //请求收藏信息
+        CardsModel.ins().C_REQ_CARDS_INFO();
     }
 
     public open(): void {
         super.open();
+        this.observe('CardChange', this.showCards);
         this.initView();
     }
 
     private initView() {
         this.AddClick(this.view.back, this.onPageChange.bind(this, false))
         this.AddClick(this.view.next, this.onPageChange.bind(this, true))
+
+        this.AddClick(this.view.cardMake, () => {
+            this.isCardMaking = !this.isCardMaking;
+            this.view.cardMake.describe.text = this.isCardMaking ? '停止制作' : '卡牌制作';
+            this.showCards();
+        })
 
         this.changePowerChannel(this.powerId, this.page);
         this.initPowerListEvent();
@@ -57,7 +72,12 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     /**当左右两个切换页数的按钮被点击 */
     private onPageChange(isAdd: boolean) {
         if (isAdd) {
-            let maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1;
+            let maxPage = -1;
+            if (this.isCardMaking) {
+                maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+            } else {
+                maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+            }
             maxPage = Math.max(0, maxPage);
             //判断是否要切换势力
             if (this.page === maxPage) {
@@ -80,7 +100,13 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
                 } else {
                     this.powerId -= 1;
                 }
-                let maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1;
+
+                let maxPage = -1;
+                if (this.isCardMaking) {
+                    maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                } else {
+                    maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                }
                 this.changePowerChannel(this.powerId, Math.max(0, maxPage))
             } else {
                 this.page -= 1;
@@ -158,7 +184,13 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     private showCards() {
         const list = this.view.cardList;
         list.removeChildren();
-        const cards = CardsModel.ins().getCardsByFilter(this.powerId, this.fee);
+
+        let cards: CardInterface[];
+        if (this.isCardMaking) {
+            cards = CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee);
+        } else {
+            cards = CardsModel.ins().getCardsByFilter(this.powerId, this.fee);
+        }
         for (let index = 0; index < cards.length; index++) {
             const cardInfo = cards[index + this.page * PageCardNum];
             //没有卡了或者卡牌到上限了就结束

@@ -20,6 +20,6 @@
     <group id="n20_tb7e" name="healthGroup" xy="179,325" size="47,58" group="n14_tb7e" advanced="true"/>
     <group id="n14_tb7e" name="buttonGroup" xy="4,175" size="222,208"/>
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
-    <text id="n23_tb7e" name="cardNum" xy="182,-5" size="43,32" visible="false" fontSize="22" color="#ffcc00" strokeColor="#333399" text="X22"/>
+    <text id="n23_tb7e" name="cardNum" xy="168,10" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="X22"/>
   </displayList>
 </component>

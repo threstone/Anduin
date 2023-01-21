@@ -5,7 +5,7 @@ class TipsView extends BaseClass {
         super();
     }
 
-    showTips(msg: string, hoverTime: number) {
+    showTips(msg: string, hoverTime: number = 5000) {
         console.log(`showTips:${msg}`)
         let tips = this.getTipsField()
         tips.text = msg

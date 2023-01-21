@@ -3,5 +3,7 @@
   <displayList>
     <graph id="n1_tb7e" name="close" xy="0,0" size="1280,720" alpha="0.5" type="rect" fillColor="#ff000000"/>
     <component id="n0_tb7e" name="card" src="tb7e1s" fileName="cards/CardItem.xml" xy="389,176"/>
+    <component id="n2_tb7e" name="make" src="ru1k2" fileName="common/btn/Button1.xml" xy="641,258"/>
+    <component id="n3_tb7e" name="disassemble" src="ru1k2" fileName="common/btn/Button1.xml" xy="641,380"/>
   </displayList>
 </component>

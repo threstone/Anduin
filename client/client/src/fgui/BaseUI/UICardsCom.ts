@@ -15,6 +15,7 @@ module BaseUI {
 		public allFeeBtn:UIButton1;
 		public back:fairygui.GLoader;
 		public next:fairygui.GLoader;
+		public cardMake:UIButton1;
 		public static URL:string = "ui://yaux2xpoz43k1k";
 
 		public static createInstance():UICardsCom {
@@ -36,6 +37,7 @@ module BaseUI {
 			this.allFeeBtn = <UIButton1>(this.getChildAt(9));
 			this.back = <fairygui.GLoader>(this.getChildAt(10));
 			this.next = <fairygui.GLoader>(this.getChildAt(11));
+			this.cardMake = <UIButton1>(this.getChildAt(12));
 		}
 	}
 }

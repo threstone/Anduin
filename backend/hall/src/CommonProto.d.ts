@@ -1205,3 +1205,965 @@ export namespace SystemPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
+
+/** Namespace CardsPto. */
+export namespace CardsPto {
+
+    /** PowerType enum. */
+    enum PowerType {
+        Common = 0,
+        ShengTang = 1,
+        WangLing = 2,
+        YouMu = 3,
+        ZiRan = 4,
+        BiLei = 5,
+        XueYuan = 6
+    }
+
+    /** QualityType enum. */
+    enum QualityType {
+        Normal = 0,
+        Rare = 1,
+        Precious = 2,
+        Premium = 3
+    }
+
+    /** CardType enum. */
+    enum CardType {
+        Hero = 0,
+        Unit = 1,
+        Magic = 2,
+        Building = 3,
+        Event = 4
+    }
+
+    /** Properties of a Card. */
+    interface ICard {
+
+        /** Card id */
+        id?: (number|null);
+
+        /** Card count */
+        count?: (number|null);
+    }
+
+    /** Represents a Card. */
+    class Card implements ICard {
+
+        /**
+         * Constructs a new Card.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.ICard);
+
+        /** Card id. */
+        public id: number;
+
+        /** Card count. */
+        public count: number;
+
+        /**
+         * Encodes the specified Card message. Does not implicitly {@link CardsPto.Card.verify|verify} messages.
+         * @param message Card message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.ICard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified Card message, length delimited. Does not implicitly {@link CardsPto.Card.verify|verify} messages.
+         * @param message Card message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.ICard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a Card message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Card
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.Card;
+
+        /**
+         * Decodes a Card message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns Card
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.Card;
+
+        /**
+         * Verifies a Card message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a Card message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns Card
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.Card;
+
+        /**
+         * Creates a plain object from a Card message. Also converts values to other types if specified.
+         * @param message Card
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.Card, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Card to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for Card
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a CardGroup. */
+    interface ICardGroup {
+
+        /** CardGroup groupId */
+        groupId?: (number|null);
+
+        /** CardGroup cards */
+        cards?: (CardsPto.ICard|null);
+
+        /** CardGroup groupName */
+        groupName?: (string|null);
+
+        /** CardGroup powerId */
+        powerId?: (CardsPto.PowerType|null);
+    }
+
+    /** Represents a CardGroup. */
+    class CardGroup implements ICardGroup {
+
+        /**
+         * Constructs a new CardGroup.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.ICardGroup);
+
+        /** CardGroup groupId. */
+        public groupId: number;
+
+        /** CardGroup cards. */
+        public cards?: (CardsPto.ICard|null);
+
+        /** CardGroup groupName. */
+        public groupName: string;
+
+        /** CardGroup powerId. */
+        public powerId: CardsPto.PowerType;
+
+        /**
+         * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
+         * @param message CardGroup message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.ICardGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified CardGroup message, length delimited. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
+         * @param message CardGroup message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.ICardGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a CardGroup message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns CardGroup
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.CardGroup;
+
+        /**
+         * Decodes a CardGroup message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns CardGroup
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.CardGroup;
+
+        /**
+         * Verifies a CardGroup message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a CardGroup message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns CardGroup
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.CardGroup;
+
+        /**
+         * Creates a plain object from a CardGroup message. Also converts values to other types if specified.
+         * @param message CardGroup
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.CardGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this CardGroup to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for CardGroup
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_REQ_CARDS_INFO. */
+    interface IC_REQ_CARDS_INFO {
+
+        /** C_REQ_CARDS_INFO cmd */
+        cmd?: (number|null);
+
+        /** C_REQ_CARDS_INFO scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_REQ_CARDS_INFO. */
+    class C_REQ_CARDS_INFO implements IC_REQ_CARDS_INFO {
+
+        /**
+         * Constructs a new C_REQ_CARDS_INFO.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IC_REQ_CARDS_INFO);
+
+        /** C_REQ_CARDS_INFO cmd. */
+        public cmd: number;
+
+        /** C_REQ_CARDS_INFO scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_REQ_CARDS_INFO message. Does not implicitly {@link CardsPto.C_REQ_CARDS_INFO.verify|verify} messages.
+         * @param message C_REQ_CARDS_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IC_REQ_CARDS_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_REQ_CARDS_INFO message, length delimited. Does not implicitly {@link CardsPto.C_REQ_CARDS_INFO.verify|verify} messages.
+         * @param message C_REQ_CARDS_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IC_REQ_CARDS_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_REQ_CARDS_INFO message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_REQ_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_REQ_CARDS_INFO;
+
+        /**
+         * Decodes a C_REQ_CARDS_INFO message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_REQ_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_REQ_CARDS_INFO;
+
+        /**
+         * Verifies a C_REQ_CARDS_INFO message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_REQ_CARDS_INFO message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_REQ_CARDS_INFO
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_REQ_CARDS_INFO;
+
+        /**
+         * Creates a plain object from a C_REQ_CARDS_INFO message. Also converts values to other types if specified.
+         * @param message C_REQ_CARDS_INFO
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.C_REQ_CARDS_INFO, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_REQ_CARDS_INFO to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_REQ_CARDS_INFO
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_CARDS_INFO. */
+    interface IS_CARDS_INFO {
+
+        /** S_CARDS_INFO cmd */
+        cmd?: (number|null);
+
+        /** S_CARDS_INFO scmd */
+        scmd?: (number|null);
+
+        /** S_CARDS_INFO cardInfos */
+        cardInfos?: (CardsPto.ICard[]|null);
+
+        /** S_CARDS_INFO cardGroups */
+        cardGroups?: (CardsPto.ICardGroup[]|null);
+    }
+
+    /** Represents a S_CARDS_INFO. */
+    class S_CARDS_INFO implements IS_CARDS_INFO {
+
+        /**
+         * Constructs a new S_CARDS_INFO.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IS_CARDS_INFO);
+
+        /** S_CARDS_INFO cmd. */
+        public cmd: number;
+
+        /** S_CARDS_INFO scmd. */
+        public scmd: number;
+
+        /** S_CARDS_INFO cardInfos. */
+        public cardInfos: CardsPto.ICard[];
+
+        /** S_CARDS_INFO cardGroups. */
+        public cardGroups: CardsPto.ICardGroup[];
+
+        /**
+         * Encodes the specified S_CARDS_INFO message. Does not implicitly {@link CardsPto.S_CARDS_INFO.verify|verify} messages.
+         * @param message S_CARDS_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IS_CARDS_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_CARDS_INFO message, length delimited. Does not implicitly {@link CardsPto.S_CARDS_INFO.verify|verify} messages.
+         * @param message S_CARDS_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IS_CARDS_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_CARDS_INFO message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_CARDS_INFO;
+
+        /**
+         * Decodes a S_CARDS_INFO message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_CARDS_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_CARDS_INFO;
+
+        /**
+         * Verifies a S_CARDS_INFO message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_CARDS_INFO message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_CARDS_INFO
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_CARDS_INFO;
+
+        /**
+         * Creates a plain object from a S_CARDS_INFO message. Also converts values to other types if specified.
+         * @param message S_CARDS_INFO
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.S_CARDS_INFO, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_CARDS_INFO to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_CARDS_INFO
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_MAKE_CARD. */
+    interface IC_MAKE_CARD {
+
+        /** C_MAKE_CARD cmd */
+        cmd?: (number|null);
+
+        /** C_MAKE_CARD scmd */
+        scmd?: (number|null);
+
+        /** C_MAKE_CARD cardId */
+        cardId?: (number|null);
+    }
+
+    /** Represents a C_MAKE_CARD. */
+    class C_MAKE_CARD implements IC_MAKE_CARD {
+
+        /**
+         * Constructs a new C_MAKE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IC_MAKE_CARD);
+
+        /** C_MAKE_CARD cmd. */
+        public cmd: number;
+
+        /** C_MAKE_CARD scmd. */
+        public scmd: number;
+
+        /** C_MAKE_CARD cardId. */
+        public cardId: number;
+
+        /**
+         * Encodes the specified C_MAKE_CARD message. Does not implicitly {@link CardsPto.C_MAKE_CARD.verify|verify} messages.
+         * @param message C_MAKE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IC_MAKE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_MAKE_CARD message, length delimited. Does not implicitly {@link CardsPto.C_MAKE_CARD.verify|verify} messages.
+         * @param message C_MAKE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IC_MAKE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_MAKE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_MAKE_CARD;
+
+        /**
+         * Decodes a C_MAKE_CARD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_MAKE_CARD;
+
+        /**
+         * Verifies a C_MAKE_CARD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_MAKE_CARD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_MAKE_CARD
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_MAKE_CARD;
+
+        /**
+         * Creates a plain object from a C_MAKE_CARD message. Also converts values to other types if specified.
+         * @param message C_MAKE_CARD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.C_MAKE_CARD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_MAKE_CARD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_MAKE_CARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MAKE_CARD. */
+    interface IS_MAKE_CARD {
+
+        /** S_MAKE_CARD cmd */
+        cmd?: (number|null);
+
+        /** S_MAKE_CARD scmd */
+        scmd?: (number|null);
+
+        /** S_MAKE_CARD cardId */
+        cardId?: (number|null);
+
+        /** S_MAKE_CARD code */
+        code?: (number|null);
+    }
+
+    /** Represents a S_MAKE_CARD. */
+    class S_MAKE_CARD implements IS_MAKE_CARD {
+
+        /**
+         * Constructs a new S_MAKE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IS_MAKE_CARD);
+
+        /** S_MAKE_CARD cmd. */
+        public cmd: number;
+
+        /** S_MAKE_CARD scmd. */
+        public scmd: number;
+
+        /** S_MAKE_CARD cardId. */
+        public cardId: number;
+
+        /** S_MAKE_CARD code. */
+        public code: number;
+
+        /**
+         * Encodes the specified S_MAKE_CARD message. Does not implicitly {@link CardsPto.S_MAKE_CARD.verify|verify} messages.
+         * @param message S_MAKE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IS_MAKE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_MAKE_CARD message, length delimited. Does not implicitly {@link CardsPto.S_MAKE_CARD.verify|verify} messages.
+         * @param message S_MAKE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IS_MAKE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_MAKE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_MAKE_CARD;
+
+        /**
+         * Decodes a S_MAKE_CARD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_MAKE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_MAKE_CARD;
+
+        /**
+         * Verifies a S_MAKE_CARD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_MAKE_CARD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_MAKE_CARD
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_MAKE_CARD;
+
+        /**
+         * Creates a plain object from a S_MAKE_CARD message. Also converts values to other types if specified.
+         * @param message S_MAKE_CARD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.S_MAKE_CARD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_MAKE_CARD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_MAKE_CARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_DISASSEMBLE_CARD. */
+    interface IC_DISASSEMBLE_CARD {
+
+        /** C_DISASSEMBLE_CARD cmd */
+        cmd?: (number|null);
+
+        /** C_DISASSEMBLE_CARD scmd */
+        scmd?: (number|null);
+
+        /** C_DISASSEMBLE_CARD cardId */
+        cardId?: (number|null);
+    }
+
+    /** Represents a C_DISASSEMBLE_CARD. */
+    class C_DISASSEMBLE_CARD implements IC_DISASSEMBLE_CARD {
+
+        /**
+         * Constructs a new C_DISASSEMBLE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IC_DISASSEMBLE_CARD);
+
+        /** C_DISASSEMBLE_CARD cmd. */
+        public cmd: number;
+
+        /** C_DISASSEMBLE_CARD scmd. */
+        public scmd: number;
+
+        /** C_DISASSEMBLE_CARD cardId. */
+        public cardId: number;
+
+        /**
+         * Encodes the specified C_DISASSEMBLE_CARD message. Does not implicitly {@link CardsPto.C_DISASSEMBLE_CARD.verify|verify} messages.
+         * @param message C_DISASSEMBLE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IC_DISASSEMBLE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_DISASSEMBLE_CARD message, length delimited. Does not implicitly {@link CardsPto.C_DISASSEMBLE_CARD.verify|verify} messages.
+         * @param message C_DISASSEMBLE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IC_DISASSEMBLE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_DISASSEMBLE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DISASSEMBLE_CARD;
+
+        /**
+         * Decodes a C_DISASSEMBLE_CARD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_DISASSEMBLE_CARD;
+
+        /**
+         * Verifies a C_DISASSEMBLE_CARD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_DISASSEMBLE_CARD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_DISASSEMBLE_CARD
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_DISASSEMBLE_CARD;
+
+        /**
+         * Creates a plain object from a C_DISASSEMBLE_CARD message. Also converts values to other types if specified.
+         * @param message C_DISASSEMBLE_CARD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.C_DISASSEMBLE_CARD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_DISASSEMBLE_CARD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_DISASSEMBLE_CARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_DISASSEMBLE_CARD. */
+    interface IS_DISASSEMBLE_CARD {
+
+        /** S_DISASSEMBLE_CARD cmd */
+        cmd?: (number|null);
+
+        /** S_DISASSEMBLE_CARD scmd */
+        scmd?: (number|null);
+
+        /** S_DISASSEMBLE_CARD cardId */
+        cardId?: (number|null);
+
+        /** S_DISASSEMBLE_CARD code */
+        code?: (number|null);
+    }
+
+    /** Represents a S_DISASSEMBLE_CARD. */
+    class S_DISASSEMBLE_CARD implements IS_DISASSEMBLE_CARD {
+
+        /**
+         * Constructs a new S_DISASSEMBLE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IS_DISASSEMBLE_CARD);
+
+        /** S_DISASSEMBLE_CARD cmd. */
+        public cmd: number;
+
+        /** S_DISASSEMBLE_CARD scmd. */
+        public scmd: number;
+
+        /** S_DISASSEMBLE_CARD cardId. */
+        public cardId: number;
+
+        /** S_DISASSEMBLE_CARD code. */
+        public code: number;
+
+        /**
+         * Encodes the specified S_DISASSEMBLE_CARD message. Does not implicitly {@link CardsPto.S_DISASSEMBLE_CARD.verify|verify} messages.
+         * @param message S_DISASSEMBLE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IS_DISASSEMBLE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_DISASSEMBLE_CARD message, length delimited. Does not implicitly {@link CardsPto.S_DISASSEMBLE_CARD.verify|verify} messages.
+         * @param message S_DISASSEMBLE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IS_DISASSEMBLE_CARD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_DISASSEMBLE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DISASSEMBLE_CARD;
+
+        /**
+         * Decodes a S_DISASSEMBLE_CARD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_DISASSEMBLE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_DISASSEMBLE_CARD;
+
+        /**
+         * Verifies a S_DISASSEMBLE_CARD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_DISASSEMBLE_CARD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_DISASSEMBLE_CARD
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_DISASSEMBLE_CARD;
+
+        /**
+         * Creates a plain object from a S_DISASSEMBLE_CARD message. Also converts values to other types if specified.
+         * @param message S_DISASSEMBLE_CARD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.S_DISASSEMBLE_CARD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_DISASSEMBLE_CARD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_DISASSEMBLE_CARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_SAVE_CARDS. */
+    interface IC_SAVE_CARDS {
+
+        /** C_SAVE_CARDS cmd */
+        cmd?: (number|null);
+
+        /** C_SAVE_CARDS scmd */
+        scmd?: (number|null);
+
+        /** C_SAVE_CARDS cardGroup */
+        cardGroup?: (CardsPto.ICardGroup|null);
+    }
+
+    /** Represents a C_SAVE_CARDS. */
+    class C_SAVE_CARDS implements IC_SAVE_CARDS {
+
+        /**
+         * Constructs a new C_SAVE_CARDS.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IC_SAVE_CARDS);
+
+        /** C_SAVE_CARDS cmd. */
+        public cmd: number;
+
+        /** C_SAVE_CARDS scmd. */
+        public scmd: number;
+
+        /** C_SAVE_CARDS cardGroup. */
+        public cardGroup?: (CardsPto.ICardGroup|null);
+
+        /**
+         * Encodes the specified C_SAVE_CARDS message. Does not implicitly {@link CardsPto.C_SAVE_CARDS.verify|verify} messages.
+         * @param message C_SAVE_CARDS message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IC_SAVE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_SAVE_CARDS message, length delimited. Does not implicitly {@link CardsPto.C_SAVE_CARDS.verify|verify} messages.
+         * @param message C_SAVE_CARDS message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IC_SAVE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_SAVE_CARDS message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_SAVE_CARDS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_SAVE_CARDS;
+
+        /**
+         * Decodes a C_SAVE_CARDS message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_SAVE_CARDS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_SAVE_CARDS;
+
+        /**
+         * Verifies a C_SAVE_CARDS message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_SAVE_CARDS message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_SAVE_CARDS
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_SAVE_CARDS;
+
+        /**
+         * Creates a plain object from a C_SAVE_CARDS message. Also converts values to other types if specified.
+         * @param message C_SAVE_CARDS
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.C_SAVE_CARDS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_SAVE_CARDS to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_SAVE_CARDS
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}

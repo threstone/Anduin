@@ -10,6 +10,8 @@ class CardItem {
         item.atkText.text = `${cardInfo.attack}`;
         item.healthText.text = `${cardInfo.health}`;
         item.quality.color = CardItem.qualityColors[cardInfo.quality];
+        item.cardNum.text = `X${cardInfo.count || 0}`;
+        this.checkAlpha(item, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
                 item.heroCardTips.visible = true;
@@ -28,5 +30,13 @@ class CardItem {
                 break;
         }
         return item;
+    }
+
+    static checkAlpha(item: BaseUI.UICardItem, cardInfo: CardInterface) {
+        if (!cardInfo.count) {
+            item.cardImg.alpha = 0.5;
+        }else{
+            item.cardImg.alpha = 1;
+        }
     }
 }
