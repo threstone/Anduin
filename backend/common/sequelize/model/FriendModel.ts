@@ -24,10 +24,6 @@ export class FriendModel extends Model {
     @Column({ type: DataType.INTEGER, comment: '好友id', field: 'friend_uid', allowNull: false })
     friendUId: number
 
-    static getFriendInfo(uid: number): Promise<FriendModel[]> {
-        return FriendModel.findAll({ where: { uid } });
-    }
-
     static addRelationship(uid: number, friendUid: number) {
         const f1 = new FriendModel();
         f1.uid = uid;

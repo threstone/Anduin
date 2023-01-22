@@ -7,7 +7,7 @@ export class DbHelper {
         let info = await GlobalVar.redisMgr.getClient(RedisType.userInfo).hget(uid, `${key}`);
         //如果没有找到信息,将mysql中的信息同步到redis
         if (info == null) {
-            const userInfo = await UserModel.getUserInfoByUid(uid);
+            const userInfo = await UserModel.findOne({ where: { uid } });
             GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
             return userInfo[key];
         }

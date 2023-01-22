@@ -89,3 +89,9 @@ message C_SAVE_CARDS{
 	CardGroup cardGroup = 3;//如果是保存新卡组,那么id为空
 }
 
+//保存卡组返回
+message S_SAVE_CARDS{
+	int32 cmd = 1[default = 4]; 
+	int32 scmd = 2[default = 8];
+	CardGroup cardGroup = 3;
+}

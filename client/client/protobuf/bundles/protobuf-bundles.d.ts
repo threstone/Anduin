@@ -556,6 +556,63 @@ declare namespace CardsPto {
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
+
+    /** Properties of a S_SAVE_CARDS. */
+    interface IS_SAVE_CARDS {
+
+        /** S_SAVE_CARDS cmd */
+        cmd?: (number|null);
+
+        /** S_SAVE_CARDS scmd */
+        scmd?: (number|null);
+
+        /** S_SAVE_CARDS cardGroup */
+        cardGroup?: (CardsPto.ICardGroup|null);
+    }
+
+    /** Represents a S_SAVE_CARDS. */
+    class S_SAVE_CARDS implements IS_SAVE_CARDS {
+
+        /**
+         * Constructs a new S_SAVE_CARDS.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IS_SAVE_CARDS);
+
+        /** S_SAVE_CARDS cmd. */
+        public cmd: number;
+
+        /** S_SAVE_CARDS scmd. */
+        public scmd: number;
+
+        /** S_SAVE_CARDS cardGroup. */
+        public cardGroup?: (CardsPto.ICardGroup|null);
+
+        /**
+         * Encodes the specified S_SAVE_CARDS message. Does not implicitly {@link CardsPto.S_SAVE_CARDS.verify|verify} messages.
+         * @param message S_SAVE_CARDS message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IS_SAVE_CARDS, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_SAVE_CARDS message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_SAVE_CARDS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_SAVE_CARDS;
+
+        /**
+         * Gets the default type url for S_SAVE_CARDS
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
 }
 
 /** Namespace ChatPto. */

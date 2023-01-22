@@ -25,6 +25,8 @@ interface Power {
     powerName: string
 }
 
-interface CommonConfig{
-    maxFeeFilter:number
+interface CommonConfig {
+    maxFeeFilter: number
+    cardMakeFee: number[]
+    cardDisassembleReturnRatio: number
 }

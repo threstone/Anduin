@@ -82,6 +82,6 @@ export class FriendHandler extends BaseHandler {
             }
             this.sendMsg(clientName, uid, res);
         }
-        AddFriendRecordModel.deleteAddFriendReq(targetUid, uid);
+        AddFriendRecordModel.destroy({ where: { target_uid: uid, from_uid: targetUid } });
     }
 }

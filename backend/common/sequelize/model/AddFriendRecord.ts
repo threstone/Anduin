@@ -41,14 +41,6 @@ export class AddFriendRecordModel extends Model {
         }
     }
 
-    static getFriendAddInfo(uid: number): Promise<AddFriendRecordModel[]> {
-        return AddFriendRecordModel.findAll({ where: { targetUid: uid } });
-    }
-
-    static deleteAddFriendReq(fromUid: number, targetUid: number) {
-        AddFriendRecordModel.destroy({ where: { target_uid: targetUid, from_uid: fromUid } });
-    }
-
     static async hasAddInfo(fromUid: number, targetUid: number) {
         const res = await AddFriendRecordModel.count({ where: { from_uid: fromUid, target_uid: targetUid } });
         return res !== 0;

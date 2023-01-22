@@ -2511,6 +2511,115 @@ $root.CardsPto = (function() {
         return C_SAVE_CARDS;
     })();
 
+    CardsPto.S_SAVE_CARDS = (function() {
+
+        function S_SAVE_CARDS(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_SAVE_CARDS.prototype.cmd = 4;
+        S_SAVE_CARDS.prototype.scmd = 8;
+        S_SAVE_CARDS.prototype.cardGroup = null;
+
+        S_SAVE_CARDS.create = function create(properties) {
+            return new S_SAVE_CARDS(properties);
+        };
+
+        S_SAVE_CARDS.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardGroup != null && Object.hasOwnProperty.call(m, "cardGroup"))
+                $root.CardsPto.CardGroup.encode(m.cardGroup, w.uint32(26).fork()).ldelim();
+            return w;
+        };
+
+        S_SAVE_CARDS.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_SAVE_CARDS();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardGroup = $root.CardsPto.CardGroup.decode(r, r.uint32());
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_SAVE_CARDS.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_SAVE_CARDS)
+                return d;
+            var m = new $root.CardsPto.S_SAVE_CARDS();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardGroup != null) {
+                if (typeof d.cardGroup !== "object")
+                    throw TypeError(".CardsPto.S_SAVE_CARDS.cardGroup: object expected");
+                m.cardGroup = $root.CardsPto.CardGroup.fromObject(d.cardGroup);
+            }
+            return m;
+        };
+
+        S_SAVE_CARDS.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 8;
+                d.cardGroup = null;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardGroup != null && m.hasOwnProperty("cardGroup")) {
+                d.cardGroup = $root.CardsPto.CardGroup.toObject(m.cardGroup, o);
+            }
+            return d;
+        };
+
+        S_SAVE_CARDS.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_SAVE_CARDS";
+        };
+
+        return S_SAVE_CARDS;
+    })();
+
     return CardsPto;
 })();
 

@@ -1,3 +1,5 @@
 {
-"maxFeeFilter":7
+"maxFeeFilter":7,
+"cardMakeFee":[40,100,400,1600],
+"cardDisassembleReturnRatio":0.5
 }

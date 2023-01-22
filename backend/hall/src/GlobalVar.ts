@@ -12,6 +12,7 @@ import * as allProto from './CommonProto';
 import * as path from 'path';
 import * as mysqlConfig from '../../common/config/mysql.json';
 import * as redisConfig from '../../common/config/redis.json';
+import { ConfigMgr } from '../../common/config/ConfigMgr';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -21,11 +22,15 @@ export class GlobalVar {
     public static redisMgr: RedisMgr;
     private static sequelizeRegister: SequelizeRegister;
     public static dbHelper: DbHelper;
+    public static configMgr: ConfigMgr;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
         // init logger configuration
         configure(loggerConfig);
+        // init config manager
+        this.configMgr = new ConfigMgr();
+
         //initMsgHandler
         this.initMsgHandler();
         //init socket server

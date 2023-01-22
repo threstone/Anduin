@@ -22,6 +22,6 @@ export class SequelizeRegister extends BaseSequelize {
         logger.info('开启数据库连接...');
         //register all models
         this.addModels([UserModel, FriendModel, AddFriendRecordModel]);
-        this.sync();
+        this.sync({ alter: true });
     }
 }

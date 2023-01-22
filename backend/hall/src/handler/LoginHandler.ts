@@ -16,7 +16,8 @@ export class LoginHandler extends BaseHandler {
             return;
         }
         const replyMsg = new LoginPto.S_LOGIN();
-        const userInfo = await UserModel.getUserInfo(msg.account, msg.password);
+        const userInfo = await UserModel.findOne({ where: { account: msg.account, password: msg.password } });
+
         if (!userInfo) {
             replyMsg.isSuccess = false;
         } else {
@@ -46,7 +47,7 @@ export class LoginHandler extends BaseHandler {
     private static async initFriendInfo(uid: number, replyMsg: LoginPto.S_LOGIN) {
         const promArr = [];
         //初始化好友请求信息,获取到添加好友信息
-        const addInfos = await AddFriendRecordModel.getFriendAddInfo(uid);
+        const addInfos: AddFriendRecordModel[] = await AddFriendRecordModel.findAll({ where: { targetUid: uid } });
         for (let index = 0; index < addInfos.length; index++) {
             const fromUid = addInfos[index].fromUid;
             const addInfo = new FriendPto.Friend();
@@ -61,7 +62,7 @@ export class LoginHandler extends BaseHandler {
         }
 
         //初始化好友信息,获取到好友信息
-        const friendInfos = await FriendModel.getFriendInfo(uid);
+        const friendInfos = await FriendModel.findAll({ where: { uid } });
         const friendUids: number[] = [];
         for (let index = 0; index < friendInfos.length; index++) {
             const friendUId = friendInfos[index].friendUId;

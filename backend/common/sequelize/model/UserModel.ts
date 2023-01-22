@@ -31,17 +31,21 @@ export class UserModel extends Model {
     @Column({ type: DataType.TINYINT, comment: '头像索引', field: 'head_index', defaultValue: -1 })
     headIndex: number
 
-    static async getUserInfo(account: string, password: string): Promise<UserModel> {
-        return await UserModel.findOne({ where: { account: account, password: password } });
-    }
-
-    static async getUserInfoByUid(uid: number): Promise<UserModel> {
-        return await UserModel.findOne({ where: { uid } });
-    }
+    @Column({
+        type: DataType.TEXT, comment: '卡牌信息', field: 'cards_info',
+        get() {
+            return JSON.parse(this.getDataValue('cardsInfo'))
+        },
+        set(obj: any) {
+            this.setDataValue('cardsInfo', JSON.stringify(obj));
+        }
+        , defaultValue: '[{"id":1,"count":3}]'
+    })
+    cardsInfo: { id: number, count: number }[]
 
     static async isExist(account: string): Promise<boolean> {
-        const res = await UserModel.sequelize.query({ query: 'select 1 from user where account = ?', values: [account] });
-        return res[0].length == 1;
+        const count = await UserModel.count({ where: { account } });
+        return count === 1;
     }
 
     static async createUser(account: string, password: string, nick: string): Promise<boolean> {

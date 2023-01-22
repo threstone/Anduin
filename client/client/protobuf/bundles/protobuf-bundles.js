@@ -1258,6 +1258,133 @@ $root.CardsPto = (function() {
         return C_SAVE_CARDS;
     })();
 
+    CardsPto.S_SAVE_CARDS = (function() {
+
+        /**
+         * Properties of a S_SAVE_CARDS.
+         * @memberof CardsPto
+         * @interface IS_SAVE_CARDS
+         * @property {number|null} [cmd] S_SAVE_CARDS cmd
+         * @property {number|null} [scmd] S_SAVE_CARDS scmd
+         * @property {CardsPto.ICardGroup|null} [cardGroup] S_SAVE_CARDS cardGroup
+         */
+
+        /**
+         * Constructs a new S_SAVE_CARDS.
+         * @memberof CardsPto
+         * @classdesc Represents a S_SAVE_CARDS.
+         * @implements IS_SAVE_CARDS
+         * @constructor
+         * @param {CardsPto.IS_SAVE_CARDS=} [properties] Properties to set
+         */
+        function S_SAVE_CARDS(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_SAVE_CARDS cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @instance
+         */
+        S_SAVE_CARDS.prototype.cmd = 4;
+
+        /**
+         * S_SAVE_CARDS scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @instance
+         */
+        S_SAVE_CARDS.prototype.scmd = 8;
+
+        /**
+         * S_SAVE_CARDS cardGroup.
+         * @member {CardsPto.ICardGroup|null|undefined} cardGroup
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @instance
+         */
+        S_SAVE_CARDS.prototype.cardGroup = null;
+
+        /**
+         * Encodes the specified S_SAVE_CARDS message. Does not implicitly {@link CardsPto.S_SAVE_CARDS.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @static
+         * @param {CardsPto.IS_SAVE_CARDS} message S_SAVE_CARDS message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_SAVE_CARDS.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardGroup != null && Object.hasOwnProperty.call(message, "cardGroup"))
+                $root.CardsPto.CardGroup.encode(message.cardGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_SAVE_CARDS message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.S_SAVE_CARDS} S_SAVE_CARDS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_SAVE_CARDS.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_SAVE_CARDS();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardGroup = $root.CardsPto.CardGroup.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_SAVE_CARDS
+         * @function getTypeUrl
+         * @memberof CardsPto.S_SAVE_CARDS
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_SAVE_CARDS";
+        };
+
+        return S_SAVE_CARDS;
+    })();
+
     return CardsPto;
 })();
 

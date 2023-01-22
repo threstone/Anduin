@@ -14,12 +14,18 @@ class CardsModel extends BaseModel {
     /**根据筛选条件获取对应的卡牌 */
     getCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
         const cardArr = this._ownerCardsMap.get(powerId);
+        if (!cardArr) {
+            return [];
+        }
         return this.filterCards(cardArr, fee)
     }
 
     /**根据筛选条件获取所有的卡牌 */
     getAllCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
         const cardArr = this._allCardMap.get(powerId);
+        if (!cardArr) {
+            return [];
+        }
         return this.filterCards(cardArr, fee)
     }
 
