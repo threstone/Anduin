@@ -31,6 +31,9 @@ export class UserModel extends Model {
     @Column({ type: DataType.TINYINT, comment: '头像索引', field: 'head_index', defaultValue: -1 })
     headIndex: number
 
+    @Column({ type: DataType.INTEGER, comment: '用于购买卡牌', field: 'gold', allowNull: false })
+    gold: number
+
     @Column({
         type: DataType.TEXT, comment: '卡牌信息', field: 'cards_info',
         get() {
@@ -53,6 +56,7 @@ export class UserModel extends Model {
         data.account = account;
         data.password = password;
         data.nick = nick;
+        data.gold = 9999999;
         const res = await data.save();
         return data == res;
     }

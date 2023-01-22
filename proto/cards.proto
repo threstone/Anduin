@@ -64,7 +64,7 @@ message S_MAKE_CARD{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 4];
 	int32 cardId = 3;
-	int32 code = 4;
+	int32 code = 4; // 0成功  1未知错误  2金币不足无法购买
 }
 
 //请求分解卡牌
