@@ -120,24 +120,35 @@ export class RedisClientSelf {
     }
 
     //发布消息
-    publish(channel: string, value: string, callBack?) {
+    publish(channel: string, value: string, callBack?: Function) {
         this.redis_client.publish(channel, value, callBack);
     }
 
-    incr(key: string | number, time_out?: number) {
+    incr(key: string | number, time_out?: number): Promise<number> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
         return this.sendCommand('incr', [key], time_out);
     }
 
     /**
-     * 
      * @param key 要上锁的key
      * @param expire 锁持续时间  单位秒
      */
-    lock(key: string | number, expire: number, time_out?: number) {
-        let promise = this.incr(key, time_out);
-        this.setExpire(key, expire);
-        return promise;
+    lock(key: string | number, expire: number, time_out?: number): Promise<boolean> {
+        return new Promise((resolve) => {
+            this.incr(key, time_out).then((incrNum) => {
+                if (incrNum === 1) {
+                    resolve(true);
+                    return;
+                }
+                resolve(false);
+            });
+            this.setExpire(key, expire);
+        });
+    }
+
+    /**解锁 */
+    unlock(key: string | number) {
+        this.delete(key);
     }
 
     /**
@@ -208,7 +219,7 @@ export class RedisClientSelf {
      */
     async hmget(key: string | number, field: any[], time_out?: number): Promise<string[]> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        let res = await this.sendCommand('hmget', [key].concat(field), time_out);
+        let res = await this.sendCommand('hmget', [key, ...field], time_out);
         return res;
     }
 

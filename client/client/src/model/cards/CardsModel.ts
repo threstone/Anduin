@@ -115,7 +115,15 @@ class CardsModel extends BaseModel {
             }
             this.emit('CardChange', [cardInfo, true]);
         } else {
-            TipsView.ins().showTips(`制作卡牌失败code:${msg.code}`)
+            //code的提示语可以提取到配置里头，防止每次都要写
+            switch (msg.code) {
+                case 1:
+                    TipsView.ins().showTips(`制作卡牌失败,请稍后再试。`)
+                    break;
+                case 2:
+                    TipsView.ins().showTips(`金币不足无法购买。`)
+                    break;
+            }
         }
     }
 
@@ -137,7 +145,12 @@ class CardsModel extends BaseModel {
             }
             this.emit('CardChange', [cardInfo, false]);
         } else {
-            TipsView.ins().showTips(`分解卡牌失败code:${msg.code}`)
+            //code的提示语可以提取到配置里头，防止每次都要写
+            switch (msg.code) {
+                case 1:
+                    TipsView.ins().showTips(`分解卡牌失败,请稍后再试。`)
+                    break;
+            }
         }
     }
 

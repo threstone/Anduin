@@ -52,7 +52,7 @@ export class LoginHandler extends BaseHandler {
             const fromUid = addInfos[index].fromUid;
             const addInfo = new FriendPto.Friend();
             addInfo.uid = fromUid;
-            const prom = GlobalVar.dbHelper.getUserInfo(fromUid, 'nick').then((nick: string) => {
+            const prom = GlobalVar.dbHelper.getUserInfoByKey(fromUid, 'nick').then((nick: string) => {
                 addInfo.nick = nick;
             }).catch((err) => {
                 logger.error(`C_FRIEND_INFO ${fromUid}获取用户昵称出错${err}`);
@@ -69,7 +69,7 @@ export class LoginHandler extends BaseHandler {
             friendUids.push(friendUId);
             const friendInfo = new FriendPto.Friend();
             friendInfo.uid = friendUId;
-            const prom = GlobalVar.dbHelper.getUserInfo(friendUId, 'nick').then((nick: string) => {
+            const prom = GlobalVar.dbHelper.getUserInfoByKey(friendUId, 'nick').then((nick: string) => {
                 friendInfo.nick = nick;
             }).catch((err) => {
                 logger.error(`C_FRIEND_INFO ${uid}获取用户昵称出错${err}`);
