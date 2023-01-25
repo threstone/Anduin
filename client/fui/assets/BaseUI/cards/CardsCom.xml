@@ -12,7 +12,7 @@
     </list>
     <image id="n6_z43k" name="bg" src="fjkir" fileName="common/res/mailbox_frame.jpg" xy="0,0" size="1000,720"/>
     <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1146,653" group="n9_z43k"/>
-    <text id="n8_z43k" name="newCardsTips" xy="1016,668" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
+    <text id="n8_z43k" name="functionTips" xy="1016,668" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
     <group id="n9_z43k" name="functionGroup" xy="1016,653" size="259,67" advanced="true"/>
     <list id="n12_z43k" name="powerList" xy="26,17" size="950,51" layout="row" overflow="hidden" colGap="6" autoClearItems="true">
       <item url="ui://yaux2xpotb7e21"/>

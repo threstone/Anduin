@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1280,720">
+  <displayList>
+    <image id="n4_oo95" name="bg" src="z43k1p" fileName="cards/res/mailbox_maillist_unread_b.png" xy="0,0" size="1280,720">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n0_oo95" name="desc" xy="340,35" size="600,85" fontSize="15" autoSize="height" text="圣堂城是人类建立的城市，他们是光明之龙的仆人，精通光系和水系法术，且在上古之战时成功击败了地狱大君和亡灵巫师联合进攻，守卫了城市，并在月圆之夜驯服了部分狂化的野兽，同时在长期战争中人类的杰出发明家也研发了一些战争兵器作为辅助战斗，现在一只联合的军队正在大陆上跃跃欲试的准备扩张自己的帝国"/>
+    <list id="n5_oo95" name="powerList" xy="267,210" size="745,300" layout="flow_hz" overflow="scroll" scroll="horizontal" lineGap="33" colGap="33" lineItemCount="3" align="center" vAlign="middle" autoClearItems="true">
+      <item url="ui://yaux2xporu1k2"/>
+      <item url="ui://yaux2xporu1k2"/>
+      <item url="ui://yaux2xporu1k2"/>
+      <item url="ui://yaux2xporu1k2"/>
+      <item url="ui://yaux2xporu1k2"/>
+      <item url="ui://yaux2xporu1k2"/>
+    </list>
+    <component id="n6_oo95" name="selectBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1078,619"/>
+    <loader id="n8_oo95" name="close" xy="1132,34" size="51,33" scale="2,2" url="ui://yaux2xpotb7e1t" autoSize="true"/>
+  </displayList>
+</component>

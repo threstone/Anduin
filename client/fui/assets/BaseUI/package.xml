@@ -2,7 +2,7 @@
 <packageDescription id="yaux2xpo">
   <resources>
     <image id="ru1k1" name="comp_172_65.png" path="/common/res/"/>
-    <component id="ru1k2" name="Button1.xml" path="/common/btn/"/>
+    <component id="ru1k2" name="Button1.xml" path="/common/btn/" exported="true"/>
     <component id="ru1k3" name="RegisterCom.xml" path="/login/"/>
     <component id="ru1k4" name="LoginCom.xml" path="/login/" exported="true"/>
     <image id="ru1k5" name="comp_58_62.png" path="/common/res/"/>
@@ -59,6 +59,7 @@
     <image id="tb7e22" name="herodetail_arrow_lef.png" path="/common/res/"/>
     <image id="tb7e23" name="hourglas.png" path="/common/res/"/>
     <component id="tb7e24" name="ShowCardDetail.xml" path="/cards/" exported="true"/>
+    <component id="oo9525" name="CreateCardGroup.xml" path="/cards/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

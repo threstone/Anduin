@@ -10,7 +10,6 @@ import * as allProto from './CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../common/config/redis.json';
 import { UserMgr } from './UserMgr';
-import * as mysqlConfig from '../../common/config/mysql.json';
 
 const logger = getLogger();
 export class GlobalVar {

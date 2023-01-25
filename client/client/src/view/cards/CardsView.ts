@@ -48,12 +48,19 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     }
 
     public open(): void {
+        if (!CardsModel.ins().cardGroups) {
+            TipsView.ins().showTips('loading...', 5000);
+            return;
+        }
+
         super.open();
-        this.observe('CardChange', this.showCards);
+
         this.initView();
     }
 
     private initView() {
+        this.observe('CardChange', this.showCards);
+
         this.AddClick(this.view.back, this.onPageChange.bind(this, false))
         this.AddClick(this.view.next, this.onPageChange.bind(this, true))
 
@@ -66,8 +73,19 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         this.changePowerChannel(this.powerId, this.page);
         this.initPowerListEvent();
         this.initFeeFilterEvent();
+        this.initCardGroup();
     }
 
+    /**初始化右侧 */
+    private initCardGroup() {
+        const list = this.view.cardsList;
+        list.removeChildren();
+        
+        const cardsBtn = BaseUI.UICardsBtn.createInstance();
+        cardsBtn.describe.text = '新套牌';
+        this.AddClick(cardsBtn, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
+        list.addChild(cardsBtn);
+    }
 
     /**当左右两个切换页数的按钮被点击 */
     private onPageChange(isAdd: boolean) {
@@ -115,7 +133,6 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         this.showCards();
     }
 
-
     /**
      * 初始化费用筛选按钮点击事件
      */
@@ -135,7 +152,6 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             });
         }
     }
-
 
     /**将除了指定id的feeBtn置为灰色 */
     private grayAllFeeBtn(excludeIndex?: number) {

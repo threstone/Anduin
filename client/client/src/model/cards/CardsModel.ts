@@ -6,6 +6,13 @@ class CardsModel extends BaseModel {
     /**根据不同势力整理过后的拥有卡牌map */
     private _ownerCardsMap: Map<CardsPto.PowerType, CardInterface[]>;
 
+    /**卡组数据 */
+    private _cardGroups: CardsPto.ICardGroup[];
+
+    get cardGroups(){
+        return this._cardGroups;
+    }
+
     constructor() {
         super();
         this.initCards()
@@ -90,9 +97,12 @@ class CardsModel extends BaseModel {
             const cardArr = this.getOwnerCardsArrByPowerId(cardInfo.powerId);
             cardArr.push(cardInfo);
         }
+        this._cardGroups = msg.cardGroups;
         this.sortCardsByFee(this._ownerCardsMap);
+        this.emit('S_CARDS_INFO');
     }
 
+    /**根据势力获取自身拥有的卡牌 */
     private getOwnerCardsArrByPowerId(powerId: number) {
         let cardArr = this._ownerCardsMap.get(powerId);
         if (!cardArr) {

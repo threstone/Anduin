@@ -23,6 +23,7 @@ interface GameProtoClass {
 interface Power {
     id: CardsPto.PowerType
     powerName: string
+    desc:string
 }
 
 interface CommonConfig {

@@ -7,7 +7,7 @@ module BaseUI {
 		public cardsList:fairygui.GList;
 		public bg:fairygui.GImage;
 		public functionBtn:UIButton3;
-		public newCardsTips:fairygui.GTextField;
+		public functionTips:fairygui.GTextField;
 		public functionGroup:fairygui.GGroup;
 		public powerList:fairygui.GList;
 		public cardList:fairygui.GList;
@@ -29,7 +29,7 @@ module BaseUI {
 			this.cardsList = <fairygui.GList>(this.getChildAt(1));
 			this.bg = <fairygui.GImage>(this.getChildAt(2));
 			this.functionBtn = <UIButton3>(this.getChildAt(3));
-			this.newCardsTips = <fairygui.GTextField>(this.getChildAt(4));
+			this.functionTips = <fairygui.GTextField>(this.getChildAt(4));
 			this.functionGroup = <fairygui.GGroup>(this.getChildAt(5));
 			this.powerList = <fairygui.GList>(this.getChildAt(6));
 			this.cardList = <fairygui.GList>(this.getChildAt(7));
