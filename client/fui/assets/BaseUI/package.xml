@@ -6,7 +6,7 @@
     <component id="ru1k3" name="RegisterCom.xml" path="/login/"/>
     <component id="ru1k4" name="LoginCom.xml" path="/login/" exported="true"/>
     <image id="ru1k5" name="comp_58_62.png" path="/common/res/"/>
-    <image id="ru1k6" name="comp_120_164_1.png" path="/common/res/" scale="9grid" scale9grid="30,41,60,82"/>
+    <image id="ru1k6" name="comp_120_164_1.png" path="/common/res/" scale="9grid" scale9grid="51,74,17,16"/>
     <image id="ru1k7" name="comp_696_152.png" path="/common/res/"/>
     <component id="ru1k8" name="HallCom.xml" path="/" exported="true"/>
     <image id="ta2r9" name="comp_30_100.png" path="/common/res/" scale="9grid" scale9grid="7,25,14,50"/>
@@ -61,6 +61,7 @@
     <component id="tb7e24" name="ShowCardDetail.xml" path="/cards/" exported="true"/>
     <component id="oo9525" name="CreateCardGroup.xml" path="/cards/" exported="true"/>
     <component id="oo9527" name="MiniCard.xml" path="/cards/" exported="true"/>
+    <component id="oo9528" name="ShowCardsCom.xml" path="/cards/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

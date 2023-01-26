@@ -8,6 +8,8 @@ module BaseUI {
 		public powerList:fairygui.GList;
 		public selectBtn:UIButton1;
 		public close:fairygui.GLoader;
+		public nameBg:fairygui.GImage;
+		public groupName:fairygui.GTextInput;
 		public static URL:string = "ui://yaux2xpooo9525";
 
 		public static createInstance():UICreateCardGroup {
@@ -22,6 +24,8 @@ module BaseUI {
 			this.powerList = <fairygui.GList>(this.getChildAt(2));
 			this.selectBtn = <UIButton1>(this.getChildAt(3));
 			this.close = <fairygui.GLoader>(this.getChildAt(4));
+			this.nameBg = <fairygui.GImage>(this.getChildAt(5));
+			this.groupName = <fairygui.GTextInput>(this.getChildAt(6));
 		}
 	}
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1000,720">
+  <displayList>
+    <image id="n0_oo95" name="bg" src="fjkir" fileName="common/res/mailbox_frame.jpg" xy="0,0" size="1000,720"/>
+    <list id="n1_oo95" name="powerList" xy="26,17" size="950,51" layout="row" overflow="hidden" colGap="6" autoClearItems="true">
+      <item url="ui://yaux2xpotb7e21"/>
+      <item url="ui://yaux2xpotb7e21"/>
+    </list>
+    <list id="n2_oo95" name="feeBtnList" xy="218,661" size="537,49" layout="pagination" overflow="hidden" colGap="15" lineItemCount="8" autoClearItems="true">
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+    </list>
+    <component id="n3_oo95" name="allFeeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="71,654" scale="0.6,0.6"/>
+    <list id="n4_oo95" name="cardList" xy="26,71" size="1181,736" scale="0.8,0.8" layout="pagination" selectionMode="none" overflow="hidden" colGap="22" lineItemCount2="2" autoItemSize="true">
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+      <item url="ui://yaux2xpotb7e1s"/>
+    </list>
+    <loader id="n5_oo95" name="back" xy="2,322" size="51,75" url="ui://yaux2xpotb7e22" autoSize="true"/>
+    <loader id="n6_oo95" name="next" xy="944,322" size="51,75" url="ui://yaux2xpofjkiu" autoSize="true"/>
+    <component id="n7_oo95" name="cardMake" src="ru1k2" fileName="common/btn/Button1.xml" xy="818,654" scale="0.6,0.6"/>
+  </displayList>
+</component>

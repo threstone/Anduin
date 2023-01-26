@@ -15,5 +15,7 @@
     </list>
     <component id="n6_oo95" name="selectBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1078,619"/>
     <loader id="n8_oo95" name="close" xy="1132,34" size="51,33" scale="2,2" url="ui://yaux2xpotb7e1t" autoSize="true"/>
+    <image id="n11_oo95" name="nameBg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="415,622" size="449,60"/>
+    <text id="n10_oo95" name="groupName" xy="428,634" size="424,45" fontSize="33" align="center" vAlign="middle" autoSize="none" text="" input="true" prompt="点此给卡组命名" maxLength="12"/>
   </displayList>
 </component>

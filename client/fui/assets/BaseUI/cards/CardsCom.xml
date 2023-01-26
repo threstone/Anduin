@@ -17,37 +17,8 @@
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
     </list>
-    <image id="n6_z43k" name="bg" src="fjkir" fileName="common/res/mailbox_frame.jpg" xy="0,0" size="1000,720"/>
     <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1146,653" group="n9_z43k"/>
     <text id="n8_z43k" name="functionTips" xy="1016,668" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
     <group id="n9_z43k" name="functionGroup" xy="1016,653" size="259,67" advanced="true"/>
-    <list id="n12_z43k" name="powerList" xy="26,17" size="950,51" layout="row" overflow="hidden" colGap="6" autoClearItems="true">
-      <item url="ui://yaux2xpotb7e21"/>
-      <item url="ui://yaux2xpotb7e21"/>
-    </list>
-    <list id="n16_tb7e" name="feeBtnList" xy="218,661" size="537,49" layout="pagination" overflow="hidden" colGap="15" lineItemCount="8" autoClearItems="true">
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-      <item url="ui://yaux2xpotb7e20"/>
-    </list>
-    <component id="n18_tb7e" name="allFeeBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="71,654" scale="0.6,0.6"/>
-    <list id="n13_tb7e" name="cardList" xy="26,71" size="1181,736" scale="0.8,0.8" layout="pagination" selectionMode="none" overflow="hidden" colGap="22" lineItemCount2="2" autoItemSize="true">
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-      <item url="ui://yaux2xpotb7e1s"/>
-    </list>
-    <loader id="n23_tb7e" name="back" xy="2,322" size="51,75" url="ui://yaux2xpotb7e22" autoSize="true"/>
-    <loader id="n24_tb7e" name="next" xy="944,322" size="51,75" url="ui://yaux2xpofjkiu" autoSize="true"/>
-    <component id="n25_tb7e" name="cardMake" src="ru1k2" fileName="common/btn/Button1.xml" xy="818,654" scale="0.6,0.6"/>
   </displayList>
 </component>

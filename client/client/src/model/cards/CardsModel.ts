@@ -9,6 +9,8 @@ class CardsModel extends BaseModel {
     /**卡组数据 */
     private _cardGroups: CardsPto.ICardGroup[];
 
+    
+
     get cardGroups(){
         return this._cardGroups;
     }

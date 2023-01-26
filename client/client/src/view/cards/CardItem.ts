@@ -11,6 +11,14 @@ class CardItem {
         }
     }
 
+    static updateNum(item: BaseUI.UICardItem, cardInfo: CardInterface) {
+        if (CardsView.ins().isCreating) {
+            this.setNum(item, CardsView.ins().getLeftCardNum(cardInfo));
+        } else {
+            this.setNum(item, cardInfo.count);
+        }
+    }
+
     static getItem(cardInfo: CardInterface) {
         const item = BaseUI.UICardItem.createInstance();
         item.feeText.text = `${cardInfo.fee}`;
@@ -19,7 +27,7 @@ class CardItem {
         item.atkText.text = `${cardInfo.attack}`;
         item.healthText.text = `${cardInfo.health}`;
         item.quality.color = CardItem.qualityColors[cardInfo.quality];
-        this.setNum(item, cardInfo.count);
+        CardItem.updateNum(item, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
                 item.heroCardTips.visible = true;
@@ -39,6 +47,4 @@ class CardItem {
         }
         return item;
     }
-
-
 }
