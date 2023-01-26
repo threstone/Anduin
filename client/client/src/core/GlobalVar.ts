@@ -3,6 +3,10 @@
 //model无法直接控制view,当有数据更新时使用事件间接通知view来保证展示的变化
 class GlobalVar {
     public static init(stage: egret.Stage) {
+
+        //init hook
+        GlobalHook.init();
+
         //auto mapping
         this.autoMapping();
         // init view

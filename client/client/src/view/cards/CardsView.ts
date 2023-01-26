@@ -3,17 +3,23 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     //=========筛选条件开始=========
     private page: number;
-    private powerId: CardsPto.PowerType;
+    private selectPowerIndex: number;
     private fee: number;
     private isCardMaking: boolean;
     //=========筛选条件结束=========
+    private allPowerInfo: Power[];
+    /**决定了卡牌是否可以拖动 */
+    private isCreateGroup: boolean;
+
 
     protected init() {
         this.view = BaseUI.UICardsCom.createInstance();
 
         this.page = 0;
-        this.powerId = CardsPto.PowerType.ShengTang;
+        this.selectPowerIndex = 0;
         this.fee = -1;
+
+        this.isCreateGroup = false;
 
         //初始化费用筛选器文本
         this.view.allFeeBtn.describe.text = '所有';
@@ -29,22 +35,26 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             }
         }
 
-        //初始化势力channel
-        const powerConfigs = ConfigMgr.ins().powerConfig;
-        for (let index = 0; index < powerConfigs.length; index++) {
-            const config = powerConfigs[index];
-            const btn = PowerBtn.getBtn(config.powerName, config.id);
-            this.view.powerList.addChild(btn);
-        }
-        //将中立channel移动到最后
-        this.view.powerList.addChild(this.view.powerList.removeChildAt(0));
-
         //初始化卡牌制作按钮
         this.isCardMaking = false;
         this.view.cardMake.describe.text = '卡牌制作';
 
+        this.view.functionBtn.describe.text = '保存';
+
         //请求收藏信息
         CardsModel.ins().C_REQ_CARDS_INFO();
+    }
+
+    private showPowerPannel(allPowerInfo: Power[]) {
+        this.removeChildrenEvents(this.view.powerList);
+        this.view.powerList.removeChildren();
+        this.allPowerInfo = allPowerInfo;
+        for (let index = 0; index < allPowerInfo.length; index++) {
+            const config = allPowerInfo[index];
+            const btn = PowerBtn.getBtn(config.powerName, config.id);
+            this.AddClick(btn, this.changePowerChannel.bind(this, config.id, this.page))
+            this.view.powerList.addChild(btn);
+        }
     }
 
     public open(): void {
@@ -54,8 +64,14 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
 
         super.open();
-
         this.initView();
+    }
+
+    public close(): void {
+        super.close();
+        this.fee = -1;
+        this.view.cardMake.describe.text = '卡牌制作';
+        this.isCardMaking = false;
     }
 
     private initView() {
@@ -69,63 +85,97 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             this.view.cardMake.describe.text = this.isCardMaking ? '停止制作' : '卡牌制作';
             this.showCards();
         })
-
-        this.changePowerChannel(this.powerId, this.page);
-        this.initPowerListEvent();
+        this.showPowerPannel(ConfigMgr.ins().powerConfig);
+        this.changePowerChannel(0, 0);
         this.initFeeFilterEvent();
         this.initCardGroup();
     }
 
     /**初始化右侧 */
     private initCardGroup() {
-        const list = this.view.cardsList;
+        const list = this.view.cardGroupList;
         list.removeChildren();
-        
-        const cardsBtn = BaseUI.UICardsBtn.createInstance();
-        cardsBtn.describe.text = '新套牌';
-        this.AddClick(cardsBtn, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
-        list.addChild(cardsBtn);
+
+        //将卡组加入list
+        const cardGroups = CardsModel.ins().cardGroups;
+        for (let index = 0; index < cardGroups.length; index++) {
+            const cardGourpInfo = cardGroups[index];
+            const cardsBtn = BaseUI.UICardsBtn.createInstance();
+            cardsBtn.describe.text = `${cardGourpInfo.groupName}/${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId]}`
+        }
+
+        if (CardsModel.ins().cardGroups.length < ConfigMgr.ins().common.maxGroupNum) {
+            //在套牌最后加入创建新套牌的btn
+            const cardsBtn = BaseUI.UICardsBtn.createInstance();
+            cardsBtn.describe.text = '新套牌';
+            this.AddClick(cardsBtn, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
+            list.addChild(cardsBtn);
+        }
+
+        this.changeRightGroupFunction(false, `${CardsModel.ins().cardGroups.length}/${ConfigMgr.ins().common.maxGroupNum}`);
+        this.AddClick(this.view.functionBtn, () => {
+            if (this.view.functionBtn.backImg.visible) {
+                this.close();
+            } else {
+
+            }
+        })
+    }
+
+    /**开始创建卡组流程 */
+    public doCreateCardGroup(powerId: CardsPto.PowerType) {
+        this.isCreateGroup = true;
+        this.changeRightGroupFunction(true, `0/30`);
+        this.showPowerPannel([ConfigMgr.ins().powerConfig[CardsPto.PowerType.Common], ConfigMgr.ins().powerConfig[powerId]]);
+        this.changePowerChannel(0, 0);
+    }
+
+
+    /**
+     * 根据isSave的值决定右侧组件的功能
+     */
+    private changeRightGroupFunction(isSave: boolean, text: string) {
+        this.view.createGroupList.visible = isSave;
+
+        this.view.cardGroupList.visible = !isSave;
+        this.view.cardGroupList.touchable = !isSave;
+
+        this.view.functionTips.text = text;
+        this.view.functionBtn.backImg.visible = !isSave;
+        this.view.functionBtn.describe.visible = isSave;
     }
 
     /**当左右两个切换页数的按钮被点击 */
     private onPageChange(isAdd: boolean) {
+        const len = this.allPowerInfo.length;
+        let powerId = this.allPowerInfo[this.selectPowerIndex].id;
         if (isAdd) {
             let maxPage = -1;
             if (this.isCardMaking) {
-                maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(powerId, this.fee).length / PageCardNum) - 1
             } else {
-                maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(powerId, this.fee).length / PageCardNum) - 1
             }
             maxPage = Math.max(0, maxPage);
             //判断是否要切换势力
             if (this.page === maxPage) {
                 //尝试到右边的势力去
-                if (this.powerId === CardsPto.PowerType.Common) {
-                    this.powerId = CardsPto.PowerType.ShengTang;
-                } else {
-
-                    this.powerId = (this.powerId + 1) % Object.keys(CardsPto.PowerType).length;
-                }
-                this.changePowerChannel(this.powerId, 0);
+                this.selectPowerIndex = (this.selectPowerIndex + 1) % len;
+                this.changePowerChannel(this.selectPowerIndex, 0);
             } else {
                 this.page += 1;
             }
         } else {
             if (this.page === 0) {
-                //尝试到左边的势力去
-                if (this.powerId === CardsPto.PowerType.Common) {
-                    this.powerId = Utils.getEnumMaxValues(CardsPto.PowerType);
-                } else {
-                    this.powerId -= 1;
-                }
-
+                this.selectPowerIndex = (this.selectPowerIndex - 1 + len) % len
+                powerId = this.allPowerInfo[this.selectPowerIndex].id;
                 let maxPage = -1;
                 if (this.isCardMaking) {
-                    maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                    maxPage = Math.ceil(CardsModel.ins().getAllCardsByFilter(powerId, this.fee).length / PageCardNum) - 1
                 } else {
-                    maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(this.powerId, this.fee).length / PageCardNum) - 1
+                    maxPage = Math.ceil(CardsModel.ins().getCardsByFilter(powerId, this.fee).length / PageCardNum) - 1
                 }
-                this.changePowerChannel(this.powerId, Math.max(0, maxPage))
+                this.changePowerChannel(this.selectPowerIndex, Math.max(0, maxPage))
             } else {
                 this.page -= 1;
             }
@@ -166,24 +216,11 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
     }
 
-
-    /**
-     * 初始化势力channel点击事件
-     */
-    private initPowerListEvent() {
-        //初始化power btn的点击事件
-        const powerList = this.view.powerList;
-        for (let index = 0; index < powerList.numChildren; index++) {
-            const btn = powerList.getChildAt(index) as BaseUI.UIPowerBtn;
-            const powerId = PowerBtn.getPowerId(btn);
-            this.AddClick(btn, this.changePowerChannel.bind(this, powerId, this.page))
-        }
-    }
-
     /**
      * 切换势力
      */
-    private changePowerChannel(powerId: number, page: number) {
+    private changePowerChannel(selectPowerIndex: number, page: number) {
+        const powerId = this.allPowerInfo[selectPowerIndex].id;
         //将顶部的power channel按钮的样子变一下
         const powerList = this.view.powerList;
         for (let index = 0; index < powerList.numChildren; index++) {
@@ -191,7 +228,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             btn.grayed = powerId === PowerBtn.getPowerId(btn)
         }
 
-        this.powerId = powerId;
+        this.selectPowerIndex = selectPowerIndex;
         this.page = page;
         this.showCards();
     }
@@ -199,14 +236,22 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     /**根据当前筛选项整理展示的卡牌 */
     private showCards() {
         const list = this.view.cardList;
+        this.removeChildrenEvents(list);
         list.removeChildren();
 
+        const powerId = this.allPowerInfo[this.selectPowerIndex].id;
         let cards: CardInterface[];
         if (this.isCardMaking) {
-            cards = CardsModel.ins().getAllCardsByFilter(this.powerId, this.fee);
+            cards = CardsModel.ins().getAllCardsByFilter(powerId, this.fee);
         } else {
-            cards = CardsModel.ins().getCardsByFilter(this.powerId, this.fee);
+            cards = CardsModel.ins().getCardsByFilter(powerId, this.fee);
         }
+
+        //防止页数因为卡牌制作到达太大的值导致切回正常状态页数太大的问题
+        while (this.page * PageCardNum > cards.length) {
+            this.page--;
+        }
+
         for (let index = 0; index < cards.length; index++) {
             const cardInfo = cards[index + this.page * PageCardNum];
             //没有卡了或者卡牌到上限了就结束
@@ -215,10 +260,48 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             }
             const cardItem = CardItem.getItem(cardInfo);
             list.addChild(cardItem);
-            //TODO 点击展示大图  这里不用this.addClick是因为在界面关闭前，事件都不会被清除
-            cardItem.addClickListener(() => {
+            let isDrag = false;
+            //点击展示大图
+            this.AddClick(cardItem, () => {
+                if (isDrag) {
+                    isDrag = false;
+                    return;
+                }
                 ShowCardDetail.ins().open(cardInfo);
-            }, this);
+            });
+
+            if (this.isCreateGroup) {
+                cardItem.dragLoader.draggable = true;
+                this.addEvent(cardItem.dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
+                    const texture = new egret.RenderTexture();
+                    texture.drawToTexture(cardItem.displayObject);
+                    cardItem.dragLoader.texture = texture;
+                    isDrag = true;
+                    cardItem.dragLoader.x = evt.stageX - cardItem.dragLoader.width / 2;
+                    cardItem.dragLoader.y = evt.stageY - cardItem.dragLoader.height / 2;
+                    cardItem.dragLoader.scaleX = list.scaleX;
+                    cardItem.dragLoader.scaleY = list.scaleY;
+                    fairygui.GRoot.inst.addChild(cardItem.dragLoader);
+                }, this);
+
+                this.addEvent(cardItem.dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
+                    cardItem.dragLoader.x = 0;
+                    cardItem.dragLoader.y = 0;
+                    cardItem.dragLoader.scaleX = 1;
+                    cardItem.dragLoader.scaleY = 1;
+                    cardItem.addChild(cardItem.dragLoader);
+                    if (evt.stageX >= this.view.createGroupList.x && evt.stageY <= this.view.createGroupList.height) {
+                        cardItem.dragLoader.texture = null;
+                        if (this.doAddCard(cardInfo)) {
+                            CardItem.setNum(cardItem, cardInfo.count);
+                        }
+                    }
+                }, this);
+            }
         }
+    }
+
+    private doAddCard(cardInfo: CardInterface): boolean {
+        return true
     }
 }

@@ -1,0 +1,4 @@
+class GlobalHook {
+    static init() {
+    }
+}

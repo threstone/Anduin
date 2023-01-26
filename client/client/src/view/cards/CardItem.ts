@@ -2,6 +2,15 @@ class CardItem {
 
     private static qualityColors = [0xFFFFFF, 0x0033CC, 0xCC00FF, 0xFF6600];
 
+    static setNum(item: BaseUI.UICardItem, count: number) {
+        item.cardNum.text = `X${count || 0}`;
+        if (!count) {
+            item.cardImg.alpha = 0.5;
+        } else {
+            item.cardImg.alpha = 1;
+        }
+    }
+
     static getItem(cardInfo: CardInterface) {
         const item = BaseUI.UICardItem.createInstance();
         item.feeText.text = `${cardInfo.fee}`;
@@ -10,8 +19,7 @@ class CardItem {
         item.atkText.text = `${cardInfo.attack}`;
         item.healthText.text = `${cardInfo.health}`;
         item.quality.color = CardItem.qualityColors[cardInfo.quality];
-        item.cardNum.text = `X${cardInfo.count || 0}`;
-        this.checkAlpha(item, cardInfo);
+        this.setNum(item, cardInfo.count);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
                 item.heroCardTips.visible = true;
@@ -32,11 +40,5 @@ class CardItem {
         return item;
     }
 
-    static checkAlpha(item: BaseUI.UICardItem, cardInfo: CardInterface) {
-        if (!cardInfo.count) {
-            item.cardImg.alpha = 0.5;
-        }else{
-            item.cardImg.alpha = 1;
-        }
-    }
+
 }

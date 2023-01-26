@@ -26,6 +26,24 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 
+    public removeTargetEvents(target: egret.DisplayObject | fairygui.GObject) {
+        for (let index = this.eventList.length - 1; index >= 0; index--) {
+            const eventData = this.eventList[index];
+            if (eventData.addObject === target) {
+                eventData.clean();
+                this.eventList.splice(index, 1);
+            }
+        }
+    }
+
+    public removeChildrenEvents(list:fairygui.GList){
+        const count = list.numChildren;
+        for (let index = 0; index < count; index++) {
+            const item = list.getChildAt(index);
+            this.removeTargetEvents(item);
+        }
+    }
+
     /**
      * 面板开启执行函数，用于子类继承
      * @param param 参数
@@ -49,7 +67,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.eventList.push(eventData);
     }
 
-    public addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any, useCapture: boolean = false) {
+    public addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any) {
         if (targetObj == null) {
             return;
         }

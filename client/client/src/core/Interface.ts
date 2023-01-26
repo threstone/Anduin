@@ -23,11 +23,12 @@ interface GameProtoClass {
 interface Power {
     id: CardsPto.PowerType
     powerName: string
-    desc:string
+    desc: string
 }
 
 interface CommonConfig {
     maxFeeFilter: number
     cardMakeFee: number[]
     cardDisassembleReturnRatio: number
+    maxGroupNum: number
 }

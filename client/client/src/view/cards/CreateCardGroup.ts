@@ -31,7 +31,7 @@ class CreateCardGroup extends BaseView<BaseUI.UICreateCardGroup> {
         const list = this.view.powerList;
         for (let index = 1; index <= list.numChildren; index++) {
             const btn = list.getChildAt(index - 1);
-            this.AddClick(btn, this.onPowerChange.bind(this,index));
+            this.AddClick(btn, this.onPowerChange.bind(this, index));
         }
     }
 
@@ -39,12 +39,13 @@ class CreateCardGroup extends BaseView<BaseUI.UICreateCardGroup> {
         this.disGrayAllBtn();
         const powerConfigs = ConfigMgr.ins().powerConfig;
         this.view.powerList.getChildAt(powerId - 1).grayed = true;
-        this.view.desc.text = powerConfigs[powerId]?.desc;
+        this.view.desc.text = powerConfigs[powerId].desc || "";
         this.selectPowerId = powerId;
     }
 
     private onSelectBtnClick() {
-
+        this.close();
+        CardsView.ins().doCreateCardGroup(this.selectPowerId);
     }
 
     private disGrayAllBtn() {

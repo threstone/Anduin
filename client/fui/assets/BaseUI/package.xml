@@ -60,6 +60,7 @@
     <image id="tb7e23" name="hourglas.png" path="/common/res/"/>
     <component id="tb7e24" name="ShowCardDetail.xml" path="/cards/" exported="true"/>
     <component id="oo9525" name="CreateCardGroup.xml" path="/cards/" exported="true"/>
+    <component id="oo9527" name="MiniCard.xml" path="/cards/" exported="true"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -13,6 +13,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton3.URL, UIButton3);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICreateCardGroup.URL, UICreateCardGroup);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniCard.URL, UIMiniCard);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton1.URL, UIButton1);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegisterCom.URL, UIRegisterCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UILoginCom.URL, UILoginCom);

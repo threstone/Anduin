@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="280,50">
+  <displayList>
+    <image id="n0_oo95" name="bg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="0,0" size="280,50"/>
+    <text id="n1_oo95" name="cardName" xy="9,1" size="184,45" fontSize="33" color="#666600" autoSize="none" strokeColor="#663300" text="农夫111"/>
+    <text id="n2_oo95" name="n2" xy="225,2" size="42,45" fontSize="33" color="#009900" strokeColor="#ff6699" text="X3"/>
+  </displayList>
+</component>

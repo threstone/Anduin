@@ -20,8 +20,7 @@ class ShowCardDetail extends BaseView<BaseUI.UIShowCardDetail> {
 
     private onCardChange(evt: EventData) {
         const cardInfo: CardInterface = evt.data[0];
-        this.view.card.cardNum.text = `X${cardInfo.count}`;
-        CardItem.checkAlpha(this.view.card, cardInfo);
+        CardItem.setNum(this.view.card, cardInfo.count);
 
         const isMake: CardInterface = evt.data[1];
         //TODO 根据isMake的值判断是制造还是分解，用来做一些特效
