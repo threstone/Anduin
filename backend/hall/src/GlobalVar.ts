@@ -8,7 +8,7 @@ import { RedisMgr } from '../../common/redis/RedisMgr';
 import { RedisType } from '../../common/ConstDefine';
 import { SequelizeRegister } from './SequelizeRegister';
 import { DbHelper } from './DbHelper';
-import * as allProto from './CommonProto';
+import * as allProto from '../../common/CommonProto';
 import * as path from 'path';
 import * as mysqlConfig from '../../common/config/mysql.json';
 import * as redisConfig from '../../common/config/redis.json';

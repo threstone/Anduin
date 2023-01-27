@@ -1,6 +1,6 @@
 import { RedisType } from '../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import { ChatPto, FriendPto } from './CommonProto';
+import { FriendPto } from '../../common/CommonProto';
 import { GlobalVar } from './GlobalVar';
 
 export class UserMgr {

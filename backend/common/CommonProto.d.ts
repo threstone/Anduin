@@ -1094,6 +1094,250 @@ export namespace FriendPto {
     }
 }
 
+/** Namespace ChatPto. */
+export namespace ChatPto {
+
+    /** MsgType enum. */
+    enum MsgType {
+        normal = 0,
+        private = 1
+    }
+
+    /** Properties of a C_SEND_MESSAGE. */
+    interface IC_SEND_MESSAGE {
+
+        /** C_SEND_MESSAGE cmd */
+        cmd?: (number|null);
+
+        /** C_SEND_MESSAGE scmd */
+        scmd?: (number|null);
+
+        /** C_SEND_MESSAGE uid */
+        uid?: (number|null);
+
+        /** C_SEND_MESSAGE msg */
+        msg?: (string|null);
+
+        /** C_SEND_MESSAGE msgType */
+        msgType?: (ChatPto.MsgType|null);
+    }
+
+    /** Represents a C_SEND_MESSAGE. */
+    class C_SEND_MESSAGE implements IC_SEND_MESSAGE {
+
+        /**
+         * Constructs a new C_SEND_MESSAGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: ChatPto.IC_SEND_MESSAGE);
+
+        /** C_SEND_MESSAGE cmd. */
+        public cmd: number;
+
+        /** C_SEND_MESSAGE scmd. */
+        public scmd: number;
+
+        /** C_SEND_MESSAGE uid. */
+        public uid: number;
+
+        /** C_SEND_MESSAGE msg. */
+        public msg: string;
+
+        /** C_SEND_MESSAGE msgType. */
+        public msgType: ChatPto.MsgType;
+
+        /**
+         * Encodes the specified C_SEND_MESSAGE message. Does not implicitly {@link ChatPto.C_SEND_MESSAGE.verify|verify} messages.
+         * @param message C_SEND_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: ChatPto.IC_SEND_MESSAGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_SEND_MESSAGE message, length delimited. Does not implicitly {@link ChatPto.C_SEND_MESSAGE.verify|verify} messages.
+         * @param message C_SEND_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: ChatPto.IC_SEND_MESSAGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_SEND_MESSAGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_SEND_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ChatPto.C_SEND_MESSAGE;
+
+        /**
+         * Decodes a C_SEND_MESSAGE message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_SEND_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ChatPto.C_SEND_MESSAGE;
+
+        /**
+         * Verifies a C_SEND_MESSAGE message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_SEND_MESSAGE message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_SEND_MESSAGE
+         */
+        public static fromObject(object: { [k: string]: any }): ChatPto.C_SEND_MESSAGE;
+
+        /**
+         * Creates a plain object from a C_SEND_MESSAGE message. Also converts values to other types if specified.
+         * @param message C_SEND_MESSAGE
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: ChatPto.C_SEND_MESSAGE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_SEND_MESSAGE to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_SEND_MESSAGE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_CHAT_MESSAGE. */
+    interface IS_CHAT_MESSAGE {
+
+        /** S_CHAT_MESSAGE cmd */
+        cmd?: (number|null);
+
+        /** S_CHAT_MESSAGE scmd */
+        scmd?: (number|null);
+
+        /** S_CHAT_MESSAGE msg */
+        msg?: (string|null);
+
+        /** S_CHAT_MESSAGE nick */
+        nick?: (string|null);
+
+        /** S_CHAT_MESSAGE uid */
+        uid?: (number|null);
+
+        /** S_CHAT_MESSAGE msgType */
+        msgType?: (ChatPto.MsgType|null);
+    }
+
+    /** Represents a S_CHAT_MESSAGE. */
+    class S_CHAT_MESSAGE implements IS_CHAT_MESSAGE {
+
+        /**
+         * Constructs a new S_CHAT_MESSAGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: ChatPto.IS_CHAT_MESSAGE);
+
+        /** S_CHAT_MESSAGE cmd. */
+        public cmd: number;
+
+        /** S_CHAT_MESSAGE scmd. */
+        public scmd: number;
+
+        /** S_CHAT_MESSAGE msg. */
+        public msg: string;
+
+        /** S_CHAT_MESSAGE nick. */
+        public nick: string;
+
+        /** S_CHAT_MESSAGE uid. */
+        public uid: number;
+
+        /** S_CHAT_MESSAGE msgType. */
+        public msgType: ChatPto.MsgType;
+
+        /**
+         * Encodes the specified S_CHAT_MESSAGE message. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.
+         * @param message S_CHAT_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: ChatPto.IS_CHAT_MESSAGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_CHAT_MESSAGE message, length delimited. Does not implicitly {@link ChatPto.S_CHAT_MESSAGE.verify|verify} messages.
+         * @param message S_CHAT_MESSAGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: ChatPto.IS_CHAT_MESSAGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_CHAT_MESSAGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_CHAT_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): ChatPto.S_CHAT_MESSAGE;
+
+        /**
+         * Decodes a S_CHAT_MESSAGE message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_CHAT_MESSAGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): ChatPto.S_CHAT_MESSAGE;
+
+        /**
+         * Verifies a S_CHAT_MESSAGE message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_CHAT_MESSAGE message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_CHAT_MESSAGE
+         */
+        public static fromObject(object: { [k: string]: any }): ChatPto.S_CHAT_MESSAGE;
+
+        /**
+         * Creates a plain object from a S_CHAT_MESSAGE message. Also converts values to other types if specified.
+         * @param message S_CHAT_MESSAGE
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: ChatPto.S_CHAT_MESSAGE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_CHAT_MESSAGE to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_CHAT_MESSAGE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace SystemPto. */
 export namespace SystemPto {
 
@@ -1340,7 +1584,7 @@ export namespace CardsPto {
         groupId?: (number|null);
 
         /** CardGroup cards */
-        cards?: (CardsPto.ICard|null);
+        cards?: (CardsPto.ICard[]|null);
 
         /** CardGroup groupName */
         groupName?: (string|null);
@@ -1362,7 +1606,7 @@ export namespace CardsPto {
         public groupId: number;
 
         /** CardGroup cards. */
-        public cards?: (CardsPto.ICard|null);
+        public cards: CardsPto.ICard[];
 
         /** CardGroup groupName. */
         public groupName: string;

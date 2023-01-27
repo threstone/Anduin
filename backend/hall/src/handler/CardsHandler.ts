@@ -1,5 +1,5 @@
 import { UserModel } from '../../../common/sequelize/model/UserModel';
-import { CardsPto } from '../CommonProto';
+import { CardsPto } from '../../../common/CommonProto';
 import { BaseHandler } from './BaseHandler';
 import { GlobalVar } from '../GlobalVar';
 import { RedisType } from '../../../common/ConstDefine';
@@ -106,7 +106,10 @@ export class CardsHandler extends BaseHandler {
 
     //保存卡组
     static C_SAVE_CARDS(clientName: string, uid: number, msg: CardsPto.C_SAVE_CARDS) {
+        // //新卡组
+        // if (msg.cardGroup.groupId === -1) {
 
+        // }
     }
 
     /**通过品质确定制作卡牌的消耗 */

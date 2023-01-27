@@ -97,7 +97,7 @@ export class ProtoBufEncoder {
 						}
 					}
 					if (!isFind && ProtoBufEncoder.getHandlerFunction(temp.prototype.cmd, temp.prototype.scmd) == undefined) {
-						logger.error(`${key} 未找到注册函数`);
+						logger.info(`未找到注册函数 ${key}`);
 					}
 				}
 			}

@@ -4,7 +4,7 @@ import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { UserModel } from '../../../common/sequelize/model/UserModel';
-import { FriendPto, LoginPto, SystemPto } from '../CommonProto';
+import { FriendPto, LoginPto, SystemPto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 

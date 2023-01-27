@@ -1,6 +1,7 @@
 import {
     Table, Column, Model, DataType,
 } from 'sequelize-typescript';
+import { CardsPto } from '../../CommonProto';
 
 @Table({
     tableName: 'user',
@@ -44,7 +45,19 @@ export class UserModel extends Model {
         }
         , defaultValue: '[{"id":1,"count":3}]'
     })
-    cardsInfo: { id: number, count: number }[]
+    cardsInfo: CardsPto.ICard[]
+
+    @Column({
+        type: DataType.TEXT, comment: '卡牌信息', field: 'card_group_info',
+        get() {
+            return JSON.parse(this.getDataValue('cardGroupInfo'))
+        },
+        set(obj: any) {
+            this.setDataValue('cardGroupInfo', JSON.stringify(obj));
+        }
+        , defaultValue: '[]'
+    })
+    cardGroupInfo: CardsPto.ICardGroup[]
 
     static async isExist(account: string): Promise<boolean> {
         const count = await UserModel.count({ where: { account } });

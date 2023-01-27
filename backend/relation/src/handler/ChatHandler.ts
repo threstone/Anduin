@@ -1,5 +1,5 @@
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
-import { ChatPto } from '../CommonProto';
+import { ChatPto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 

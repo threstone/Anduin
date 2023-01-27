@@ -6,7 +6,7 @@ import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
 import { RedisMgr } from '../../common/redis/RedisMgr';
 import { RedisType } from '../../common/ConstDefine';
-import * as allProto from './CommonProto';
+import * as allProto from '../../common/CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../common/config/redis.json';
 import { UserMgr } from './UserMgr';

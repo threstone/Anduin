@@ -15,7 +15,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "./src"
+    "./src",
+    "../common"
   ],
   "exclude": [
     "./node_modules/",

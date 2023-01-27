@@ -1,5 +1,5 @@
 import { GlobalVar } from '../GlobalVar';
-import { LoginPto } from '../CommonProto';
+import { LoginPto } from '../../../common/CommonProto';
 import { GateSocket } from '../GateSocket';
 
 export class LoginHandler {

@@ -2,7 +2,7 @@ import { getLogger } from 'log4js';
 import { RedisType } from '../../../common/ConstDefine';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
-import { FriendPto } from '../CommonProto';
+import { FriendPto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 

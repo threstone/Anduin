@@ -44,7 +44,6 @@ export interface ILog {
 
 export interface CardInterface {
     cardId: number;
-    cardName: string;
     powerId: number;
     cardType: number;
     type2: number;
@@ -53,6 +52,4 @@ export interface CardInterface {
     health: number;
     fee: number;
     quality: number;
-    imgId: number;
-    desc: string;
 }
