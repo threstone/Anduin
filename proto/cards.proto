@@ -33,7 +33,7 @@ message Card{
 
 message CardGroup{
 	int32 groupId = 0;
-	Card cards = 1;
+	repeated Card cards = 1;
 	string groupName = 2;
 	PowerType powerId = 3;
 }

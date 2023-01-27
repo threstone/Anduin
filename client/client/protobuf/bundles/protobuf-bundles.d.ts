@@ -90,7 +90,7 @@ declare namespace CardsPto {
         groupId?: (number|null);
 
         /** CardGroup cards */
-        cards?: (CardsPto.ICard|null);
+        cards?: (CardsPto.ICard[]|null);
 
         /** CardGroup groupName */
         groupName?: (string|null);
@@ -112,7 +112,7 @@ declare namespace CardsPto {
         public groupId: number;
 
         /** CardGroup cards. */
-        public cards?: (CardsPto.ICard|null);
+        public cards: CardsPto.ICard[];
 
         /** CardGroup groupName. */
         public groupName: string;

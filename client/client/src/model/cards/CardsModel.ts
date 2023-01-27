@@ -9,9 +9,7 @@ class CardsModel extends BaseModel {
     /**卡组数据 */
     private _cardGroups: CardsPto.ICardGroup[];
 
-    
-
-    get cardGroups(){
+    get cardGroups() {
         return this._cardGroups;
     }
 
@@ -21,7 +19,7 @@ class CardsModel extends BaseModel {
     }
 
     /**根据筛选条件获取对应的卡牌 */
-    getCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
+    public getCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
         const cardArr = this._ownerCardsMap.get(powerId);
         if (!cardArr) {
             return [];
@@ -30,7 +28,7 @@ class CardsModel extends BaseModel {
     }
 
     /**根据筛选条件获取所有的卡牌 */
-    getAllCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
+    public getAllCardsByFilter(powerId: CardsPto.PowerType, fee: number) {
         const cardArr = this._allCardMap.get(powerId);
         if (!cardArr) {
             return [];
@@ -167,22 +165,36 @@ class CardsModel extends BaseModel {
     }
 
     /**请求卡牌收藏数据 */
-    C_REQ_CARDS_INFO() {
+    public C_REQ_CARDS_INFO() {
         const msg = new CardsPto.C_REQ_CARDS_INFO();
         this.sendMsg(msg);
     }
 
     /**请求制作卡牌 */
-    C_MAKE_CARD(cardId: number) {
+    public C_MAKE_CARD(cardId: number) {
         const msg = new CardsPto.C_MAKE_CARD();
         msg.cardId = cardId;
         this.sendMsg(msg);
     }
 
     /**请求分解卡牌 */
-    C_DISASSEMBLE_CARD(cardId: number) {
+    public C_DISASSEMBLE_CARD(cardId: number) {
         const msg = new CardsPto.C_DISASSEMBLE_CARD();
         msg.cardId = cardId;
+        this.sendMsg(msg);
+    }
+
+    /**保存卡牌数据 */
+    public C_SAVE_CARDS(cardGroupInfo: CardGroupInfo) {
+        const msg = new CardsPto.C_SAVE_CARDS();
+        msg.cardGroup.groupId = cardGroupInfo.groupId;
+        msg.cardGroup.powerId = cardGroupInfo.powerId;
+        msg.cardGroup.groupName = cardGroupInfo.groupName;
+        const cardsInfo = cardGroupInfo.cardsInfo;
+        for (let index = 0; index < cardsInfo.length; index++) {
+            const info = cardsInfo[index];
+            msg.cardGroup.cards.push({ id: info.cardInfo.cardId, count: info.count });
+        }
         this.sendMsg(msg);
     }
 }

@@ -196,7 +196,7 @@ $root.CardsPto = (function() {
          * @memberof CardsPto
          * @interface ICardGroup
          * @property {number|null} [groupId] CardGroup groupId
-         * @property {CardsPto.ICard|null} [cards] CardGroup cards
+         * @property {Array.<CardsPto.ICard>|null} [cards] CardGroup cards
          * @property {string|null} [groupName] CardGroup groupName
          * @property {CardsPto.PowerType|null} [powerId] CardGroup powerId
          */
@@ -210,6 +210,7 @@ $root.CardsPto = (function() {
          * @param {CardsPto.ICardGroup=} [properties] Properties to set
          */
         function CardGroup(properties) {
+            this.cards = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -226,11 +227,11 @@ $root.CardsPto = (function() {
 
         /**
          * CardGroup cards.
-         * @member {CardsPto.ICard|null|undefined} cards
+         * @member {Array.<CardsPto.ICard>} cards
          * @memberof CardsPto.CardGroup
          * @instance
          */
-        CardGroup.prototype.cards = null;
+        CardGroup.prototype.cards = $util.emptyArray;
 
         /**
          * CardGroup groupName.
@@ -262,8 +263,9 @@ $root.CardsPto = (function() {
                 writer = $Writer.create();
             if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
                 writer.uint32(/* id 0, wireType 0 =*/0).int32(message.groupId);
-            if (message.cards != null && Object.hasOwnProperty.call(message, "cards"))
-                $root.CardsPto.Card.encode(message.cards, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.cards != null && message.cards.length)
+                for (var i = 0; i < message.cards.length; ++i)
+                    $root.CardsPto.Card.encode(message.cards[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             if (message.groupName != null && Object.hasOwnProperty.call(message, "groupName"))
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.groupName);
             if (message.powerId != null && Object.hasOwnProperty.call(message, "powerId"))
@@ -294,7 +296,9 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 1: {
-                        message.cards = $root.CardsPto.Card.decode(reader, reader.uint32());
+                        if (!(message.cards && message.cards.length))
+                            message.cards = [];
+                        message.cards.push($root.CardsPto.Card.decode(reader, reader.uint32()));
                         break;
                     }
                 case 2: {

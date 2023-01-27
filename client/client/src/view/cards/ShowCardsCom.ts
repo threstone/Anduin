@@ -129,7 +129,7 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
                     const createGroupList = CardsView.ins().getView().createGroupList;
                     if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
                         cardItem.dragLoader.texture = null;
-                        const addRes = CardsView.ins().doAddCard(cardInfo);
+                        const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
                         if (addRes !== -1) {
                             CardItem.setNum(cardItem, addRes);
                             CardsView.ins().refreshCreateGroupList();
