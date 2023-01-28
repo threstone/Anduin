@@ -46,4 +46,9 @@ export class DbHelper {
         }
         GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${uid}`, (userInfo as any).dataValues, -1);
     }
+
+    /**同步对应数据到redis */
+    syncUserInfoToMysql(uid: number, user: UserModel) {
+        return GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(uid, (user as any).dataValues);
+    }
 }

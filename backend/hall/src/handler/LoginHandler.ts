@@ -4,7 +4,7 @@ import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { UserModel } from '../../../common/sequelize/model/UserModel';
-import { FriendPto, LoginPto, SystemPto } from '../../../common/CommonProto';
+import { FriendPto, LoginPto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
@@ -96,10 +96,7 @@ export class LoginHandler extends BaseHandler {
         //如果玩家在线,把旧的玩家踢掉
         const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(uid);
         if (oldClient) {
-            let tips = new SystemPto.S_TIPS();
-            tips.msg = '您的账号在别处登录了!';
-            tips.hoverTime = 60000;
-            this.sendMsg(oldClient, uid, tips);
+            GlobalVar.socketServer.sendTips(oldClient, uid, '您的账号在别处登录了!', 60000);
             GlobalVar.socketServer.callCloseUserSocket(oldClient, uid);
         }
 

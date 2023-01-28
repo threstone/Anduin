@@ -6,7 +6,6 @@ import { FriendPto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
-const logger = getLogger();
 export class FriendHandler extends BaseHandler {
     //请求添加好友
     static async C_ADD_FRIEND(clientName: string, uid: number, msg: FriendPto.C_ADD_FRIEND) {

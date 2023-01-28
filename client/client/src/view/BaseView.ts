@@ -36,11 +36,20 @@ abstract class BaseView<T extends fairygui.GComponent> {
         }
     }
 
-    public removeChildrenEvents(list:fairygui.GList){
+    public removeChildrenEvents(list: fairygui.GList, includeChildrenName?: string[]) {
         const count = list.numChildren;
         for (let index = 0; index < count; index++) {
             const item = list.getChildAt(index);
             this.removeTargetEvents(item);
+            if (includeChildrenName) {
+                for (let childIndex = 0; childIndex < includeChildrenName.length; childIndex++) {
+                    const childName = includeChildrenName[childIndex];
+                    const child = item[childName]
+                    if (child) {
+                        this.removeTargetEvents(child);
+                    }
+                }
+            }
         }
     }
 

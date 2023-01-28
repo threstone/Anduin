@@ -95,3 +95,17 @@ message S_SAVE_CARDS{
 	int32 scmd = 2[default = 8];
 	CardGroup cardGroup = 3;
 }
+
+//请求删除卡组
+message C_DELETE_CARD_GROUP{
+	int32 cmd = 1[default = 4]; 
+	int32 scmd = 2[default = 9];
+	int32 groupId = 3;
+}
+
+//删除卡组返回
+message S_DELETE_CARD_GROUP{
+	int32 cmd = 1[default = 4]; 
+	int32 scmd = 2[default = 10];
+	int32 groupId = 3;
+}

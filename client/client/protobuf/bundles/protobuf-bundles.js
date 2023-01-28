@@ -1389,6 +1389,260 @@ $root.CardsPto = (function() {
         return S_SAVE_CARDS;
     })();
 
+    CardsPto.C_DELETE_CARD_GROUP = (function() {
+
+        /**
+         * Properties of a C_DELETE_CARD_GROUP.
+         * @memberof CardsPto
+         * @interface IC_DELETE_CARD_GROUP
+         * @property {number|null} [cmd] C_DELETE_CARD_GROUP cmd
+         * @property {number|null} [scmd] C_DELETE_CARD_GROUP scmd
+         * @property {number|null} [groupId] C_DELETE_CARD_GROUP groupId
+         */
+
+        /**
+         * Constructs a new C_DELETE_CARD_GROUP.
+         * @memberof CardsPto
+         * @classdesc Represents a C_DELETE_CARD_GROUP.
+         * @implements IC_DELETE_CARD_GROUP
+         * @constructor
+         * @param {CardsPto.IC_DELETE_CARD_GROUP=} [properties] Properties to set
+         */
+        function C_DELETE_CARD_GROUP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_DELETE_CARD_GROUP cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @instance
+         */
+        C_DELETE_CARD_GROUP.prototype.cmd = 4;
+
+        /**
+         * C_DELETE_CARD_GROUP scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @instance
+         */
+        C_DELETE_CARD_GROUP.prototype.scmd = 9;
+
+        /**
+         * C_DELETE_CARD_GROUP groupId.
+         * @member {number} groupId
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @instance
+         */
+        C_DELETE_CARD_GROUP.prototype.groupId = 0;
+
+        /**
+         * Encodes the specified C_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @static
+         * @param {CardsPto.IC_DELETE_CARD_GROUP} message C_DELETE_CARD_GROUP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_DELETE_CARD_GROUP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.groupId);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.C_DELETE_CARD_GROUP} C_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_DELETE_CARD_GROUP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.groupId = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_DELETE_CARD_GROUP
+         * @function getTypeUrl
+         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_DELETE_CARD_GROUP";
+        };
+
+        return C_DELETE_CARD_GROUP;
+    })();
+
+    CardsPto.S_DELETE_CARD_GROUP = (function() {
+
+        /**
+         * Properties of a S_DELETE_CARD_GROUP.
+         * @memberof CardsPto
+         * @interface IS_DELETE_CARD_GROUP
+         * @property {number|null} [cmd] S_DELETE_CARD_GROUP cmd
+         * @property {number|null} [scmd] S_DELETE_CARD_GROUP scmd
+         * @property {number|null} [groupId] S_DELETE_CARD_GROUP groupId
+         */
+
+        /**
+         * Constructs a new S_DELETE_CARD_GROUP.
+         * @memberof CardsPto
+         * @classdesc Represents a S_DELETE_CARD_GROUP.
+         * @implements IS_DELETE_CARD_GROUP
+         * @constructor
+         * @param {CardsPto.IS_DELETE_CARD_GROUP=} [properties] Properties to set
+         */
+        function S_DELETE_CARD_GROUP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_DELETE_CARD_GROUP cmd.
+         * @member {number} cmd
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @instance
+         */
+        S_DELETE_CARD_GROUP.prototype.cmd = 4;
+
+        /**
+         * S_DELETE_CARD_GROUP scmd.
+         * @member {number} scmd
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @instance
+         */
+        S_DELETE_CARD_GROUP.prototype.scmd = 10;
+
+        /**
+         * S_DELETE_CARD_GROUP groupId.
+         * @member {number} groupId
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @instance
+         */
+        S_DELETE_CARD_GROUP.prototype.groupId = 0;
+
+        /**
+         * Encodes the specified S_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
+         * @function encode
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @static
+         * @param {CardsPto.IS_DELETE_CARD_GROUP} message S_DELETE_CARD_GROUP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_DELETE_CARD_GROUP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.groupId);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * @function decode
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {CardsPto.S_DELETE_CARD_GROUP} S_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_DELETE_CARD_GROUP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.groupId = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_DELETE_CARD_GROUP
+         * @function getTypeUrl
+         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_DELETE_CARD_GROUP";
+        };
+
+        return S_DELETE_CARD_GROUP;
+    })();
+
     return CardsPto;
 })();
 

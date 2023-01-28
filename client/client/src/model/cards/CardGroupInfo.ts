@@ -21,10 +21,23 @@ class CardGroupInfo {
     set hasPremium(value: boolean) { this._hasPremium = value }
     get cardsInfo() { return this._cardsInfo }
 
-    public startGroupEdit(powerId: CardsPto.PowerType, grouName: string, groupId: number) {
+    public startGroupEdit(powerId: CardsPto.PowerType, grouName: string, groupInfo: CardsPto.ICardGroup) {
         this.powerId = powerId;
         this.groupName = grouName;
-        this.groupId = groupId;
+        this.groupId = groupInfo.groupId || -1;
+        //修改已有的卡组
+        if (groupInfo !== null) {
+            this._cardCount = 0;
+            for (let index = 0; index < groupInfo.cards.length; index++) {
+                const info = groupInfo.cards[index];
+                const cardInfo = CardsModel.ins().getCardInfoById(info.id);
+                this._cardsInfo.push({ count: info.count, cardInfo })
+                if (cardInfo.cardType === CardsPto.CardType.Hero) {
+                    this._hasPremium = true;
+                }
+                this._cardCount += info.count;
+            }
+        }
     }
 
     public clear() {

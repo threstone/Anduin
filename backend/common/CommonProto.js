@@ -2959,6 +2959,220 @@ $root.CardsPto = (function() {
         return S_SAVE_CARDS;
     })();
 
+    CardsPto.C_DELETE_CARD_GROUP = (function() {
+
+        function C_DELETE_CARD_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_DELETE_CARD_GROUP.prototype.cmd = 4;
+        C_DELETE_CARD_GROUP.prototype.scmd = 9;
+        C_DELETE_CARD_GROUP.prototype.groupId = 0;
+
+        C_DELETE_CARD_GROUP.create = function create(properties) {
+            return new C_DELETE_CARD_GROUP(properties);
+        };
+
+        C_DELETE_CARD_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
+                w.uint32(24).int32(m.groupId);
+            return w;
+        };
+
+        C_DELETE_CARD_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.groupId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_DELETE_CARD_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_DELETE_CARD_GROUP)
+                return d;
+            var m = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.groupId != null) {
+                m.groupId = d.groupId | 0;
+            }
+            return m;
+        };
+
+        C_DELETE_CARD_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 9;
+                d.groupId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.groupId != null && m.hasOwnProperty("groupId")) {
+                d.groupId = m.groupId;
+            }
+            return d;
+        };
+
+        C_DELETE_CARD_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.C_DELETE_CARD_GROUP";
+        };
+
+        return C_DELETE_CARD_GROUP;
+    })();
+
+    CardsPto.S_DELETE_CARD_GROUP = (function() {
+
+        function S_DELETE_CARD_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_DELETE_CARD_GROUP.prototype.cmd = 4;
+        S_DELETE_CARD_GROUP.prototype.scmd = 10;
+        S_DELETE_CARD_GROUP.prototype.groupId = 0;
+
+        S_DELETE_CARD_GROUP.create = function create(properties) {
+            return new S_DELETE_CARD_GROUP(properties);
+        };
+
+        S_DELETE_CARD_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
+                w.uint32(24).int32(m.groupId);
+            return w;
+        };
+
+        S_DELETE_CARD_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.groupId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_DELETE_CARD_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_DELETE_CARD_GROUP)
+                return d;
+            var m = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.groupId != null) {
+                m.groupId = d.groupId | 0;
+            }
+            return m;
+        };
+
+        S_DELETE_CARD_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 4;
+                d.scmd = 10;
+                d.groupId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.groupId != null && m.hasOwnProperty("groupId")) {
+                d.groupId = m.groupId;
+            }
+            return d;
+        };
+
+        S_DELETE_CARD_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/CardsPto.S_DELETE_CARD_GROUP";
+        };
+
+        return S_DELETE_CARD_GROUP;
+    })();
+
     return CardsPto;
 })();
 

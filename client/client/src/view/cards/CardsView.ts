@@ -40,12 +40,14 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     }
 
     private initView() {
+        this.observe('CardsGroupUpdate', this.updateGroupList);
         this.initRightGroup();
     }
 
-    /**初始化右侧 */
-    private initRightGroup() {
+    /**更新卡组list */
+    private updateGroupList() {
         const list = this.view.cardGroupList;
+        this.removeChildrenEvents(list, ['clickLoader', 'delete']);
         list.removeChildren();
 
         //将卡组加入list
@@ -53,18 +55,32 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         for (let index = 0; index < cardGroups.length; index++) {
             const cardGourpInfo = cardGroups[index];
             const cardsBtn = BaseUI.UICardsBtn.createInstance();
-            cardsBtn.describe.text = `${cardGourpInfo.groupName}/${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId]}`
+            cardsBtn.describe.text = `${cardGourpInfo.groupName}[${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId].powerName}]` +
+                `\n${CardsModel.ins().getGroupCardNum(cardGourpInfo)}/30`;
+            list.addChild(cardsBtn);
+            this.AddClick(cardsBtn.clickLoader, () => {
+                this.doCreateCardGroup(cardGourpInfo.powerId, cardGourpInfo.groupName, cardGourpInfo);
+            });
+            this.AddClick(cardsBtn.delete, () => {
+                CardsModel.ins().C_DELETE_CARD_GROUP(cardGourpInfo.groupId);
+            });
         }
 
         if (CardsModel.ins().cardGroups.length < ConfigMgr.ins().common.maxGroupNum) {
             //在套牌最后加入创建新套牌的btn
             const cardsBtn = BaseUI.UICardsBtn.createInstance();
             cardsBtn.describe.text = '新套牌';
-            this.AddClick(cardsBtn, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
+            cardsBtn.describe.fontSize = 44;
+            cardsBtn.delete.visible = false;
+            this.AddClick(cardsBtn.clickLoader, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
             list.addChild(cardsBtn);
         }
-
         this.changeRightGroupFunction(false, `${CardsModel.ins().cardGroups.length}/${ConfigMgr.ins().common.maxGroupNum}`);
+    }
+
+    /**初始化右侧 */
+    private initRightGroup() {
+        this.updateGroupList();
         this.AddClick(this.view.functionBtn, () => {
             //关闭界面
             if (this.view.functionBtn.backImg.visible) {
@@ -83,13 +99,13 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
 
     /**开始创建卡组流程 */
-    public doCreateCardGroup(powerId: CardsPto.PowerType, groupName: string, groupId: number) {
+    public doCreateCardGroup(powerId: CardsPto.PowerType, groupName: string, groupInfo?: CardsPto.ICardGroup) {
         this._isCreating = true;
         this.changeRightGroupFunction(true, `0/30`);
+        this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupInfo);
+        this.refreshCreateGroupList();
         ShowCardsCom.ins().showPowerPannel([ConfigMgr.ins().powerConfig[CardsPto.PowerType.Common], ConfigMgr.ins().powerConfig[powerId]]);
         ShowCardsCom.ins().changePowerChannel(0, 0);
-        this.refreshCreateGroupList();
-        this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupId)
     }
 
 
@@ -122,8 +138,8 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
                 if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
                     this._cacheCreateGroupInfo.hasPremium = false;
                 }
-                this.refreshCreateGroupList();
                 cardsInfo.splice(index, 1);
+                this.refreshCreateGroupList();
                 ShowCardsCom.ins().changePowerChannel();
             })
             //TODO 悬浮详情功能

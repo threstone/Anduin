@@ -2512,4 +2512,208 @@ export namespace CardsPto {
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
+
+    /** Properties of a C_DELETE_CARD_GROUP. */
+    interface IC_DELETE_CARD_GROUP {
+
+        /** C_DELETE_CARD_GROUP cmd */
+        cmd?: (number|null);
+
+        /** C_DELETE_CARD_GROUP scmd */
+        scmd?: (number|null);
+
+        /** C_DELETE_CARD_GROUP groupId */
+        groupId?: (number|null);
+    }
+
+    /** Represents a C_DELETE_CARD_GROUP. */
+    class C_DELETE_CARD_GROUP implements IC_DELETE_CARD_GROUP {
+
+        /**
+         * Constructs a new C_DELETE_CARD_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IC_DELETE_CARD_GROUP);
+
+        /** C_DELETE_CARD_GROUP cmd. */
+        public cmd: number;
+
+        /** C_DELETE_CARD_GROUP scmd. */
+        public scmd: number;
+
+        /** C_DELETE_CARD_GROUP groupId. */
+        public groupId: number;
+
+        /**
+         * Encodes the specified C_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
+         * @param message C_DELETE_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IC_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_DELETE_CARD_GROUP message, length delimited. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
+         * @param message C_DELETE_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IC_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DELETE_CARD_GROUP;
+
+        /**
+         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_DELETE_CARD_GROUP;
+
+        /**
+         * Verifies a C_DELETE_CARD_GROUP message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_DELETE_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_DELETE_CARD_GROUP
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_DELETE_CARD_GROUP;
+
+        /**
+         * Creates a plain object from a C_DELETE_CARD_GROUP message. Also converts values to other types if specified.
+         * @param message C_DELETE_CARD_GROUP
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.C_DELETE_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_DELETE_CARD_GROUP to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_DELETE_CARD_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_DELETE_CARD_GROUP. */
+    interface IS_DELETE_CARD_GROUP {
+
+        /** S_DELETE_CARD_GROUP cmd */
+        cmd?: (number|null);
+
+        /** S_DELETE_CARD_GROUP scmd */
+        scmd?: (number|null);
+
+        /** S_DELETE_CARD_GROUP groupId */
+        groupId?: (number|null);
+    }
+
+    /** Represents a S_DELETE_CARD_GROUP. */
+    class S_DELETE_CARD_GROUP implements IS_DELETE_CARD_GROUP {
+
+        /**
+         * Constructs a new S_DELETE_CARD_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: CardsPto.IS_DELETE_CARD_GROUP);
+
+        /** S_DELETE_CARD_GROUP cmd. */
+        public cmd: number;
+
+        /** S_DELETE_CARD_GROUP scmd. */
+        public scmd: number;
+
+        /** S_DELETE_CARD_GROUP groupId. */
+        public groupId: number;
+
+        /**
+         * Encodes the specified S_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
+         * @param message S_DELETE_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: CardsPto.IS_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_DELETE_CARD_GROUP message, length delimited. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
+         * @param message S_DELETE_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: CardsPto.IS_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DELETE_CARD_GROUP;
+
+        /**
+         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_DELETE_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_DELETE_CARD_GROUP;
+
+        /**
+         * Verifies a S_DELETE_CARD_GROUP message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_DELETE_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_DELETE_CARD_GROUP
+         */
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_DELETE_CARD_GROUP;
+
+        /**
+         * Creates a plain object from a S_DELETE_CARD_GROUP message. Also converts values to other types if specified.
+         * @param message S_DELETE_CARD_GROUP
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: CardsPto.S_DELETE_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_DELETE_CARD_GROUP to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_DELETE_CARD_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
 }
