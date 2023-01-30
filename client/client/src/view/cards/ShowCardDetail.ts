@@ -21,13 +21,11 @@ class ShowCardDetail extends BaseView<BaseUI.UIShowCardDetail> {
     private onCardChange(evt: EventData) {
         const cardInfo: CardInterface = evt.data[0];
         CardItem.setNum(this.view.card, cardInfo.count);
-
         const isMake: CardInterface = evt.data[1];
-        //TODO 根据isMake的值判断是制造还是分解，用来做一些特效
         if (isMake) {
-
-        }else{
-
+            TipsView.ins().showTips("卡片制造成功！");
+        } else {
+            TipsView.ins().showTips("卡片分解成功！");
         }
     }
 

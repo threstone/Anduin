@@ -10,7 +10,8 @@
 		"libs/rawinflate/rawinflate.js",
 		"libs/fairygui/fairygui.js",
 		"protobuf/library/protobuf-library.js",
-		"protobuf/bundles/protobuf-bundles.js"
+		"protobuf/bundles/protobuf-bundles.js",
+		"libs/mouse/mouse.js"
 	],
 	"game": [
 		"bin-debug/core/BaseClass.js",

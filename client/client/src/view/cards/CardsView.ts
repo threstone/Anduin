@@ -10,6 +10,8 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     get isCreating() { return this._isCreating }
 
 
+    private _hoverItem: BaseUI.UICardItem;
+
     protected init() {
         this.view = BaseUI.UICardsCom.createInstance();
 
@@ -41,6 +43,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     private initView() {
         this.observe('CardsGroupUpdate', this.updateGroupList);
+        this.observe('CardChange', this.refreshCreateGroupList);
         this.initRightGroup();
     }
 
@@ -100,6 +103,9 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     /**开始创建卡组流程 */
     public doCreateCardGroup(powerId: CardsPto.PowerType, groupName: string, groupInfo?: CardsPto.ICardGroup) {
+        if (!groupInfo) {
+            TipsView.ins().showTips('将卡牌拖动至右侧来组建卡组吧!', 6000)
+        }
         this._isCreating = true;
         this.changeRightGroupFunction(true, `0/30`);
         this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupInfo);
@@ -125,12 +131,38 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     /**根据数据渲染出卡牌 */
     public refreshCreateGroupList() {
+        if (!this._isCreating) {
+            return;
+        }
         const list = this.view.createGroupList;
-        this.removeChildrenEvents(list)
+
+        this.removeChildrenEvents(list, ['dragLoader']);
         list.removeChildren();
         let sum = 0;
         const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+        for (let index = 0; index < cardsInfo.length; index++) {
+            const info = cardsInfo[index];
+            const showItemNum = Math.min(info.cardInfo.count, info.count);
+            if (showItemNum !== 0) {
+                const miniCard = MiniCard.getMiniCard(info.cardInfo, showItemNum);
+                list.addChild(miniCard);
+                this.addMiniCardEvent(miniCard, index, info)
+            }
+            //判断自己是否拥有足够的卡牌,没有足够的卡牌的话要多一个虚的item
+            if (info.cardInfo.count < info.count) {
+                const virtualCard = MiniCard.getMiniCard(info.cardInfo, info.count - info.cardInfo.count);
+                virtualCard.alpha = 0.5;
+                list.addChild(virtualCard);
+                this.addMiniCardEvent(virtualCard, index, info)
+            }
+            sum += info.count;
+        }
+        this.view.functionTips.text = `${sum}/${GroupCardsNum}`;
+    }
 
+    private addMiniCardEvent(miniCard: BaseUI.UIMiniCard, index: number, info: { count: number, cardInfo: CardInterface }) {
+        const list = this.view.createGroupList;
+        const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
         const onClick = (index: number, info: { count: number, cardInfo: CardInterface }) => {
             if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
                 this._cacheCreateGroupInfo.hasPremium = false;
@@ -139,29 +171,60 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             if (info.count <= 0) {
                 cardsInfo.splice(index, 1);
             }
+            fairygui.GRoot.inst.removeChild(this._hoverItem);
             this.refreshCreateGroupList();
             ShowCardsCom.ins().changePowerChannel();
         }
 
-        for (let index = 0; index < cardsInfo.length; index++) {
-            const info = cardsInfo[index];
-            const showItemNum = Math.min(info.cardInfo.count, info.count);
-            if (showItemNum !== 0) {
-                const miniCard = MiniCard.getMiniCard(info.cardInfo, showItemNum);
-                list.addChild(miniCard);
-                this.AddClick(miniCard, onClick.bind(this, index, info));
-            }
-            //判断自己是否拥有足够的卡牌,没有足够的卡牌的话要多一个虚的item
-            if (info.cardInfo.count < info.count) {
-                const virtualCard = MiniCard.getMiniCard(info.cardInfo, info.count - info.cardInfo.count);
-                virtualCard.alpha = 0.5;
-                list.addChild(virtualCard);
-                this.AddClick(virtualCard, onClick.bind(this, index, info));
-            }
-            //TODO 悬浮详情功能
-            sum += info.count;
-        }
-        this.view.functionTips.text = `${sum}/${GroupCardsNum}`;
+        this.AddClick(miniCard, onClick.bind(this, index, info));
+        this.addEvent(miniCard, mouse.MouseEvent.ROLL_OVER, () => {
+            this.showCardDetail(info.cardInfo, list.x, miniCard.y);
+        }, this);
+        this.addEvent(miniCard, mouse.MouseEvent.ROLL_OUT, () => {
+            fairygui.GRoot.inst.removeChild(this._hoverItem);
+        }, this);
+
+        //拖动效果
+        miniCard.dragLoader.draggable = true;
+        this.addEvent(miniCard.dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
+            // isDrag = true;
+            // const texture = new egret.RenderTexture();
+            // texture.drawToTexture(cardItem.displayObject);
+            // cardItem.dragLoader.texture = texture;
+            // cardItem.dragLoader.x = evt.stageX - cardItem.dragLoader.width / 2;
+            // cardItem.dragLoader.y = evt.stageY - cardItem.dragLoader.height / 2;
+            // cardItem.dragLoader.scaleX = list.scaleX;
+            // cardItem.dragLoader.scaleY = list.scaleY;
+            // fairygui.GRoot.inst.addChild(cardItem.dragLoader);
+        }, this);
+
+        this.addEvent(miniCard.dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
+            // cardItem.dragLoader.x = 0;
+            // cardItem.dragLoader.y = 0;
+            // cardItem.dragLoader.scaleX = 1;
+            // cardItem.dragLoader.scaleY = 1;
+            // cardItem.addChild(cardItem.dragLoader);
+            // const createGroupList = CardsView.ins().getView().createGroupList;
+            // if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
+            //     cardItem.dragLoader.texture = null;
+            //     const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
+            //     if (addRes !== false) {
+            //         CardItem.updateNum(cardItem, cardInfo);
+            //         CardsView.ins().refreshCreateGroupList();
+            //     }
+            // }
+        }, this);
+    }
+
+    private showCardDetail(cardInfo: CardInterface, x: number, y: number) {
+        const item = CardItem.getItem(cardInfo);
+        item.cardNum.visible = false;
+        item.x = x - item.width;
+        item.y = y;
+        item.name = 'cardDetail';
+        item.cardImg.alpha = 1;
+        fairygui.GRoot.inst.addChild(item);
+        this._hoverItem = item;
     }
 
     /**获取剩余卡牌的数量 */

@@ -25,6 +25,13 @@ class CardItem {
         item.feeText.text = `${cardInfo.fee}`;
         item.cardName.text = `${cardInfo.cardName}`;
         item.desc.text = `${cardInfo.desc}`;
+        // TODO waiting for img
+        RES.getResByUrl(`./resource/card/${0/**cardInfo.cardId */}.jpg`, (data) => {
+            if (!data) {
+                return
+            }
+            item.cardImg.texture = data;
+        })
         item.atkText.text = `${cardInfo.attack}`;
         item.healthText.text = `${cardInfo.health}`;
         item.quality.color = CardItem.qualityColors[cardInfo.quality];

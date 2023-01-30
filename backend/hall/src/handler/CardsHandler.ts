@@ -244,7 +244,7 @@ export class CardsHandler extends BaseHandler {
                 hasHero = true;
             }
             //同一种橙卡只能携带一张
-            if (cardConfig.quality === CardsPto.QualityType.Premium) {
+            if (cardConfig.quality === CardsPto.QualityType.Premium && card.count > 1) {
                 return false;
             }
             //只能携带本职业卡或中立卡

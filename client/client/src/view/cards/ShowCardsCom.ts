@@ -68,7 +68,7 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
     /**根据当前筛选项整理展示的卡牌 */
     private showCards() {
         const list = this.view.cardList;
-        this.removeChildrenEvents(list);
+        this.removeChildrenEvents(list, ['dragLoader']);
         list.removeChildren();
 
         const powerId = this.allPowerInfo[this.selectPowerIndex].id;

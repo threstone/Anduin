@@ -7,6 +7,7 @@ module BaseUI {
 		public cardName:fairygui.GTextField;
 		public countText:fairygui.GTextField;
 		public feeText:fairygui.GTextField;
+		public dragLoader:fairygui.GLoader;
 		public static URL:string = "ui://yaux2xpooo9527";
 
 		public static createInstance():UIMiniCard {
@@ -20,6 +21,7 @@ module BaseUI {
 			this.cardName = <fairygui.GTextField>(this.getChildAt(1));
 			this.countText = <fairygui.GTextField>(this.getChildAt(2));
 			this.feeText = <fairygui.GTextField>(this.getChildAt(3));
+			this.dragLoader = <fairygui.GLoader>(this.getChildAt(4));
 		}
 	}
 }

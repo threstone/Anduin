@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="218,368">
   <displayList>
-    <loader id="n13_tb7e" name="cardImg" xy="11,10" size="200,173" url="ui://yaux2xpotb7e1z" fill="scaleMatchWidth" shrinkOnly="true"/>
+    <loader id="n13_tb7e" name="cardImg" xy="11,10" size="200,173" fill="scaleMatchWidth" shrinkOnly="true"/>
     <graph id="n16_tb7e" name="feeBg" xy="0,0" size="39,39" group="n18_tb7e" type="regular_polygon" lineColor="#ffffffff" fillColor="#ff0033cc" sides="5" startAngle="-18"/>
     <text id="n17_tb7e" name="feeText" xy="7,7" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
     <group id="n18_tb7e" name="feeGroup" xy="0,0" size="39,39" advanced="true"/>

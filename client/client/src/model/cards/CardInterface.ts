@@ -9,7 +9,6 @@ interface CardInterface {
     health: number;
     fee: number;
     quality: CardsPto.QualityType;
-    imgId: number;
     desc: string;
     attr: string;
     count: number;

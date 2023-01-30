@@ -53,7 +53,6 @@
     <image id="tb7e1v" name="H.png" path="/common/res/"/>
     <image id="tb7e1w" name="guild_battle_ico.png" path="/common/res/"/>
     <image id="tb7e1x" name="line.png" path="/common/res/"/>
-    <image id="tb7e1z" name="temp_card.jpg" path="/cards/res/"/>
     <component id="tb7e20" name="FeeBtn.xml" path="/cards/" exported="true"/>
     <component id="tb7e21" name="PowerBtn.xml" path="/cards/" exported="true"/>
     <image id="tb7e22" name="herodetail_arrow_lef.png" path="/common/res/"/>
