@@ -41,7 +41,11 @@ export class UserModel extends Model {
             return JSON.parse(this.getDataValue('cardsInfo'))
         },
         set(obj: any) {
-            this.setDataValue('cardsInfo', JSON.stringify(obj));
+            if (typeof (obj) === 'string') {
+                this.setDataValue('cardsInfo',obj);
+            }else{
+                this.setDataValue('cardsInfo', JSON.stringify(obj));
+            }
         }
         , defaultValue: '[{"id":1,"count":3}]'
     })
@@ -53,7 +57,11 @@ export class UserModel extends Model {
             return JSON.parse(this.getDataValue('cardGroupInfo'))
         },
         set(obj: any) {
-            this.setDataValue('cardGroupInfo', JSON.stringify(obj));
+            if (typeof (obj) === 'string') {
+                this.setDataValue('cardGroupInfo',obj);
+            }else{
+                this.setDataValue('cardGroupInfo', JSON.stringify(obj));
+            }
         }
         , defaultValue: '[]'
     })

@@ -106,10 +106,6 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
                 cardItem.dragLoader.draggable = true;
                 this.addEvent(cardItem.dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
                     isDrag = true;
-                    if (cardItem.cardImg.alpha !== 1) {
-                        evt.preventDefault();
-                        return;
-                    }
                     const texture = new egret.RenderTexture();
                     texture.drawToTexture(cardItem.displayObject);
                     cardItem.dragLoader.texture = texture;
@@ -130,8 +126,8 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
                     if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
                         cardItem.dragLoader.texture = null;
                         const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
-                        if (addRes !== -1) {
-                            CardItem.setNum(cardItem, addRes);
+                        if (addRes !== false) {
+                            CardItem.updateNum(cardItem, cardInfo);
                             CardsView.ins().refreshCreateGroupList();
                         }
                     }
@@ -235,7 +231,7 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
         for (let index = 0; index < allPowerInfo.length; index++) {
             const config = allPowerInfo[index];
             const btn = PowerBtn.getBtn(config.powerName, config.id);
-            this.AddClick(btn, this.changePowerChannel.bind(this, config.id, this.page))
+            this.AddClick(btn, this.changePowerChannel.bind(this, index, this.page))
             this.view.powerList.addChild(btn);
         }
     }

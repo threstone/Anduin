@@ -97,6 +97,9 @@ declare namespace CardsPto {
 
         /** CardGroup powerId */
         powerId?: (CardsPto.PowerType|null);
+
+        /** CardGroup accessToUse */
+        accessToUse?: (boolean|null);
     }
 
     /** Represents a CardGroup. */
@@ -119,6 +122,9 @@ declare namespace CardsPto {
 
         /** CardGroup powerId. */
         public powerId: CardsPto.PowerType;
+
+        /** CardGroup accessToUse. */
+        public accessToUse: boolean;
 
         /**
          * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.

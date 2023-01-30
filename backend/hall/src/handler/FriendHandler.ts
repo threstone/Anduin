@@ -1,4 +1,3 @@
-import { getLogger } from 'log4js';
 import { RedisType } from '../../../common/ConstDefine';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';

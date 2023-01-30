@@ -199,6 +199,7 @@ $root.CardsPto = (function() {
          * @property {Array.<CardsPto.ICard>|null} [cards] CardGroup cards
          * @property {string|null} [groupName] CardGroup groupName
          * @property {CardsPto.PowerType|null} [powerId] CardGroup powerId
+         * @property {boolean|null} [accessToUse] CardGroup accessToUse
          */
 
         /**
@@ -250,6 +251,14 @@ $root.CardsPto = (function() {
         CardGroup.prototype.powerId = 0;
 
         /**
+         * CardGroup accessToUse.
+         * @member {boolean} accessToUse
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.accessToUse = false;
+
+        /**
          * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
          * @function encode
          * @memberof CardsPto.CardGroup
@@ -270,6 +279,8 @@ $root.CardsPto = (function() {
                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.groupName);
             if (message.powerId != null && Object.hasOwnProperty.call(message, "powerId"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.powerId);
+            if (message.accessToUse != null && Object.hasOwnProperty.call(message, "accessToUse"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.accessToUse);
             return writer;
         };
 
@@ -307,6 +318,10 @@ $root.CardsPto = (function() {
                     }
                 case 3: {
                         message.powerId = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.accessToUse = reader.bool();
                         break;
                     }
                 default:

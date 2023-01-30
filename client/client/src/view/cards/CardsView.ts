@@ -56,7 +56,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             const cardGourpInfo = cardGroups[index];
             const cardsBtn = BaseUI.UICardsBtn.createInstance();
             cardsBtn.describe.text = `${cardGourpInfo.groupName}[${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId].powerName}]` +
-                `\n${CardsModel.ins().getGroupCardNum(cardGourpInfo)}/30`;
+                `\n${CardsModel.ins().getGroupCardNum(cardGourpInfo)}/${GroupCardsNum}`;
             list.addChild(cardsBtn);
             this.AddClick(cardsBtn.clickLoader, () => {
                 this.doCreateCardGroup(cardGourpInfo.powerId, cardGourpInfo.groupName, cardGourpInfo);
@@ -130,22 +130,38 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         list.removeChildren();
         let sum = 0;
         const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+
+        const onClick = (index: number, info: { count: number, cardInfo: CardInterface }) => {
+            if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
+                this._cacheCreateGroupInfo.hasPremium = false;
+            }
+            info.count--;
+            if (info.count <= 0) {
+                cardsInfo.splice(index, 1);
+            }
+            this.refreshCreateGroupList();
+            ShowCardsCom.ins().changePowerChannel();
+        }
+
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];
-            const miniCard = MiniCard.getMiniCard(info.cardInfo, info.count);
-            list.addChild(miniCard);
-            this.AddClick(miniCard, () => {
-                if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
-                    this._cacheCreateGroupInfo.hasPremium = false;
-                }
-                cardsInfo.splice(index, 1);
-                this.refreshCreateGroupList();
-                ShowCardsCom.ins().changePowerChannel();
-            })
+            const showItemNum = Math.min(info.cardInfo.count, info.count);
+            if (showItemNum !== 0) {
+                const miniCard = MiniCard.getMiniCard(info.cardInfo, showItemNum);
+                list.addChild(miniCard);
+                this.AddClick(miniCard, onClick.bind(this, index, info));
+            }
+            //判断自己是否拥有足够的卡牌,没有足够的卡牌的话要多一个虚的item
+            if (info.cardInfo.count < info.count) {
+                const virtualCard = MiniCard.getMiniCard(info.cardInfo, info.count - info.cardInfo.count);
+                virtualCard.alpha = 0.5;
+                list.addChild(virtualCard);
+                this.AddClick(virtualCard, onClick.bind(this, index, info));
+            }
             //TODO 悬浮详情功能
             sum += info.count;
         }
-        this.view.functionTips.text = `${sum}/30`;
+        this.view.functionTips.text = `${sum}/${GroupCardsNum}`;
     }
 
     /**获取剩余卡牌的数量 */

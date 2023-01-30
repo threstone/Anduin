@@ -1882,6 +1882,7 @@ $root.CardsPto = (function() {
         CardGroup.prototype.cards = $util.emptyArray;
         CardGroup.prototype.groupName = "";
         CardGroup.prototype.powerId = 0;
+        CardGroup.prototype.accessToUse = false;
 
         CardGroup.create = function create(properties) {
             return new CardGroup(properties);
@@ -1900,6 +1901,8 @@ $root.CardsPto = (function() {
                 w.uint32(18).string(m.groupName);
             if (m.powerId != null && Object.hasOwnProperty.call(m, "powerId"))
                 w.uint32(24).int32(m.powerId);
+            if (m.accessToUse != null && Object.hasOwnProperty.call(m, "accessToUse"))
+                w.uint32(32).bool(m.accessToUse);
             return w;
         };
 
@@ -1926,6 +1929,10 @@ $root.CardsPto = (function() {
                     }
                 case 3: {
                         m.powerId = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.accessToUse = r.bool();
                         break;
                     }
                 default:
@@ -1992,6 +1999,9 @@ $root.CardsPto = (function() {
                 m.powerId = 6;
                 break;
             }
+            if (d.accessToUse != null) {
+                m.accessToUse = Boolean(d.accessToUse);
+            }
             return m;
         };
 
@@ -2006,6 +2016,7 @@ $root.CardsPto = (function() {
                 d.groupId = 0;
                 d.groupName = "";
                 d.powerId = o.enums === String ? "Common" : 0;
+                d.accessToUse = false;
             }
             if (m.groupId != null && m.hasOwnProperty("groupId")) {
                 d.groupId = m.groupId;
@@ -2021,6 +2032,9 @@ $root.CardsPto = (function() {
             }
             if (m.powerId != null && m.hasOwnProperty("powerId")) {
                 d.powerId = o.enums === String ? $root.CardsPto.PowerType[m.powerId] === undefined ? m.powerId : $root.CardsPto.PowerType[m.powerId] : m.powerId;
+            }
+            if (m.accessToUse != null && m.hasOwnProperty("accessToUse")) {
+                d.accessToUse = m.accessToUse;
             }
             return d;
         };

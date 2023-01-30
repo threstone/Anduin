@@ -1,3 +1,4 @@
+const GroupCardsNum = 30;
 class CardGroupInfo {
     /**创建卡组数据缓存 */
     private _cardsInfo: { count: number, cardInfo: CardInterface }[];
@@ -24,9 +25,10 @@ class CardGroupInfo {
     public startGroupEdit(powerId: CardsPto.PowerType, grouName: string, groupInfo: CardsPto.ICardGroup) {
         this.powerId = powerId;
         this.groupName = grouName;
-        this.groupId = groupInfo.groupId || -1;
+        this.groupId = -1;
         //修改已有的卡组
         if (groupInfo !== null) {
+            this.groupId = groupInfo.groupId || -1;
             this._cardCount = 0;
             for (let index = 0; index < groupInfo.cards.length; index++) {
                 const info = groupInfo.cards[index];
@@ -53,31 +55,31 @@ class CardGroupInfo {
      * 检查将要加入的卡牌是否可以加入
      */
     private addCardCheck(cardInfo: CardInterface) {
-        if (this._cardCount >= 30) {
-            TipsView.ins().showTips('最多携带30张卡牌');
+        if (this._cardCount > GroupCardsNum) {
+            TipsView.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
             return false;
         }
         if (this._hasPremium && cardInfo.cardType === CardsPto.CardType.Hero) {
             TipsView.ins().showTips('英雄卡只能携带一张');
             return false;
         }
-        if (cardInfo.count === 0) {
-            TipsView.ins().showTips('拥有的卡没有那么多');
-            return false;
-        }
         if (cardInfo.powerId !== this.powerId && cardInfo.powerId !== CardsPto.PowerType.Common) {
             TipsView.ins().showTips('只能携带本职业卡或中立卡');
             return false;
         }
+        if (this._cardCount === GroupCardsNum - 1 && this.hasPremium === false) {
+            TipsView.ins().showTips('必须携带一张英雄卡');
+            return false;
+        }
+        return true;
     }
 
     /**
      * 向卡组添加卡牌
-     * @returns 返回此卡还有多少张 如果-1则说明添加失败 
      */
-    public doAddCard(cardInfo: CardInterface): number {
+    public doAddCard(cardInfo: CardInterface): boolean {
         if (this.addCardCheck(cardInfo) === false) {
-            return -1;
+            return false;
         }
         const cardsInfo = this._cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
@@ -86,19 +88,15 @@ class CardGroupInfo {
             if (cardInfo.cardId === info.cardInfo.cardId) {
                 if (cardInfo.quality === CardsPto.QualityType.Premium) {
                     TipsView.ins().showTips('同一种橙卡只能携带一张');
-                    return -1;
+                    return false;
                 }
                 if (info.count === 3) {
                     TipsView.ins().showTips('同一张卡最多携带了3张了');
-                    return -1;
-                }
-                if (cardInfo.count <= info.count) {
-                    TipsView.ins().showTips('拥有的卡没有那么多');
-                    return -1;
+                    return false;
                 }
                 info.count++;
                 this._cardCount++;
-                return cardInfo.count - info.count;
+                return true;
             }
         }
 
@@ -120,6 +118,6 @@ class CardGroupInfo {
             }
             return a.cardInfo.fee - b.cardInfo.fee;
         });
-        return cardInfo.count - 1;
+        return true;
     }
 }

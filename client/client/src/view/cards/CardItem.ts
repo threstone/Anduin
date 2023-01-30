@@ -3,8 +3,9 @@ class CardItem {
     private static qualityColors = [0xFFFFFF, 0x0033CC, 0xCC00FF, 0xFF6600];
 
     static setNum(item: BaseUI.UICardItem, count: number) {
-        item.cardNum.text = `X${count || 0}`;
-        if (!count) {
+        count = Math.max((count || 0), 0);
+        item.cardNum.text = `X${count}`;
+        if (count <= 0) {
             item.cardImg.alpha = 0.5;
         } else {
             item.cardImg.alpha = 1;
