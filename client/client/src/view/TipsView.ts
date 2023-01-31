@@ -1,8 +1,26 @@
-class TipsView extends BaseClass {
+class TipsView extends BaseView<BaseUI.UITipsCom> {
     private tipsPool: Array<fairygui.GTextField> = [];
 
-    constructor() {
-        super();
+    protected init() {
+        this.view = BaseUI.UITipsCom.createInstance();
+        this.view.btn.describe.text = '确定';
+        this.view.x = (fairygui.GRoot.inst.width - this.view.width) / 2;
+        this.view.y = (fairygui.GRoot.inst.height - this.view.height) / 2;
+    }
+
+    public open(text: string): Promise<boolean> {
+        return new Promise((resolve) => {
+            super.open();
+            this.AddClick(this.view.btn, () => {
+                resolve(true);
+                this.close();
+            });
+            this.AddClick(this.view.close, () => {
+                resolve(false);
+                this.close();
+            });
+            this.view.desc.text = text;
+        });
     }
 
     showTips(msg: string, hoverTime: number = 5000) {

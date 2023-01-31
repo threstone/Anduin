@@ -61,6 +61,8 @@
     <component id="oo9525" name="CreateCardGroup.xml" path="/cards/" exported="true"/>
     <component id="oo9527" name="MiniCard.xml" path="/cards/" exported="true"/>
     <component id="oo9528" name="ShowCardsCom.xml" path="/cards/" exported="true"/>
+    <component id="fimv29" name="TipsCom.xml" path="/common/" exported="true"/>
+    <image id="fimv2a" name="dy_bj10.png" path="/common/res/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

@@ -54,6 +54,7 @@
 		"bin-debug/fgui/BaseUI/UIRegisterCom.js",
 		"bin-debug/fgui/BaseUI/UIShowCardDetail.js",
 		"bin-debug/fgui/BaseUI/UIShowCardsCom.js",
+		"bin-debug/fgui/BaseUI/UITipsCom.js",
 		"bin-debug/LoadingUI.js",
 		"bin-debug/model/LoginModel.js",
 		"bin-debug/model/SystemModel.js",

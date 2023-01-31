@@ -103,26 +103,14 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
             });
 
             if (CardsView.ins().isCreating) {
-                cardItem.dragLoader.draggable = true;
-                this.addEvent(cardItem.dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
-                    isDrag = true;
-                    const texture = new egret.RenderTexture();
-                    texture.drawToTexture(cardItem.displayObject);
-                    cardItem.dragLoader.texture = texture;
-                    cardItem.dragLoader.x = evt.stageX - cardItem.dragLoader.width / 2;
-                    cardItem.dragLoader.y = evt.stageY - cardItem.dragLoader.height / 2;
+                const createGroupList = CardsView.ins().getView().createGroupList;
+                this.addDragEvent(cardItem, cardItem.dragLoader, (evt: fairygui.DragEvent) => {
                     cardItem.dragLoader.scaleX = list.scaleX;
                     cardItem.dragLoader.scaleY = list.scaleY;
-                    fairygui.GRoot.inst.addChild(cardItem.dragLoader);
-                }, this);
-
-                this.addEvent(cardItem.dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
-                    cardItem.dragLoader.x = 0;
-                    cardItem.dragLoader.y = 0;
+                    isDrag = true;
+                }, (evt: fairygui.DragEvent) => {
                     cardItem.dragLoader.scaleX = 1;
                     cardItem.dragLoader.scaleY = 1;
-                    cardItem.addChild(cardItem.dragLoader);
-                    const createGroupList = CardsView.ins().getView().createGroupList;
                     if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
                         cardItem.dragLoader.texture = null;
                         const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
@@ -131,7 +119,7 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
                             CardsView.ins().refreshCreateGroupList();
                         }
                     }
-                }, this);
+                });
             }
         }
     }

@@ -4,6 +4,7 @@ module BaseUI {
 
 	export class BaseUIBinder {
 		public static bindAll():void {
+			fairygui.UIObjectFactory.setPackageItemExtension(UITipsCom.URL, UITipsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatBtn.URL, UIChatBtn);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatFriendBox.URL, UIChatFriendBox);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatItem.URL, UIChatItem);

@@ -64,8 +64,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             this.AddClick(cardsBtn.clickLoader, () => {
                 this.doCreateCardGroup(cardGourpInfo.powerId, cardGourpInfo.groupName, cardGourpInfo);
             });
-            this.AddClick(cardsBtn.delete, () => {
-                CardsModel.ins().C_DELETE_CARD_GROUP(cardGourpInfo.groupId);
+            this.AddClick(cardsBtn.delete, async () => {
+                if (await TipsView.ins().open('确定要删除此卡组吗?')) {
+                    CardsModel.ins().C_DELETE_CARD_GROUP(cardGourpInfo.groupId);
+                }
             });
         }
 
@@ -107,7 +109,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             TipsView.ins().showTips('将卡牌拖动至右侧来组建卡组吧!', 6000)
         }
         this._isCreating = true;
-        this.changeRightGroupFunction(true, `0/30`);
+        this.changeRightGroupFunction(true, `0/${GroupCardsNum}`);
         this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupInfo);
         this.refreshCreateGroupList();
         ShowCardsCom.ins().showPowerPannel([ConfigMgr.ins().powerConfig[CardsPto.PowerType.Common], ConfigMgr.ins().powerConfig[powerId]]);
@@ -163,7 +165,12 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     private addMiniCardEvent(miniCard: BaseUI.UIMiniCard, index: number, info: { count: number, cardInfo: CardInterface }) {
         const list = this.view.createGroupList;
         const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+        let isDrag = false;
         const onClick = (index: number, info: { count: number, cardInfo: CardInterface }) => {
+            if (isDrag === true) {
+                isDrag = false
+                return;
+            }
             if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
                 this._cacheCreateGroupInfo.hasPremium = false;
             }
@@ -177,43 +184,21 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
 
         this.AddClick(miniCard, onClick.bind(this, index, info));
-        this.addEvent(miniCard, mouse.MouseEvent.ROLL_OVER, () => {
+        this.addEvent(miniCard.dragLoader, mouse.MouseEvent.ROLL_OVER, () => {
             this.showCardDetail(info.cardInfo, list.x, miniCard.y);
         }, this);
-        this.addEvent(miniCard, mouse.MouseEvent.ROLL_OUT, () => {
+        this.addEvent(miniCard.dragLoader, mouse.MouseEvent.ROLL_OUT, () => {
             fairygui.GRoot.inst.removeChild(this._hoverItem);
         }, this);
 
-        //拖动效果
-        miniCard.dragLoader.draggable = true;
-        this.addEvent(miniCard.dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
-            // isDrag = true;
-            // const texture = new egret.RenderTexture();
-            // texture.drawToTexture(cardItem.displayObject);
-            // cardItem.dragLoader.texture = texture;
-            // cardItem.dragLoader.x = evt.stageX - cardItem.dragLoader.width / 2;
-            // cardItem.dragLoader.y = evt.stageY - cardItem.dragLoader.height / 2;
-            // cardItem.dragLoader.scaleX = list.scaleX;
-            // cardItem.dragLoader.scaleY = list.scaleY;
-            // fairygui.GRoot.inst.addChild(cardItem.dragLoader);
-        }, this);
-
-        this.addEvent(miniCard.dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
-            // cardItem.dragLoader.x = 0;
-            // cardItem.dragLoader.y = 0;
-            // cardItem.dragLoader.scaleX = 1;
-            // cardItem.dragLoader.scaleY = 1;
-            // cardItem.addChild(cardItem.dragLoader);
-            // const createGroupList = CardsView.ins().getView().createGroupList;
-            // if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
-            //     cardItem.dragLoader.texture = null;
-            //     const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
-            //     if (addRes !== false) {
-            //         CardItem.updateNum(cardItem, cardInfo);
-            //         CardsView.ins().refreshCreateGroupList();
-            //     }
-            // }
-        }, this);
+        // 拖动效果
+        this.addDragEvent(miniCard, miniCard.dragLoader, null, (evt: fairygui.DragEvent) => {
+            if (evt.stageX < list.x) {
+                onClick(index, info);
+                return;
+            }
+            isDrag = true;
+        });
     }
 
     private showCardDetail(cardInfo: CardInterface, x: number, y: number) {

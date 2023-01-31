@@ -4,7 +4,7 @@
     <image id="n12_fjki" name="bg" src="fjkiq" fileName="common/res/bg.jpg" xy="0,0" size="1280,720"/>
     <image id="n3_ta2r" name="n3" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="20,13" size="262,120"/>
     <text id="n0_ta2r" name="nickText" xy="28,24" size="247,48" fontSize="35" color="#669966" align="center" autoSize="shrink" strokeColor="#000000" text="积木"/>
-    <component id="n4_ta2r" name="friendCom" src="ta2rb" fileName="friend/Friend.xml" xy="1232,100"/>
+    <component id="n4_ta2r" name="friendCom" src="ta2rb" fileName="friend/FriendCom.xml" xy="1232,100"/>
     <text id="n7_ta2r" name="uidText" xy="28,79" size="247,48" fontSize="35" color="#669966" align="center" autoSize="shrink" strokeColor="#000000" text="ID:1"/>
     <component id="n8_fjki" name="settingBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1098,12"/>
     <component id="n9_fjki" name="cardGroupBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="312,13"/>

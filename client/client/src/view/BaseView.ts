@@ -26,6 +26,32 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 
+    public addDragEvent(base: fairygui.GComponent, dragLoader: fairygui.GLoader, dragStartFun?: Function, dragStartEnd?: Function) {
+        //拖动效果
+        dragLoader.draggable = true;
+        this.addEvent(dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
+            const texture = new egret.RenderTexture();
+            //研究一下为什么拖出来的texture会模糊
+            texture.drawToTexture(base.displayObject);
+            dragLoader.texture = texture;
+            dragLoader.x = evt.stageX - dragLoader.width / 2;
+            dragLoader.y = evt.stageY - dragLoader.height / 2;
+            fairygui.GRoot.inst.addChild(dragLoader);
+            if (dragStartFun) {
+                dragStartFun(evt);
+            }
+        }, this);
+        this.addEvent(dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
+            dragLoader.x = 0;
+            dragLoader.y = 0;
+            dragLoader.texture = null;
+            base.addChild(dragLoader);
+            if (dragStartEnd) {
+                dragStartEnd(evt);
+            }
+        }, this);
+    }
+
     public removeTargetEvents(target: egret.DisplayObject | fairygui.GObject) {
         for (let index = this.eventList.length - 1; index >= 0; index--) {
             const eventData = this.eventList[index];
