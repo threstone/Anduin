@@ -11,4 +11,8 @@ export enum RedisType {
      * 用户社交关系
      */
     userRelation,
+    /**
+     * 用户游戏数据，如不在游戏中将不存在此数据
+     */
+    userGame,
 }

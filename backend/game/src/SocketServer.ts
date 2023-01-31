@@ -1,21 +1,10 @@
 import { getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import * as RpcCommon from '../../common/rpc/rpc_class/RpcCommonRelation';
-import { GlobalVar } from './GlobalVar';
+import * as RpcCommon from '../../common/rpc/rpc_class/RpcCommonGame';
 
 const logger = getLogger();
-export class SocketServer extends RpcCommon.RelationRPCServer {
-    userOnline(clientName: string, uid: number, nick: string): void {
-        //玩家上线
-        GlobalVar.userMgr.onUserOnline(clientName, uid, nick);
-    }
-
-    userOffline(clientName: string, uid: number): void {
-        //玩家下线
-        GlobalVar.userMgr.onUserOffline(uid);
-    }
-
-    async transferTRelation(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
+export class SocketServer extends RpcCommon.GameRPCServer {
+    async transferToGame(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
         const msg = ProtoBufEncoder.decode(buff, 0);
         const fun = ProtoBufEncoder.getHandlerFunction(msg.cmd, msg.scmd);
         if (!fun) {

@@ -1,9 +1,49 @@
 syntax = "proto3";
 package HallPto;
 
-// //更换头像
-// message C_CHANGE_HEAD{
-// 	int32 cmd = 1[default = 2]; 
-// 	int32 scmd = 2[default = 4];
-// 	int32 headIndex = 3;
-// }
+//请求友谊赛
+message C_REQ_FRIENDLY_MATCH{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 1];
+	int32 targetUid = 3;
+}
+
+//是否成功请求友谊赛
+message S_REQ_FRIENDLY_MATCH{
+    int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 2];
+	int32 code = 3;//1非好友  2好友不在线  3好友正在游戏中
+	int64 endTime = 4;//超过这个时间未接受会当做是拒绝
+}
+
+//取消请求友谊赛
+message C_CANCEL_REQ_FRIENDLY_MATCH{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 3];
+	int32 targetUid = 3;
+}
+
+//请求友谊赛结果
+message S_REQ_FRIENDLY_MATCH_RESULT{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 4];
+	int32 targetUid = 3;
+	bool result = 4;
+    int32 token = 5;
+}
+
+//好友请求友谊赛
+message S_FRIENDLY_MATCH{
+    int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 5];
+	int32 friendUid = 3;
+    int32 endTime = 4;//超过这个时间未接受会当做是拒绝
+}
+
+//接受或拒绝好友的友谊赛请求
+message C_REQ_FRIENDLY_MATCH_RESULT{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 6];
+	int32 targetUid = 3;
+	bool result = 4;
+}

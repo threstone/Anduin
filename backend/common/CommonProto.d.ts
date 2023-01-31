@@ -1338,6 +1338,652 @@ export namespace ChatPto {
     }
 }
 
+/** Namespace HallPto. */
+export namespace HallPto {
+
+    /** Properties of a C_REQ_FRIENDLY_MATCH. */
+    interface IC_REQ_FRIENDLY_MATCH {
+
+        /** C_REQ_FRIENDLY_MATCH cmd */
+        cmd?: (number|null);
+
+        /** C_REQ_FRIENDLY_MATCH scmd */
+        scmd?: (number|null);
+
+        /** C_REQ_FRIENDLY_MATCH targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a C_REQ_FRIENDLY_MATCH. */
+    class C_REQ_FRIENDLY_MATCH implements IC_REQ_FRIENDLY_MATCH {
+
+        /**
+         * Constructs a new C_REQ_FRIENDLY_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_REQ_FRIENDLY_MATCH);
+
+        /** C_REQ_FRIENDLY_MATCH cmd. */
+        public cmd: number;
+
+        /** C_REQ_FRIENDLY_MATCH scmd. */
+        public scmd: number;
+
+        /** C_REQ_FRIENDLY_MATCH targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified C_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message C_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message C_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IC_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Decodes a C_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Verifies a C_REQ_FRIENDLY_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_REQ_FRIENDLY_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.C_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Creates a plain object from a C_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
+         * @param message C_REQ_FRIENDLY_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.C_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_REQ_FRIENDLY_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_REQ_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_REQ_FRIENDLY_MATCH. */
+    interface IS_REQ_FRIENDLY_MATCH {
+
+        /** S_REQ_FRIENDLY_MATCH cmd */
+        cmd?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH scmd */
+        scmd?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH code */
+        code?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH endTime */
+        endTime?: (number|null);
+    }
+
+    /** Represents a S_REQ_FRIENDLY_MATCH. */
+    class S_REQ_FRIENDLY_MATCH implements IS_REQ_FRIENDLY_MATCH {
+
+        /**
+         * Constructs a new S_REQ_FRIENDLY_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_REQ_FRIENDLY_MATCH);
+
+        /** S_REQ_FRIENDLY_MATCH cmd. */
+        public cmd: number;
+
+        /** S_REQ_FRIENDLY_MATCH scmd. */
+        public scmd: number;
+
+        /** S_REQ_FRIENDLY_MATCH code. */
+        public code: number;
+
+        /** S_REQ_FRIENDLY_MATCH endTime. */
+        public endTime: number;
+
+        /**
+         * Encodes the specified S_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message S_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message S_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IS_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Decodes a S_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Verifies a S_REQ_FRIENDLY_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_REQ_FRIENDLY_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.S_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Creates a plain object from a S_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
+         * @param message S_REQ_FRIENDLY_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.S_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_REQ_FRIENDLY_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_REQ_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_CANCEL_REQ_FRIENDLY_MATCH. */
+    interface IC_CANCEL_REQ_FRIENDLY_MATCH {
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH cmd */
+        cmd?: (number|null);
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH scmd */
+        scmd?: (number|null);
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a C_CANCEL_REQ_FRIENDLY_MATCH. */
+    class C_CANCEL_REQ_FRIENDLY_MATCH implements IC_CANCEL_REQ_FRIENDLY_MATCH {
+
+        /**
+         * Constructs a new C_CANCEL_REQ_FRIENDLY_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH);
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH cmd. */
+        public cmd: number;
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH scmd. */
+        public scmd: number;
+
+        /** C_CANCEL_REQ_FRIENDLY_MATCH targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified C_CANCEL_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.C_CANCEL_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message C_CANCEL_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_CANCEL_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.C_CANCEL_REQ_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message C_CANCEL_REQ_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_CANCEL_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Decodes a C_CANCEL_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Verifies a C_CANCEL_REQ_FRIENDLY_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_CANCEL_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
+
+        /**
+         * Creates a plain object from a C_CANCEL_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
+         * @param message C_CANCEL_REQ_FRIENDLY_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.C_CANCEL_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_CANCEL_REQ_FRIENDLY_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_CANCEL_REQ_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_REQ_FRIENDLY_MATCH_RESULT. */
+    interface IS_REQ_FRIENDLY_MATCH_RESULT {
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT cmd */
+        cmd?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT scmd */
+        scmd?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT targetUid */
+        targetUid?: (number|null);
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT result */
+        result?: (boolean|null);
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT token */
+        token?: (number|null);
+    }
+
+    /** Represents a S_REQ_FRIENDLY_MATCH_RESULT. */
+    class S_REQ_FRIENDLY_MATCH_RESULT implements IS_REQ_FRIENDLY_MATCH_RESULT {
+
+        /**
+         * Constructs a new S_REQ_FRIENDLY_MATCH_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT);
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT cmd. */
+        public cmd: number;
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT scmd. */
+        public scmd: number;
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT targetUid. */
+        public targetUid: number;
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT result. */
+        public result: boolean;
+
+        /** S_REQ_FRIENDLY_MATCH_RESULT token. */
+        public token: number;
+
+        /**
+         * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
+         * @param message S_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message, length delimited. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
+         * @param message S_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_REQ_FRIENDLY_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Decodes a S_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_REQ_FRIENDLY_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Verifies a S_REQ_FRIENDLY_MATCH_RESULT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_REQ_FRIENDLY_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_REQ_FRIENDLY_MATCH_RESULT
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Creates a plain object from a S_REQ_FRIENDLY_MATCH_RESULT message. Also converts values to other types if specified.
+         * @param message S_REQ_FRIENDLY_MATCH_RESULT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.S_REQ_FRIENDLY_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_REQ_FRIENDLY_MATCH_RESULT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_REQ_FRIENDLY_MATCH_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIENDLY_MATCH. */
+    interface IS_FRIENDLY_MATCH {
+
+        /** S_FRIENDLY_MATCH cmd */
+        cmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH scmd */
+        scmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH friendUid */
+        friendUid?: (number|null);
+
+        /** S_FRIENDLY_MATCH endTime */
+        endTime?: (number|null);
+    }
+
+    /** Represents a S_FRIENDLY_MATCH. */
+    class S_FRIENDLY_MATCH implements IS_FRIENDLY_MATCH {
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_FRIENDLY_MATCH);
+
+        /** S_FRIENDLY_MATCH cmd. */
+        public cmd: number;
+
+        /** S_FRIENDLY_MATCH scmd. */
+        public scmd: number;
+
+        /** S_FRIENDLY_MATCH friendUid. */
+        public friendUid: number;
+
+        /** S_FRIENDLY_MATCH endTime. */
+        public endTime: number;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message S_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message S_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IS_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH;
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_FRIENDLY_MATCH;
+
+        /**
+         * Verifies a S_FRIENDLY_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_FRIENDLY_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.S_FRIENDLY_MATCH;
+
+        /**
+         * Creates a plain object from a S_FRIENDLY_MATCH message. Also converts values to other types if specified.
+         * @param message S_FRIENDLY_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.S_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_FRIENDLY_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_REQ_FRIENDLY_MATCH_RESULT. */
+    interface IC_REQ_FRIENDLY_MATCH_RESULT {
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT cmd */
+        cmd?: (number|null);
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT scmd */
+        scmd?: (number|null);
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT targetUid */
+        targetUid?: (number|null);
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT result */
+        result?: (boolean|null);
+    }
+
+    /** Represents a C_REQ_FRIENDLY_MATCH_RESULT. */
+    class C_REQ_FRIENDLY_MATCH_RESULT implements IC_REQ_FRIENDLY_MATCH_RESULT {
+
+        /**
+         * Constructs a new C_REQ_FRIENDLY_MATCH_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT);
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT cmd. */
+        public cmd: number;
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT scmd. */
+        public scmd: number;
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT targetUid. */
+        public targetUid: number;
+
+        /** C_REQ_FRIENDLY_MATCH_RESULT result. */
+        public result: boolean;
+
+        /**
+         * Encodes the specified C_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
+         * @param message C_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_REQ_FRIENDLY_MATCH_RESULT message, length delimited. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
+         * @param message C_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_REQ_FRIENDLY_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Decodes a C_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_REQ_FRIENDLY_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Verifies a C_REQ_FRIENDLY_MATCH_RESULT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_REQ_FRIENDLY_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_REQ_FRIENDLY_MATCH_RESULT
+         */
+        public static fromObject(object: { [k: string]: any }): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
+
+        /**
+         * Creates a plain object from a C_REQ_FRIENDLY_MATCH_RESULT message. Also converts values to other types if specified.
+         * @param message C_REQ_FRIENDLY_MATCH_RESULT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: HallPto.C_REQ_FRIENDLY_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_REQ_FRIENDLY_MATCH_RESULT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_REQ_FRIENDLY_MATCH_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace SystemPto. */
 export namespace SystemPto {
 

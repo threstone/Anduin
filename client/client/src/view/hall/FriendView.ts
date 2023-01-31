@@ -52,14 +52,19 @@ class FriendView extends BaseView<BaseUI.UIFriendCom> {
             }
             ChatView.ins().openInFriendChannel(this.curSelectUid);
             this.view.friendOpCom.visible = false;
-        }, this)
+            this.curSelectUid = -1;
+        }, this);
         chatBtn.describe.text = '私聊';
         list.addChild(chatBtn);
 
         const fightBtn = BaseUI.UIButton3.createInstance();
         fightBtn.describe.text = '友谊赛';
-        fightBtn.touchable = false;
-        fightBtn.grayed = true;
+        fightBtn.addClickListener(() => {
+            if (this.curSelectUid === -1) {
+                return;
+            }
+            HallModel.ins().C_REQ_FRIENDLY_MATCH(this.curSelectUid);
+        }, this);
         list.addChild(fightBtn);
 
         //计算list大小
@@ -168,16 +173,29 @@ class FriendView extends BaseView<BaseUI.UIFriendCom> {
             friendItem.nickText.text = friendInfo.nick;
             friendItem.onlineImg.color = friendInfo.isOnline ? 0xFFFFFF : 0xFF0000;
             friendItem.addClickListener((data: egret.TouchEvent) => {
-                this.view.friendOpCom.visible = true;
                 let point = this.view.friendOpCom.globalToLocal(data.stageX, data.stageY);
-                this.view.friendOpCom.opList.y = point.y;
-                this.curSelectUid = friendInfo.uid;
+                this.showFriendOpCom(point, friendInfo.uid)
             }, this)
             this.view.list.addChild(friendItem);
         }
 
         this.updateFriendAddInfo();
     }
+
+    private showFriendOpCom(point: egret.Point, friendUid: number) {
+        this.view.friendOpCom.visible = true;
+        this.view.friendOpCom.opList.y = point.y;
+        this.curSelectUid = friendUid;
+
+        const list = this.view.friendOpCom.opList;
+        const isOnline = FriendModel.ins().isOnline(friendUid);
+        for (let index = 0; index < list.numChildren; index++) {
+            const btn = list.getChildAt(index);
+            btn.touchable = isOnline;
+            btn.grayed = !isOnline;
+        }
+    }
+
 
     //检查要添加的好友是否在请求列表中
     private checkReqInfo(targetUid: number) {

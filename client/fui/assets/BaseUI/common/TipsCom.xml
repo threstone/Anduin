@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="400,250">
+<component size="1280,720">
   <displayList>
-    <image id="n4_fimv" name="n4" src="ta2rh" fileName="common/res/comp_142_160_2.png" xy="0,0" size="400,250"/>
-    <text id="n2_fimv" name="n2" xy="165,4" size="69,45" fontSize="33" color="#ffffff" strokeColor="#000000" text="提示"/>
-    <text id="n5_fimv" name="desc" xy="32,62" size="339,120" fontSize="22" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="desc"/>
-    <component id="n6_fimv" name="btn" src="ru1k2" fileName="common/btn/Button1.xml" xy="114,180" scale="0.6,0.6"/>
-    <loader id="n7_fimv" name="close" xy="340,2" size="58,62" url="ui://yaux2xporu1k5" autoSize="true"/>
+    <graph id="n10_fimv" name="closeBg" xy="0,0" size="1280,720" alpha="0.25" type="rect" fillColor="#ff000000"/>
+    <image id="n4_fimv" name="n4" src="ta2rh" fileName="common/res/comp_142_160_2.png" xy="440,235" size="400,250" group="n9_fimv"/>
+    <text id="n2_fimv" name="n2" xy="605,239" size="69,45" group="n9_fimv" fontSize="33" color="#ffffff" strokeColor="#000000" text="提示"/>
+    <text id="n5_fimv" name="desc" xy="472,297" size="339,120" group="n9_fimv" fontSize="22" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="desc"/>
+    <component id="n6_fimv" name="btn" src="ru1k2" fileName="common/btn/Button1.xml" xy="554,415" group="n9_fimv" scale="0.6,0.6"/>
+    <loader id="n7_fimv" name="close" xy="780,237" size="58,62" group="n9_fimv" url="ui://yaux2xporu1k5" autoSize="true"/>
+    <group id="n9_fimv" name="n9" xy="440,235" size="400,250"/>
   </displayList>
 </component>

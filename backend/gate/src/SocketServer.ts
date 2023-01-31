@@ -121,7 +121,7 @@ export class SocketServer {
         if (cmd >= 0 && cmd <= 99) {
             GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendTransferToHall(socket.uid, buffer);
         } else if (cmd === 100) {
-            GlobalVar.relationConnector.sendTransferTRelation(socket.uid, buffer);
+            GlobalVar.relationConnector.sendTransferToRelation(socket.uid, buffer);
         }else{
             this.logger.error(`unknow routing cmd${cmd}`);
         }

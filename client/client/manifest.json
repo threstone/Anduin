@@ -17,7 +17,7 @@
 		"bin-debug/core/BaseClass.js",
 		"bin-debug/model/BaseModel.js",
 		"bin-debug/view/BaseView.js",
-		"bin-debug/fgui/BaseUI/UIMiniCard.js",
+		"bin-debug/fgui/BaseUI/UIMiniChat.js",
 		"bin-debug/core/EventListenerData.js",
 		"bin-debug/core/GameDispatcher.js",
 		"bin-debug/core/GlobalHook.js",
@@ -48,8 +48,8 @@
 		"bin-debug/fgui/BaseUI/UIFriendReqItem.js",
 		"bin-debug/fgui/BaseUI/UIHallCom.js",
 		"bin-debug/fgui/BaseUI/UILoginCom.js",
+		"bin-debug/fgui/BaseUI/UIMiniCard.js",
 		"bin-debug/Main.js",
-		"bin-debug/fgui/BaseUI/UIMiniChat.js",
 		"bin-debug/fgui/BaseUI/UIPowerBtn.js",
 		"bin-debug/fgui/BaseUI/UIRegisterCom.js",
 		"bin-debug/fgui/BaseUI/UIShowCardDetail.js",
@@ -81,6 +81,7 @@
 		"bin-debug/view/chat/ChatFriendBox.js",
 		"bin-debug/view/chat/ChatItem.js",
 		"bin-debug/view/chat/ChatView.js",
+		"bin-debug/view/hall/FriendlyMatchView.js",
 		"bin-debug/view/hall/FriendView.js",
 		"bin-debug/view/hall/HallView.js"
 	]

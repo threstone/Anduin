@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UITipsCom extends fairygui.GComponent {
+		public closeBg:fairygui.GGraph;
 		public desc:fairygui.GTextField;
 		public btn:UIButton1;
 		public close:fairygui.GLoader;
@@ -15,9 +16,10 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.desc = <fairygui.GTextField>(this.getChildAt(2));
-			this.btn = <UIButton1>(this.getChildAt(3));
-			this.close = <fairygui.GLoader>(this.getChildAt(4));
+			this.closeBg = <fairygui.GGraph>(this.getChildAt(0));
+			this.desc = <fairygui.GTextField>(this.getChildAt(3));
+			this.btn = <UIButton1>(this.getChildAt(4));
+			this.close = <fairygui.GLoader>(this.getChildAt(5));
 		}
 	}
 }

@@ -6,9 +6,10 @@ import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
 import { RedisMgr } from '../../common/redis/RedisMgr';
 import { RedisType } from '../../common/ConstDefine';
-import * as allProto from './CommonProto';
+import * as allProto from '../../common/CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../common/config/redis.json';
+import { TableMgr } from './TableMgr';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -16,6 +17,7 @@ export class GlobalVar {
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
+    public static tableMgr: TableMgr;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -28,6 +30,9 @@ export class GlobalVar {
 
         //init redisMgr
         this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userRelation]);
+
+        this.tableMgr = new TableMgr();
+        this.tableMgr.startLogic();
     }
 
     /**

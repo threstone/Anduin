@@ -2,12 +2,12 @@
 import * as RPC from "../RPC"
 import { ILog } from "../../I"
 
-let uuid = "e553ae42-6f01-4666-944c-19956f67db56"
+let uuid = "be06f208-920b-464a-9163-8707776388db"
 
 //服务器的虚函数定义
-export abstract class RelationRPCServer {
+export abstract class GameRPCServer {
     private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["userOnline", "userOffline", "transferToRelation"]
+    private funs_: string[] = ["transferToGame"]
     get funs() { return this.funs_ }
     get rpc() { return this.rpcServer };
 
@@ -25,14 +25,8 @@ export abstract class RelationRPCServer {
 
     }
 
-    //用户上线
-    abstract userOnline(clientName: string,uid:number,nick:string):void
-
-    //用户离线
-    abstract userOffline(clientName: string,uid:number):void
-
     //转发
-    abstract transferToRelation(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
+    abstract transferToGame(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
 
     //s2c
     //主动告知网关转发消息
@@ -47,25 +41,13 @@ export abstract class RelationRPCServer {
         this.rpc.send(clientName,"transferToGate",args)
     }
 
-    //广播消息
-    async callBroadcast(clientName:string,buffer:Buffer):Promise<void>    {
-        let args = [buffer]
-        let res: any = await this.rpc.call(clientName,"broadcast", args)
-        return res
-    }
-
-    sendBroadcast(clientName:string,buffer:Buffer)    {
-        let args = [buffer]
-        this.rpc.send(clientName,"broadcast",args)
-    }
-
 }
 
 //客户端的函数定义
-export abstract class RelationRPCClient {
+export abstract class GameRPCClient {
 
     private myRpcClient = new RPC.RPC_CLIENT()
-    private funs_: string[] = ["transferToGate", "broadcast"]
+    private funs_: string[] = ["transferToGate"]
     get funs() { return this.funs_ }
     get rpc() { return this.myRpcClient }
     get port() { return this.rpc.port }
@@ -84,47 +66,20 @@ export abstract class RelationRPCClient {
     abstract onOpen();
     abstract onClose();
 
-    //用户上线
-    async callUserOnline(uid:number,nick:string):Promise<void>    {
-        let args = [uid,nick]
-        let res: any = await this.rpc.call("userOnline",args)
-        return res
-    }
-
-    sendUserOnline(uid:number,nick:string)    {
-        let args = [uid,nick]
-        this.rpc.send("userOnline",args)
-    }
-
-    //用户离线
-    async callUserOffline(uid:number):Promise<void>    {
-        let args = [uid]
-        let res: any = await this.rpc.call("userOffline",args)
-        return res
-    }
-
-    sendUserOffline(uid:number)    {
-        let args = [uid]
-        this.rpc.send("userOffline",args)
-    }
-
     //转发
-    async callTransferToRelation(uid:number,buff:Buffer):Promise<Buffer>    {
+    async callTransferToGame(uid:number,buff:Buffer):Promise<Buffer>    {
         let args = [uid,buff]
-        let res: any = await this.rpc.call("transferToRelation",args)
+        let res: any = await this.rpc.call("transferToGame",args)
         return res
     }
 
-    sendTransferToRelation(uid:number,buff:Buffer)    {
+    sendTransferToGame(uid:number,buff:Buffer)    {
         let args = [uid,buff]
-        this.rpc.send("transferToRelation",args)
+        this.rpc.send("transferToGame",args)
     }
 
     //s2c
     //主动告知网关转发消息
     abstract transferToGate(uid:number,buffer:Buffer):void
-
-    //广播消息
-    abstract broadcast(buffer:Buffer):void
 
 }
