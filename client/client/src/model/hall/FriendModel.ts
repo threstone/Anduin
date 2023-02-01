@@ -30,6 +30,16 @@ class FriendModel extends BaseModel {
         return false;
     }
 
+    getFriendNick(uid: number) {
+        for (let index = 0; index < this._friendList.length; index++) {
+            const friend = this._friendList[index];
+            if (friend.uid === uid) {
+                return friend.nick;
+            }
+        }
+        return 'unkonw';
+    }
+
     private emitFriendUpdate() {
         //排序在线列表
         const arr = this._friendList;
@@ -69,19 +79,19 @@ class FriendModel extends BaseModel {
     //返回请求添加好友是否成功
     private S_ADD_FRIEND_REQ(msg: FriendPto.S_ADD_FRIEND_REQ) {
         if (msg.code === 0) {
-            TipsView.ins().showTips('成功请求添加好友');
+            SystemModel.ins().showTips('成功请求添加好友');
         } else if (msg.code === 1) {
-            TipsView.ins().showTips('缺少id');
+            SystemModel.ins().showTips('缺少id');
         } else if (msg.code === 2) {
-            TipsView.ins().showTips('对方还没同意，不要重复请求');
+            SystemModel.ins().showTips('对方还没同意，不要重复请求');
         } else if (msg.code === 3) {
-            TipsView.ins().showTips('对方已经是你的好友了');
+            SystemModel.ins().showTips('对方已经是你的好友了');
         } else if (msg.code === 4) {
-            TipsView.ins().showTips('不能添加自己');
+            SystemModel.ins().showTips('不能添加自己');
         } else if (msg.code === 5) {
-            TipsView.ins().showTips('请输入正确的id');
+            SystemModel.ins().showTips('请输入正确的id');
         } else if (msg.code === 6) {
-            TipsView.ins().showTips('请同意对方的好友请求');
+            SystemModel.ins().showTips('请同意对方的好友请求');
         }
     }
 

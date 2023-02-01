@@ -1,0 +1,11 @@
+syntax = "proto3";
+package GamePto;
+
+//客户端请求开始友谊赛
+message C_FRIENDLY_MATCH{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 1];
+	int32 token = 3;
+}
+
+

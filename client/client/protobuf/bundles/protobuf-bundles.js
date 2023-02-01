@@ -2835,6 +2835,145 @@ $root.FriendPto = (function() {
     return FriendPto;
 })();
 
+$root.GamePto = (function() {
+
+    /**
+     * Namespace GamePto.
+     * @exports GamePto
+     * @namespace
+     */
+    var GamePto = {};
+
+    GamePto.C_FRIENDLY_MATCH = (function() {
+
+        /**
+         * Properties of a C_FRIENDLY_MATCH.
+         * @memberof GamePto
+         * @interface IC_FRIENDLY_MATCH
+         * @property {number|null} [cmd] C_FRIENDLY_MATCH cmd
+         * @property {number|null} [scmd] C_FRIENDLY_MATCH scmd
+         * @property {number|null} [token] C_FRIENDLY_MATCH token
+         */
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH.
+         * @memberof GamePto
+         * @classdesc Represents a C_FRIENDLY_MATCH.
+         * @implements IC_FRIENDLY_MATCH
+         * @constructor
+         * @param {GamePto.IC_FRIENDLY_MATCH=} [properties] Properties to set
+         */
+        function C_FRIENDLY_MATCH(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_FRIENDLY_MATCH cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @instance
+         */
+        C_FRIENDLY_MATCH.prototype.cmd = 200;
+
+        /**
+         * C_FRIENDLY_MATCH scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @instance
+         */
+        C_FRIENDLY_MATCH.prototype.scmd = 1;
+
+        /**
+         * C_FRIENDLY_MATCH token.
+         * @member {number} token
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @instance
+         */
+        C_FRIENDLY_MATCH.prototype.token = 0;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @static
+         * @param {GamePto.IC_FRIENDLY_MATCH} message C_FRIENDLY_MATCH message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_FRIENDLY_MATCH.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.token);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_FRIENDLY_MATCH} C_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_FRIENDLY_MATCH.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_FRIENDLY_MATCH();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.token = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH
+         * @function getTypeUrl
+         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_FRIENDLY_MATCH";
+        };
+
+        return C_FRIENDLY_MATCH;
+    })();
+
+    return GamePto;
+})();
+
 $root.HallPto = (function() {
 
     /**
@@ -3406,7 +3545,7 @@ $root.HallPto = (function() {
          * @property {number|null} [cmd] S_FRIENDLY_MATCH cmd
          * @property {number|null} [scmd] S_FRIENDLY_MATCH scmd
          * @property {number|null} [friendUid] S_FRIENDLY_MATCH friendUid
-         * @property {number|null} [endTime] S_FRIENDLY_MATCH endTime
+         * @property {number|Long|null} [endTime] S_FRIENDLY_MATCH endTime
          */
 
         /**
@@ -3450,11 +3589,11 @@ $root.HallPto = (function() {
 
         /**
          * S_FRIENDLY_MATCH endTime.
-         * @member {number} endTime
+         * @member {number|Long} endTime
          * @memberof HallPto.S_FRIENDLY_MATCH
          * @instance
          */
-        S_FRIENDLY_MATCH.prototype.endTime = 0;
+        S_FRIENDLY_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Encodes the specified S_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.
@@ -3475,7 +3614,7 @@ $root.HallPto = (function() {
             if (message.friendUid != null && Object.hasOwnProperty.call(message, "friendUid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.friendUid);
             if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.endTime);
+                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.endTime);
             return writer;
         };
 
@@ -3510,7 +3649,7 @@ $root.HallPto = (function() {
                         break;
                     }
                 case 4: {
-                        message.endTime = reader.int32();
+                        message.endTime = reader.int64();
                         break;
                     }
                 default:

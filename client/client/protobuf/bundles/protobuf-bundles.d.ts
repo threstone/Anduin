@@ -1253,6 +1253,67 @@ declare namespace FriendPto {
     }
 }
 
+/** Namespace GamePto. */
+declare namespace GamePto {
+
+    /** Properties of a C_FRIENDLY_MATCH. */
+    interface IC_FRIENDLY_MATCH {
+
+        /** C_FRIENDLY_MATCH cmd */
+        cmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH scmd */
+        scmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH token */
+        token?: (number|null);
+    }
+
+    /** Represents a C_FRIENDLY_MATCH. */
+    class C_FRIENDLY_MATCH implements IC_FRIENDLY_MATCH {
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_FRIENDLY_MATCH);
+
+        /** C_FRIENDLY_MATCH cmd. */
+        public cmd: number;
+
+        /** C_FRIENDLY_MATCH scmd. */
+        public scmd: number;
+
+        /** C_FRIENDLY_MATCH token. */
+        public token: number;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
+         * @param message C_FRIENDLY_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_FRIENDLY_MATCH, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_FRIENDLY_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_FRIENDLY_MATCH;
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
 /** Namespace HallPto. */
 declare namespace HallPto {
 
@@ -1515,7 +1576,7 @@ declare namespace HallPto {
         friendUid?: (number|null);
 
         /** S_FRIENDLY_MATCH endTime */
-        endTime?: (number|null);
+        endTime?: (number|Long|null);
     }
 
     /** Represents a S_FRIENDLY_MATCH. */
@@ -1537,7 +1598,7 @@ declare namespace HallPto {
         public friendUid: number;
 
         /** S_FRIENDLY_MATCH endTime. */
-        public endTime: number;
+        public endTime: (number|Long);
 
         /**
          * Encodes the specified S_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.

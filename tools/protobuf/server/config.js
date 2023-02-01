@@ -14,6 +14,7 @@ let configs = [
             '../../../proto/system.proto',
             '../../../proto/friend.proto',
             '../../../proto/cards.proto',
+			'../../../proto/game.proto',
         ]
     }
 ];

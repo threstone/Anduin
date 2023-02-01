@@ -37,7 +37,7 @@ message S_FRIENDLY_MATCH{
     int32 cmd = 1[default = 2]; 
 	int32 scmd = 2[default = 5];
 	int32 friendUid = 3;
-    int32 endTime = 4;//超过这个时间未接受会当做是拒绝
+    int64 endTime = 4;//超过这个时间未接受会当做是拒绝
 }
 
 //接受或拒绝好友的友谊赛请求

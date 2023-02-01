@@ -56,19 +56,19 @@ class CardGroupInfo {
      */
     private addCardCheck(cardInfo: CardInterface) {
         if (this._cardCount > GroupCardsNum) {
-            TipsView.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
+            SystemModel.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
             return false;
         }
         if (this._hasPremium && cardInfo.cardType === CardsPto.CardType.Hero) {
-            TipsView.ins().showTips('英雄卡只能携带一张');
+            SystemModel.ins().showTips('英雄卡只能携带一张');
             return false;
         }
         if (cardInfo.powerId !== this.powerId && cardInfo.powerId !== CardsPto.PowerType.Common) {
-            TipsView.ins().showTips('只能携带本职业卡或中立卡');
+            SystemModel.ins().showTips('只能携带本职业卡或中立卡');
             return false;
         }
         if (this._cardCount === GroupCardsNum - 1 && this.hasPremium === false) {
-            TipsView.ins().showTips('必须携带一张英雄卡');
+            SystemModel.ins().showTips('必须携带一张英雄卡');
             return false;
         }
         return true;
@@ -87,11 +87,11 @@ class CardGroupInfo {
             //已经有了
             if (cardInfo.cardId === info.cardInfo.cardId) {
                 if (cardInfo.quality === CardsPto.QualityType.Premium) {
-                    TipsView.ins().showTips('同一种橙卡只能携带一张');
+                    SystemModel.ins().showTips('同一种橙卡只能携带一张');
                     return false;
                 }
                 if (info.count === 3) {
-                    TipsView.ins().showTips('同一张卡最多携带了3张了');
+                    SystemModel.ins().showTips('同一张卡最多携带了3张了');
                     return false;
                 }
                 info.count++;

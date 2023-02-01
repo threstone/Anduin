@@ -1,28 +1,17 @@
 //此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts
-import * as RPC from "../RPC"
-import { ILog } from "../../I"
 
-let uuid = "914a3d93-57f1-42db-9cc0-a4f42d4c5c02"
+import { ILog } from "../../I"
+import { RPCServer } from "../RPCServer";
+import { RPCClient } from "../RPCClient";
+
+let uuid = "f80b7bc1-e3fb-4422-9b9e-41b041b70afa"
 
 //服务器的虚函数定义
-export abstract class HallRPCServer {
-    private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["reqLogin", "reqRegister", "transferToHall"]
-    get funs() { return this.funs_ }
-    get rpc() { return this.rpcServer };
-
+export abstract class HallRPCServer extends RPCServer {
     constructor(port: number, logger: ILog) {
-        this.rpcServer.startServer(port, uuid, logger);
+        super(port, logger, uuid)
+        this._funs = ["reqLogin", "reqRegister", "transferToHall"]; 
         this.init();
-    }
-
-    init() {
-        this.rpc.registerFuns(this)
-         this.rpc.onClose = this.onClose.bind(this)
-    }
-
-    onClose(clientName: string) {
-
     }
 
     //登录
@@ -36,7 +25,7 @@ export abstract class HallRPCServer {
 
     //s2c
     //主动告知网关转发消息
-    async callTransferToGate(clientName:string,uid:number,buffer:Buffer):Promise<void>    {
+    async callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise < void>     {
         let args = [uid,buffer]
         let res: any = await this.rpc.call(clientName,"transferToGate", args)
         return res
@@ -48,7 +37,7 @@ export abstract class HallRPCServer {
     }
 
     //关闭对应uid的socket
-    async callCloseUserSocket(clientName:string,uid:number):Promise<void>    {
+    async callCloseUserSocket(clientName:string,uid:number): Promise < void>     {
         let args = [uid]
         let res: any = await this.rpc.call(clientName,"closeUserSocket", args)
         return res
@@ -62,28 +51,13 @@ export abstract class HallRPCServer {
 }
 
 //客户端的函数定义
-export abstract class HallRPCClient {
+export abstract class HallRPCClient extends RPCClient{
 
-    private myRpcClient = new RPC.RPC_CLIENT()
-    private funs_: string[] = ["transferToGate", "closeUserSocket"]
-    get funs() { return this.funs_ }
-    get rpc() { return this.myRpcClient }
-    get port() { return this.rpc.port }
-    get host() { return this.rpc.host }
-    get isClose() { return this.rpc.isClose }
     constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {
-        this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)
+        super(host, port, serverName, myName, uuid, logger);
+        this._funs = ["transferToGate", "closeUserSocket"];
+        this.init();
     }
-
-    init() {
-        this.rpc.registerFuns(this)
-        this.rpc.onOpen = this.onOpen.bind(this)
-        this.rpc.onClose = this.onClose.bind(this)
-    }
-
-    abstract onOpen();
-    abstract onClose();
-
     //登录
     async callReqLogin(buff:Buffer):Promise<Buffer>    {
         let args = [buff]

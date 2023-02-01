@@ -46,7 +46,7 @@ export class HallHandler extends BaseHandler {
 
     //接受或拒绝好友的友谊赛请求
     static async C_REQ_FRIENDLY_MATCH_RESULT(clientName: string, uid: number, msg: HallPto.C_REQ_FRIENDLY_MATCH_RESULT) {
-        const redisKey = `friendlyMatch[${uid}]-[${msg.targetUid}]`;
+        const redisKey = `friendlyMatch[${msg.targetUid}]-[${uid}]`;
         const res = await GlobalVar.redisMgr.getClient(RedisType.userRelation).getData(redisKey);
         //没有这个请求数据的话就不用管了
         if (!res) {
@@ -54,10 +54,8 @@ export class HallHandler extends BaseHandler {
         }
         GlobalVar.redisMgr.getClient(RedisType.userRelation).delete(redisKey);
 
-        let friendClientName: string;
+        const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${msg.targetUid}`);
         if (msg.result) {
-            //如果这个好友不在线
-            friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${msg.targetUid}`);
             if (!friendClientName) {
                 GlobalVar.socketServer.sendTips(clientName, uid, '好友离线了');
                 return;

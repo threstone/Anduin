@@ -441,6 +441,9 @@ export class RPC_CLIENT extends RPC_BASE {
     get port() {
         return this._port
     }
+    get myName() {
+        return this._myName
+    }
     async call(method: string, args: Array<any>) {
         if (this.isClose) {
             logger.error("call error ,do not connect to rpc server.  call method:", method)

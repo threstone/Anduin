@@ -64,6 +64,8 @@ class FriendView extends BaseView<BaseUI.UIFriendCom> {
                 return;
             }
             HallModel.ins().C_REQ_FRIENDLY_MATCH(this.curSelectUid);
+            this.view.friendOpCom.visible = false;
+            this.curSelectUid = -1;
         }, this);
         list.addChild(fightBtn);
 

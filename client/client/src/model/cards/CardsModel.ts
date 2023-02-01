@@ -139,10 +139,10 @@ class CardsModel extends BaseModel {
             //code的提示语可以提取到配置里头，防止每次都要写
             switch (msg.code) {
                 case 1:
-                    TipsView.ins().showTips(`制作卡牌失败,请稍后再试。`)
+                    SystemModel.ins().showTips(`制作卡牌失败,请稍后再试。`)
                     break;
                 case 2:
-                    TipsView.ins().showTips(`金币不足无法购买。`)
+                    SystemModel.ins().showTips(`金币不足无法购买。`)
                     break;
             }
         }
@@ -169,7 +169,7 @@ class CardsModel extends BaseModel {
             //code的提示语可以提取到配置里头，防止每次都要写
             switch (msg.code) {
                 case 1:
-                    TipsView.ins().showTips(`分解卡牌失败,请稍后再试。`)
+                    SystemModel.ins().showTips(`分解卡牌失败,请稍后再试。`)
                     break;
             }
         }

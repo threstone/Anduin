@@ -28,25 +28,18 @@ function readFile(rpc_funPath, outputPath) {
         }
     }
     let funs = createFunLists(1, lineArr, server2clientPos)
-    let serverClass = '//此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts\nimport * as RPC from "../RPC"\n' +
-        'import { ILog } from "../../I"\n\n' +
+    let serverClass = '//此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts\n\n' +
+        'import { ILog } from "../../I"\n' +
+        'import { RPCServer } from "../RPCServer";\n' +
+        'import { RPCClient } from "../RPCClient";\n\n' +
         `let uuid = "${uuid}"\n\n` +
         '//服务器的虚函数定义\n' +
-        'export abstract class ' + className + 'Server {\n' +
-        '    private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();\n' + funs + '\n' +
-        '    get funs() { return this.funs_ }\n' +
-        '    get rpc() { return this.rpcServer };\n\n' +
+        'export abstract class ' + className + 'Server extends RPCServer {\n' +
         '    constructor(port: number, logger: ILog) {\n' +
-        '        this.rpcServer.startServer(port, uuid, logger);\n' +
+        '        super(port, logger, uuid)\n' +
+        `        this._funs = ${funs}; \n` +
         '        this.init();\n' +
-        '    }\n\n' +
-        '    init() {\n' +
-        '        this.rpc.registerFuns(this)\n' +
-        '         this.rpc.onClose = this.onClose.bind(this)\n' +
-        '    }\n\n' +
-        '    onClose(clientName: string) {\n\n' +
-        '    }\n\n'
-
+        '    }\n\n';
 
     let serverFun = abstractFuns(1, lineArr, server2clientPos, true)
 
@@ -60,24 +53,12 @@ function readFile(rpc_funPath, outputPath) {
 
     let clientFun = abstractFuns(server2clientPos, lineArr)
 
-    let exportClientClass = '//客户端的函数定义\n' + 'export abstract class ' + className + 'Client {\n' +
-        '\n    private myRpcClient = new RPC.RPC_CLIENT()\n' + funs +
-        '\n    get funs() { return this.funs_ }' +
-        '\n    get rpc() { return this.myRpcClient }' +
-        // '\n    get clientName() { return this.rpc.clientName }' +
-        '\n    get port() { return this.rpc.port }' +
-        '\n    get host() { return this.rpc.host }' +
-        '\n    get isClose() { return this.rpc.isClose }' +
+    let exportClientClass = '//客户端的函数定义\n' + 'export abstract class ' + className + 'Client extends RPCClient{\n' +
         '\n    constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {' +
-        '\n        this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)\n    }\n' +
-        '\n    init() {' +
-        '\n        this.rpc.registerFuns(this)' +
-        '\n        this.rpc.onOpen = this.onOpen.bind(this)' +
-        '\n        this.rpc.onClose = this.onClose.bind(this)' +
-        '\n    }\n' +
-        '\n    abstract onOpen();' +
-        '\n    abstract onClose();\n\n'
-
+        '\n        super(host, port, serverName, myName, uuid, logger);' +
+        `\n        this._funs = ${funs};` +
+        `\n        this.init();` +
+        '\n    }\n';
 
     let rpcC2SFuns = createAsyncRpcFun(1, lineArr, server2clientPos)
     console.log('客户端转化成功');
@@ -124,7 +105,7 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
             args += ']'
             if (strOne.indexOf('Promise<') === -1) {
                 let resultTypeIndex = strOne.lastIndexOf(':');
-                strOne = `${strOne.substring(0, resultTypeIndex + 1)}Promise<${strOne.substring(resultTypeIndex + 1)}>`
+                strOne = `${strOne.substring(0, resultTypeIndex + 1)} Promise < ${strOne.substring(resultTypeIndex + 1)}> `
             }
             if (isS2C) {//s2c需要clientName
                 //如果返回值是非Promise对象
@@ -200,7 +181,7 @@ function createFunLists(start, lineArr, end) {
         }
 
     }
-    funs = '    private funs_: string[] = [' + funs + ']'
+    funs = '[' + funs + ']'
     return funs
 }
 

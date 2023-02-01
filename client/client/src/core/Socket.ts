@@ -37,6 +37,7 @@ class Socket extends BaseClass {
     */
     public sendProtoMsg(msg: GameProtoClass): void {
         let msgAny: any = msg;
+        console.log(`send message: cmd:${msg.cmd} scmd:${msg.scmd}`);
 
         let buffer = MessageManager.getProtoCls(msgAny.__proto__.cmd, msgAny.__proto__.scmd).encode(msg).finish();
 
@@ -60,6 +61,7 @@ class Socket extends BaseClass {
         let msg: egret.ByteArray = new egret.ByteArray();;
         byteArray.readBytes(msg);
 
+        console.log(`rcv message: cmd:${sysId} scmd:${cmdId}`);
         MessageManager.rcvMsgHandler(sysId, cmdId, msg);
     }
 

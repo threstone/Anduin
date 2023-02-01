@@ -2105,7 +2105,7 @@ $root.HallPto = (function() {
         S_FRIENDLY_MATCH.prototype.cmd = 2;
         S_FRIENDLY_MATCH.prototype.scmd = 5;
         S_FRIENDLY_MATCH.prototype.friendUid = 0;
-        S_FRIENDLY_MATCH.prototype.endTime = 0;
+        S_FRIENDLY_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         S_FRIENDLY_MATCH.create = function create(properties) {
             return new S_FRIENDLY_MATCH(properties);
@@ -2121,7 +2121,7 @@ $root.HallPto = (function() {
             if (m.friendUid != null && Object.hasOwnProperty.call(m, "friendUid"))
                 w.uint32(24).int32(m.friendUid);
             if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-                w.uint32(32).int32(m.endTime);
+                w.uint32(32).int64(m.endTime);
             return w;
         };
 
@@ -2145,7 +2145,7 @@ $root.HallPto = (function() {
                         break;
                     }
                 case 4: {
-                        m.endTime = r.int32();
+                        m.endTime = r.int64();
                         break;
                     }
                 default:
@@ -2170,7 +2170,14 @@ $root.HallPto = (function() {
                 m.friendUid = d.friendUid | 0;
             }
             if (d.endTime != null) {
-                m.endTime = d.endTime | 0;
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
             }
             return m;
         };
@@ -2183,7 +2190,11 @@ $root.HallPto = (function() {
                 d.cmd = 2;
                 d.scmd = 5;
                 d.friendUid = 0;
-                d.endTime = 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -2195,7 +2206,10 @@ $root.HallPto = (function() {
                 d.friendUid = m.friendUid;
             }
             if (m.endTime != null && m.hasOwnProperty("endTime")) {
-                d.endTime = m.endTime;
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
             }
             return d;
         };
@@ -3914,6 +3928,120 @@ $root.CardsPto = (function() {
     })();
 
     return CardsPto;
+})();
+
+$root.GamePto = (function() {
+
+    var GamePto = {};
+
+    GamePto.C_FRIENDLY_MATCH = (function() {
+
+        function C_FRIENDLY_MATCH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_FRIENDLY_MATCH.prototype.cmd = 200;
+        C_FRIENDLY_MATCH.prototype.scmd = 1;
+        C_FRIENDLY_MATCH.prototype.token = 0;
+
+        C_FRIENDLY_MATCH.create = function create(properties) {
+            return new C_FRIENDLY_MATCH(properties);
+        };
+
+        C_FRIENDLY_MATCH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(24).int32(m.token);
+            return w;
+        };
+
+        C_FRIENDLY_MATCH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.C_FRIENDLY_MATCH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.token = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.C_FRIENDLY_MATCH)
+                return d;
+            var m = new $root.GamePto.C_FRIENDLY_MATCH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.token != null) {
+                m.token = d.token | 0;
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 1;
+                d.token = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            return d;
+        };
+
+        C_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_FRIENDLY_MATCH";
+        };
+
+        return C_FRIENDLY_MATCH;
+    })();
+
+    return GamePto;
 })();
 
 module.exports = $root;

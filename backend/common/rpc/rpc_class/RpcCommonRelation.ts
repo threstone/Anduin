@@ -1,28 +1,17 @@
 //此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts
-import * as RPC from "../RPC"
-import { ILog } from "../../I"
 
-let uuid = "e553ae42-6f01-4666-944c-19956f67db56"
+import { ILog } from "../../I"
+import { RPCServer } from "../RPCServer";
+import { RPCClient } from "../RPCClient";
+
+let uuid = "c5d1fe77-152c-40cf-9c32-14744968bd26"
 
 //服务器的虚函数定义
-export abstract class RelationRPCServer {
-    private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();
-    private funs_: string[] = ["userOnline", "userOffline", "transferToRelation"]
-    get funs() { return this.funs_ }
-    get rpc() { return this.rpcServer };
-
+export abstract class RelationRPCServer extends RPCServer {
     constructor(port: number, logger: ILog) {
-        this.rpcServer.startServer(port, uuid, logger);
+        super(port, logger, uuid)
+        this._funs = ["userOnline", "userOffline", "transferToRelation"]; 
         this.init();
-    }
-
-    init() {
-        this.rpc.registerFuns(this)
-         this.rpc.onClose = this.onClose.bind(this)
-    }
-
-    onClose(clientName: string) {
-
     }
 
     //用户上线
@@ -36,7 +25,7 @@ export abstract class RelationRPCServer {
 
     //s2c
     //主动告知网关转发消息
-    async callTransferToGate(clientName:string,uid:number,buffer:Buffer):Promise<void>    {
+    async callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise < void>     {
         let args = [uid,buffer]
         let res: any = await this.rpc.call(clientName,"transferToGate", args)
         return res
@@ -48,7 +37,7 @@ export abstract class RelationRPCServer {
     }
 
     //广播消息
-    async callBroadcast(clientName:string,buffer:Buffer):Promise<void>    {
+    async callBroadcast(clientName:string,buffer:Buffer): Promise < void>     {
         let args = [buffer]
         let res: any = await this.rpc.call(clientName,"broadcast", args)
         return res
@@ -62,30 +51,15 @@ export abstract class RelationRPCServer {
 }
 
 //客户端的函数定义
-export abstract class RelationRPCClient {
+export abstract class RelationRPCClient extends RPCClient{
 
-    private myRpcClient = new RPC.RPC_CLIENT()
-    private funs_: string[] = ["transferToGate", "broadcast"]
-    get funs() { return this.funs_ }
-    get rpc() { return this.myRpcClient }
-    get port() { return this.rpc.port }
-    get host() { return this.rpc.host }
-    get isClose() { return this.rpc.isClose }
     constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {
-        this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)
+        super(host, port, serverName, myName, uuid, logger);
+        this._funs = ["transferToGate", "broadcast"];
+        this.init();
     }
-
-    init() {
-        this.rpc.registerFuns(this)
-        this.rpc.onOpen = this.onOpen.bind(this)
-        this.rpc.onClose = this.onClose.bind(this)
-    }
-
-    abstract onOpen();
-    abstract onClose();
-
     //用户上线
-    async callUserOnline(uid:number,nick:string):Promise<void>    {
+    async callUserOnline(uid:number,nick:string): Promise < void>     {
         let args = [uid,nick]
         let res: any = await this.rpc.call("userOnline",args)
         return res
@@ -97,7 +71,7 @@ export abstract class RelationRPCClient {
     }
 
     //用户离线
-    async callUserOffline(uid:number):Promise<void>    {
+    async callUserOffline(uid:number): Promise < void>     {
         let args = [uid]
         let res: any = await this.rpc.call("userOffline",args)
         return res

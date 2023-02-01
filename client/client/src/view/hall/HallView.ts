@@ -21,7 +21,12 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
 
         this.AddClick(this.view.miniChat, this.onMiniChatClick);
         this.observe('S_CHAT_MESSAGE', this.onChatMessage);
-        this.observe('S_REQ_FRIENDLY_MATCH', FriendlyMatchView.ins().open.bind(FriendlyMatchView.ins()));
+        this.observe('S_REQ_FRIENDLY_MATCH', (evt: EventData) => {
+            FriendlyMatchView.ins().openByRequest(evt.data);
+        });
+        this.observe('S_FRIENDLY_MATCH', (evt: EventData) => {
+            FriendlyMatchView.ins().openByResponse(evt.data);
+        });
     }
 
     private onMiniChatClick() {
