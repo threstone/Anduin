@@ -29,7 +29,7 @@ export class GlobalVar {
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
 
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userRelation]);
+        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGame]);
 
         this.tableMgr = new TableMgr();
         this.tableMgr.startLogic();

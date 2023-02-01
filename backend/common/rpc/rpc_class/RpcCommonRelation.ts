@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "c5d1fe77-152c-40cf-9c32-14744968bd26"
+let uuid = "77458db2-8c60-4265-9acc-5bbf5f44b790"
 
 //服务器的虚函数定义
 export abstract class RelationRPCServer extends RPCServer {

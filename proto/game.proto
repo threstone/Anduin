@@ -5,7 +5,15 @@ package GamePto;
 message C_FRIENDLY_MATCH{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 1];
-	int32 token = 3;
+	string token = 3;
 }
 
 
+
+
+
+//游戏开始  开始前要判断玩家是否在游戏中，在就开始失败
+//message C_FRIENDLD_MATCH_LEAVE{
+//	int32 cmd = 1[default = 200]; 
+//	int32 scmd = 2[default = 3];
+//}

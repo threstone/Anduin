@@ -51,11 +51,5 @@ class HallModel extends BaseModel {
     private S_REQ_FRIENDLY_MATCH_RESULT(msg: HallPto.S_REQ_FRIENDLY_MATCH_RESULT) {
         this.emit('S_REQ_FRIENDLY_MATCH_RESULT');
         SystemModel.ins().showTips(`${FriendModel.ins().getFriendNick(msg.targetUid)}${msg.result ? '接受' : '拒绝'}了你的友谊赛请求！`)
-        if (msg.result) {
-            msg.token;
-            const req = new GamePto.C_FRIENDLY_MATCH();
-            req.token = msg.token;
-            this.sendMsg(req);
-        }
     }
 }

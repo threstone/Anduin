@@ -4,9 +4,13 @@ import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
 import { CommonUtils } from '../../common/CommonUtils';
 import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
-import { HallConnectorMgr } from './connector/HallConnectorMgr';
 import { RelationConnector } from './connector/RelationConnector';
+import { ConnectorMgr } from '../../common/rpc/ConntctorMgr';
+import { HallConnector } from './connector/HallConnector';
+import { GameConnector } from './connector/GameConnector';
 import * as relationConn from '../../common/config/relation_node.json';
+import * as hallConn from '../../common/config/hall_node.json';
+import * as gamesConn from '../../common/config/game_node.json';
 
 const logger = getLogger();
 
@@ -14,7 +18,9 @@ export class GlobalVar {
 
     public static startupParam: ILauncherOption;
     public static socketServer: SocketServer;
-    public static hallConnectorMgr: HallConnectorMgr
+    
+    public static hallConnectorMgr: ConnectorMgr<HallConnector>;
+    public static gameConnectorMgr: ConnectorMgr<GameConnector>;
     public static relationConnector: RelationConnector
 
     public static init() {
@@ -30,9 +36,8 @@ export class GlobalVar {
     }
 
     private static initConnector() {
-        //init hallConectorMgr
-        this.hallConnectorMgr = new HallConnectorMgr(logger, this.startupParam.nodeId);
+        this.hallConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, hallConn, HallConnector);
+        this.gameConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, gamesConn, GameConnector);
         this.relationConnector = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
-        this.relationConnector.init();
     }
 }

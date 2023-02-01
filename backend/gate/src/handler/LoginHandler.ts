@@ -7,7 +7,7 @@ export class LoginHandler {
         if (socket.isAuthorized) {
             return;
         }
-        const login = GlobalVar.hallConnectorMgr.getRandLifeLogin();
+        const login = GlobalVar.hallConnectorMgr.getAliveConnector();
         if (!login) {
             return;
         }

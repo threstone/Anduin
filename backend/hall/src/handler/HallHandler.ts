@@ -1,8 +1,10 @@
+import { v4 as uuid } from 'uuid';
 import { HallPto } from '../../../common/CommonProto';
 import { RedisType } from '../../../common/ConstDefine';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
+
 export class HallHandler extends BaseHandler {
     //请求友谊赛
     static async C_REQ_FRIENDLY_MATCH(clientName: string, uid: number, msg: HallPto.C_REQ_FRIENDLY_MATCH) {
@@ -72,14 +74,81 @@ export class HallHandler extends BaseHandler {
         const replay = new HallPto.S_REQ_FRIENDLY_MATCH_RESULT();
         replay.result = msg.result;
         replay.targetUid = uid;
-        if (msg.result) {
-            replay.token = Date.now() + Math.floor(Math.random() * 10000000);
-            //将token
-            GlobalVar.redisMgr.getClient(RedisType.userGame).setObjInHash(replay.token, {
-                uid1: msg.targetUid, client1: friendClientName,
-                uid2: uid, client2: clientName
-            }, 10);
-        }
         this.sendMsg(friendClientName, msg.targetUid, replay);
+        //如果接受，下发挑选卡组协议
+        if (msg.result) {
+            const chooseGroup = new HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
+            chooseGroup.endTime = Date.now() + 300000;
+            chooseGroup.token = uuid();
+            chooseGroup.targetUid = uid;
+            this.sendMsg(friendClientName, msg.targetUid, chooseGroup);
+            chooseGroup.targetUid = msg.targetUid;
+            this.sendMsg(clientName, uid, chooseGroup);
+            GlobalVar.redisMgr.getClient(RedisType.userGame).hmset(chooseGroup.token, {}, 300);
+        }
+    }
+
+    //友谊赛挑选卡组
+    static async C_FRIENDLY_MATCH_CARD_GROUP(clientName: string, uid: number, msg: HallPto.C_FRIENDLY_MATCH_CARD_GROUP) {
+        const redis = GlobalVar.redisMgr.getClient(RedisType.userGame);
+        const data = await redis.hgetall(msg.token);
+        if (!data) {
+            const stopMsg = new HallPto.S_FRIENDLY_MATCH_STOP();
+            this.sendMsg(clientName, uid, stopMsg);
+            return;
+        }
+        //对方设置好卡组了,开始游戏
+        if (data[msg.targetUid]) {
+            const startMsg = new HallPto.S_FRIENDLY_MATCH_TOKEN();
+            startMsg.token = uuid();
+            data[uid] = msg.cardGroupId;
+            data[`client${uid}`] = clientName;
+            redis.hmset(startMsg.token, data, 15);
+            redis.delete(msg.token);
+            this.sendMsg(clientName, uid, msg);
+        } else {
+            redis.hmset(msg.token, {
+                [uid]: msg.cardGroupId,
+                [`client${uid}`]: clientName
+            });
+        }
+    }
+
+    //友谊赛取消挑选卡组
+    static async C_FRIENDLY_MATCH_CANCEL_GROUP(clientName: string, uid: number, msg: HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP) {
+        const redis = GlobalVar.redisMgr.getClient(RedisType.userGame);
+        const data = await redis.hgetall(msg.token);
+        if (!data) {
+            const stopMsg = new HallPto.S_FRIENDLY_MATCH_STOP();
+            this.sendMsg(clientName, uid, stopMsg);
+            return;
+        }
+        redis.hdel(msg.token, `${uid}`);
+    }
+
+    //友谊赛离开
+    static async C_FRIENDLY_MATCH_LEAVE(clientName: string, uid: number, msg: HallPto.C_FRIENDLY_MATCH_LEAVE) {
+        //如果token信息已经不在了就不处理了
+        const redis = GlobalVar.redisMgr.getClient(RedisType.userGame);
+        const data = await redis.hgetall(msg.token);
+        if (!data) {
+            return;
+        }
+
+        GlobalVar.redisMgr.getClient(RedisType.userGame).delete(msg.token);
+        const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${msg.targetUid}`);
+        if (!friendClientName) {
+            const stopMsg = new HallPto.S_FRIENDLY_MATCH_STOP();
+            this.sendMsg(friendClientName, msg.targetUid, stopMsg);
+        }
     }
 }
+
+
+// if (msg.result) {
+//     replay.token = Date.now() + Math.floor(Math.random() * 10000000);
+//     //将token
+//     GlobalVar.redisMgr.getClient(RedisType.userGame).setObjInHash(replay.token, {
+//         friendUid: uid, clientName
+//     }, 10);
+// }

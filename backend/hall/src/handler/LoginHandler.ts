@@ -105,7 +105,7 @@ export class LoginHandler extends BaseHandler {
         replyMsg.nick = userInfo.nick;
         replyMsg.uid = uid;
         //设置玩家信息
-        GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(uid, (userInfo as any).dataValues, -1);
+        GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(uid, (userInfo as any).dataValues, -1);
         GlobalVar.redisMgr.getClient(RedisType.userGate).setData(uid, `${clientName}`, -1);
         await this.initFriendInfo(uid, replyMsg);
     }

@@ -9,7 +9,7 @@ export class DbHelper {
         //如果没有找到信息,将mysql中的信息同步到redis
         if (info == null) {
             const userInfo = await UserModel.findOne({ where: { uid } });
-            GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
+            GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
             return userInfo[key];
         }
         return info;
@@ -20,7 +20,7 @@ export class DbHelper {
         const info = await GlobalVar.redisMgr.getClient(RedisType.userInfo).hmget(uid, keys);
         if (info == null) {
             const userInfo = await UserModel.findOne({ where: { uid } });
-            GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
+            GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(`${userInfo.uid}`, (userInfo as any).dataValues, -1);
             return userInfo;
         }
         const res = new UserModel();
@@ -44,11 +44,11 @@ export class DbHelper {
         } else {
             userInfo = await UserModel.findOne({ attributes: keys, where: { uid } });
         }
-        GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(`${uid}`, (userInfo as any).dataValues, -1);
+        GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(`${uid}`, (userInfo as any).dataValues, -1);
     }
 
     /**同步对应数据到redis */
     syncUserInfoToMysql(uid: number, user: UserModel) {
-        return GlobalVar.redisMgr.getClient(RedisType.userInfo).setObjInHash(uid, (user as any).dataValues);
+        return GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(uid, (user as any).dataValues);
     }
 }

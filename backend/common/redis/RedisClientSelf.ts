@@ -159,7 +159,7 @@ export class RedisClientSelf {
      * @param sec  设置存在时间   如果sec为-1则有效时间为永久
      * @param time_out 请求超时时间
      */
-    async setData(key: string | number, value: any, sec: number, time_out?: number) {
+    setData(key: string | number, value: any, sec: number, time_out?: number) {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
         if (typeof value == 'object') {
             value = JSON.stringify(value);
@@ -173,18 +173,23 @@ export class RedisClientSelf {
 
     /**
      * 将对象以hash的方式储存到redis
+     * @param sec  设置存在时间   
+     * 如果sec为-1则如果是新key则永久,如果是已有的key则按原有的销毁时间
      */
-    setObjInHash(key: string | number, obj: {}, time_out?: number) {
+    hmset(key: string | number, obj: {}, sec: number = -1, time_out?: number) {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
         let keys = Object.keys(obj);
-        let date = [key];
+        let data = [key];
         for (let index = 0; index < keys.length; index++) {
             let key = keys[index];
             let value = obj[key];
-            date.push(key);
-            date.push(value);
+            data.push(key);
+            data.push(value);
         }
-        this.sendCommand('hmset', date, time_out);
+        this.sendCommand('hmset', data, time_out);
+        if (sec !== -1) {
+            this.setExpire(key, sec);
+        }
     }
 
     /**
@@ -193,10 +198,9 @@ export class RedisClientSelf {
      * @param key 
      * @param time_out 请求超时时间
      */
-    async getData(key: string | number, time_out?: number): Promise<any> {
+    getData(key: string | number, time_out?: number): Promise<any> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        let res = await this.sendCommand('get', [key], time_out);
-        return res;
+        return this.sendCommand('get', [key], time_out);
     }
 
     /**
@@ -204,36 +208,31 @@ export class RedisClientSelf {
      * @param key 
      * @param time_out 请求超时时间
      */
-    async hgetall(key: string | number, time_out?: number): Promise<any> {
+    hgetall(key: string | number, time_out?: number): Promise<any> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        let res = await this.sendCommand('hgetall', [key], time_out);
-        return res;
+        return this.sendCommand('hgetall', [key], time_out);
     }
 
     /**
      * 返回哈希表中，一个或多个给定字段的值 
      * @param key 
      * @param field  一个或多个给定字段
-     * @param sec  设置存在时间   如果sec为-1则有效时间为永久
      * @param time_out 请求超时时间
      */
-    async hmget(key: string | number, field: any[], time_out?: number): Promise<string[]> {
+    hmget(key: string | number, field: any[], time_out?: number): Promise<string[]> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        let res = await this.sendCommand('hmget', [key, ...field], time_out);
-        return res;
+        return this.sendCommand('hmget', [key, ...field], time_out);
     }
 
     /**
     * 返回哈希表中给定字段的值 
     * @param key 
     * @param field 给定字段
-    * @param sec  设置存在时间   如果sec为-1则有效时间为永久
     * @param time_out 请求超时时间
     */
-    async hget(key: string | number, field: string, time_out?: number): Promise<any> {
+    hget(key: string | number, field: string, time_out?: number): Promise<any> {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        let res = await this.sendCommand('hget', [key, field], time_out);
-        return res;
+        return this.sendCommand('hget', [key, field], time_out);
     }
 
     /**
@@ -241,29 +240,35 @@ export class RedisClientSelf {
      * @param key 
      * @param field  给定字段
      * @param value 
-     * @param sec  设置存在时间 如果sec为-1则有效时间为永久
      * @param time_out 请求超时时间
      */
-    async hset(key: string | number, field: string, value: any, sec: number, time_out?: number) {
+    hset(key: string | number, field: string, value: any, time_out?: number) {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
         if (typeof value == 'object') {
             value = JSON.stringify(value);
         }
-        await this.sendCommand('hset', [key, field, value], time_out);
-        if (sec != -1) {
-            this.setExpire(key, sec);
-        }
+        return this.sendCommand('hset', [key, field, value], time_out);
     }
 
+    /**
+     * 删除哈希表中的指定字段
+     * @param key 
+     * @param field  指定字段
+     * @param time_out 请求超时时间
+     */
+    hdel(key: string | number, field: string, time_out?: number) {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        return this.sendCommand('hdel', [key, field], time_out);
+    }
 
     /**
      * 删除redis数据
      * @param key 
      * @param time_out 
      */
-    async delete(key: string | number, time_out?: number) {
+    delete(key: string | number, time_out?: number) {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        this.sendCommand('del', [key], time_out);
+        return this.sendCommand('del', [key], time_out);
     }
 
     /**
@@ -273,9 +278,9 @@ export class RedisClientSelf {
      * @param expireTime 锁持续时间  单位秒
      * @param time_out 请求超时时间
      */
-    async setExpire(key: string | number, expireTime: number, time_out?: number) {
+    setExpire(key: string | number, expireTime: number, time_out?: number) {
         time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
-        this.sendCommand('expire', [key, expireTime], time_out);
+        return this.sendCommand('expire', [key, expireTime], time_out);
     }
 
     /**

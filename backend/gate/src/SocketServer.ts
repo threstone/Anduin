@@ -118,12 +118,21 @@ export class SocketServer {
         if (socket.isAuthorized !== true) {
             return;
         }
+        //routing to hall server 
         if (cmd >= 0 && cmd <= 99) {
-            GlobalVar.hallConnectorMgr.getRandLifeLogin()?.sendTransferToHall(socket.uid, buffer);
-        } else if (cmd === 100) {
+            GlobalVar.hallConnectorMgr.getAliveConnector()?.sendTransferToHall(socket.uid, buffer);
+        }//routing to relation server 
+        else if (cmd === 100) {
             GlobalVar.relationConnector.sendTransferToRelation(socket.uid, buffer);
-        } else if (cmd >= 200) {
-            // GlobalVar.relationConnector
+        }//routing to game server 
+        else if (cmd >= 200) {
+            if (!socket.gameNodeId) {
+                GlobalVar.gameConnectorMgr.getAliveConnector()?.sendTransferToGame(socket.uid, buffer);
+            } else {
+                const connector = GlobalVar.gameConnectorMgr.getConnectorByName(socket.gameNodeId);
+                connector.sendTransferToGame(socket.uid, buffer);
+            }
+        } else {
             this.logger.error(`unknow routing cmd${cmd}`);
         }
     }

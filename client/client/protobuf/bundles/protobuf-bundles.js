@@ -2852,7 +2852,7 @@ $root.GamePto = (function() {
          * @interface IC_FRIENDLY_MATCH
          * @property {number|null} [cmd] C_FRIENDLY_MATCH cmd
          * @property {number|null} [scmd] C_FRIENDLY_MATCH scmd
-         * @property {number|null} [token] C_FRIENDLY_MATCH token
+         * @property {string|null} [token] C_FRIENDLY_MATCH token
          */
 
         /**
@@ -2888,11 +2888,11 @@ $root.GamePto = (function() {
 
         /**
          * C_FRIENDLY_MATCH token.
-         * @member {number} token
+         * @member {string} token
          * @memberof GamePto.C_FRIENDLY_MATCH
          * @instance
          */
-        C_FRIENDLY_MATCH.prototype.token = 0;
+        C_FRIENDLY_MATCH.prototype.token = "";
 
         /**
          * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
@@ -2911,7 +2911,7 @@ $root.GamePto = (function() {
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.token != null && Object.hasOwnProperty.call(message, "token"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.token);
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.token);
             return writer;
         };
 
@@ -2942,7 +2942,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        message.token = reader.int32();
+                        message.token = reader.string();
                         break;
                     }
                 default:
@@ -3389,7 +3389,6 @@ $root.HallPto = (function() {
          * @property {number|null} [scmd] S_REQ_FRIENDLY_MATCH_RESULT scmd
          * @property {number|null} [targetUid] S_REQ_FRIENDLY_MATCH_RESULT targetUid
          * @property {boolean|null} [result] S_REQ_FRIENDLY_MATCH_RESULT result
-         * @property {number|null} [token] S_REQ_FRIENDLY_MATCH_RESULT token
          */
 
         /**
@@ -3440,14 +3439,6 @@ $root.HallPto = (function() {
         S_REQ_FRIENDLY_MATCH_RESULT.prototype.result = false;
 
         /**
-         * S_REQ_FRIENDLY_MATCH_RESULT token.
-         * @member {number} token
-         * @memberof HallPto.S_REQ_FRIENDLY_MATCH_RESULT
-         * @instance
-         */
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.token = 0;
-
-        /**
          * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
          * @function encode
          * @memberof HallPto.S_REQ_FRIENDLY_MATCH_RESULT
@@ -3467,8 +3458,6 @@ $root.HallPto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.targetUid);
             if (message.result != null && Object.hasOwnProperty.call(message, "result"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.result);
-            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.token);
             return writer;
         };
 
@@ -3504,10 +3493,6 @@ $root.HallPto = (function() {
                     }
                 case 4: {
                         message.result = reader.bool();
-                        break;
-                    }
-                case 5: {
-                        message.token = reader.int32();
                         break;
                     }
                 default:
@@ -3818,6 +3803,828 @@ $root.HallPto = (function() {
         };
 
         return C_REQ_FRIENDLY_MATCH_RESULT;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_CARD_GROUP = (function() {
+
+        /**
+         * Properties of a S_FRIENDLY_MATCH_CARD_GROUP.
+         * @memberof HallPto
+         * @interface IS_FRIENDLY_MATCH_CARD_GROUP
+         * @property {number|null} [cmd] S_FRIENDLY_MATCH_CARD_GROUP cmd
+         * @property {number|null} [scmd] S_FRIENDLY_MATCH_CARD_GROUP scmd
+         * @property {number|Long|null} [endTime] S_FRIENDLY_MATCH_CARD_GROUP endTime
+         * @property {string|null} [token] S_FRIENDLY_MATCH_CARD_GROUP token
+         * @property {number|null} [targetUid] S_FRIENDLY_MATCH_CARD_GROUP targetUid
+         */
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_CARD_GROUP.
+         * @memberof HallPto
+         * @classdesc Represents a S_FRIENDLY_MATCH_CARD_GROUP.
+         * @implements IS_FRIENDLY_MATCH_CARD_GROUP
+         * @constructor
+         * @param {HallPto.IS_FRIENDLY_MATCH_CARD_GROUP=} [properties] Properties to set
+         */
+        function S_FRIENDLY_MATCH_CARD_GROUP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_FRIENDLY_MATCH_CARD_GROUP cmd.
+         * @member {number} cmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
+
+        /**
+         * S_FRIENDLY_MATCH_CARD_GROUP scmd.
+         * @member {number} scmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 7;
+
+        /**
+         * S_FRIENDLY_MATCH_CARD_GROUP endTime.
+         * @member {number|Long} endTime
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * S_FRIENDLY_MATCH_CARD_GROUP token.
+         * @member {string} token
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
+
+        /**
+         * S_FRIENDLY_MATCH_CARD_GROUP targetUid.
+         * @member {number} targetUid
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {HallPto.IS_FRIENDLY_MATCH_CARD_GROUP} message S_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.endTime);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.token);
+            if (message.targetUid != null && Object.hasOwnProperty.call(message, "targetUid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetUid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.S_FRIENDLY_MATCH_CARD_GROUP} S_FRIENDLY_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.endTime = reader.int64();
+                        break;
+                    }
+                case 4: {
+                        message.token = reader.string();
+                        break;
+                    }
+                case 5: {
+                        message.targetUid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_CARD_GROUP
+         * @function getTypeUrl
+         * @memberof HallPto.S_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_CARD_GROUP";
+        };
+
+        return S_FRIENDLY_MATCH_CARD_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_CARD_GROUP = (function() {
+
+        /**
+         * Properties of a C_FRIENDLY_MATCH_CARD_GROUP.
+         * @memberof HallPto
+         * @interface IC_FRIENDLY_MATCH_CARD_GROUP
+         * @property {number|null} [cmd] C_FRIENDLY_MATCH_CARD_GROUP cmd
+         * @property {number|null} [scmd] C_FRIENDLY_MATCH_CARD_GROUP scmd
+         * @property {number|null} [cardGroupId] C_FRIENDLY_MATCH_CARD_GROUP cardGroupId
+         * @property {string|null} [token] C_FRIENDLY_MATCH_CARD_GROUP token
+         * @property {number|null} [targetUid] C_FRIENDLY_MATCH_CARD_GROUP targetUid
+         */
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_CARD_GROUP.
+         * @memberof HallPto
+         * @classdesc Represents a C_FRIENDLY_MATCH_CARD_GROUP.
+         * @implements IC_FRIENDLY_MATCH_CARD_GROUP
+         * @constructor
+         * @param {HallPto.IC_FRIENDLY_MATCH_CARD_GROUP=} [properties] Properties to set
+         */
+        function C_FRIENDLY_MATCH_CARD_GROUP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_FRIENDLY_MATCH_CARD_GROUP cmd.
+         * @member {number} cmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
+
+        /**
+         * C_FRIENDLY_MATCH_CARD_GROUP scmd.
+         * @member {number} scmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 8;
+
+        /**
+         * C_FRIENDLY_MATCH_CARD_GROUP cardGroupId.
+         * @member {number} cardGroupId
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cardGroupId = 0;
+
+        /**
+         * C_FRIENDLY_MATCH_CARD_GROUP token.
+         * @member {string} token
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
+
+        /**
+         * C_FRIENDLY_MATCH_CARD_GROUP targetUid.
+         * @member {number} targetUid
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {HallPto.IC_FRIENDLY_MATCH_CARD_GROUP} message C_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardGroupId != null && Object.hasOwnProperty.call(message, "cardGroupId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardGroupId);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.token);
+            if (message.targetUid != null && Object.hasOwnProperty.call(message, "targetUid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetUid);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.C_FRIENDLY_MATCH_CARD_GROUP} C_FRIENDLY_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardGroupId = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.token = reader.string();
+                        break;
+                    }
+                case 5: {
+                        message.targetUid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_CARD_GROUP
+         * @function getTypeUrl
+         * @memberof HallPto.C_FRIENDLY_MATCH_CARD_GROUP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CARD_GROUP";
+        };
+
+        return C_FRIENDLY_MATCH_CARD_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP = (function() {
+
+        /**
+         * Properties of a C_FRIENDLY_MATCH_CANCEL_GROUP.
+         * @memberof HallPto
+         * @interface IC_FRIENDLY_MATCH_CANCEL_GROUP
+         * @property {number|null} [cmd] C_FRIENDLY_MATCH_CANCEL_GROUP cmd
+         * @property {number|null} [scmd] C_FRIENDLY_MATCH_CANCEL_GROUP scmd
+         * @property {string|null} [token] C_FRIENDLY_MATCH_CANCEL_GROUP token
+         */
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_CANCEL_GROUP.
+         * @memberof HallPto
+         * @classdesc Represents a C_FRIENDLY_MATCH_CANCEL_GROUP.
+         * @implements IC_FRIENDLY_MATCH_CANCEL_GROUP
+         * @constructor
+         * @param {HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP=} [properties] Properties to set
+         */
+        function C_FRIENDLY_MATCH_CANCEL_GROUP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_FRIENDLY_MATCH_CANCEL_GROUP cmd.
+         * @member {number} cmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.cmd = 2;
+
+        /**
+         * C_FRIENDLY_MATCH_CANCEL_GROUP scmd.
+         * @member {number} scmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.scmd = 9;
+
+        /**
+         * C_FRIENDLY_MATCH_CANCEL_GROUP token.
+         * @member {string} token
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @instance
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.token = "";
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_CANCEL_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @static
+         * @param {HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP} message C_FRIENDLY_MATCH_CANCEL_GROUP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.token);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_CANCEL_GROUP message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP} C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.token = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @function getTypeUrl
+         * @memberof HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_FRIENDLY_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP";
+        };
+
+        return C_FRIENDLY_MATCH_CANCEL_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_LEAVE = (function() {
+
+        /**
+         * Properties of a C_FRIENDLY_MATCH_LEAVE.
+         * @memberof HallPto
+         * @interface IC_FRIENDLY_MATCH_LEAVE
+         * @property {number|null} [cmd] C_FRIENDLY_MATCH_LEAVE cmd
+         * @property {number|null} [scmd] C_FRIENDLY_MATCH_LEAVE scmd
+         * @property {string|null} [token] C_FRIENDLY_MATCH_LEAVE token
+         * @property {number|null} [targetUid] C_FRIENDLY_MATCH_LEAVE targetUid
+         */
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_LEAVE.
+         * @memberof HallPto
+         * @classdesc Represents a C_FRIENDLY_MATCH_LEAVE.
+         * @implements IC_FRIENDLY_MATCH_LEAVE
+         * @constructor
+         * @param {HallPto.IC_FRIENDLY_MATCH_LEAVE=} [properties] Properties to set
+         */
+        function C_FRIENDLY_MATCH_LEAVE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_FRIENDLY_MATCH_LEAVE cmd.
+         * @member {number} cmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @instance
+         */
+        C_FRIENDLY_MATCH_LEAVE.prototype.cmd = 2;
+
+        /**
+         * C_FRIENDLY_MATCH_LEAVE scmd.
+         * @member {number} scmd
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @instance
+         */
+        C_FRIENDLY_MATCH_LEAVE.prototype.scmd = 10;
+
+        /**
+         * C_FRIENDLY_MATCH_LEAVE token.
+         * @member {string} token
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @instance
+         */
+        C_FRIENDLY_MATCH_LEAVE.prototype.token = "";
+
+        /**
+         * C_FRIENDLY_MATCH_LEAVE targetUid.
+         * @member {number} targetUid
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @instance
+         */
+        C_FRIENDLY_MATCH_LEAVE.prototype.targetUid = 0;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_LEAVE message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_LEAVE.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @static
+         * @param {HallPto.IC_FRIENDLY_MATCH_LEAVE} message C_FRIENDLY_MATCH_LEAVE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_FRIENDLY_MATCH_LEAVE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.token);
+            if (message.targetUid != null && Object.hasOwnProperty.call(message, "targetUid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.targetUid);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_LEAVE message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.C_FRIENDLY_MATCH_LEAVE} C_FRIENDLY_MATCH_LEAVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_FRIENDLY_MATCH_LEAVE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.C_FRIENDLY_MATCH_LEAVE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.token = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.targetUid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_LEAVE
+         * @function getTypeUrl
+         * @memberof HallPto.C_FRIENDLY_MATCH_LEAVE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_FRIENDLY_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_LEAVE";
+        };
+
+        return C_FRIENDLY_MATCH_LEAVE;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_STOP = (function() {
+
+        /**
+         * Properties of a S_FRIENDLY_MATCH_STOP.
+         * @memberof HallPto
+         * @interface IS_FRIENDLY_MATCH_STOP
+         * @property {number|null} [cmd] S_FRIENDLY_MATCH_STOP cmd
+         * @property {number|null} [scmd] S_FRIENDLY_MATCH_STOP scmd
+         */
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_STOP.
+         * @memberof HallPto
+         * @classdesc Represents a S_FRIENDLY_MATCH_STOP.
+         * @implements IS_FRIENDLY_MATCH_STOP
+         * @constructor
+         * @param {HallPto.IS_FRIENDLY_MATCH_STOP=} [properties] Properties to set
+         */
+        function S_FRIENDLY_MATCH_STOP(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_FRIENDLY_MATCH_STOP cmd.
+         * @member {number} cmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_STOP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_STOP.prototype.cmd = 2;
+
+        /**
+         * S_FRIENDLY_MATCH_STOP scmd.
+         * @member {number} scmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_STOP
+         * @instance
+         */
+        S_FRIENDLY_MATCH_STOP.prototype.scmd = 11;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_STOP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_STOP.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.S_FRIENDLY_MATCH_STOP
+         * @static
+         * @param {HallPto.IS_FRIENDLY_MATCH_STOP} message S_FRIENDLY_MATCH_STOP message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_FRIENDLY_MATCH_STOP.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_STOP message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.S_FRIENDLY_MATCH_STOP
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.S_FRIENDLY_MATCH_STOP} S_FRIENDLY_MATCH_STOP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_FRIENDLY_MATCH_STOP.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.S_FRIENDLY_MATCH_STOP();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_STOP
+         * @function getTypeUrl
+         * @memberof HallPto.S_FRIENDLY_MATCH_STOP
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_FRIENDLY_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_STOP";
+        };
+
+        return S_FRIENDLY_MATCH_STOP;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_TOKEN = (function() {
+
+        /**
+         * Properties of a S_FRIENDLY_MATCH_TOKEN.
+         * @memberof HallPto
+         * @interface IS_FRIENDLY_MATCH_TOKEN
+         * @property {number|null} [cmd] S_FRIENDLY_MATCH_TOKEN cmd
+         * @property {number|null} [scmd] S_FRIENDLY_MATCH_TOKEN scmd
+         * @property {string|null} [token] S_FRIENDLY_MATCH_TOKEN token
+         */
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_TOKEN.
+         * @memberof HallPto
+         * @classdesc Represents a S_FRIENDLY_MATCH_TOKEN.
+         * @implements IS_FRIENDLY_MATCH_TOKEN
+         * @constructor
+         * @param {HallPto.IS_FRIENDLY_MATCH_TOKEN=} [properties] Properties to set
+         */
+        function S_FRIENDLY_MATCH_TOKEN(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_FRIENDLY_MATCH_TOKEN cmd.
+         * @member {number} cmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @instance
+         */
+        S_FRIENDLY_MATCH_TOKEN.prototype.cmd = 2;
+
+        /**
+         * S_FRIENDLY_MATCH_TOKEN scmd.
+         * @member {number} scmd
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @instance
+         */
+        S_FRIENDLY_MATCH_TOKEN.prototype.scmd = 12;
+
+        /**
+         * S_FRIENDLY_MATCH_TOKEN token.
+         * @member {string} token
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @instance
+         */
+        S_FRIENDLY_MATCH_TOKEN.prototype.token = "";
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_TOKEN message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_TOKEN.verify|verify} messages.
+         * @function encode
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @static
+         * @param {HallPto.IS_FRIENDLY_MATCH_TOKEN} message S_FRIENDLY_MATCH_TOKEN message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_FRIENDLY_MATCH_TOKEN.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.token);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_TOKEN message from the specified reader or buffer.
+         * @function decode
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {HallPto.S_FRIENDLY_MATCH_TOKEN} S_FRIENDLY_MATCH_TOKEN
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_FRIENDLY_MATCH_TOKEN.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.HallPto.S_FRIENDLY_MATCH_TOKEN();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.token = reader.string();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_TOKEN
+         * @function getTypeUrl
+         * @memberof HallPto.S_FRIENDLY_MATCH_TOKEN
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_FRIENDLY_MATCH_TOKEN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_TOKEN";
+        };
+
+        return S_FRIENDLY_MATCH_TOKEN;
     })();
 
     return HallPto;

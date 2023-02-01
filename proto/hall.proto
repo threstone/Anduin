@@ -29,7 +29,6 @@ message S_REQ_FRIENDLY_MATCH_RESULT{
 	int32 scmd = 2[default = 4];
 	int32 targetUid = 3;
 	bool result = 4;
-    int32 token = 5;
 }
 
 //好友请求友谊赛
@@ -46,4 +45,50 @@ message C_REQ_FRIENDLY_MATCH_RESULT{
 	int32 scmd = 2[default = 6];
 	int32 targetUid = 3;
 	bool result = 4;
+}
+
+//友谊赛挑选卡组
+message S_FRIENDLY_MATCH_CARD_GROUP{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 7];
+	int64 endTime = 3;
+	string token = 4;
+	int32 targetUid = 5;
+}
+
+//友谊赛挑选卡组
+message C_FRIENDLY_MATCH_CARD_GROUP{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 8];
+	int32 cardGroupId = 3;
+	string token = 4;
+	int32 targetUid = 5;
+}
+
+//友谊赛取消挑选卡组
+message C_FRIENDLY_MATCH_CANCEL_GROUP{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 9];
+	string token = 3;
+}
+
+//友谊赛离开
+message C_FRIENDLY_MATCH_LEAVE{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 10];
+	string token = 3;
+	int32 targetUid = 4;
+}
+
+//友谊赛中断
+message S_FRIENDLY_MATCH_STOP{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 11];
+}
+
+//友谊赛token下发，玩家通过token请求开始
+message S_FRIENDLY_MATCH_TOKEN{
+	int32 cmd = 1[default = 2]; 
+	int32 scmd = 2[default = 12];
+	string token = 3;
 }

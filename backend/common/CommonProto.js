@@ -1971,7 +1971,6 @@ $root.HallPto = (function() {
         S_REQ_FRIENDLY_MATCH_RESULT.prototype.scmd = 4;
         S_REQ_FRIENDLY_MATCH_RESULT.prototype.targetUid = 0;
         S_REQ_FRIENDLY_MATCH_RESULT.prototype.result = false;
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.token = 0;
 
         S_REQ_FRIENDLY_MATCH_RESULT.create = function create(properties) {
             return new S_REQ_FRIENDLY_MATCH_RESULT(properties);
@@ -1988,8 +1987,6 @@ $root.HallPto = (function() {
                 w.uint32(24).int32(m.targetUid);
             if (m.result != null && Object.hasOwnProperty.call(m, "result"))
                 w.uint32(32).bool(m.result);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(40).int32(m.token);
             return w;
         };
 
@@ -2016,10 +2013,6 @@ $root.HallPto = (function() {
                         m.result = r.bool();
                         break;
                     }
-                case 5: {
-                        m.token = r.int32();
-                        break;
-                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2044,9 +2037,6 @@ $root.HallPto = (function() {
             if (d.result != null) {
                 m.result = Boolean(d.result);
             }
-            if (d.token != null) {
-                m.token = d.token | 0;
-            }
             return m;
         };
 
@@ -2059,7 +2049,6 @@ $root.HallPto = (function() {
                 d.scmd = 4;
                 d.targetUid = 0;
                 d.result = false;
-                d.token = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -2072,9 +2061,6 @@ $root.HallPto = (function() {
             }
             if (m.result != null && m.hasOwnProperty("result")) {
                 d.result = m.result;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
             }
             return d;
         };
@@ -2347,6 +2333,718 @@ $root.HallPto = (function() {
         };
 
         return C_REQ_FRIENDLY_MATCH_RESULT;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_CARD_GROUP = (function() {
+
+        function S_FRIENDLY_MATCH_CARD_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 7;
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
+
+        S_FRIENDLY_MATCH_CARD_GROUP.create = function create(properties) {
+            return new S_FRIENDLY_MATCH_CARD_GROUP(properties);
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+                w.uint32(24).int64(m.endTime);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(34).string(m.token);
+            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
+                w.uint32(40).int32(m.targetUid);
+            return w;
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.endTime = r.int64();
+                        break;
+                    }
+                case 4: {
+                        m.token = r.string();
+                        break;
+                    }
+                case 5: {
+                        m.targetUid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP)
+                return d;
+            var m = new $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.endTime != null) {
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
+            }
+            if (d.token != null) {
+                m.token = String(d.token);
+            }
+            if (d.targetUid != null) {
+                m.targetUid = d.targetUid | 0;
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 7;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
+                d.token = "";
+                d.targetUid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.endTime != null && m.hasOwnProperty("endTime")) {
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
+                d.targetUid = m.targetUid;
+            }
+            return d;
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_CARD_GROUP";
+        };
+
+        return S_FRIENDLY_MATCH_CARD_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_CARD_GROUP = (function() {
+
+        function C_FRIENDLY_MATCH_CARD_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 8;
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cardGroupId = 0;
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
+
+        C_FRIENDLY_MATCH_CARD_GROUP.create = function create(properties) {
+            return new C_FRIENDLY_MATCH_CARD_GROUP(properties);
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardGroupId != null && Object.hasOwnProperty.call(m, "cardGroupId"))
+                w.uint32(24).int32(m.cardGroupId);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(34).string(m.token);
+            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
+                w.uint32(40).int32(m.targetUid);
+            return w;
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardGroupId = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.token = r.string();
+                        break;
+                    }
+                case 5: {
+                        m.targetUid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP)
+                return d;
+            var m = new $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardGroupId != null) {
+                m.cardGroupId = d.cardGroupId | 0;
+            }
+            if (d.token != null) {
+                m.token = String(d.token);
+            }
+            if (d.targetUid != null) {
+                m.targetUid = d.targetUid | 0;
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 8;
+                d.cardGroupId = 0;
+                d.token = "";
+                d.targetUid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardGroupId != null && m.hasOwnProperty("cardGroupId")) {
+                d.cardGroupId = m.cardGroupId;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
+                d.targetUid = m.targetUid;
+            }
+            return d;
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CARD_GROUP";
+        };
+
+        return C_FRIENDLY_MATCH_CARD_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP = (function() {
+
+        function C_FRIENDLY_MATCH_CANCEL_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.cmd = 2;
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.scmd = 9;
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.token = "";
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.create = function create(properties) {
+            return new C_FRIENDLY_MATCH_CANCEL_GROUP(properties);
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(26).string(m.token);
+            return w;
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.token = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP)
+                return d;
+            var m = new $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.token != null) {
+                m.token = String(d.token);
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 9;
+                d.token = "";
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            return d;
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_FRIENDLY_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP";
+        };
+
+        return C_FRIENDLY_MATCH_CANCEL_GROUP;
+    })();
+
+    HallPto.C_FRIENDLY_MATCH_LEAVE = (function() {
+
+        function C_FRIENDLY_MATCH_LEAVE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_FRIENDLY_MATCH_LEAVE.prototype.cmd = 2;
+        C_FRIENDLY_MATCH_LEAVE.prototype.scmd = 10;
+        C_FRIENDLY_MATCH_LEAVE.prototype.token = "";
+        C_FRIENDLY_MATCH_LEAVE.prototype.targetUid = 0;
+
+        C_FRIENDLY_MATCH_LEAVE.create = function create(properties) {
+            return new C_FRIENDLY_MATCH_LEAVE(properties);
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(26).string(m.token);
+            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
+                w.uint32(32).int32(m.targetUid);
+            return w;
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_LEAVE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.token = r.string();
+                        break;
+                    }
+                case 4: {
+                        m.targetUid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_LEAVE)
+                return d;
+            var m = new $root.HallPto.C_FRIENDLY_MATCH_LEAVE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.token != null) {
+                m.token = String(d.token);
+            }
+            if (d.targetUid != null) {
+                m.targetUid = d.targetUid | 0;
+            }
+            return m;
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 10;
+                d.token = "";
+                d.targetUid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
+                d.targetUid = m.targetUid;
+            }
+            return d;
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_FRIENDLY_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_LEAVE";
+        };
+
+        return C_FRIENDLY_MATCH_LEAVE;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_STOP = (function() {
+
+        function S_FRIENDLY_MATCH_STOP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FRIENDLY_MATCH_STOP.prototype.cmd = 2;
+        S_FRIENDLY_MATCH_STOP.prototype.scmd = 11;
+
+        S_FRIENDLY_MATCH_STOP.create = function create(properties) {
+            return new S_FRIENDLY_MATCH_STOP(properties);
+        };
+
+        S_FRIENDLY_MATCH_STOP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            return w;
+        };
+
+        S_FRIENDLY_MATCH_STOP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_STOP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_STOP.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_STOP)
+                return d;
+            var m = new $root.HallPto.S_FRIENDLY_MATCH_STOP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_STOP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 11;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            return d;
+        };
+
+        S_FRIENDLY_MATCH_STOP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FRIENDLY_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_STOP";
+        };
+
+        return S_FRIENDLY_MATCH_STOP;
+    })();
+
+    HallPto.S_FRIENDLY_MATCH_TOKEN = (function() {
+
+        function S_FRIENDLY_MATCH_TOKEN(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FRIENDLY_MATCH_TOKEN.prototype.cmd = 2;
+        S_FRIENDLY_MATCH_TOKEN.prototype.scmd = 12;
+        S_FRIENDLY_MATCH_TOKEN.prototype.token = "";
+
+        S_FRIENDLY_MATCH_TOKEN.create = function create(properties) {
+            return new S_FRIENDLY_MATCH_TOKEN(properties);
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
+                w.uint32(26).string(m.token);
+            return w;
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_TOKEN();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.token = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.fromObject = function fromObject(d) {
+            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_TOKEN)
+                return d;
+            var m = new $root.HallPto.S_FRIENDLY_MATCH_TOKEN();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.token != null) {
+                m.token = String(d.token);
+            }
+            return m;
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 2;
+                d.scmd = 12;
+                d.token = "";
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.token != null && m.hasOwnProperty("token")) {
+                d.token = m.token;
+            }
+            return d;
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FRIENDLY_MATCH_TOKEN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_TOKEN";
+        };
+
+        return S_FRIENDLY_MATCH_TOKEN;
     })();
 
     return HallPto;
@@ -3945,7 +4643,7 @@ $root.GamePto = (function() {
 
         C_FRIENDLY_MATCH.prototype.cmd = 200;
         C_FRIENDLY_MATCH.prototype.scmd = 1;
-        C_FRIENDLY_MATCH.prototype.token = 0;
+        C_FRIENDLY_MATCH.prototype.token = "";
 
         C_FRIENDLY_MATCH.create = function create(properties) {
             return new C_FRIENDLY_MATCH(properties);
@@ -3959,7 +4657,7 @@ $root.GamePto = (function() {
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
             if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(24).int32(m.token);
+                w.uint32(26).string(m.token);
             return w;
         };
 
@@ -3979,7 +4677,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        m.token = r.int32();
+                        m.token = r.string();
                         break;
                     }
                 default:
@@ -4001,7 +4699,7 @@ $root.GamePto = (function() {
                 m.scmd = d.scmd | 0;
             }
             if (d.token != null) {
-                m.token = d.token | 0;
+                m.token = String(d.token);
             }
             return m;
         };
@@ -4013,7 +4711,7 @@ $root.GamePto = (function() {
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 1;
-                d.token = 0;
+                d.token = "";
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;

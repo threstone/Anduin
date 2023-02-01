@@ -1266,7 +1266,7 @@ declare namespace GamePto {
         scmd?: (number|null);
 
         /** C_FRIENDLY_MATCH token */
-        token?: (number|null);
+        token?: (string|null);
     }
 
     /** Represents a C_FRIENDLY_MATCH. */
@@ -1285,7 +1285,7 @@ declare namespace GamePto {
         public scmd: number;
 
         /** C_FRIENDLY_MATCH token. */
-        public token: number;
+        public token: string;
 
         /**
          * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
@@ -1508,9 +1508,6 @@ declare namespace HallPto {
 
         /** S_REQ_FRIENDLY_MATCH_RESULT result */
         result?: (boolean|null);
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT token */
-        token?: (number|null);
     }
 
     /** Represents a S_REQ_FRIENDLY_MATCH_RESULT. */
@@ -1533,9 +1530,6 @@ declare namespace HallPto {
 
         /** S_REQ_FRIENDLY_MATCH_RESULT result. */
         public result: boolean;
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT token. */
-        public token: number;
 
         /**
          * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
@@ -1683,6 +1677,372 @@ declare namespace HallPto {
 
         /**
          * Gets the default type url for C_REQ_FRIENDLY_MATCH_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIENDLY_MATCH_CARD_GROUP. */
+    interface IS_FRIENDLY_MATCH_CARD_GROUP {
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP cmd */
+        cmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP scmd */
+        scmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP endTime */
+        endTime?: (number|Long|null);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP token */
+        token?: (string|null);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a S_FRIENDLY_MATCH_CARD_GROUP. */
+    class S_FRIENDLY_MATCH_CARD_GROUP implements IS_FRIENDLY_MATCH_CARD_GROUP {
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_CARD_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_CARD_GROUP);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP cmd. */
+        public cmd: number;
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP scmd. */
+        public scmd: number;
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP endTime. */
+        public endTime: (number|Long);
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP token. */
+        public token: string;
+
+        /** S_FRIENDLY_MATCH_CARD_GROUP targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
+         * @param message S_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_FRIENDLY_MATCH_CARD_GROUP, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIENDLY_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_CARD_GROUP;
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_CARD_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_FRIENDLY_MATCH_CARD_GROUP. */
+    interface IC_FRIENDLY_MATCH_CARD_GROUP {
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP cmd */
+        cmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP scmd */
+        scmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP cardGroupId */
+        cardGroupId?: (number|null);
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP token */
+        token?: (string|null);
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a C_FRIENDLY_MATCH_CARD_GROUP. */
+    class C_FRIENDLY_MATCH_CARD_GROUP implements IC_FRIENDLY_MATCH_CARD_GROUP {
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_CARD_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_CARD_GROUP);
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP cmd. */
+        public cmd: number;
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP scmd. */
+        public scmd: number;
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP cardGroupId. */
+        public cardGroupId: number;
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP token. */
+        public token: string;
+
+        /** C_FRIENDLY_MATCH_CARD_GROUP targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
+         * @param message C_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_FRIENDLY_MATCH_CARD_GROUP, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_FRIENDLY_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_CARD_GROUP;
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_CARD_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_FRIENDLY_MATCH_CANCEL_GROUP. */
+    interface IC_FRIENDLY_MATCH_CANCEL_GROUP {
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP cmd */
+        cmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP scmd */
+        scmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP token */
+        token?: (string|null);
+    }
+
+    /** Represents a C_FRIENDLY_MATCH_CANCEL_GROUP. */
+    class C_FRIENDLY_MATCH_CANCEL_GROUP implements IC_FRIENDLY_MATCH_CANCEL_GROUP {
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_CANCEL_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP);
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP cmd. */
+        public cmd: number;
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP scmd. */
+        public scmd: number;
+
+        /** C_FRIENDLY_MATCH_CANCEL_GROUP token. */
+        public token: string;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_CANCEL_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP.verify|verify} messages.
+         * @param message C_FRIENDLY_MATCH_CANCEL_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_CANCEL_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP;
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_CANCEL_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_FRIENDLY_MATCH_LEAVE. */
+    interface IC_FRIENDLY_MATCH_LEAVE {
+
+        /** C_FRIENDLY_MATCH_LEAVE cmd */
+        cmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_LEAVE scmd */
+        scmd?: (number|null);
+
+        /** C_FRIENDLY_MATCH_LEAVE token */
+        token?: (string|null);
+
+        /** C_FRIENDLY_MATCH_LEAVE targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a C_FRIENDLY_MATCH_LEAVE. */
+    class C_FRIENDLY_MATCH_LEAVE implements IC_FRIENDLY_MATCH_LEAVE {
+
+        /**
+         * Constructs a new C_FRIENDLY_MATCH_LEAVE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_LEAVE);
+
+        /** C_FRIENDLY_MATCH_LEAVE cmd. */
+        public cmd: number;
+
+        /** C_FRIENDLY_MATCH_LEAVE scmd. */
+        public scmd: number;
+
+        /** C_FRIENDLY_MATCH_LEAVE token. */
+        public token: string;
+
+        /** C_FRIENDLY_MATCH_LEAVE targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified C_FRIENDLY_MATCH_LEAVE message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_LEAVE.verify|verify} messages.
+         * @param message C_FRIENDLY_MATCH_LEAVE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IC_FRIENDLY_MATCH_LEAVE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_FRIENDLY_MATCH_LEAVE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_FRIENDLY_MATCH_LEAVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_LEAVE;
+
+        /**
+         * Gets the default type url for C_FRIENDLY_MATCH_LEAVE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIENDLY_MATCH_STOP. */
+    interface IS_FRIENDLY_MATCH_STOP {
+
+        /** S_FRIENDLY_MATCH_STOP cmd */
+        cmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH_STOP scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a S_FRIENDLY_MATCH_STOP. */
+    class S_FRIENDLY_MATCH_STOP implements IS_FRIENDLY_MATCH_STOP {
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_STOP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_STOP);
+
+        /** S_FRIENDLY_MATCH_STOP cmd. */
+        public cmd: number;
+
+        /** S_FRIENDLY_MATCH_STOP scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_STOP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_STOP.verify|verify} messages.
+         * @param message S_FRIENDLY_MATCH_STOP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_FRIENDLY_MATCH_STOP, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_STOP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIENDLY_MATCH_STOP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_STOP;
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_STOP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIENDLY_MATCH_TOKEN. */
+    interface IS_FRIENDLY_MATCH_TOKEN {
+
+        /** S_FRIENDLY_MATCH_TOKEN cmd */
+        cmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH_TOKEN scmd */
+        scmd?: (number|null);
+
+        /** S_FRIENDLY_MATCH_TOKEN token */
+        token?: (string|null);
+    }
+
+    /** Represents a S_FRIENDLY_MATCH_TOKEN. */
+    class S_FRIENDLY_MATCH_TOKEN implements IS_FRIENDLY_MATCH_TOKEN {
+
+        /**
+         * Constructs a new S_FRIENDLY_MATCH_TOKEN.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_TOKEN);
+
+        /** S_FRIENDLY_MATCH_TOKEN cmd. */
+        public cmd: number;
+
+        /** S_FRIENDLY_MATCH_TOKEN scmd. */
+        public scmd: number;
+
+        /** S_FRIENDLY_MATCH_TOKEN token. */
+        public token: string;
+
+        /**
+         * Encodes the specified S_FRIENDLY_MATCH_TOKEN message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_TOKEN.verify|verify} messages.
+         * @param message S_FRIENDLY_MATCH_TOKEN message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: HallPto.IS_FRIENDLY_MATCH_TOKEN, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIENDLY_MATCH_TOKEN message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIENDLY_MATCH_TOKEN
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_TOKEN;
+
+        /**
+         * Gets the default type url for S_FRIENDLY_MATCH_TOKEN
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
