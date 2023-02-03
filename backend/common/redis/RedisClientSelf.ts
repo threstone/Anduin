@@ -91,6 +91,40 @@ export class RedisClientSelf {
     }
 
     /**
+     * 向Set中添加一个或多个元素
+     */
+    sadd(key: string | number, value: string | number | string[] | number[], time_out?: number) {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        const arr = [key];
+        if (Array.isArray(value)) {
+            arr.push(...value);
+        } else {
+            arr.push(value);
+        }
+        return this.sendCommand('sadd', arr, time_out);
+    }
+
+    /**
+     * 获取Set中的所有元素
+     */
+    smembers(key: string | number, time_out?: number) {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        return this.sendCommand('smembers', [key], time_out);
+    }
+
+    /**
+     * 判断元素是否在Set中
+     */
+    sismember(key: string | number, value: number | string, time_out?: number): Promise<boolean> {
+        time_out = time_out > 0 ? time_out : DEFAULT_REDIS_TIMEOUT;
+        return new Promise((resolve) => {
+            this.sendCommand('sismember', [key, value], time_out).then((value) => {
+                resolve(value === '1');
+            });
+        });
+    }
+
+    /**
      * 订阅消息
      */
     subscribe(channel: string, callBack: Function) {
@@ -136,11 +170,7 @@ export class RedisClientSelf {
     lock(key: string | number, expire: number, time_out?: number): Promise<boolean> {
         return new Promise((resolve) => {
             this.incr(key, time_out).then((incrNum) => {
-                if (incrNum === 1) {
-                    resolve(true);
-                    return;
-                }
-                resolve(false);
+                resolve(incrNum === 1);
             });
             this.setExpire(key, expire);
         });

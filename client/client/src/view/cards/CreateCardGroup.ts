@@ -46,7 +46,7 @@ class CreateCardGroup extends BaseView<BaseUI.UICreateCardGroup> {
     private onSelectBtnClick() {
         this.close();
         if (this.view.groupName.text.length === 0) {
-            this.view.groupName.text = ConfigMgr.ins().powerConfig[this.selectPowerId].powerName;
+            this.view.groupName.text = CardsModel.ins().getCardGroupName(this.selectPowerId);
         }
         CardsView.ins().doCreateCardGroup(this.selectPowerId, this.view.groupName.text, null);
         this.view.groupName.text = '';

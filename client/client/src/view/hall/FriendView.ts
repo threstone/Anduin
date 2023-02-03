@@ -60,10 +60,10 @@ class FriendView extends BaseView<BaseUI.UIFriendCom> {
         const fightBtn = BaseUI.UIButton3.createInstance();
         fightBtn.describe.text = '友谊赛';
         fightBtn.addClickListener(() => {
-            if (this.curSelectUid === -1) {
+            if (this.curSelectUid === -1 || FriendModel.ins().isOnline(this.curSelectUid) === false) {
                 return;
             }
-            HallModel.ins().C_REQ_FRIENDLY_MATCH(this.curSelectUid);
+            FriendlyMatchModel.ins().C_REQ_MATCH(this.curSelectUid);
             this.view.friendOpCom.visible = false;
             this.curSelectUid = -1;
         }, this);

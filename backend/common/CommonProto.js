@@ -1609,1444 +1609,6 @@ $root.HallPto = (function() {
 
     var HallPto = {};
 
-    HallPto.C_REQ_FRIENDLY_MATCH = (function() {
-
-        function C_REQ_FRIENDLY_MATCH(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_REQ_FRIENDLY_MATCH.prototype.cmd = 2;
-        C_REQ_FRIENDLY_MATCH.prototype.scmd = 1;
-        C_REQ_FRIENDLY_MATCH.prototype.targetUid = 0;
-
-        C_REQ_FRIENDLY_MATCH.create = function create(properties) {
-            return new C_REQ_FRIENDLY_MATCH(properties);
-        };
-
-        C_REQ_FRIENDLY_MATCH.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(24).int32(m.targetUid);
-            return w;
-        };
-
-        C_REQ_FRIENDLY_MATCH.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_REQ_FRIENDLY_MATCH();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_REQ_FRIENDLY_MATCH.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_REQ_FRIENDLY_MATCH)
-                return d;
-            var m = new $root.HallPto.C_REQ_FRIENDLY_MATCH();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            return m;
-        };
-
-        C_REQ_FRIENDLY_MATCH.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 1;
-                d.targetUid = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            return d;
-        };
-
-        C_REQ_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_REQ_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_REQ_FRIENDLY_MATCH";
-        };
-
-        return C_REQ_FRIENDLY_MATCH;
-    })();
-
-    HallPto.S_REQ_FRIENDLY_MATCH = (function() {
-
-        function S_REQ_FRIENDLY_MATCH(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_REQ_FRIENDLY_MATCH.prototype.cmd = 2;
-        S_REQ_FRIENDLY_MATCH.prototype.scmd = 2;
-        S_REQ_FRIENDLY_MATCH.prototype.code = 0;
-        S_REQ_FRIENDLY_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        S_REQ_FRIENDLY_MATCH.create = function create(properties) {
-            return new S_REQ_FRIENDLY_MATCH(properties);
-        };
-
-        S_REQ_FRIENDLY_MATCH.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
-                w.uint32(24).int32(m.code);
-            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-                w.uint32(32).int64(m.endTime);
-            return w;
-        };
-
-        S_REQ_FRIENDLY_MATCH.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_REQ_FRIENDLY_MATCH();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.endTime = r.int64();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_REQ_FRIENDLY_MATCH.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_REQ_FRIENDLY_MATCH)
-                return d;
-            var m = new $root.HallPto.S_REQ_FRIENDLY_MATCH();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.code != null) {
-                m.code = d.code | 0;
-            }
-            if (d.endTime != null) {
-                if ($util.Long)
-                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
-                else if (typeof d.endTime === "string")
-                    m.endTime = parseInt(d.endTime, 10);
-                else if (typeof d.endTime === "number")
-                    m.endTime = d.endTime;
-                else if (typeof d.endTime === "object")
-                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
-            }
-            return m;
-        };
-
-        S_REQ_FRIENDLY_MATCH.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 2;
-                d.code = 0;
-                if ($util.Long) {
-                    var n = new $util.Long(0, 0, false);
-                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
-                } else
-                    d.endTime = o.longs === String ? "0" : 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.code != null && m.hasOwnProperty("code")) {
-                d.code = m.code;
-            }
-            if (m.endTime != null && m.hasOwnProperty("endTime")) {
-                if (typeof m.endTime === "number")
-                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
-                else
-                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
-            }
-            return d;
-        };
-
-        S_REQ_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_REQ_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_REQ_FRIENDLY_MATCH";
-        };
-
-        return S_REQ_FRIENDLY_MATCH;
-    })();
-
-    HallPto.C_CANCEL_REQ_FRIENDLY_MATCH = (function() {
-
-        function C_CANCEL_REQ_FRIENDLY_MATCH(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.prototype.cmd = 2;
-        C_CANCEL_REQ_FRIENDLY_MATCH.prototype.scmd = 3;
-        C_CANCEL_REQ_FRIENDLY_MATCH.prototype.targetUid = 0;
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.create = function create(properties) {
-            return new C_CANCEL_REQ_FRIENDLY_MATCH(properties);
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(24).int32(m.targetUid);
-            return w;
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_CANCEL_REQ_FRIENDLY_MATCH();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_CANCEL_REQ_FRIENDLY_MATCH)
-                return d;
-            var m = new $root.HallPto.C_CANCEL_REQ_FRIENDLY_MATCH();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            return m;
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 3;
-                d.targetUid = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            return d;
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_CANCEL_REQ_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_CANCEL_REQ_FRIENDLY_MATCH";
-        };
-
-        return C_CANCEL_REQ_FRIENDLY_MATCH;
-    })();
-
-    HallPto.S_REQ_FRIENDLY_MATCH_RESULT = (function() {
-
-        function S_REQ_FRIENDLY_MATCH_RESULT(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.cmd = 2;
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.scmd = 4;
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.targetUid = 0;
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.result = false;
-
-        S_REQ_FRIENDLY_MATCH_RESULT.create = function create(properties) {
-            return new S_REQ_FRIENDLY_MATCH_RESULT(properties);
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(24).int32(m.targetUid);
-            if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-                w.uint32(32).bool(m.result);
-            return w;
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_REQ_FRIENDLY_MATCH_RESULT();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.result = r.bool();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_REQ_FRIENDLY_MATCH_RESULT)
-                return d;
-            var m = new $root.HallPto.S_REQ_FRIENDLY_MATCH_RESULT();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            if (d.result != null) {
-                m.result = Boolean(d.result);
-            }
-            return m;
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 4;
-                d.targetUid = 0;
-                d.result = false;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            if (m.result != null && m.hasOwnProperty("result")) {
-                d.result = m.result;
-            }
-            return d;
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_REQ_FRIENDLY_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_REQ_FRIENDLY_MATCH_RESULT";
-        };
-
-        return S_REQ_FRIENDLY_MATCH_RESULT;
-    })();
-
-    HallPto.S_FRIENDLY_MATCH = (function() {
-
-        function S_FRIENDLY_MATCH(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_FRIENDLY_MATCH.prototype.cmd = 2;
-        S_FRIENDLY_MATCH.prototype.scmd = 5;
-        S_FRIENDLY_MATCH.prototype.friendUid = 0;
-        S_FRIENDLY_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-
-        S_FRIENDLY_MATCH.create = function create(properties) {
-            return new S_FRIENDLY_MATCH(properties);
-        };
-
-        S_FRIENDLY_MATCH.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.friendUid != null && Object.hasOwnProperty.call(m, "friendUid"))
-                w.uint32(24).int32(m.friendUid);
-            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-                w.uint32(32).int64(m.endTime);
-            return w;
-        };
-
-        S_FRIENDLY_MATCH.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.friendUid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.endTime = r.int64();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH)
-                return d;
-            var m = new $root.HallPto.S_FRIENDLY_MATCH();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.friendUid != null) {
-                m.friendUid = d.friendUid | 0;
-            }
-            if (d.endTime != null) {
-                if ($util.Long)
-                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
-                else if (typeof d.endTime === "string")
-                    m.endTime = parseInt(d.endTime, 10);
-                else if (typeof d.endTime === "number")
-                    m.endTime = d.endTime;
-                else if (typeof d.endTime === "object")
-                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 5;
-                d.friendUid = 0;
-                if ($util.Long) {
-                    var n = new $util.Long(0, 0, false);
-                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
-                } else
-                    d.endTime = o.longs === String ? "0" : 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.friendUid != null && m.hasOwnProperty("friendUid")) {
-                d.friendUid = m.friendUid;
-            }
-            if (m.endTime != null && m.hasOwnProperty("endTime")) {
-                if (typeof m.endTime === "number")
-                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
-                else
-                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
-            }
-            return d;
-        };
-
-        S_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH";
-        };
-
-        return S_FRIENDLY_MATCH;
-    })();
-
-    HallPto.C_REQ_FRIENDLY_MATCH_RESULT = (function() {
-
-        function C_REQ_FRIENDLY_MATCH_RESULT(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_REQ_FRIENDLY_MATCH_RESULT.prototype.cmd = 2;
-        C_REQ_FRIENDLY_MATCH_RESULT.prototype.scmd = 6;
-        C_REQ_FRIENDLY_MATCH_RESULT.prototype.targetUid = 0;
-        C_REQ_FRIENDLY_MATCH_RESULT.prototype.result = false;
-
-        C_REQ_FRIENDLY_MATCH_RESULT.create = function create(properties) {
-            return new C_REQ_FRIENDLY_MATCH_RESULT(properties);
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(24).int32(m.targetUid);
-            if (m.result != null && Object.hasOwnProperty.call(m, "result"))
-                w.uint32(32).bool(m.result);
-            return w;
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_REQ_FRIENDLY_MATCH_RESULT();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.result = r.bool();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_REQ_FRIENDLY_MATCH_RESULT)
-                return d;
-            var m = new $root.HallPto.C_REQ_FRIENDLY_MATCH_RESULT();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            if (d.result != null) {
-                m.result = Boolean(d.result);
-            }
-            return m;
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 6;
-                d.targetUid = 0;
-                d.result = false;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            if (m.result != null && m.hasOwnProperty("result")) {
-                d.result = m.result;
-            }
-            return d;
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_REQ_FRIENDLY_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_REQ_FRIENDLY_MATCH_RESULT";
-        };
-
-        return C_REQ_FRIENDLY_MATCH_RESULT;
-    })();
-
-    HallPto.S_FRIENDLY_MATCH_CARD_GROUP = (function() {
-
-        function S_FRIENDLY_MATCH_CARD_GROUP(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 7;
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
-
-        S_FRIENDLY_MATCH_CARD_GROUP.create = function create(properties) {
-            return new S_FRIENDLY_MATCH_CARD_GROUP(properties);
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
-                w.uint32(24).int64(m.endTime);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(34).string(m.token);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(40).int32(m.targetUid);
-            return w;
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.endTime = r.int64();
-                        break;
-                    }
-                case 4: {
-                        m.token = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP)
-                return d;
-            var m = new $root.HallPto.S_FRIENDLY_MATCH_CARD_GROUP();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.endTime != null) {
-                if ($util.Long)
-                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
-                else if (typeof d.endTime === "string")
-                    m.endTime = parseInt(d.endTime, 10);
-                else if (typeof d.endTime === "number")
-                    m.endTime = d.endTime;
-                else if (typeof d.endTime === "object")
-                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
-            }
-            if (d.token != null) {
-                m.token = String(d.token);
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 7;
-                if ($util.Long) {
-                    var n = new $util.Long(0, 0, false);
-                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
-                } else
-                    d.endTime = o.longs === String ? "0" : 0;
-                d.token = "";
-                d.targetUid = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.endTime != null && m.hasOwnProperty("endTime")) {
-                if (typeof m.endTime === "number")
-                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
-                else
-                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            return d;
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_CARD_GROUP";
-        };
-
-        return S_FRIENDLY_MATCH_CARD_GROUP;
-    })();
-
-    HallPto.C_FRIENDLY_MATCH_CARD_GROUP = (function() {
-
-        function C_FRIENDLY_MATCH_CARD_GROUP(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cmd = 2;
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.scmd = 8;
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.cardGroupId = 0;
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.token = "";
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.targetUid = 0;
-
-        C_FRIENDLY_MATCH_CARD_GROUP.create = function create(properties) {
-            return new C_FRIENDLY_MATCH_CARD_GROUP(properties);
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.cardGroupId != null && Object.hasOwnProperty.call(m, "cardGroupId"))
-                w.uint32(24).int32(m.cardGroupId);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(34).string(m.token);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(40).int32(m.targetUid);
-            return w;
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardGroupId = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.token = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP)
-                return d;
-            var m = new $root.HallPto.C_FRIENDLY_MATCH_CARD_GROUP();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.cardGroupId != null) {
-                m.cardGroupId = d.cardGroupId | 0;
-            }
-            if (d.token != null) {
-                m.token = String(d.token);
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 8;
-                d.cardGroupId = 0;
-                d.token = "";
-                d.targetUid = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.cardGroupId != null && m.hasOwnProperty("cardGroupId")) {
-                d.cardGroupId = m.cardGroupId;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            return d;
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_FRIENDLY_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CARD_GROUP";
-        };
-
-        return C_FRIENDLY_MATCH_CARD_GROUP;
-    })();
-
-    HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP = (function() {
-
-        function C_FRIENDLY_MATCH_CANCEL_GROUP(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.cmd = 2;
-        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.scmd = 9;
-        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.token = "";
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.create = function create(properties) {
-            return new C_FRIENDLY_MATCH_CANCEL_GROUP(properties);
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(26).string(m.token);
-            return w;
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.token = r.string();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP)
-                return d;
-            var m = new $root.HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.token != null) {
-                m.token = String(d.token);
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 9;
-                d.token = "";
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
-            }
-            return d;
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_FRIENDLY_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP";
-        };
-
-        return C_FRIENDLY_MATCH_CANCEL_GROUP;
-    })();
-
-    HallPto.C_FRIENDLY_MATCH_LEAVE = (function() {
-
-        function C_FRIENDLY_MATCH_LEAVE(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        C_FRIENDLY_MATCH_LEAVE.prototype.cmd = 2;
-        C_FRIENDLY_MATCH_LEAVE.prototype.scmd = 10;
-        C_FRIENDLY_MATCH_LEAVE.prototype.token = "";
-        C_FRIENDLY_MATCH_LEAVE.prototype.targetUid = 0;
-
-        C_FRIENDLY_MATCH_LEAVE.create = function create(properties) {
-            return new C_FRIENDLY_MATCH_LEAVE(properties);
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(26).string(m.token);
-            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
-                w.uint32(32).int32(m.targetUid);
-            return w;
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.C_FRIENDLY_MATCH_LEAVE();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.token = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.C_FRIENDLY_MATCH_LEAVE)
-                return d;
-            var m = new $root.HallPto.C_FRIENDLY_MATCH_LEAVE();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.token != null) {
-                m.token = String(d.token);
-            }
-            if (d.targetUid != null) {
-                m.targetUid = d.targetUid | 0;
-            }
-            return m;
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 10;
-                d.token = "";
-                d.targetUid = 0;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
-            }
-            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
-                d.targetUid = m.targetUid;
-            }
-            return d;
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_FRIENDLY_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.C_FRIENDLY_MATCH_LEAVE";
-        };
-
-        return C_FRIENDLY_MATCH_LEAVE;
-    })();
-
-    HallPto.S_FRIENDLY_MATCH_STOP = (function() {
-
-        function S_FRIENDLY_MATCH_STOP(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_FRIENDLY_MATCH_STOP.prototype.cmd = 2;
-        S_FRIENDLY_MATCH_STOP.prototype.scmd = 11;
-
-        S_FRIENDLY_MATCH_STOP.create = function create(properties) {
-            return new S_FRIENDLY_MATCH_STOP(properties);
-        };
-
-        S_FRIENDLY_MATCH_STOP.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            return w;
-        };
-
-        S_FRIENDLY_MATCH_STOP.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_STOP();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_STOP.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_STOP)
-                return d;
-            var m = new $root.HallPto.S_FRIENDLY_MATCH_STOP();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_STOP.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 11;
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            return d;
-        };
-
-        S_FRIENDLY_MATCH_STOP.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_FRIENDLY_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_STOP";
-        };
-
-        return S_FRIENDLY_MATCH_STOP;
-    })();
-
-    HallPto.S_FRIENDLY_MATCH_TOKEN = (function() {
-
-        function S_FRIENDLY_MATCH_TOKEN(p) {
-            if (p)
-                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
-                    if (p[ks[i]] != null)
-                        this[ks[i]] = p[ks[i]];
-        }
-
-        S_FRIENDLY_MATCH_TOKEN.prototype.cmd = 2;
-        S_FRIENDLY_MATCH_TOKEN.prototype.scmd = 12;
-        S_FRIENDLY_MATCH_TOKEN.prototype.token = "";
-
-        S_FRIENDLY_MATCH_TOKEN.create = function create(properties) {
-            return new S_FRIENDLY_MATCH_TOKEN(properties);
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.encode = function encode(m, w) {
-            if (!w)
-                w = $Writer.create();
-            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
-                w.uint32(8).int32(m.cmd);
-            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
-                w.uint32(16).int32(m.scmd);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(26).string(m.token);
-            return w;
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.decode = function decode(r, l) {
-            if (!(r instanceof $Reader))
-                r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.HallPto.S_FRIENDLY_MATCH_TOKEN();
-            while (r.pos < c) {
-                var t = r.uint32();
-                switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.token = r.string();
-                        break;
-                    }
-                default:
-                    r.skipType(t & 7);
-                    break;
-                }
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.fromObject = function fromObject(d) {
-            if (d instanceof $root.HallPto.S_FRIENDLY_MATCH_TOKEN)
-                return d;
-            var m = new $root.HallPto.S_FRIENDLY_MATCH_TOKEN();
-            if (d.cmd != null) {
-                m.cmd = d.cmd | 0;
-            }
-            if (d.scmd != null) {
-                m.scmd = d.scmd | 0;
-            }
-            if (d.token != null) {
-                m.token = String(d.token);
-            }
-            return m;
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.toObject = function toObject(m, o) {
-            if (!o)
-                o = {};
-            var d = {};
-            if (o.defaults) {
-                d.cmd = 2;
-                d.scmd = 12;
-                d.token = "";
-            }
-            if (m.cmd != null && m.hasOwnProperty("cmd")) {
-                d.cmd = m.cmd;
-            }
-            if (m.scmd != null && m.hasOwnProperty("scmd")) {
-                d.scmd = m.scmd;
-            }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
-            }
-            return d;
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.prototype.toJSON = function toJSON() {
-            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_FRIENDLY_MATCH_TOKEN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/HallPto.S_FRIENDLY_MATCH_TOKEN";
-        };
-
-        return S_FRIENDLY_MATCH_TOKEN;
-    })();
-
     return HallPto;
 })();
 
@@ -4740,6 +3302,1446 @@ $root.GamePto = (function() {
     })();
 
     return GamePto;
+})();
+
+$root.FriendlyMatchPto = (function() {
+
+    var FriendlyMatchPto = {};
+
+    FriendlyMatchPto.C_REQ_MATCH = (function() {
+
+        function C_REQ_MATCH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_REQ_MATCH.prototype.cmd = 201;
+        C_REQ_MATCH.prototype.scmd = 1;
+        C_REQ_MATCH.prototype.targetUid = 0;
+
+        C_REQ_MATCH.create = function create(properties) {
+            return new C_REQ_MATCH(properties);
+        };
+
+        C_REQ_MATCH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
+                w.uint32(24).int32(m.targetUid);
+            return w;
+        };
+
+        C_REQ_MATCH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_REQ_MATCH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.targetUid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_REQ_MATCH.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_REQ_MATCH)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_REQ_MATCH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.targetUid != null) {
+                m.targetUid = d.targetUid | 0;
+            }
+            return m;
+        };
+
+        C_REQ_MATCH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 1;
+                d.targetUid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
+                d.targetUid = m.targetUid;
+            }
+            return d;
+        };
+
+        C_REQ_MATCH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH";
+        };
+
+        return C_REQ_MATCH;
+    })();
+
+    FriendlyMatchPto.S_REQ_MATCH = (function() {
+
+        function S_REQ_MATCH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_REQ_MATCH.prototype.cmd = 201;
+        S_REQ_MATCH.prototype.scmd = 2;
+        S_REQ_MATCH.prototype.code = 0;
+        S_REQ_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        S_REQ_MATCH.create = function create(properties) {
+            return new S_REQ_MATCH(properties);
+        };
+
+        S_REQ_MATCH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
+                w.uint32(24).int32(m.code);
+            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+                w.uint32(32).int64(m.endTime);
+            return w;
+        };
+
+        S_REQ_MATCH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_REQ_MATCH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.code = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.endTime = r.int64();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_REQ_MATCH.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_REQ_MATCH)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_REQ_MATCH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.code != null) {
+                m.code = d.code | 0;
+            }
+            if (d.endTime != null) {
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
+            }
+            return m;
+        };
+
+        S_REQ_MATCH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 2;
+                d.code = 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.code != null && m.hasOwnProperty("code")) {
+                d.code = m.code;
+            }
+            if (m.endTime != null && m.hasOwnProperty("endTime")) {
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
+            }
+            return d;
+        };
+
+        S_REQ_MATCH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH";
+        };
+
+        return S_REQ_MATCH;
+    })();
+
+    FriendlyMatchPto.C_CANCEL_REQ_MATCH = (function() {
+
+        function C_CANCEL_REQ_MATCH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_CANCEL_REQ_MATCH.prototype.cmd = 201;
+        C_CANCEL_REQ_MATCH.prototype.scmd = 3;
+
+        C_CANCEL_REQ_MATCH.create = function create(properties) {
+            return new C_CANCEL_REQ_MATCH(properties);
+        };
+
+        C_CANCEL_REQ_MATCH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            return w;
+        };
+
+        C_CANCEL_REQ_MATCH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_CANCEL_REQ_MATCH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_CANCEL_REQ_MATCH.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_CANCEL_REQ_MATCH)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_CANCEL_REQ_MATCH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            return m;
+        };
+
+        C_CANCEL_REQ_MATCH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 3;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            return d;
+        };
+
+        C_CANCEL_REQ_MATCH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_CANCEL_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_CANCEL_REQ_MATCH";
+        };
+
+        return C_CANCEL_REQ_MATCH;
+    })();
+
+    FriendlyMatchPto.S_REQ_MATCH_RESULT = (function() {
+
+        function S_REQ_MATCH_RESULT(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_REQ_MATCH_RESULT.prototype.cmd = 201;
+        S_REQ_MATCH_RESULT.prototype.scmd = 4;
+        S_REQ_MATCH_RESULT.prototype.result = false;
+        S_REQ_MATCH_RESULT.prototype.targetUid = 0;
+
+        S_REQ_MATCH_RESULT.create = function create(properties) {
+            return new S_REQ_MATCH_RESULT(properties);
+        };
+
+        S_REQ_MATCH_RESULT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+                w.uint32(24).bool(m.result);
+            if (m.targetUid != null && Object.hasOwnProperty.call(m, "targetUid"))
+                w.uint32(32).int32(m.targetUid);
+            return w;
+        };
+
+        S_REQ_MATCH_RESULT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_REQ_MATCH_RESULT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.result = r.bool();
+                        break;
+                    }
+                case 4: {
+                        m.targetUid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_REQ_MATCH_RESULT.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_REQ_MATCH_RESULT)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_REQ_MATCH_RESULT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.result != null) {
+                m.result = Boolean(d.result);
+            }
+            if (d.targetUid != null) {
+                m.targetUid = d.targetUid | 0;
+            }
+            return m;
+        };
+
+        S_REQ_MATCH_RESULT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 4;
+                d.result = false;
+                d.targetUid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.result != null && m.hasOwnProperty("result")) {
+                d.result = m.result;
+            }
+            if (m.targetUid != null && m.hasOwnProperty("targetUid")) {
+                d.targetUid = m.targetUid;
+            }
+            return d;
+        };
+
+        S_REQ_MATCH_RESULT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH_RESULT";
+        };
+
+        return S_REQ_MATCH_RESULT;
+    })();
+
+    FriendlyMatchPto.S_MATCH = (function() {
+
+        function S_MATCH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_MATCH.prototype.cmd = 201;
+        S_MATCH.prototype.scmd = 5;
+        S_MATCH.prototype.friendUid = 0;
+        S_MATCH.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        S_MATCH.create = function create(properties) {
+            return new S_MATCH(properties);
+        };
+
+        S_MATCH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.friendUid != null && Object.hasOwnProperty.call(m, "friendUid"))
+                w.uint32(24).int32(m.friendUid);
+            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+                w.uint32(32).int64(m.endTime);
+            return w;
+        };
+
+        S_MATCH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_MATCH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.friendUid = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.endTime = r.int64();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_MATCH.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_MATCH)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_MATCH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.friendUid != null) {
+                m.friendUid = d.friendUid | 0;
+            }
+            if (d.endTime != null) {
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
+            }
+            return m;
+        };
+
+        S_MATCH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 5;
+                d.friendUid = 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.friendUid != null && m.hasOwnProperty("friendUid")) {
+                d.friendUid = m.friendUid;
+            }
+            if (m.endTime != null && m.hasOwnProperty("endTime")) {
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
+            }
+            return d;
+        };
+
+        S_MATCH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH";
+        };
+
+        return S_MATCH;
+    })();
+
+    FriendlyMatchPto.C_REQ_MATCH_RESULT = (function() {
+
+        function C_REQ_MATCH_RESULT(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_REQ_MATCH_RESULT.prototype.cmd = 201;
+        C_REQ_MATCH_RESULT.prototype.scmd = 6;
+        C_REQ_MATCH_RESULT.prototype.result = false;
+
+        C_REQ_MATCH_RESULT.create = function create(properties) {
+            return new C_REQ_MATCH_RESULT(properties);
+        };
+
+        C_REQ_MATCH_RESULT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.result != null && Object.hasOwnProperty.call(m, "result"))
+                w.uint32(24).bool(m.result);
+            return w;
+        };
+
+        C_REQ_MATCH_RESULT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_REQ_MATCH_RESULT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.result = r.bool();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_REQ_MATCH_RESULT.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_REQ_MATCH_RESULT)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_REQ_MATCH_RESULT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.result != null) {
+                m.result = Boolean(d.result);
+            }
+            return m;
+        };
+
+        C_REQ_MATCH_RESULT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 6;
+                d.result = false;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.result != null && m.hasOwnProperty("result")) {
+                d.result = m.result;
+            }
+            return d;
+        };
+
+        C_REQ_MATCH_RESULT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH_RESULT";
+        };
+
+        return C_REQ_MATCH_RESULT;
+    })();
+
+    FriendlyMatchPto.S_MATCH_CARD_GROUP = (function() {
+
+        function S_MATCH_CARD_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_MATCH_CARD_GROUP.prototype.cmd = 201;
+        S_MATCH_CARD_GROUP.prototype.scmd = 7;
+        S_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        S_MATCH_CARD_GROUP.create = function create(properties) {
+            return new S_MATCH_CARD_GROUP(properties);
+        };
+
+        S_MATCH_CARD_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+                w.uint32(24).int64(m.endTime);
+            return w;
+        };
+
+        S_MATCH_CARD_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_MATCH_CARD_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.endTime = r.int64();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_MATCH_CARD_GROUP)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_MATCH_CARD_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.endTime != null) {
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
+            }
+            return m;
+        };
+
+        S_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 7;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.endTime != null && m.hasOwnProperty("endTime")) {
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
+            }
+            return d;
+        };
+
+        S_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_CARD_GROUP";
+        };
+
+        return S_MATCH_CARD_GROUP;
+    })();
+
+    FriendlyMatchPto.C_GROUP_CHOOSE = (function() {
+
+        function C_GROUP_CHOOSE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_GROUP_CHOOSE.prototype.cmd = 201;
+        C_GROUP_CHOOSE.prototype.scmd = 8;
+        C_GROUP_CHOOSE.prototype.cardGroupId = 0;
+
+        C_GROUP_CHOOSE.create = function create(properties) {
+            return new C_GROUP_CHOOSE(properties);
+        };
+
+        C_GROUP_CHOOSE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.cardGroupId != null && Object.hasOwnProperty.call(m, "cardGroupId"))
+                w.uint32(24).int32(m.cardGroupId);
+            return w;
+        };
+
+        C_GROUP_CHOOSE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_GROUP_CHOOSE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.cardGroupId = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_GROUP_CHOOSE.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_GROUP_CHOOSE)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_GROUP_CHOOSE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.cardGroupId != null) {
+                m.cardGroupId = d.cardGroupId | 0;
+            }
+            return m;
+        };
+
+        C_GROUP_CHOOSE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 8;
+                d.cardGroupId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.cardGroupId != null && m.hasOwnProperty("cardGroupId")) {
+                d.cardGroupId = m.cardGroupId;
+            }
+            return d;
+        };
+
+        C_GROUP_CHOOSE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_GROUP_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_GROUP_CHOOSE";
+        };
+
+        return C_GROUP_CHOOSE;
+    })();
+
+    FriendlyMatchPto.C_MATCH_CANCEL_GROUP = (function() {
+
+        function C_MATCH_CANCEL_GROUP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_MATCH_CANCEL_GROUP.prototype.cmd = 201;
+        C_MATCH_CANCEL_GROUP.prototype.scmd = 9;
+
+        C_MATCH_CANCEL_GROUP.create = function create(properties) {
+            return new C_MATCH_CANCEL_GROUP(properties);
+        };
+
+        C_MATCH_CANCEL_GROUP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            return w;
+        };
+
+        C_MATCH_CANCEL_GROUP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_MATCH_CANCEL_GROUP.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            return m;
+        };
+
+        C_MATCH_CANCEL_GROUP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 9;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            return d;
+        };
+
+        C_MATCH_CANCEL_GROUP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_GROUP";
+        };
+
+        return C_MATCH_CANCEL_GROUP;
+    })();
+
+    FriendlyMatchPto.C_MATCH_LEAVE = (function() {
+
+        function C_MATCH_LEAVE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_MATCH_LEAVE.prototype.cmd = 201;
+        C_MATCH_LEAVE.prototype.scmd = 10;
+
+        C_MATCH_LEAVE.create = function create(properties) {
+            return new C_MATCH_LEAVE(properties);
+        };
+
+        C_MATCH_LEAVE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            return w;
+        };
+
+        C_MATCH_LEAVE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_MATCH_LEAVE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_MATCH_LEAVE.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_MATCH_LEAVE)
+                return d;
+            var m = new $root.FriendlyMatchPto.C_MATCH_LEAVE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            return m;
+        };
+
+        C_MATCH_LEAVE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 10;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            return d;
+        };
+
+        C_MATCH_LEAVE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_LEAVE";
+        };
+
+        return C_MATCH_LEAVE;
+    })();
+
+    FriendlyMatchPto.S_MATCH_STOP = (function() {
+
+        function S_MATCH_STOP(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_MATCH_STOP.prototype.cmd = 201;
+        S_MATCH_STOP.prototype.scmd = 11;
+        S_MATCH_STOP.prototype.code = 0;
+
+        S_MATCH_STOP.create = function create(properties) {
+            return new S_MATCH_STOP(properties);
+        };
+
+        S_MATCH_STOP.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
+                w.uint32(24).int32(m.code);
+            return w;
+        };
+
+        S_MATCH_STOP.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_MATCH_STOP();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.code = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_MATCH_STOP.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_MATCH_STOP)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_MATCH_STOP();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.code != null) {
+                m.code = d.code | 0;
+            }
+            return m;
+        };
+
+        S_MATCH_STOP.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 11;
+                d.code = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.code != null && m.hasOwnProperty("code")) {
+                d.code = m.code;
+            }
+            return d;
+        };
+
+        S_MATCH_STOP.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_STOP";
+        };
+
+        return S_MATCH_STOP;
+    })();
+
+    FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE = (function() {
+
+        function S_FRIEND_GROUP_STATUS_CHANGE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FRIEND_GROUP_STATUS_CHANGE.prototype.cmd = 201;
+        S_FRIEND_GROUP_STATUS_CHANGE.prototype.scmd = 12;
+        S_FRIEND_GROUP_STATUS_CHANGE.prototype.isChoose = false;
+
+        S_FRIEND_GROUP_STATUS_CHANGE.create = function create(properties) {
+            return new S_FRIEND_GROUP_STATUS_CHANGE(properties);
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.isChoose != null && Object.hasOwnProperty.call(m, "isChoose"))
+                w.uint32(24).bool(m.isChoose);
+            return w;
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.isChoose = r.bool();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.isChoose != null) {
+                m.isChoose = Boolean(d.isChoose);
+            }
+            return m;
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 12;
+                d.isChoose = false;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.isChoose != null && m.hasOwnProperty("isChoose")) {
+                d.isChoose = m.isChoose;
+            }
+            return d;
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FRIEND_GROUP_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE";
+        };
+
+        return S_FRIEND_GROUP_STATUS_CHANGE;
+    })();
+
+    FriendlyMatchPto.S_GROUP_CHOOSE_RESULT = (function() {
+
+        function S_GROUP_CHOOSE_RESULT(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_GROUP_CHOOSE_RESULT.prototype.cmd = 201;
+        S_GROUP_CHOOSE_RESULT.prototype.scmd = 13;
+        S_GROUP_CHOOSE_RESULT.prototype.code = 0;
+
+        S_GROUP_CHOOSE_RESULT.create = function create(properties) {
+            return new S_GROUP_CHOOSE_RESULT(properties);
+        };
+
+        S_GROUP_CHOOSE_RESULT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.code != null && Object.hasOwnProperty.call(m, "code"))
+                w.uint32(24).int32(m.code);
+            return w;
+        };
+
+        S_GROUP_CHOOSE_RESULT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.code = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_GROUP_CHOOSE_RESULT.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT)
+                return d;
+            var m = new $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.code != null) {
+                m.code = d.code | 0;
+            }
+            return m;
+        };
+
+        S_GROUP_CHOOSE_RESULT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 201;
+                d.scmd = 13;
+                d.code = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.code != null && m.hasOwnProperty("code")) {
+                d.code = m.code;
+            }
+            return d;
+        };
+
+        S_GROUP_CHOOSE_RESULT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_GROUP_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/FriendlyMatchPto.S_GROUP_CHOOSE_RESULT";
+        };
+
+        return S_GROUP_CHOOSE_RESULT;
+    })();
+
+    return FriendlyMatchPto;
 })();
 
 module.exports = $root;

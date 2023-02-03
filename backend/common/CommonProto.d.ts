@@ -1338,1282 +1338,6 @@ export namespace ChatPto {
     }
 }
 
-/** Namespace HallPto. */
-export namespace HallPto {
-
-    /** Properties of a C_REQ_FRIENDLY_MATCH. */
-    interface IC_REQ_FRIENDLY_MATCH {
-
-        /** C_REQ_FRIENDLY_MATCH cmd */
-        cmd?: (number|null);
-
-        /** C_REQ_FRIENDLY_MATCH scmd */
-        scmd?: (number|null);
-
-        /** C_REQ_FRIENDLY_MATCH targetUid */
-        targetUid?: (number|null);
-    }
-
-    /** Represents a C_REQ_FRIENDLY_MATCH. */
-    class C_REQ_FRIENDLY_MATCH implements IC_REQ_FRIENDLY_MATCH {
-
-        /**
-         * Constructs a new C_REQ_FRIENDLY_MATCH.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_REQ_FRIENDLY_MATCH);
-
-        /** C_REQ_FRIENDLY_MATCH cmd. */
-        public cmd: number;
-
-        /** C_REQ_FRIENDLY_MATCH scmd. */
-        public scmd: number;
-
-        /** C_REQ_FRIENDLY_MATCH targetUid. */
-        public targetUid: number;
-
-        /**
-         * Encodes the specified C_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message C_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message C_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Decodes a C_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Verifies a C_REQ_FRIENDLY_MATCH message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_REQ_FRIENDLY_MATCH
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Creates a plain object from a C_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
-         * @param message C_REQ_FRIENDLY_MATCH
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_REQ_FRIENDLY_MATCH to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_REQ_FRIENDLY_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_REQ_FRIENDLY_MATCH. */
-    interface IS_REQ_FRIENDLY_MATCH {
-
-        /** S_REQ_FRIENDLY_MATCH cmd */
-        cmd?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH scmd */
-        scmd?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH code */
-        code?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH endTime */
-        endTime?: (number|null);
-    }
-
-    /** Represents a S_REQ_FRIENDLY_MATCH. */
-    class S_REQ_FRIENDLY_MATCH implements IS_REQ_FRIENDLY_MATCH {
-
-        /**
-         * Constructs a new S_REQ_FRIENDLY_MATCH.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_REQ_FRIENDLY_MATCH);
-
-        /** S_REQ_FRIENDLY_MATCH cmd. */
-        public cmd: number;
-
-        /** S_REQ_FRIENDLY_MATCH scmd. */
-        public scmd: number;
-
-        /** S_REQ_FRIENDLY_MATCH code. */
-        public code: number;
-
-        /** S_REQ_FRIENDLY_MATCH endTime. */
-        public endTime: number;
-
-        /**
-         * Encodes the specified S_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message S_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message S_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Decodes a S_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Verifies a S_REQ_FRIENDLY_MATCH message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_REQ_FRIENDLY_MATCH
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Creates a plain object from a S_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
-         * @param message S_REQ_FRIENDLY_MATCH
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_REQ_FRIENDLY_MATCH to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_REQ_FRIENDLY_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a C_CANCEL_REQ_FRIENDLY_MATCH. */
-    interface IC_CANCEL_REQ_FRIENDLY_MATCH {
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH cmd */
-        cmd?: (number|null);
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH scmd */
-        scmd?: (number|null);
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH targetUid */
-        targetUid?: (number|null);
-    }
-
-    /** Represents a C_CANCEL_REQ_FRIENDLY_MATCH. */
-    class C_CANCEL_REQ_FRIENDLY_MATCH implements IC_CANCEL_REQ_FRIENDLY_MATCH {
-
-        /**
-         * Constructs a new C_CANCEL_REQ_FRIENDLY_MATCH.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH);
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH cmd. */
-        public cmd: number;
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH scmd. */
-        public scmd: number;
-
-        /** C_CANCEL_REQ_FRIENDLY_MATCH targetUid. */
-        public targetUid: number;
-
-        /**
-         * Encodes the specified C_CANCEL_REQ_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.C_CANCEL_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message C_CANCEL_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_CANCEL_REQ_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.C_CANCEL_REQ_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message C_CANCEL_REQ_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_CANCEL_REQ_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_CANCEL_REQ_FRIENDLY_MATCH message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Decodes a C_CANCEL_REQ_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Verifies a C_CANCEL_REQ_FRIENDLY_MATCH message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_CANCEL_REQ_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_CANCEL_REQ_FRIENDLY_MATCH
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_CANCEL_REQ_FRIENDLY_MATCH;
-
-        /**
-         * Creates a plain object from a C_CANCEL_REQ_FRIENDLY_MATCH message. Also converts values to other types if specified.
-         * @param message C_CANCEL_REQ_FRIENDLY_MATCH
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_CANCEL_REQ_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_CANCEL_REQ_FRIENDLY_MATCH to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_CANCEL_REQ_FRIENDLY_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_REQ_FRIENDLY_MATCH_RESULT. */
-    interface IS_REQ_FRIENDLY_MATCH_RESULT {
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT cmd */
-        cmd?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT scmd */
-        scmd?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT targetUid */
-        targetUid?: (number|null);
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT result */
-        result?: (boolean|null);
-    }
-
-    /** Represents a S_REQ_FRIENDLY_MATCH_RESULT. */
-    class S_REQ_FRIENDLY_MATCH_RESULT implements IS_REQ_FRIENDLY_MATCH_RESULT {
-
-        /**
-         * Constructs a new S_REQ_FRIENDLY_MATCH_RESULT.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT);
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT cmd. */
-        public cmd: number;
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT scmd. */
-        public scmd: number;
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT targetUid. */
-        public targetUid: number;
-
-        /** S_REQ_FRIENDLY_MATCH_RESULT result. */
-        public result: boolean;
-
-        /**
-         * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
-         * @param message S_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_REQ_FRIENDLY_MATCH_RESULT message, length delimited. Does not implicitly {@link HallPto.S_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
-         * @param message S_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_REQ_FRIENDLY_MATCH_RESULT
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Decodes a S_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_REQ_FRIENDLY_MATCH_RESULT
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Verifies a S_REQ_FRIENDLY_MATCH_RESULT message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_REQ_FRIENDLY_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_REQ_FRIENDLY_MATCH_RESULT
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Creates a plain object from a S_REQ_FRIENDLY_MATCH_RESULT message. Also converts values to other types if specified.
-         * @param message S_REQ_FRIENDLY_MATCH_RESULT
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_REQ_FRIENDLY_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_REQ_FRIENDLY_MATCH_RESULT to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_REQ_FRIENDLY_MATCH_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIENDLY_MATCH. */
-    interface IS_FRIENDLY_MATCH {
-
-        /** S_FRIENDLY_MATCH cmd */
-        cmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH scmd */
-        scmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH friendUid */
-        friendUid?: (number|null);
-
-        /** S_FRIENDLY_MATCH endTime */
-        endTime?: (number|null);
-    }
-
-    /** Represents a S_FRIENDLY_MATCH. */
-    class S_FRIENDLY_MATCH implements IS_FRIENDLY_MATCH {
-
-        /**
-         * Constructs a new S_FRIENDLY_MATCH.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_FRIENDLY_MATCH);
-
-        /** S_FRIENDLY_MATCH cmd. */
-        public cmd: number;
-
-        /** S_FRIENDLY_MATCH scmd. */
-        public scmd: number;
-
-        /** S_FRIENDLY_MATCH friendUid. */
-        public friendUid: number;
-
-        /** S_FRIENDLY_MATCH endTime. */
-        public endTime: number;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH message, length delimited. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_FRIENDLY_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_FRIENDLY_MATCH
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_FRIENDLY_MATCH;
-
-        /**
-         * Verifies a S_FRIENDLY_MATCH message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_FRIENDLY_MATCH message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_FRIENDLY_MATCH
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_FRIENDLY_MATCH;
-
-        /**
-         * Creates a plain object from a S_FRIENDLY_MATCH message. Also converts values to other types if specified.
-         * @param message S_FRIENDLY_MATCH
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_FRIENDLY_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_FRIENDLY_MATCH to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_FRIENDLY_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a C_REQ_FRIENDLY_MATCH_RESULT. */
-    interface IC_REQ_FRIENDLY_MATCH_RESULT {
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT cmd */
-        cmd?: (number|null);
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT scmd */
-        scmd?: (number|null);
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT targetUid */
-        targetUid?: (number|null);
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT result */
-        result?: (boolean|null);
-    }
-
-    /** Represents a C_REQ_FRIENDLY_MATCH_RESULT. */
-    class C_REQ_FRIENDLY_MATCH_RESULT implements IC_REQ_FRIENDLY_MATCH_RESULT {
-
-        /**
-         * Constructs a new C_REQ_FRIENDLY_MATCH_RESULT.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT);
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT cmd. */
-        public cmd: number;
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT scmd. */
-        public scmd: number;
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT targetUid. */
-        public targetUid: number;
-
-        /** C_REQ_FRIENDLY_MATCH_RESULT result. */
-        public result: boolean;
-
-        /**
-         * Encodes the specified C_REQ_FRIENDLY_MATCH_RESULT message. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
-         * @param message C_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_REQ_FRIENDLY_MATCH_RESULT message, length delimited. Does not implicitly {@link HallPto.C_REQ_FRIENDLY_MATCH_RESULT.verify|verify} messages.
-         * @param message C_REQ_FRIENDLY_MATCH_RESULT message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_REQ_FRIENDLY_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_REQ_FRIENDLY_MATCH_RESULT
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Decodes a C_REQ_FRIENDLY_MATCH_RESULT message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_REQ_FRIENDLY_MATCH_RESULT
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Verifies a C_REQ_FRIENDLY_MATCH_RESULT message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_REQ_FRIENDLY_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_REQ_FRIENDLY_MATCH_RESULT
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_REQ_FRIENDLY_MATCH_RESULT;
-
-        /**
-         * Creates a plain object from a C_REQ_FRIENDLY_MATCH_RESULT message. Also converts values to other types if specified.
-         * @param message C_REQ_FRIENDLY_MATCH_RESULT
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_REQ_FRIENDLY_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_REQ_FRIENDLY_MATCH_RESULT to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_REQ_FRIENDLY_MATCH_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIENDLY_MATCH_CARD_GROUP. */
-    interface IS_FRIENDLY_MATCH_CARD_GROUP {
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP cmd */
-        cmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP scmd */
-        scmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP endTime */
-        endTime?: (number|null);
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP token */
-        token?: (string|null);
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP targetUid */
-        targetUid?: (number|null);
-    }
-
-    /** Represents a S_FRIENDLY_MATCH_CARD_GROUP. */
-    class S_FRIENDLY_MATCH_CARD_GROUP implements IS_FRIENDLY_MATCH_CARD_GROUP {
-
-        /**
-         * Constructs a new S_FRIENDLY_MATCH_CARD_GROUP.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_CARD_GROUP);
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP cmd. */
-        public cmd: number;
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP scmd. */
-        public scmd: number;
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP endTime. */
-        public endTime: number;
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP token. */
-        public token: string;
-
-        /** S_FRIENDLY_MATCH_CARD_GROUP targetUid. */
-        public targetUid: number;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_FRIENDLY_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_CARD_GROUP message, length delimited. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_FRIENDLY_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIENDLY_MATCH_CARD_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_FRIENDLY_MATCH_CARD_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Verifies a S_FRIENDLY_MATCH_CARD_GROUP message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_FRIENDLY_MATCH_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_FRIENDLY_MATCH_CARD_GROUP
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Creates a plain object from a S_FRIENDLY_MATCH_CARD_GROUP message. Also converts values to other types if specified.
-         * @param message S_FRIENDLY_MATCH_CARD_GROUP
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_FRIENDLY_MATCH_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_FRIENDLY_MATCH_CARD_GROUP to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_FRIENDLY_MATCH_CARD_GROUP
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a C_FRIENDLY_MATCH_CARD_GROUP. */
-    interface IC_FRIENDLY_MATCH_CARD_GROUP {
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP cmd */
-        cmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP scmd */
-        scmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP cardGroupId */
-        cardGroupId?: (number|null);
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP token */
-        token?: (string|null);
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP targetUid */
-        targetUid?: (number|null);
-    }
-
-    /** Represents a C_FRIENDLY_MATCH_CARD_GROUP. */
-    class C_FRIENDLY_MATCH_CARD_GROUP implements IC_FRIENDLY_MATCH_CARD_GROUP {
-
-        /**
-         * Constructs a new C_FRIENDLY_MATCH_CARD_GROUP.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_CARD_GROUP);
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP cmd. */
-        public cmd: number;
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP scmd. */
-        public scmd: number;
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP cardGroupId. */
-        public cardGroupId: number;
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP token. */
-        public token: string;
-
-        /** C_FRIENDLY_MATCH_CARD_GROUP targetUid. */
-        public targetUid: number;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_CARD_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_FRIENDLY_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_CARD_GROUP message, length delimited. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_CARD_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_FRIENDLY_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_FRIENDLY_MATCH_CARD_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_CARD_GROUP message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_FRIENDLY_MATCH_CARD_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Verifies a C_FRIENDLY_MATCH_CARD_GROUP message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_FRIENDLY_MATCH_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_FRIENDLY_MATCH_CARD_GROUP
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_FRIENDLY_MATCH_CARD_GROUP;
-
-        /**
-         * Creates a plain object from a C_FRIENDLY_MATCH_CARD_GROUP message. Also converts values to other types if specified.
-         * @param message C_FRIENDLY_MATCH_CARD_GROUP
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_FRIENDLY_MATCH_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_FRIENDLY_MATCH_CARD_GROUP to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_FRIENDLY_MATCH_CARD_GROUP
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a C_FRIENDLY_MATCH_CANCEL_GROUP. */
-    interface IC_FRIENDLY_MATCH_CANCEL_GROUP {
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP cmd */
-        cmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP scmd */
-        scmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP token */
-        token?: (string|null);
-    }
-
-    /** Represents a C_FRIENDLY_MATCH_CANCEL_GROUP. */
-    class C_FRIENDLY_MATCH_CANCEL_GROUP implements IC_FRIENDLY_MATCH_CANCEL_GROUP {
-
-        /**
-         * Constructs a new C_FRIENDLY_MATCH_CANCEL_GROUP.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP);
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP cmd. */
-        public cmd: number;
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP scmd. */
-        public scmd: number;
-
-        /** C_FRIENDLY_MATCH_CANCEL_GROUP token. */
-        public token: string;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_CANCEL_GROUP message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_CANCEL_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_CANCEL_GROUP message, length delimited. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_CANCEL_GROUP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_FRIENDLY_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_CANCEL_GROUP message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_FRIENDLY_MATCH_CANCEL_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_CANCEL_GROUP message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_FRIENDLY_MATCH_CANCEL_GROUP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP;
-
-        /**
-         * Verifies a C_FRIENDLY_MATCH_CANCEL_GROUP message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_FRIENDLY_MATCH_CANCEL_GROUP message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_FRIENDLY_MATCH_CANCEL_GROUP
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP;
-
-        /**
-         * Creates a plain object from a C_FRIENDLY_MATCH_CANCEL_GROUP message. Also converts values to other types if specified.
-         * @param message C_FRIENDLY_MATCH_CANCEL_GROUP
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_FRIENDLY_MATCH_CANCEL_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_FRIENDLY_MATCH_CANCEL_GROUP to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_FRIENDLY_MATCH_CANCEL_GROUP
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a C_FRIENDLY_MATCH_LEAVE. */
-    interface IC_FRIENDLY_MATCH_LEAVE {
-
-        /** C_FRIENDLY_MATCH_LEAVE cmd */
-        cmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_LEAVE scmd */
-        scmd?: (number|null);
-
-        /** C_FRIENDLY_MATCH_LEAVE token */
-        token?: (string|null);
-
-        /** C_FRIENDLY_MATCH_LEAVE targetUid */
-        targetUid?: (number|null);
-    }
-
-    /** Represents a C_FRIENDLY_MATCH_LEAVE. */
-    class C_FRIENDLY_MATCH_LEAVE implements IC_FRIENDLY_MATCH_LEAVE {
-
-        /**
-         * Constructs a new C_FRIENDLY_MATCH_LEAVE.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IC_FRIENDLY_MATCH_LEAVE);
-
-        /** C_FRIENDLY_MATCH_LEAVE cmd. */
-        public cmd: number;
-
-        /** C_FRIENDLY_MATCH_LEAVE scmd. */
-        public scmd: number;
-
-        /** C_FRIENDLY_MATCH_LEAVE token. */
-        public token: string;
-
-        /** C_FRIENDLY_MATCH_LEAVE targetUid. */
-        public targetUid: number;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_LEAVE message. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_LEAVE.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_LEAVE message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IC_FRIENDLY_MATCH_LEAVE, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified C_FRIENDLY_MATCH_LEAVE message, length delimited. Does not implicitly {@link HallPto.C_FRIENDLY_MATCH_LEAVE.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH_LEAVE message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IC_FRIENDLY_MATCH_LEAVE, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_LEAVE message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns C_FRIENDLY_MATCH_LEAVE
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.C_FRIENDLY_MATCH_LEAVE;
-
-        /**
-         * Decodes a C_FRIENDLY_MATCH_LEAVE message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns C_FRIENDLY_MATCH_LEAVE
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.C_FRIENDLY_MATCH_LEAVE;
-
-        /**
-         * Verifies a C_FRIENDLY_MATCH_LEAVE message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a C_FRIENDLY_MATCH_LEAVE message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns C_FRIENDLY_MATCH_LEAVE
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.C_FRIENDLY_MATCH_LEAVE;
-
-        /**
-         * Creates a plain object from a C_FRIENDLY_MATCH_LEAVE message. Also converts values to other types if specified.
-         * @param message C_FRIENDLY_MATCH_LEAVE
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.C_FRIENDLY_MATCH_LEAVE, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this C_FRIENDLY_MATCH_LEAVE to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for C_FRIENDLY_MATCH_LEAVE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIENDLY_MATCH_STOP. */
-    interface IS_FRIENDLY_MATCH_STOP {
-
-        /** S_FRIENDLY_MATCH_STOP cmd */
-        cmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH_STOP scmd */
-        scmd?: (number|null);
-    }
-
-    /** Represents a S_FRIENDLY_MATCH_STOP. */
-    class S_FRIENDLY_MATCH_STOP implements IS_FRIENDLY_MATCH_STOP {
-
-        /**
-         * Constructs a new S_FRIENDLY_MATCH_STOP.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_STOP);
-
-        /** S_FRIENDLY_MATCH_STOP cmd. */
-        public cmd: number;
-
-        /** S_FRIENDLY_MATCH_STOP scmd. */
-        public scmd: number;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_STOP message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_STOP.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_STOP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_FRIENDLY_MATCH_STOP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_STOP message, length delimited. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_STOP.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_STOP message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_FRIENDLY_MATCH_STOP, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_STOP message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIENDLY_MATCH_STOP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_STOP;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_STOP message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_FRIENDLY_MATCH_STOP
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_FRIENDLY_MATCH_STOP;
-
-        /**
-         * Verifies a S_FRIENDLY_MATCH_STOP message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_FRIENDLY_MATCH_STOP message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_FRIENDLY_MATCH_STOP
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_FRIENDLY_MATCH_STOP;
-
-        /**
-         * Creates a plain object from a S_FRIENDLY_MATCH_STOP message. Also converts values to other types if specified.
-         * @param message S_FRIENDLY_MATCH_STOP
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_FRIENDLY_MATCH_STOP, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_FRIENDLY_MATCH_STOP to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_FRIENDLY_MATCH_STOP
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-
-    /** Properties of a S_FRIENDLY_MATCH_TOKEN. */
-    interface IS_FRIENDLY_MATCH_TOKEN {
-
-        /** S_FRIENDLY_MATCH_TOKEN cmd */
-        cmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH_TOKEN scmd */
-        scmd?: (number|null);
-
-        /** S_FRIENDLY_MATCH_TOKEN token */
-        token?: (string|null);
-    }
-
-    /** Represents a S_FRIENDLY_MATCH_TOKEN. */
-    class S_FRIENDLY_MATCH_TOKEN implements IS_FRIENDLY_MATCH_TOKEN {
-
-        /**
-         * Constructs a new S_FRIENDLY_MATCH_TOKEN.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: HallPto.IS_FRIENDLY_MATCH_TOKEN);
-
-        /** S_FRIENDLY_MATCH_TOKEN cmd. */
-        public cmd: number;
-
-        /** S_FRIENDLY_MATCH_TOKEN scmd. */
-        public scmd: number;
-
-        /** S_FRIENDLY_MATCH_TOKEN token. */
-        public token: string;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_TOKEN message. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_TOKEN.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_TOKEN message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: HallPto.IS_FRIENDLY_MATCH_TOKEN, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified S_FRIENDLY_MATCH_TOKEN message, length delimited. Does not implicitly {@link HallPto.S_FRIENDLY_MATCH_TOKEN.verify|verify} messages.
-         * @param message S_FRIENDLY_MATCH_TOKEN message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: HallPto.IS_FRIENDLY_MATCH_TOKEN, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_TOKEN message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns S_FRIENDLY_MATCH_TOKEN
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): HallPto.S_FRIENDLY_MATCH_TOKEN;
-
-        /**
-         * Decodes a S_FRIENDLY_MATCH_TOKEN message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns S_FRIENDLY_MATCH_TOKEN
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): HallPto.S_FRIENDLY_MATCH_TOKEN;
-
-        /**
-         * Verifies a S_FRIENDLY_MATCH_TOKEN message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a S_FRIENDLY_MATCH_TOKEN message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns S_FRIENDLY_MATCH_TOKEN
-         */
-        public static fromObject(object: { [k: string]: any }): HallPto.S_FRIENDLY_MATCH_TOKEN;
-
-        /**
-         * Creates a plain object from a S_FRIENDLY_MATCH_TOKEN message. Also converts values to other types if specified.
-         * @param message S_FRIENDLY_MATCH_TOKEN
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: HallPto.S_FRIENDLY_MATCH_TOKEN, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this S_FRIENDLY_MATCH_TOKEN to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for S_FRIENDLY_MATCH_TOKEN
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
-    }
-}
-
 /** Namespace SystemPto. */
 export namespace SystemPto {
 
@@ -4099,6 +2823,1336 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for C_FRIENDLY_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+}
+
+/** Namespace FriendlyMatchPto. */
+export namespace FriendlyMatchPto {
+
+    /** Properties of a C_REQ_MATCH. */
+    interface IC_REQ_MATCH {
+
+        /** C_REQ_MATCH cmd */
+        cmd?: (number|null);
+
+        /** C_REQ_MATCH scmd */
+        scmd?: (number|null);
+
+        /** C_REQ_MATCH targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a C_REQ_MATCH. */
+    class C_REQ_MATCH implements IC_REQ_MATCH {
+
+        /**
+         * Constructs a new C_REQ_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_REQ_MATCH);
+
+        /** C_REQ_MATCH cmd. */
+        public cmd: number;
+
+        /** C_REQ_MATCH scmd. */
+        public scmd: number;
+
+        /** C_REQ_MATCH targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified C_REQ_MATCH message. Does not implicitly {@link FriendlyMatchPto.C_REQ_MATCH.verify|verify} messages.
+         * @param message C_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_REQ_MATCH message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_REQ_MATCH.verify|verify} messages.
+         * @param message C_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_REQ_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_REQ_MATCH;
+
+        /**
+         * Decodes a C_REQ_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_REQ_MATCH;
+
+        /**
+         * Verifies a C_REQ_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_REQ_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_REQ_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_REQ_MATCH;
+
+        /**
+         * Creates a plain object from a C_REQ_MATCH message. Also converts values to other types if specified.
+         * @param message C_REQ_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_REQ_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_REQ_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_REQ_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_REQ_MATCH. */
+    interface IS_REQ_MATCH {
+
+        /** S_REQ_MATCH cmd */
+        cmd?: (number|null);
+
+        /** S_REQ_MATCH scmd */
+        scmd?: (number|null);
+
+        /** S_REQ_MATCH code */
+        code?: (number|null);
+
+        /** S_REQ_MATCH endTime */
+        endTime?: (number|null);
+    }
+
+    /** Represents a S_REQ_MATCH. */
+    class S_REQ_MATCH implements IS_REQ_MATCH {
+
+        /**
+         * Constructs a new S_REQ_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_REQ_MATCH);
+
+        /** S_REQ_MATCH cmd. */
+        public cmd: number;
+
+        /** S_REQ_MATCH scmd. */
+        public scmd: number;
+
+        /** S_REQ_MATCH code. */
+        public code: number;
+
+        /** S_REQ_MATCH endTime. */
+        public endTime: number;
+
+        /**
+         * Encodes the specified S_REQ_MATCH message. Does not implicitly {@link FriendlyMatchPto.S_REQ_MATCH.verify|verify} messages.
+         * @param message S_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_REQ_MATCH message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_REQ_MATCH.verify|verify} messages.
+         * @param message S_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_REQ_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_REQ_MATCH;
+
+        /**
+         * Decodes a S_REQ_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_REQ_MATCH;
+
+        /**
+         * Verifies a S_REQ_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_REQ_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_REQ_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_REQ_MATCH;
+
+        /**
+         * Creates a plain object from a S_REQ_MATCH message. Also converts values to other types if specified.
+         * @param message S_REQ_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_REQ_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_REQ_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_REQ_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_CANCEL_REQ_MATCH. */
+    interface IC_CANCEL_REQ_MATCH {
+
+        /** C_CANCEL_REQ_MATCH cmd */
+        cmd?: (number|null);
+
+        /** C_CANCEL_REQ_MATCH scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_CANCEL_REQ_MATCH. */
+    class C_CANCEL_REQ_MATCH implements IC_CANCEL_REQ_MATCH {
+
+        /**
+         * Constructs a new C_CANCEL_REQ_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_CANCEL_REQ_MATCH);
+
+        /** C_CANCEL_REQ_MATCH cmd. */
+        public cmd: number;
+
+        /** C_CANCEL_REQ_MATCH scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_CANCEL_REQ_MATCH message. Does not implicitly {@link FriendlyMatchPto.C_CANCEL_REQ_MATCH.verify|verify} messages.
+         * @param message C_CANCEL_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_CANCEL_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_CANCEL_REQ_MATCH message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_CANCEL_REQ_MATCH.verify|verify} messages.
+         * @param message C_CANCEL_REQ_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_CANCEL_REQ_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_CANCEL_REQ_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_CANCEL_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_CANCEL_REQ_MATCH;
+
+        /**
+         * Decodes a C_CANCEL_REQ_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_CANCEL_REQ_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_CANCEL_REQ_MATCH;
+
+        /**
+         * Verifies a C_CANCEL_REQ_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_CANCEL_REQ_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_CANCEL_REQ_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_CANCEL_REQ_MATCH;
+
+        /**
+         * Creates a plain object from a C_CANCEL_REQ_MATCH message. Also converts values to other types if specified.
+         * @param message C_CANCEL_REQ_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_CANCEL_REQ_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_CANCEL_REQ_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_CANCEL_REQ_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_REQ_MATCH_RESULT. */
+    interface IS_REQ_MATCH_RESULT {
+
+        /** S_REQ_MATCH_RESULT cmd */
+        cmd?: (number|null);
+
+        /** S_REQ_MATCH_RESULT scmd */
+        scmd?: (number|null);
+
+        /** S_REQ_MATCH_RESULT result */
+        result?: (boolean|null);
+
+        /** S_REQ_MATCH_RESULT targetUid */
+        targetUid?: (number|null);
+    }
+
+    /** Represents a S_REQ_MATCH_RESULT. */
+    class S_REQ_MATCH_RESULT implements IS_REQ_MATCH_RESULT {
+
+        /**
+         * Constructs a new S_REQ_MATCH_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_REQ_MATCH_RESULT);
+
+        /** S_REQ_MATCH_RESULT cmd. */
+        public cmd: number;
+
+        /** S_REQ_MATCH_RESULT scmd. */
+        public scmd: number;
+
+        /** S_REQ_MATCH_RESULT result. */
+        public result: boolean;
+
+        /** S_REQ_MATCH_RESULT targetUid. */
+        public targetUid: number;
+
+        /**
+         * Encodes the specified S_REQ_MATCH_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_REQ_MATCH_RESULT.verify|verify} messages.
+         * @param message S_REQ_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_REQ_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_REQ_MATCH_RESULT message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_REQ_MATCH_RESULT.verify|verify} messages.
+         * @param message S_REQ_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_REQ_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_REQ_MATCH_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_REQ_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_REQ_MATCH_RESULT;
+
+        /**
+         * Decodes a S_REQ_MATCH_RESULT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_REQ_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_REQ_MATCH_RESULT;
+
+        /**
+         * Verifies a S_REQ_MATCH_RESULT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_REQ_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_REQ_MATCH_RESULT
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_REQ_MATCH_RESULT;
+
+        /**
+         * Creates a plain object from a S_REQ_MATCH_RESULT message. Also converts values to other types if specified.
+         * @param message S_REQ_MATCH_RESULT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_REQ_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_REQ_MATCH_RESULT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_REQ_MATCH_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MATCH. */
+    interface IS_MATCH {
+
+        /** S_MATCH cmd */
+        cmd?: (number|null);
+
+        /** S_MATCH scmd */
+        scmd?: (number|null);
+
+        /** S_MATCH friendUid */
+        friendUid?: (number|null);
+
+        /** S_MATCH endTime */
+        endTime?: (number|null);
+    }
+
+    /** Represents a S_MATCH. */
+    class S_MATCH implements IS_MATCH {
+
+        /**
+         * Constructs a new S_MATCH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_MATCH);
+
+        /** S_MATCH cmd. */
+        public cmd: number;
+
+        /** S_MATCH scmd. */
+        public scmd: number;
+
+        /** S_MATCH friendUid. */
+        public friendUid: number;
+
+        /** S_MATCH endTime. */
+        public endTime: number;
+
+        /**
+         * Encodes the specified S_MATCH message. Does not implicitly {@link FriendlyMatchPto.S_MATCH.verify|verify} messages.
+         * @param message S_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_MATCH message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_MATCH.verify|verify} messages.
+         * @param message S_MATCH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_MATCH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_MATCH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH;
+
+        /**
+         * Decodes a S_MATCH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_MATCH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_MATCH;
+
+        /**
+         * Verifies a S_MATCH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_MATCH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_MATCH
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_MATCH;
+
+        /**
+         * Creates a plain object from a S_MATCH message. Also converts values to other types if specified.
+         * @param message S_MATCH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_MATCH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_MATCH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_MATCH
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_REQ_MATCH_RESULT. */
+    interface IC_REQ_MATCH_RESULT {
+
+        /** C_REQ_MATCH_RESULT cmd */
+        cmd?: (number|null);
+
+        /** C_REQ_MATCH_RESULT scmd */
+        scmd?: (number|null);
+
+        /** C_REQ_MATCH_RESULT result */
+        result?: (boolean|null);
+    }
+
+    /** Represents a C_REQ_MATCH_RESULT. */
+    class C_REQ_MATCH_RESULT implements IC_REQ_MATCH_RESULT {
+
+        /**
+         * Constructs a new C_REQ_MATCH_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_REQ_MATCH_RESULT);
+
+        /** C_REQ_MATCH_RESULT cmd. */
+        public cmd: number;
+
+        /** C_REQ_MATCH_RESULT scmd. */
+        public scmd: number;
+
+        /** C_REQ_MATCH_RESULT result. */
+        public result: boolean;
+
+        /**
+         * Encodes the specified C_REQ_MATCH_RESULT message. Does not implicitly {@link FriendlyMatchPto.C_REQ_MATCH_RESULT.verify|verify} messages.
+         * @param message C_REQ_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_REQ_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_REQ_MATCH_RESULT message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_REQ_MATCH_RESULT.verify|verify} messages.
+         * @param message C_REQ_MATCH_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_REQ_MATCH_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_REQ_MATCH_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_REQ_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_REQ_MATCH_RESULT;
+
+        /**
+         * Decodes a C_REQ_MATCH_RESULT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_REQ_MATCH_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_REQ_MATCH_RESULT;
+
+        /**
+         * Verifies a C_REQ_MATCH_RESULT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_REQ_MATCH_RESULT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_REQ_MATCH_RESULT
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_REQ_MATCH_RESULT;
+
+        /**
+         * Creates a plain object from a C_REQ_MATCH_RESULT message. Also converts values to other types if specified.
+         * @param message C_REQ_MATCH_RESULT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_REQ_MATCH_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_REQ_MATCH_RESULT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_REQ_MATCH_RESULT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MATCH_CARD_GROUP. */
+    interface IS_MATCH_CARD_GROUP {
+
+        /** S_MATCH_CARD_GROUP cmd */
+        cmd?: (number|null);
+
+        /** S_MATCH_CARD_GROUP scmd */
+        scmd?: (number|null);
+
+        /** S_MATCH_CARD_GROUP endTime */
+        endTime?: (number|null);
+    }
+
+    /** Represents a S_MATCH_CARD_GROUP. */
+    class S_MATCH_CARD_GROUP implements IS_MATCH_CARD_GROUP {
+
+        /**
+         * Constructs a new S_MATCH_CARD_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_MATCH_CARD_GROUP);
+
+        /** S_MATCH_CARD_GROUP cmd. */
+        public cmd: number;
+
+        /** S_MATCH_CARD_GROUP scmd. */
+        public scmd: number;
+
+        /** S_MATCH_CARD_GROUP endTime. */
+        public endTime: number;
+
+        /**
+         * Encodes the specified S_MATCH_CARD_GROUP message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_CARD_GROUP.verify|verify} messages.
+         * @param message S_MATCH_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_MATCH_CARD_GROUP message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_MATCH_CARD_GROUP.verify|verify} messages.
+         * @param message S_MATCH_CARD_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+
+        /**
+         * Decodes a S_MATCH_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_MATCH_CARD_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+
+        /**
+         * Verifies a S_MATCH_CARD_GROUP message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_MATCH_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_MATCH_CARD_GROUP
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+
+        /**
+         * Creates a plain object from a S_MATCH_CARD_GROUP message. Also converts values to other types if specified.
+         * @param message S_MATCH_CARD_GROUP
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_MATCH_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_MATCH_CARD_GROUP to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_MATCH_CARD_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_GROUP_CHOOSE. */
+    interface IC_GROUP_CHOOSE {
+
+        /** C_GROUP_CHOOSE cmd */
+        cmd?: (number|null);
+
+        /** C_GROUP_CHOOSE scmd */
+        scmd?: (number|null);
+
+        /** C_GROUP_CHOOSE cardGroupId */
+        cardGroupId?: (number|null);
+    }
+
+    /** Represents a C_GROUP_CHOOSE. */
+    class C_GROUP_CHOOSE implements IC_GROUP_CHOOSE {
+
+        /**
+         * Constructs a new C_GROUP_CHOOSE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_GROUP_CHOOSE);
+
+        /** C_GROUP_CHOOSE cmd. */
+        public cmd: number;
+
+        /** C_GROUP_CHOOSE scmd. */
+        public scmd: number;
+
+        /** C_GROUP_CHOOSE cardGroupId. */
+        public cardGroupId: number;
+
+        /**
+         * Encodes the specified C_GROUP_CHOOSE message. Does not implicitly {@link FriendlyMatchPto.C_GROUP_CHOOSE.verify|verify} messages.
+         * @param message C_GROUP_CHOOSE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_GROUP_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_GROUP_CHOOSE message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_GROUP_CHOOSE.verify|verify} messages.
+         * @param message C_GROUP_CHOOSE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_GROUP_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_GROUP_CHOOSE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_GROUP_CHOOSE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_GROUP_CHOOSE;
+
+        /**
+         * Decodes a C_GROUP_CHOOSE message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_GROUP_CHOOSE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_GROUP_CHOOSE;
+
+        /**
+         * Verifies a C_GROUP_CHOOSE message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_GROUP_CHOOSE message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_GROUP_CHOOSE
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_GROUP_CHOOSE;
+
+        /**
+         * Creates a plain object from a C_GROUP_CHOOSE message. Also converts values to other types if specified.
+         * @param message C_GROUP_CHOOSE
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_GROUP_CHOOSE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_GROUP_CHOOSE to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_GROUP_CHOOSE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_MATCH_CANCEL_GROUP. */
+    interface IC_MATCH_CANCEL_GROUP {
+
+        /** C_MATCH_CANCEL_GROUP cmd */
+        cmd?: (number|null);
+
+        /** C_MATCH_CANCEL_GROUP scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_MATCH_CANCEL_GROUP. */
+    class C_MATCH_CANCEL_GROUP implements IC_MATCH_CANCEL_GROUP {
+
+        /**
+         * Constructs a new C_MATCH_CANCEL_GROUP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP);
+
+        /** C_MATCH_CANCEL_GROUP cmd. */
+        public cmd: number;
+
+        /** C_MATCH_CANCEL_GROUP scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_MATCH_CANCEL_GROUP message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_GROUP.verify|verify} messages.
+         * @param message C_MATCH_CANCEL_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_MATCH_CANCEL_GROUP message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_GROUP.verify|verify} messages.
+         * @param message C_MATCH_CANCEL_GROUP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_MATCH_CANCEL_GROUP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_MATCH_CANCEL_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+
+        /**
+         * Decodes a C_MATCH_CANCEL_GROUP message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_MATCH_CANCEL_GROUP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+
+        /**
+         * Verifies a C_MATCH_CANCEL_GROUP message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_MATCH_CANCEL_GROUP message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_MATCH_CANCEL_GROUP
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+
+        /**
+         * Creates a plain object from a C_MATCH_CANCEL_GROUP message. Also converts values to other types if specified.
+         * @param message C_MATCH_CANCEL_GROUP
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_MATCH_CANCEL_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_MATCH_CANCEL_GROUP to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_MATCH_CANCEL_GROUP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_MATCH_LEAVE. */
+    interface IC_MATCH_LEAVE {
+
+        /** C_MATCH_LEAVE cmd */
+        cmd?: (number|null);
+
+        /** C_MATCH_LEAVE scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_MATCH_LEAVE. */
+    class C_MATCH_LEAVE implements IC_MATCH_LEAVE {
+
+        /**
+         * Constructs a new C_MATCH_LEAVE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IC_MATCH_LEAVE);
+
+        /** C_MATCH_LEAVE cmd. */
+        public cmd: number;
+
+        /** C_MATCH_LEAVE scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_MATCH_LEAVE message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_LEAVE.verify|verify} messages.
+         * @param message C_MATCH_LEAVE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IC_MATCH_LEAVE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_MATCH_LEAVE message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_MATCH_LEAVE.verify|verify} messages.
+         * @param message C_MATCH_LEAVE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IC_MATCH_LEAVE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_MATCH_LEAVE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_MATCH_LEAVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_LEAVE;
+
+        /**
+         * Decodes a C_MATCH_LEAVE message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_MATCH_LEAVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_MATCH_LEAVE;
+
+        /**
+         * Verifies a C_MATCH_LEAVE message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_MATCH_LEAVE message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_MATCH_LEAVE
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_MATCH_LEAVE;
+
+        /**
+         * Creates a plain object from a C_MATCH_LEAVE message. Also converts values to other types if specified.
+         * @param message C_MATCH_LEAVE
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.C_MATCH_LEAVE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_MATCH_LEAVE to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_MATCH_LEAVE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MATCH_STOP. */
+    interface IS_MATCH_STOP {
+
+        /** S_MATCH_STOP cmd */
+        cmd?: (number|null);
+
+        /** S_MATCH_STOP scmd */
+        scmd?: (number|null);
+
+        /** S_MATCH_STOP code */
+        code?: (number|null);
+    }
+
+    /** Represents a S_MATCH_STOP. */
+    class S_MATCH_STOP implements IS_MATCH_STOP {
+
+        /**
+         * Constructs a new S_MATCH_STOP.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_MATCH_STOP);
+
+        /** S_MATCH_STOP cmd. */
+        public cmd: number;
+
+        /** S_MATCH_STOP scmd. */
+        public scmd: number;
+
+        /** S_MATCH_STOP code. */
+        public code: number;
+
+        /**
+         * Encodes the specified S_MATCH_STOP message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_STOP.verify|verify} messages.
+         * @param message S_MATCH_STOP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_MATCH_STOP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_MATCH_STOP message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_MATCH_STOP.verify|verify} messages.
+         * @param message S_MATCH_STOP message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_MATCH_STOP, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_MATCH_STOP message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MATCH_STOP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_STOP;
+
+        /**
+         * Decodes a S_MATCH_STOP message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_MATCH_STOP
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_MATCH_STOP;
+
+        /**
+         * Verifies a S_MATCH_STOP message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_MATCH_STOP message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_MATCH_STOP
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_MATCH_STOP;
+
+        /**
+         * Creates a plain object from a S_MATCH_STOP message. Also converts values to other types if specified.
+         * @param message S_MATCH_STOP
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_MATCH_STOP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_MATCH_STOP to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_MATCH_STOP
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FRIEND_GROUP_STATUS_CHANGE. */
+    interface IS_FRIEND_GROUP_STATUS_CHANGE {
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE cmd */
+        cmd?: (number|null);
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE scmd */
+        scmd?: (number|null);
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE isChoose */
+        isChoose?: (boolean|null);
+    }
+
+    /** Represents a S_FRIEND_GROUP_STATUS_CHANGE. */
+    class S_FRIEND_GROUP_STATUS_CHANGE implements IS_FRIEND_GROUP_STATUS_CHANGE {
+
+        /**
+         * Constructs a new S_FRIEND_GROUP_STATUS_CHANGE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE);
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE cmd. */
+        public cmd: number;
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE scmd. */
+        public scmd: number;
+
+        /** S_FRIEND_GROUP_STATUS_CHANGE isChoose. */
+        public isChoose: boolean;
+
+        /**
+         * Encodes the specified S_FRIEND_GROUP_STATUS_CHANGE message. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE.verify|verify} messages.
+         * @param message S_FRIEND_GROUP_STATUS_CHANGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_FRIEND_GROUP_STATUS_CHANGE message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE.verify|verify} messages.
+         * @param message S_FRIEND_GROUP_STATUS_CHANGE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_FRIEND_GROUP_STATUS_CHANGE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+
+        /**
+         * Decodes a S_FRIEND_GROUP_STATUS_CHANGE message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+
+        /**
+         * Verifies a S_FRIEND_GROUP_STATUS_CHANGE message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_FRIEND_GROUP_STATUS_CHANGE message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+
+        /**
+         * Creates a plain object from a S_FRIEND_GROUP_STATUS_CHANGE message. Also converts values to other types if specified.
+         * @param message S_FRIEND_GROUP_STATUS_CHANGE
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_FRIEND_GROUP_STATUS_CHANGE to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_FRIEND_GROUP_STATUS_CHANGE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_GROUP_CHOOSE_RESULT. */
+    interface IS_GROUP_CHOOSE_RESULT {
+
+        /** S_GROUP_CHOOSE_RESULT cmd */
+        cmd?: (number|null);
+
+        /** S_GROUP_CHOOSE_RESULT scmd */
+        scmd?: (number|null);
+
+        /** S_GROUP_CHOOSE_RESULT code */
+        code?: (number|null);
+    }
+
+    /** Represents a S_GROUP_CHOOSE_RESULT. */
+    class S_GROUP_CHOOSE_RESULT implements IS_GROUP_CHOOSE_RESULT {
+
+        /**
+         * Constructs a new S_GROUP_CHOOSE_RESULT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT);
+
+        /** S_GROUP_CHOOSE_RESULT cmd. */
+        public cmd: number;
+
+        /** S_GROUP_CHOOSE_RESULT scmd. */
+        public scmd: number;
+
+        /** S_GROUP_CHOOSE_RESULT code. */
+        public code: number;
+
+        /**
+         * Encodes the specified S_GROUP_CHOOSE_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_GROUP_CHOOSE_RESULT.verify|verify} messages.
+         * @param message S_GROUP_CHOOSE_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_GROUP_CHOOSE_RESULT message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_GROUP_CHOOSE_RESULT.verify|verify} messages.
+         * @param message S_GROUP_CHOOSE_RESULT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_GROUP_CHOOSE_RESULT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_GROUP_CHOOSE_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+
+        /**
+         * Decodes a S_GROUP_CHOOSE_RESULT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_GROUP_CHOOSE_RESULT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+
+        /**
+         * Verifies a S_GROUP_CHOOSE_RESULT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_GROUP_CHOOSE_RESULT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_GROUP_CHOOSE_RESULT
+         */
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+
+        /**
+         * Creates a plain object from a S_GROUP_CHOOSE_RESULT message. Also converts values to other types if specified.
+         * @param message S_GROUP_CHOOSE_RESULT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: FriendlyMatchPto.S_GROUP_CHOOSE_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_GROUP_CHOOSE_RESULT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_GROUP_CHOOSE_RESULT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "77458db2-8c60-4265-9acc-5bbf5f44b790"
+let uuid = "d0d4dda0-143f-4aad-8947-09fd8c99c7d4"
 
 //服务器的虚函数定义
 export abstract class RelationRPCServer extends RPCServer {
@@ -25,25 +25,23 @@ export abstract class RelationRPCServer extends RPCServer {
 
     //s2c
     //主动告知网关转发消息
-    async callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise < void>     {
+    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientName,"transferToGate", args)
-        return res
+        return this.rpc.call(clientName,"transferToGate", args)
     }
 
-    sendTransferToGate(clientName:string,uid:number,buffer:Buffer)    {
+    sendTransferToGate(clientName:string,uid:number,buffer:Buffer){
         let args = [uid,buffer]
         this.rpc.send(clientName,"transferToGate",args)
     }
 
     //广播消息
-    async callBroadcast(clientName:string,buffer:Buffer): Promise < void>     {
+    callBroadcast(clientName:string,buffer:Buffer): Promise<void>    {
         let args = [buffer]
-        let res: any = await this.rpc.call(clientName,"broadcast", args)
-        return res
+        return this.rpc.call(clientName,"broadcast", args)
     }
 
-    sendBroadcast(clientName:string,buffer:Buffer)    {
+    sendBroadcast(clientName:string,buffer:Buffer){
         let args = [buffer]
         this.rpc.send(clientName,"broadcast",args)
     }
@@ -59,7 +57,7 @@ export abstract class RelationRPCClient extends RPCClient{
         this.init();
     }
     //用户上线
-    async callUserOnline(uid:number,nick:string): Promise < void>     {
+    async callUserOnline(uid:number,nick:string): Promise<void>    {
         let args = [uid,nick]
         let res: any = await this.rpc.call("userOnline",args)
         return res
@@ -71,7 +69,7 @@ export abstract class RelationRPCClient extends RPCClient{
     }
 
     //用户离线
-    async callUserOffline(uid:number): Promise < void>     {
+    async callUserOffline(uid:number): Promise<void>    {
         let args = [uid]
         let res: any = await this.rpc.call("userOffline",args)
         return res

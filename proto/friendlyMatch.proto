@@ -1,0 +1,94 @@
+syntax = "proto3";
+package FriendlyMatchPto;
+
+//请求友谊赛
+message C_REQ_MATCH{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 1];
+	int32 targetUid = 3;
+}
+
+//是否成功请求友谊赛
+message S_REQ_MATCH{
+    int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 2];
+	int32 code = 3;//1非好友  2好友不在线  3好友正在游戏中 4未知错误
+	int64 endTime = 4;//超过这个时间未接受会当做是拒绝
+}
+
+//取消请求友谊赛
+message C_CANCEL_REQ_MATCH{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 3];
+}
+
+//请求友谊赛结果
+message S_REQ_MATCH_RESULT{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 4];
+	bool result = 3;
+	int32 targetUid = 4;
+}
+
+//好友请求友谊赛
+message S_MATCH{
+    int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 5];
+	int32 friendUid = 3;
+    int64 endTime = 4;//超过这个时间未接受会当做是拒绝
+}
+
+//接受或拒绝好友的友谊赛请求
+message C_REQ_MATCH_RESULT{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 6];
+	bool result = 3;
+}
+
+//通知友谊赛挑选卡组
+message S_MATCH_CARD_GROUP{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 7];
+	int64 endTime = 3;
+}
+
+//玩家挑选卡组
+message C_GROUP_CHOOSE{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 8];
+	int32 cardGroupId = 3;
+}
+
+//友谊赛取消挑选卡组
+message C_MATCH_CANCEL_GROUP{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 9];
+}
+
+//友谊赛离开
+message C_MATCH_LEAVE{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 10];
+}
+
+//友谊赛中断
+message S_MATCH_STOP{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 11];
+	int32 code = 3;// 1好友取消了友谊赛请求
+}
+
+//好友选择卡组状态改变
+message S_FRIEND_GROUP_STATUS_CHANGE{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 12];
+	bool isChoose = 3;
+}
+
+//选择卡组结果
+message S_GROUP_CHOOSE_RESULT{
+	int32 cmd = 1[default = 201]; 
+	int32 scmd = 2[default = 13];
+	int32 code = 3;// 1卡组非法
+}
+

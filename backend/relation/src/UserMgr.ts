@@ -28,7 +28,7 @@ export class UserMgr {
         const user = new UserInfo(clientName, uid, nick);
         this._userMap.set(uid, user);
         //通知好友上线
-        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).lRange(uid, 0, -1);
+        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).smembers(uid);
         const msg = new FriendPto.S_FRIEND_CHANGE();
         msg.uid = uid;
         msg.isOnline = true;
@@ -47,7 +47,7 @@ export class UserMgr {
         GlobalVar.redisMgr.getClient(RedisType.userGate).delete(`${uid}`);
         this._userMap.delete(uid);
         //通知好友下线
-        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).lRange(uid, 0, -1);
+        const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).smembers(uid);
         const msg = new FriendPto.S_FRIEND_CHANGE();
         msg.uid = uid;
         msg.isOnline = false;

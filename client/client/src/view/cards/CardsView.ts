@@ -110,6 +110,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
         this._isCreating = true;
         this.changeRightGroupFunction(true, `0/${GroupCardsNum}`);
+        this.view.groupName.text = groupName;
         this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupInfo);
         this.refreshCreateGroupList();
         ShowCardsCom.ins().showPowerPannel([ConfigMgr.ins().powerConfig[CardsPto.PowerType.Common], ConfigMgr.ins().powerConfig[powerId]]);
@@ -121,7 +122,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
      * 根据isSave的值决定右侧组件的功能
      */
     private changeRightGroupFunction(isSave: boolean, text: string) {
-        this.view.createGroupList.visible = isSave;
+        this.view.cardGroupGroup.visible = isSave;
 
         this.view.cardGroupList.visible = !isSave;
         this.view.cardGroupList.touchable = !isSave;

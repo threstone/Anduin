@@ -3,7 +3,7 @@
   <displayList>
     <image id="n0_pqjx" name="n0" src="z43k1l" fileName="cards/res/dailylogin_matri.png" xy="0,0" size="1280,720"/>
     <component id="n1_pqjx" name="chooseBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1057,624"/>
-    <list id="n2_pqjx" name="cardGroupList" xy="0,0" size="1000,601" layout="flow_hz" overflow="scroll" margin="20,20,40,20" lineGap="15" colGap="40" autoClearItems="true">
+    <list id="n2_pqjx" name="cardGroupList" xy="0,50" size="1000,551" layout="flow_hz" overflow="scroll" margin="20,20,40,20" lineGap="15" colGap="40" autoClearItems="true">
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
@@ -27,5 +27,6 @@
     <component id="n4_pqjx" name="cardsViewBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="708,625"/>
     <component id="n5_pqjx" name="heroCard" src="tb7e1s" fileName="cards/CardItem.xml" xy="1031,216"/>
     <loader id="n8_pqjx" name="close" xy="1089,21" size="51,33" scale="2,2" url="ui://yaux2xpotb7e1t" autoSize="true"/>
+    <text id="n9_pqjx" name="tips" xy="217,4" size="571,45" fontSize="33" color="#4c71c0" align="center" autoSize="none" text="对方已经挑选好了,倒计时00:00:00"/>
   </displayList>
 </component>

@@ -18,6 +18,24 @@ class CardsModel extends BaseModel {
         this.initCards()
     }
 
+    /**用于用户创建卡组没有设置卡组名时的逻辑 */
+    public getCardGroupName(powerId: CardsPto.PowerType) {
+        const arr = [];
+        for (let index = 0; index < this._cardGroups.length; index++) {
+            const cardGroup = this._cardGroups[index];
+            if (cardGroup.powerId === powerId) {
+                arr.push(cardGroup.groupName)
+            }
+        }
+        let nameIndex = 0;
+        let powerName = `${ConfigMgr.ins().powerConfig[powerId].powerName}${nameIndex}`;
+        while (arr.indexOf(powerName) !== -1) {
+            nameIndex++;
+            powerName = `${ConfigMgr.ins().powerConfig[powerId].powerName}${nameIndex}`;
+        }
+        return powerName;
+    }
+
     /**获取卡组中的卡牌数量 */
     public getGroupCardNum(cardGroup: CardsPto.ICardGroup) {
         let sum = 0;

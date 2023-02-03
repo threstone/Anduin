@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "33140efb-4116-41a3-96e7-1e33a1e8aa52"
+let uuid = "041f34cb-28dc-4fb8-ab09-9746156a15d6"
 
 //服务器的虚函数定义
 export abstract class GameRPCServer extends RPCServer {
@@ -19,37 +19,37 @@ export abstract class GameRPCServer extends RPCServer {
 
     //s2c
     //主动告知网关转发消息
-    async callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise < void>     {
+    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void
+>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientName,"transferToGate", args)
-        return res
+        return this.rpc.call(clientName,"transferToGate", args)
     }
 
-    sendTransferToGate(clientName:string,uid:number,buffer:Buffer)    {
+    sendTransferToGate(clientName:string,uid:number,buffer:Buffer){
         let args = [uid,buffer]
         this.rpc.send(clientName,"transferToGate",args)
     }
 
     //将用户绑定到自身
-    async callBindUserGameNode(clientName:string,uid:number):Promise<boolean>    {
+    callBindUserGameNode(clientName:string,uid:number):Promise<boolean>
+    {
         let args = [uid]
-        let res: any = await this.rpc.call(clientName,"bindUserGameNode", args)
-        return res
+        return this.rpc.call(clientName,"bindUserGameNode", args)
     }
 
-    sendBindUserGameNode(clientName:string,uid:number)    {
+    sendBindUserGameNode(clientName:string,uid:number){
         let args = [uid]
         this.rpc.send(clientName,"bindUserGameNode",args)
     }
 
     //解除绑定用户的gameNode
-    async callUnbindUserGameNode(clientName:string,uid:number):Promise<boolean>    {
+    callUnbindUserGameNode(clientName:string,uid:number):Promise<boolean>
+    {
         let args = [uid]
-        let res: any = await this.rpc.call(clientName,"unbindUserGameNode", args)
-        return res
+        return this.rpc.call(clientName,"unbindUserGameNode", args)
     }
 
-    sendUnbindUserGameNode(clientName:string,uid:number)    {
+    sendUnbindUserGameNode(clientName:string,uid:number){
         let args = [uid]
         this.rpc.send(clientName,"unbindUserGameNode",args)
     }
@@ -65,7 +65,8 @@ export abstract class GameRPCClient extends RPCClient{
         this.init();
     }
     //转发
-    async callTransferToGame(uid:number,buff:Buffer):Promise<Buffer>    {
+    async callTransferToGame(uid:number,buff:Buffer):Promise<Buffer>
+    {
         let args = [uid,buff]
         let res: any = await this.rpc.call("transferToGame",args)
         return res

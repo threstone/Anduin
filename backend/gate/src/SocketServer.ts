@@ -26,6 +26,26 @@ export class SocketServer {
     //     ProtoBufEncoder.addProtoModule(protoModule, handle)
     // }
 
+    bindGameNode(uid: number, clientName: string) {
+        const socket = this.socketMap.get(uid);
+        if (!socket) {
+            this.logger.error(`bindGameNode 未找到指定user socket:${uid}`);
+            return false;
+        }
+        socket.gameNodeId = clientName;
+        return true;
+    }
+
+    unBindGameNode(uid: number) {
+        const socket = this.socketMap.get(uid);
+        if (!socket) {
+            this.logger.error(`unBindGameNode 未找到指定user socket:${uid}`);
+            return false;
+        }
+        delete socket.gameNodeId;
+        return true;
+    }
+
     broadcast(buffer: Buffer) {
         this.socketMap.forEach((socket) => {
             socket.send(buffer);

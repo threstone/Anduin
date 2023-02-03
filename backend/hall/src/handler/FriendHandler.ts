@@ -15,7 +15,7 @@ export class FriendHandler extends BaseHandler {
         } else if (msg.uid === uid) {
             //不能添加自己
             res.code = 4;
-        } else if (await FriendModel.isFriend(uid, msg.uid)) {
+        } else if (await GlobalVar.redisMgr.getClient(RedisType.userRelation).sismember(uid, msg.uid)) {
             //对方已经是你的好友了
             res.code = 3;
         } else if (await AddFriendRecordModel.hasAddInfo(uid, msg.uid)) {//检查是不是已经添加中
@@ -64,8 +64,8 @@ export class FriendHandler extends BaseHandler {
             res.friend.nick = await GlobalVar.dbHelper.getUserInfoByKey(targetUid, 'nick');
 
             //成功添加后要将对应的信息加到redis中
-            GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(uid, targetUid);
-            GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(targetUid, uid);
+            GlobalVar.redisMgr.getClient(RedisType.userRelation).sadd(uid, targetUid);
+            GlobalVar.redisMgr.getClient(RedisType.userRelation).sadd(targetUid, uid);
 
             //判断对方是否在线,在线就通知对方
             const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${targetUid}`);

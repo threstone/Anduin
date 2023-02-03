@@ -33,23 +33,29 @@ export interface ILauncherOption {
 
 //日志记录对象
 export interface ILog {
-    trace(...args: any[]): void;
-    debug(...args: any[]): void;
-    info(...args: any[]): void;
-    warn(...args: any[]): void;
-    error(...args: any[]): void;
-    fatal(...args: any[]): void;
-    log(...args: any[]): void;
+    trace(...args: any[]): void
+    debug(...args: any[]): void
+    info(...args: any[]): void
+    warn(...args: any[]): void
+    error(...args: any[]): void
+    fatal(...args: any[]): void
+    log(...args: any[]): void
 }
 
 export interface CardInterface {
-    cardId: number;
-    powerId: number;
-    cardType: number;
-    type2: number;
-    attack: number;
-    atkType: number;
-    health: number;
-    fee: number;
-    quality: number;
+    cardId: number
+    powerId: number
+    cardType: number
+    type2: number
+    attack: number
+    atkType: number
+    health: number
+    fee: number
+    quality: number
+}
+
+export interface ISession {
+    clientName: string
+    uid: number
+    sendMsg(message: IGameMessage): void
 }

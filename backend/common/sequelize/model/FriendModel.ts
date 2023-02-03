@@ -34,9 +34,4 @@ export class FriendModel extends Model {
         f2.friendUId = uid;
         f2.save();
     }
-
-    static async isFriend(uid: number, friendUid: number) {
-        const res = await FriendModel.count({ where: { uid, friend_uid: friendUid } });
-        return res !== 0;
-    }
 }

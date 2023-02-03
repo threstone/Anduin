@@ -22,11 +22,11 @@ abstract class BaseView<T extends fairygui.GComponent> {
 
     protected abstract init();
 
-    public AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
+    protected AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 
-    public addDragEvent(base: fairygui.GComponent, dragLoader: fairygui.GLoader, dragStartFun?: Function, dragStartEnd?: Function) {
+    protected addDragEvent(base: fairygui.GComponent, dragLoader: fairygui.GLoader, dragStartFun?: Function, dragStartEnd?: Function) {
         //拖动效果
         dragLoader.draggable = true;
         this.addEvent(dragLoader, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
@@ -52,7 +52,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         }, this);
     }
 
-    public removeTargetEvents(target: egret.DisplayObject | fairygui.GObject) {
+    protected removeTargetEvents(target: egret.DisplayObject | fairygui.GObject) {
         for (let index = this.eventList.length - 1; index >= 0; index--) {
             const eventData = this.eventList[index];
             if (eventData.addObject === target) {
@@ -62,7 +62,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         }
     }
 
-    public removeChildrenEvents(list: fairygui.GList, includeChildrenName?: string[]) {
+    protected removeChildrenEvents(list: fairygui.GList, includeChildrenName?: string[]) {
         const count = list.numChildren;
         for (let index = 0; index < count; index++) {
             const item = list.getChildAt(index);
@@ -96,13 +96,13 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.removeEvents();
     }
 
-    public observe(event: string, func: Function): void {
+    protected observe(event: string, func: Function): void {
         GameDispatcher.getInstance().addEventListener(event, func, this);
         const eventData = new EventListenerData(null, event, func, this);
         this.eventList.push(eventData);
     }
 
-    public addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any) {
+    protected addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any) {
         if (targetObj == null) {
             return;
         }
@@ -111,7 +111,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.eventList.push(eventData);
     }
 
-    public removeEvents(): void {
+    protected removeEvents(): void {
         let list = this.eventList
         for (let i = 0, len = list.length; i < len; i++) {
             const eventData = list[i];

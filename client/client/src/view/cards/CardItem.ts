@@ -21,38 +21,42 @@ class CardItem {
     }
 
     static getItem(cardInfo: CardInterface) {
-        const item = BaseUI.UICardItem.createInstance();
-        item.feeText.text = `${cardInfo.fee}`;
-        item.cardName.text = `${cardInfo.cardName}`;
-        item.desc.text = `${cardInfo.desc}`;
+        const card = BaseUI.UICardItem.createInstance();
+        this.updateCard(card, cardInfo);
+        return card;
+    }
+
+    static updateCard(card: BaseUI.UICardItem, cardInfo: CardInterface) {
+        card.feeText.text = `${cardInfo.fee}`;
+        card.cardName.text = `${cardInfo.cardName}`;
+        card.desc.text = `${cardInfo.desc}`;
         // TODO waiting for img
         RES.getResByUrl(`./resource/card/${0/**cardInfo.cardId */}.jpg`, (data) => {
             if (!data) {
                 return
             }
-            item.cardImg.texture = data;
+            card.cardImg.texture = data;
         })
-        item.atkText.text = `${cardInfo.attack}`;
-        item.healthText.text = `${cardInfo.health}`;
-        item.quality.color = CardItem.qualityColors[cardInfo.quality];
-        CardItem.updateNum(item, cardInfo);
+        card.atkText.text = `${cardInfo.attack}`;
+        card.healthText.text = `${cardInfo.health}`;
+        card.quality.color = CardItem.qualityColors[cardInfo.quality];
+        CardItem.updateNum(card, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
-                item.heroCardTips.visible = true;
-                item.feeGroup.visible = false;
+                card.heroCardTips.visible = true;
+                card.feeGroup.visible = false;
                 break;
             case CardsPto.CardType.Unit:
                 break;
             case CardsPto.CardType.Magic:
             case CardsPto.CardType.Building:
-                item.atkGroup.visible = false;
+                card.atkGroup.visible = false;
                 break;
             case CardsPto.CardType.Event:
-                item.atkGroup.visible = false;
-                item.healthBg.visible = false;
-                item.times.visible = true;
+                card.atkGroup.visible = false;
+                card.healthBg.visible = false;
+                card.times.visible = true;
                 break;
         }
-        return item;
     }
 }

@@ -96,9 +96,9 @@ export class ProtoBufEncoder {
 							break;
 						}
 					}
-					if (!isFind && ProtoBufEncoder.getHandlerFunction(temp.prototype.cmd, temp.prototype.scmd) == undefined) {
-						logger.info(`未找到注册函数 ${key}`);
-					}
+					// if (!isFind && ProtoBufEncoder.getHandlerFunction(temp.prototype.cmd, temp.prototype.scmd) == undefined) {
+					// 	logger.info(`未找到注册函数 ${key}`);
+					// }
 				}
 			}
 		}

@@ -51,13 +51,14 @@ class MessageManager {
      */
     public static rcvMsgHandler(cmd: number, scmd: number, msg: egret.ByteArray): void {
         if (MessageManager._recMsgHandlerObj[cmd + "_" + scmd] == null) {
-            console.log("该cmd,scmd下标处没有信息处理函数\r\ncmd:" + cmd + "\tscmd:" + scmd);
+            console.error("该cmd,scmd下标处没有信息处理函数\r\ncmd:" + cmd + "\tscmd:" + scmd);
+            return;
         }
         try {
             let data = MessageManager.getProtoCls(cmd, scmd).decode(msg.bytes);
             MessageManager._recMsgHandlerObj[cmd + "_" + scmd](data);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
 

@@ -5,7 +5,10 @@ module BaseUI {
 	export class UICardsCom extends fairygui.GComponent {
 		public listBg:fairygui.GImage;
 		public cardGroupList:fairygui.GList;
+		public nameBg:fairygui.GImage;
+		public groupName:fairygui.GTextInput;
 		public createGroupList:fairygui.GList;
+		public cardGroupGroup:fairygui.GGroup;
 		public functionBtn:UIButton3;
 		public functionTips:fairygui.GTextField;
 		public functionGroup:fairygui.GGroup;
@@ -20,10 +23,13 @@ module BaseUI {
 
 			this.listBg = <fairygui.GImage>(this.getChildAt(0));
 			this.cardGroupList = <fairygui.GList>(this.getChildAt(1));
-			this.createGroupList = <fairygui.GList>(this.getChildAt(2));
-			this.functionBtn = <UIButton3>(this.getChildAt(3));
-			this.functionTips = <fairygui.GTextField>(this.getChildAt(4));
-			this.functionGroup = <fairygui.GGroup>(this.getChildAt(5));
+			this.nameBg = <fairygui.GImage>(this.getChildAt(2));
+			this.groupName = <fairygui.GTextInput>(this.getChildAt(3));
+			this.createGroupList = <fairygui.GList>(this.getChildAt(4));
+			this.cardGroupGroup = <fairygui.GGroup>(this.getChildAt(5));
+			this.functionBtn = <UIButton3>(this.getChildAt(6));
+			this.functionTips = <fairygui.GTextField>(this.getChildAt(7));
+			this.functionGroup = <fairygui.GGroup>(this.getChildAt(8));
 		}
 	}
 }

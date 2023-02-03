@@ -61,7 +61,7 @@ export class LoginHandler extends BaseHandler {
             replyMsg.reqAddList.push(addInfo);
         }
 
-        //初始化好友信息,获取到好友信息
+        // 初始化好友信息,获取到好友信息
         const friendInfos = await FriendModel.findAll({ where: { uid } });
         const friendUids: number[] = [];
         for (let index = 0; index < friendInfos.length; index++) {
@@ -85,9 +85,9 @@ export class LoginHandler extends BaseHandler {
             promArr.push(onlineInfoPromise);
             replyMsg.friendList.push(friendInfo);
         }
-        //将好友信息插入到redis中
+        // //将好友信息插入到redis中
         GlobalVar.redisMgr.getClient(RedisType.userRelation).delete(uid);
-        GlobalVar.redisMgr.getClient(RedisType.userRelation).rPush(uid, friendUids);
+        GlobalVar.redisMgr.getClient(RedisType.userRelation).sadd(uid, friendUids);
         await Promise.all(promArr);
     }
 

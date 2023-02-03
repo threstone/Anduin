@@ -105,7 +105,7 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
             args += ']'
             if (strOne.indexOf('Promise<') === -1) {
                 let resultTypeIndex = strOne.lastIndexOf(':');
-                strOne = `${strOne.substring(0, resultTypeIndex + 1)} Promise < ${strOne.substring(resultTypeIndex + 1)}> `
+                strOne = `${strOne.substring(0, resultTypeIndex + 1)} Promise<${strOne.substring(resultTypeIndex + 1)}>`
             }
             if (isS2C) {//s2c需要clientName
                 //如果返回值是非Promise对象
@@ -115,15 +115,14 @@ function createAsyncRpcFun(start, lineArr, end, isS2C) {
                 let upperCase = header.toUpperCase()//转成大写
                 let nFunName = upperCase + funName.substring(1, funName.length)
                 strOne = 'call' + nFunName + param
-                strAll = strAll + '    async ' + strOne + '    {\n'
+                strAll = strAll + '    ' + strOne + '    {\n'
                 strAll = strAll + args +
-                    '\n        let res: any = await this.rpc.call(clientName,' + '"' + funName + '", args)' +
-                    '\n        return res' +
+                    '\n        return this.rpc.call(clientName,' + '"' + funName + '", args)' +
                     '\n    }\n\n'
                 //生成send
                 param = param.substring(param.indexOf('('), param.indexOf(')') + 1)
                 strOne = 'send' + nFunName + param
-                strAll = strAll + '    ' + strOne + '    {\n'
+                strAll = strAll + '    ' + strOne + '{\n'
                 strAll = strAll + args +
                     '\n        this.rpc.send(clientName,' + '"' + funName + '",args)' +
                     '\n    }\n\n'

@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "d46b407f-67bb-42de-9d5f-31267819d7eb"
+let uuid = "3957a620-7271-44dc-85e9-3b6499fa2c3b"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer extends RPCServer {
@@ -25,25 +25,23 @@ export abstract class HallRPCServer extends RPCServer {
 
     //s2c
     //主动告知网关转发消息
-    async callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise < void>     {
+    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void>    {
         let args = [uid,buffer]
-        let res: any = await this.rpc.call(clientName,"transferToGate", args)
-        return res
+        return this.rpc.call(clientName,"transferToGate", args)
     }
 
-    sendTransferToGate(clientName:string,uid:number,buffer:Buffer)    {
+    sendTransferToGate(clientName:string,uid:number,buffer:Buffer){
         let args = [uid,buffer]
         this.rpc.send(clientName,"transferToGate",args)
     }
 
     //关闭对应uid的socket
-    async callCloseUserSocket(clientName:string,uid:number): Promise < void>     {
+    callCloseUserSocket(clientName:string,uid:number): Promise<void>    {
         let args = [uid]
-        let res: any = await this.rpc.call(clientName,"closeUserSocket", args)
-        return res
+        return this.rpc.call(clientName,"closeUserSocket", args)
     }
 
-    sendCloseUserSocket(clientName:string,uid:number)    {
+    sendCloseUserSocket(clientName:string,uid:number){
         let args = [uid]
         this.rpc.send(clientName,"closeUserSocket",args)
     }

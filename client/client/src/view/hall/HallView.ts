@@ -14,19 +14,33 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.view.nickText.text = UserModel.ins().nick;
         this.view.uidText.text = `ID:${UserModel.ins().uid}`
         this.view.cardGroupBtn.describe.text = '收藏';
-        this.AddClick(this.view.cardGroupBtn, CardsView.ins().open.bind(CardsView.ins()))
+        this.AddClick(this.view.cardGroupBtn, CardsView.ins().open.bind(CardsView.ins()));
+
         this.view.fightBtn.describe.text = '对战';
+        this.AddClick(this.view.fightBtn, CardsGroupChooseView.ins().open.bind(CardsGroupChooseView.ins()));
+
         this.view.pveBtn.describe.text = '冒险';
         this.view.settingBtn.describe.text = '设置';
 
         this.AddClick(this.view.miniChat, this.onMiniChatClick);
         this.observe('S_CHAT_MESSAGE', this.onChatMessage);
-        this.observe('S_REQ_FRIENDLY_MATCH', (evt: EventData) => {
+        this.observe('S_REQ_MATCH', (evt: EventData) => {
             FriendlyMatchView.ins().openByRequest(evt.data);
         });
-        this.observe('S_FRIENDLY_MATCH', (evt: EventData) => {
+        this.observe('S_MATCH', (evt: EventData) => {
             FriendlyMatchView.ins().openByResponse(evt.data);
         });
+        this.observe('S_MATCH_CARD_GROUP', MatchGroupChooseView.ins().open.bind(MatchGroupChooseView.ins()));
+    }
+
+    /**将迷你聊天组件重新加入到自身 */
+    public reAddMiniChat() {
+        this.view.addChild(this.view.miniChat);
+    }
+
+    /**将迷你聊天组件加入到指定的view中 */
+    public addMiniChatToView(view: BaseView<fairygui.GComponent>) {
+        view.getView().addChild(this.view.miniChat);
     }
 
     private onMiniChatClick() {
