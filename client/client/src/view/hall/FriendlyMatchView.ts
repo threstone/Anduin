@@ -56,7 +56,7 @@ class FriendlyMatchView extends BaseView<BaseUI.UITipsCom> {
         super.close();
         clearInterval(this.intervalId);
         clearTimeout(this.timeoutId);
-        if (evt.data) {
+        if (evt && evt.data) {
             TipsView.ins().open(evt.data);
         }
     }

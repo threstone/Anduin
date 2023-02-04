@@ -24,8 +24,8 @@ class MatchGroupChooseView extends CardsGroupChooseView {
         this.AddClick(this.view.close, FriendlyMatchModel.ins().C_MATCH_LEAVE.bind(FriendlyMatchModel.ins()));
     }
 
-    public close(evt:EventData): void {
-        if (evt.data) {
+    public close(evt: EventData): void {
+        if (evt && evt.data) {
             TipsView.ins().open(evt.data);
         }
         super.close();
