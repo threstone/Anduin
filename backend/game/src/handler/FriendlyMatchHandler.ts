@@ -124,7 +124,7 @@ export class FriendlyMatchHandler extends BaseHandler {
         replay.code = 0;
         this.sendMsg(clientName, uid, replay);
 
-        matchInfo.setCardGroup(uid, msg.cardGroupId);
+        matchInfo.setCardGroup(uid, cardGroupInfo);
         //对方设置好卡组了,开始游戏
         if (matchInfo.isComplete()) {
             const gameTable = GlobalVar.tableMgr.createTable();

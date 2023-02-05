@@ -4492,26 +4492,26 @@ $root.GamePto = (function() {
      */
     var GamePto = {};
 
-    GamePto.C_FRIENDLY_MATCH = (function() {
+    GamePto.S_SERVER_ERROR = (function() {
 
         /**
-         * Properties of a C_FRIENDLY_MATCH.
+         * Properties of a S_SERVER_ERROR.
          * @memberof GamePto
-         * @interface IC_FRIENDLY_MATCH
-         * @property {number|null} [cmd] C_FRIENDLY_MATCH cmd
-         * @property {number|null} [scmd] C_FRIENDLY_MATCH scmd
-         * @property {string|null} [token] C_FRIENDLY_MATCH token
+         * @interface IS_SERVER_ERROR
+         * @property {number|null} [cmd] S_SERVER_ERROR cmd
+         * @property {number|null} [scmd] S_SERVER_ERROR scmd
+         * @property {string|null} [message] S_SERVER_ERROR message
          */
 
         /**
-         * Constructs a new C_FRIENDLY_MATCH.
+         * Constructs a new S_SERVER_ERROR.
          * @memberof GamePto
-         * @classdesc Represents a C_FRIENDLY_MATCH.
-         * @implements IC_FRIENDLY_MATCH
+         * @classdesc Represents a S_SERVER_ERROR.
+         * @implements IS_SERVER_ERROR
          * @constructor
-         * @param {GamePto.IC_FRIENDLY_MATCH=} [properties] Properties to set
+         * @param {GamePto.IS_SERVER_ERROR=} [properties] Properties to set
          */
-        function C_FRIENDLY_MATCH(properties) {
+        function S_SERVER_ERROR(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4519,65 +4519,65 @@ $root.GamePto = (function() {
         }
 
         /**
-         * C_FRIENDLY_MATCH cmd.
+         * S_SERVER_ERROR cmd.
          * @member {number} cmd
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @memberof GamePto.S_SERVER_ERROR
          * @instance
          */
-        C_FRIENDLY_MATCH.prototype.cmd = 200;
+        S_SERVER_ERROR.prototype.cmd = 200;
 
         /**
-         * C_FRIENDLY_MATCH scmd.
+         * S_SERVER_ERROR scmd.
          * @member {number} scmd
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @memberof GamePto.S_SERVER_ERROR
          * @instance
          */
-        C_FRIENDLY_MATCH.prototype.scmd = 1;
+        S_SERVER_ERROR.prototype.scmd = 1;
 
         /**
-         * C_FRIENDLY_MATCH token.
-         * @member {string} token
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * S_SERVER_ERROR message.
+         * @member {string} message
+         * @memberof GamePto.S_SERVER_ERROR
          * @instance
          */
-        C_FRIENDLY_MATCH.prototype.token = "";
+        S_SERVER_ERROR.prototype.message = "";
 
         /**
-         * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
+         * Encodes the specified S_SERVER_ERROR message. Does not implicitly {@link GamePto.S_SERVER_ERROR.verify|verify} messages.
          * @function encode
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @memberof GamePto.S_SERVER_ERROR
          * @static
-         * @param {GamePto.IC_FRIENDLY_MATCH} message C_FRIENDLY_MATCH message or plain object to encode
+         * @param {GamePto.IS_SERVER_ERROR} message S_SERVER_ERROR message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        C_FRIENDLY_MATCH.encode = function encode(message, writer) {
+        S_SERVER_ERROR.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.token != null && Object.hasOwnProperty.call(message, "token"))
-                writer.uint32(/* id 3, wireType 2 =*/26).string(message.token);
+            if (message.message != null && Object.hasOwnProperty.call(message, "message"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.message);
             return writer;
         };
 
         /**
-         * Decodes a C_FRIENDLY_MATCH message from the specified reader or buffer.
+         * Decodes a S_SERVER_ERROR message from the specified reader or buffer.
          * @function decode
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @memberof GamePto.S_SERVER_ERROR
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {GamePto.C_FRIENDLY_MATCH} C_FRIENDLY_MATCH
+         * @returns {GamePto.S_SERVER_ERROR} S_SERVER_ERROR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        C_FRIENDLY_MATCH.decode = function decode(reader, length) {
+        S_SERVER_ERROR.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_FRIENDLY_MATCH();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_SERVER_ERROR();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4590,7 +4590,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        message.token = reader.string();
+                        message.message = reader.string();
                         break;
                     }
                 default:
@@ -4602,21 +4602,21 @@ $root.GamePto = (function() {
         };
 
         /**
-         * Gets the default type url for C_FRIENDLY_MATCH
+         * Gets the default type url for S_SERVER_ERROR
          * @function getTypeUrl
-         * @memberof GamePto.C_FRIENDLY_MATCH
+         * @memberof GamePto.S_SERVER_ERROR
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        C_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_SERVER_ERROR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/GamePto.C_FRIENDLY_MATCH";
+            return typeUrlPrefix + "/GamePto.S_SERVER_ERROR";
         };
 
-        return C_FRIENDLY_MATCH;
+        return S_SERVER_ERROR;
     })();
 
     return GamePto;

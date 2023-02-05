@@ -4,14 +4,8 @@ import { GameMatchInfo } from '../game/GameMatchInfo';
 import { GlobalVar } from '../GlobalVar';
 
 export class FriendlyMatchInfo extends GameMatchInfo {
-    souceUid: number
-    souceClient: string
-    targetUid: number
-    targetClient: string
+    
     endTime: number
-
-    souceGroupId: number
-    targetGroupId: number
 
     constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number, endTime: number) {
         super(souceClient, souceUid, targetClient, targetUid);
@@ -37,6 +31,6 @@ export class FriendlyMatchInfo extends GameMatchInfo {
     }
 
     isComplete() {
-        return this.souceGroupId && this.targetGroupId;
+        return this.souceCardGroup && this.targetCardGroup;
     }
 }

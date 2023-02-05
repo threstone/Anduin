@@ -1995,57 +1995,57 @@ declare namespace FriendlyMatchPto {
 /** Namespace GamePto. */
 declare namespace GamePto {
 
-    /** Properties of a C_FRIENDLY_MATCH. */
-    interface IC_FRIENDLY_MATCH {
+    /** Properties of a S_SERVER_ERROR. */
+    interface IS_SERVER_ERROR {
 
-        /** C_FRIENDLY_MATCH cmd */
+        /** S_SERVER_ERROR cmd */
         cmd?: (number|null);
 
-        /** C_FRIENDLY_MATCH scmd */
+        /** S_SERVER_ERROR scmd */
         scmd?: (number|null);
 
-        /** C_FRIENDLY_MATCH token */
-        token?: (string|null);
+        /** S_SERVER_ERROR message */
+        message?: (string|null);
     }
 
-    /** Represents a C_FRIENDLY_MATCH. */
-    class C_FRIENDLY_MATCH implements IC_FRIENDLY_MATCH {
+    /** Represents a S_SERVER_ERROR. */
+    class S_SERVER_ERROR implements IS_SERVER_ERROR {
 
         /**
-         * Constructs a new C_FRIENDLY_MATCH.
+         * Constructs a new S_SERVER_ERROR.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IC_FRIENDLY_MATCH);
+        constructor(properties?: GamePto.IS_SERVER_ERROR);
 
-        /** C_FRIENDLY_MATCH cmd. */
+        /** S_SERVER_ERROR cmd. */
         public cmd: number;
 
-        /** C_FRIENDLY_MATCH scmd. */
+        /** S_SERVER_ERROR scmd. */
         public scmd: number;
 
-        /** C_FRIENDLY_MATCH token. */
-        public token: string;
+        /** S_SERVER_ERROR message. */
+        public message: string;
 
         /**
-         * Encodes the specified C_FRIENDLY_MATCH message. Does not implicitly {@link GamePto.C_FRIENDLY_MATCH.verify|verify} messages.
-         * @param message C_FRIENDLY_MATCH message or plain object to encode
+         * Encodes the specified S_SERVER_ERROR message. Does not implicitly {@link GamePto.S_SERVER_ERROR.verify|verify} messages.
+         * @param message S_SERVER_ERROR message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IC_FRIENDLY_MATCH, writer?: protobuf.Writer): protobuf.Writer;
+        public static encode(message: GamePto.IS_SERVER_ERROR, writer?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a C_FRIENDLY_MATCH message from the specified reader or buffer.
+         * Decodes a S_SERVER_ERROR message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns C_FRIENDLY_MATCH
+         * @returns S_SERVER_ERROR
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_FRIENDLY_MATCH;
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_SERVER_ERROR;
 
         /**
-         * Gets the default type url for C_FRIENDLY_MATCH
+         * Gets the default type url for S_SERVER_ERROR
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

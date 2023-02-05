@@ -1,5 +1,8 @@
+import { getLogger } from 'log4js';
 import { GameTable } from './game/GameTable';
+import { GlobalVar } from './GlobalVar';
 
+const logger = getLogger();
 export class TableMgr {
     private _tableId: number = 100000;
     private _logicIndex = 0;
@@ -29,7 +32,11 @@ export class TableMgr {
         return table;
     }
 
-    /**驱动桌子执行逻辑 */
+    private destroyTable(table: GameTable) {
+        this._tables[table.talbeIndex] = null;
+    }
+
+    /**驱动桌子执行逻辑 每次执行指定数量桌子的逻辑就跳出 给其他io操作让出资源 */
     private logicRun() {
         let now = Date.now();
         let length = this._tables.length;
@@ -37,15 +44,18 @@ export class TableMgr {
         let i = this._logicIndex;
         for (; i < length; i++) {
             let table = this._tables[i];
-            if (table) {
+            if (table && !table.isDestroy) {
                 try {
                     table.onRun(now);
                 } catch (err) {
-                    // let message = e.message;
-                    // let stack = e.stack;
-                    // logger.error("桌局执行发生错误:", `\nmessage:${message}\nstack:${stack}`)
-                    // table.destoryTable("桌局执行发生错误:" + e.error)
+                    table.destroy();
+                    let message = err.message;
+                    let stack = err.stack;
+                    logger.error(`桌局执行发生错误:\nmessage:${message}\nstack:${stack}`);
+                    table.destroy();
                 }
+            } else {
+                this.destroyTable(table);
             }
             count++;
             if (count >= 30) {

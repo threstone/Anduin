@@ -3180,39 +3180,39 @@ $root.GamePto = (function() {
 
     var GamePto = {};
 
-    GamePto.C_FRIENDLY_MATCH = (function() {
+    GamePto.S_SERVER_ERROR = (function() {
 
-        function C_FRIENDLY_MATCH(p) {
+        function S_SERVER_ERROR(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        C_FRIENDLY_MATCH.prototype.cmd = 200;
-        C_FRIENDLY_MATCH.prototype.scmd = 1;
-        C_FRIENDLY_MATCH.prototype.token = "";
+        S_SERVER_ERROR.prototype.cmd = 200;
+        S_SERVER_ERROR.prototype.scmd = 1;
+        S_SERVER_ERROR.prototype.message = "";
 
-        C_FRIENDLY_MATCH.create = function create(properties) {
-            return new C_FRIENDLY_MATCH(properties);
+        S_SERVER_ERROR.create = function create(properties) {
+            return new S_SERVER_ERROR(properties);
         };
 
-        C_FRIENDLY_MATCH.encode = function encode(m, w) {
+        S_SERVER_ERROR.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.token != null && Object.hasOwnProperty.call(m, "token"))
-                w.uint32(26).string(m.token);
+            if (m.message != null && Object.hasOwnProperty.call(m, "message"))
+                w.uint32(26).string(m.message);
             return w;
         };
 
-        C_FRIENDLY_MATCH.decode = function decode(r, l) {
+        S_SERVER_ERROR.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.C_FRIENDLY_MATCH();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_SERVER_ERROR();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -3225,7 +3225,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        m.token = r.string();
+                        m.message = r.string();
                         break;
                     }
                 default:
@@ -3236,30 +3236,30 @@ $root.GamePto = (function() {
             return m;
         };
 
-        C_FRIENDLY_MATCH.fromObject = function fromObject(d) {
-            if (d instanceof $root.GamePto.C_FRIENDLY_MATCH)
+        S_SERVER_ERROR.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_SERVER_ERROR)
                 return d;
-            var m = new $root.GamePto.C_FRIENDLY_MATCH();
+            var m = new $root.GamePto.S_SERVER_ERROR();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.token != null) {
-                m.token = String(d.token);
+            if (d.message != null) {
+                m.message = String(d.message);
             }
             return m;
         };
 
-        C_FRIENDLY_MATCH.toObject = function toObject(m, o) {
+        S_SERVER_ERROR.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 1;
-                d.token = "";
+                d.message = "";
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -3267,24 +3267,24 @@ $root.GamePto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.token != null && m.hasOwnProperty("token")) {
-                d.token = m.token;
+            if (m.message != null && m.hasOwnProperty("message")) {
+                d.message = m.message;
             }
             return d;
         };
 
-        C_FRIENDLY_MATCH.prototype.toJSON = function toJSON() {
+        S_SERVER_ERROR.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_FRIENDLY_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_SERVER_ERROR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/GamePto.C_FRIENDLY_MATCH";
+            return typeUrlPrefix + "/GamePto.S_SERVER_ERROR";
         };
 
-        return C_FRIENDLY_MATCH;
+        return S_SERVER_ERROR;
     })();
 
     return GamePto;

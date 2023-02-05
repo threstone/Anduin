@@ -1,11 +1,13 @@
+import { CardsPto } from '../../../common/CommonProto';
+
 export class GameMatchInfo {
     souceUid: number
     souceClient: string
     targetUid: number
     targetClient: string
 
-    souceGroupId: number
-    targetGroupId: number
+    souceCardGroup: CardsPto.CardGroup
+    targetCardGroup: CardsPto.CardGroup
 
     constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number) {
         this.souceClient = souceClient;
@@ -14,19 +16,19 @@ export class GameMatchInfo {
         this.targetClient = targetClient;
     }
 
-    setCardGroup(uid: number, cardGroupId: number) {
+    setCardGroup(uid: number, cardGroup: CardsPto.CardGroup) {
         if (uid === this.souceUid) {
-            this.souceGroupId = cardGroupId;
+            this.souceCardGroup = cardGroup;
         } else {
-            this.targetGroupId = cardGroupId;
+            this.targetCardGroup = cardGroup;
         }
     }
 
     clearCardGroup(uid: number) {
         if (uid === this.souceUid) {
-            this.souceGroupId = undefined;
+            this.souceCardGroup = undefined;
         } else {
-            this.targetGroupId = undefined;
+            this.targetCardGroup = undefined;
         }
     }
 }

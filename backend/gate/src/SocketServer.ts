@@ -104,9 +104,13 @@ export class SocketServer {
         socket.removeAllListeners();
         console.log(`socket close ,remoteAddress:${socket.remoteAddress}  uid:${socket.uid}`);
         this.clientConnectedCount_--;
+        /**授权用户 */
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
             GlobalVar.relationConnector.sendUserOffline(socket.uid);
+            if (socket.gameNodeId) {
+                GlobalVar.gameConnectorMgr.getConnectorByName(socket.gameNodeId).sendUserOffline(socket.uid);
+            }
         }
     }
 

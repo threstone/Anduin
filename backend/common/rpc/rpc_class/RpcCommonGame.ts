@@ -4,23 +4,25 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "041f34cb-28dc-4fb8-ab09-9746156a15d6"
+let uuid = "44c676e6-b82c-4fd5-ab91-f4901a8d31eb"
 
 //服务器的虚函数定义
 export abstract class GameRPCServer extends RPCServer {
     constructor(port: number, logger: ILog) {
         super(port, logger, uuid)
-        this._funs = ["transferToGame"]; 
+        this._funs = ["transferToGame", "userOffline"]; 
         this.init();
     }
 
     //转发
     abstract transferToGame(clientName: string,uid:number,buff:Buffer):Promise<Buffer>
 
+    //用户离线
+    abstract userOffline(clientName: string,uid:number):void
+
     //s2c
     //主动告知网关转发消息
-    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void
->    {
+    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void>    {
         let args = [uid,buffer]
         return this.rpc.call(clientName,"transferToGate", args)
     }
@@ -31,8 +33,7 @@ export abstract class GameRPCServer extends RPCServer {
     }
 
     //将用户绑定到自身
-    callBindUserGameNode(clientName:string,uid:number):Promise<boolean>
-    {
+    callBindUserGameNode(clientName:string,uid:number):Promise<boolean>    {
         let args = [uid]
         return this.rpc.call(clientName,"bindUserGameNode", args)
     }
@@ -43,8 +44,7 @@ export abstract class GameRPCServer extends RPCServer {
     }
 
     //解除绑定用户的gameNode
-    callUnbindUserGameNode(clientName:string,uid:number):Promise<boolean>
-    {
+    callUnbindUserGameNode(clientName:string,uid:number):Promise<boolean>    {
         let args = [uid]
         return this.rpc.call(clientName,"unbindUserGameNode", args)
     }
@@ -65,8 +65,7 @@ export abstract class GameRPCClient extends RPCClient{
         this.init();
     }
     //转发
-    async callTransferToGame(uid:number,buff:Buffer):Promise<Buffer>
-    {
+    async callTransferToGame(uid:number,buff:Buffer):Promise<Buffer>    {
         let args = [uid,buff]
         let res: any = await this.rpc.call("transferToGame",args)
         return res
@@ -75,6 +74,18 @@ export abstract class GameRPCClient extends RPCClient{
     sendTransferToGame(uid:number,buff:Buffer)    {
         let args = [uid,buff]
         this.rpc.send("transferToGame",args)
+    }
+
+    //用户离线
+    async callUserOffline(uid:number): Promise<void>    {
+        let args = [uid]
+        let res: any = await this.rpc.call("userOffline",args)
+        return res
+    }
+
+    sendUserOffline(uid:number)    {
+        let args = [uid]
+        this.rpc.send("userOffline",args)
     }
 
     //s2c

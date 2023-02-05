@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "3957a620-7271-44dc-85e9-3b6499fa2c3b"
+let uuid = "fc93ceee-cd32-483a-92fa-c5a44082bba6"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer extends RPCServer {
