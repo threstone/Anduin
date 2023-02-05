@@ -1,8 +1,6 @@
-import { GamePto } from '../../../common/CommonProto';
-import { IGameMessage } from '../../../common/I';
-import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { GlobalVar } from '../GlobalVar';
 import { NodeDriver } from '../NodeDriver';
+import { BaseTable } from './BaseTable';
 import { GameMatchInfo } from './GameMatchInfo';
 import { GameUser } from './GameUser';
 import { NodeEndGame } from './node/NodeEndGame';
@@ -11,20 +9,13 @@ import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 
-export class GameTable {
-    tableId: number;
-    talbeIndex: number;
-    private _users: GameUser[];
-    private _nodeDriver: NodeDriver;
-    get users() { return this._users; }
+export class GameTable extends BaseTable {
 
-    private _isDestroy: boolean;
-    get isDestroy() { return this._isDestroy; }
+    /**接下来执行回合操作的玩家 */
+    nextRoundUserIndex: number;
 
     constructor(tableId: number, talbeIndex: number) {
-        this.tableId = tableId;
-        this.talbeIndex = talbeIndex;
-        this._users = [];
+        super(tableId, talbeIndex);
 
         this._nodeDriver = new NodeDriver(this);
         this._nodeDriver.setNodes([
@@ -34,36 +25,6 @@ export class GameTable {
             new NodeRoundEnd(this._nodeDriver),
             new NodeEndGame(this._nodeDriver),
         ]);
-    }
-
-    /**广播消息 */
-    private broadcast(message: IGameMessage, excludeUid: number = -1) {
-        const messageBuffer = ProtoBufEncoder.encode(message);
-        const users = this._users;
-        for (let index = 0; index < users.length; index++) {
-            const user = users[index];
-            if (user.uid !== excludeUid || user.isOnline === false) {
-                continue;
-            }
-            user.sendBuffer(messageBuffer);
-        }
-    }
-
-    public destroy() {
-        //send tips
-        const msg = new GamePto.S_SERVER_ERROR();
-        msg.message = '出现异常,请联系相关人员(QQ:790325011)!';
-        this.broadcast(msg);
-
-        const users = this._users;
-        for (let index = 0; index < users.length; index++) {
-            const user = users[index];
-            //clear user manager cache
-            GlobalVar.userMgr.clearUser(user.uid);
-            //unbind
-            GlobalVar.socketServer.sendUnbindUserGameNode(user.clientName, user.uid);
-        }
-        this._isDestroy = true;
     }
 
     public onRun(now: number) {
@@ -98,6 +59,4 @@ export class GameTable {
         this._users.push(user2);
         GlobalVar.userMgr.setUser(user2);
     }
-
-
 }

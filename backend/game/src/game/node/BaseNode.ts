@@ -1,5 +1,6 @@
 import { NodeDefine, NodeDriverResult } from '../../GameDefine';
 import { NodeDriver } from '../../NodeDriver';
+import { GameTable } from '../GameTable';
 
 export abstract class BaseNode {
     protected node: number
@@ -9,5 +10,8 @@ export abstract class BaseNode {
         this.node = node;
         this.nodeDriver = driver;
     }
-    abstract run(): NodeDriverResult;
+
+
+    public abstract run(table: GameTable): NodeDriverResult;
+    public abstract onWaitTimeArrive(table: GameTable): NodeDriverResult;
 }

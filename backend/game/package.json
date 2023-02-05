@@ -15,6 +15,7 @@
     "reflect-metadata": "^0.1.13",
     "redis": "^3.0.2",
     "uuid": "^8.3.1",
+    "@stdlib/random-base-mt19937": "0.0.5",
     "ws": "^7.5.3"
   },
   "devDependencies": {

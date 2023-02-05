@@ -1,6 +1,5 @@
 import { getLogger } from 'log4js';
 import { GameTable } from './game/GameTable';
-import { GlobalVar } from './GlobalVar';
 
 const logger = getLogger();
 export class TableMgr {
@@ -28,6 +27,9 @@ export class TableMgr {
             index = this._tables.length;
         }
         let table = new GameTable(this.newTableId(), index);
+        const rand = Math.random() * 999999;
+        table.setRandSeed(rand);
+        logger.info(`table${table.tableId}随机数设置为:${rand}`);
         this._tables[index] = table;
         return table;
     }
