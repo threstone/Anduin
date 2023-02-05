@@ -10,7 +10,7 @@ import * as allProto from '../../common/CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../common/config/redis.json';
 import { TableMgr } from './TableMgr';
-import { SessionMgr } from './SessionMgr';
+import { UserMgr } from './UserMgr';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -19,7 +19,7 @@ export class GlobalVar {
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     public static tableMgr: TableMgr;
-    public static sessionMgr: SessionMgr;
+    public static userMgr: UserMgr;
 
     public static init() {
         this.startupParam = CommonUtils.getStartupParam();
@@ -36,7 +36,7 @@ export class GlobalVar {
         this.tableMgr = new TableMgr();
         this.tableMgr.startLogic();
 
-        this.sessionMgr = new SessionMgr();
+        this.userMgr = new UserMgr();
     }
 
     /**

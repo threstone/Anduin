@@ -13,7 +13,7 @@ export class SocketServer extends RpcCommon.GameRPCServer {
             logger.error(`未知的协议 cmd:${msg.cmd} scmd:${msg.scmd}`);
             return;
         }
-        const session = GlobalVar.sessionMgr.getUserSession(uid);
+        const session = GlobalVar.userMgr.getUserSession(uid);
         if (session) {
             return await fun(session, msg);
         }

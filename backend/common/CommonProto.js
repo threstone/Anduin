@@ -936,9 +936,8 @@ $root.FriendPto = (function() {
 
         S_FRIEND_CHANGE.prototype.cmd = 3;
         S_FRIEND_CHANGE.prototype.scmd = 4;
-        S_FRIEND_CHANGE.prototype.uid = 0;
-        S_FRIEND_CHANGE.prototype.isOnline = false;
         S_FRIEND_CHANGE.prototype.friend = null;
+        S_FRIEND_CHANGE.prototype.isNewFriend = false;
 
         S_FRIEND_CHANGE.create = function create(properties) {
             return new S_FRIEND_CHANGE(properties);
@@ -951,12 +950,10 @@ $root.FriendPto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(24).int32(m.uid);
-            if (m.isOnline != null && Object.hasOwnProperty.call(m, "isOnline"))
-                w.uint32(32).bool(m.isOnline);
             if (m.friend != null && Object.hasOwnProperty.call(m, "friend"))
-                $root.FriendPto.Friend.encode(m.friend, w.uint32(42).fork()).ldelim();
+                $root.FriendPto.Friend.encode(m.friend, w.uint32(26).fork()).ldelim();
+            if (m.isNewFriend != null && Object.hasOwnProperty.call(m, "isNewFriend"))
+                w.uint32(32).bool(m.isNewFriend);
             return w;
         };
 
@@ -976,15 +973,11 @@ $root.FriendPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.uid = r.int32();
+                        m.friend = $root.FriendPto.Friend.decode(r, r.uint32());
                         break;
                     }
                 case 4: {
-                        m.isOnline = r.bool();
-                        break;
-                    }
-                case 5: {
-                        m.friend = $root.FriendPto.Friend.decode(r, r.uint32());
+                        m.isNewFriend = r.bool();
                         break;
                     }
                 default:
@@ -1005,16 +998,13 @@ $root.FriendPto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.uid != null) {
-                m.uid = d.uid | 0;
-            }
-            if (d.isOnline != null) {
-                m.isOnline = Boolean(d.isOnline);
-            }
             if (d.friend != null) {
                 if (typeof d.friend !== "object")
                     throw TypeError(".FriendPto.S_FRIEND_CHANGE.friend: object expected");
                 m.friend = $root.FriendPto.Friend.fromObject(d.friend);
+            }
+            if (d.isNewFriend != null) {
+                m.isNewFriend = Boolean(d.isNewFriend);
             }
             return m;
         };
@@ -1026,9 +1016,8 @@ $root.FriendPto = (function() {
             if (o.defaults) {
                 d.cmd = 3;
                 d.scmd = 4;
-                d.uid = 0;
-                d.isOnline = false;
                 d.friend = null;
+                d.isNewFriend = false;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -1036,14 +1025,11 @@ $root.FriendPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.uid != null && m.hasOwnProperty("uid")) {
-                d.uid = m.uid;
-            }
-            if (m.isOnline != null && m.hasOwnProperty("isOnline")) {
-                d.isOnline = m.isOnline;
-            }
             if (m.friend != null && m.hasOwnProperty("friend")) {
                 d.friend = $root.FriendPto.Friend.toObject(m.friend, o);
+            }
+            if (m.isNewFriend != null && m.hasOwnProperty("isNewFriend")) {
+                d.isNewFriend = m.isNewFriend;
             }
             return d;
         };

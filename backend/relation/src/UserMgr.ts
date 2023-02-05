@@ -30,8 +30,9 @@ export class UserMgr {
         //通知好友上线
         const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).smembers(uid);
         const msg = new FriendPto.S_FRIEND_CHANGE();
-        msg.uid = uid;
-        msg.isOnline = true;
+        msg.friend = new FriendPto.Friend();
+        msg.friend.uid = uid;
+        msg.friend.isOnline = true;
         const buffer = ProtoBufEncoder.encode(msg);
         for (let index = 0; index < uids.length; index++) {
             const uid = uids[index];
@@ -49,8 +50,9 @@ export class UserMgr {
         //通知好友下线
         const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).smembers(uid);
         const msg = new FriendPto.S_FRIEND_CHANGE();
-        msg.uid = uid;
-        msg.isOnline = false;
+        msg.friend = new FriendPto.Friend();
+        msg.friend.uid = uid;
+        msg.friend.isOnline = false;
         const buffer = ProtoBufEncoder.encode(msg);
         for (let index = 0; index < uids.length; index++) {
             const uid = uids[index];

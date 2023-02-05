@@ -62,6 +62,7 @@ export class FriendHandler extends BaseHandler {
             res.friend = new FriendPto.Friend();
             res.friend.uid = targetUid;
             res.friend.nick = await GlobalVar.dbHelper.getUserInfoByKey(targetUid, 'nick');
+            res.isNewFriend = true;
 
             //成功添加后要将对应的信息加到redis中
             GlobalVar.redisMgr.getClient(RedisType.userRelation).sadd(uid, targetUid);
@@ -72,6 +73,7 @@ export class FriendHandler extends BaseHandler {
             if (friendClientName) {
                 res.friend.isOnline = true;
                 const notice = new FriendPto.S_FRIEND_CHANGE();
+                notice.isNewFriend = true;
                 notice.friend = new FriendPto.Friend();
                 notice.friend.isOnline = true;
                 notice.friend.uid = uid;

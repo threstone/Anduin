@@ -12,14 +12,16 @@ class FriendlyMatchView extends BaseView<BaseUI.UITipsCom> {
     open(endTime: number) {
         super.open();
 
-        this.AddClick(this.view.btn, this.doClose);
-        this.AddClick(this.view.close, this.doClose);
+        this.AddClick(this.view.btn, this.close);
+        this.AddClick(this.view.close, this.close);
 
         this.reqEndTime = endTime;
         this.updateDesc();
         this.intervalId = setInterval(this.updateDesc.bind(this), 1000);
-        this.timeoutId = setTimeout(this.doClose.bind(this), endTime - Date.now());
-        this.observe('FriendlyMatchViewClose', this.doClose);
+        this.timeoutId = setTimeout(this.close.bind(this), endTime - Date.now());
+        
+        this.observe('FriendlyMatchViewClose', this.close);
+        this.observe('FriendUpdate', this.onFriendStatusUpdate);
     }
 
     /**打开请求等待界面 */
@@ -52,7 +54,18 @@ class FriendlyMatchView extends BaseView<BaseUI.UITipsCom> {
         this.view.desc.text = `${this.descStart}\n${Utils.formatTime(this.reqEndTime - Date.now())}`;
     }
 
-    private doClose(evt: EventData) {
+
+    private onFriendStatusUpdate(evt: EventData) {
+        const friendUid: number = evt.data;
+        if (friendUid === FriendlyMatchModel.ins().friendUid && false === FriendModel.ins().isOnline(friendUid)) {
+            TipsView.ins().showTips(`${FriendModel.ins().getFriendNick(friendUid)}离线了!`)
+            this.close();
+            FriendlyMatchModel.ins().C_MATCH_LEAVE();
+        }
+    }
+
+
+    public close(evt?: EventData): void {
         super.close();
         clearInterval(this.intervalId);
         clearTimeout(this.timeoutId);

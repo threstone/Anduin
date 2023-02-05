@@ -27,9 +27,8 @@ message C_ADD_FRIEND_REQ_RESULT{
 message S_FRIEND_CHANGE{
 	int32 cmd = 1[default = 3]; 
 	int32 scmd = 2[default = 4];
-	int32 uid = 3;
-	bool isOnline = 4;
-	Friend friend = 5;//如果有值说明是新的好友
+	Friend friend = 3;
+	bool isNewFriend = 4;
 }
 
 //他人请求添加好友

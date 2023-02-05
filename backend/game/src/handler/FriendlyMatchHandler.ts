@@ -67,6 +67,7 @@ export class FriendlyMatchHandler extends BaseHandler {
         const replay = new FriendlyMatchPto.S_MATCH_STOP();
         replay.code = 1;
         this.sendMsg(matchInfo.targetClient, matchInfo.targetUid, replay);
+        matchInfo.destroy();
         this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
     }
 
@@ -90,6 +91,7 @@ export class FriendlyMatchHandler extends BaseHandler {
             this.sendMsg(matchInfo.targetClient, matchInfo.targetUid, chooseGroup);
             matchInfo.endTime = chooseGroup.endTime;
         } else {
+            matchInfo.destroy();
             this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
         }
     }
@@ -125,8 +127,9 @@ export class FriendlyMatchHandler extends BaseHandler {
         matchInfo.setCardGroup(uid, msg.cardGroupId);
         //对方设置好卡组了,开始游戏
         if (matchInfo.isComplete()) {
-            //TODO do start game
-            console.log('start game');
+            const gameTable = GlobalVar.tableMgr.createTable();
+            gameTable.tryToStartGame(matchInfo);
+            this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
         }
     }
 
@@ -139,7 +142,8 @@ export class FriendlyMatchHandler extends BaseHandler {
             this.sendMsg(clientName, uid, stopMsg);
             return;
         }
-        matchInfo.clearCardGroup(uid);
+        matchInfo.destroy();
+        this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
     }
 
     //友谊赛离开
@@ -154,6 +158,7 @@ export class FriendlyMatchHandler extends BaseHandler {
         stopMsg.code = 2;
         this.sendMsg(noticeClient, noticeUid, stopMsg);
 
+        matchInfo.destroy();
         this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
     }
 }

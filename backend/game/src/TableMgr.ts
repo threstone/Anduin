@@ -1,4 +1,4 @@
-import { GameTable } from './GameTable';
+import { GameTable } from './game/GameTable';
 
 export class TableMgr {
     private _tableId: number = 100000;
@@ -21,7 +21,7 @@ export class TableMgr {
     /**创建桌子 */
     public createTable() {
         let index = this._tables.indexOf(null);
-        if (index == -1) {
+        if (index === -1) {
             index = this._tables.length;
         }
         let table = new GameTable(this.newTableId(), index);

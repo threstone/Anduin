@@ -1,8 +1,9 @@
 import { FriendlyMatchPto } from '../../../common/CommonProto';
 import { IGameMessage } from '../../../common/I';
+import { GameMatchInfo } from '../game/GameMatchInfo';
 import { GlobalVar } from '../GlobalVar';
 
-export class FriendlyMatchInfo {
+export class FriendlyMatchInfo extends GameMatchInfo {
     souceUid: number
     souceClient: string
     targetUid: number
@@ -13,10 +14,7 @@ export class FriendlyMatchInfo {
     targetGroupId: number
 
     constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number, endTime: number) {
-        this.souceClient = souceClient;
-        this.souceUid = souceUid;
-        this.targetUid = targetUid;
-        this.targetClient = targetClient;
+        super(souceClient, souceUid, targetClient, targetUid);
         this.endTime = endTime;
     }
 
@@ -36,22 +34,6 @@ export class FriendlyMatchInfo {
 
     sendToTarget(message: IGameMessage) {
         GlobalVar.socketServer.sendMsg(this.targetClient, this.targetUid, message);
-    }
-
-    setCardGroup(uid: number, cardGroupId: number) {
-        if (uid === this.souceUid) {
-            this.souceGroupId = cardGroupId;
-        } else {
-            this.targetGroupId = cardGroupId;
-        }
-    }
-
-    clearCardGroup(uid: number) {
-        if (uid === this.souceUid) {
-            this.souceGroupId = undefined;
-        } else {
-            this.targetGroupId = undefined;
-        }
     }
 
     isComplete() {

@@ -1,9 +1,13 @@
 class FriendlyMatchModel extends BaseModel {
 
+    private _friendUid: number;
+    get friendUid() { return this._friendUid }
+
     /**请求友谊赛 */
     C_REQ_MATCH(uid: number) {
         const msg = new FriendlyMatchPto.C_REQ_MATCH();
         msg.targetUid = uid;
+        this._friendUid = uid;
         this.sendMsg(msg);
     }
 
@@ -72,6 +76,7 @@ class FriendlyMatchModel extends BaseModel {
 
     //好友的友谊赛请求
     private S_MATCH(msg: FriendlyMatchPto.S_MATCH) {
+        this._friendUid = msg.friendUid;
         this.emit('S_MATCH', msg);
     }
 

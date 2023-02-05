@@ -16,6 +16,7 @@ class MatchGroupChooseView extends CardsGroupChooseView {
         this.observe('S_FRIEND_GROUP_STATUS_CHANGE', this.onFriendChooseStatusChange);
         this.observe('FriendlyMatchViewClose', this.close);
         this.observe('FriendChooseGroupSuccess', this.chooseGroupSuccess);
+        this.observe('FriendUpdate', this.onFriendStatusUpdate);
 
         this.reqEndTime = evt.data;
         this.descStart = '选择卡组倒计时';
@@ -24,7 +25,7 @@ class MatchGroupChooseView extends CardsGroupChooseView {
         this.AddClick(this.view.close, FriendlyMatchModel.ins().C_MATCH_LEAVE.bind(FriendlyMatchModel.ins()));
     }
 
-    public close(evt: EventData): void {
+    public close(evt?: EventData): void {
         if (evt && evt.data) {
             TipsView.ins().open(evt.data);
         }
@@ -61,5 +62,14 @@ class MatchGroupChooseView extends CardsGroupChooseView {
                 FriendlyMatchModel.ins().C_CANCEL_REQ_MATCH();
             }
         })
+    }
+
+    private onFriendStatusUpdate(evt: EventData) {
+        const friendUid: number = evt.data;
+        if (friendUid === FriendlyMatchModel.ins().friendUid && false === FriendModel.ins().isOnline(friendUid)) {
+            TipsView.ins().showTips(`${FriendModel.ins().getFriendNick(friendUid)}离线了!`)
+            this.close();
+            FriendlyMatchModel.ins().C_MATCH_LEAVE();
+        }
     }
 }

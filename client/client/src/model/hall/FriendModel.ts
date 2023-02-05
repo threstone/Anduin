@@ -40,31 +40,31 @@ class FriendModel extends BaseModel {
         return 'unkonw';
     }
 
-    private emitFriendUpdate() {
+    private emitFriendUpdate(updateFriendUid?: number) {
         //排序在线列表
         const arr = this._friendList;
         arr.sort((a, b) => {
             return (b.isOnline ? 1 : 0) - (a.isOnline ? 1 : 0)
         })
-        this.emit('FriendUpdate');
+        this.emit('FriendUpdate', updateFriendUid);
     }
 
 
     //好友变动
     private S_FRIEND_CHANGE(msg: FriendPto.S_FRIEND_CHANGE) {
         //新的好友
-        if (msg.friend) {
+        if (msg.isNewFriend) {
             this._friendList.push(msg.friend);
         } else {
             for (let index = 0; index < this._friendList.length; index++) {
                 const info = this._friendList[index];
-                if (info.uid === msg.uid) {
-                    info.isOnline = msg.isOnline;
+                if (info.uid === msg.friend.uid) {
+                    info.isOnline = msg.friend.isOnline;
                     break;
                 }
             }
         }
-        this.emitFriendUpdate();
+        this.emitFriendUpdate(msg.friend.uid);
     }
 
     //他人请求添加好友

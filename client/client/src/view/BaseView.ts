@@ -22,7 +22,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
 
     protected abstract init();
 
-    protected AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
+    public AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 

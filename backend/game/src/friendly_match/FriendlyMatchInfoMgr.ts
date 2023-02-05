@@ -35,7 +35,6 @@ export class FriendlyMatchInfoMgr {
     clearFriendlyMatchInfo(uid: number) {
         const info = this._map.get(uid);
         if (info) {
-            info.destroy();
             this._map.delete(info.souceUid);
             this._map.delete(info.targetUid);
         }

@@ -784,14 +784,11 @@ export namespace FriendPto {
         /** S_FRIEND_CHANGE scmd */
         scmd?: (number|null);
 
-        /** S_FRIEND_CHANGE uid */
-        uid?: (number|null);
-
-        /** S_FRIEND_CHANGE isOnline */
-        isOnline?: (boolean|null);
-
         /** S_FRIEND_CHANGE friend */
         friend?: (FriendPto.IFriend|null);
+
+        /** S_FRIEND_CHANGE isNewFriend */
+        isNewFriend?: (boolean|null);
     }
 
     /** Represents a S_FRIEND_CHANGE. */
@@ -809,14 +806,11 @@ export namespace FriendPto {
         /** S_FRIEND_CHANGE scmd. */
         public scmd: number;
 
-        /** S_FRIEND_CHANGE uid. */
-        public uid: number;
-
-        /** S_FRIEND_CHANGE isOnline. */
-        public isOnline: boolean;
-
         /** S_FRIEND_CHANGE friend. */
         public friend?: (FriendPto.IFriend|null);
+
+        /** S_FRIEND_CHANGE isNewFriend. */
+        public isNewFriend: boolean;
 
         /**
          * Encodes the specified S_FRIEND_CHANGE message. Does not implicitly {@link FriendPto.S_FRIEND_CHANGE.verify|verify} messages.

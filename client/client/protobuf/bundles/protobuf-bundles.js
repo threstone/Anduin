@@ -2429,9 +2429,8 @@ $root.FriendPto = (function() {
          * @interface IS_FRIEND_CHANGE
          * @property {number|null} [cmd] S_FRIEND_CHANGE cmd
          * @property {number|null} [scmd] S_FRIEND_CHANGE scmd
-         * @property {number|null} [uid] S_FRIEND_CHANGE uid
-         * @property {boolean|null} [isOnline] S_FRIEND_CHANGE isOnline
          * @property {FriendPto.IFriend|null} [friend] S_FRIEND_CHANGE friend
+         * @property {boolean|null} [isNewFriend] S_FRIEND_CHANGE isNewFriend
          */
 
         /**
@@ -2466,28 +2465,20 @@ $root.FriendPto = (function() {
         S_FRIEND_CHANGE.prototype.scmd = 4;
 
         /**
-         * S_FRIEND_CHANGE uid.
-         * @member {number} uid
-         * @memberof FriendPto.S_FRIEND_CHANGE
-         * @instance
-         */
-        S_FRIEND_CHANGE.prototype.uid = 0;
-
-        /**
-         * S_FRIEND_CHANGE isOnline.
-         * @member {boolean} isOnline
-         * @memberof FriendPto.S_FRIEND_CHANGE
-         * @instance
-         */
-        S_FRIEND_CHANGE.prototype.isOnline = false;
-
-        /**
          * S_FRIEND_CHANGE friend.
          * @member {FriendPto.IFriend|null|undefined} friend
          * @memberof FriendPto.S_FRIEND_CHANGE
          * @instance
          */
         S_FRIEND_CHANGE.prototype.friend = null;
+
+        /**
+         * S_FRIEND_CHANGE isNewFriend.
+         * @member {boolean} isNewFriend
+         * @memberof FriendPto.S_FRIEND_CHANGE
+         * @instance
+         */
+        S_FRIEND_CHANGE.prototype.isNewFriend = false;
 
         /**
          * Encodes the specified S_FRIEND_CHANGE message. Does not implicitly {@link FriendPto.S_FRIEND_CHANGE.verify|verify} messages.
@@ -2505,12 +2496,10 @@ $root.FriendPto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
-            if (message.isOnline != null && Object.hasOwnProperty.call(message, "isOnline"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isOnline);
             if (message.friend != null && Object.hasOwnProperty.call(message, "friend"))
-                $root.FriendPto.Friend.encode(message.friend, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                $root.FriendPto.Friend.encode(message.friend, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.isNewFriend != null && Object.hasOwnProperty.call(message, "isNewFriend"))
+                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isNewFriend);
             return writer;
         };
 
@@ -2541,15 +2530,11 @@ $root.FriendPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.uid = reader.int32();
+                        message.friend = $root.FriendPto.Friend.decode(reader, reader.uint32());
                         break;
                     }
                 case 4: {
-                        message.isOnline = reader.bool();
-                        break;
-                    }
-                case 5: {
-                        message.friend = $root.FriendPto.Friend.decode(reader, reader.uint32());
+                        message.isNewFriend = reader.bool();
                         break;
                     }
                 default:
