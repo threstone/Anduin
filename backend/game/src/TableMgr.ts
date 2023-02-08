@@ -38,7 +38,10 @@ export class TableMgr {
         this._tables[table.talbeIndex] = null;
     }
 
-    /**驱动桌子执行逻辑 每次执行指定数量桌子的逻辑就跳出 给其他io操作让出资源 */
+    /**
+     * 基于增量标记的思路 让出资源
+     * 驱动桌子执行逻辑 每次执行指定数量桌子的逻辑就跳出 给其他io操作让出资源 
+     * */
     private logicRun() {
         let now = Date.now();
         let length = this._tables.length;

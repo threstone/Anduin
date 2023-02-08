@@ -1,8 +1,6 @@
 import * as loggerConfig from '../config/log4js.json';
 import { configure, getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import { CommonUtils } from '../../common/CommonUtils';
-import { ILauncherOption } from '../../common/I';
 import { SocketServer } from './SocketServer';
 import { RelationConnector } from './connector/RelationConnector';
 import { ConnectorMgr } from '../../common/rpc/ConntctorMgr';
@@ -11,20 +9,21 @@ import { GameConnector } from './connector/GameConnector';
 import * as relationConn from '../../common/config/relation_node.json';
 import * as hallConn from '../../common/config/hall_node.json';
 import * as gamesConn from '../../common/config/game_node.json';
+import { LauncherOption } from '../../common/LauncherOption';
 
 const logger = getLogger();
 
 export class GlobalVar {
 
-    public static startupParam: ILauncherOption;
+    public static startupParam: LauncherOption;
     public static socketServer: SocketServer;
-    
+
     public static hallConnectorMgr: ConnectorMgr<HallConnector>;
     public static gameConnectorMgr: ConnectorMgr<GameConnector>;
     public static relationConnector: RelationConnector
 
     public static init() {
-        this.startupParam = CommonUtils.getStartupParam();
+        this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
         ProtoBufEncoder.init(logger);

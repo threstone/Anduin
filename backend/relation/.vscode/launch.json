@@ -10,7 +10,7 @@
             "name": "启动程序普通模式",
             "program": "${workspaceFolder}\\dist\\relation\\src\\bin\\main.js",
             "args": [
-                "socketListenPort=Num(9001)",
+                "socketListenPort=9001",
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -24,7 +24,7 @@
             "program": "${workspaceFolder}\\dist\\relation\\src\\bin\\main.js",
 
             "args": [
-                "socketListenPort=Num(9001)",
+                "socketListenPort=9001",
             ]
         }
     ]

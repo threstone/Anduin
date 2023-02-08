@@ -20,9 +20,9 @@ export class LoginHandler {
                     socket.isAuthorized = true;
                     socket.uid = msg.uid;
                     GlobalVar.socketServer.addSocketToMap(msg.uid, socket);
-                    socket.send(buffer);
                     GlobalVar.relationConnector.sendUserOnline(socket.uid, msg.nick);
                 }
+                socket.send(buffer);
             });
         } else if (scmd === LoginPto.C_REGISTER.prototype.scmd) {
             login.callReqRegister(buffer).then((buff) => {

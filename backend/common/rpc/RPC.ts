@@ -546,6 +546,7 @@ export class RPC_SERVER extends RPC_BASE {
         logger = iLog;
         this._version = version;
         this._sessionId = 2;
+        logger.info(`rpc server listen port:${listenPort}`)
         let wss = new WS.Server({ port: listenPort });
         wss.on("connection", (ws: any, req) => {
             logger.log('rpc client connected ', req.connection.remoteAddress + ":" + req.connection.remotePort)

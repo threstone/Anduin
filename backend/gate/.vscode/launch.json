@@ -12,8 +12,8 @@
             // "preLaunchTask": "tsc: build - tsconfig.json",
             "args": [
                 "nodeId=gate1",
-                "maxUser=Num(1000)",
-                "socketListenPort=Num(1001)",
+                "maxUser=1000",
+                "socketListenPort=1001",
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -30,8 +30,8 @@
             // ],
             "args": [
                 "nodeId=gate1",
-                "maxUser=Num(1000)",
-                "socketListenPort=Num(1001)",
+                "maxUser=1000",
+                "socketListenPort=1001",
             ]
         }
     ]
