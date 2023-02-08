@@ -3,3 +3,4 @@ node_modules/
 logs/
 dist/
 /client/client/bin-debug
+/client/client/bin-release
