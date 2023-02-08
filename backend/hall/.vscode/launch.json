@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}\\dist\\hall\\src\\bin\\main.js",
             // "preLaunchTask": "tsc: build - tsconfig.json",
             "args": [
-                "socketListenPort=Num(2001)",
+                "socketListenPort=2001",
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -27,7 +27,7 @@
             //     "${workspaceFolder}/dist/src/*.js"
             // ],
             "args": [
-                "socketListenPort=Num(2001)",
+                "socketListenPort=2001",
             ]
         }
     ]

@@ -1,2 +1,2 @@
 title hall
-node .\dist\hall\src\bin\main.js socketListenPort=Num(2001)
+node .\dist\hall\src\bin\main.js socketListenPort=2001
