@@ -13,10 +13,6 @@
   },
   "include": [
     "./src"
-    // "*.ts",
-    // "*.js",
-    // "./handle",
-    // "./games"
   ],
   "exclude": [
     "./node_modules/",

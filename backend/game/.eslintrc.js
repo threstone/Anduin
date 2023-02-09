@@ -23,5 +23,8 @@ module.exports = {
         'semi': [2, 'always'],//语句强制分号结尾
         'no-unused-vars': 0,
         'no-multi-spaces': 0,
-    }
+    },
+    exclude: [
+        "./test/"
+    ]
 };
