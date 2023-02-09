@@ -11,10 +11,19 @@ export class NodeRoundEnd extends BaseNode {
     }
 
     public run(table: GameTable): NodeDriverResult {
-        throw new Error('Method not implemented.');
+        return this.deal(table);
     }
 
     public onWaitTimeArrive(table: GameTable): NodeDriverResult {
-        throw new Error('Method not implemented.');
+        return NodeDriverResult.GoOn;
+    }
+
+    private deal(table: GameTable) {
+        //执行场上所有卡牌的回合结束事件
+        //计算所有回合结束事件所需要的时间
+        //玩家有可能在这个阶段死亡
+        return NodeDriverResult.GoOn;
+        this.nodeDriver.waitTime(1234);
+        return NodeDriverResult.Wait;
     }
 }

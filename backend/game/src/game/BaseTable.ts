@@ -13,8 +13,9 @@ export class BaseTable {
     tableId: number;
     talbeIndex: number;
     protected _users: GameUser[];
-    protected _nodeDriver: NodeDriver;
     get users() { return this._users; }
+    protected _nodeDriver: NodeDriver;
+    get nodeDriver() { return this._nodeDriver }
 
     protected _isDestroy: boolean;
     get isDestroy() { return this._isDestroy; }
@@ -47,10 +48,10 @@ export class BaseTable {
     /**洗牌 */
     public shuffle(cards: number[]) {
         for (let i = 0; i < cards.length; i++) {
-            let lastIndex = cards.length - 1 - i;
+            const lastIndex = cards.length - 1 - i;
             let index = this.random(lastIndex);
 
-            let temp = cards[index];
+            const temp = cards[index];
             cards[index] = cards[lastIndex];
             cards[lastIndex] = temp;
         }

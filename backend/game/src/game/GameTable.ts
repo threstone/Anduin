@@ -28,10 +28,6 @@ export class GameTable extends BaseTable {
         ]);
     }
 
-    public onTrigger(){
-        
-    }
-
     public onRun(now: number) {
         this._nodeDriver.onRun(now);
     }

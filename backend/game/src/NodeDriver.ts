@@ -1,10 +1,18 @@
 import { getLogger } from 'log4js';
+import { IGameMessage } from '../../common/I';
 import { GameTable } from './game/GameTable';
+import { GameUser } from './game/GameUser';
 import { BaseNode } from './game/node/BaseNode';
 import { NodeDriverResult } from './GameDefine';
 
 const logger = getLogger();
 export class NodeDriver {
+
+    onTrigger(user: GameUser, msg: IGameMessage) {
+        const node = this._nodes[this._nodeIndex];
+        const nodeResult = node.trigger(user, this._table, msg);
+        this.handlerResult(nodeResult);
+    }
 
     private _nodeIndex: number
     private _nodes: BaseNode[]
@@ -23,7 +31,7 @@ export class NodeDriver {
             return;
         }
 
-        const node = this.getCurNode();
+        const node = this._nodes[this._nodeIndex];
 
         let nodeResult: NodeDriverResult;
         if (this._awakenTime !== -1) {
@@ -39,6 +47,7 @@ export class NodeDriver {
         switch (result) {
             case NodeDriverResult.GoOn:
                 this._nodeIndex++;
+                this._awakenTime = -1;
                 if (this._nodeIndex === this._nodes.length) {
                     this._nodeIndex = -1;
                 }
@@ -68,7 +77,7 @@ export class NodeDriver {
         this._nodeIndex = 0;
     }
 
-    getCurNode(): BaseNode {
-        return this._nodes[this._nodeIndex];
+    getCurNode() {
+        return this._nodes[this._nodeIndex].node;
     }
 }

@@ -1,5 +1,5 @@
 import { GameTable } from '../game/GameTable';
-// import * as assert from 'assert';
+import * as assert from 'assert';
 describe('GameTable Test', () => {
     it("random", async function () {
         let table = new GameTable(1, 1);
@@ -8,6 +8,7 @@ describe('GameTable Test', () => {
         for (let index = 0; index < 1000; index++) {
             res[table.random(2)]++;
         }
+        assert.equal(res[0], 480);
     });
 
     it("shuffle", async function () {
@@ -15,6 +16,7 @@ describe('GameTable Test', () => {
         let cards = [1, 2, 3, 4, 5];
         table.setRandSeed(123);
         table.shuffle(cards);
+        assert.equal(cards, [4, 5, 1, 2, 3]);
     });
 });
 

@@ -2730,8 +2730,8 @@ export namespace GamePto {
         /** C_PREPARE_TO_START scmd */
         scmd?: (number|null);
 
-        /** C_PREPARE_TO_START cardIndexes */
-        cardIndexes?: (number[]|null);
+        /** C_PREPARE_TO_START replaceCardIndexes */
+        replaceCardIndexes?: (number[]|null);
     }
 
     /** Represents a C_PREPARE_TO_START. */
@@ -2749,8 +2749,8 @@ export namespace GamePto {
         /** C_PREPARE_TO_START scmd. */
         public scmd: number;
 
-        /** C_PREPARE_TO_START cardIndexes. */
-        public cardIndexes: number[];
+        /** C_PREPARE_TO_START replaceCardIndexes. */
+        public replaceCardIndexes: number[];
 
         /**
          * Encodes the specified C_PREPARE_TO_START message. Does not implicitly {@link GamePto.C_PREPARE_TO_START.verify|verify} messages.

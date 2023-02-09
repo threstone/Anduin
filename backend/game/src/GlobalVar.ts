@@ -10,6 +10,7 @@ import * as redisConfig from '../../common/config/redis.json';
 import { TableMgr } from './TableMgr';
 import { UserMgr } from './UserMgr';
 import { LauncherOption } from '../../common/LauncherOption';
+import { ConfigMgr } from '../../common/config/ConfigMgr';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -19,11 +20,15 @@ export class GlobalVar {
     public static redisMgr: RedisMgr;
     public static tableMgr: TableMgr;
     public static userMgr: UserMgr;
+    public static configMgr: ConfigMgr;
 
     public static init() {
         this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
+        // init config manager
+        this.configMgr = new ConfigMgr();
+
         //initMsgHandler
         this.initMsgHandler();
         //init socket server

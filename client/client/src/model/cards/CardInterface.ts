@@ -12,4 +12,5 @@ interface CardInterface {
     desc: string;
     attr: string;
     count: number;
+    isDerivation: number;
 }

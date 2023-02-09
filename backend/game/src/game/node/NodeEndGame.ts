@@ -11,10 +11,15 @@ export class NodeEndGame extends BaseNode {
     }
 
     public run(table: GameTable): NodeDriverResult {
-        throw new Error('Method not implemented.');
+        this.deal(table);
+        return NodeDriverResult.GoOn;
     }
 
     public onWaitTimeArrive(table: GameTable): NodeDriverResult {
+        return NodeDriverResult.GoOn;
+    }
+
+    private deal(table: GameTable) {
         throw new Error('Method not implemented.');
     }
 }

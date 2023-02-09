@@ -5,11 +5,12 @@ import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
 
 export abstract class BaseNode {
-    protected node: number
+    protected _node: NodeDefine
+    get node() { return this._node; }
     protected nodeDriver: NodeDriver
 
     constructor(node: NodeDefine, driver: NodeDriver) {
-        this.node = node;
+        this._node = node;
         this.nodeDriver = driver;
     }
 
@@ -17,7 +18,7 @@ export abstract class BaseNode {
     public abstract run(table: GameTable): NodeDriverResult;
     public abstract onWaitTimeArrive(table: GameTable): NodeDriverResult;
 
-    public trigger(user: GameUser, table: GameTable, msg: IGameMessage) {
+    public trigger(user: GameUser, table: GameTable, msg: IGameMessage): NodeDriverResult {
         throw new Error('Method not implemented.');
     }
 }

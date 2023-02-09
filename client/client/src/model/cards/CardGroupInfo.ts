@@ -55,7 +55,7 @@ class CardGroupInfo {
      * 检查将要加入的卡牌是否可以加入
      */
     private addCardCheck(cardInfo: CardInterface) {
-        if (this._cardCount > GroupCardsNum) {
+        if (this._cardCount >= GroupCardsNum) {
             SystemModel.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
             return false;
         }

@@ -1995,6 +1995,63 @@ declare namespace FriendlyMatchPto {
 /** Namespace GamePto. */
 declare namespace GamePto {
 
+    /** Properties of a C_PREPARE_TO_START. */
+    interface IC_PREPARE_TO_START {
+
+        /** C_PREPARE_TO_START cmd */
+        cmd?: (number|null);
+
+        /** C_PREPARE_TO_START scmd */
+        scmd?: (number|null);
+
+        /** C_PREPARE_TO_START replaceCardIndexes */
+        replaceCardIndexes?: (number[]|null);
+    }
+
+    /** Represents a C_PREPARE_TO_START. */
+    class C_PREPARE_TO_START implements IC_PREPARE_TO_START {
+
+        /**
+         * Constructs a new C_PREPARE_TO_START.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_PREPARE_TO_START);
+
+        /** C_PREPARE_TO_START cmd. */
+        public cmd: number;
+
+        /** C_PREPARE_TO_START scmd. */
+        public scmd: number;
+
+        /** C_PREPARE_TO_START replaceCardIndexes. */
+        public replaceCardIndexes: number[];
+
+        /**
+         * Encodes the specified C_PREPARE_TO_START message. Does not implicitly {@link GamePto.C_PREPARE_TO_START.verify|verify} messages.
+         * @param message C_PREPARE_TO_START message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_PREPARE_TO_START, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_PREPARE_TO_START message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_PREPARE_TO_START
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_PREPARE_TO_START;
+
+        /**
+         * Gets the default type url for C_PREPARE_TO_START
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a S_SERVER_ERROR. */
     interface IS_SERVER_ERROR {
 
@@ -2046,6 +2103,132 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_SERVER_ERROR
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_INIT_GAME. */
+    interface IS_INIT_GAME {
+
+        /** S_INIT_GAME cmd */
+        cmd?: (number|null);
+
+        /** S_INIT_GAME scmd */
+        scmd?: (number|null);
+
+        /** S_INIT_GAME targetNick */
+        targetNick?: (string|null);
+
+        /** S_INIT_GAME targetPower */
+        targetPower?: (number|null);
+    }
+
+    /** Represents a S_INIT_GAME. */
+    class S_INIT_GAME implements IS_INIT_GAME {
+
+        /**
+         * Constructs a new S_INIT_GAME.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_INIT_GAME);
+
+        /** S_INIT_GAME cmd. */
+        public cmd: number;
+
+        /** S_INIT_GAME scmd. */
+        public scmd: number;
+
+        /** S_INIT_GAME targetNick. */
+        public targetNick: string;
+
+        /** S_INIT_GAME targetPower. */
+        public targetPower: number;
+
+        /**
+         * Encodes the specified S_INIT_GAME message. Does not implicitly {@link GamePto.S_INIT_GAME.verify|verify} messages.
+         * @param message S_INIT_GAME message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_INIT_GAME, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_INIT_GAME message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_INIT_GAME
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_INIT_GAME;
+
+        /**
+         * Gets the default type url for S_INIT_GAME
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_START_HAND_CARD. */
+    interface IS_START_HAND_CARD {
+
+        /** S_START_HAND_CARD cmd */
+        cmd?: (number|null);
+
+        /** S_START_HAND_CARD scmd */
+        scmd?: (number|null);
+
+        /** S_START_HAND_CARD isFirst */
+        isFirst?: (boolean|null);
+
+        /** S_START_HAND_CARD handCards */
+        handCards?: (number[]|null);
+    }
+
+    /** Represents a S_START_HAND_CARD. */
+    class S_START_HAND_CARD implements IS_START_HAND_CARD {
+
+        /**
+         * Constructs a new S_START_HAND_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_START_HAND_CARD);
+
+        /** S_START_HAND_CARD cmd. */
+        public cmd: number;
+
+        /** S_START_HAND_CARD scmd. */
+        public scmd: number;
+
+        /** S_START_HAND_CARD isFirst. */
+        public isFirst: boolean;
+
+        /** S_START_HAND_CARD handCards. */
+        public handCards: number[];
+
+        /**
+         * Encodes the specified S_START_HAND_CARD message. Does not implicitly {@link GamePto.S_START_HAND_CARD.verify|verify} messages.
+         * @param message S_START_HAND_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_START_HAND_CARD, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_START_HAND_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_START_HAND_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_START_HAND_CARD;
+
+        /**
+         * Gets the default type url for S_START_HAND_CARD
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

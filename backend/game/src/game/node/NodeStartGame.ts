@@ -1,5 +1,6 @@
 import { GamePto } from '../../../../common/CommonProto';
 import { NodeDefine, NodeDriverResult } from '../../GameDefine';
+import { GlobalVar } from '../../GlobalVar';
 import { NodeDriver } from '../../NodeDriver';
 import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
@@ -14,8 +15,7 @@ export class NodeStartGame extends BaseNode {
 
     public run(table: GameTable): NodeDriverResult {
         this.deal(table);
-
-        this.nodeDriver.waitTime(5000);
+        this.nodeDriver.waitTime(GlobalVar.configMgr.common.replaceCardTime);
         return NodeDriverResult.Wait;
     }
 
@@ -26,7 +26,39 @@ export class NodeStartGame extends BaseNode {
 
     /**玩家操作换牌 */
     public trigger(user: GameUser, table: GameTable, msg: GamePto.C_PREPARE_TO_START) {
-        
+        if (user.isReplace) {
+            return;
+        }
+
+        for (let index = 0; index < msg.replaceCardIndexes.length; index++) {
+            const cardIndex = msg.replaceCardIndexes[index];
+            //被替换的卡牌
+            const replaceCardId = user.handCards[cardIndex];
+            //替换掉卡牌
+            user.handCards[cardIndex] = user.cardPool.pop();
+            //将卡牌重新放入卡池
+            user.cardPool.push(replaceCardId);
+        }
+        if (msg.replaceCardIndexes.length !== 0) {
+            table.shuffle(user.cardPool);
+        }
+        user.isReplace = true;
+
+        if (this.isAllUserReplace(table)) {
+            return NodeDriverResult.GoOn;
+        }
+        return NodeDriverResult.Continue;
+    }
+
+    private isAllUserReplace(table: GameTable): boolean {
+        let res = true;
+        for (let index = 0; index < table.users.length; index++) {
+            const user = table.users[index];
+            if (user.isReplace === false) {
+                return false;
+            }
+        }
+        return res;
     }
 
     private deal(table: GameTable) {
@@ -36,9 +68,7 @@ export class NodeStartGame extends BaseNode {
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
-            console.log(user.cardPool);
             table.shuffle(user.cardPool);
-            console.log(user.cardPool);
 
             const startHandCardData = new GamePto.S_START_HAND_CARD();
             user.handCards = [user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop()];

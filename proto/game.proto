@@ -1,16 +1,12 @@
 syntax = "proto3";
 package GamePto;
 
-
-
-
-
-//游戏开始  开始前要判断玩家是否在游戏中，在就开始失败
-//message C_FRIENDLD_MATCH_LEAVE{
-//	int32 cmd = 1[default = 200]; 
-//	int32 scmd = 2[default = 3];
-//}
-
+//准备开始(包含更换卡牌数据)
+message C_PREPARE_TO_START{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 1];
+	repeated int32 replaceCardIndexes = 3;
+}
 
 //===================Server message===================
 
@@ -21,10 +17,18 @@ message S_SERVER_ERROR{
 	string message = 3;
 }
 
-//开始游戏
-message S_START_GAME{
+//初始化游戏
+message S_INIT_GAME{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10001];
-	
+	string targetNick = 3;
+	int32 targetPower = 4;
 }
 
+//派发起始手牌
+message S_START_HAND_CARD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10001];
+	bool isFirst = 3;
+	repeated int32 handCards = 4;
+}

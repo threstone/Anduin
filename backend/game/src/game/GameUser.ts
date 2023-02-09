@@ -15,8 +15,12 @@ export class GameUser {
     table: GameTable;
     cardGroup: CardsPto.CardGroup;
 
+    /**卡池 */
     cardPool: number[];
+    /**手牌 */
     handCards: number[];
+    /**是否换牌 */
+    isReplace: boolean;
 
     constructor(matchUser: MatchUser, table: GameTable) {
         this.clientName = matchUser.clientName;

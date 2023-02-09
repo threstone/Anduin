@@ -90,6 +90,10 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
             if (!cardInfo || list.numChildren === 10) {
                 return;
             }
+
+            if (cardInfo.isDerivation) {
+                continue;
+            }
             const cardItem = CardItem.getItem(cardInfo);
             list.addChild(cardItem);
             let isDrag = false;

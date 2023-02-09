@@ -4492,6 +4492,145 @@ $root.GamePto = (function() {
      */
     var GamePto = {};
 
+    GamePto.C_PREPARE_TO_START = (function() {
+
+        /**
+         * Properties of a C_PREPARE_TO_START.
+         * @memberof GamePto
+         * @interface IC_PREPARE_TO_START
+         * @property {number|null} [cmd] C_PREPARE_TO_START cmd
+         * @property {number|null} [scmd] C_PREPARE_TO_START scmd
+         * @property {Array.<number>|null} [replaceCardIndexes] C_PREPARE_TO_START replaceCardIndexes
+         */
+
+        /**
+         * Constructs a new C_PREPARE_TO_START.
+         * @memberof GamePto
+         * @classdesc Represents a C_PREPARE_TO_START.
+         * @implements IC_PREPARE_TO_START
+         * @constructor
+         * @param {GamePto.IC_PREPARE_TO_START=} [properties] Properties to set
+         */
+        function C_PREPARE_TO_START(properties) {
+            this.replaceCardIndexes = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_PREPARE_TO_START cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @instance
+         */
+        C_PREPARE_TO_START.prototype.cmd = 200;
+
+        /**
+         * C_PREPARE_TO_START scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @instance
+         */
+        C_PREPARE_TO_START.prototype.scmd = 1;
+
+        /**
+         * C_PREPARE_TO_START replaceCardIndexes.
+         * @member {Array.<number>} replaceCardIndexes
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @instance
+         */
+        C_PREPARE_TO_START.prototype.replaceCardIndexes = $util.emptyArray;
+
+        /**
+         * Encodes the specified C_PREPARE_TO_START message. Does not implicitly {@link GamePto.C_PREPARE_TO_START.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @static
+         * @param {GamePto.IC_PREPARE_TO_START} message C_PREPARE_TO_START message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_PREPARE_TO_START.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.replaceCardIndexes != null && message.replaceCardIndexes.length) {
+                writer.uint32(/* id 3, wireType 2 =*/26).fork();
+                for (var i = 0; i < message.replaceCardIndexes.length; ++i)
+                    writer.int32(message.replaceCardIndexes[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Decodes a C_PREPARE_TO_START message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_PREPARE_TO_START} C_PREPARE_TO_START
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_PREPARE_TO_START.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_PREPARE_TO_START();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.replaceCardIndexes && message.replaceCardIndexes.length))
+                            message.replaceCardIndexes = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.replaceCardIndexes.push(reader.int32());
+                        } else
+                            message.replaceCardIndexes.push(reader.int32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_PREPARE_TO_START
+         * @function getTypeUrl
+         * @memberof GamePto.C_PREPARE_TO_START
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_PREPARE_TO_START.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_PREPARE_TO_START";
+        };
+
+        return C_PREPARE_TO_START;
+    })();
+
     GamePto.S_SERVER_ERROR = (function() {
 
         /**
@@ -4532,7 +4671,7 @@ $root.GamePto = (function() {
          * @memberof GamePto.S_SERVER_ERROR
          * @instance
          */
-        S_SERVER_ERROR.prototype.scmd = 1;
+        S_SERVER_ERROR.prototype.scmd = 10000;
 
         /**
          * S_SERVER_ERROR message.
@@ -4617,6 +4756,302 @@ $root.GamePto = (function() {
         };
 
         return S_SERVER_ERROR;
+    })();
+
+    GamePto.S_INIT_GAME = (function() {
+
+        /**
+         * Properties of a S_INIT_GAME.
+         * @memberof GamePto
+         * @interface IS_INIT_GAME
+         * @property {number|null} [cmd] S_INIT_GAME cmd
+         * @property {number|null} [scmd] S_INIT_GAME scmd
+         * @property {string|null} [targetNick] S_INIT_GAME targetNick
+         * @property {number|null} [targetPower] S_INIT_GAME targetPower
+         */
+
+        /**
+         * Constructs a new S_INIT_GAME.
+         * @memberof GamePto
+         * @classdesc Represents a S_INIT_GAME.
+         * @implements IS_INIT_GAME
+         * @constructor
+         * @param {GamePto.IS_INIT_GAME=} [properties] Properties to set
+         */
+        function S_INIT_GAME(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_INIT_GAME cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_INIT_GAME
+         * @instance
+         */
+        S_INIT_GAME.prototype.cmd = 200;
+
+        /**
+         * S_INIT_GAME scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_INIT_GAME
+         * @instance
+         */
+        S_INIT_GAME.prototype.scmd = 10001;
+
+        /**
+         * S_INIT_GAME targetNick.
+         * @member {string} targetNick
+         * @memberof GamePto.S_INIT_GAME
+         * @instance
+         */
+        S_INIT_GAME.prototype.targetNick = "";
+
+        /**
+         * S_INIT_GAME targetPower.
+         * @member {number} targetPower
+         * @memberof GamePto.S_INIT_GAME
+         * @instance
+         */
+        S_INIT_GAME.prototype.targetPower = 0;
+
+        /**
+         * Encodes the specified S_INIT_GAME message. Does not implicitly {@link GamePto.S_INIT_GAME.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_INIT_GAME
+         * @static
+         * @param {GamePto.IS_INIT_GAME} message S_INIT_GAME message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_INIT_GAME.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.targetNick != null && Object.hasOwnProperty.call(message, "targetNick"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetNick);
+            if (message.targetPower != null && Object.hasOwnProperty.call(message, "targetPower"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.targetPower);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_INIT_GAME message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_INIT_GAME
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_INIT_GAME} S_INIT_GAME
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_INIT_GAME.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_INIT_GAME();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.targetNick = reader.string();
+                        break;
+                    }
+                case 4: {
+                        message.targetPower = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_INIT_GAME
+         * @function getTypeUrl
+         * @memberof GamePto.S_INIT_GAME
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_INIT_GAME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_INIT_GAME";
+        };
+
+        return S_INIT_GAME;
+    })();
+
+    GamePto.S_START_HAND_CARD = (function() {
+
+        /**
+         * Properties of a S_START_HAND_CARD.
+         * @memberof GamePto
+         * @interface IS_START_HAND_CARD
+         * @property {number|null} [cmd] S_START_HAND_CARD cmd
+         * @property {number|null} [scmd] S_START_HAND_CARD scmd
+         * @property {boolean|null} [isFirst] S_START_HAND_CARD isFirst
+         * @property {Array.<number>|null} [handCards] S_START_HAND_CARD handCards
+         */
+
+        /**
+         * Constructs a new S_START_HAND_CARD.
+         * @memberof GamePto
+         * @classdesc Represents a S_START_HAND_CARD.
+         * @implements IS_START_HAND_CARD
+         * @constructor
+         * @param {GamePto.IS_START_HAND_CARD=} [properties] Properties to set
+         */
+        function S_START_HAND_CARD(properties) {
+            this.handCards = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_START_HAND_CARD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_START_HAND_CARD
+         * @instance
+         */
+        S_START_HAND_CARD.prototype.cmd = 200;
+
+        /**
+         * S_START_HAND_CARD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_START_HAND_CARD
+         * @instance
+         */
+        S_START_HAND_CARD.prototype.scmd = 10001;
+
+        /**
+         * S_START_HAND_CARD isFirst.
+         * @member {boolean} isFirst
+         * @memberof GamePto.S_START_HAND_CARD
+         * @instance
+         */
+        S_START_HAND_CARD.prototype.isFirst = false;
+
+        /**
+         * S_START_HAND_CARD handCards.
+         * @member {Array.<number>} handCards
+         * @memberof GamePto.S_START_HAND_CARD
+         * @instance
+         */
+        S_START_HAND_CARD.prototype.handCards = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_START_HAND_CARD message. Does not implicitly {@link GamePto.S_START_HAND_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_START_HAND_CARD
+         * @static
+         * @param {GamePto.IS_START_HAND_CARD} message S_START_HAND_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_START_HAND_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.isFirst != null && Object.hasOwnProperty.call(message, "isFirst"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isFirst);
+            if (message.handCards != null && message.handCards.length) {
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                for (var i = 0; i < message.handCards.length; ++i)
+                    writer.int32(message.handCards[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Decodes a S_START_HAND_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_START_HAND_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_START_HAND_CARD} S_START_HAND_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_START_HAND_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_START_HAND_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.isFirst = reader.bool();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.handCards && message.handCards.length))
+                            message.handCards = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.handCards.push(reader.int32());
+                        } else
+                            message.handCards.push(reader.int32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_START_HAND_CARD
+         * @function getTypeUrl
+         * @memberof GamePto.S_START_HAND_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_START_HAND_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_START_HAND_CARD";
+        };
+
+        return S_START_HAND_CARD;
     })();
 
     return GamePto;

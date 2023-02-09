@@ -3183,7 +3183,7 @@ $root.GamePto = (function() {
     GamePto.C_PREPARE_TO_START = (function() {
 
         function C_PREPARE_TO_START(p) {
-            this.cardIndexes = [];
+            this.replaceCardIndexes = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -3192,7 +3192,7 @@ $root.GamePto = (function() {
 
         C_PREPARE_TO_START.prototype.cmd = 200;
         C_PREPARE_TO_START.prototype.scmd = 1;
-        C_PREPARE_TO_START.prototype.cardIndexes = $util.emptyArray;
+        C_PREPARE_TO_START.prototype.replaceCardIndexes = $util.emptyArray;
 
         C_PREPARE_TO_START.create = function create(properties) {
             return new C_PREPARE_TO_START(properties);
@@ -3205,10 +3205,10 @@ $root.GamePto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.cardIndexes != null && m.cardIndexes.length) {
+            if (m.replaceCardIndexes != null && m.replaceCardIndexes.length) {
                 w.uint32(26).fork();
-                for (var i = 0; i < m.cardIndexes.length; ++i)
-                    w.int32(m.cardIndexes[i]);
+                for (var i = 0; i < m.replaceCardIndexes.length; ++i)
+                    w.int32(m.replaceCardIndexes[i]);
                 w.ldelim();
             }
             return w;
@@ -3230,14 +3230,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        if (!(m.cardIndexes && m.cardIndexes.length))
-                            m.cardIndexes = [];
+                        if (!(m.replaceCardIndexes && m.replaceCardIndexes.length))
+                            m.replaceCardIndexes = [];
                         if ((t & 7) === 2) {
                             var c2 = r.uint32() + r.pos;
                             while (r.pos < c2)
-                                m.cardIndexes.push(r.int32());
+                                m.replaceCardIndexes.push(r.int32());
                         } else
-                            m.cardIndexes.push(r.int32());
+                            m.replaceCardIndexes.push(r.int32());
                         break;
                     }
                 default:
@@ -3258,12 +3258,12 @@ $root.GamePto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.cardIndexes) {
-                if (!Array.isArray(d.cardIndexes))
-                    throw TypeError(".GamePto.C_PREPARE_TO_START.cardIndexes: array expected");
-                m.cardIndexes = [];
-                for (var i = 0; i < d.cardIndexes.length; ++i) {
-                    m.cardIndexes[i] = d.cardIndexes[i] | 0;
+            if (d.replaceCardIndexes) {
+                if (!Array.isArray(d.replaceCardIndexes))
+                    throw TypeError(".GamePto.C_PREPARE_TO_START.replaceCardIndexes: array expected");
+                m.replaceCardIndexes = [];
+                for (var i = 0; i < d.replaceCardIndexes.length; ++i) {
+                    m.replaceCardIndexes[i] = d.replaceCardIndexes[i] | 0;
                 }
             }
             return m;
@@ -3274,7 +3274,7 @@ $root.GamePto = (function() {
                 o = {};
             var d = {};
             if (o.arrays || o.defaults) {
-                d.cardIndexes = [];
+                d.replaceCardIndexes = [];
             }
             if (o.defaults) {
                 d.cmd = 200;
@@ -3286,10 +3286,10 @@ $root.GamePto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.cardIndexes && m.cardIndexes.length) {
-                d.cardIndexes = [];
-                for (var j = 0; j < m.cardIndexes.length; ++j) {
-                    d.cardIndexes[j] = m.cardIndexes[j];
+            if (m.replaceCardIndexes && m.replaceCardIndexes.length) {
+                d.replaceCardIndexes = [];
+                for (var j = 0; j < m.replaceCardIndexes.length; ++j) {
+                    d.replaceCardIndexes[j] = m.replaceCardIndexes[j];
                 }
             }
             return d;

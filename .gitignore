@@ -4,3 +4,5 @@ logs/
 dist/
 /client/client/bin-debug
 /client/client/bin-release
+/backend/publish/*/
+
