@@ -1,3 +1,4 @@
+import { GamePto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { NodeDriver } from '../NodeDriver';
 import { BaseTable } from './BaseTable';
@@ -27,6 +28,10 @@ export class GameTable extends BaseTable {
         ]);
     }
 
+    public onTrigger(){
+        
+    }
+
     public onRun(now: number) {
         this._nodeDriver.onRun(now);
     }
@@ -41,22 +46,32 @@ export class GameTable extends BaseTable {
      * 尝试开启游戏
      * @param matchInfo 游戏开始必须的用户相关信息
      */
-    public tryToStartGame(matchInfo: GameMatchInfo) {
-        this.initUserInfo(matchInfo);
+    public async tryToStartGame(matchInfo: GameMatchInfo) {
+        await this.initUserInfo(matchInfo);
         this.initNode();
+
+        const message = new GamePto.S_INIT_GAME();
+        message.targetNick = this.users[1].nick;
+        message.targetPower = this.users[1].cardGroup.powerId;
+        this.users[0].sendMsg(message);
+
+        message.targetNick = this.users[0].nick;
+        message.targetPower = this.users[0].cardGroup.powerId;
+        this.users[1].sendMsg(message);
     }
 
     private initNode() {
         this._nodeDriver.resetNode();
     }
 
-    private initUserInfo(matchInfo: GameMatchInfo) {
-        const user1 = new GameUser(matchInfo.souceClient, matchInfo.souceUid, matchInfo.souceCardGroup, this);
+    private async initUserInfo(matchInfo: GameMatchInfo) {
+        const user1 = new GameUser(matchInfo.souceUser, this);
         this._users.push(user1);
         GlobalVar.userMgr.setUser(user1);
 
-        const user2 = new GameUser(matchInfo.targetClient, matchInfo.targetUid, matchInfo.targetCardGroup, this);
+        const user2 = new GameUser(matchInfo.targetUser, this);
         this._users.push(user2);
         GlobalVar.userMgr.setUser(user2);
+        return Promise.all([user1.syncUserInfo(), user2.syncUserInfo()]);
     }
 }

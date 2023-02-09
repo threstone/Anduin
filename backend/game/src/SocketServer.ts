@@ -24,7 +24,7 @@ export class SocketServer extends RpcCommon.GameRPCServer {
         }
         const user = GlobalVar.userMgr.getUser(uid);
         if (user) {
-            return await fun(user, msg);
+            return await fun(user, user.table, msg);
         }
         return await fun(clientName, uid, msg);
     }

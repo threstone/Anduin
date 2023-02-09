@@ -39,6 +39,7 @@ export class BaseTable {
      * @description 假设 value=2 那么 返回 0或 1
      */
     public random(value: number) {
+        value = value || 1;
         return this.mtrand_() % value;
     }
 
@@ -46,19 +47,17 @@ export class BaseTable {
     /**洗牌 */
     public shuffle(cards: number[]) {
         for (let i = 0; i < cards.length; i++) {
-            var lastIndex = cards.length - 1 - i;
+            let lastIndex = cards.length - 1 - i;
             let index = this.random(lastIndex);
 
             let temp = cards[index];
             cards[index] = cards[lastIndex];
             cards[lastIndex] = temp;
         }
-
-        return true;
     }
 
     /**广播消息 */
-    private broadcast(message: IGameMessage, excludeUid: number = -1) {
+    public broadcast(message: IGameMessage, excludeUid: number = -1) {
         const messageBuffer = ProtoBufEncoder.encode(message);
         const users = this._users;
         for (let index = 0; index < users.length; index++) {

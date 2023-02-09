@@ -27,7 +27,7 @@ export class TableMgr {
             index = this._tables.length;
         }
         let table = new GameTable(this.newTableId(), index);
-        const rand = Math.random() * 999999;
+        const rand = Math.floor(Math.random() * 999999);
         table.setRandSeed(rand);
         logger.info(`table${table.tableId}随机数设置为:${rand}`);
         this._tables[index] = table;

@@ -1,6 +1,19 @@
 [
 {
  "cardId":0,
+ "powerId":0,
+ "cardType":2,
+ "type2":1,
+ "attack":0,
+ "atkType":0,
+ "health":0,
+ "fee":0,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":1
+  },
+{
+ "cardId":1,
  "powerId":1,
  "cardType":0,
  "type2":1,
@@ -9,11 +22,12 @@
  "health":3,
  "fee":0,
  "quality":1,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":1,
- "powerId":1,
+ "cardId":2,
+ "powerId":0,
  "cardType":1,
  "type2":1,
  "attack":1,
@@ -21,11 +35,12 @@
  "health":4,
  "fee":2,
  "quality":1,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":2,
- "powerId":1,
+ "cardId":3,
+ "powerId":0,
  "cardType":2,
  "type2":1,
  "attack":4,
@@ -33,11 +48,12 @@
  "health":7,
  "fee":3,
  "quality":2,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":3,
- "powerId":1,
+ "cardId":4,
+ "powerId":0,
  "cardType":3,
  "type2":1,
  "attack":1,
@@ -45,11 +61,12 @@
  "health":3,
  "fee":4,
  "quality":3,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":4,
- "powerId":1,
+ "cardId":5,
+ "powerId":0,
  "cardType":4,
  "type2":1,
  "attack":3,
@@ -57,11 +74,12 @@
  "health":5,
  "fee":5,
  "quality":1,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":5,
- "powerId":1,
+ "cardId":6,
+ "powerId":0,
  "cardType":0,
  "type2":1,
  "attack":4,
@@ -69,11 +87,12 @@
  "health":3,
  "fee":0,
  "quality":2,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":6,
- "powerId":1,
+ "cardId":7,
+ "powerId":0,
  "cardType":1,
  "type2":1,
  "attack":2,
@@ -81,11 +100,12 @@
  "health":8,
  "fee":7,
  "quality":2,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":7,
- "powerId":1,
+ "cardId":8,
+ "powerId":0,
  "cardType":2,
  "type2":1,
  "attack":7,
@@ -93,11 +113,12 @@
  "health":3,
  "fee":8,
  "quality":0,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":8,
- "powerId":1,
+ "cardId":9,
+ "powerId":0,
  "cardType":3,
  "type2":1,
  "attack":2,
@@ -105,10 +126,11 @@
  "health":1,
  "fee":9,
  "quality":0,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":9,
+ "cardId":10,
  "powerId":1,
  "cardType":4,
  "type2":1,
@@ -117,10 +139,11 @@
  "health":2,
  "fee":1,
  "quality":1,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":10,
+ "cardId":11,
  "powerId":1,
  "cardType":0,
  "type2":1,
@@ -129,10 +152,11 @@
  "health":4,
  "fee":0,
  "quality":2,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":11,
+ "cardId":12,
  "powerId":2,
  "cardType":1,
  "type2":1,
@@ -141,10 +165,11 @@
  "health":1,
  "fee":4,
  "quality":3,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":12,
+ "cardId":13,
  "powerId":3,
  "cardType":2,
  "type2":1,
@@ -153,10 +178,11 @@
  "health":5,
  "fee":5,
  "quality":0,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":13,
+ "cardId":14,
  "powerId":4,
  "cardType":3,
  "type2":1,
@@ -165,10 +191,11 @@
  "health":8,
  "fee":6,
  "quality":1,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":14,
+ "cardId":15,
  "powerId":5,
  "cardType":4,
  "type2":1,
@@ -177,10 +204,11 @@
  "health":7,
  "fee":7,
  "quality":3,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":15,
+ "cardId":16,
  "powerId":6,
  "cardType":0,
  "type2":1,
@@ -189,10 +217,11 @@
  "health":9,
  "fee":0,
  "quality":2,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
   },
 {
- "cardId":16,
+ "cardId":17,
  "powerId":0,
  "cardType":1,
  "type2":1,
@@ -201,6 +230,98 @@
  "health":6,
  "fee":4,
  "quality":0,
- "attr":"TBD"
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":18,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":1,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":19,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":2,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":20,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":3,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":21,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":4,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":22,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":4,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":23,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":4,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
+  },
+{
+ "cardId":24,
+ "powerId":0,
+ "cardType":1,
+ "type2":1,
+ "attack":3,
+ "atkType":1,
+ "health":5,
+ "fee":4,
+ "quality":1,
+ "attr":"TBD",
+ "isDerivation":0
   }
 ]

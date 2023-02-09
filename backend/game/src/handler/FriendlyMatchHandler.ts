@@ -63,10 +63,13 @@ export class FriendlyMatchHandler extends BaseHandler {
     //取消请求友谊赛
     static C_CANCEL_REQ_MATCH(clientName: string, uid: number, msg: FriendlyMatchPto.C_CANCEL_REQ_MATCH) {
         const matchInfo = this._friendlyMatchInfoMgr.getFriendlyMatchInfo(uid);
+        if (!matchInfo) {
+            return;
+        }
         //通知对方
         const replay = new FriendlyMatchPto.S_MATCH_STOP();
         replay.code = 1;
-        this.sendMsg(matchInfo.targetClient, matchInfo.targetUid, replay);
+        this.sendMsg(matchInfo.targetUser.clientName, matchInfo.targetUser.uid, replay);
         matchInfo.destroy();
         this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
     }
@@ -82,13 +85,13 @@ export class FriendlyMatchHandler extends BaseHandler {
         const replay = new FriendlyMatchPto.S_REQ_MATCH_RESULT();
         replay.result = msg.result;
         replay.targetUid = uid;
-        this.sendMsg(matchInfo.souceClient, matchInfo.souceUid, replay);
+        this.sendMsg(matchInfo.souceUser.clientName, matchInfo.souceUser.uid, replay);
         //如果接受，下发挑选卡组协议
         if (msg.result) {
             const chooseGroup = new FriendlyMatchPto.S_MATCH_CARD_GROUP();
             chooseGroup.endTime = Date.now() + 300000;
-            this.sendMsg(matchInfo.souceClient, matchInfo.souceUid, chooseGroup);
-            this.sendMsg(matchInfo.targetClient, matchInfo.targetUid, chooseGroup);
+            this.sendMsg(matchInfo.souceUser.clientName, matchInfo.souceUser.uid, chooseGroup);
+            this.sendMsg(matchInfo.targetUser.clientName, matchInfo.targetUser.uid, chooseGroup);
             matchInfo.endTime = chooseGroup.endTime;
         } else {
             matchInfo.destroy();
@@ -152,8 +155,8 @@ export class FriendlyMatchHandler extends BaseHandler {
         if (!matchInfo) {
             return;
         }
-        const noticeUid = matchInfo.souceUid === uid ? matchInfo.targetUid : matchInfo.souceUid;
-        const noticeClient = matchInfo.souceUid === uid ? matchInfo.targetClient : matchInfo.souceClient;
+        const noticeUid = matchInfo.souceUser.uid === uid ? matchInfo.targetUser.uid : matchInfo.souceUser.uid;
+        const noticeClient = matchInfo.souceUser.uid === uid ? matchInfo.targetUser.clientName : matchInfo.souceUser.clientName;
         const stopMsg = new FriendlyMatchPto.S_MATCH_STOP();
         stopMsg.code = 2;
         this.sendMsg(noticeClient, noticeUid, stopMsg);

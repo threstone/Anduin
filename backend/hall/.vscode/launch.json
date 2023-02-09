@@ -29,6 +29,12 @@
             "args": [
                 "socketListenPort=2001",
             ]
+        },
+        {
+            "command": "npm test",
+            "name": "npm test",
+            "request": "launch",
+            "type": "node-terminal"
         }
     ]
 }

@@ -22,10 +22,15 @@
             "request": "launch",
             "name": "光启动不编译",
             "program": "${workspaceFolder}\\dist\\game\\src\\bin\\main.js",
-
             "args": [
                 "socketListenPort=3001",
             ]
+        },
+        {
+            "command": "npm test",
+            "name": "npm test",
+            "request": "launch",
+            "type": "node-terminal"
         }
     ]
 }

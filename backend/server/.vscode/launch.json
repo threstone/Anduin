@@ -25,6 +25,12 @@
                 "${workspaceFolder}/dist/*.js"
             ],
             "args": []
+        },
+        {
+            "command": "npm test",
+            "name": "npm test",
+            "request": "launch",
+            "type": "node-terminal"
         }
     ]
 }

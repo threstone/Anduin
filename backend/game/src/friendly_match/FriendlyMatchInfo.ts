@@ -4,7 +4,7 @@ import { GameMatchInfo } from '../game/GameMatchInfo';
 import { GlobalVar } from '../GlobalVar';
 
 export class FriendlyMatchInfo extends GameMatchInfo {
-    
+
     endTime: number
 
     constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number, endTime: number) {
@@ -14,23 +14,23 @@ export class FriendlyMatchInfo extends GameMatchInfo {
 
     destroy() {
         //unbind
-        GlobalVar.socketServer.sendUnbindUserGameNode(this.souceClient, this.souceUid);
-        GlobalVar.socketServer.sendUnbindUserGameNode(this.targetClient, this.targetUid);
+        GlobalVar.socketServer.sendUnbindUserGameNode(this.souceUser.clientName, this.souceUser.uid);
+        GlobalVar.socketServer.sendUnbindUserGameNode(this.targetUser.clientName, this.targetUser.uid);
         //send stop message to user
         const stopMsg = new FriendlyMatchPto.S_MATCH_STOP();
-        GlobalVar.socketServer.sendMsg(this.souceClient, this.souceUid, stopMsg);
-        GlobalVar.socketServer.sendMsg(this.targetClient, this.targetUid, stopMsg);
+        GlobalVar.socketServer.sendMsg(this.souceUser.clientName, this.souceUser.uid, stopMsg);
+        GlobalVar.socketServer.sendMsg(this.targetUser.clientName, this.targetUser.uid, stopMsg);
     }
 
     sendToSource(message: IGameMessage) {
-        GlobalVar.socketServer.sendMsg(this.souceClient, this.souceUid, message);
+        GlobalVar.socketServer.sendMsg(this.souceUser.clientName, this.souceUser.uid, message);
     }
 
     sendToTarget(message: IGameMessage) {
-        GlobalVar.socketServer.sendMsg(this.targetClient, this.targetUid, message);
+        GlobalVar.socketServer.sendMsg(this.targetUser.clientName, this.targetUser.uid, message);
     }
 
     isComplete() {
-        return this.souceCardGroup && this.targetCardGroup;
+        return this.souceUser.cardGroup && this.targetUser.cardGroup;
     }
 }

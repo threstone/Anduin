@@ -33,6 +33,12 @@
                 "maxUser=1000",
                 "socketListenPort=1001",
             ]
+        },
+        {
+            "command": "npm test",
+            "name": "npm test",
+            "request": "launch",
+            "type": "node-terminal"
         }
     ]
 }

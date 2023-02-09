@@ -1,34 +1,42 @@
 import { CardsPto } from '../../../common/CommonProto';
+import { RedisType } from '../../../common/ConstDefine';
+import { GlobalVar } from '../GlobalVar';
 
 export class GameMatchInfo {
-    souceUid: number
-    souceClient: string
-    targetUid: number
-    targetClient: string
-
-    souceCardGroup: CardsPto.CardGroup
-    targetCardGroup: CardsPto.CardGroup
+    souceUser: MatchUser;
+    targetUser: MatchUser;
 
     constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number) {
-        this.souceClient = souceClient;
-        this.souceUid = souceUid;
-        this.targetUid = targetUid;
-        this.targetClient = targetClient;
+        this.souceUser = new MatchUser(souceClient, souceUid);
+        this.targetUser = new MatchUser(targetClient, targetUid);
     }
 
     setCardGroup(uid: number, cardGroup: CardsPto.CardGroup) {
-        if (uid === this.souceUid) {
-            this.souceCardGroup = cardGroup;
+        if (uid === this.souceUser.uid) {
+            this.souceUser.cardGroup = cardGroup;
         } else {
-            this.targetCardGroup = cardGroup;
+            this.targetUser.cardGroup = cardGroup;
         }
     }
 
     clearCardGroup(uid: number) {
-        if (uid === this.souceUid) {
-            this.souceCardGroup = undefined;
+        if (uid === this.souceUser.uid) {
+            this.souceUser.cardGroup = undefined;
         } else {
-            this.targetCardGroup = undefined;
+            this.targetUser.cardGroup = undefined;
         }
+    }
+
+}
+
+export class MatchUser {
+    uid: number
+    clientName: string
+    nick: string
+    cardGroup: CardsPto.CardGroup
+
+    constructor(clientName: string, uid: number) {
+        this.uid = uid;
+        this.clientName = clientName;
     }
 }
