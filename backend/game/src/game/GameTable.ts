@@ -1,6 +1,6 @@
 import { GamePto } from '../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
-import { NodeDriver } from '../NodeDriver';
+import { NodeDriver } from '../core/NodeDriver';
 import { BaseTable } from './BaseTable';
 import { GameMatchInfo } from './GameMatchInfo';
 import { GameUser } from './GameUser';

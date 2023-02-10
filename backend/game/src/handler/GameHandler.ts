@@ -1,7 +1,7 @@
 import { GamePto } from '../../../common/CommonProto';
 import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
-import { NodeDefine } from '../GameDefine';
+import { NodeDefine } from '../game/GameDefine';
 import { BaseHandler } from './BaseHandler';
 
 export class GameHandler extends BaseHandler {

@@ -1,3 +1,5 @@
+import { CardsPto } from "./CommonProto";
+
 //游戏封包的结构
 export interface IGameMessage {
     cmd: number
@@ -42,20 +44,37 @@ export interface ILog {
     log(...args: any[]): void
 }
 
-export interface CardInterface {
-    cardId: number
-    powerId: number
-    cardType: number
-    type2: number
-    attack: number
-    atkType: number
-    health: number
-    fee: number
-    quality: number
-}
-
 export interface ISession {
     clientName: string
     uid: number
     sendMsg(message: IGameMessage): void
+}
+
+export class CardInterface {
+    cardId: number;
+
+    powerId: CardsPto.PowerType;
+
+    /**卡牌类型(0英雄、1单位、2法术、3建筑、4事件) */
+    cardType: CardsPto.CardType;
+
+    /**攻击力 */
+    attack: number;
+
+    /**攻击类型(0近战,1远程) */
+    atkType: CardsPto.AtkType;
+
+    /**生命值 */
+    health: number;
+
+    /**费用 */
+    fee: number;
+
+    /**品质 */
+    quality: CardsPto.QualityType;
+
+    attr: any;
+
+    /**是否衍生 */
+    isDerivation: number;
 }

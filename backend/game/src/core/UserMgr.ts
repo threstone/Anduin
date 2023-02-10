@@ -1,4 +1,4 @@
-import { GameUser } from './game/GameUser';
+import { GameUser } from '../game/GameUser';
 
 export class UserMgr {
     private _userMap: Map<number, GameUser>;

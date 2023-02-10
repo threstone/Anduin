@@ -1,5 +1,5 @@
-import { NodeDefine, NodeDriverResult } from '../../GameDefine';
-import { NodeDriver } from '../../NodeDriver';
+import { NodeDefine, NodeDriverResult } from '../GameDefine';
+import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { BaseNode } from './BaseNode';
 

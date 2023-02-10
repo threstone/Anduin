@@ -1,8 +1,8 @@
 import { getLogger } from 'log4js';
-import { IGameMessage } from '../../common/I';
-import { ProtoBufEncoder } from '../../common/ProtoBufEncoder';
-import * as RpcCommon from '../../common/rpc/rpc_class/RpcCommonGame';
-import { GlobalVar } from './GlobalVar';
+import { IGameMessage } from '../../../common/I';
+import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
+import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonGame';
+import { GlobalVar } from '../GlobalVar';
 
 const logger = getLogger();
 export class SocketServer extends RpcCommon.GameRPCServer {

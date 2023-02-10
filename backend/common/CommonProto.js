@@ -1761,6 +1761,13 @@ $root.CardsPto = (function() {
         return values;
     })();
 
+    CardsPto.AtkType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "CloseRange"] = 0;
+        values[valuesById[1] = "LongRange"] = 1;
+        return values;
+    })();
+
     CardsPto.Card = (function() {
 
         function Card(p) {
@@ -3548,7 +3555,7 @@ $root.GamePto = (function() {
         }
 
         S_START_HAND_CARD.prototype.cmd = 200;
-        S_START_HAND_CARD.prototype.scmd = 10001;
+        S_START_HAND_CARD.prototype.scmd = 10002;
         S_START_HAND_CARD.prototype.isFirst = false;
         S_START_HAND_CARD.prototype.handCards = $util.emptyArray;
 
@@ -3645,7 +3652,7 @@ $root.GamePto = (function() {
             }
             if (o.defaults) {
                 d.cmd = 200;
-                d.scmd = 10001;
+                d.scmd = 10002;
                 d.isFirst = false;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {

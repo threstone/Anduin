@@ -1,5 +1,5 @@
 import { getLogger } from 'log4js';
-import { GameTable } from './game/GameTable';
+import { GameTable } from '../game/GameTable';
 
 const logger = getLogger();
 export class TableMgr {

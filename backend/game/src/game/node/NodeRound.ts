@@ -1,6 +1,6 @@
-import { NodeDefine, NodeDriverResult } from '../../GameDefine';
+import { NodeDefine, NodeDriverResult } from '../GameDefine';
 import { GlobalVar } from '../../GlobalVar';
-import { NodeDriver } from '../../NodeDriver';
+import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
 import { BaseNode } from './BaseNode';

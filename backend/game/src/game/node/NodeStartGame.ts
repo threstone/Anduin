@@ -1,7 +1,7 @@
 import { GamePto } from '../../../../common/CommonProto';
-import { NodeDefine, NodeDriverResult } from '../../GameDefine';
+import { NodeDefine, NodeDriverResult } from '../GameDefine';
 import { GlobalVar } from '../../GlobalVar';
-import { NodeDriver } from '../../NodeDriver';
+import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
 import { BaseNode } from './BaseNode';
@@ -74,9 +74,10 @@ export class NodeStartGame extends BaseNode {
             user.handCards = [user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop()];
             startHandCardData.isFirst = table.nextRoundUserIndex === index;
             if (table.nextRoundUserIndex !== index) {
-                user.handCards.push(user.cardPool.pop(), 0);
+                user.handCards.push(user.cardPool.pop(), GlobalVar.cardMgr.getCardInstance(0));
             }
-            startHandCardData.handCards = user.handCards;
+
+            startHandCardData.handCards = user.getHandCardIds();
             //发牌
             user.sendMsg(startHandCardData);
         }

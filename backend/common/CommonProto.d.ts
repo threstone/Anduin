@@ -1475,6 +1475,12 @@ export namespace CardsPto {
         Event = 4
     }
 
+    /** AtkType enum. */
+    enum AtkType {
+        CloseRange = 0,
+        LongRange = 1
+    }
+
     /** Properties of a Card. */
     interface ICard {
 

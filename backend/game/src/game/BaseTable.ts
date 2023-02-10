@@ -3,7 +3,7 @@ import { GamePto } from '../../../common/CommonProto';
 import { IGameMessage } from '../../../common/I';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { GlobalVar } from '../GlobalVar';
-import { NodeDriver } from '../NodeDriver';
+import { NodeDriver } from '../core/NodeDriver';
 import { GameUser } from './GameUser';
 
 export class BaseTable {
@@ -46,7 +46,7 @@ export class BaseTable {
 
 
     /**洗牌 */
-    public shuffle(cards: number[]) {
+    public shuffle(cards: any[]) {
         for (let i = 0; i < cards.length; i++) {
             const lastIndex = cards.length - 1 - i;
             let index = this.random(lastIndex);

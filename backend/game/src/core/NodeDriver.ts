@@ -1,9 +1,9 @@
 import { getLogger } from 'log4js';
-import { IGameMessage } from '../../common/I';
-import { GameTable } from './game/GameTable';
-import { GameUser } from './game/GameUser';
-import { BaseNode } from './game/node/BaseNode';
-import { NodeDriverResult } from './GameDefine';
+import { IGameMessage } from '../../../common/I';
+import { GameTable } from '../game/GameTable';
+import { GameUser } from '../game/GameUser';
+import { BaseNode } from '../game/node/BaseNode';
+import { NodeDriverResult } from '../game/GameDefine';
 
 const logger = getLogger();
 export class NodeDriver {
