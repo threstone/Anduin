@@ -1,6 +1,6 @@
 import { CardsPto, FriendlyMatchPto } from '../../../common/CommonProto';
 import { RedisType } from '../../../common/ConstDefine';
-import { FriendlyMatchInfoMgr } from '../friendly_match/FriendlyMatchInfoMgr';
+import { FriendlyMatchInfoMgr } from '../game/friendly_match/FriendlyMatchInfoMgr';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 import { getLogger } from 'log4js';
