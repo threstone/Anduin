@@ -8,12 +8,6 @@ import { NodeDriverResult } from '../game/GameDefine';
 const logger = getLogger();
 export class NodeDriver {
 
-    onTrigger(user: GameUser, msg: IGameMessage) {
-        const node = this._nodes[this._nodeIndex];
-        const nodeResult = node.trigger(user, this._table, msg);
-        this.handlerResult(nodeResult);
-    }
-
     private _nodeIndex: number
     private _nodes: BaseNode[]
     private _table: GameTable
@@ -40,6 +34,12 @@ export class NodeDriver {
             nodeResult = node.run(this._table);
         }
 
+        this.handlerResult(nodeResult);
+    }
+
+    onTrigger(user: GameUser, msg: IGameMessage) {
+        const node = this._nodes[this._nodeIndex];
+        const nodeResult = node.trigger(user, this._table, msg);
         this.handlerResult(nodeResult);
     }
 

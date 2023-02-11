@@ -32,6 +32,12 @@ declare namespace CardsPto {
         Event = 4
     }
 
+    /** AtkType enum. */
+    enum AtkType {
+        CloseRange = 0,
+        LongRange = 1
+    }
+
     /** Properties of a Card. */
     interface ICard {
 
@@ -1995,6 +2001,57 @@ declare namespace FriendlyMatchPto {
 /** Namespace GamePto. */
 declare namespace GamePto {
 
+    /** Properties of a GameEvent. */
+    interface IGameEvent {
+
+        /** GameEvent opTime */
+        opTime?: (number|Long|null);
+
+        /** GameEvent opType */
+        opType?: (number|null);
+    }
+
+    /** Represents a GameEvent. */
+    class GameEvent implements IGameEvent {
+
+        /**
+         * Constructs a new GameEvent.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IGameEvent);
+
+        /** GameEvent opTime. */
+        public opTime: (number|Long);
+
+        /** GameEvent opType. */
+        public opType: number;
+
+        /**
+         * Encodes the specified GameEvent message. Does not implicitly {@link GamePto.GameEvent.verify|verify} messages.
+         * @param message GameEvent message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IGameEvent, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a GameEvent message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns GameEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.GameEvent;
+
+        /**
+         * Gets the default type url for GameEvent
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a C_PREPARE_TO_START. */
     interface IC_PREPARE_TO_START {
 
@@ -2229,6 +2286,189 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_START_HAND_CARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_ROUND_START_EVENT. */
+    interface IS_ROUND_START_EVENT {
+
+        /** S_ROUND_START_EVENT cmd */
+        cmd?: (number|null);
+
+        /** S_ROUND_START_EVENT scmd */
+        scmd?: (number|null);
+
+        /** S_ROUND_START_EVENT uid */
+        uid?: (number|null);
+
+        /** S_ROUND_START_EVENT events */
+        events?: (GamePto.IGameEvent[]|null);
+    }
+
+    /** Represents a S_ROUND_START_EVENT. */
+    class S_ROUND_START_EVENT implements IS_ROUND_START_EVENT {
+
+        /**
+         * Constructs a new S_ROUND_START_EVENT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ROUND_START_EVENT);
+
+        /** S_ROUND_START_EVENT cmd. */
+        public cmd: number;
+
+        /** S_ROUND_START_EVENT scmd. */
+        public scmd: number;
+
+        /** S_ROUND_START_EVENT uid. */
+        public uid: number;
+
+        /** S_ROUND_START_EVENT events. */
+        public events: GamePto.IGameEvent[];
+
+        /**
+         * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
+         * @param message S_ROUND_START_EVENT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ROUND_START_EVENT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_ROUND_START_EVENT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ROUND_START_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_START_EVENT;
+
+        /**
+         * Gets the default type url for S_ROUND_START_EVENT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_ROUND_END_EVENT. */
+    interface IS_ROUND_END_EVENT {
+
+        /** S_ROUND_END_EVENT cmd */
+        cmd?: (number|null);
+
+        /** S_ROUND_END_EVENT scmd */
+        scmd?: (number|null);
+
+        /** S_ROUND_END_EVENT uid */
+        uid?: (number|null);
+
+        /** S_ROUND_END_EVENT events */
+        events?: (GamePto.IGameEvent[]|null);
+    }
+
+    /** Represents a S_ROUND_END_EVENT. */
+    class S_ROUND_END_EVENT implements IS_ROUND_END_EVENT {
+
+        /**
+         * Constructs a new S_ROUND_END_EVENT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ROUND_END_EVENT);
+
+        /** S_ROUND_END_EVENT cmd. */
+        public cmd: number;
+
+        /** S_ROUND_END_EVENT scmd. */
+        public scmd: number;
+
+        /** S_ROUND_END_EVENT uid. */
+        public uid: number;
+
+        /** S_ROUND_END_EVENT events. */
+        public events: GamePto.IGameEvent[];
+
+        /**
+         * Encodes the specified S_ROUND_END_EVENT message. Does not implicitly {@link GamePto.S_ROUND_END_EVENT.verify|verify} messages.
+         * @param message S_ROUND_END_EVENT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ROUND_END_EVENT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_ROUND_END_EVENT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ROUND_END_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_END_EVENT;
+
+        /**
+         * Gets the default type url for S_ROUND_END_EVENT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_GAME_EVENT. */
+    interface IS_GAME_EVENT {
+
+        /** S_GAME_EVENT cmd */
+        cmd?: (number|null);
+
+        /** S_GAME_EVENT scmd */
+        scmd?: (number|null);
+
+        /** S_GAME_EVENT events */
+        events?: (GamePto.IGameEvent[]|null);
+    }
+
+    /** Represents a S_GAME_EVENT. */
+    class S_GAME_EVENT implements IS_GAME_EVENT {
+
+        /**
+         * Constructs a new S_GAME_EVENT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_GAME_EVENT);
+
+        /** S_GAME_EVENT cmd. */
+        public cmd: number;
+
+        /** S_GAME_EVENT scmd. */
+        public scmd: number;
+
+        /** S_GAME_EVENT events. */
+        public events: GamePto.IGameEvent[];
+
+        /**
+         * Encodes the specified S_GAME_EVENT message. Does not implicitly {@link GamePto.S_GAME_EVENT.verify|verify} messages.
+         * @param message S_GAME_EVENT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_GAME_EVENT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_GAME_EVENT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_GAME_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_EVENT;
+
+        /**
+         * Gets the default type url for S_GAME_EVENT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

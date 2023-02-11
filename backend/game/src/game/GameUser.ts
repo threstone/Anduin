@@ -2,6 +2,7 @@ import { CardsPto } from '../../../common/CommonProto';
 import { RedisType } from '../../../common/ConstDefine';
 import { IGameMessage } from '../../../common/I';
 import { BaseCard } from '../card/BaseCard';
+import { EventCard } from '../card/EventCard';
 import { GlobalVar } from '../GlobalVar';
 import { MatchUser } from './GameMatchInfo';
 import { GameTable } from './GameTable';
@@ -20,6 +21,13 @@ export class GameUser {
     cardPool: BaseCard[];
     /**手牌 */
     handCards: BaseCard[];
+    /**坟场 */
+    deadPool: BaseCard[];
+    /**正在战场上起作用的卡牌 */
+    enablePool: EventCard[];
+
+    get hero() { return this.enablePool[0] }
+
     /**是否换牌 */
     isReplace: boolean;
 
@@ -30,6 +38,11 @@ export class GameUser {
         this.isOnline = true;
 
         this.cardGroup = matchUser.cardGroup;
+        this.resetInfo();
+    }
+
+    private resetInfo() {
+        this.isReplace = false
         this.cardPool = [];
         for (let index = 0; index < this.cardGroup.cards.length; index++) {
             const cardInfo = this.cardGroup.cards[index];
@@ -37,16 +50,28 @@ export class GameUser {
                 this.cardPool.push(GlobalVar.cardMgr.getCardInstance(cardInfo.id));
             }
         }
+        this.deadPool = [];
+        this.enablePool = [];
     }
 
-    sendMsg(message: IGameMessage) {
+
+    /**获取手牌id */
+    public getHandCardIds() {
+        const result: number[] = [];
+        for (let index = 0; index < this.handCards.length; index++) {
+            result.push(this.handCards[index].cardId)
+        }
+        return result;
+    }
+
+    public sendMsg(message: IGameMessage) {
         if (!this.isOnline === false) {
             return;
         }
         GlobalVar.socketServer.sendMsg(this.clientName, this.uid, message);
     }
 
-    sendBuffer(messageBuffer: Buffer) {
+    public sendBuffer(messageBuffer: Buffer) {
         if (!this.isOnline === false) {
             return;
         }
@@ -56,18 +81,10 @@ export class GameUser {
     /**
      * 将redis数据同步过来
      */
-    async syncUserInfo() {
+    public async syncUserInfo() {
         const redis = GlobalVar.redisMgr.getClient(RedisType.userInfo);
         const sInfo = await redis.hmget(this.uid, ['nick']);
         this.nick = sInfo[0];
     }
 
-    getHandCardIds() {
-        const result: number[] = [];
-        for (let index = 0; index < this.handCards.length; index++) {
-            const cardInfo = this.handCards[index];
-            result.push(this.handCards[index].cardId)
-        }
-        return result;
-    }
 }

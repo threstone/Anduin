@@ -77,6 +77,20 @@ $root.CardsPto = (function() {
         return values;
     })();
 
+    /**
+     * AtkType enum.
+     * @name CardsPto.AtkType
+     * @enum {number}
+     * @property {number} CloseRange=0 CloseRange value
+     * @property {number} LongRange=1 LongRange value
+     */
+    CardsPto.AtkType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "CloseRange"] = 0;
+        values[valuesById[1] = "LongRange"] = 1;
+        return values;
+    })();
+
     CardsPto.Card = (function() {
 
         /**
@@ -4492,6 +4506,118 @@ $root.GamePto = (function() {
      */
     var GamePto = {};
 
+    GamePto.GameEvent = (function() {
+
+        /**
+         * Properties of a GameEvent.
+         * @memberof GamePto
+         * @interface IGameEvent
+         * @property {number|Long|null} [opTime] GameEvent opTime
+         * @property {number|null} [opType] GameEvent opType
+         */
+
+        /**
+         * Constructs a new GameEvent.
+         * @memberof GamePto
+         * @classdesc Represents a GameEvent.
+         * @implements IGameEvent
+         * @constructor
+         * @param {GamePto.IGameEvent=} [properties] Properties to set
+         */
+        function GameEvent(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * GameEvent opTime.
+         * @member {number|Long} opTime
+         * @memberof GamePto.GameEvent
+         * @instance
+         */
+        GameEvent.prototype.opTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * GameEvent opType.
+         * @member {number} opType
+         * @memberof GamePto.GameEvent
+         * @instance
+         */
+        GameEvent.prototype.opType = 0;
+
+        /**
+         * Encodes the specified GameEvent message. Does not implicitly {@link GamePto.GameEvent.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.GameEvent
+         * @static
+         * @param {GamePto.IGameEvent} message GameEvent message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        GameEvent.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.opTime != null && Object.hasOwnProperty.call(message, "opTime"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.opTime);
+            if (message.opType != null && Object.hasOwnProperty.call(message, "opType"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.opType);
+            return writer;
+        };
+
+        /**
+         * Decodes a GameEvent message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.GameEvent
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.GameEvent} GameEvent
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        GameEvent.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.GameEvent();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.opTime = reader.int64();
+                        break;
+                    }
+                case 2: {
+                        message.opType = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for GameEvent
+         * @function getTypeUrl
+         * @memberof GamePto.GameEvent
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        GameEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.GameEvent";
+        };
+
+        return GameEvent;
+    })();
+
     GamePto.C_PREPARE_TO_START = (function() {
 
         /**
@@ -4942,7 +5068,7 @@ $root.GamePto = (function() {
          * @memberof GamePto.S_START_HAND_CARD
          * @instance
          */
-        S_START_HAND_CARD.prototype.scmd = 10001;
+        S_START_HAND_CARD.prototype.scmd = 10002;
 
         /**
          * S_START_HAND_CARD isFirst.
@@ -5052,6 +5178,429 @@ $root.GamePto = (function() {
         };
 
         return S_START_HAND_CARD;
+    })();
+
+    GamePto.S_ROUND_START_EVENT = (function() {
+
+        /**
+         * Properties of a S_ROUND_START_EVENT.
+         * @memberof GamePto
+         * @interface IS_ROUND_START_EVENT
+         * @property {number|null} [cmd] S_ROUND_START_EVENT cmd
+         * @property {number|null} [scmd] S_ROUND_START_EVENT scmd
+         * @property {number|null} [uid] S_ROUND_START_EVENT uid
+         * @property {Array.<GamePto.IGameEvent>|null} [events] S_ROUND_START_EVENT events
+         */
+
+        /**
+         * Constructs a new S_ROUND_START_EVENT.
+         * @memberof GamePto
+         * @classdesc Represents a S_ROUND_START_EVENT.
+         * @implements IS_ROUND_START_EVENT
+         * @constructor
+         * @param {GamePto.IS_ROUND_START_EVENT=} [properties] Properties to set
+         */
+        function S_ROUND_START_EVENT(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_ROUND_START_EVENT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @instance
+         */
+        S_ROUND_START_EVENT.prototype.cmd = 200;
+
+        /**
+         * S_ROUND_START_EVENT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @instance
+         */
+        S_ROUND_START_EVENT.prototype.scmd = 10003;
+
+        /**
+         * S_ROUND_START_EVENT uid.
+         * @member {number} uid
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @instance
+         */
+        S_ROUND_START_EVENT.prototype.uid = 0;
+
+        /**
+         * S_ROUND_START_EVENT events.
+         * @member {Array.<GamePto.IGameEvent>} events
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @instance
+         */
+        S_ROUND_START_EVENT.prototype.events = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @static
+         * @param {GamePto.IS_ROUND_START_EVENT} message S_ROUND_START_EVENT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_ROUND_START_EVENT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(message.events[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_ROUND_START_EVENT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_ROUND_START_EVENT} S_ROUND_START_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_ROUND_START_EVENT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_ROUND_START_EVENT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.events && message.events.length))
+                            message.events = [];
+                        message.events.push($root.GamePto.GameEvent.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ROUND_START_EVENT
+         * @function getTypeUrl
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ROUND_START_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_START_EVENT";
+        };
+
+        return S_ROUND_START_EVENT;
+    })();
+
+    GamePto.S_ROUND_END_EVENT = (function() {
+
+        /**
+         * Properties of a S_ROUND_END_EVENT.
+         * @memberof GamePto
+         * @interface IS_ROUND_END_EVENT
+         * @property {number|null} [cmd] S_ROUND_END_EVENT cmd
+         * @property {number|null} [scmd] S_ROUND_END_EVENT scmd
+         * @property {number|null} [uid] S_ROUND_END_EVENT uid
+         * @property {Array.<GamePto.IGameEvent>|null} [events] S_ROUND_END_EVENT events
+         */
+
+        /**
+         * Constructs a new S_ROUND_END_EVENT.
+         * @memberof GamePto
+         * @classdesc Represents a S_ROUND_END_EVENT.
+         * @implements IS_ROUND_END_EVENT
+         * @constructor
+         * @param {GamePto.IS_ROUND_END_EVENT=} [properties] Properties to set
+         */
+        function S_ROUND_END_EVENT(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_ROUND_END_EVENT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @instance
+         */
+        S_ROUND_END_EVENT.prototype.cmd = 200;
+
+        /**
+         * S_ROUND_END_EVENT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @instance
+         */
+        S_ROUND_END_EVENT.prototype.scmd = 10004;
+
+        /**
+         * S_ROUND_END_EVENT uid.
+         * @member {number} uid
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @instance
+         */
+        S_ROUND_END_EVENT.prototype.uid = 0;
+
+        /**
+         * S_ROUND_END_EVENT events.
+         * @member {Array.<GamePto.IGameEvent>} events
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @instance
+         */
+        S_ROUND_END_EVENT.prototype.events = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_ROUND_END_EVENT message. Does not implicitly {@link GamePto.S_ROUND_END_EVENT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @static
+         * @param {GamePto.IS_ROUND_END_EVENT} message S_ROUND_END_EVENT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_ROUND_END_EVENT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(message.events[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_ROUND_END_EVENT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_ROUND_END_EVENT} S_ROUND_END_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_ROUND_END_EVENT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_ROUND_END_EVENT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.events && message.events.length))
+                            message.events = [];
+                        message.events.push($root.GamePto.GameEvent.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ROUND_END_EVENT
+         * @function getTypeUrl
+         * @memberof GamePto.S_ROUND_END_EVENT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ROUND_END_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_END_EVENT";
+        };
+
+        return S_ROUND_END_EVENT;
+    })();
+
+    GamePto.S_GAME_EVENT = (function() {
+
+        /**
+         * Properties of a S_GAME_EVENT.
+         * @memberof GamePto
+         * @interface IS_GAME_EVENT
+         * @property {number|null} [cmd] S_GAME_EVENT cmd
+         * @property {number|null} [scmd] S_GAME_EVENT scmd
+         * @property {Array.<GamePto.IGameEvent>|null} [events] S_GAME_EVENT events
+         */
+
+        /**
+         * Constructs a new S_GAME_EVENT.
+         * @memberof GamePto
+         * @classdesc Represents a S_GAME_EVENT.
+         * @implements IS_GAME_EVENT
+         * @constructor
+         * @param {GamePto.IS_GAME_EVENT=} [properties] Properties to set
+         */
+        function S_GAME_EVENT(properties) {
+            this.events = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_GAME_EVENT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_GAME_EVENT
+         * @instance
+         */
+        S_GAME_EVENT.prototype.cmd = 200;
+
+        /**
+         * S_GAME_EVENT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_GAME_EVENT
+         * @instance
+         */
+        S_GAME_EVENT.prototype.scmd = 10005;
+
+        /**
+         * S_GAME_EVENT events.
+         * @member {Array.<GamePto.IGameEvent>} events
+         * @memberof GamePto.S_GAME_EVENT
+         * @instance
+         */
+        S_GAME_EVENT.prototype.events = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_GAME_EVENT message. Does not implicitly {@link GamePto.S_GAME_EVENT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_GAME_EVENT
+         * @static
+         * @param {GamePto.IS_GAME_EVENT} message S_GAME_EVENT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_GAME_EVENT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.events != null && message.events.length)
+                for (var i = 0; i < message.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(message.events[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_GAME_EVENT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_GAME_EVENT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_GAME_EVENT} S_GAME_EVENT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_GAME_EVENT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_GAME_EVENT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.events && message.events.length))
+                            message.events = [];
+                        message.events.push($root.GamePto.GameEvent.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_GAME_EVENT
+         * @function getTypeUrl
+         * @memberof GamePto.S_GAME_EVENT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_GAME_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_GAME_EVENT";
+        };
+
+        return S_GAME_EVENT;
     })();
 
     return GamePto;

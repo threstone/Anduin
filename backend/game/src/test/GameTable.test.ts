@@ -16,7 +16,10 @@ describe('GameTable Test', () => {
         let cards = [1, 2, 3, 4, 5];
         table.setRandSeed(123);
         table.shuffle(cards);
-        assert.equal(cards, [4, 5, 1, 2, 3]);
+        let result = [4, 5, 1, 2, 3];
+        for (let index = 0; index < result.length; index++) {
+            assert.equal(result[index], cards[index])
+        }
     });
 });
 

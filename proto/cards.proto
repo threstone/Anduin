@@ -26,6 +26,11 @@ enum CardType{
 	Event = 4;//事件卡
 }
 
+enum AtkType{
+	CloseRange = 0;//近战
+	LongRange = 1;//远程
+}
+
 message Card{
 	int32 id = 0;
 	int32 count = 1;

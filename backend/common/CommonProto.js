@@ -3187,6 +3187,113 @@ $root.GamePto = (function() {
 
     var GamePto = {};
 
+    GamePto.GameEvent = (function() {
+
+        function GameEvent(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        GameEvent.prototype.opTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        GameEvent.prototype.opType = 0;
+
+        GameEvent.create = function create(properties) {
+            return new GameEvent(properties);
+        };
+
+        GameEvent.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.opTime != null && Object.hasOwnProperty.call(m, "opTime"))
+                w.uint32(8).int64(m.opTime);
+            if (m.opType != null && Object.hasOwnProperty.call(m, "opType"))
+                w.uint32(16).int32(m.opType);
+            return w;
+        };
+
+        GameEvent.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.GameEvent();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.opTime = r.int64();
+                        break;
+                    }
+                case 2: {
+                        m.opType = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        GameEvent.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.GameEvent)
+                return d;
+            var m = new $root.GamePto.GameEvent();
+            if (d.opTime != null) {
+                if ($util.Long)
+                    (m.opTime = $util.Long.fromValue(d.opTime)).unsigned = false;
+                else if (typeof d.opTime === "string")
+                    m.opTime = parseInt(d.opTime, 10);
+                else if (typeof d.opTime === "number")
+                    m.opTime = d.opTime;
+                else if (typeof d.opTime === "object")
+                    m.opTime = new $util.LongBits(d.opTime.low >>> 0, d.opTime.high >>> 0).toNumber();
+            }
+            if (d.opType != null) {
+                m.opType = d.opType | 0;
+            }
+            return m;
+        };
+
+        GameEvent.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.opTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.opTime = o.longs === String ? "0" : 0;
+                d.opType = 0;
+            }
+            if (m.opTime != null && m.hasOwnProperty("opTime")) {
+                if (typeof m.opTime === "number")
+                    d.opTime = o.longs === String ? String(m.opTime) : m.opTime;
+                else
+                    d.opTime = o.longs === String ? $util.Long.prototype.toString.call(m.opTime) : o.longs === Number ? new $util.LongBits(m.opTime.low >>> 0, m.opTime.high >>> 0).toNumber() : m.opTime;
+            }
+            if (m.opType != null && m.hasOwnProperty("opType")) {
+                d.opType = m.opType;
+            }
+            return d;
+        };
+
+        GameEvent.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        GameEvent.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.GameEvent";
+        };
+
+        return GameEvent;
+    })();
+
     GamePto.C_PREPARE_TO_START = (function() {
 
         function C_PREPARE_TO_START(p) {
@@ -3685,6 +3792,406 @@ $root.GamePto = (function() {
         };
 
         return S_START_HAND_CARD;
+    })();
+
+    GamePto.S_ROUND_START_EVENT = (function() {
+
+        function S_ROUND_START_EVENT(p) {
+            this.events = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_ROUND_START_EVENT.prototype.cmd = 200;
+        S_ROUND_START_EVENT.prototype.scmd = 10003;
+        S_ROUND_START_EVENT.prototype.uid = 0;
+        S_ROUND_START_EVENT.prototype.events = $util.emptyArray;
+
+        S_ROUND_START_EVENT.create = function create(properties) {
+            return new S_ROUND_START_EVENT(properties);
+        };
+
+        S_ROUND_START_EVENT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(24).int32(m.uid);
+            if (m.events != null && m.events.length) {
+                for (var i = 0; i < m.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(m.events[i], w.uint32(34).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_ROUND_START_EVENT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_ROUND_START_EVENT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(m.events && m.events.length))
+                            m.events = [];
+                        m.events.push($root.GamePto.GameEvent.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_ROUND_START_EVENT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_ROUND_START_EVENT)
+                return d;
+            var m = new $root.GamePto.S_ROUND_START_EVENT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            if (d.events) {
+                if (!Array.isArray(d.events))
+                    throw TypeError(".GamePto.S_ROUND_START_EVENT.events: array expected");
+                m.events = [];
+                for (var i = 0; i < d.events.length; ++i) {
+                    if (typeof d.events[i] !== "object")
+                        throw TypeError(".GamePto.S_ROUND_START_EVENT.events: object expected");
+                    m.events[i] = $root.GamePto.GameEvent.fromObject(d.events[i]);
+                }
+            }
+            return m;
+        };
+
+        S_ROUND_START_EVENT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.events = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10003;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            if (m.events && m.events.length) {
+                d.events = [];
+                for (var j = 0; j < m.events.length; ++j) {
+                    d.events[j] = $root.GamePto.GameEvent.toObject(m.events[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_ROUND_START_EVENT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_ROUND_START_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_START_EVENT";
+        };
+
+        return S_ROUND_START_EVENT;
+    })();
+
+    GamePto.S_ROUND_END_EVENT = (function() {
+
+        function S_ROUND_END_EVENT(p) {
+            this.events = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_ROUND_END_EVENT.prototype.cmd = 200;
+        S_ROUND_END_EVENT.prototype.scmd = 10004;
+        S_ROUND_END_EVENT.prototype.uid = 0;
+        S_ROUND_END_EVENT.prototype.events = $util.emptyArray;
+
+        S_ROUND_END_EVENT.create = function create(properties) {
+            return new S_ROUND_END_EVENT(properties);
+        };
+
+        S_ROUND_END_EVENT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(24).int32(m.uid);
+            if (m.events != null && m.events.length) {
+                for (var i = 0; i < m.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(m.events[i], w.uint32(34).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_ROUND_END_EVENT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_ROUND_END_EVENT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(m.events && m.events.length))
+                            m.events = [];
+                        m.events.push($root.GamePto.GameEvent.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_ROUND_END_EVENT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_ROUND_END_EVENT)
+                return d;
+            var m = new $root.GamePto.S_ROUND_END_EVENT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            if (d.events) {
+                if (!Array.isArray(d.events))
+                    throw TypeError(".GamePto.S_ROUND_END_EVENT.events: array expected");
+                m.events = [];
+                for (var i = 0; i < d.events.length; ++i) {
+                    if (typeof d.events[i] !== "object")
+                        throw TypeError(".GamePto.S_ROUND_END_EVENT.events: object expected");
+                    m.events[i] = $root.GamePto.GameEvent.fromObject(d.events[i]);
+                }
+            }
+            return m;
+        };
+
+        S_ROUND_END_EVENT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.events = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10004;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            if (m.events && m.events.length) {
+                d.events = [];
+                for (var j = 0; j < m.events.length; ++j) {
+                    d.events[j] = $root.GamePto.GameEvent.toObject(m.events[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_ROUND_END_EVENT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_ROUND_END_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_END_EVENT";
+        };
+
+        return S_ROUND_END_EVENT;
+    })();
+
+    GamePto.S_GAME_EVENT = (function() {
+
+        function S_GAME_EVENT(p) {
+            this.events = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_GAME_EVENT.prototype.cmd = 200;
+        S_GAME_EVENT.prototype.scmd = 10005;
+        S_GAME_EVENT.prototype.events = $util.emptyArray;
+
+        S_GAME_EVENT.create = function create(properties) {
+            return new S_GAME_EVENT(properties);
+        };
+
+        S_GAME_EVENT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.events != null && m.events.length) {
+                for (var i = 0; i < m.events.length; ++i)
+                    $root.GamePto.GameEvent.encode(m.events[i], w.uint32(26).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_GAME_EVENT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_GAME_EVENT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(m.events && m.events.length))
+                            m.events = [];
+                        m.events.push($root.GamePto.GameEvent.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_GAME_EVENT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_GAME_EVENT)
+                return d;
+            var m = new $root.GamePto.S_GAME_EVENT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.events) {
+                if (!Array.isArray(d.events))
+                    throw TypeError(".GamePto.S_GAME_EVENT.events: array expected");
+                m.events = [];
+                for (var i = 0; i < d.events.length; ++i) {
+                    if (typeof d.events[i] !== "object")
+                        throw TypeError(".GamePto.S_GAME_EVENT.events: object expected");
+                    m.events[i] = $root.GamePto.GameEvent.fromObject(d.events[i]);
+                }
+            }
+            return m;
+        };
+
+        S_GAME_EVENT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.events = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10005;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.events && m.events.length) {
+                d.events = [];
+                for (var j = 0; j < m.events.length; ++j) {
+                    d.events[j] = $root.GamePto.GameEvent.toObject(m.events[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_GAME_EVENT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_GAME_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_GAME_EVENT";
+        };
+
+        return S_GAME_EVENT;
     })();
 
     return GamePto;

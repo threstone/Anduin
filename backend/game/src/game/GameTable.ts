@@ -9,14 +9,23 @@ import { NodeRound } from './node/NodeRound';
 import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
+import { GameMapData } from './GameMapData';
 
 export class GameTable extends BaseTable {
 
     /**接下来执行回合操作的玩家 */
     nextRoundUserIndex: number;
 
+    /**地图数据 */
+    mapData: GameMapData;
+
+    isGameOver: boolean;
+
     constructor(tableId: number, talbeIndex: number) {
         super(tableId, talbeIndex);
+
+        this.mapData = new GameMapData(7, 8);
+        this.isGameOver = false;
 
         this._nodeDriver = new NodeDriver(this);
         this._nodeDriver.setNodes([
@@ -26,6 +35,19 @@ export class GameTable extends BaseTable {
             new NodeRoundEnd(this._nodeDriver),
             new NodeEndGame(this._nodeDriver),
         ]);
+    }
+
+    /**检查是否结束 */
+    public checkGameOver() {
+        for (let index = 0; index < this._users.length; index++) {
+            const user = this._users[index];
+            //英雄死亡
+            if (user.hero.health <= 0) {
+                this.isGameOver = true;
+                return true;
+            }
+        }
+        return false;
     }
 
     public onRun(now: number) {

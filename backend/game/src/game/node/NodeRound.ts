@@ -13,6 +13,10 @@ export class NodeRound extends BaseNode {
     }
 
     public run(table: GameTable): NodeDriverResult {
+        if (table.isGameOver) {
+            return NodeDriverResult.GoOn;
+        }
+        
         this.deal(table);
         this.nodeDriver.waitTime(GlobalVar.configMgr.common.roundOptTime);
         return NodeDriverResult.Wait;
