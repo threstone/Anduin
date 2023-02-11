@@ -2,8 +2,9 @@ import { GlobalVar } from "../GlobalVar";
 import * as path from 'path';
 import { CommonUtils } from "../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
-import { Card0 } from "../card/common/Card0";
+import { getLogger } from "log4js";
 
+const logger = getLogger();
 export class CardMgr {
 
     private _cardClassMap: Map<number, typeof BaseCard>;
@@ -15,8 +16,7 @@ export class CardMgr {
 
     private init() {
         const makeTime = Date.now();
-        console.log(`开始卡片初始化`);
-
+        logger.info(`开始卡片初始化`);
         const handlerPath = path.join(__dirname, '../card/');
         const files = CommonUtils.getAllFiles(handlerPath);
         for (let index = 0; index < files.length; index++) {
@@ -38,8 +38,7 @@ export class CardMgr {
             this._cardClassMap.set(cardId, cardClass[className])
 
         }
-
-        console.log(`结束卡片初始化,耗时:${Date.now() - makeTime}ms`);
+        logger.info(`结束卡片初始化,耗时:${Date.now() - makeTime}ms`);
     }
 
     public getCardInstance(cardId: number): BaseCard {

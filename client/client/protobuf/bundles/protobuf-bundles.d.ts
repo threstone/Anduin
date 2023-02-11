@@ -2009,6 +2009,12 @@ declare namespace GamePto {
 
         /** GameEvent opType */
         opType?: (number|null);
+
+        /** GameEvent x */
+        x?: (number|null);
+
+        /** GameEvent y */
+        y?: (number|null);
     }
 
     /** Represents a GameEvent. */
@@ -2025,6 +2031,12 @@ declare namespace GamePto {
 
         /** GameEvent opType. */
         public opType: number;
+
+        /** GameEvent x. */
+        public x: number;
+
+        /** GameEvent y. */
+        public y: number;
 
         /**
          * Encodes the specified GameEvent message. Does not implicitly {@link GamePto.GameEvent.verify|verify} messages.
@@ -2046,6 +2058,189 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for GameEvent
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a UserInfo. */
+    interface IUserInfo {
+
+        /** UserInfo nick */
+        nick?: (string|null);
+
+        /** UserInfo power */
+        power?: (number|null);
+
+        /** UserInfo uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a UserInfo. */
+    class UserInfo implements IUserInfo {
+
+        /**
+         * Constructs a new UserInfo.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IUserInfo);
+
+        /** UserInfo nick. */
+        public nick: string;
+
+        /** UserInfo power. */
+        public power: number;
+
+        /** UserInfo uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified UserInfo message. Does not implicitly {@link GamePto.UserInfo.verify|verify} messages.
+         * @param message UserInfo message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IUserInfo, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a UserInfo message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UserInfo
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.UserInfo;
+
+        /**
+         * Gets the default type url for UserInfo
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a Card. */
+    interface ICard {
+
+        /** Card id */
+        id?: (number|null);
+
+        /** Card attack */
+        attack?: (number|null);
+
+        /** Card health */
+        health?: (number|null);
+
+        /** Card fee */
+        fee?: (number|null);
+
+        /** Card allowAtk */
+        allowAtk?: (boolean|null);
+
+        /** Card uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a Card. */
+    class Card implements ICard {
+
+        /**
+         * Constructs a new Card.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.ICard);
+
+        /** Card id. */
+        public id: number;
+
+        /** Card attack. */
+        public attack: number;
+
+        /** Card health. */
+        public health: number;
+
+        /** Card fee. */
+        public fee: number;
+
+        /** Card allowAtk. */
+        public allowAtk: boolean;
+
+        /** Card uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
+         * @param message Card message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.ICard, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a Card message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns Card
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.Card;
+
+        /**
+         * Gets the default type url for Card
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a MapData. */
+    interface IMapData {
+
+        /** MapData eventCard */
+        eventCard?: (GamePto.ICard[]|null);
+
+        /** MapData unitCard */
+        unitCard?: (GamePto.ICard[]|null);
+    }
+
+    /** Represents a MapData. */
+    class MapData implements IMapData {
+
+        /**
+         * Constructs a new MapData.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IMapData);
+
+        /** MapData eventCard. */
+        public eventCard: GamePto.ICard[];
+
+        /** MapData unitCard. */
+        public unitCard: GamePto.ICard[];
+
+        /**
+         * Encodes the specified MapData message. Does not implicitly {@link GamePto.MapData.verify|verify} messages.
+         * @param message MapData message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IMapData, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a MapData message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns MapData
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.MapData;
+
+        /**
+         * Gets the default type url for MapData
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -2175,11 +2370,8 @@ declare namespace GamePto {
         /** S_INIT_GAME scmd */
         scmd?: (number|null);
 
-        /** S_INIT_GAME targetNick */
-        targetNick?: (string|null);
-
-        /** S_INIT_GAME targetPower */
-        targetPower?: (number|null);
+        /** S_INIT_GAME users */
+        users?: (GamePto.IUserInfo[]|null);
     }
 
     /** Represents a S_INIT_GAME. */
@@ -2197,11 +2389,8 @@ declare namespace GamePto {
         /** S_INIT_GAME scmd. */
         public scmd: number;
 
-        /** S_INIT_GAME targetNick. */
-        public targetNick: string;
-
-        /** S_INIT_GAME targetPower. */
-        public targetPower: number;
+        /** S_INIT_GAME users. */
+        public users: GamePto.IUserInfo[];
 
         /**
          * Encodes the specified S_INIT_GAME message. Does not implicitly {@link GamePto.S_INIT_GAME.verify|verify} messages.
@@ -2229,63 +2418,69 @@ declare namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_START_HAND_CARD. */
-    interface IS_START_HAND_CARD {
+    /** Properties of a S_START_GAME. */
+    interface IS_START_GAME {
 
-        /** S_START_HAND_CARD cmd */
+        /** S_START_GAME cmd */
         cmd?: (number|null);
 
-        /** S_START_HAND_CARD scmd */
+        /** S_START_GAME scmd */
         scmd?: (number|null);
 
-        /** S_START_HAND_CARD isFirst */
-        isFirst?: (boolean|null);
+        /** S_START_GAME firstUid */
+        firstUid?: (number|null);
 
-        /** S_START_HAND_CARD handCards */
+        /** S_START_GAME handCards */
         handCards?: (number[]|null);
+
+        /** S_START_GAME mapData */
+        mapData?: (GamePto.IMapData|null);
     }
 
-    /** Represents a S_START_HAND_CARD. */
-    class S_START_HAND_CARD implements IS_START_HAND_CARD {
+    /** Represents a S_START_GAME. */
+    class S_START_GAME implements IS_START_GAME {
 
         /**
-         * Constructs a new S_START_HAND_CARD.
+         * Constructs a new S_START_GAME.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_START_HAND_CARD);
+        constructor(properties?: GamePto.IS_START_GAME);
 
-        /** S_START_HAND_CARD cmd. */
+        /** S_START_GAME cmd. */
         public cmd: number;
 
-        /** S_START_HAND_CARD scmd. */
+        /** S_START_GAME scmd. */
         public scmd: number;
 
-        /** S_START_HAND_CARD isFirst. */
-        public isFirst: boolean;
+        /** S_START_GAME firstUid. */
+        public firstUid: number;
 
-        /** S_START_HAND_CARD handCards. */
+        /** S_START_GAME handCards. */
         public handCards: number[];
 
+        /** S_START_GAME mapData. */
+        public mapData?: (GamePto.IMapData|null);
+
         /**
-         * Encodes the specified S_START_HAND_CARD message. Does not implicitly {@link GamePto.S_START_HAND_CARD.verify|verify} messages.
-         * @param message S_START_HAND_CARD message or plain object to encode
+         * Encodes the specified S_START_GAME message. Does not implicitly {@link GamePto.S_START_GAME.verify|verify} messages.
+         * @param message S_START_GAME message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_START_HAND_CARD, writer?: protobuf.Writer): protobuf.Writer;
+        public static encode(message: GamePto.IS_START_GAME, writer?: protobuf.Writer): protobuf.Writer;
 
         /**
-         * Decodes a S_START_HAND_CARD message from the specified reader or buffer.
+         * Decodes a S_START_GAME message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_START_HAND_CARD
+         * @returns S_START_GAME
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_START_HAND_CARD;
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_START_GAME;
 
         /**
-         * Gets the default type url for S_START_HAND_CARD
+         * Gets the default type url for S_START_GAME
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

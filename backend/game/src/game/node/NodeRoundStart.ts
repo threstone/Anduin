@@ -28,20 +28,38 @@ export class NodeRoundStart extends BaseNode {
         //派发回合开始
         const roundStartMsg = new GamePto.S_ROUND_START_EVENT();
         roundStartMsg.uid = user.uid;
-        table.broadcast(roundStartMsg);
-
-        //执行场上所有乙方卡牌的回合开始事件
-        for (let index = 0; index < user.enablePool.length; index++) {
-            const card = user.enablePool[index];
-            // card.onRoundStart();
+        let sum = 0;
+        //执行场上所有乙方事件卡的回合开始事件
+        for (let index = 0; index < user.eventPool.length; index++) {
+            const card = user.eventPool[index];
+            const event = card.onRoundStart();
+            if (event) {
+                //计算所有回合开始事件所需要的时间
+                sum += event.opTime;
+                roundStartMsg.events.push(event)
+            }
         }
 
-        //计算所有回合开始事件所需要的时间
+        //执行场上所有单位卡牌的回合开始事件
+        for (let index = 0; index < user.unitPool.length; index++) {
+            const card = user.unitPool[index];
+            const event = card.onRoundStart();
+            if (event) {
+                event.x = card.x;
+                event.y = card.y;
+                roundStartMsg.events.push(event)
+                //计算所有回合开始事件所需要的时间
+                sum += event.opTime;
+            }
+        }
+        table.broadcast(roundStartMsg);
 
         //玩家有可能在这个阶段死亡
+        if (table.checkGameOver()) {
+            return NodeDriverResult.GoOn;
+        }
 
-        return NodeDriverResult.GoOn;
-        this.nodeDriver.waitTime(1234);
+        this.nodeDriver.waitTime(sum);
         return NodeDriverResult.Wait;
     }
 }

@@ -20,13 +20,11 @@ export class GameMapData {
         }
     }
 
-    public setCard(x: number, y: number, card: UnitCard) {
-        const position = y * this._width + x;
+    public setCard(card: UnitCard) {
+        const position = card.y * this._width + card.x;
         if (this._mapData[position]) {
             return;
         }
-        card.x = x;
-        card.y = y;
         this._mapData[position] = card;
     }
 
@@ -36,19 +34,19 @@ export class GameMapData {
         if (!card) {
             return;
         }
-        card.x = undefined;
-        card.y = undefined;
         this._mapData[position] = null;
     }
 
-    public move(x: number, y: number, card: UnitCard) {
+    public move(targetX: number, targetY: number, card: UnitCard) {
         const resultSet = new Set<number>();
         this.canMove(card.x, card.y, 2, resultSet)
-        if (!resultSet.has(y * this._width + x)) {
+        if (!resultSet.has(targetY * this._width + targetX)) {
             return false;
         }
         this.delete(card.x, card.y);
-        this.setCard(x, y, card)
+        card.x = targetX;
+        card.y = targetY;
+        this.setCard(card);
         return true;
     }
 

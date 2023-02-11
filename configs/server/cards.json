@@ -9,7 +9,7 @@
  "health":0,
  "fee":0,
  "quality":1,
- "attr":"TBD",
+ "attr":{"0":0},
  "isDerivation":1
   },
 {
@@ -22,7 +22,7 @@
  "health":3,
  "fee":0,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -35,7 +35,7 @@
  "health":4,
  "fee":2,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -48,7 +48,7 @@
  "health":7,
  "fee":3,
  "quality":2,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -61,7 +61,7 @@
  "health":3,
  "fee":4,
  "quality":3,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -74,7 +74,7 @@
  "health":5,
  "fee":5,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -87,7 +87,7 @@
  "health":3,
  "fee":0,
  "quality":2,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -100,7 +100,7 @@
  "health":8,
  "fee":7,
  "quality":2,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -113,7 +113,7 @@
  "health":3,
  "fee":8,
  "quality":0,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -126,7 +126,7 @@
  "health":1,
  "fee":9,
  "quality":0,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -139,7 +139,7 @@
  "health":2,
  "fee":1,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -152,7 +152,7 @@
  "health":4,
  "fee":0,
  "quality":2,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -165,7 +165,7 @@
  "health":1,
  "fee":4,
  "quality":3,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -178,7 +178,7 @@
  "health":5,
  "fee":5,
  "quality":0,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -191,7 +191,7 @@
  "health":8,
  "fee":6,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -204,7 +204,7 @@
  "health":7,
  "fee":7,
  "quality":3,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -217,7 +217,7 @@
  "health":9,
  "fee":0,
  "quality":2,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -230,7 +230,7 @@
  "health":6,
  "fee":4,
  "quality":0,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -243,7 +243,7 @@
  "health":5,
  "fee":1,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -256,7 +256,7 @@
  "health":5,
  "fee":2,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -269,7 +269,7 @@
  "health":5,
  "fee":3,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -282,7 +282,7 @@
  "health":5,
  "fee":4,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -295,7 +295,7 @@
  "health":5,
  "fee":4,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -308,7 +308,7 @@
  "health":5,
  "fee":4,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   },
 {
@@ -321,7 +321,7 @@
  "health":5,
  "fee":4,
  "quality":1,
- "attr":"TBD",
+ "attr":{},
  "isDerivation":0
   }
 ]

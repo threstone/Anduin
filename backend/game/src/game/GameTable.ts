@@ -17,14 +17,16 @@ export class GameTable extends BaseTable {
     nextRoundUserIndex: number;
 
     /**地图数据 */
-    mapData: GameMapData;
+    private _mapData: GameMapData;
+
+    get mapData() { return this._mapData; }
 
     isGameOver: boolean;
 
     constructor(tableId: number, talbeIndex: number) {
         super(tableId, talbeIndex);
 
-        this.mapData = new GameMapData(7, 8);
+        this._mapData = new GameMapData(7, 8);
         this.isGameOver = false;
 
         this._nodeDriver = new NodeDriver(this);
@@ -50,6 +52,34 @@ export class GameTable extends BaseTable {
         return false;
     }
 
+    public getMapData() {
+        const mapData = new GamePto.MapData();
+        for (let index = 0; index < this._users.length; index++) {
+            const user = this._users[index];
+            for (let eventIndex = 0; eventIndex < user.eventPool.length; eventIndex++) {
+                const eventCard = user.eventPool[eventIndex];
+                const gameCard = new GamePto.Card();
+                gameCard.id = eventCard.cardId;
+                gameCard.attack = eventCard.attack;
+                gameCard.health = eventCard.health;
+                gameCard.uid = user.uid;
+                mapData.eventCard.push(gameCard);
+            }
+
+            for (let unitIndex = 0; unitIndex < user.unitPool.length; unitIndex++) {
+                const unitCard = user.unitPool[unitIndex];
+                const gameCard = new GamePto.Card();
+                gameCard.id = unitCard.cardId;
+                gameCard.attack = unitCard.attack;
+                gameCard.health = unitCard.health;
+                gameCard.allowAtk = unitCard.allowAtk;
+                gameCard.uid = user.uid;
+                mapData.eventCard.push(gameCard);
+            }
+        }
+        return mapData;
+    }
+
     public onRun(now: number) {
         this._nodeDriver.onRun(now);
     }
@@ -69,13 +99,16 @@ export class GameTable extends BaseTable {
         this.initNode();
 
         const message = new GamePto.S_INIT_GAME();
-        message.targetNick = this.users[1].nick;
-        message.targetPower = this.users[1].cardGroup.powerId;
-        this.users[0].sendMsg(message);
+        for (let index = 0; index < this._users.length; index++) {
+            const user = this._users[index];
+            const userInfo = new GamePto.UserInfo();
+            userInfo.nick = user.nick;
+            userInfo.power = user.powerId;
+            userInfo.uid = user.uid;
+            message.users.push(userInfo);
+        }
 
-        message.targetNick = this.users[0].nick;
-        message.targetPower = this.users[0].cardGroup.powerId;
-        this.users[1].sendMsg(message);
+        this.broadcast(message);
     }
 
     private initNode() {

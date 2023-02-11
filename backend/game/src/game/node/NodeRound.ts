@@ -38,6 +38,13 @@ export class NodeRound extends BaseNode {
             //派发回合结束信息
             return NodeDriverResult.GoOn;
         }
+
+        //TODO Logic
+
+        //玩家有可能在这个阶段死亡
+        if (table.checkGameOver()) {
+            return NodeDriverResult.GoOn;
+        }
         return NodeDriverResult.Continue;
     }
 }

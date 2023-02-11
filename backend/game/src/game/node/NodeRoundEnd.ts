@@ -25,20 +25,33 @@ export class NodeRoundEnd extends BaseNode {
     private deal(table: GameTable) {
         const user = table.users[table.nextRoundUserIndex];
 
-        //派发回合开始
+        //派发回合结束
         const roundStartMsg = new GamePto.S_ROUND_END_EVENT();
         roundStartMsg.uid = user.uid;
 
         let sum = 0;
-        //执行场上所有乙方卡牌的回合开始事件
-        for (let index = 0; index < user.enablePool.length; index++) {
-            const card = user.enablePool[index];
-            // const event = card.onRoundEnd();
-            // //计算所有回合结束事件所需要的时间
-            // if (event) {
-            //     sum += event.opTime;
-            //     roundStartMsg.events.push(event)
-            // }
+        //执行场上所有乙方事件卡的回合结束事件
+        for (let index = 0; index < user.eventPool.length; index++) {
+            const card = user.eventPool[index];
+            const event = card.onRoundEnd();
+            if (event) {
+                //计算所有回合结束事件所需要的时间
+                sum += event.opTime;
+                roundStartMsg.events.push(event)
+            }
+        }
+
+        //执行场上所有单位卡牌的回合结束事件
+        for (let index = 0; index < user.unitPool.length; index++) {
+            const card = user.unitPool[index];
+            const event = card.onRoundEnd();
+            if (event) {
+                event.x = card.x;
+                event.y = card.y;
+                //计算所有回合结束事件所需要的时间
+                sum += event.opTime;
+                roundStartMsg.events.push(event)
+            }
         }
 
         //玩家有可能在这个阶段死亡

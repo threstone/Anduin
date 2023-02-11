@@ -1,9 +1,9 @@
-import { GamePto } from "../../../common/CommonProto";
 import { EventCard } from "./EventCard";
 
 export class UnitCard extends EventCard {
     x: number;
     y: number;
+    allowAtk: boolean;
 
     /**被攻击前触发 */
     public onPreAtk() {

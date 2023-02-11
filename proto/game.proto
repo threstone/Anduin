@@ -4,6 +4,28 @@ package GamePto;
 message GameEvent{
 	int64 opTime = 1;
 	int32 opType = 2;
+	int32 x = 3;
+	int32 y = 4;
+}
+
+message UserInfo{
+	string nick = 0;
+	int32 power = 1;
+	int32 uid = 3;
+}
+
+message Card{
+	int32 id = 0;
+	int32 attack = 1;
+	int32 health = 2;
+	int32 fee = 3;//战场上的卡用不到，手牌会用到
+	bool allowAtk = 4;
+	int32 uid = 5;
+}
+
+message MapData{
+	repeated Card eventCard = 0;
+	repeated Card unitCard = 1;
 }
 
 //===================Client message===================
@@ -28,16 +50,16 @@ message S_SERVER_ERROR{
 message S_INIT_GAME{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10001];
-	string targetNick = 3;
-	int32 targetPower = 4;
+	repeated UserInfo users = 3;
 }
 
-//派发起始手牌
-message S_START_HAND_CARD{
+//开始游戏
+message S_START_GAME{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10002];
-	bool isFirst = 3;
+	int32 firstUid = 3;
 	repeated int32 handCards = 4;
+	MapData mapData = 5;
 }
 
 //回合开始
@@ -62,3 +84,4 @@ message S_GAME_EVENT{
 	int32 scmd = 2[default = 10005];
 	repeated GameEvent events = 3;
 }
+

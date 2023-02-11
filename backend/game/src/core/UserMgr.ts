@@ -6,16 +6,16 @@ export class UserMgr {
         this._userMap = new Map<number, GameUser>();
     }
 
-    setUser(user: GameUser) {
+    public setUser(user: GameUser) {
         this._userMap.set(user.uid, user);
     }
 
-    getUser(uid: number) {
+    public getUser(uid: number) {
         let user = this._userMap.get(uid);
         return user;
     }
 
-    clearUser(uid: number) {
+    public clearUser(uid: number) {
         this._userMap.delete(uid);
     }
 }

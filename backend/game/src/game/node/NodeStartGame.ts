@@ -50,6 +50,7 @@ export class NodeStartGame extends BaseNode {
         return NodeDriverResult.Continue;
     }
 
+    /**检查是否所有玩家都换牌了 */
     private isAllUserReplace(table: GameTable): boolean {
         let res = true;
         for (let index = 0; index < table.users.length; index++) {
@@ -64,15 +65,19 @@ export class NodeStartGame extends BaseNode {
     private deal(table: GameTable) {
         //确定先后手
         table.nextRoundUserIndex = table.random(2);
-
+        const startHandCardData = new GamePto.S_START_GAME();
+        startHandCardData.firstUid = table.users[table.nextRoundUserIndex].uid;
+        startHandCardData.mapData = table.getMapData();
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
-            table.shuffle(user.cardPool);
+            //初始化信息
+            user.resetInfo();
 
-            const startHandCardData = new GamePto.S_START_HAND_CARD();
-            user.handCards = [user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop()];
-            startHandCardData.isFirst = table.nextRoundUserIndex === index;
+            table.shuffle(user.cardPool);
+            user.handCards.push(user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop())
+
+            //后手多1张牌和多一硬币
             if (table.nextRoundUserIndex !== index) {
                 user.handCards.push(user.cardPool.pop(), GlobalVar.cardMgr.getCardInstance(0));
             }
