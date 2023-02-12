@@ -65,6 +65,8 @@
     <image id="fimv2a" name="dy_bj10.png" path="/common/res/"/>
     <component id="pqjx2b" name="CardsGroupChooseCom.xml" path="/cards/" exported="true"/>
     <component id="jig14" name="GameSceneCom.xml" path="/game/" exported="true"/>
+    <image id="pg482c" name="bbg_arena.jpg" path="/game/res/"/>
+    <component id="pg482d" name="UserInfoBox.xml" path="/game/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

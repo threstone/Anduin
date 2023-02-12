@@ -21,7 +21,7 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
 
         this.view.pveBtn.describe.text = '冒险';
         this.AddClick(this.view.pveBtn, GameSceneView.ins().open.bind(GameSceneView.ins()));
-        
+
         this.view.settingBtn.describe.text = '设置';
 
 
@@ -34,6 +34,7 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
             FriendlyMatchView.ins().openByResponse(evt.data);
         });
         this.observe('S_MATCH_CARD_GROUP', MatchGroupChooseView.ins().open.bind(MatchGroupChooseView.ins()));
+        this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
     }
 
     /**将迷你聊天组件重新加入到自身 */

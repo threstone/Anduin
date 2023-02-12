@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="530,235" bgColor="#66ff00">
+  <displayList>
+    <image id="n0_pg48" name="n0" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="0,0" size="530,235">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <component id="n3_pg48" name="heroCard" src="tb7e1s" fileName="cards/CardItem.xml" xy="19,65" size="218,368" scale="0.5,0.5"/>
+    <image id="n4_pg48" name="n4" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="287,77" size="120,164"/>
+    <image id="n5_pg48" name="n5" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="149,77" size="120,164"/>
+    <text id="n6_pg48" name="n6" xy="326,141" size="48,32" fontSize="22" color="#0099ff" strokeColor="#333333" text="墓地"/>
+    <text id="n7_pg48" name="n7" xy="163,129" size="92,61" fontSize="22" color="#0099ff" align="center" vAlign="middle" strokeColor="#333333" text="剩余卡牌&#xA;00"/>
+    <list id="n8_pg48" name="feeList" xy="81,12" size="446,49" layout="pagination" overflow="hidden" colGap="15" lineItemCount="8" autoClearItems="true">
+      <relation target="" sidePair="left-left%,bottom-bottom%"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+      <item url="ui://yaux2xpotb7e20"/>
+    </list>
+    <text id="n9_pg48" name="n9" xy="6,21" size="80,32" fontSize="22" color="#0099ff" align="right" vAlign="middle" autoSize="none" strokeColor="#333333" text="能量:10"/>
+  </displayList>
+</component>

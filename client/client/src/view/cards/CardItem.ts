@@ -31,12 +31,13 @@ class CardItem {
         card.cardName.text = `${cardInfo.cardName}`;
         card.desc.text = `${cardInfo.desc}`;
         // TODO waiting for img
-        RES.getResByUrl(`./resource/card/${0/**cardInfo.cardId */}.jpg`, (data) => {
-            if (!data) {
-                return
-            }
-            card.cardImg.texture = data;
-        })
+        // RES.getResByUrl(`./resource/card/${0/**cardInfo.cardId */}.jpg`, (data) => {
+        //     if (!data) {
+        //         return
+        //     }
+        //     card.cardImg.texture = data;
+        // })
+        card.tempCardName.text = `${cardInfo.cardName}`;
         card.atkText.text = `${cardInfo.attack}`;
         card.healthText.text = `${cardInfo.health}`;
         card.quality.color = CardItem.qualityColors[cardInfo.quality];

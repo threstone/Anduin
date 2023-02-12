@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1600,1200">
   <displayList>
-    <graph id="n10_fimv" name="closeBg" xy="0,0" size="1600,1200" alpha="0.25" type="rect" fillColor="#ff000000">
-      <relation target="" sidePair="width-width,height-height%"/>
-    </graph>
+    <image id="n26_pg48" name="bg" src="pg482c" fileName="game/res/bbg_arena.jpg" xy="0,0" size="1600,1200"/>
     <graph id="n20_jig1" name="target" xy="181,0" size="1279,160" type="rect" lineSize="0" fillColor="#ffff3300"/>
-    <graph id="n21_jig1" name="you" xy="181,1008" size="1280,160" type="rect" lineSize="0" fillColor="#ff00ff00"/>
-    <graph id="n22_jig1" name="panding" xy="1365,343" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
-    <graph id="n23_jig1" name="record" xy="0,402" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
-    <graph id="n24_jig1" name="map" xy="362,330" size="840,562" type="rect" lineSize="0" fillColor="#ffccccff"/>
+    <graph id="n21_jig1" name="you" xy="62,974" size="1280,225" type="rect" lineSize="0" fillColor="#ff00ff00"/>
+    <graph id="n22_jig1" name="panding" xy="1446,366" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n23_jig1" name="record" xy="28,385" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <component id="n27_pg48" name="n27" src="tb7e1s" fileName="cards/CardItem.xml" xy="456,998" scale="0.5,0.5"/>
+    <component id="n28_pg48" name="n28" src="pg482d" fileName="game/UserInfoBox.xml" xy="1070,965">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </component>
+    <component id="n29_pg48" name="n29" src="pg482d" fileName="game/UserInfoBox.xml" xy="1070,0">
+      <relation target="" sidePair="right-right,top-top"/>
+    </component>
+    <graph id="n30_pg48" name="n30" xy="251,172" size="1050,800" type="rect"/>
   </displayList>
 </component>
