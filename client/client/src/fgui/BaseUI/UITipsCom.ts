@@ -7,6 +7,7 @@ module BaseUI {
 		public desc:fairygui.GTextField;
 		public btn:UIButton1;
 		public close:fairygui.GLoader;
+		public group:fairygui.GGroup;
 		public static URL:string = "ui://yaux2xpofimv29";
 
 		public static createInstance():UITipsCom {
@@ -20,6 +21,7 @@ module BaseUI {
 			this.desc = <fairygui.GTextField>(this.getChildAt(3));
 			this.btn = <UIButton1>(this.getChildAt(4));
 			this.close = <fairygui.GLoader>(this.getChildAt(5));
+			this.group = <fairygui.GGroup>(this.getChildAt(6));
 		}
 	}
 }

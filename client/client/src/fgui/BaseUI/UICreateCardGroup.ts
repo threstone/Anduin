@@ -10,6 +10,7 @@ module BaseUI {
 		public close:fairygui.GLoader;
 		public nameBg:fairygui.GImage;
 		public groupName:fairygui.GTextInput;
+		public cardNameGroup:fairygui.GGroup;
 		public static URL:string = "ui://yaux2xpooo9525";
 
 		public static createInstance():UICreateCardGroup {
@@ -26,6 +27,7 @@ module BaseUI {
 			this.close = <fairygui.GLoader>(this.getChildAt(4));
 			this.nameBg = <fairygui.GImage>(this.getChildAt(5));
 			this.groupName = <fairygui.GTextInput>(this.getChildAt(6));
+			this.cardNameGroup = <fairygui.GGroup>(this.getChildAt(7));
 		}
 	}
 }

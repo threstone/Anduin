@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n10_fimv" name="closeBg" xy="0,0" size="1600,1200" alpha="0.25" type="rect" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height%"/>
+    </graph>
+    <graph id="n20_jig1" name="target" xy="181,0" size="1279,160" type="rect" lineSize="0" fillColor="#ffff3300"/>
+    <graph id="n21_jig1" name="you" xy="181,1008" size="1280,160" type="rect" lineSize="0" fillColor="#ff00ff00"/>
+    <graph id="n22_jig1" name="panding" xy="1365,343" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n23_jig1" name="record" xy="0,402" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n24_jig1" name="map" xy="362,330" size="840,562" type="rect" lineSize="0" fillColor="#ffccccff"/>
+  </displayList>
+</component>

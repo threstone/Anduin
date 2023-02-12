@@ -20,7 +20,10 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.AddClick(this.view.fightBtn, CardsGroupChooseView.ins().open.bind(CardsGroupChooseView.ins()));
 
         this.view.pveBtn.describe.text = '冒险';
+        this.AddClick(this.view.pveBtn, GameSceneView.ins().open.bind(GameSceneView.ins()));
+        
         this.view.settingBtn.describe.text = '设置';
+
 
         this.AddClick(this.view.miniChat, this.onMiniChatClick);
         this.observe('S_CHAT_MESSAGE', this.onChatMessage);
