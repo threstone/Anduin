@@ -16,7 +16,7 @@ export class NodeRound extends BaseNode {
         if (table.isGameOver) {
             return NodeDriverResult.GoOn;
         }
-        
+
         this.deal(table);
         this.nodeDriver.waitTime(GlobalVar.configMgr.common.roundOptTime);
         return NodeDriverResult.Wait;
@@ -28,11 +28,12 @@ export class NodeRound extends BaseNode {
     }
 
     private deal(table: GameTable) {
-        //告知玩家开始操作
+        const user = table.users[table.nextRoundUserIndex];
     }
 
     //玩家回合操作
     public trigger(user: GameUser, table: GameTable, msg) {
+        console.log("玩家操作");
         //如果是结束回合的消息
         if (false) {
             //派发回合结束信息

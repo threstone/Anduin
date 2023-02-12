@@ -2727,112 +2727,10 @@ export namespace CardsPto {
 /** Namespace GamePto. */
 export namespace GamePto {
 
-    /** Properties of a GameEvent. */
-    interface IGameEvent {
-
-        /** GameEvent opTime */
-        opTime?: (number|null);
-
-        /** GameEvent opType */
-        opType?: (number|null);
-
-        /** GameEvent x */
-        x?: (number|null);
-
-        /** GameEvent y */
-        y?: (number|null);
-    }
-
-    /** Represents a GameEvent. */
-    class GameEvent implements IGameEvent {
-
-        /**
-         * Constructs a new GameEvent.
-         * @param [properties] Properties to set
-         */
-        constructor(properties?: GamePto.IGameEvent);
-
-        /** GameEvent opTime. */
-        public opTime: number;
-
-        /** GameEvent opType. */
-        public opType: number;
-
-        /** GameEvent x. */
-        public x: number;
-
-        /** GameEvent y. */
-        public y: number;
-
-        /**
-         * Encodes the specified GameEvent message. Does not implicitly {@link GamePto.GameEvent.verify|verify} messages.
-         * @param message GameEvent message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encode(message: GamePto.IGameEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Encodes the specified GameEvent message, length delimited. Does not implicitly {@link GamePto.GameEvent.verify|verify} messages.
-         * @param message GameEvent message or plain object to encode
-         * @param [writer] Writer to encode to
-         * @returns Writer
-         */
-        public static encodeDelimited(message: GamePto.IGameEvent, writer?: $protobuf.Writer): $protobuf.Writer;
-
-        /**
-         * Decodes a GameEvent message from the specified reader or buffer.
-         * @param reader Reader or buffer to decode from
-         * @param [length] Message length if known beforehand
-         * @returns GameEvent
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.GameEvent;
-
-        /**
-         * Decodes a GameEvent message from the specified reader or buffer, length delimited.
-         * @param reader Reader or buffer to decode from
-         * @returns GameEvent
-         * @throws {Error} If the payload is not a reader or valid buffer
-         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-         */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.GameEvent;
-
-        /**
-         * Verifies a GameEvent message.
-         * @param message Plain object to verify
-         * @returns `null` if valid, otherwise the reason why it is not
-         */
-        public static verify(message: { [k: string]: any }): (string|null);
-
-        /**
-         * Creates a GameEvent message from a plain object. Also converts values to their respective internal types.
-         * @param object Plain object
-         * @returns GameEvent
-         */
-        public static fromObject(object: { [k: string]: any }): GamePto.GameEvent;
-
-        /**
-         * Creates a plain object from a GameEvent message. Also converts values to other types if specified.
-         * @param message GameEvent
-         * @param [options] Conversion options
-         * @returns Plain object
-         */
-        public static toObject(message: GamePto.GameEvent, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-        /**
-         * Converts this GameEvent to JSON.
-         * @returns JSON object
-         */
-        public toJSON(): { [k: string]: any };
-
-        /**
-         * Gets the default type url for GameEvent
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
+    /** EventType enum. */
+    enum EventType {
+        DrawCard = 0,
+        FATIGUE = 1
     }
 
     /** Properties of a UserInfo. */
@@ -2940,8 +2838,8 @@ export namespace GamePto {
     /** Properties of a Card. */
     interface ICard {
 
-        /** Card id */
-        id?: (number|null);
+        /** Card cardId */
+        cardId?: (number|null);
 
         /** Card attack */
         attack?: (number|null);
@@ -2968,8 +2866,8 @@ export namespace GamePto {
          */
         constructor(properties?: GamePto.ICard);
 
-        /** Card id. */
-        public id: number;
+        /** Card cardId. */
+        public cardId: number;
 
         /** Card attack. */
         public attack: number;
@@ -3459,114 +3357,114 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_START_GAME. */
-    interface IS_START_GAME {
+    /** Properties of a S_GAME_START. */
+    interface IS_GAME_START {
 
-        /** S_START_GAME cmd */
+        /** S_GAME_START cmd */
         cmd?: (number|null);
 
-        /** S_START_GAME scmd */
+        /** S_GAME_START scmd */
         scmd?: (number|null);
 
-        /** S_START_GAME firstUid */
+        /** S_GAME_START firstUid */
         firstUid?: (number|null);
 
-        /** S_START_GAME handCards */
+        /** S_GAME_START handCards */
         handCards?: (number[]|null);
 
-        /** S_START_GAME mapData */
+        /** S_GAME_START mapData */
         mapData?: (GamePto.IMapData|null);
     }
 
-    /** Represents a S_START_GAME. */
-    class S_START_GAME implements IS_START_GAME {
+    /** Represents a S_GAME_START. */
+    class S_GAME_START implements IS_GAME_START {
 
         /**
-         * Constructs a new S_START_GAME.
+         * Constructs a new S_GAME_START.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_START_GAME);
+        constructor(properties?: GamePto.IS_GAME_START);
 
-        /** S_START_GAME cmd. */
+        /** S_GAME_START cmd. */
         public cmd: number;
 
-        /** S_START_GAME scmd. */
+        /** S_GAME_START scmd. */
         public scmd: number;
 
-        /** S_START_GAME firstUid. */
+        /** S_GAME_START firstUid. */
         public firstUid: number;
 
-        /** S_START_GAME handCards. */
+        /** S_GAME_START handCards. */
         public handCards: number[];
 
-        /** S_START_GAME mapData. */
+        /** S_GAME_START mapData. */
         public mapData?: (GamePto.IMapData|null);
 
         /**
-         * Encodes the specified S_START_GAME message. Does not implicitly {@link GamePto.S_START_GAME.verify|verify} messages.
-         * @param message S_START_GAME message or plain object to encode
+         * Encodes the specified S_GAME_START message. Does not implicitly {@link GamePto.S_GAME_START.verify|verify} messages.
+         * @param message S_GAME_START message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_START_GAME, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_GAME_START, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_START_GAME message, length delimited. Does not implicitly {@link GamePto.S_START_GAME.verify|verify} messages.
-         * @param message S_START_GAME message or plain object to encode
+         * Encodes the specified S_GAME_START message, length delimited. Does not implicitly {@link GamePto.S_GAME_START.verify|verify} messages.
+         * @param message S_GAME_START message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_START_GAME, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_GAME_START, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_START_GAME message from the specified reader or buffer.
+         * Decodes a S_GAME_START message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_START_GAME
+         * @returns S_GAME_START
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_START_GAME;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_START;
 
         /**
-         * Decodes a S_START_GAME message from the specified reader or buffer, length delimited.
+         * Decodes a S_GAME_START message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_START_GAME
+         * @returns S_GAME_START
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_START_GAME;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_GAME_START;
 
         /**
-         * Verifies a S_START_GAME message.
+         * Verifies a S_GAME_START message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_START_GAME message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_GAME_START message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_START_GAME
+         * @returns S_GAME_START
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_START_GAME;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_GAME_START;
 
         /**
-         * Creates a plain object from a S_START_GAME message. Also converts values to other types if specified.
-         * @param message S_START_GAME
+         * Creates a plain object from a S_GAME_START message. Also converts values to other types if specified.
+         * @param message S_GAME_START
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_START_GAME, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_GAME_START, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_START_GAME to JSON.
+         * Converts this S_GAME_START to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_START_GAME
+         * Gets the default type url for S_GAME_START
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -3584,9 +3482,6 @@ export namespace GamePto {
 
         /** S_ROUND_START_EVENT uid */
         uid?: (number|null);
-
-        /** S_ROUND_START_EVENT events */
-        events?: (GamePto.IGameEvent[]|null);
     }
 
     /** Represents a S_ROUND_START_EVENT. */
@@ -3606,9 +3501,6 @@ export namespace GamePto {
 
         /** S_ROUND_START_EVENT uid. */
         public uid: number;
-
-        /** S_ROUND_START_EVENT events. */
-        public events: GamePto.IGameEvent[];
 
         /**
          * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
@@ -3692,9 +3584,6 @@ export namespace GamePto {
 
         /** S_ROUND_END_EVENT uid */
         uid?: (number|null);
-
-        /** S_ROUND_END_EVENT events */
-        events?: (GamePto.IGameEvent[]|null);
     }
 
     /** Represents a S_ROUND_END_EVENT. */
@@ -3714,9 +3603,6 @@ export namespace GamePto {
 
         /** S_ROUND_END_EVENT uid. */
         public uid: number;
-
-        /** S_ROUND_END_EVENT events. */
-        public events: GamePto.IGameEvent[];
 
         /**
          * Encodes the specified S_ROUND_END_EVENT message. Does not implicitly {@link GamePto.S_ROUND_END_EVENT.verify|verify} messages.
@@ -3789,102 +3675,120 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_GAME_EVENT. */
-    interface IS_GAME_EVENT {
+    /** Properties of a S_DRAW_CARDS. */
+    interface IS_DRAW_CARDS {
 
-        /** S_GAME_EVENT cmd */
+        /** S_DRAW_CARDS cmd */
         cmd?: (number|null);
 
-        /** S_GAME_EVENT scmd */
+        /** S_DRAW_CARDS scmd */
         scmd?: (number|null);
 
-        /** S_GAME_EVENT events */
-        events?: (GamePto.IGameEvent[]|null);
+        /** S_DRAW_CARDS cards */
+        cards?: (GamePto.ICard[]|null);
+
+        /** S_DRAW_CARDS cardCount */
+        cardCount?: (number|null);
+
+        /** S_DRAW_CARDS damages */
+        damages?: (number[]|null);
+
+        /** S_DRAW_CARDS uid */
+        uid?: (number|null);
     }
 
-    /** Represents a S_GAME_EVENT. */
-    class S_GAME_EVENT implements IS_GAME_EVENT {
+    /** Represents a S_DRAW_CARDS. */
+    class S_DRAW_CARDS implements IS_DRAW_CARDS {
 
         /**
-         * Constructs a new S_GAME_EVENT.
+         * Constructs a new S_DRAW_CARDS.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_GAME_EVENT);
+        constructor(properties?: GamePto.IS_DRAW_CARDS);
 
-        /** S_GAME_EVENT cmd. */
+        /** S_DRAW_CARDS cmd. */
         public cmd: number;
 
-        /** S_GAME_EVENT scmd. */
+        /** S_DRAW_CARDS scmd. */
         public scmd: number;
 
-        /** S_GAME_EVENT events. */
-        public events: GamePto.IGameEvent[];
+        /** S_DRAW_CARDS cards. */
+        public cards: GamePto.ICard[];
+
+        /** S_DRAW_CARDS cardCount. */
+        public cardCount: number;
+
+        /** S_DRAW_CARDS damages. */
+        public damages: number[];
+
+        /** S_DRAW_CARDS uid. */
+        public uid: number;
 
         /**
-         * Encodes the specified S_GAME_EVENT message. Does not implicitly {@link GamePto.S_GAME_EVENT.verify|verify} messages.
-         * @param message S_GAME_EVENT message or plain object to encode
+         * Encodes the specified S_DRAW_CARDS message. Does not implicitly {@link GamePto.S_DRAW_CARDS.verify|verify} messages.
+         * @param message S_DRAW_CARDS message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_GAME_EVENT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_DRAW_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_GAME_EVENT message, length delimited. Does not implicitly {@link GamePto.S_GAME_EVENT.verify|verify} messages.
-         * @param message S_GAME_EVENT message or plain object to encode
+         * Encodes the specified S_DRAW_CARDS message, length delimited. Does not implicitly {@link GamePto.S_DRAW_CARDS.verify|verify} messages.
+         * @param message S_DRAW_CARDS message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_GAME_EVENT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_DRAW_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_GAME_EVENT message from the specified reader or buffer.
+         * Decodes a S_DRAW_CARDS message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_GAME_EVENT
+         * @returns S_DRAW_CARDS
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_EVENT;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_DRAW_CARDS;
 
         /**
-         * Decodes a S_GAME_EVENT message from the specified reader or buffer, length delimited.
+         * Decodes a S_DRAW_CARDS message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_GAME_EVENT
+         * @returns S_DRAW_CARDS
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_GAME_EVENT;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_DRAW_CARDS;
 
         /**
-         * Verifies a S_GAME_EVENT message.
+         * Verifies a S_DRAW_CARDS message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_GAME_EVENT message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_DRAW_CARDS message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_GAME_EVENT
+         * @returns S_DRAW_CARDS
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_GAME_EVENT;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_DRAW_CARDS;
 
         /**
-         * Creates a plain object from a S_GAME_EVENT message. Also converts values to other types if specified.
-         * @param message S_GAME_EVENT
+         * Creates a plain object from a S_DRAW_CARDS message. Also converts values to other types if specified.
+         * @param message S_DRAW_CARDS
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_GAME_EVENT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_DRAW_CARDS, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_GAME_EVENT to JSON.
+         * Converts this S_DRAW_CARDS to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_GAME_EVENT
+         * Gets the default type url for S_DRAW_CARDS
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

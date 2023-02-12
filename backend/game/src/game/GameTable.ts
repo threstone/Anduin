@@ -52,29 +52,38 @@ export class GameTable extends BaseTable {
         return false;
     }
 
+
+    public getOtherUser(uid: number) {
+        if (this._users[0].uid === uid) {
+            return this._users[1];
+        }
+        return this._users[0];
+    }
+
+    /**获取地图数据 */
     public getMapData() {
         const mapData = new GamePto.MapData();
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
             for (let eventIndex = 0; eventIndex < user.eventPool.length; eventIndex++) {
                 const eventCard = user.eventPool[eventIndex];
-                const gameCard = new GamePto.Card();
-                gameCard.id = eventCard.cardId;
-                gameCard.attack = eventCard.attack;
-                gameCard.health = eventCard.health;
-                gameCard.uid = user.uid;
-                mapData.eventCard.push(gameCard);
+                // const gameCard = new GamePto.Card();
+                // gameCard.cardId = eventCard.cardId;
+                // gameCard.attack = eventCard.attack;
+                // gameCard.health = eventCard.health;
+                // gameCard.uid = user.uid;
+                mapData.eventCard.push(eventCard);
             }
 
             for (let unitIndex = 0; unitIndex < user.unitPool.length; unitIndex++) {
                 const unitCard = user.unitPool[unitIndex];
-                const gameCard = new GamePto.Card();
-                gameCard.id = unitCard.cardId;
-                gameCard.attack = unitCard.attack;
-                gameCard.health = unitCard.health;
-                gameCard.allowAtk = unitCard.allowAtk;
-                gameCard.uid = user.uid;
-                mapData.eventCard.push(gameCard);
+                // const gameCard = new GamePto.Card();
+                // gameCard.cardId = unitCard.cardId;
+                // gameCard.attack = unitCard.attack;
+                // gameCard.health = unitCard.health;
+                // gameCard.allowAtk = unitCard.allowAtk;
+                // gameCard.uid = user.uid;
+                mapData.eventCard.push(unitCard);
             }
         }
         return mapData;

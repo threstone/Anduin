@@ -1,6 +1,6 @@
 import { EventCard } from "./EventCard";
 
-export class UnitCard extends EventCard {
+export abstract class UnitCard extends EventCard {
     x: number;
     y: number;
     allowAtk: boolean;

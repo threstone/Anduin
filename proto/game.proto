@@ -1,21 +1,20 @@
 syntax = "proto3";
 package GamePto;
 
-message GameEvent{
-	int64 opTime = 1;
-	int32 opType = 2;
-	int32 x = 3;
-	int32 y = 4;
+enum EventType{
+	DrawCard = 0;//抽牌
+	FATIGUE = 1;//疲劳
 }
+
 
 message UserInfo{
 	string nick = 0;
 	int32 power = 1;
-	int32 uid = 3;
+	int32 uid = 2;
 }
 
 message Card{
-	int32 id = 0;
+	int32 cardId = 0;
 	int32 attack = 1;
 	int32 health = 2;
 	int32 fee = 3;//战场上的卡用不到，手牌会用到
@@ -54,7 +53,7 @@ message S_INIT_GAME{
 }
 
 //开始游戏
-message S_START_GAME{
+message S_GAME_START{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10002];
 	int32 firstUid = 3;
@@ -67,7 +66,6 @@ message S_ROUND_START_EVENT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10003];
 	int32 uid = 3;
-	repeated GameEvent events = 4;
 }
 
 //回合结束
@@ -75,13 +73,15 @@ message S_ROUND_END_EVENT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10004];
 	int32 uid = 3;
-	repeated GameEvent events = 4;
 }
 
-//各种事件
-message S_GAME_EVENT{
+//抽卡疲劳
+message S_DRAW_CARDS{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10005];
-	repeated GameEvent events = 3;
+	repeated Card cards = 3;
+	int32 cardCount = 4;
+	repeated int32 damages = 5;
+	int32 uid = 6;
 }
 

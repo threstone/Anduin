@@ -34,6 +34,9 @@ export class NodeStartGame extends BaseNode {
             const cardIndex = msg.replaceCardIndexes[index];
             //被替换的卡牌
             const replaceCardId = user.handCards[cardIndex];
+            if (!replaceCardId) {
+                continue;
+            }
             //替换掉卡牌
             user.handCards[cardIndex] = user.cardPool.pop();
             //将卡牌重新放入卡池
@@ -65,9 +68,9 @@ export class NodeStartGame extends BaseNode {
     private deal(table: GameTable) {
         //确定先后手
         table.nextRoundUserIndex = table.random(2);
-        const startHandCardData = new GamePto.S_START_GAME();
-        startHandCardData.firstUid = table.users[table.nextRoundUserIndex].uid;
-        startHandCardData.mapData = table.getMapData();
+        const gameStartMsg = new GamePto.S_GAME_START();
+        gameStartMsg.firstUid = table.users[table.nextRoundUserIndex].uid;
+        gameStartMsg.mapData = table.getMapData();
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
@@ -75,16 +78,16 @@ export class NodeStartGame extends BaseNode {
             user.resetInfo();
 
             table.shuffle(user.cardPool);
+            //抽三张
             user.handCards.push(user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop())
-
             //后手多1张牌和多一硬币
             if (table.nextRoundUserIndex !== index) {
                 user.handCards.push(user.cardPool.pop(), GlobalVar.cardMgr.getCardInstance(0));
             }
 
-            startHandCardData.handCards = user.getHandCardIds();
-            //发牌
-            user.sendMsg(startHandCardData);
+            gameStartMsg.handCards = user.getHandCardIds();
+            user.sendMsg(gameStartMsg);
         }
+        console.log("派发游戏开始协议");
     }
 }

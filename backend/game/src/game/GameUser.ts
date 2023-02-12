@@ -1,4 +1,4 @@
-import { CardsPto } from '../../../common/CommonProto';
+import { CardsPto, GamePto } from '../../../common/CommonProto';
 import { RedisType } from '../../../common/ConstDefine';
 import { IGameMessage } from '../../../common/I';
 import { BaseCard } from '../card/BaseCard';
@@ -46,6 +46,9 @@ export class GameUser {
     /**是否换牌 */
     isReplace: boolean;
 
+    /**疲劳值 */
+    private _fatigue: number;
+
     constructor(matchUser: MatchUser, table: GameTable) {
         this.clientName = matchUser.clientName;
         this.uid = matchUser.uid;
@@ -78,6 +81,36 @@ export class GameUser {
         //如果自己是先手玩家,那么自己的英雄的位置在下方
         heroCard.y = this === this.table.users[this.table.nextRoundUserIndex] ? 7 : 0;
         this.setUnitCardToMap(heroCard);
+
+        this._fatigue = 1;
+    }
+
+
+    /**
+     * 从卡池中抽牌
+     * 如果没有卡可以抽取,则返回疲劳伤害数组
+     * 因为派发给双方玩家的信息不同，不适合广播,所以会派发对应的消息给双方玩家
+     * @param num 张数
+     */
+    public drawCardsFromPool(num: number) {
+        const message = new GamePto.S_DRAW_CARDS();
+        message.uid = this.uid;
+        for (let index = 0; index < num; index++) {
+            if (this.cardPool.length === 0) {
+                message.damages.push(this._fatigue);
+                this.hero.health -= this._fatigue;
+                this._fatigue++;
+                continue;
+            }
+            const card = this.cardPool.pop();
+            message.cards.push(card);
+            this.handCards.push(this.cardPool.pop());
+        }
+        message.cardCount = message.cards.length;
+        this.sendMsg(message);
+        message.cards = [];
+        //派发消息给另外一个玩家
+        this.table.getOtherUser(this.uid).sendMsg(message);
     }
 
     /**设置单位卡到地图 */
@@ -117,5 +150,4 @@ export class GameUser {
         const sInfo = await redis.hmget(this.uid, ['nick']);
         this.nick = sInfo[0];
     }
-
 }
