@@ -64,6 +64,7 @@
     <component id="fimv29" name="TipsCom.xml" path="/common/" exported="true"/>
     <image id="fimv2a" name="dy_bj10.png" path="/common/res/"/>
     <component id="pqjx2b" name="CardsGroupChooseCom.xml" path="/cards/" exported="true"/>
+    <component id="kkcr2c" name="GameCom.xml" path="/game/"/>
   </resources>
   <publish name="" genCode="true"/>
 </packageDescription>

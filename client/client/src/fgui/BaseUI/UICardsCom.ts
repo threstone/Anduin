@@ -12,6 +12,7 @@ module BaseUI {
 		public functionBtn:UIButton3;
 		public functionTips:fairygui.GTextField;
 		public functionGroup:fairygui.GGroup;
+		public rightGroup:fairygui.GGroup;
 		public static URL:string = "ui://yaux2xpoz43k1k";
 
 		public static createInstance():UICardsCom {
@@ -30,6 +31,7 @@ module BaseUI {
 			this.functionBtn = <UIButton3>(this.getChildAt(6));
 			this.functionTips = <fairygui.GTextField>(this.getChildAt(7));
 			this.functionGroup = <fairygui.GGroup>(this.getChildAt(8));
+			this.rightGroup = <fairygui.GGroup>(this.getChildAt(9));
 		}
 	}
 }

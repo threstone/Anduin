@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1280,720">
+<component size="1600,1200">
   <displayList>
-    <image id="n2_z43k" name="listBg" src="z43k1l" fileName="cards/res/dailylogin_matri.png" xy="1000,0" size="280,720"/>
-    <list id="n0_z43k" name="cardGroupList" xy="1000,0" size="280,653" overflow="scroll" autoClearItems="true">
+    <image id="n2_z43k" name="listBg" src="z43k1l" fileName="cards/res/dailylogin_matri.png" xy="1320,0" size="280,1200" group="n30_kkcr">
+      <relation target="" sidePair="height-height"/>
+    </image>
+    <list id="n0_z43k" name="cardGroupList" xy="1320,0" size="280,1133" group="n30_kkcr" overflow="scroll" autoClearItems="true">
+      <relation target="" sidePair="height-height"/>
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
@@ -10,18 +13,24 @@
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
     </list>
-    <image id="n27_pqjx" name="nameBg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="1000,0" size="280,60" group="n29_pqjx"/>
-    <text id="n28_pqjx" name="groupName" xy="1000,8" size="280,45" group="n29_pqjx" fontSize="22" align="center" vAlign="middle" autoSize="none" text="groupName" input="true" maxLength="12"/>
-    <list id="n26_oo95" name="createGroupList" xy="1000,59" size="280,594" group="n29_pqjx" overflow="scroll" autoClearItems="true">
+    <image id="n27_pqjx" name="nameBg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="1320,0" size="280,60" group="n29_pqjx"/>
+    <text id="n28_pqjx" name="groupName" xy="1320,8" size="280,45" group="n29_pqjx" fontSize="22" align="center" vAlign="middle" autoSize="none" text="groupName" input="true" maxLength="12"/>
+    <list id="n26_oo95" name="createGroupList" xy="1320,59" size="280,1074" group="n29_pqjx" overflow="scroll" autoClearItems="true">
+      <relation target="" sidePair="height-height"/>
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
     </list>
-    <group id="n29_pqjx" name="cardGroupGroup" xy="1000,0" size="280,653" advanced="true"/>
-    <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1146,653" group="n9_z43k"/>
-    <text id="n8_z43k" name="functionTips" xy="1016,668" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
-    <group id="n9_z43k" name="functionGroup" xy="1016,653" size="259,67" advanced="true"/>
+    <group id="n29_pqjx" name="cardGroupGroup" xy="1320,0" size="280,1133" group="n30_kkcr" advanced="true"/>
+    <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1466,1133" group="n9_z43k"/>
+    <text id="n8_z43k" name="functionTips" xy="1336,1148" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>
+    <group id="n9_z43k" name="functionGroup" xy="1336,1133" size="259,67" group="n30_kkcr" advanced="true">
+      <relation target="" sidePair="bottom-bottom"/>
+    </group>
+    <group id="n30_kkcr" name="rightGroup" xy="1320,0" size="280,1200" advanced="true">
+      <relation target="" sidePair="right-right"/>
+    </group>
   </displayList>
 </component>

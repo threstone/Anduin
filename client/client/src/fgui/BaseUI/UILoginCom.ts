@@ -9,6 +9,7 @@ module BaseUI {
 		public passwordInput:fairygui.GTextInput;
 		public loginBtn:UIButton1;
 		public regBtn:UIButton1;
+		public loginGrou:fairygui.GGroup;
 		public regCom:UIRegisterCom;
 		public static URL:string = "ui://yaux2xporu1k4";
 
@@ -25,7 +26,8 @@ module BaseUI {
 			this.passwordInput = <fairygui.GTextInput>(this.getChildAt(3));
 			this.loginBtn = <UIButton1>(this.getChildAt(4));
 			this.regBtn = <UIButton1>(this.getChildAt(5));
-			this.regCom = <UIRegisterCom>(this.getChildAt(6));
+			this.loginGrou = <fairygui.GGroup>(this.getChildAt(6));
+			this.regCom = <UIRegisterCom>(this.getChildAt(7));
 		}
 	}
 }

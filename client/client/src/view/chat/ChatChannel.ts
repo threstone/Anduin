@@ -11,6 +11,6 @@ class ChatChannel {
         this.btn.describe.text = desc;
         this.inputCom = BaseUI.UIChatInputCom.createInstance();
         this.inputCom.x = 34;
-        this.inputCom.y = 625;
+        this.inputCom.y = fairygui.GRoot.inst.height -95
     }
 }

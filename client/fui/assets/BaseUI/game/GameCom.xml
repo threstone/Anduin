@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n0_kkcr" name="n0" xy="1808,558" size="1279,160" type="rect" lineSize="0" fillColor="#ffff3300"/>
+    <graph id="n1_kkcr" name="n1" xy="1776,1287" size="1280,160" type="rect" lineSize="0" fillColor="#ff00ff00"/>
+    <graph id="n2_kkcr" name="n2" xy="2717,834" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n3_kkcr" name="n3" xy="1775,818" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n4_kkcr" name="n4" xy="1970,726" size="840,562" type="rect" lineSize="0" fillColor="#ffccccff"/>
+  </displayList>
+</component>

@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UICardsGroupChooseCom extends fairygui.GComponent {
+		public bg:fairygui.GImage;
 		public chooseBtn:UIButton1;
 		public cardGroupList:fairygui.GList;
 		public rankText:fairygui.GTextField;
@@ -19,6 +20,7 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
+			this.bg = <fairygui.GImage>(this.getChildAt(0));
 			this.chooseBtn = <UIButton1>(this.getChildAt(1));
 			this.cardGroupList = <fairygui.GList>(this.getChildAt(2));
 			this.rankText = <fairygui.GTextField>(this.getChildAt(3));
