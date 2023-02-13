@@ -1,5 +1,4 @@
 class CardItem {
-
     private static qualityColors = [0xFFFFFF, 0x0033CC, 0xCC00FF, 0xFF6600];
 
     static setNum(item: BaseUI.UICardItem, count: number) {

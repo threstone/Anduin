@@ -45,6 +45,7 @@ export class GlobalVar {
 
         //init socket server
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
+        this.cardMgr.getCardInstance(123);
     }
 
     /**

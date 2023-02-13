@@ -19,9 +19,13 @@ class FriendlyMatchView extends BaseView<BaseUI.UITipsCom> {
         this.updateDesc();
         this.intervalId = setInterval(this.updateDesc.bind(this), 1000);
         this.timeoutId = setTimeout(this.close.bind(this), endTime - Date.now());
-        
+
         this.observe('FriendlyMatchViewClose', this.close);
         this.observe('FriendUpdate', this.onFriendStatusUpdate);
+        this.observe('S_INIT_GAME', () => {
+            this.close();
+            TipsView.ins().close(true);
+        });
     }
 
     /**打开请求等待界面 */

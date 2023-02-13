@@ -49,7 +49,10 @@ export class TableMgr {
         let i = this._logicIndex;
         for (; i < length; i++) {
             let table = this._tables[i];
-            if (table && !table.isDestroy) {
+            if (!table) {
+                continue
+            }
+            if (!table.isDestroy) {
                 try {
                     table.onRun(now);
                 } catch (err) {

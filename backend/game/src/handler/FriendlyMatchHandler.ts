@@ -126,14 +126,20 @@ export class FriendlyMatchHandler extends BaseHandler {
         }
         replay.code = 0;
         this.sendMsg(clientName, uid, replay);
-
         matchInfo.setCardGroup(uid, cardGroupInfo);
         //对方设置好卡组了,开始游戏
         if (matchInfo.isComplete()) {
             const gameTable = GlobalVar.tableMgr.createTable();
             gameTable.tryToStartGame(matchInfo);
             this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
+        } else {
+            //通知对方选择卡组状态改变了
+            const notice = new FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            notice.isChoose = true;
+            const friendInfo = matchInfo.getFriend(uid);
+            this.sendMsg(friendInfo.clientName, friendInfo.uid, notice);
         }
+
     }
 
     //友谊赛取消挑选卡组
@@ -145,8 +151,13 @@ export class FriendlyMatchHandler extends BaseHandler {
             this.sendMsg(clientName, uid, stopMsg);
             return;
         }
-        matchInfo.destroy();
-        this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
+        matchInfo.clearCardGroup(uid);
+
+        //通知对方选择卡组状态改变了
+        const notice = new FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+        notice.isChoose = false;
+        const friendInfo = matchInfo.getFriend(uid);
+        this.sendMsg(friendInfo.clientName, friendInfo.uid, notice);
     }
 
     //友谊赛离开
@@ -155,11 +166,11 @@ export class FriendlyMatchHandler extends BaseHandler {
         if (!matchInfo) {
             return;
         }
-        const noticeUid = matchInfo.souceUser.uid === uid ? matchInfo.targetUser.uid : matchInfo.souceUser.uid;
-        const noticeClient = matchInfo.souceUser.uid === uid ? matchInfo.targetUser.clientName : matchInfo.souceUser.clientName;
+
         const stopMsg = new FriendlyMatchPto.S_MATCH_STOP();
         stopMsg.code = 2;
-        this.sendMsg(noticeClient, noticeUid, stopMsg);
+        const friendInfo = matchInfo.getFriend(uid);
+        this.sendMsg(friendInfo.clientName, friendInfo.uid, stopMsg);
 
         matchInfo.destroy();
         this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);

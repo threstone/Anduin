@@ -67,6 +67,9 @@
     <component id="jig14" name="GameSceneCom.xml" path="/game/" exported="true"/>
     <image id="pg482c" name="bbg_arena.jpg" path="/game/res/"/>
     <component id="pg482d" name="UserInfoBox.xml" path="/game/"/>
+    <component id="pg482e" name="HandCardsCom.xml" path="/game/"/>
+    <image id="pg482f" name="map.png" path="/game/res/"/>
+    <component id="pg482g" name="ChooseCards.xml" path="/game/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

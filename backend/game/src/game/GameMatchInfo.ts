@@ -1,6 +1,4 @@
 import { CardsPto } from '../../../common/CommonProto';
-import { RedisType } from '../../../common/ConstDefine';
-import { GlobalVar } from '../GlobalVar';
 
 export class GameMatchInfo {
     souceUser: MatchUser;
@@ -11,7 +9,7 @@ export class GameMatchInfo {
         this.targetUser = new MatchUser(targetClient, targetUid);
     }
 
-    setCardGroup(uid: number, cardGroup: CardsPto.CardGroup) {
+    public setCardGroup(uid: number, cardGroup: CardsPto.CardGroup) {
         if (uid === this.souceUser.uid) {
             this.souceUser.cardGroup = cardGroup;
         } else {
@@ -19,7 +17,7 @@ export class GameMatchInfo {
         }
     }
 
-    clearCardGroup(uid: number) {
+    public clearCardGroup(uid: number) {
         if (uid === this.souceUser.uid) {
             this.souceUser.cardGroup = undefined;
         } else {
@@ -27,6 +25,12 @@ export class GameMatchInfo {
         }
     }
 
+    public getFriend(uid: number) {
+        if (this.souceUser.uid === uid) {
+            return this.targetUser
+        }
+        return this.souceUser;
+    }
 }
 
 export class MatchUser {

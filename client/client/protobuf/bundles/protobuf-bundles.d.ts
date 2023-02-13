@@ -2373,11 +2373,14 @@ declare namespace GamePto {
         /** S_GAME_START firstUid */
         firstUid?: (number|null);
 
-        /** S_GAME_START handCards */
-        handCards?: (number[]|null);
+        /** S_GAME_START cards */
+        cards?: (GamePto.ICard[]|null);
 
         /** S_GAME_START mapData */
         mapData?: (GamePto.IMapData|null);
+
+        /** S_GAME_START replaceEndTime */
+        replaceEndTime?: (number|Long|null);
     }
 
     /** Represents a S_GAME_START. */
@@ -2398,11 +2401,14 @@ declare namespace GamePto {
         /** S_GAME_START firstUid. */
         public firstUid: number;
 
-        /** S_GAME_START handCards. */
-        public handCards: number[];
+        /** S_GAME_START cards. */
+        public cards: GamePto.ICard[];
 
         /** S_GAME_START mapData. */
         public mapData?: (GamePto.IMapData|null);
+
+        /** S_GAME_START replaceEndTime. */
+        public replaceEndTime: (number|Long);
 
         /**
          * Encodes the specified S_GAME_START message. Does not implicitly {@link GamePto.S_GAME_START.verify|verify} messages.
@@ -2430,6 +2436,69 @@ declare namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a S_PREPARE_TO_START. */
+    interface IS_PREPARE_TO_START {
+
+        /** S_PREPARE_TO_START cmd */
+        cmd?: (number|null);
+
+        /** S_PREPARE_TO_START scmd */
+        scmd?: (number|null);
+
+        /** S_PREPARE_TO_START firstUid */
+        firstUid?: (number|null);
+
+        /** S_PREPARE_TO_START cards */
+        cards?: (GamePto.ICard[]|null);
+    }
+
+    /** Represents a S_PREPARE_TO_START. */
+    class S_PREPARE_TO_START implements IS_PREPARE_TO_START {
+
+        /**
+         * Constructs a new S_PREPARE_TO_START.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_PREPARE_TO_START);
+
+        /** S_PREPARE_TO_START cmd. */
+        public cmd: number;
+
+        /** S_PREPARE_TO_START scmd. */
+        public scmd: number;
+
+        /** S_PREPARE_TO_START firstUid. */
+        public firstUid: number;
+
+        /** S_PREPARE_TO_START cards. */
+        public cards: GamePto.ICard[];
+
+        /**
+         * Encodes the specified S_PREPARE_TO_START message. Does not implicitly {@link GamePto.S_PREPARE_TO_START.verify|verify} messages.
+         * @param message S_PREPARE_TO_START message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_PREPARE_TO_START, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_PREPARE_TO_START message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_PREPARE_TO_START
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_PREPARE_TO_START;
+
+        /**
+         * Gets the default type url for S_PREPARE_TO_START
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a S_ROUND_START_EVENT. */
     interface IS_ROUND_START_EVENT {
 
@@ -2441,6 +2510,12 @@ declare namespace GamePto {
 
         /** S_ROUND_START_EVENT uid */
         uid?: (number|null);
+
+        /** S_ROUND_START_EVENT fee */
+        fee?: (number|null);
+
+        /** S_ROUND_START_EVENT maxFee */
+        maxFee?: (number|null);
     }
 
     /** Represents a S_ROUND_START_EVENT. */
@@ -2460,6 +2535,12 @@ declare namespace GamePto {
 
         /** S_ROUND_START_EVENT uid. */
         public uid: number;
+
+        /** S_ROUND_START_EVENT fee. */
+        public fee: number;
+
+        /** S_ROUND_START_EVENT maxFee. */
+        public maxFee: number;
 
         /**
          * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.

@@ -16,11 +16,11 @@ abstract class BaseView<T extends fairygui.GComponent> {
 
     private eventList: EventListenerData[] = [];
 
-    constructor() {
-        this.init();
+    constructor(...param: any[]) {
+        this.init(...param);
     }
 
-    protected abstract init();
+    protected abstract init(...param: any[]);
 
     public AddClick(target: egret.DisplayObject | fairygui.GObject, func: Function): void {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
@@ -84,7 +84,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @param param 参数
      */
     public open(...param: any[]) {
-        fairygui.GRoot.inst.addChild(this.view)
+        fairygui.GRoot.inst.addChild(this.view);
     }
 
     /**
@@ -92,7 +92,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @param param 参数
      */
     public close(...param: any[]) {
-        fairygui.GRoot.inst.removeChild(this.view)
+        fairygui.GRoot.inst.removeChild(this.view);
         this.removeEvents();
     }
 

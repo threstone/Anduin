@@ -40,7 +40,7 @@ class MatchGroupChooseView extends CardsGroupChooseView {
 
     private onFriendChooseStatusChange(evt: EventData) {
         if (evt.data) {
-            this.descStart = '好友已经选择完毕,就等你了!  选择卡组倒计时';
+            this.descStart = '好友已经选择完毕,就等你了!';
             TipsView.ins().showTips('好友已经选择完毕,就等你了!')
         } else {
             this.descStart = '选择卡组倒计时';
@@ -57,10 +57,8 @@ class MatchGroupChooseView extends CardsGroupChooseView {
     }
 
     private chooseGroupSuccess() {
-        TipsView.ins().open('选择成功,等待好友选择卡组').then((res) => {
-            if (res === false) {
-                FriendlyMatchModel.ins().C_CANCEL_REQ_MATCH();
-            }
+        TipsView.ins().open('选择成功,等待好友选择卡组', '取消').then((res) => {
+            FriendlyMatchModel.ins().C_MATCH_CANCEL_GROUP();
         })
     }
 

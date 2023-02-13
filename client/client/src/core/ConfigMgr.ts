@@ -5,6 +5,7 @@ class ConfigMgr extends BaseClass {
         this._allConfig = RES.getRes('config_json');
     }
 
+    /**powerId对应了势力下标 */
     get powerConfig(): Power[] {
         return this._allConfig['power'];
     }

@@ -25,11 +25,20 @@ export class NodeRoundStart extends BaseNode {
 
     private deal(table: GameTable) {
         const user = table.users[table.nextRoundUserIndex];
+        //费用增长以及重置
+        if (user.feeMax < user.feeUpperLimit) {
+            user.feeMax++;
+            user.fee = user.feeMax;
+        }
 
         //派发回合开始
         const roundStartMsg = new GamePto.S_ROUND_START_EVENT();
         roundStartMsg.uid = user.uid;
+        roundStartMsg.maxFee = user.feeMax;
+        roundStartMsg.fee = user.fee;
+
         table.broadcast(roundStartMsg);
+
         console.log("派发回合开始协议");
 
         let sum = 0;

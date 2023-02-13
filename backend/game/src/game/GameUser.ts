@@ -49,6 +49,14 @@ export class GameUser {
     /**疲劳值 */
     private _fatigue: number;
 
+
+    /**费用增长上限*/
+    feeUpperLimit: number;
+    /**最大费用值 */
+    feeMax: number;
+    /**当前费用 */
+    fee: number;
+
     constructor(matchUser: MatchUser, table: GameTable) {
         this.clientName = matchUser.clientName;
         this.uid = matchUser.uid;
@@ -83,6 +91,10 @@ export class GameUser {
         this.setUnitCardToMap(heroCard);
 
         this._fatigue = 1;
+
+        this.feeUpperLimit = 0;
+        this.feeMax = 0;
+        this.fee = 0;
     }
 
 
@@ -120,23 +132,23 @@ export class GameUser {
     }
 
     /**获取手牌id */
-    public getHandCardIds() {
-        const result: number[] = [];
-        for (let index = 0; index < this._handCards.length; index++) {
-            result.push(this._handCards[index].cardId)
-        }
-        return result;
-    }
+    // public getHandCardIds() {
+    //     const result: number[] = [];
+    //     for (let index = 0; index < this._handCards.length; index++) {
+    //         result.push(this._handCards[index].cardId)
+    //     }
+    //     return result;
+    // }
 
     public sendMsg(message: IGameMessage) {
-        if (!this.isOnline === false) {
+        if (this.isOnline === false) {
             return;
         }
         GlobalVar.socketServer.sendMsg(this.clientName, this.uid, message);
     }
 
     public sendBuffer(messageBuffer: Buffer) {
-        if (!this.isOnline === false) {
+        if (this.isOnline === false) {
             return;
         }
         GlobalVar.socketServer.sendBuffer(this.clientName, this.uid, messageBuffer);

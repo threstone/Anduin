@@ -18,6 +18,8 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniCard.URL, UIMiniCard);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardsCom.URL, UIShowCardsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIUserInfoBox.URL, UIUserInfoBox);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIHandCardsCom.URL, UIHandCardsCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIChooseCards.URL, UIChooseCards);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsGroupChooseCom.URL, UICardsGroupChooseCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton1.URL, UIButton1);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegisterCom.URL, UIRegisterCom);

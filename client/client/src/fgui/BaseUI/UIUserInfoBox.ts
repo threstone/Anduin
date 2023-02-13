@@ -3,8 +3,11 @@
 module BaseUI {
 
 	export class UIUserInfoBox extends fairygui.GComponent {
-		public heroCard:UICardItem;
+		public leastCardNum:fairygui.GTextField;
 		public feeList:fairygui.GList;
+		public nick:fairygui.GTextField;
+		public feeDesc:fairygui.GTextField;
+		public power:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpopg482d";
 
 		public static createInstance():UIUserInfoBox {
@@ -14,8 +17,11 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.heroCard = <UICardItem>(this.getChildAt(1));
-			this.feeList = <fairygui.GList>(this.getChildAt(6));
+			this.leastCardNum = <fairygui.GTextField>(this.getChildAt(4));
+			this.feeList = <fairygui.GList>(this.getChildAt(5));
+			this.nick = <fairygui.GTextField>(this.getChildAt(6));
+			this.feeDesc = <fairygui.GTextField>(this.getChildAt(7));
+			this.power = <fairygui.GTextField>(this.getChildAt(8));
 		}
 	}
 }

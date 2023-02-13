@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n0_pg48" name="n0" xy="0,0" size="1600,1200" alpha="0.4" type="rect" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n1_pg48" name="chooseBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="714,918"/>
+  </displayList>
+</component>

@@ -65,7 +65,7 @@ export class GameTable extends BaseTable {
         const mapData = new GamePto.MapData();
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
-            for (let eventIndex = 0; eventIndex < user.eventPool.length; eventIndex++) {
+            for (let eventIndex = 0; eventIndex < user.eventPool?.length; eventIndex++) {
                 const eventCard = user.eventPool[eventIndex];
                 // const gameCard = new GamePto.Card();
                 // gameCard.cardId = eventCard.cardId;
@@ -75,7 +75,7 @@ export class GameTable extends BaseTable {
                 mapData.eventCard.push(eventCard);
             }
 
-            for (let unitIndex = 0; unitIndex < user.unitPool.length; unitIndex++) {
+            for (let unitIndex = 0; unitIndex < user.unitPool?.length; unitIndex++) {
                 const unitCard = user.unitPool[unitIndex];
                 // const gameCard = new GamePto.Card();
                 // gameCard.cardId = unitCard.cardId;

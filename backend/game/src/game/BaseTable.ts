@@ -63,7 +63,7 @@ export class BaseTable {
         const users = this._users;
         for (let index = 0; index < users.length; index++) {
             const user = users[index];
-            if (user.uid !== excludeUid || user.isOnline === false) {
+            if (user.uid === excludeUid || user.isOnline === false) {
                 continue;
             }
             user.sendBuffer(messageBuffer);

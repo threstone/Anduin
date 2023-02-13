@@ -20,7 +20,11 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.AddClick(this.view.fightBtn, CardsGroupChooseView.ins().open.bind(CardsGroupChooseView.ins()));
 
         this.view.pveBtn.describe.text = '冒险';
-        this.AddClick(this.view.pveBtn, GameSceneView.ins().open.bind(GameSceneView.ins()));
+        this.AddClick(this.view.pveBtn, () => {
+            GameSceneView.ins().open({
+                data: { users: [{ nick: UserModel.ins().nick, power: 1, uid: UserModel.ins().uid }, { nick: "1", power: 2, uid: 123 }] }
+            });
+        });
 
         this.view.settingBtn.describe.text = '设置';
 

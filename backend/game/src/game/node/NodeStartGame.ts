@@ -29,6 +29,7 @@ export class NodeStartGame extends BaseNode {
         if (user.isReplace) {
             return;
         }
+        const replay = new GamePto.S_PREPARE_TO_START();
 
         for (let index = 0; index < msg.replaceCardIndexes.length; index++) {
             const cardIndex = msg.replaceCardIndexes[index];
@@ -39,13 +40,19 @@ export class NodeStartGame extends BaseNode {
             }
             //替换掉卡牌
             user.handCards[cardIndex] = user.cardPool.pop();
+            replay.cards.push(user.handCards[cardIndex]);
             //将卡牌重新放入卡池
+
             user.cardPool.push(replaceCardId);
         }
+
+        //如果插入了卡牌,洗牌
         if (msg.replaceCardIndexes.length !== 0) {
             table.shuffle(user.cardPool);
         }
+
         user.isReplace = true;
+        user.sendMsg(replay);
 
         if (this.isAllUserReplace(table)) {
             return NodeDriverResult.GoOn;
@@ -71,6 +78,7 @@ export class NodeStartGame extends BaseNode {
         const gameStartMsg = new GamePto.S_GAME_START();
         gameStartMsg.firstUid = table.users[table.nextRoundUserIndex].uid;
         gameStartMsg.mapData = table.getMapData();
+        gameStartMsg.replaceEndTime = Date.now() + GlobalVar.configMgr.common.replaceCardTime;
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
@@ -85,7 +93,7 @@ export class NodeStartGame extends BaseNode {
                 user.handCards.push(user.cardPool.pop(), GlobalVar.cardMgr.getCardInstance(0));
             }
 
-            gameStartMsg.handCards = user.getHandCardIds();
+            gameStartMsg.cards = user.handCards;
             user.sendMsg(gameStartMsg);
         }
         console.log("派发游戏开始协议");

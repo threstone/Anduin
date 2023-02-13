@@ -57,28 +57,38 @@ message S_GAME_START{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10002];
 	int32 firstUid = 3;
-	repeated int32 handCards = 4;
+	repeated Card cards = 4;
 	MapData mapData = 5;
+	int64 replaceEndTime = 6;
+}
+
+//准备开始游戏
+message S_PREPARE_TO_START{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10003];
+	repeated Card cards = 3;
 }
 
 //回合开始
 message S_ROUND_START_EVENT{
 	int32 cmd = 1[default = 200]; 
-	int32 scmd = 2[default = 10003];
+	int32 scmd = 2[default = 10004];
 	int32 uid = 3;
+	int32 fee = 4;
+	int32 maxFee = 5;
 }
 
 //回合结束
 message S_ROUND_END_EVENT{
 	int32 cmd = 1[default = 200]; 
-	int32 scmd = 2[default = 10004];
+	int32 scmd = 2[default = 10005];
 	int32 uid = 3;
 }
 
 //抽卡疲劳
 message S_DRAW_CARDS{
 	int32 cmd = 1[default = 200]; 
-	int32 scmd = 2[default = 10005];
+	int32 scmd = 2[default = 10006];
 	repeated Card cards = 3;
 	int32 cardCount = 4;
 	repeated int32 damages = 5;

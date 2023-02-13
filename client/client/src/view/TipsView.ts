@@ -4,11 +4,11 @@ class TipsView extends BaseView<BaseUI.UITipsCom> {
 
     protected init() {
         this.view = BaseUI.UITipsCom.createInstance();
-        this.view.btn.describe.text = '确定';
     }
 
-    public open(text: string): Promise<boolean> {
+    public open(text: string, btnText: string = '确定'): Promise<boolean> {
         return new Promise((resolve) => {
+            this.view.btn.describe.text = btnText;
             super.open();
             this._resolve = resolve;
             this.AddClick(this.view.btn, this.close.bind(this, true));
