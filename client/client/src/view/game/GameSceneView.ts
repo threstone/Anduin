@@ -59,37 +59,38 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         super.open();
 
 
-        // let temp = {
-        //     "firstUid": 1,
-        //     "cards": [
-        //         {
-        //             "cardId": 0,
-        //             "attack": 0,
-        //             "health": 0,
-        //             "fee": 0,
-        //             "uid": 2
-        //         },
-        //         {
-        //             "cardId": 0,
-        //             "attack": 0,
-        //             "health": 0,
-        //             "fee": 0,
-        //             "uid": 2
-        //         },
-        //         {
-        //             "cardId": 0,
-        //             "attack": 0,
-        //             "health": 0,
-        //             "fee": 0,
-        //             "uid": 2
-        //         }
-        //     ],
-        //     "mapData": {},
-        //     "replaceEndTime": "1676296544675"
-        // }
-        // this.onGameStart({
-        //     data: temp
-        // })
+        //TODO test
+        let temp = {
+            "firstUid": 1,
+            "cards": [
+                {
+                    "cardId": 0,
+                    "attack": 0,
+                    "health": 0,
+                    "fee": 0,
+                    "uid": 2
+                },
+                {
+                    "cardId": 0,
+                    "attack": 0,
+                    "health": 0,
+                    "fee": 0,
+                    "uid": 2
+                },
+                {
+                    "cardId": 0,
+                    "attack": 0,
+                    "health": 0,
+                    "fee": 0,
+                    "uid": 2
+                }
+            ],
+            "mapData": {},
+            "replaceEndTime": "1676296544675"
+        }
+        this.onGameStart({
+            data: temp
+        })
 
 
         this.initUserInfo(evt.data)
@@ -113,6 +114,18 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     private initEvents() {
         this.observe('GameSceneClose', this.close);
         this.observe('S_GAME_START', this.onGameStart);
+        this.observe('S_ROUND_START_EVENT', this.onRoundStart);
+    }
+
+    private onRoundStart(evt: EventData) {
+        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+        const userInfoBox = msg.uid === UserModel.ins().uid ? this.selfUserBox : this.targetUserBox;
+        userInfoBox.feeSet(msg.fee,msg.maxFee);
+        if (ChooseCards.ins().isOnStage()) {
+            console.log();
+        } else {
+
+        }
     }
 
     private onGameStart(evt: EventData) {

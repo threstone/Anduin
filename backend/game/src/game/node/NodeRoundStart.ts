@@ -3,7 +3,6 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { BaseNode } from './BaseNode';
 import { GamePto } from '../../../../common/CommonProto';
-import { IGameMessage } from '../../../../common/I';
 
 //回合开始,执行一些回合开始时的任务,如卡牌开始事件,确定操作者
 export class NodeRoundStart extends BaseNode {

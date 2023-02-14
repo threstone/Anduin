@@ -11,6 +11,12 @@ export class NodeEndGame extends BaseNode {
     }
 
     public run(table: GameTable): NodeDriverResult {
+        if (!table.isGameOver) {
+            //如果不是回合结束状态就reset node
+            //实现下一阶段又到回合开始
+            this.nodeDriver.resetNode();
+            return NodeDriverResult.GoOn;
+        }
         this.deal(table);
         return NodeDriverResult.GoOn;
     }

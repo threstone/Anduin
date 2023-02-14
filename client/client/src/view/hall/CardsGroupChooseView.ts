@@ -17,6 +17,8 @@ class CardsGroupChooseView extends BaseView<BaseUI.UICardsGroupChooseCom>{
         this.AddClick(this.view.cardsViewBtn, this.onCardsViewBtnClick);
         this.AddClick(this.view.chooseBtn, this.onChooseBtnClick);
 
+        this.observe('CardsGroupUpdate', this.initView);
+
         this.initView();
         HallView.ins().addMiniChatToView(this);
     }

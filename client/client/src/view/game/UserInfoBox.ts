@@ -7,8 +7,8 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox>{
     public setUserInfo(userInfo: GamePto.IUserInfo) {
         this.view.nick.text = userInfo.nick;;
         this.view.power.text = ConfigMgr.ins().powerConfig[userInfo.power].powerName;
-        this.feeSet(7, 4);
-        this.setLeastCardNum(12);
+        this.feeSet(0, 0);
+        this.setLeastCardNum(29);
     }
 
     /**设置费用 */
@@ -34,6 +34,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox>{
         this.view.feeDesc.text = `能量:${fee}`;
     }
 
+    /**设置剩余卡牌 */
     public setLeastCardNum(num: number) {
         this.view.leastCardNum.text = `剩余卡牌\n${num}`
     }

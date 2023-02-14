@@ -10,7 +10,9 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
     private onBtnClick() {
         GameModel.ins().C_PREPARE_TO_START(this._replaceIndexes);
-        // this.deleteCardTween(1);
+        //TODO test
+        this.replaceCards({ data: { "cards": [{ "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 }, { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }, { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }], "replaceCardIndexes": [0, 1] } })
+        GameDispatcher.getInstance().emit('S_ROUND_START_EVENT', { "uid": 2, "fee": 0, "maxFee": 0 })
     }
 
     private replaceCards(evt: EventData) {

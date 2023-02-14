@@ -33,4 +33,14 @@ class GameModel extends BaseModel {
         this.emit('S_REPLACE_CARDS', msg);
         this.handCards = msg.cards;
     }
+
+    //回合开始
+    S_ROUND_START_EVENT(msg: GamePto.S_ROUND_START_EVENT) {
+        this.emit('S_ROUND_START_EVENT', msg);
+    }
+
+    //回合结束
+    S_ROUND_END_EVENT(msg: GamePto.S_ROUND_END_EVENT) {
+        this.emit('S_ROUND_END_EVENT', msg);
+    }
 }

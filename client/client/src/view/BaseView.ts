@@ -104,6 +104,13 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.removeEvents();
     }
 
+    /**
+     * @returns 返回是否处于场景中
+     */
+    public isOnStage() {
+        return fairygui.GRoot.inst.isChildInView(this.view)
+    }
+
     protected observe(event: string, func: Function): void {
         GameDispatcher.getInstance().addEventListener(event, func, this);
         const eventData = new EventListenerData(null, event, func, this);
