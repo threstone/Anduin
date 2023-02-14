@@ -49,6 +49,7 @@ class CardItem {
             case CardsPto.CardType.Unit:
                 break;
             case CardsPto.CardType.Magic:
+                card.healthGroup.visible = false;
             case CardsPto.CardType.Building:
                 card.atkGroup.visible = false;
                 break;

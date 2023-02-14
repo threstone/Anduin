@@ -59,37 +59,37 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         super.open();
 
 
-        let temp = {
-            "firstUid": 1,
-            "cards": [
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                },
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                },
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                }
-            ],
-            "mapData": {},
-            "replaceEndTime": "1676296544675"
-        }
-        this.onGameStart({
-            data: temp
-        })
+        // let temp = {
+        //     "firstUid": 1,
+        //     "cards": [
+        //         {
+        //             "cardId": 0,
+        //             "attack": 0,
+        //             "health": 0,
+        //             "fee": 0,
+        //             "uid": 2
+        //         },
+        //         {
+        //             "cardId": 0,
+        //             "attack": 0,
+        //             "health": 0,
+        //             "fee": 0,
+        //             "uid": 2
+        //         },
+        //         {
+        //             "cardId": 0,
+        //             "attack": 0,
+        //             "health": 0,
+        //             "fee": 0,
+        //             "uid": 2
+        //         }
+        //     ],
+        //     "mapData": {},
+        //     "replaceEndTime": "1676296544675"
+        // }
+        // this.onGameStart({
+        //     data: temp
+        // })
 
 
         this.initUserInfo(evt.data)

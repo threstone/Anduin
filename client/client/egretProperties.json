@@ -44,5 +44,8 @@
       "name": "mouse",
       "path": "./libs/mouse"
     }
-  ]
+  ],
+  "vivo": {
+    "usePlugin": true
+  }
 }

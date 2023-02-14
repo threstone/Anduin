@@ -8,6 +8,7 @@ class MatchGroupChooseView extends CardsGroupChooseView {
     protected init() {
         super.init();
         this.view.tips.visible = true;
+        console.log("MatchGroupChooseView\nMatchGroupChooseView\nMatchGroupChooseView\nMatchGroupChooseView\nMatchGroupChooseView\nMatchGroupChooseView\n");
     }
 
     public open(evt: EventData): void {

@@ -56,6 +56,7 @@ class MessageManager {
         }
         try {
             let data = MessageManager.getProtoCls(cmd, scmd).decode(msg.bytes);
+            console.log(`rcv message: cmd:${cmd} scmd:${scmd} data:${JSON.stringify(data)}`);
             MessageManager._recMsgHandlerObj[cmd + "_" + scmd](data);
         } catch (error) {
             console.error(error);

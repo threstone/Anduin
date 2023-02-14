@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1280,720">
+<component size="1600,1200">
   <displayList>
-    <graph id="n1_tb7e" name="close" xy="0,0" size="1280,720" alpha="0.5" type="rect" fillColor="#ff000000"/>
-    <component id="n0_tb7e" name="card" src="tb7e1s" fileName="cards/CardItem.xml" xy="389,176"/>
-    <component id="n2_tb7e" name="make" src="ru1k2" fileName="common/btn/Button1.xml" xy="641,258"/>
-    <component id="n3_tb7e" name="disassemble" src="ru1k2" fileName="common/btn/Button1.xml" xy="641,380"/>
+    <graph id="n1_tb7e" name="close" xy="0,0" size="1600,1200" alpha="0.5" type="rect" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n0_tb7e" name="card" src="tb7e1s" fileName="cards/CardItem.xml" xy="588,416"/>
+    <component id="n2_tb7e" name="make" src="ru1k2" fileName="common/btn/Button1.xml" xy="840,498"/>
+    <component id="n3_tb7e" name="disassemble" src="ru1k2" fileName="common/btn/Button1.xml" xy="840,620"/>
   </displayList>
 </component>

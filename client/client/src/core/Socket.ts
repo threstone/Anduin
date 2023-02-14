@@ -61,7 +61,6 @@ class Socket extends BaseClass {
         let msg: egret.ByteArray = new egret.ByteArray();;
         byteArray.readBytes(msg);
 
-        console.log(`rcv message: cmd:${sysId} scmd:${cmdId}`);
         MessageManager.rcvMsgHandler(sysId, cmdId, msg);
     }
 

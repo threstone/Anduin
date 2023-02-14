@@ -29,7 +29,7 @@ export class NodeStartGame extends BaseNode {
         if (user.isReplace) {
             return;
         }
-        const replay = new GamePto.S_PREPARE_TO_START();
+        const replay = new GamePto.S_REPLACE_CARDS();
 
         for (let index = 0; index < msg.replaceCardIndexes.length; index++) {
             const cardIndex = msg.replaceCardIndexes[index];
@@ -40,11 +40,11 @@ export class NodeStartGame extends BaseNode {
             }
             //替换掉卡牌
             user.handCards[cardIndex] = user.cardPool.pop();
-            replay.cards.push(user.handCards[cardIndex]);
+            replay.replaceCardIndexes.push(cardIndex);
             //将卡牌重新放入卡池
-
             user.cardPool.push(replaceCardId);
         }
+        replay.cards = user.handCards;
 
         //如果插入了卡牌,洗牌
         if (msg.replaceCardIndexes.length !== 0) {

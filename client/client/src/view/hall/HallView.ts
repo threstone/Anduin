@@ -27,7 +27,9 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         });
 
         this.view.settingBtn.describe.text = '设置';
-
+        this.AddClick(this.view.settingBtn, () => {
+            SettingView.ins().open();
+        });
 
         this.AddClick(this.view.miniChat, this.onMiniChatClick);
         this.observe('S_CHAT_MESSAGE', this.onChatMessage);
@@ -37,7 +39,11 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.observe('S_MATCH', (evt: EventData) => {
             FriendlyMatchView.ins().openByResponse(evt.data);
         });
-        this.observe('S_MATCH_CARD_GROUP', MatchGroupChooseView.ins().open.bind(MatchGroupChooseView.ins()));
+        // this.observe('S_MATCH_CARD_GROUP', MatchGroupChooseView.ins().open.bind(MatchGroupChooseView.ins()));
+        this.observe('S_MATCH_CARD_GROUP', (evt) => {
+            MatchGroupChooseView.ins().open(evt)
+            console.log('open lileileileifjnsajfhjksdfksdkjhgkdj');
+        });
         this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
     }
 

@@ -3,6 +3,13 @@ class GameModel extends BaseModel {
     handCards: GamePto.ICard[];
     mapData: GamePto.IMapData;
 
+    /**准备开始(包含更换卡牌数据) */
+    C_PREPARE_TO_START(replareplaceCardIndexes: number[]) {
+        const msg = new GamePto.C_PREPARE_TO_START();
+        msg.replaceCardIndexes = replareplaceCardIndexes;
+        this.sendMsg(msg);
+    }
+
     //服务端异常 关闭场景
     S_SERVER_ERROR(msg: GamePto.S_SERVER_ERROR) {
         SystemModel.ins().showTips(msg.message, 10000);
@@ -19,5 +26,11 @@ class GameModel extends BaseModel {
         this.emit('S_GAME_START', msg);
         this.handCards = msg.cards;
         this.mapData = msg.mapData;
+    }
+
+    //替换手牌
+    S_REPLACE_CARDS(msg: GamePto.S_REPLACE_CARDS) {
+        this.emit('S_REPLACE_CARDS', msg);
+        this.handCards = msg.cards;
     }
 }

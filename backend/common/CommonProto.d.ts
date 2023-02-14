@@ -3477,108 +3477,108 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_PREPARE_TO_START. */
-    interface IS_PREPARE_TO_START {
+    /** Properties of a S_REPLACE_CARDS. */
+    interface IS_REPLACE_CARDS {
 
-        /** S_PREPARE_TO_START cmd */
+        /** S_REPLACE_CARDS cmd */
         cmd?: (number|null);
 
-        /** S_PREPARE_TO_START scmd */
+        /** S_REPLACE_CARDS scmd */
         scmd?: (number|null);
 
-        /** S_PREPARE_TO_START firstUid */
-        firstUid?: (number|null);
-
-        /** S_PREPARE_TO_START cards */
+        /** S_REPLACE_CARDS cards */
         cards?: (GamePto.ICard[]|null);
+
+        /** S_REPLACE_CARDS replaceCardIndexes */
+        replaceCardIndexes?: (number[]|null);
     }
 
-    /** Represents a S_PREPARE_TO_START. */
-    class S_PREPARE_TO_START implements IS_PREPARE_TO_START {
+    /** Represents a S_REPLACE_CARDS. */
+    class S_REPLACE_CARDS implements IS_REPLACE_CARDS {
 
         /**
-         * Constructs a new S_PREPARE_TO_START.
+         * Constructs a new S_REPLACE_CARDS.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_PREPARE_TO_START);
+        constructor(properties?: GamePto.IS_REPLACE_CARDS);
 
-        /** S_PREPARE_TO_START cmd. */
+        /** S_REPLACE_CARDS cmd. */
         public cmd: number;
 
-        /** S_PREPARE_TO_START scmd. */
+        /** S_REPLACE_CARDS scmd. */
         public scmd: number;
 
-        /** S_PREPARE_TO_START firstUid. */
-        public firstUid: number;
-
-        /** S_PREPARE_TO_START cards. */
+        /** S_REPLACE_CARDS cards. */
         public cards: GamePto.ICard[];
 
+        /** S_REPLACE_CARDS replaceCardIndexes. */
+        public replaceCardIndexes: number[];
+
         /**
-         * Encodes the specified S_PREPARE_TO_START message. Does not implicitly {@link GamePto.S_PREPARE_TO_START.verify|verify} messages.
-         * @param message S_PREPARE_TO_START message or plain object to encode
+         * Encodes the specified S_REPLACE_CARDS message. Does not implicitly {@link GamePto.S_REPLACE_CARDS.verify|verify} messages.
+         * @param message S_REPLACE_CARDS message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_PREPARE_TO_START, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_REPLACE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_PREPARE_TO_START message, length delimited. Does not implicitly {@link GamePto.S_PREPARE_TO_START.verify|verify} messages.
-         * @param message S_PREPARE_TO_START message or plain object to encode
+         * Encodes the specified S_REPLACE_CARDS message, length delimited. Does not implicitly {@link GamePto.S_REPLACE_CARDS.verify|verify} messages.
+         * @param message S_REPLACE_CARDS message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_PREPARE_TO_START, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_REPLACE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_PREPARE_TO_START message from the specified reader or buffer.
+         * Decodes a S_REPLACE_CARDS message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_PREPARE_TO_START
+         * @returns S_REPLACE_CARDS
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_PREPARE_TO_START;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_REPLACE_CARDS;
 
         /**
-         * Decodes a S_PREPARE_TO_START message from the specified reader or buffer, length delimited.
+         * Decodes a S_REPLACE_CARDS message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_PREPARE_TO_START
+         * @returns S_REPLACE_CARDS
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_PREPARE_TO_START;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_REPLACE_CARDS;
 
         /**
-         * Verifies a S_PREPARE_TO_START message.
+         * Verifies a S_REPLACE_CARDS message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_PREPARE_TO_START message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_REPLACE_CARDS message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_PREPARE_TO_START
+         * @returns S_REPLACE_CARDS
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_PREPARE_TO_START;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_REPLACE_CARDS;
 
         /**
-         * Creates a plain object from a S_PREPARE_TO_START message. Also converts values to other types if specified.
-         * @param message S_PREPARE_TO_START
+         * Creates a plain object from a S_REPLACE_CARDS message. Also converts values to other types if specified.
+         * @param message S_REPLACE_CARDS
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_PREPARE_TO_START, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_REPLACE_CARDS, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_PREPARE_TO_START to JSON.
+         * Converts this S_REPLACE_CARDS to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_PREPARE_TO_START
+         * Gets the default type url for S_REPLACE_CARDS
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

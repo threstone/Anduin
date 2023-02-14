@@ -22,4 +22,12 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     }
     
+    public addStartHandCards(cards: GameCard[]){
+        // for (let index = 0; index < this.cards.length; index++) {
+        //     const card = this.cards[index];
+        //     GameSceneView.ins().getView().addChild(card.cardItem);
+        // }
+
+    }
+
 }
