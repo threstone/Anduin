@@ -4,6 +4,7 @@ module BaseUI {
 
 	export class UIGameSceneCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
+		public map:fairygui.GImage;
 		public panding:fairygui.GGraph;
 		public record:fairygui.GGraph;
 		public selfInfoBox:UIUserInfoBox;
@@ -20,12 +21,13 @@ module BaseUI {
 			super.constructFromXML(xml);
 
 			this.bg = <fairygui.GImage>(this.getChildAt(0));
-			this.panding = <fairygui.GGraph>(this.getChildAt(1));
-			this.record = <fairygui.GGraph>(this.getChildAt(2));
-			this.selfInfoBox = <UIUserInfoBox>(this.getChildAt(3));
-			this.targetInfoBox = <UIUserInfoBox>(this.getChildAt(4));
-			this.selfHand = <UIHandCardsCom>(this.getChildAt(5));
-			this.targetHand = <UIHandCardsCom>(this.getChildAt(6));
+			this.map = <fairygui.GImage>(this.getChildAt(1));
+			this.panding = <fairygui.GGraph>(this.getChildAt(2));
+			this.record = <fairygui.GGraph>(this.getChildAt(3));
+			this.selfInfoBox = <UIUserInfoBox>(this.getChildAt(4));
+			this.targetInfoBox = <UIUserInfoBox>(this.getChildAt(5));
+			this.selfHand = <UIHandCardsCom>(this.getChildAt(6));
+			this.targetHand = <UIHandCardsCom>(this.getChildAt(7));
 		}
 	}
 }

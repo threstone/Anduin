@@ -92,9 +92,9 @@ export class GameUser {
 
         this._fatigue = 1;
 
-        this.feeUpperLimit = 0;
-        this.feeMax = 0;
-        this.fee = 0;
+        this.feeUpperLimit = 10;
+        this.feeMax = 10;
+        this.fee = 1;
     }
 
 

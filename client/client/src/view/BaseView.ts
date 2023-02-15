@@ -139,4 +139,11 @@ abstract class BaseView<T extends fairygui.GComponent> {
         }
         this.eventList = []
     }
+
+    /** 收到指定事件时将特效函数放入特效队列*/
+    public addEffectListener(eventName: string, fun: (...args: any[]) => Promise<any>) {
+        this.observe(eventName, (evt: EventData) => {
+            GameSceneView.ins().addToEffectPool(fun.bind(this, evt.data));
+        });
+    }
 }

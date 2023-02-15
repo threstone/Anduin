@@ -13,6 +13,12 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     targetUserBox: UserInfoBox;
     selfUserBox: UserInfoBox;
 
+    //消息收到后就马上执行数据的变更，但是动画的展示应该维护一个pool来顺序播放
+    private _effectPool: (() => Promise<any>)[];
+    private _isPlaying: boolean;
+
+    get cards() { return this.selfHandCom.cards }
+
     protected init() {
         this.view = BaseUI.UIGameSceneCom.createInstance();
 
@@ -58,32 +64,20 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     public open(evt: EventData): void {
         super.open();
 
+        this._effectPool = [];
+        this._isPlaying = false;
 
         //TODO test
         let temp = {
             "firstUid": 1,
             "cards": [
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                },
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                },
-                {
-                    "cardId": 0,
-                    "attack": 0,
-                    "health": 0,
-                    "fee": 0,
-                    "uid": 2
-                }
+                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
             ],
             "mapData": {},
             "replaceEndTime": "1676296544675"
@@ -117,12 +111,31 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.observe('S_ROUND_START_EVENT', this.onRoundStart);
     }
 
+    /**将函数加入特效池 */
+    public addToEffectPool(func: () => Promise<any>) {
+        this._effectPool.push(func);
+        if (!this._isPlaying) {
+            this.doEffect();
+        }
+    }
+
+    /**尝试执行特效 */
+    private async doEffect() {
+        while (this._effectPool.length !== 0) {
+            this._isPlaying = true;
+            await this._effectPool.shift()();
+        }
+        this._isPlaying = false;
+    }
+
+
     private onRoundStart(evt: EventData) {
         const msg: GamePto.S_ROUND_START_EVENT = evt.data;
         const userInfoBox = msg.uid === UserModel.ins().uid ? this.selfUserBox : this.targetUserBox;
-        userInfoBox.feeSet(msg.fee,msg.maxFee);
+        userInfoBox.feeSet(msg.fee, msg.maxFee);
+        //如果换牌界面还在,则要把卡先放到手牌中
         if (ChooseCards.ins().isOnStage()) {
-            console.log();
+            this.addToEffectPool(this.selfHandCom.showAddStartHandCards.bind(this.selfHandCom));
         } else {
 
         }
@@ -130,6 +143,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
+        this.selfHandCom.onGameStart();
         ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid)
     }
 

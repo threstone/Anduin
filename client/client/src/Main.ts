@@ -9,16 +9,21 @@ class Main extends egret.DisplayObjectContainer {
             // custom lifecycle plugin
 
             context.onUpdate = () => {
-
+                // GameDispatcher.getInstance().emit('GameBeat');
             }
         })
 
+
+        const frameRate = egret.ticker.$frameRate;
+        const slowFrameRate = 10;
         egret.lifecycle.onPause = () => {
             // egret.ticker.pause();
+            egret.ticker.$setFrameRate(slowFrameRate)
         }
 
         egret.lifecycle.onResume = () => {
             // egret.ticker.resume();
+            egret.ticker.$setFrameRate(frameRate);
         }
 
         this.runGame().catch(e => {

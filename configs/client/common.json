@@ -3,7 +3,8 @@
 "cardMakeFee":[40,100,400,1600],
 "cardDisassembleReturnRatio":0.5,
 "maxGroupNum":18,
-"maxHandCardNum":10,
+"maxHandCardNum":7,
 "replaceCardTime":50000,
-"roundOptTime":90000
+"roundOptTime":90000,
+"startHandCardNum":5
 }

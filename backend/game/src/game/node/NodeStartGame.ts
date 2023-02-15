@@ -86,11 +86,13 @@ export class NodeStartGame extends BaseNode {
             user.resetInfo();
 
             table.shuffle(user.cardPool);
-            //抽三张
-            user.handCards.push(user.cardPool.pop(), user.cardPool.pop(), user.cardPool.pop())
-            //后手多1张牌和多一硬币
+            //抽n张
+            for (let cardNum = 0; cardNum < GlobalVar.configMgr.common.startHandCardNum; cardNum++) {
+                user.handCards.push(user.cardPool.pop())
+            }
+            //后手多一费
             if (table.nextRoundUserIndex !== index) {
-                user.handCards.push(user.cardPool.pop(), GlobalVar.cardMgr.getCardInstance(0));
+                user.fee += 1;
             }
 
             gameStartMsg.cards = user.handCards;
