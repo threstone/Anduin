@@ -5,6 +5,14 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
         this.view.accountInput.text;
         this.view.regBtn.describe.text = '注册';
         this.initRegCom();
+        this.loadLocalStorage();
+    }
+
+    private loadLocalStorage() {
+        let loginAccount = egret.localStorage.getItem('LoginAccount');
+        if(loginAccount){
+            this.view.accountInput.text = loginAccount;
+        }
     }
 
     private initRegCom() {
@@ -26,6 +34,7 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
     onLoginResult(evt: EventData) {
         const msg: LoginPto.S_LOGIN = evt.data;
         if (msg.isSuccess) {
+            egret.localStorage.setItem('LoginAccount', this.view.accountInput.text);
             this.close();
         } else {
             this.view.touchable = true;

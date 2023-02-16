@@ -2450,6 +2450,9 @@ declare namespace GamePto {
 
         /** S_REPLACE_CARDS replaceCardIndexes */
         replaceCardIndexes?: (number[]|null);
+
+        /** S_REPLACE_CARDS uid */
+        uid?: (number|null);
     }
 
     /** Represents a S_REPLACE_CARDS. */
@@ -2472,6 +2475,9 @@ declare namespace GamePto {
 
         /** S_REPLACE_CARDS replaceCardIndexes. */
         public replaceCardIndexes: number[];
+
+        /** S_REPLACE_CARDS uid. */
+        public uid: number;
 
         /**
          * Encodes the specified S_REPLACE_CARDS message. Does not implicitly {@link GamePto.S_REPLACE_CARDS.verify|verify} messages.
@@ -2657,6 +2663,9 @@ declare namespace GamePto {
 
         /** S_DRAW_CARDS uid */
         uid?: (number|null);
+
+        /** S_DRAW_CARDS cardPoolNum */
+        cardPoolNum?: (number|null);
     }
 
     /** Represents a S_DRAW_CARDS. */
@@ -2685,6 +2694,9 @@ declare namespace GamePto {
 
         /** S_DRAW_CARDS uid. */
         public uid: number;
+
+        /** S_DRAW_CARDS cardPoolNum. */
+        public cardPoolNum: number;
 
         /**
          * Encodes the specified S_DRAW_CARDS message. Does not implicitly {@link GamePto.S_DRAW_CARDS.verify|verify} messages.

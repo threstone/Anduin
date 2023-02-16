@@ -33,7 +33,7 @@ export class NodeRoundStart extends BaseNode {
         roundStartMsg.atkTimesLimit = user.atkTimesLimit;
         roundStartMsg.moveTimes = user.moveTimes;
         roundStartMsg.moveTimesLimit = user.moveTimesLimit;
-        
+
         table.broadcast(roundStartMsg);
 
         console.log("派发回合开始协议");

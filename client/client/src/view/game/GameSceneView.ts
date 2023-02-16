@@ -116,7 +116,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.observe('S_GAME_START', this.onGameStart);
         this.observe('S_ROUND_START_EVENT', this.onRoundStart);
         this.observe('S_FEE_INFO', this.onFeeInfo);
-        this.observe('S_DRAW_CARDS', this.onDrawCards);
+        this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
+        this.observe('S_REPLACE_CARDS', this.onReplaceCards);
     }
 
     /**将函数加入特效池 */
@@ -158,7 +159,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             this._allowToOprate = true;
             this.selfUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
             this.selfUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
-        }else{
+        } else {
             this.targetUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
             this.targetUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
@@ -178,14 +179,22 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         userInfoBox.feeSet(msg.fee, msg.maxFee);
     }
 
-    private onDrawCards(evt: EventData) {
-        const msg: GamePto.S_DRAW_CARDS = evt.data;
+    private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid === UserModel.ins().uid) {
-            this.selfHandCom.drawCards(...msg.cards);
+            await this.selfHandCom.drawCards(...msg.cards);
             this.selfHandCom.fatigue(msg.damages);
+            this.selfUserBox.setLeastCardNum(msg.cardPoolNum);
         } else {
-            this.targetHandCom.drawCardsToHand(msg.cardCount);
+            await this.targetHandCom.drawCardsToHand(msg.cardCount);
             this.targetHandCom.fatigue(msg.damages);
+            this.targetUserBox.setLeastCardNum(msg.cardPoolNum);
+        }
+    }
+
+    private onReplaceCards(evt: EventData) {
+        const msg: GamePto.S_REPLACE_CARDS = evt.data;
+        if (msg.uid !== UserModel.ins().uid) {
+            this.targetHandCom.replace(msg.replaceCardIndexes);
         }
     }
 

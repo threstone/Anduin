@@ -11,6 +11,7 @@ module BaseUI {
 		public heroCard:UICardItem;
 		public close:fairygui.GLoader;
 		public tips:fairygui.GTextField;
+		public selectGroupName:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpopqjx2b";
 
 		public static createInstance():UICardsGroupChooseCom {
@@ -28,6 +29,7 @@ module BaseUI {
 			this.heroCard = <UICardItem>(this.getChildAt(5));
 			this.close = <fairygui.GLoader>(this.getChildAt(6));
 			this.tips = <fairygui.GTextField>(this.getChildAt(7));
+			this.selectGroupName = <fairygui.GTextField>(this.getChildAt(8));
 		}
 	}
 }

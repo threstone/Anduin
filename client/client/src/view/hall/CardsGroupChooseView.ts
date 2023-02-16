@@ -50,6 +50,11 @@ class CardsGroupChooseView extends BaseView<BaseUI.UICardsGroupChooseCom>{
             this.AddClick(cardsBtn.clickLoader, this.selectGroup.bind(this, cardGourpInfo));
             list.addChild(cardsBtn);
         }
+
+        //Test code
+        if (cardGroups[0]) {
+            this.selectGroup(cardGroups[0])
+        }
     }
 
     private selectGroup(cardGourpInfo: CardsPto.ICardGroup) {
@@ -58,6 +63,8 @@ class CardsGroupChooseView extends BaseView<BaseUI.UICardsGroupChooseCom>{
         if (cardGourpInfo.accessToUse) {
             this.selectGroupId = cardGourpInfo.groupId;
         }
+        this.view.selectGroupName.text = `${cardGourpInfo.groupName}[${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId].powerName}]`;
+        
         for (let index = 0; index < cardGourpInfo.cards.length; index++) {
             const card = cardGourpInfo.cards[index];
             const config = CardsModel.ins().getCardInfoById(card.id);

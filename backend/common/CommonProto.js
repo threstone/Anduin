@@ -4130,6 +4130,7 @@ $root.GamePto = (function() {
         S_REPLACE_CARDS.prototype.scmd = 10003;
         S_REPLACE_CARDS.prototype.cards = $util.emptyArray;
         S_REPLACE_CARDS.prototype.replaceCardIndexes = $util.emptyArray;
+        S_REPLACE_CARDS.prototype.uid = 0;
 
         S_REPLACE_CARDS.create = function create(properties) {
             return new S_REPLACE_CARDS(properties);
@@ -4152,6 +4153,8 @@ $root.GamePto = (function() {
                     w.int32(m.replaceCardIndexes[i]);
                 w.ldelim();
             }
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(40).int32(m.uid);
             return w;
         };
 
@@ -4185,6 +4188,10 @@ $root.GamePto = (function() {
                                 m.replaceCardIndexes.push(r.int32());
                         } else
                             m.replaceCardIndexes.push(r.int32());
+                        break;
+                    }
+                case 5: {
+                        m.uid = r.int32();
                         break;
                     }
                 default:
@@ -4223,6 +4230,9 @@ $root.GamePto = (function() {
                     m.replaceCardIndexes[i] = d.replaceCardIndexes[i] | 0;
                 }
             }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
             return m;
         };
 
@@ -4237,6 +4247,7 @@ $root.GamePto = (function() {
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 10003;
+                d.uid = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -4255,6 +4266,9 @@ $root.GamePto = (function() {
                 for (var j = 0; j < m.replaceCardIndexes.length; ++j) {
                     d.replaceCardIndexes[j] = m.replaceCardIndexes[j];
                 }
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
             }
             return d;
         };
@@ -4560,6 +4574,7 @@ $root.GamePto = (function() {
         S_DRAW_CARDS.prototype.cardCount = 0;
         S_DRAW_CARDS.prototype.damages = $util.emptyArray;
         S_DRAW_CARDS.prototype.uid = 0;
+        S_DRAW_CARDS.prototype.cardPoolNum = 0;
 
         S_DRAW_CARDS.create = function create(properties) {
             return new S_DRAW_CARDS(properties);
@@ -4586,6 +4601,8 @@ $root.GamePto = (function() {
             }
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(48).int32(m.uid);
+            if (m.cardPoolNum != null && Object.hasOwnProperty.call(m, "cardPoolNum"))
+                w.uint32(56).int32(m.cardPoolNum);
             return w;
         };
 
@@ -4627,6 +4644,10 @@ $root.GamePto = (function() {
                     }
                 case 6: {
                         m.uid = r.int32();
+                        break;
+                    }
+                case 7: {
+                        m.cardPoolNum = r.int32();
                         break;
                     }
                 default:
@@ -4671,6 +4692,9 @@ $root.GamePto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
+            if (d.cardPoolNum != null) {
+                m.cardPoolNum = d.cardPoolNum | 0;
+            }
             return m;
         };
 
@@ -4687,6 +4711,7 @@ $root.GamePto = (function() {
                 d.scmd = 10006;
                 d.cardCount = 0;
                 d.uid = 0;
+                d.cardPoolNum = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -4711,6 +4736,9 @@ $root.GamePto = (function() {
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
+            }
+            if (m.cardPoolNum != null && m.hasOwnProperty("cardPoolNum")) {
+                d.cardPoolNum = m.cardPoolNum;
             }
             return d;
         };

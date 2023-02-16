@@ -29,7 +29,11 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     }
 
     private replaceCards(msg: GamePto.S_REPLACE_CARDS) {
+        if (msg.uid !== UserModel.ins().uid) {
+            return;
+        }
         this.view.touchable = false;
+        this.view.chooseBtn.visible = false;
         const promiseArr = [];
         for (let index = 0; index < msg.replaceCardIndexes.length; index++) {
             const replaceIndex = msg.replaceCardIndexes[index];
@@ -81,6 +85,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
     public open(handCards: GamePto.ICard[], isFirst: boolean): void {
         super.open();
+        TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
 
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
@@ -94,10 +99,6 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
             this._cards.push(gameCard);
             //卡牌出现展示动画
             this.cardAddTween(handCards.length, index);
-            //最后的硬币不加点击事件
-            if (!isFirst && index === handCards.length - 1) {
-                continue;
-            }
             this.AddClick(gameCard.cardItem, () => {
                 gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
                 if (gameCard.cardItem.grayed) {
@@ -115,6 +116,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         this.view.removeChildren();
         this.view.addChild(this.view.chooseBtn);
         this.view.touchable = true;
+        this.view.chooseBtn.visible = true;
         this._cards = null;
     }
 

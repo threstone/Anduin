@@ -26,11 +26,11 @@ class TipsView extends BaseView<BaseUI.UITipsCom> {
         }
     }
 
-    updateViewDesc(text: string) {
+    public updateViewDesc(text: string) {
         this.view.desc.text = text;
     }
 
-    showTips(msg: string, hoverTime: number = 5000) {
+    public showTips(msg: string, hoverTime: number = 5000) {
         console.log(`showTips:${msg}`)
         let tips = this.getTipsField()
         tips.text = msg

@@ -66,6 +66,9 @@ export class GameUser {
     /**当前费用 */
     fee: number;
 
+    /** 替换的卡牌，用于首轮游戏给对方看换了哪些*/
+    replaceIndexes: number[];
+
     constructor(matchUser: MatchUser, table: GameTable) {
         this.clientName = matchUser.clientName;
         this.uid = matchUser.uid;
@@ -100,7 +103,8 @@ export class GameUser {
         this._eventPool = [];
         this._unitPool = [];
         this._handCards = [];
-
+        this.replaceIndexes = [];
+        
         /**设置英雄到战场 */
         const heroCard = this._cardPool.shift() as UnitCard;
         heroCard.x = 3;

@@ -68,6 +68,7 @@ message S_REPLACE_CARDS{
 	int32 scmd = 2[default = 10003];
 	repeated Card cards = 3;
 	repeated int32 replaceCardIndexes = 4;
+	int32 uid = 5;
 }
 
 //回合开始
@@ -96,6 +97,7 @@ message S_DRAW_CARDS{
 	int32 cardCount = 4;
 	repeated int32 damages = 5;
 	int32 uid = 6;
+	int32 cardPoolNum = 7;
 }
 
 //费用协议

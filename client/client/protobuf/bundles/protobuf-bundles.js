@@ -5522,6 +5522,7 @@ $root.GamePto = (function() {
          * @property {number|null} [scmd] S_REPLACE_CARDS scmd
          * @property {Array.<GamePto.ICard>|null} [cards] S_REPLACE_CARDS cards
          * @property {Array.<number>|null} [replaceCardIndexes] S_REPLACE_CARDS replaceCardIndexes
+         * @property {number|null} [uid] S_REPLACE_CARDS uid
          */
 
         /**
@@ -5574,6 +5575,14 @@ $root.GamePto = (function() {
         S_REPLACE_CARDS.prototype.replaceCardIndexes = $util.emptyArray;
 
         /**
+         * S_REPLACE_CARDS uid.
+         * @member {number} uid
+         * @memberof GamePto.S_REPLACE_CARDS
+         * @instance
+         */
+        S_REPLACE_CARDS.prototype.uid = 0;
+
+        /**
          * Encodes the specified S_REPLACE_CARDS message. Does not implicitly {@link GamePto.S_REPLACE_CARDS.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_REPLACE_CARDS
@@ -5598,6 +5607,8 @@ $root.GamePto = (function() {
                     writer.int32(message.replaceCardIndexes[i]);
                 writer.ldelim();
             }
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
             return writer;
         };
 
@@ -5642,6 +5653,10 @@ $root.GamePto = (function() {
                                 message.replaceCardIndexes.push(reader.int32());
                         } else
                             message.replaceCardIndexes.push(reader.int32());
+                        break;
+                    }
+                case 5: {
+                        message.uid = reader.int32();
                         break;
                     }
                 default:
@@ -5996,6 +6011,7 @@ $root.GamePto = (function() {
          * @property {number|null} [cardCount] S_DRAW_CARDS cardCount
          * @property {Array.<number>|null} [damages] S_DRAW_CARDS damages
          * @property {number|null} [uid] S_DRAW_CARDS uid
+         * @property {number|null} [cardPoolNum] S_DRAW_CARDS cardPoolNum
          */
 
         /**
@@ -6064,6 +6080,14 @@ $root.GamePto = (function() {
         S_DRAW_CARDS.prototype.uid = 0;
 
         /**
+         * S_DRAW_CARDS cardPoolNum.
+         * @member {number} cardPoolNum
+         * @memberof GamePto.S_DRAW_CARDS
+         * @instance
+         */
+        S_DRAW_CARDS.prototype.cardPoolNum = 0;
+
+        /**
          * Encodes the specified S_DRAW_CARDS message. Does not implicitly {@link GamePto.S_DRAW_CARDS.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_DRAW_CARDS
@@ -6092,6 +6116,8 @@ $root.GamePto = (function() {
             }
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
+            if (message.cardPoolNum != null && Object.hasOwnProperty.call(message, "cardPoolNum"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cardPoolNum);
             return writer;
         };
 
@@ -6144,6 +6170,10 @@ $root.GamePto = (function() {
                     }
                 case 6: {
                         message.uid = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.cardPoolNum = reader.int32();
                         break;
                     }
                 default:
