@@ -1,6 +1,8 @@
 class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
     private _replaceIndexes: number[];
+    private _cards: GameCard[];
+    get cards() { return this._cards }
 
     protected init() {
         this.view = BaseUI.UIChooseCards.createInstance();
@@ -10,18 +12,20 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     private onBtnClick() {
         GameModel.ins().C_PREPARE_TO_START(this._replaceIndexes);
         //TODO test
-        GameDispatcher.getInstance().emit('S_REPLACE_CARDS', {
-            "cards": [
-                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
-            ], "replaceCardIndexes": [0, 1]
-        })
-        GameDispatcher.getInstance().emit('S_ROUND_START_EVENT', { "uid": 2, "fee": 0, "maxFee": 0 });
+        if (TEST_GAME) {
+            GameDispatcher.getInstance().emit('S_REPLACE_CARDS', {
+                "cards": [
+                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
+                ], "replaceCardIndexes": [0, 1]
+            })
+            GameDispatcher.getInstance().emit('S_ROUND_START_EVENT', { "uid": 1, "fee": 1, "maxFee": 10 });
+        }
     }
 
     private replaceCards(msg: GamePto.S_REPLACE_CARDS) {
@@ -30,7 +34,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         for (let index = 0; index < msg.replaceCardIndexes.length; index++) {
             const replaceIndex = msg.replaceCardIndexes[index];
             promiseArr.push(this.deleteCardTween(replaceIndex));
-            GameSceneView.ins().cards[replaceIndex] = new GameCard(msg.cards[replaceIndex]);
+            this._cards[replaceIndex] = new GameCard(msg.cards[replaceIndex]);
             this.cardAddTween(msg.cards.length, replaceIndex);
         }
         return Promise.all(promiseArr);
@@ -39,7 +43,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     private deleteCardTween(replaceIndex: number) {
         return new Promise<void>((resolve) => {
             const poolPosition = GameSceneView.ins().getView().selfInfoBox.cardPoolBg.localToRoot();
-            const cardItem = GameSceneView.ins().cards[replaceIndex].cardItem;
+            const cardItem = this._cards[replaceIndex].cardItem;
             egret.Tween.get(cardItem).to({ y: cardItem.y - cardItem.height }, 400)
                 .to({ x: poolPosition.x }, 400)
                 .to({ scaleX: 0.5, scaleY: 0.5, skewX: 90, skewY: 90, y: poolPosition.y }, 900)
@@ -58,7 +62,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         const needWidth = (length - 1) * interval + cardWidth * length;
         const startX = (this.view.width - needWidth) / 2;
 
-        const gameCard = GameSceneView.ins().cards[index];
+        const gameCard = this._cards[index];
         this.view.addChild(gameCard.cardItem);
 
         gameCard.cardItem.skewX = 90;
@@ -81,11 +85,13 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
 
+        this._cards = [];
+
         this._replaceIndexes = [];
         for (let index = 0; index < handCards.length; index++) {
             const cardInfo = handCards[index];
             const gameCard = new GameCard(cardInfo);
-            GameSceneView.ins().cards.push(gameCard);
+            this._cards.push(gameCard);
             //卡牌出现展示动画
             this.cardAddTween(handCards.length, index);
             //最后的硬币不加点击事件
@@ -109,6 +115,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         this.view.removeChildren();
         this.view.addChild(this.view.chooseBtn);
         this.view.touchable = true;
+        this._cards = null;
     }
 
 }

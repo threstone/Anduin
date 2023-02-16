@@ -1,75 +1,127 @@
 class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
-    private _isSelf: boolean;
     private _cards: GameCard[];
     get cards() { return this._cards }
 
-    protected init(view: BaseUI.UIHandCardsCom, isSelf: boolean) {
+    protected init(view: BaseUI.UIHandCardsCom) {
         this.view = view;
-        this._isSelf = isSelf;
         this._cards = [];
     }
 
-    public addCard() {
+    public addCard(opTime: number, ...cards: GameCard[]) {
+        this._cards.push(...cards);
+        for (let index = 0; index < cards.length; index++) {
+            const cardItem = cards[index].cardItem;
+            cardItem.setPivot(0, 0, true);
+            this.view.addChild(cardItem);
+
+            //初始化悬浮事件
+            let oldIndex = this.view.getChildIndex(cardItem);
+            this.addEvent(cardItem.dragLoader, mouse.MouseEvent.ROLL_OVER, () => {
+                this.view.setChildIndex(cardItem, 99);
+                cardItem.scaleX = 1;
+                cardItem.scaleY = 1;
+            }, this);
+            this.addEvent(cardItem.dragLoader, mouse.MouseEvent.ROLL_OUT, () => {
+                this.view.setChildIndex(cardItem, oldIndex);
+                cardItem.scaleX = 0.5;
+                cardItem.scaleY = 0.5;
+            }, this);
+
+            //初始化拖动事件
+            let cacheX = 0;
+            let cacheY = 0;
+            cardItem.draggable = true;
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
+                cacheX = cardItem.x;
+                cacheY = cardItem.y;
+            }, this);
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
+                cardItem.x = cacheX;
+                cardItem.y = cacheY;
+                cardItem.scaleX = 0.5;
+                cardItem.scaleY = 0.5;
+            }, this);
+        }
+
         //悬浮变大、拖动使用
-        this.updataCardsPostion(1000);
+        return this.updateCardsPostion(opTime);
     }
 
-    public removeCard() {
-
-        this.updataCardsPostion(100);
+    public removeCard(gameCard: GameCard) {
+        const index = this._cards.indexOf(gameCard);
+        if (index === -1) {
+            return;
+        }
+        this.removeTargetEvents(gameCard.cardItem);
+        this.view.removeChild(gameCard.cardItem);
+        this._cards.splice(index);
     }
 
-    //根据手牌数量和卡牌大小计算卡牌位置
-    private updataCardsPostion(time: number, callback?: Function) {
+    //根据手牌数量和卡牌大小计算卡牌位置并移动
+    private updateCardsPostion(time: number) {
         const cardsLen = this._cards.length;
         if (cardsLen === 0) {
             return;
         }
         //计算各自卡牌的位置，然后用缓动动画移过去
-        const maxInterval = 15;
+        const maxSpacing = 15;
         const scale = 0.5;
-        const cardWidth = this._cards[0].cardItem.width * scale
-        const allWidth = cardsLen * cardWidth;
+        const cardWidth = this._cards[0].cardItem.width * scale;
+        const cardHeight = this._cards[0].cardItem.height * scale;
+        const allCardsWidth = cardsLen * cardWidth;
         const viewWidth = this.view.width;
-        let interval = 0;
+        let cardSpacing = 0;
         let startX = 0;
-        //款大于容器大小了,要叠加
-        if (allWidth >= viewWidth) {
-            interval = (viewWidth - allWidth) / (cardsLen - 1);
+        //宽大于容器大小了,要叠加
+        if (allCardsWidth >= viewWidth) {
+            cardSpacing = (viewWidth - allCardsWidth) / (cardsLen - 1);
             startX = 0;
         } else {
             //卡牌宽度容器足够装下
-            interval = (viewWidth - allWidth) / (cardsLen - 1);
-            if (interval > maxInterval) {
-                startX = (viewWidth - (allWidth + (cardsLen - 1) * 15)) / 2;
-                interval = maxInterval;
+            cardSpacing = (viewWidth - allCardsWidth) / (cardsLen - 1);
+            if (cardSpacing > maxSpacing) {
+                startX = (viewWidth - (allCardsWidth + (cardsLen - 1) * maxSpacing)) / 2;
+                cardSpacing = maxSpacing;
             }
         }
-
+        const y = (this.view.height - cardHeight) / 2 - cardHeight;
         for (let index = 0; index < cardsLen; index++) {
             const cardItem = this._cards[index].cardItem;
-            egret.Tween.get(cardItem).to({ x: startX + index * cardWidth + interval * index, y: 2, scaleX: scale, scaleY: scale }, time)
+            egret.Tween.get(cardItem).to({
+                x: startX + index * cardWidth + cardSpacing * index, y: y, scaleX: scale, scaleY: scale, skewX: 0, skewY: 0, pivotY: 1
+            }, time);
+
         }
-        // if (callback) {
-        //     callback();
-        // }
+        return this.wait(time);
     }
 
-    public showAddStartHandCards() {
+    /** 将起始卡牌加入手牌*/
+    public showAddStartHandCards(cards: GameCard[]) {
         ChooseCards.ins().close();
-        for (let index = 0; index < this.cards.length; index++) {
-            const card = this.cards[index];
+        for (let index = 0; index < cards.length; index++) {
+            const card = cards[index];
             const localPoint = this.view.rootToLocal(card.cardItem.x, card.cardItem.y)
             card.cardItem.x = localPoint.x;
             card.cardItem.y = localPoint.y;
-            this.view.addChild(card.cardItem);
         }
-        this.updataCardsPostion(800)
+        return this.addCard(800, ...cards);
+    }
+
+    /**抽卡 */
+    public drawCards(...cardsInfo: GamePto.ICard[]) {
+        const cardPoolPoint = GameSceneView.ins().selfUserBox.getCardPoolRootPosition();
+        const localPoint = this.view.rootToLocal(cardPoolPoint.x, cardPoolPoint.y);
+        return this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(cardsInfo, localPoint.x, localPoint.y, 0.5, 90));
     }
 
     public onGameStart() {
         this._cards = [];
+    }
+
+    /**疲劳伤害 */
+    public fatigue(damages: number[]) {
+        throw new Error("Method not implemented.");
     }
 
 }

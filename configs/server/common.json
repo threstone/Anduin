@@ -6,5 +6,10 @@
 "maxHandCardNum":7,
 "replaceCardTime":50000,
 "roundOptTime":90000,
-"startHandCardNum":5
+"startHandCardNum":5,
+"drawCardTime":400,
+"roundAtkTimes":3,
+"roundAtkTimesLimit":5,
+"roundMoveTimes":3,
+"roundMoveTimesLimit":5
 }

@@ -24,18 +24,16 @@ export class NodeRoundStart extends BaseNode {
 
     private deal(table: GameTable) {
         const user = table.users[table.nextRoundUserIndex];
-        // //费用增长以及重置
-        // if (user.feeMax < user.feeUpperLimit) {
-        //     user.feeMax++;
-        //     user.fee = user.feeMax;
-        // }
+        user.onRoundStart();
 
         //派发回合开始
         const roundStartMsg = new GamePto.S_ROUND_START_EVENT();
         roundStartMsg.uid = user.uid;
-        roundStartMsg.maxFee = user.feeMax;
-        roundStartMsg.fee = user.fee;
-
+        roundStartMsg.atkTimes = user.atkTimes;
+        roundStartMsg.atkTimesLimit = user.atkTimesLimit;
+        roundStartMsg.moveTimes = user.moveTimes;
+        roundStartMsg.moveTimesLimit = user.moveTimesLimit;
+        
         table.broadcast(roundStartMsg);
 
         console.log("派发回合开始协议");
@@ -54,9 +52,6 @@ export class NodeRoundStart extends BaseNode {
             //计算所有回合开始事件所需要的时间
             sum += card.onRoundStart();
         }
-
-        //发牌
-        user.drawCardsFromPool(1);
 
         //玩家有可能在这个阶段死亡
         if (table.checkGameOver()) {

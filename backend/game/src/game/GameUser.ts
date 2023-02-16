@@ -49,6 +49,15 @@ export class GameUser {
     /**疲劳值 */
     private _fatigue: number;
 
+    /**可攻击次数 */
+    atkTimes: number
+    /* 可攻击次数上限 */
+    atkTimesLimit: number
+
+    /**可移动次数 */
+    moveTimes: number
+    /* 可移动次数上限 */
+    moveTimesLimit: number
 
     /**费用增长上限*/
     feeUpperLimit: number;
@@ -64,6 +73,15 @@ export class GameUser {
         this.isOnline = true;
 
         this._cardGroup = matchUser.cardGroup;
+    }
+
+    /**回合开始 */
+    public onRoundStart() {
+        //重置移动、攻击次数
+        this.atkTimes = GlobalVar.configMgr.common.roundAtkTimes;
+        this.atkTimesLimit = GlobalVar.configMgr.common.roundAtkTimesLimit;
+        this.moveTimes = GlobalVar.configMgr.common.roundMoveTimes;
+        this.moveTimesLimit = GlobalVar.configMgr.common.roundMoveTimesLimit;
     }
 
     /**重置用户游戏数据 */
@@ -123,6 +141,7 @@ export class GameUser {
         message.cards = [];
         //派发消息给另外一个玩家
         this.table.getOtherUser(this.uid).sendMsg(message);
+        return GlobalVar.configMgr.common.drawCardTime;
     }
 
     /**设置单位卡到地图 */
@@ -131,14 +150,14 @@ export class GameUser {
         this._unitPool.push(card);
     }
 
-    /**获取手牌id */
-    // public getHandCardIds() {
-    //     const result: number[] = [];
-    //     for (let index = 0; index < this._handCards.length; index++) {
-    //         result.push(this._handCards[index].cardId)
-    //     }
-    //     return result;
-    // }
+    /**广播费用 */
+    public broadcastFeeInfo() {
+        const msg = new GamePto.S_FEE_INFO()
+        msg.uid = this.uid;
+        msg.fee = this.fee;
+        msg.maxFee = this.feeMax;
+        this._table.broadcast(msg);
+    }
 
     public sendMsg(message: IGameMessage) {
         if (this.isOnline === false) {

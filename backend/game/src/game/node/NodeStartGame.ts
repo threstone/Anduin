@@ -97,6 +97,9 @@ export class NodeStartGame extends BaseNode {
 
             gameStartMsg.cards = user.handCards;
             user.sendMsg(gameStartMsg);
+
+            //广播用户费用
+            user.broadcastFeeInfo();
         }
         console.log("派发游戏开始协议");
     }

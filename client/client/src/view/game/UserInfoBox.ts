@@ -38,4 +38,19 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox>{
     public setLeastCardNum(num: number) {
         this.view.leastCardNum.text = `剩余卡牌\n${num}`
     }
+
+    /** 获取卡尺的全局位置*/
+    public getCardPoolRootPosition() {
+        return this.view.cardPoolBg.localToRoot();
+    }
+
+    /**设置攻击次数信息 */
+    public setAtkTimesInfo(times: number, timesLimit) {
+        this.view.atkTimes.text = `攻击次数${times}/${timesLimit}`
+    }
+
+    /**设置移动次数信息 */
+    public setMoveTimesInfo(times: number, timesLimit) {
+        this.view.moveTimes.text = `攻击次数${times}/${timesLimit}`
+    }
 }

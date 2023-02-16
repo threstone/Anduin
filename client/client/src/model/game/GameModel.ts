@@ -1,3 +1,4 @@
+let TEST_GAME = true;
 class GameModel extends BaseModel {
 
     handCards: GamePto.ICard[];
@@ -18,6 +19,7 @@ class GameModel extends BaseModel {
 
     //初始化游戏
     S_INIT_GAME(msg: GamePto.S_INIT_GAME) {
+        TEST_GAME = false;
         this.emit('S_INIT_GAME', msg);
     }
 
@@ -42,5 +44,18 @@ class GameModel extends BaseModel {
     //回合结束
     S_ROUND_END_EVENT(msg: GamePto.S_ROUND_END_EVENT) {
         this.emit('S_ROUND_END_EVENT', msg);
+    }
+
+    //抽卡疲劳
+    S_DRAW_CARDS(msg: GamePto.S_DRAW_CARDS) {
+        if (msg.uid === UserModel.ins().uid && msg.cardCount !== 0) {
+            this.handCards.push(...msg.cards);
+        }
+        this.emit('S_DRAW_CARDS', msg);
+    }
+
+    //费用协议
+    S_FEE_INFO(msg: GamePto.S_FEE_INFO) {
+        this.emit('S_FEE_INFO', msg);
     }
 }

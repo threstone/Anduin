@@ -31,4 +31,6 @@ interface CommonConfig {
     cardMakeFee: number[]
     cardDisassembleReturnRatio: number
     maxGroupNum: number
+    startHandCardNum: number
+    drawCardTime: number
 }

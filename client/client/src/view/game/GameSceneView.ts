@@ -7,11 +7,16 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     blockWidth: number;
     blockHeight: number;
 
-    targetHandCom: HandCardView;
+    targetHandCom: TargetHandCom;
     selfHandCom: HandCardView;
 
     targetUserBox: UserInfoBox;
     selfUserBox: UserInfoBox;
+
+    /**是否允许操作 */
+    get allowToOprate() { return this._allowToOprate; }
+    private _allowToOprate: boolean;
+
 
     //消息收到后就马上执行数据的变更，但是动画的展示应该维护一个pool来顺序播放
     private _effectPool: (() => Promise<any>)[];
@@ -23,8 +28,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.view = BaseUI.UIGameSceneCom.createInstance();
 
         //初始化双方手牌控件
-        this.targetHandCom = new HandCardView(this.view.targetHand, false);
-        this.selfHandCom = new HandCardView(this.view.selfHand, true);
+        this.targetHandCom = new TargetHandCom(this.view.targetHand);
+        this.selfHandCom = new HandCardView(this.view.selfHand);
 
         //初始化双方手牌控件
         this.targetUserBox = new UserInfoBox(this.view.targetInfoBox);
@@ -68,24 +73,25 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this._isPlaying = false;
 
         //TODO test
-        let temp = {
-            "firstUid": 1,
-            "cards": [
-                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
-            ],
-            "mapData": {},
-            "replaceEndTime": "1676296544675"
+        if (TEST_GAME) {
+            let temp = {
+                "firstUid": 1,
+                "cards": [
+                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
+                ],
+                "mapData": {},
+                "replaceEndTime": "1676296544675"
+            }
+            this.onGameStart({
+                data: temp
+            })
         }
-        this.onGameStart({
-            data: temp
-        })
-
 
         this.initUserInfo(evt.data)
 
@@ -109,6 +115,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.observe('GameSceneClose', this.close);
         this.observe('S_GAME_START', this.onGameStart);
         this.observe('S_ROUND_START_EVENT', this.onRoundStart);
+        this.observe('S_FEE_INFO', this.onFeeInfo);
+        this.observe('S_DRAW_CARDS', this.onDrawCards);
     }
 
     /**将函数加入特效池 */
@@ -131,20 +139,54 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
     private onRoundStart(evt: EventData) {
         const msg: GamePto.S_ROUND_START_EVENT = evt.data;
-        const userInfoBox = msg.uid === UserModel.ins().uid ? this.selfUserBox : this.targetUserBox;
-        userInfoBox.feeSet(msg.fee, msg.maxFee);
+
         //如果换牌界面还在,则要把卡先放到手牌中
         if (ChooseCards.ins().isOnStage()) {
-            this.addToEffectPool(this.selfHandCom.showAddStartHandCards.bind(this.selfHandCom));
-        } else {
+            this.addToEffectPool(this.selfHandCom.showAddStartHandCards.bind(this.selfHandCom, ChooseCards.ins().cards));
+            //TODO test
+            if (TEST_GAME) {
+                //TEST CODE
+                this.addToEffectPool(this.selfHandCom.drawCards.bind(this.selfHandCom,
+                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 }));
+                this.targetHandCom.replace([1, 3])
+            }
+        }
 
+        //自己的回合开始了
+        if (msg.uid === UserModel.ins().uid) {
+            this._allowToOprate = true;
+            this.selfUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
+            this.selfUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
+        }else{
+            this.targetUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
+            this.targetUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
     }
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
+        this.targetHandCom.drawStartHandCards();
         this.selfHandCom.onGameStart();
         ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid)
+    }
+
+
+    private onFeeInfo(evt: EventData) {
+        const msg: GamePto.S_FEE_INFO = evt.data;
+        const userInfoBox = msg.uid === UserModel.ins().uid ? this.selfUserBox : this.targetUserBox;
+        userInfoBox.feeSet(msg.fee, msg.maxFee);
+    }
+
+    private onDrawCards(evt: EventData) {
+        const msg: GamePto.S_DRAW_CARDS = evt.data;
+        if (msg.uid === UserModel.ins().uid) {
+            this.selfHandCom.drawCards(...msg.cards);
+            this.selfHandCom.fatigue(msg.damages);
+        } else {
+            this.targetHandCom.drawCardsToHand(msg.cardCount);
+            this.targetHandCom.fatigue(msg.damages);
+        }
     }
 
     private initView() {

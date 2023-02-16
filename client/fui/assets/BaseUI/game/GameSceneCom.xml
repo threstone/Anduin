@@ -2,16 +2,16 @@
 <component size="1600,1200">
   <displayList>
     <image id="n26_pg48" name="bg" src="pg482c" fileName="game/res/bbg_arena.jpg" xy="0,0" size="1600,1200"/>
-    <image id="n34_pg48" name="map" src="pg482f" fileName="game/res/map.png" xy="310,215"/>
+    <image id="n34_pg48" name="map" src="pg482f" fileName="game/res/map.png" xy="310,219"/>
     <graph id="n22_jig1" name="panding" xy="1409,361" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
     <graph id="n23_jig1" name="record" xy="1,385" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
-    <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1152,1028">
+    <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1152,990">
       <relation target="" sidePair="right-right,bottom-bottom"/>
     </component>
     <component id="n29_pg48" name="targetInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1154,2">
       <relation target="" sidePair="right-right,top-top"/>
     </component>
-    <component id="n32_pg48" name="selfHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="335,1009"/>
+    <component id="n32_pg48" name="selfHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="335,990"/>
     <component id="n33_pg48" name="targetHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="335,0"/>
   </displayList>
 </component>

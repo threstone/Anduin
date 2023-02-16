@@ -60,6 +60,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         }, this);
     }
 
+    /**移除目标的所有事件 */
     protected removeTargetEvents(target: egret.DisplayObject | fairygui.GObject) {
         for (let index = this.eventList.length - 1; index >= 0; index--) {
             const eventData = this.eventList[index];
@@ -145,5 +146,14 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.observe(eventName, (evt: EventData) => {
             GameSceneView.ins().addToEffectPool(fun.bind(this, evt.data));
         });
+    }
+
+    protected wait(waitTime: number) {
+        return new Promise<void>((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, waitTime);
+        });
+
     }
 }

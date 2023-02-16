@@ -75,8 +75,10 @@ message S_ROUND_START_EVENT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10004];
 	int32 uid = 3;
-	int32 fee = 4;
-	int32 maxFee = 5;
+	int32 atkTimes = 4;
+	int32 atkTimesLimit = 5;
+	int32 moveTimes = 6;
+	int32 moveTimesLimit = 7;
 }
 
 //回合结束
@@ -96,3 +98,11 @@ message S_DRAW_CARDS{
 	int32 uid = 6;
 }
 
+//费用协议
+message S_FEE_INFO{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10007];
+	int32 fee = 3;
+	int32 maxFee = 4;
+	int32 uid = 5;
+}

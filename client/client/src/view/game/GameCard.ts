@@ -11,4 +11,19 @@ class GameCard {
         this.cardItem.healthText.text = `${cardInfo.health}`;
         this.cardItem.cardNum.visible = false;
     }
+
+    public static getGameCards(cardsInfo: GamePto.ICard[], x: number = 0, y: number = 0, scale: number = 1, skew: number = 0) {
+        const gameCards: GameCard[] = [];
+        for (let index = 0; index < cardsInfo.length; index++) {
+            const gameCard = new GameCard(cardsInfo[index]);
+            gameCards.push(gameCard);
+            gameCard.cardItem.x = x;
+            gameCard.cardItem.y = y;
+            gameCard.cardItem.scaleX = scale;
+            gameCard.cardItem.scaleY = scale;
+            gameCard.cardItem.skewX = skew;
+            gameCard.cardItem.skewY = skew;
+        }
+        return gameCards;
+    }
 }

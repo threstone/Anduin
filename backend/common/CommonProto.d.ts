@@ -3597,11 +3597,17 @@ export namespace GamePto {
         /** S_ROUND_START_EVENT uid */
         uid?: (number|null);
 
-        /** S_ROUND_START_EVENT fee */
-        fee?: (number|null);
+        /** S_ROUND_START_EVENT atkTimes */
+        atkTimes?: (number|null);
 
-        /** S_ROUND_START_EVENT maxFee */
-        maxFee?: (number|null);
+        /** S_ROUND_START_EVENT atkTimesLimit */
+        atkTimesLimit?: (number|null);
+
+        /** S_ROUND_START_EVENT moveTimes */
+        moveTimes?: (number|null);
+
+        /** S_ROUND_START_EVENT moveTimesLimit */
+        moveTimesLimit?: (number|null);
     }
 
     /** Represents a S_ROUND_START_EVENT. */
@@ -3622,11 +3628,17 @@ export namespace GamePto {
         /** S_ROUND_START_EVENT uid. */
         public uid: number;
 
-        /** S_ROUND_START_EVENT fee. */
-        public fee: number;
+        /** S_ROUND_START_EVENT atkTimes. */
+        public atkTimes: number;
 
-        /** S_ROUND_START_EVENT maxFee. */
-        public maxFee: number;
+        /** S_ROUND_START_EVENT atkTimesLimit. */
+        public atkTimesLimit: number;
+
+        /** S_ROUND_START_EVENT moveTimes. */
+        public moveTimes: number;
+
+        /** S_ROUND_START_EVENT moveTimesLimit. */
+        public moveTimesLimit: number;
 
         /**
          * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
@@ -3915,6 +3927,120 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_DRAW_CARDS
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FEE_INFO. */
+    interface IS_FEE_INFO {
+
+        /** S_FEE_INFO cmd */
+        cmd?: (number|null);
+
+        /** S_FEE_INFO scmd */
+        scmd?: (number|null);
+
+        /** S_FEE_INFO fee */
+        fee?: (number|null);
+
+        /** S_FEE_INFO maxFee */
+        maxFee?: (number|null);
+
+        /** S_FEE_INFO uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_FEE_INFO. */
+    class S_FEE_INFO implements IS_FEE_INFO {
+
+        /**
+         * Constructs a new S_FEE_INFO.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_FEE_INFO);
+
+        /** S_FEE_INFO cmd. */
+        public cmd: number;
+
+        /** S_FEE_INFO scmd. */
+        public scmd: number;
+
+        /** S_FEE_INFO fee. */
+        public fee: number;
+
+        /** S_FEE_INFO maxFee. */
+        public maxFee: number;
+
+        /** S_FEE_INFO uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_FEE_INFO message. Does not implicitly {@link GamePto.S_FEE_INFO.verify|verify} messages.
+         * @param message S_FEE_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_FEE_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_FEE_INFO message, length delimited. Does not implicitly {@link GamePto.S_FEE_INFO.verify|verify} messages.
+         * @param message S_FEE_INFO message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_FEE_INFO, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_FEE_INFO message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FEE_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_FEE_INFO;
+
+        /**
+         * Decodes a S_FEE_INFO message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_FEE_INFO
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_FEE_INFO;
+
+        /**
+         * Verifies a S_FEE_INFO message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_FEE_INFO message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_FEE_INFO
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_FEE_INFO;
+
+        /**
+         * Creates a plain object from a S_FEE_INFO message. Also converts values to other types if specified.
+         * @param message S_FEE_INFO
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_FEE_INFO, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_FEE_INFO to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_FEE_INFO
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

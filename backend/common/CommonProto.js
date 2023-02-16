@@ -4285,8 +4285,10 @@ $root.GamePto = (function() {
         S_ROUND_START_EVENT.prototype.cmd = 200;
         S_ROUND_START_EVENT.prototype.scmd = 10004;
         S_ROUND_START_EVENT.prototype.uid = 0;
-        S_ROUND_START_EVENT.prototype.fee = 0;
-        S_ROUND_START_EVENT.prototype.maxFee = 0;
+        S_ROUND_START_EVENT.prototype.atkTimes = 0;
+        S_ROUND_START_EVENT.prototype.atkTimesLimit = 0;
+        S_ROUND_START_EVENT.prototype.moveTimes = 0;
+        S_ROUND_START_EVENT.prototype.moveTimesLimit = 0;
 
         S_ROUND_START_EVENT.create = function create(properties) {
             return new S_ROUND_START_EVENT(properties);
@@ -4301,10 +4303,14 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.scmd);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(24).int32(m.uid);
-            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(32).int32(m.fee);
-            if (m.maxFee != null && Object.hasOwnProperty.call(m, "maxFee"))
-                w.uint32(40).int32(m.maxFee);
+            if (m.atkTimes != null && Object.hasOwnProperty.call(m, "atkTimes"))
+                w.uint32(32).int32(m.atkTimes);
+            if (m.atkTimesLimit != null && Object.hasOwnProperty.call(m, "atkTimesLimit"))
+                w.uint32(40).int32(m.atkTimesLimit);
+            if (m.moveTimes != null && Object.hasOwnProperty.call(m, "moveTimes"))
+                w.uint32(48).int32(m.moveTimes);
+            if (m.moveTimesLimit != null && Object.hasOwnProperty.call(m, "moveTimesLimit"))
+                w.uint32(56).int32(m.moveTimesLimit);
             return w;
         };
 
@@ -4328,11 +4334,19 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        m.fee = r.int32();
+                        m.atkTimes = r.int32();
                         break;
                     }
                 case 5: {
-                        m.maxFee = r.int32();
+                        m.atkTimesLimit = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.moveTimes = r.int32();
+                        break;
+                    }
+                case 7: {
+                        m.moveTimesLimit = r.int32();
                         break;
                     }
                 default:
@@ -4356,11 +4370,17 @@ $root.GamePto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
-            if (d.fee != null) {
-                m.fee = d.fee | 0;
+            if (d.atkTimes != null) {
+                m.atkTimes = d.atkTimes | 0;
             }
-            if (d.maxFee != null) {
-                m.maxFee = d.maxFee | 0;
+            if (d.atkTimesLimit != null) {
+                m.atkTimesLimit = d.atkTimesLimit | 0;
+            }
+            if (d.moveTimes != null) {
+                m.moveTimes = d.moveTimes | 0;
+            }
+            if (d.moveTimesLimit != null) {
+                m.moveTimesLimit = d.moveTimesLimit | 0;
             }
             return m;
         };
@@ -4373,8 +4393,10 @@ $root.GamePto = (function() {
                 d.cmd = 200;
                 d.scmd = 10004;
                 d.uid = 0;
-                d.fee = 0;
-                d.maxFee = 0;
+                d.atkTimes = 0;
+                d.atkTimesLimit = 0;
+                d.moveTimes = 0;
+                d.moveTimesLimit = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -4385,11 +4407,17 @@ $root.GamePto = (function() {
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
             }
-            if (m.fee != null && m.hasOwnProperty("fee")) {
-                d.fee = m.fee;
+            if (m.atkTimes != null && m.hasOwnProperty("atkTimes")) {
+                d.atkTimes = m.atkTimes;
             }
-            if (m.maxFee != null && m.hasOwnProperty("maxFee")) {
-                d.maxFee = m.maxFee;
+            if (m.atkTimesLimit != null && m.hasOwnProperty("atkTimesLimit")) {
+                d.atkTimesLimit = m.atkTimesLimit;
+            }
+            if (m.moveTimes != null && m.hasOwnProperty("moveTimes")) {
+                d.moveTimes = m.moveTimes;
+            }
+            if (m.moveTimesLimit != null && m.hasOwnProperty("moveTimesLimit")) {
+                d.moveTimesLimit = m.moveTimesLimit;
             }
             return d;
         };
@@ -4699,6 +4727,141 @@ $root.GamePto = (function() {
         };
 
         return S_DRAW_CARDS;
+    })();
+
+    GamePto.S_FEE_INFO = (function() {
+
+        function S_FEE_INFO(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FEE_INFO.prototype.cmd = 200;
+        S_FEE_INFO.prototype.scmd = 10007;
+        S_FEE_INFO.prototype.fee = 0;
+        S_FEE_INFO.prototype.maxFee = 0;
+        S_FEE_INFO.prototype.uid = 0;
+
+        S_FEE_INFO.create = function create(properties) {
+            return new S_FEE_INFO(properties);
+        };
+
+        S_FEE_INFO.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
+                w.uint32(24).int32(m.fee);
+            if (m.maxFee != null && Object.hasOwnProperty.call(m, "maxFee"))
+                w.uint32(32).int32(m.maxFee);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(40).int32(m.uid);
+            return w;
+        };
+
+        S_FEE_INFO.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_FEE_INFO();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.fee = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.maxFee = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FEE_INFO.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_FEE_INFO)
+                return d;
+            var m = new $root.GamePto.S_FEE_INFO();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.fee != null) {
+                m.fee = d.fee | 0;
+            }
+            if (d.maxFee != null) {
+                m.maxFee = d.maxFee | 0;
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            return m;
+        };
+
+        S_FEE_INFO.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10007;
+                d.fee = 0;
+                d.maxFee = 0;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.fee != null && m.hasOwnProperty("fee")) {
+                d.fee = m.fee;
+            }
+            if (m.maxFee != null && m.hasOwnProperty("maxFee")) {
+                d.maxFee = m.maxFee;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            return d;
+        };
+
+        S_FEE_INFO.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FEE_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_FEE_INFO";
+        };
+
+        return S_FEE_INFO;
     })();
 
     return GamePto;
