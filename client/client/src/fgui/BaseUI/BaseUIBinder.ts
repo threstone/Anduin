@@ -36,6 +36,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFeeBtn.URL, UIFeeBtn);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIPowerBtn.URL, UIPowerBtn);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardDetail.URL, UIShowCardDetail);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIRightCtrlCom.URL, UIRightCtrlCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsCom.URL, UICardsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsBtn.URL, UICardsBtn);
 		}

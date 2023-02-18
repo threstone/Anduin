@@ -91,7 +91,7 @@ export class GameUser {
     public resetInfo() {
         this.isReplace = false
         this._cardPool = [];
-        for (let index = 1; index < this._cardGroup.cards.length; index++) {
+        for (let index = 0; index < this._cardGroup.cards.length; index++) {
             const cardInfo = this._cardGroup.cards[index];
             for (let z = 0; z < cardInfo.count; z++) {
                 const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id);
@@ -104,7 +104,7 @@ export class GameUser {
         this._unitPool = [];
         this._handCards = [];
         this.replaceIndexes = [];
-        
+
         /**设置英雄到战场 */
         const heroCard = this._cardPool.shift() as UnitCard;
         heroCard.x = 3;

@@ -1,10 +1,43 @@
-class TargetHandCom extends BaseView<BaseUI.UIHandCardsCom>{
+class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     private _cards: BaseUI.UICardBackItem[];
 
-    protected init(view: BaseUI.UIHandCardsCom) {
-        this.view = view;
+    protected init() {
+        this.view = GameSceneView.ins().getView().targetHand;
         this._cards = [];
+    }
+
+    public open(): void {
+        super.open();
+        this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
+        this.observe('S_REPLACE_CARDS', this.onReplaceCards);
+        this.observe('S_GAME_START', this.drawStartHandCards);
+
+    }
+
+    public close(): void {
+        super.close()
+
+        for (let index = 0; index < this._cards.length; index++) {
+            const card = this._cards[index];
+            this.view.removeChild(card);
+        }
+        this._cards = [];
+    }
+
+    private onReplaceCards(evt: EventData) {
+        const msg: GamePto.S_REPLACE_CARDS = evt.data;
+        if (msg.uid !== UserModel.ins().uid) {
+            TargetHandView.ins().replace(msg.replaceCardIndexes);
+        }
+    }
+
+    private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
+        if (msg.uid !== UserModel.ins().uid) {
+            await TargetHandView.ins().drawCardsToHand(msg.cardCount);
+            TargetHandView.ins().fatigue(msg.damages);
+            TargetInfoBox.ins().setLeastCardNum(msg.cardPoolNum);
+        }
     }
 
     /** 抽起始手牌*/

@@ -7,12 +7,6 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     blockWidth: number;
     blockHeight: number;
 
-    targetHandCom: TargetHandCom;
-    selfHandCom: HandCardView;
-
-    targetUserBox: UserInfoBox;
-    selfUserBox: UserInfoBox;
-
     /**是否允许操作 */
     get allowToOprate() { return this._allowToOprate; }
     private _allowToOprate: boolean;
@@ -22,19 +16,20 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     private _effectPool: (() => Promise<any>)[];
     private _isPlaying: boolean;
 
-    get cards() { return this.selfHandCom.cards }
+    // get cards() { return HandCardView.ins().cards }
 
     protected init() {
         this.view = BaseUI.UIGameSceneCom.createInstance();
 
-        //初始化双方手牌控件
-        this.targetHandCom = new TargetHandCom(this.view.targetHand);
-        this.selfHandCom = new HandCardView(this.view.selfHand);
+        //绑定这些控件和此控件一同显示和关闭
+        this.bindView(HandCardView.ins());
+        this.bindView(TargetHandView.ins());
+        this.bindView(RightCtrlView.ins());
 
-        //初始化双方手牌控件
-        this.targetUserBox = new UserInfoBox(this.view.targetInfoBox);
-        this.selfUserBox = new UserInfoBox(this.view.selfInfoBox);
+        this.bindView(SelfInfoBox.ins());
+        this.bindView(TargetInfoBox.ins());
 
+        this.view.close.describe.text = 'tempCloseBtn'
 
         this.mapX = 313;
         this.mapY = 220;
@@ -66,58 +61,23 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         (this.view.displayObject as egret.DisplayObjectContainer).addChild(shp);
     }
 
-    public open(evt: EventData): void {
+    public open(): void {
         super.open();
 
         this._effectPool = [];
         this._isPlaying = false;
 
-        //TODO test
-        if (TEST_GAME) {
-            let temp = {
-                "firstUid": 1,
-                "cards": [
-                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
-                ],
-                "mapData": {},
-                "replaceEndTime": "1676296544675"
-            }
-            this.onGameStart({
-                data: temp
-            })
-        }
-
-        this.initUserInfo(evt.data)
-
         this.initEvents();
         this.initView();
     }
 
-
-    /**初始化双方职业，昵称 */
-    private initUserInfo(msg: GamePto.S_INIT_GAME) {
-        if (msg.users[0].uid === UserModel.ins().uid) {
-            this.selfUserBox.setUserInfo(msg.users[0]);
-            this.targetUserBox.setUserInfo(msg.users[1]);
-        } else {
-            this.selfUserBox.setUserInfo(msg.users[1]);
-            this.targetUserBox.setUserInfo(msg.users[0]);
-        }
-    }
-
     private initEvents() {
+        //以下三个事件考虑是否有用,未来可能用的到,如果用不到就都单独抽到对应的组件中
         this.observe('GameSceneClose', this.close);
         this.observe('S_GAME_START', this.onGameStart);
         this.observe('S_ROUND_START_EVENT', this.onRoundStart);
-        this.observe('S_FEE_INFO', this.onFeeInfo);
-        this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
-        this.observe('S_REPLACE_CARDS', this.onReplaceCards);
+
+        this.AddClick(this.view.close, this.close);
     }
 
     /**将函数加入特效池 */
@@ -140,62 +100,15 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
     private onRoundStart(evt: EventData) {
         const msg: GamePto.S_ROUND_START_EVENT = evt.data;
-
-        //如果换牌界面还在,则要把卡先放到手牌中
-        if (ChooseCards.ins().isOnStage()) {
-            this.addToEffectPool(this.selfHandCom.showAddStartHandCards.bind(this.selfHandCom, ChooseCards.ins().cards));
-            //TODO test
-            if (TEST_GAME) {
-                //TEST CODE
-                this.addToEffectPool(this.selfHandCom.drawCards.bind(this.selfHandCom,
-                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 }));
-                this.targetHandCom.replace([1, 3])
-            }
-        }
-
         //自己的回合开始了
         if (msg.uid === UserModel.ins().uid) {
             this._allowToOprate = true;
-            this.selfUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
-            this.selfUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
-        } else {
-            this.targetUserBox.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
-            this.targetUserBox.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
     }
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
-        this.targetHandCom.drawStartHandCards();
-        this.selfHandCom.onGameStart();
         ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid)
-    }
-
-
-    private onFeeInfo(evt: EventData) {
-        const msg: GamePto.S_FEE_INFO = evt.data;
-        const userInfoBox = msg.uid === UserModel.ins().uid ? this.selfUserBox : this.targetUserBox;
-        userInfoBox.feeSet(msg.fee, msg.maxFee);
-    }
-
-    private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
-        if (msg.uid === UserModel.ins().uid) {
-            await this.selfHandCom.drawCards(...msg.cards);
-            this.selfHandCom.fatigue(msg.damages);
-            this.selfUserBox.setLeastCardNum(msg.cardPoolNum);
-        } else {
-            await this.targetHandCom.drawCardsToHand(msg.cardCount);
-            this.targetHandCom.fatigue(msg.damages);
-            this.targetUserBox.setLeastCardNum(msg.cardPoolNum);
-        }
-    }
-
-    private onReplaceCards(evt: EventData) {
-        const msg: GamePto.S_REPLACE_CARDS = evt.data;
-        if (msg.uid !== UserModel.ins().uid) {
-            this.targetHandCom.replace(msg.replaceCardIndexes);
-        }
     }
 
     private initView() {

@@ -3,9 +3,33 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     private _cards: GameCard[];
     get cards() { return this._cards }
 
-    protected init(view: BaseUI.UIHandCardsCom) {
-        this.view = view;
+    protected init() {
+        this.view = GameSceneView.ins().getView().selfHand;;
         this._cards = [];
+    }
+
+    public open(): void {
+        super.open();
+
+        this.addEffectListener('S_DRAW_CARDS', this.onDrawCards);
+    }
+
+    public close(): void {
+        super.close()
+        
+        for (let index = 0; index < this._cards.length; index++) {
+            const card = this._cards[index];
+            this.view.removeChild(card.cardItem);
+        }
+        this._cards = [];
+    }
+
+    private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
+        if (msg.uid === UserModel.ins().uid) {
+            await this.drawCards(...msg.cards);
+            this.fatigue(msg.damages);
+            SelfInfoBox.ins().setLeastCardNum(msg.cardPoolNum);
+        }
     }
 
     public addCard(opTime: number, ...cards: GameCard[]) {
@@ -98,7 +122,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /** 将起始卡牌加入手牌*/
     public showAddStartHandCards(cards: GameCard[]) {
-        ChooseCards.ins().close();
         for (let index = 0; index < cards.length; index++) {
             const card = cards[index];
             const localPoint = this.view.rootToLocal(card.cardItem.x, card.cardItem.y)
@@ -110,13 +133,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /**抽卡 */
     public drawCards(...cardsInfo: GamePto.ICard[]) {
-        const cardPoolPoint = GameSceneView.ins().selfUserBox.getCardPoolRootPosition();
+        const cardPoolPoint = SelfInfoBox.ins().getCardPoolRootPosition();
         const localPoint = this.view.rootToLocal(cardPoolPoint.x, cardPoolPoint.y);
         return this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(cardsInfo, localPoint.x, localPoint.y, 0.5, 90));
-    }
-
-    public onGameStart() {
-        this._cards = [];
     }
 
     /**疲劳伤害 */

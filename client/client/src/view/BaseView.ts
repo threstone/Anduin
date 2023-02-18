@@ -7,7 +7,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
             for (let index = 0; index < arguments.length; index++) {
                 arr.push(arguments[index])
             }
-            self.__instance__ = new self(...arr);
+            self.__instance__ = new self();
             /**
              * 这里其实是使用了静态继承来实现 B继承A  A继承BaseView时,B.ins()和A.ins()会返回各自不同的单例
              * 调试时并无问题，但是当egret发布后,结果是不一样的,当B.ins()和A.ins()被调用时,
@@ -15,6 +15,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
              * 所以这里用father的方式来指定父级,以区分不同类单例的父级防止使用同一条继承链中最先创建的实例
              */
             self.__instance__.__father__ = self;
+            self.__instance__.init(...arr);
         }
         return self.__instance__;
     }
@@ -24,9 +25,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
 
     private eventList: EventListenerData[] = [];
 
-    constructor(...param: any[]) {
-        this.init(...param);
-    }
+    private _bindViewList: BaseView<fairygui.GComponent>[];
 
     protected abstract init(...param: any[]);
 
@@ -94,6 +93,12 @@ abstract class BaseView<T extends fairygui.GComponent> {
      */
     public open(...param: any[]) {
         fairygui.GRoot.inst.addChild(this.view);
+        if (this._bindViewList) {
+            for (let index = 0; index < this._bindViewList.length; index++) {
+                const bindView = this._bindViewList[index];
+                bindView.open(param);
+            }
+        }
     }
 
     /**
@@ -101,6 +106,12 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @param param 参数
      */
     public close(...param: any[]) {
+        if (this._bindViewList) {
+            for (let index = 0; index < this._bindViewList.length; index++) {
+                const bindView = this._bindViewList[index];
+                bindView.close(param);
+            }
+        }
         fairygui.GRoot.inst.removeChild(this.view);
         this.removeEvents();
     }
@@ -154,6 +165,15 @@ abstract class BaseView<T extends fairygui.GComponent> {
                 resolve();
             }, waitTime);
         });
+    }
 
+    /**
+     * 绑定此view和自身共同显示和关闭
+     */
+    protected bindView(view: BaseView<fairygui.GComponent>) {
+        if (!this._bindViewList) {
+            this._bindViewList = [];
+        }
+        this._bindViewList.push(view);
     }
 }

@@ -21,9 +21,25 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
 
         this.view.pveBtn.describe.text = '冒险';
         this.AddClick(this.view.pveBtn, () => {
-            GameSceneView.ins().open({
-                data: { users: [{ nick: UserModel.ins().nick, power: 1, uid: UserModel.ins().uid }, { nick: "1", power: 2, uid: 123 }] }
-            });
+            GameDispatcher.getInstance().emit('S_INIT_GAME', { users: [{ nick: UserModel.ins().nick, power: 1, uid: UserModel.ins().uid }, { nick: "1", power: 2, uid: 123 }] })
+            //TODO test
+            if (TEST_GAME) {
+                let temp = {
+                    "firstUid": 1,
+                    "cards": [
+                        { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
+                        { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
+                    ],
+                    "mapData": {},
+                    "replaceEndTime": "1676296544675"
+                }
+                GameDispatcher.getInstance().emit('S_GAME_START', temp)
+            }
         });
 
         this.view.settingBtn.describe.text = '设置';

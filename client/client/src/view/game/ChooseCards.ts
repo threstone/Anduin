@@ -9,11 +9,57 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         this.view.chooseBtn.describe.text = '确定';
     }
 
+
+    /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
+    public open(handCards: GamePto.ICard[], isFirst: boolean): void {
+        super.open();
+
+        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
+
+        TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
+
+        this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
+        this.AddClick(this.view.chooseBtn, this.onBtnClick);
+
+        this._cards = [];
+
+        this._replaceIndexes = [];
+        for (let index = 0; index < handCards.length; index++) {
+            const cardInfo = handCards[index];
+            const gameCard = new GameCard(cardInfo);
+            this._cards.push(gameCard);
+            //卡牌出现展示动画
+            this.cardAddTween(handCards.length, index);
+            this.AddClick(gameCard.cardItem, () => {
+                gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
+                if (gameCard.cardItem.grayed) {
+                    this._replaceIndexes.push(index);
+                } else {
+                    this._replaceIndexes.splice(this._replaceIndexes.indexOf(index))
+                }
+            });
+        }
+    }
+
+    public close(): void {
+        super.close()
+
+        //close已经把所有时间清除了
+        for (let index = 0; index < this._cards.length; index++) {
+            const card = this._cards[index];
+            this.view.removeChild(card.cardItem);
+        }
+
+        this.view.touchable = true;
+        this.view.chooseBtn.visible = true;
+    }
+
     private onBtnClick() {
         GameModel.ins().C_PREPARE_TO_START(this._replaceIndexes);
         //TODO test
         if (TEST_GAME) {
             GameDispatcher.getInstance().emit('S_REPLACE_CARDS', {
+                "uid": UserModel.ins().uid,
                 "cards": [
                     { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
                     { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
@@ -80,44 +126,16 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         egret.Tween.get(gameCard.cardItem).to({ x: startX + index * interval + index * cardWidth, y: 416 }, 1000);
     }
 
-
-
-    /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
-    public open(handCards: GamePto.ICard[], isFirst: boolean): void {
-        super.open();
-        TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
-
-        this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
-        this.AddClick(this.view.chooseBtn, this.onBtnClick);
-
-        this._cards = [];
-
-        this._replaceIndexes = [];
-        for (let index = 0; index < handCards.length; index++) {
-            const cardInfo = handCards[index];
-            const gameCard = new GameCard(cardInfo);
-            this._cards.push(gameCard);
-            //卡牌出现展示动画
-            this.cardAddTween(handCards.length, index);
-            this.AddClick(gameCard.cardItem, () => {
-                gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
-                if (gameCard.cardItem.grayed) {
-                    this._replaceIndexes.push(index);
-                } else {
-                    this._replaceIndexes.splice(this._replaceIndexes.indexOf(index))
-                }
-            });
+    private async onRoundStart() {
+        this.close();
+        await HandCardView.ins().showAddStartHandCards(this.cards);
+        this._cards = null;
+        if (TEST_GAME) {
+            //TEST CODE
+            GameSceneView.ins().addToEffectPool(HandCardView.ins().drawCards.bind(HandCardView.ins(),
+                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
+                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 }));
+            TargetHandView.ins().replace([1, 3]);
         }
     }
-
-    public close(): void {
-        super.close()
-
-        this.view.removeChildren();
-        this.view.addChild(this.view.chooseBtn);
-        this.view.touchable = true;
-        this.view.chooseBtn.visible = true;
-        this._cards = null;
-    }
-
 }
