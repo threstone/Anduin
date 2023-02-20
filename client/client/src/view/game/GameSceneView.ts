@@ -2,11 +2,6 @@
 
 class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
-    mapX: number;
-    mapY: number;
-    blockWidth: number;
-    blockHeight: number;
-
     /**是否允许操作 */
     get allowToOprate() { return this._allowToOprate; }
     private _allowToOprate: boolean;
@@ -22,43 +17,13 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.view = BaseUI.UIGameSceneCom.createInstance();
 
         //绑定这些控件和此控件一同显示和关闭
-        this.bindView(HandCardView.ins());
-        this.bindView(TargetHandView.ins());
         this.bindView(RightCtrlView.ins());
-
         this.bindView(SelfInfoBox.ins());
         this.bindView(TargetInfoBox.ins());
+        this.bindView(HandCardView.ins());
+        this.bindView(TargetHandView.ins());
 
         this.view.close.describe.text = 'tempCloseBtn'
-
-        this.mapX = 313;
-        this.mapY = 220;
-        this.blockWidth = 140;
-        this.blockHeight = 95;
-
-        //==============test code===============
-        // this.initMapBlock();
-    }
-
-    private initMapBlock() {
-        const shp: egret.Shape = new egret.Shape();
-        shp.x = this.mapX;
-        shp.y = this.mapY;
-
-        shp.graphics.lineStyle(2, 0xFFFFFF);
-        let endX = 7 * this.blockWidth;
-        let endY = 8 * this.blockHeight;
-        for (let index = 0; index < 8; index++) {
-            shp.graphics.moveTo(index * this.blockWidth, 0);
-            shp.graphics.lineTo(index * this.blockWidth, endY);
-        }
-
-        for (let index = 0; index < 9; index++) {
-            shp.graphics.moveTo(0, index * this.blockHeight);
-            shp.graphics.lineTo(endX, index * this.blockHeight);
-        }
-        shp.graphics.endFill();
-        (this.view.displayObject as egret.DisplayObjectContainer).addChild(shp);
     }
 
     public open(): void {
@@ -69,6 +34,10 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
         this.initEvents();
         this.initView();
+    }
+
+    private initView() {
+
     }
 
     private initEvents() {
@@ -108,10 +77,36 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
-        ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid)
+        ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid);
+        MapView.ins().updateMap();
     }
 
-    private initView() {
+    public useCardShow(card: GameCard) {
+        const cardItem = card.cardItem
+        this.view.addChild(cardItem);
 
+        const cardConfig = CardsModel.ins().getCardInfoById(card.cardInfo.cardId);
+        //如果是事件卡和法术卡移动至左侧显示，然后播放对应特效
+        if (cardConfig.cardType === CardsPto.CardType.Event || cardConfig.cardType === CardsPto.CardType.Magic) {
+            egret.Tween.get(cardItem).to({
+                scaleX: 1, scaleY: 1,
+                x: this.view.map.x - cardItem.width,
+                y: (this.view.height - cardItem.height) / 2
+            }, 400).to({}, 2000).call(() => {
+                this.view.removeChild(cardItem);
+            });
+        } else {
+            //对地图进行刷新
+            // GameMap
+        }
+
+        //如果是单位卡，卡牌移动到对应的位置然后放在那
+
+        //switch card type(unit\ event\ magic) and do something
+        //case unit  
+        //move to target block 
+        //scale to some value
     }
+
+
 }

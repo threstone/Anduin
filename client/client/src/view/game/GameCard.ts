@@ -3,6 +3,9 @@ class GameCard {
     cardItem: BaseUI.UICardItem;
     cardInfo: GamePto.ICard;
 
+    cacheX: number;
+    cacheY: number;
+
     constructor(cardInfo: GamePto.ICard) {
         this.cardInfo = cardInfo;
         this.cardItem = CardItem.getItem(CardsModel.ins().getCardInfoById(cardInfo.cardId));

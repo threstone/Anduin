@@ -81,16 +81,19 @@ export class NodeStartGame extends BaseNode {
 
     private deal(table: GameTable) {
         //确定先后手
-        table.nextRoundUserIndex = table.random(2);
+        table.roundUserIndex = table.random(2);
         const gameStartMsg = new GamePto.S_GAME_START();
-        gameStartMsg.firstUid = table.users[table.nextRoundUserIndex].uid;
-        gameStartMsg.mapData = table.getMapData();
+        gameStartMsg.firstUid = table.users[table.roundUserIndex].uid;
         gameStartMsg.replaceEndTime = Date.now() + GlobalVar.configMgr.common.replaceCardTime;
+        //初始化信息
+        table.users[0].resetInfo();
+        table.users[1].resetInfo();
+        gameStartMsg.mapData = table.getMapData();
+
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
-            //初始化信息
-            user.resetInfo();
+
 
             table.shuffle(user.cardPool);
             //抽n张
@@ -98,7 +101,7 @@ export class NodeStartGame extends BaseNode {
                 user.handCards.push(user.cardPool.pop())
             }
             //后手多一费
-            if (table.nextRoundUserIndex !== index) {
+            if (table.roundUserIndex !== index) {
                 user.fee += 1;
             }
 

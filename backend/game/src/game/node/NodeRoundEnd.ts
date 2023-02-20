@@ -3,7 +3,6 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { BaseNode } from './BaseNode';
 import { GamePto } from '../../../../common/CommonProto';
-import { IGameMessage } from '../../../../common/I';
 
 //回合结束,执行一些回合结束时的任务,如卡牌结束事件
 export class NodeRoundEnd extends BaseNode {
@@ -24,7 +23,7 @@ export class NodeRoundEnd extends BaseNode {
     }
 
     private deal(table: GameTable) {
-        const user = table.users[table.nextRoundUserIndex];
+        const user = table.users[table.roundUserIndex];
 
         //派发回合结束
         const roundStartMsg = new GamePto.S_ROUND_END_EVENT();
@@ -58,7 +57,7 @@ export class NodeRoundEnd extends BaseNode {
         this.nodeDriver.waitTime(sum);
 
         //更改下一个回合操作玩家
-        table.nextRoundUserIndex = (table.nextRoundUserIndex + 1) % table.users.length;
+        table.roundUserIndex = (table.roundUserIndex + 1) % table.users.length;
         return NodeDriverResult.Wait;
     }
 }

@@ -18,6 +18,11 @@ class MatchGroupChooseView extends CardsGroupChooseView {
         this.observe('FriendChooseGroupSuccess', this.chooseGroupSuccess);
         this.observe('FriendUpdate', this.onFriendStatusUpdate);
 
+        this.observe('S_INIT_GAME', () => {
+            this.close();
+            TipsView.ins().close(true);
+        });
+
         this.reqEndTime = evt.data;
         this.descStart = '选择卡组倒计时';
         this.intervalId = setInterval(this.updateDesc.bind(this), 1000);
@@ -58,7 +63,9 @@ class MatchGroupChooseView extends CardsGroupChooseView {
 
     private chooseGroupSuccess() {
         TipsView.ins().open('选择成功,等待好友选择卡组', '取消').then((res) => {
-            FriendlyMatchModel.ins().C_MATCH_CANCEL_GROUP();
+            if(this.isOnStage()){
+                FriendlyMatchModel.ins().C_MATCH_CANCEL_GROUP();
+            }
         })
     }
 

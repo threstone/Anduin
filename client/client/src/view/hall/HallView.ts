@@ -26,6 +26,7 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
             if (TEST_GAME) {
                 let temp = {
                     "firstUid": 1,
+                    "mapData": { "unitCards": [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "x": 3, "y": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "x": 3, "y": 0 }], "eventCards": [] },
                     "cards": [
                         { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
                         { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
@@ -35,7 +36,6 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
                         { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
                         { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
                     ],
-                    "mapData": {},
                     "replaceEndTime": "1676296544675"
                 }
                 GameDispatcher.getInstance().emit('S_GAME_START', temp)

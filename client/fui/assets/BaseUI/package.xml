@@ -72,6 +72,12 @@
     <component id="pg482g" name="ChooseCards.xml" path="/game/" exported="true"/>
     <component id="pg482h" name="CardBackItem.xml" path="/cards/" exported="true"/>
     <component id="uym42i" name="RightCtrlCom.xml" path="/game/"/>
+    <component id="hzsg2j" name="MapView.xml" path="/game/map/"/>
+    <component id="hzsg2k" name="MapUnitBase.xml" path="/game/map/"/>
+    <component id="hzsg2m" name="MapBuildingBase.xml" path="/game/map/"/>
+    <component id="hzsg2n" name="MapUnit.xml" path="/game/map/" exported="true"/>
+    <component id="hzsg2o" name="MapBuilding.xml" path="/game/map/" exported="true"/>
+    <image id="hzsg2p" name="DR_atk_til.png" path="/common/res/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

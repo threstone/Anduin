@@ -4659,6 +4659,8 @@ $root.GamePto = (function() {
          * @property {number|null} [fee] Card fee
          * @property {boolean|null} [allowAtk] Card allowAtk
          * @property {number|null} [uid] Card uid
+         * @property {number|null} [x] Card x
+         * @property {number|null} [y] Card y
          */
 
         /**
@@ -4725,6 +4727,22 @@ $root.GamePto = (function() {
         Card.prototype.uid = 0;
 
         /**
+         * Card x.
+         * @member {number} x
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.x = 0;
+
+        /**
+         * Card y.
+         * @member {number} y
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.y = 0;
+
+        /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
          * @function encode
          * @memberof GamePto.Card
@@ -4748,6 +4766,10 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowAtk);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.y);
             return writer;
         };
 
@@ -4793,6 +4815,14 @@ $root.GamePto = (function() {
                         message.uid = reader.int32();
                         break;
                     }
+                case 6: {
+                        message.x = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.y = reader.int32();
+                        break;
+                    }
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -4825,8 +4855,8 @@ $root.GamePto = (function() {
          * Properties of a MapData.
          * @memberof GamePto
          * @interface IMapData
-         * @property {Array.<GamePto.ICard>|null} [eventCard] MapData eventCard
-         * @property {Array.<GamePto.ICard>|null} [unitCard] MapData unitCard
+         * @property {Array.<GamePto.ICard>|null} [eventCards] MapData eventCards
+         * @property {Array.<GamePto.ICard>|null} [unitCards] MapData unitCards
          */
 
         /**
@@ -4838,8 +4868,8 @@ $root.GamePto = (function() {
          * @param {GamePto.IMapData=} [properties] Properties to set
          */
         function MapData(properties) {
-            this.eventCard = [];
-            this.unitCard = [];
+            this.eventCards = [];
+            this.unitCards = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4847,20 +4877,20 @@ $root.GamePto = (function() {
         }
 
         /**
-         * MapData eventCard.
-         * @member {Array.<GamePto.ICard>} eventCard
+         * MapData eventCards.
+         * @member {Array.<GamePto.ICard>} eventCards
          * @memberof GamePto.MapData
          * @instance
          */
-        MapData.prototype.eventCard = $util.emptyArray;
+        MapData.prototype.eventCards = $util.emptyArray;
 
         /**
-         * MapData unitCard.
-         * @member {Array.<GamePto.ICard>} unitCard
+         * MapData unitCards.
+         * @member {Array.<GamePto.ICard>} unitCards
          * @memberof GamePto.MapData
          * @instance
          */
-        MapData.prototype.unitCard = $util.emptyArray;
+        MapData.prototype.unitCards = $util.emptyArray;
 
         /**
          * Encodes the specified MapData message. Does not implicitly {@link GamePto.MapData.verify|verify} messages.
@@ -4874,12 +4904,12 @@ $root.GamePto = (function() {
         MapData.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.eventCard != null && message.eventCard.length)
-                for (var i = 0; i < message.eventCard.length; ++i)
-                    $root.GamePto.Card.encode(message.eventCard[i], writer.uint32(/* id 0, wireType 2 =*/2).fork()).ldelim();
-            if (message.unitCard != null && message.unitCard.length)
-                for (var i = 0; i < message.unitCard.length; ++i)
-                    $root.GamePto.Card.encode(message.unitCard[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.eventCards != null && message.eventCards.length)
+                for (var i = 0; i < message.eventCards.length; ++i)
+                    $root.GamePto.Card.encode(message.eventCards[i], writer.uint32(/* id 0, wireType 2 =*/2).fork()).ldelim();
+            if (message.unitCards != null && message.unitCards.length)
+                for (var i = 0; i < message.unitCards.length; ++i)
+                    $root.GamePto.Card.encode(message.unitCards[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
             return writer;
         };
 
@@ -4902,15 +4932,15 @@ $root.GamePto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 0: {
-                        if (!(message.eventCard && message.eventCard.length))
-                            message.eventCard = [];
-                        message.eventCard.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        if (!(message.eventCards && message.eventCards.length))
+                            message.eventCards = [];
+                        message.eventCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
                         break;
                     }
                 case 1: {
-                        if (!(message.unitCard && message.unitCard.length))
-                            message.unitCard = [];
-                        message.unitCard.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        if (!(message.unitCards && message.unitCards.length))
+                            message.unitCards = [];
+                        message.unitCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -5076,6 +5106,402 @@ $root.GamePto = (function() {
         };
 
         return C_PREPARE_TO_START;
+    })();
+
+    GamePto.C_END_ROUND = (function() {
+
+        /**
+         * Properties of a C_END_ROUND.
+         * @memberof GamePto
+         * @interface IC_END_ROUND
+         * @property {number|null} [cmd] C_END_ROUND cmd
+         * @property {number|null} [scmd] C_END_ROUND scmd
+         */
+
+        /**
+         * Constructs a new C_END_ROUND.
+         * @memberof GamePto
+         * @classdesc Represents a C_END_ROUND.
+         * @implements IC_END_ROUND
+         * @constructor
+         * @param {GamePto.IC_END_ROUND=} [properties] Properties to set
+         */
+        function C_END_ROUND(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_END_ROUND cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_END_ROUND
+         * @instance
+         */
+        C_END_ROUND.prototype.cmd = 200;
+
+        /**
+         * C_END_ROUND scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_END_ROUND
+         * @instance
+         */
+        C_END_ROUND.prototype.scmd = 2;
+
+        /**
+         * Encodes the specified C_END_ROUND message. Does not implicitly {@link GamePto.C_END_ROUND.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_END_ROUND
+         * @static
+         * @param {GamePto.IC_END_ROUND} message C_END_ROUND message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_END_ROUND.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_END_ROUND message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_END_ROUND
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_END_ROUND} C_END_ROUND
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_END_ROUND.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_END_ROUND();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_END_ROUND
+         * @function getTypeUrl
+         * @memberof GamePto.C_END_ROUND
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_END_ROUND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_END_ROUND";
+        };
+
+        return C_END_ROUND;
+    })();
+
+    GamePto.C_DISCARD = (function() {
+
+        /**
+         * Properties of a C_DISCARD.
+         * @memberof GamePto
+         * @interface IC_DISCARD
+         * @property {number|null} [cmd] C_DISCARD cmd
+         * @property {number|null} [scmd] C_DISCARD scmd
+         * @property {number|null} [cardIndex] C_DISCARD cardIndex
+         */
+
+        /**
+         * Constructs a new C_DISCARD.
+         * @memberof GamePto
+         * @classdesc Represents a C_DISCARD.
+         * @implements IC_DISCARD
+         * @constructor
+         * @param {GamePto.IC_DISCARD=} [properties] Properties to set
+         */
+        function C_DISCARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_DISCARD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_DISCARD
+         * @instance
+         */
+        C_DISCARD.prototype.cmd = 200;
+
+        /**
+         * C_DISCARD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_DISCARD
+         * @instance
+         */
+        C_DISCARD.prototype.scmd = 3;
+
+        /**
+         * C_DISCARD cardIndex.
+         * @member {number} cardIndex
+         * @memberof GamePto.C_DISCARD
+         * @instance
+         */
+        C_DISCARD.prototype.cardIndex = 0;
+
+        /**
+         * Encodes the specified C_DISCARD message. Does not implicitly {@link GamePto.C_DISCARD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_DISCARD
+         * @static
+         * @param {GamePto.IC_DISCARD} message C_DISCARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_DISCARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardIndex);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_DISCARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_DISCARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_DISCARD} C_DISCARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_DISCARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_DISCARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardIndex = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_DISCARD
+         * @function getTypeUrl
+         * @memberof GamePto.C_DISCARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_DISCARD";
+        };
+
+        return C_DISCARD;
+    })();
+
+    GamePto.C_USE_CARD = (function() {
+
+        /**
+         * Properties of a C_USE_CARD.
+         * @memberof GamePto
+         * @interface IC_USE_CARD
+         * @property {number|null} [cmd] C_USE_CARD cmd
+         * @property {number|null} [scmd] C_USE_CARD scmd
+         * @property {number|null} [cardIndex] C_USE_CARD cardIndex
+         * @property {number|null} [x] C_USE_CARD x
+         * @property {number|null} [y] C_USE_CARD y
+         */
+
+        /**
+         * Constructs a new C_USE_CARD.
+         * @memberof GamePto
+         * @classdesc Represents a C_USE_CARD.
+         * @implements IC_USE_CARD
+         * @constructor
+         * @param {GamePto.IC_USE_CARD=} [properties] Properties to set
+         */
+        function C_USE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_USE_CARD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_USE_CARD
+         * @instance
+         */
+        C_USE_CARD.prototype.cmd = 200;
+
+        /**
+         * C_USE_CARD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_USE_CARD
+         * @instance
+         */
+        C_USE_CARD.prototype.scmd = 4;
+
+        /**
+         * C_USE_CARD cardIndex.
+         * @member {number} cardIndex
+         * @memberof GamePto.C_USE_CARD
+         * @instance
+         */
+        C_USE_CARD.prototype.cardIndex = 0;
+
+        /**
+         * C_USE_CARD x.
+         * @member {number} x
+         * @memberof GamePto.C_USE_CARD
+         * @instance
+         */
+        C_USE_CARD.prototype.x = 0;
+
+        /**
+         * C_USE_CARD y.
+         * @member {number} y
+         * @memberof GamePto.C_USE_CARD
+         * @instance
+         */
+        C_USE_CARD.prototype.y = 0;
+
+        /**
+         * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_USE_CARD
+         * @static
+         * @param {GamePto.IC_USE_CARD} message C_USE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_USE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardIndex);
+            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.x);
+            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.y);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_USE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_USE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_USE_CARD} C_USE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_USE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_USE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.cardIndex = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.x = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.y = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_USE_CARD
+         * @function getTypeUrl
+         * @memberof GamePto.C_USE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_USE_CARD";
+        };
+
+        return C_USE_CARD;
     })();
 
     GamePto.S_SERVER_ERROR = (function() {
@@ -6357,6 +6783,395 @@ $root.GamePto = (function() {
         };
 
         return S_FEE_INFO;
+    })();
+
+    GamePto.S_DISCARD = (function() {
+
+        /**
+         * Properties of a S_DISCARD.
+         * @memberof GamePto
+         * @interface IS_DISCARD
+         * @property {number|null} [cmd] S_DISCARD cmd
+         * @property {number|null} [scmd] S_DISCARD scmd
+         * @property {boolean|null} [isSuccess] S_DISCARD isSuccess
+         * @property {number|null} [cardIndex] S_DISCARD cardIndex
+         * @property {number|null} [fee] S_DISCARD fee
+         * @property {number|null} [feeMax] S_DISCARD feeMax
+         * @property {number|null} [uid] S_DISCARD uid
+         */
+
+        /**
+         * Constructs a new S_DISCARD.
+         * @memberof GamePto
+         * @classdesc Represents a S_DISCARD.
+         * @implements IS_DISCARD
+         * @constructor
+         * @param {GamePto.IS_DISCARD=} [properties] Properties to set
+         */
+        function S_DISCARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_DISCARD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.cmd = 200;
+
+        /**
+         * S_DISCARD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.scmd = 10008;
+
+        /**
+         * S_DISCARD isSuccess.
+         * @member {boolean} isSuccess
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.isSuccess = false;
+
+        /**
+         * S_DISCARD cardIndex.
+         * @member {number} cardIndex
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.cardIndex = 0;
+
+        /**
+         * S_DISCARD fee.
+         * @member {number} fee
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.fee = 0;
+
+        /**
+         * S_DISCARD feeMax.
+         * @member {number} feeMax
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.feeMax = 0;
+
+        /**
+         * S_DISCARD uid.
+         * @member {number} uid
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.uid = 0;
+
+        /**
+         * Encodes the specified S_DISCARD message. Does not implicitly {@link GamePto.S_DISCARD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_DISCARD
+         * @static
+         * @param {GamePto.IS_DISCARD} message S_DISCARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_DISCARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.isSuccess != null && Object.hasOwnProperty.call(message, "isSuccess"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSuccess);
+            if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cardIndex);
+            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
+            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.feeMax);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_DISCARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_DISCARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_DISCARD} S_DISCARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_DISCARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_DISCARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.isSuccess = reader.bool();
+                        break;
+                    }
+                case 4: {
+                        message.cardIndex = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.fee = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.feeMax = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_DISCARD
+         * @function getTypeUrl
+         * @memberof GamePto.S_DISCARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_DISCARD";
+        };
+
+        return S_DISCARD;
+    })();
+
+    GamePto.S_USE_CARD = (function() {
+
+        /**
+         * Properties of a S_USE_CARD.
+         * @memberof GamePto
+         * @interface IS_USE_CARD
+         * @property {number|null} [cmd] S_USE_CARD cmd
+         * @property {number|null} [scmd] S_USE_CARD scmd
+         * @property {boolean|null} [isSuccess] S_USE_CARD isSuccess
+         * @property {number|null} [fee] S_USE_CARD fee
+         * @property {number|null} [feeMax] S_USE_CARD feeMax
+         * @property {number|null} [uid] S_USE_CARD uid
+         * @property {number|null} [cardIndex] S_USE_CARD cardIndex
+         * @property {GamePto.ICard|null} [card] S_USE_CARD card
+         */
+
+        /**
+         * Constructs a new S_USE_CARD.
+         * @memberof GamePto
+         * @classdesc Represents a S_USE_CARD.
+         * @implements IS_USE_CARD
+         * @constructor
+         * @param {GamePto.IS_USE_CARD=} [properties] Properties to set
+         */
+        function S_USE_CARD(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_USE_CARD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.cmd = 200;
+
+        /**
+         * S_USE_CARD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.scmd = 10009;
+
+        /**
+         * S_USE_CARD isSuccess.
+         * @member {boolean} isSuccess
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.isSuccess = false;
+
+        /**
+         * S_USE_CARD fee.
+         * @member {number} fee
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.fee = 0;
+
+        /**
+         * S_USE_CARD feeMax.
+         * @member {number} feeMax
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.feeMax = 0;
+
+        /**
+         * S_USE_CARD uid.
+         * @member {number} uid
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.uid = 0;
+
+        /**
+         * S_USE_CARD cardIndex.
+         * @member {number} cardIndex
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.cardIndex = 0;
+
+        /**
+         * S_USE_CARD card.
+         * @member {GamePto.ICard|null|undefined} card
+         * @memberof GamePto.S_USE_CARD
+         * @instance
+         */
+        S_USE_CARD.prototype.card = null;
+
+        /**
+         * Encodes the specified S_USE_CARD message. Does not implicitly {@link GamePto.S_USE_CARD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_USE_CARD
+         * @static
+         * @param {GamePto.IS_USE_CARD} message S_USE_CARD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_USE_CARD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.isSuccess != null && Object.hasOwnProperty.call(message, "isSuccess"))
+                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSuccess);
+            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
+            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.feeMax);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
+            if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.cardIndex);
+            if (message.card != null && Object.hasOwnProperty.call(message, "card"))
+                $root.GamePto.Card.encode(message.card, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_USE_CARD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_USE_CARD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_USE_CARD} S_USE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_USE_CARD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_USE_CARD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.isSuccess = reader.bool();
+                        break;
+                    }
+                case 5: {
+                        message.fee = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.feeMax = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 8: {
+                        message.cardIndex = reader.int32();
+                        break;
+                    }
+                case 9: {
+                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_USE_CARD
+         * @function getTypeUrl
+         * @memberof GamePto.S_USE_CARD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_USE_CARD";
+        };
+
+        return S_USE_CARD;
     })();
 
     return GamePto;

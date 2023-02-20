@@ -12,7 +12,8 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
         this.observe('S_REPLACE_CARDS', this.onReplaceCards);
         this.observe('S_GAME_START', this.drawStartHandCards);
-
+        this.observe('S_DISCARD', this.onDeleteCard);
+        this.observe('S_USE_CARD', this.onUseCard);
     }
 
     public close(): void {
@@ -25,6 +26,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         this._cards = [];
     }
 
+    /**换卡 */
     private onReplaceCards(evt: EventData) {
         const msg: GamePto.S_REPLACE_CARDS = evt.data;
         if (msg.uid !== UserModel.ins().uid) {
@@ -32,6 +34,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         }
     }
 
+    /**抽卡疲劳 */
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid !== UserModel.ins().uid) {
             await TargetHandView.ins().drawCardsToHand(msg.cardCount);
@@ -81,6 +84,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         return this.updateCardsPostion(time);
     }
 
+    /**根据手牌数量和卡牌大小计算卡牌位置并移动 */
     private updateCardsPostion(time: number) {
         const cardsLen = this._cards.length;
         if (cardsLen === 0) {
@@ -141,11 +145,40 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
             .to({ y: y }, 900)
             .call(() => {
                 this.view.removeChild(cardItem);
+                this.updateCardsPostion(400);
             });
     }
 
     /**疲劳伤害 */
     public fatigue(damages: number[]) {
-        throw new Error("Method not implemented.");
+        //TODO
+    }
+
+    /**弃牌 */
+    private onDeleteCard(evt: EventData) {
+        const msg: GamePto.S_DISCARD = evt.data;
+        if (msg.isSuccess && msg.uid !== UserModel.ins().uid) {
+            this.removeCardToCardPool(msg.cardIndex);
+            TargetInfoBox.ins().feeSet(msg.fee, msg.feeMax);
+        }
+    }
+
+    /**使用卡牌 */
+    private onUseCard(evt: EventData) {
+        const msg: GamePto.S_USE_CARD = evt.data;
+        if (!msg.isSuccess || msg.uid === UserModel.ins().uid) {
+            return;
+        }
+
+        //将手牌位置的卡换成对应的卡牌
+        const gameCard = new GameCard(msg.card);
+        const cardBg = this._cards[msg.cardIndex];
+        gameCard.cardItem.x = cardBg.x;
+        gameCard.cardItem.y = cardBg.y;
+        gameCard.cardItem.scaleX = 0.5;
+        gameCard.cardItem.scaleY = 0.5;
+        this.view.removeChild(cardBg);
+
+        GameSceneView.ins().useCardShow(gameCard);
     }
 }

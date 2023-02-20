@@ -37,6 +37,11 @@ class CardItem {
         //     card.cardImg.texture = data;
         // })
         card.tempCardName.text = `${cardInfo.cardName}`;
+        if (cardInfo.atkType === CardsPto.AtkType.CloseRange) {
+            card.longRange.visible = false;
+        } else {
+            card.closeRange.visible = false;
+        }
         card.atkText.text = `${cardInfo.attack}`;
         card.healthText.text = `${cardInfo.health}`;
         card.quality.color = CardItem.qualityColors[cardInfo.quality];

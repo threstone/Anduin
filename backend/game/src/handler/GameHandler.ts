@@ -8,10 +8,68 @@ export class GameHandler extends BaseHandler {
 
     //准备开始(包含更换卡牌数据)
     static C_PREPARE_TO_START(user: GameUser, table: GameTable, msg: GamePto.C_PREPARE_TO_START) {
-        // table.nextRoundUserIndex
         if (!table.nodeDriver || table.nodeDriver.getCurNode() !== NodeDefine.GameStart) {
             return;
         }
         table.nodeDriver.onTrigger(user, msg);
     }
+
+    //请求结束回合
+    static C_END_ROUND(user: GameUser, table: GameTable, msg: GamePto.C_END_ROUND) {
+        if (!table.allowRoundOprate(user)) {
+            return;
+        }
+        table.nodeDriver.onTrigger(user, msg);
+    }
+
+    //请求弃牌
+    static C_DISCARD(user: GameUser, table: GameTable, msg: GamePto.C_DISCARD) {
+        if (!table.allowRoundOprate(user)) {
+            return;
+        }
+
+        const replay = new GamePto.S_DISCARD();
+        replay.isSuccess = false;
+        replay.uid = user.uid;
+        const card = user.handCards[msg.cardIndex];
+        if (card) {
+            //入墓地
+            replay.isSuccess = true;
+            user.handCards.splice(msg.cardIndex, 1)
+            user.deadPool.push(card);
+            replay.cardIndex = msg.cardIndex;
+            //加费用
+            if (user.fee < user.feeMax) {
+                user.fee += 1;
+                replay.fee = user.fee;
+                replay.feeMax = user.feeMax;
+            }
+        }
+
+        table.broadcast(replay);
+    }
+
+    //使用卡牌
+    static C_USE_CARD(user: GameUser, table: GameTable, msg: GamePto.C_DISCARD) {
+        if (!table.allowRoundOprate(user)) {
+            return;
+        }
+
+        const replay = new GamePto.S_USE_CARD();
+        replay.isSuccess = false;
+        replay.uid = user.uid;
+        const card = user.handCards[msg.cardIndex];
+        if (card && card.fee <= user.fee) {
+            replay.isSuccess = true;
+            replay.card = card;
+            user.handCards.splice(msg.cardIndex, 1)
+            replay.cardIndex = msg.cardIndex;
+            //减费用
+            user.fee -= card.fee;
+            replay.fee = user.fee;
+            replay.feeMax = user.feeMax;
+        }
+        table.broadcast(replay);
+    }
+
 }

@@ -120,10 +120,12 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @returns 返回是否处于场景中
      */
     public isOnStage() {
-        return fairygui.GRoot.inst.isChildInView(this.view)
+        return (fairygui.GRoot.inst.displayObject as egret.DisplayObjectContainer).contains(this.view.displayObject);
+        // 以下方法返回永远是true...
+        // return fairygui.GRoot.inst.isChildInView(this.view);(new egret.DisplayObjectContainer()).contains
     }
 
-    protected observe(event: string, func: Function): void {
+    protected observe(event: string, func: (evt: EventData) => void): void {
         GameDispatcher.getInstance().addEventListener(event, func, this);
         const eventData = new EventListenerData(null, event, func, this);
         this.eventList.push(eventData);

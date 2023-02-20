@@ -12,6 +12,11 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatInputCom.URL, UIChatInputCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatCom.URL, UIChatCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton3.URL, UIButton3);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapView.URL, UIMapView);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapUnitBase.URL, UIMapUnitBase);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapBuildingBase.URL, UIMapBuildingBase);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapUnit.URL, UIMapUnit);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapBuilding.URL, UIMapBuilding);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIGameSceneCom.URL, UIGameSceneCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICreateCardGroup.URL, UICreateCardGroup);

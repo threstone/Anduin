@@ -35,7 +35,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
                 if (gameCard.cardItem.grayed) {
                     this._replaceIndexes.push(index);
                 } else {
-                    this._replaceIndexes.splice(this._replaceIndexes.indexOf(index))
+                    this._replaceIndexes.splice(this._replaceIndexes.indexOf(index), 1);
                 }
             });
         }

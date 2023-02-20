@@ -20,11 +20,13 @@ message Card{
 	int32 fee = 3;//战场上的卡用不到，手牌会用到
 	bool allowAtk = 4;
 	int32 uid = 5;
+	int32 x = 6;
+	int32 y = 7;
 }
 
 message MapData{
-	repeated Card eventCard = 0;
-	repeated Card unitCard = 1;
+	repeated Card eventCards = 0;
+	repeated Card unitCards = 1;
 }
 
 //===================Client message===================
@@ -34,6 +36,28 @@ message C_PREPARE_TO_START{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 1];
 	repeated int32 replaceCardIndexes = 3;
+}
+
+//请求结束回合
+message C_END_ROUND{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 2];
+}
+
+//弃牌
+message C_DISCARD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 3];
+	int32 cardIndex = 3;
+}
+
+//使用卡牌
+message C_USE_CARD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 4];
+	int32 cardIndex = 3;
+	int32 x = 4;
+	int32 y = 5;
 }
 
 //===================Server message===================
@@ -107,4 +131,27 @@ message S_FEE_INFO{
 	int32 fee = 3;
 	int32 maxFee = 4;
 	int32 uid = 5;
+}
+
+//弃牌
+message S_DISCARD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10008];
+	bool isSuccess = 3;
+	int32 cardIndex = 4;
+	int32 fee = 5;
+	int32 feeMax = 6;
+	int32 uid = 7;
+}
+
+//使用卡牌
+message S_USE_CARD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10009];
+	bool isSuccess = 3;
+	int32 fee = 5;
+	int32 feeMax = 6;	
+	int32 uid = 7;
+	int32 cardIndex = 8;
+	Card card = 9;
 }

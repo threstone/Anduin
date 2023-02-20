@@ -23,7 +23,7 @@ export class NodeRoundStart extends BaseNode {
     }
 
     private deal(table: GameTable) {
-        const user = table.users[table.nextRoundUserIndex];
+        const user = table.users[table.roundUserIndex];
         user.onRoundStart();
 
         //派发回合开始

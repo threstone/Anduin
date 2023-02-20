@@ -109,7 +109,7 @@ export class GameUser {
         const heroCard = this._cardPool.shift() as UnitCard;
         heroCard.x = 3;
         //如果自己是先手玩家,那么自己的英雄的位置在下方
-        heroCard.y = this === this.table.users[this.table.nextRoundUserIndex] ? 7 : 0;
+        heroCard.y = this === this.table.users[this.table.roundUserIndex] ? 7 : 0;
         this.setUnitCardToMap(heroCard);
 
         this._fatigue = 1;

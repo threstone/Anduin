@@ -1,3 +1,8 @@
+enum SceneAreaEnum {
+    nothing,
+    deadPool,
+    gameMap
+}
 class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     private _cards: GameCard[];
@@ -12,11 +17,13 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         super.open();
 
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards);
+        this.observe('S_DISCARD', this.onDeleteCard);
+        this.observe('S_USE_CARD', this.onDeleteCard);
     }
 
     public close(): void {
         super.close()
-        
+
         for (let index = 0; index < this._cards.length; index++) {
             const card = this._cards[index];
             this.view.removeChild(card.cardItem);
@@ -24,6 +31,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this._cards = [];
     }
 
+    /**抽卡疲劳 */
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid === UserModel.ins().uid) {
             await this.drawCards(...msg.cards);
@@ -35,7 +43,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     public addCard(opTime: number, ...cards: GameCard[]) {
         this._cards.push(...cards);
         for (let index = 0; index < cards.length; index++) {
-            const cardItem = cards[index].cardItem;
+            const gameCard = cards[index];
+            const cardItem = gameCard.cardItem;
             cardItem.setPivot(0, 0, true);
             this.view.addChild(cardItem);
 
@@ -53,16 +62,27 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
 
             //初始化拖动事件
-            let cacheX = 0;
-            let cacheY = 0;
             cardItem.draggable = true;
-            this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, (evt: fairygui.DragEvent) => {
-                cacheX = cardItem.x;
-                cacheY = cardItem.y;
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, () => {
+                gameCard.cacheX = cardItem.x;
+                gameCard.cacheY = cardItem.y;
             }, this);
-            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
-                cardItem.x = cacheX;
-                cardItem.y = cacheY;
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
+                //检查是否允许操作
+                if (GameSceneView.ins().allowToOprate) {
+                    if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
+                        GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
+                        return;
+                    }
+
+                    const mapPoint = new egret.Point();
+                    if (MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
+                        GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), mapPoint);
+                        return;
+                    }
+                }
+                cardItem.x = gameCard.cacheX;
+                cardItem.y = gameCard.cacheY;
                 cardItem.scaleX = 0.5;
                 cardItem.scaleY = 0.5;
             }, this);
@@ -72,17 +92,21 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         return this.updateCardsPostion(opTime);
     }
 
+    /**
+     * 删除卡牌，移除相关事件
+     */
     public removeCard(gameCard: GameCard) {
         const index = this._cards.indexOf(gameCard);
         if (index === -1) {
             return;
         }
         this.removeTargetEvents(gameCard.cardItem);
+        this.removeTargetEvents(gameCard.cardItem.dragLoader);
         this.view.removeChild(gameCard.cardItem);
-        this._cards.splice(index);
+        this._cards.splice(index, 1);
     }
 
-    //根据手牌数量和卡牌大小计算卡牌位置并移动
+    /**根据手牌数量和卡牌大小计算卡牌位置并移动 */
     private updateCardsPostion(time: number) {
         const cardsLen = this._cards.length;
         if (cardsLen === 0) {
@@ -140,7 +164,37 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /**疲劳伤害 */
     public fatigue(damages: number[]) {
-        // throw new Error("Method not implemented.");
+        //TODO
     }
 
+    /**弃牌或成功使用卡牌 */
+    private onDeleteCard(evt: EventData) {
+        const msg: GamePto.S_DISCARD | GamePto.S_USE_CARD = evt.data;
+        if (msg.uid !== UserModel.ins().uid) {
+            return;
+        }
+
+        const gameCard = this._cards[msg.cardIndex];
+        if (msg.isSuccess) {
+            this.removeCard(gameCard);
+            SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
+            this.updateCardsPostion(500);
+        } else {
+            const cardItem = gameCard.cardItem;
+            cardItem.x = gameCard.cacheX;
+            cardItem.y = gameCard.cacheX;
+            cardItem.scaleX = 0.5;
+            cardItem.scaleY = 0.5;
+        }
+    }
+
+    /**获取卡牌下标 */
+    private getCardIndex(cardItem: CardItem) {
+        for (let index = 0; index < this._cards.length; index++) {
+            if (this._cards[index].cardItem === cardItem) {
+                return index;
+            }
+        }
+        return -1;
+    }
 }

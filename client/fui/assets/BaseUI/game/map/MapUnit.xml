@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="140,95" overflow="hidden">
+  <displayList>
+    <graph id="n20_hzsg" name="allowAtk" xy="0,0" size="140,95" visible="false" alpha="0.3" type="rect" fillColor="#ff66ff00"/>
+    <component id="n13_hzsg" name="info" src="hzsg2k" fileName="game/map/MapUnitBase.xml" xy="0,0"/>
+    <image id="n14_hzsg" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="2,60" group="n19_hzsg"/>
+    <image id="n15_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/DR_atk_til.png" xy="38,97" group="n17_hzsg" rotation="-135"/>
+    <image id="n16_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/DR_atk_til.png" xy="0,91" group="n17_hzsg" rotation="-45"/>
+    <group id="n17_hzsg" name="longRange" xy="0,91" size="88,14" group="n19_hzsg" advanced="true"/>
+    <text id="n18_hzsg" name="atkText" xy="9,64" size="25,27" group="n19_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="99"/>
+    <text id="n21_hzsg" name="heroFlag" xy="50,0" size="40,27" group="n19_hzsg" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄"/>
+    <group id="n19_hzsg" name="atkGroup" xy="0,0" size="90,104" advanced="true"/>
+    <image id="n10_hzsg" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="102,63" size="38,32" group="n12_hzsg" aspect="true"/>
+    <text id="n11_hzsg" name="healthText" xy="109,65" size="25,27" group="n12_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
+    <group id="n12_hzsg" name="healthGroup" xy="102,63" size="38,32" advanced="true"/>
+  </displayList>
+</component>

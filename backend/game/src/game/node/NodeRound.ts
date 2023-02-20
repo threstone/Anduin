@@ -4,6 +4,8 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
 import { BaseNode } from './BaseNode';
+import { IGameMessage } from '../../../../common/I';
+import { GamePto } from '../../../../common/CommonProto';
 
 //回合中,负责处理玩家操作,执行某些操作后要判断玩家英雄是否死亡
 export class NodeRound extends BaseNode {
@@ -28,17 +30,22 @@ export class NodeRound extends BaseNode {
     }
 
     private deal(table: GameTable) {
-        const user = table.users[table.nextRoundUserIndex];
+        const user = table.users[table.roundUserIndex];
     }
 
     //玩家回合操作
-    public trigger(user: GameUser, table: GameTable, msg) {
-        console.log("玩家操作");
-        //如果是结束回合的消息
-        if (false) {
-            //派发回合结束信息
-            return NodeDriverResult.GoOn;
+    public trigger(user: GameUser, table: GameTable, msg: IGameMessage) {
+
+        if (table.users[table.roundUserIndex].uid !== user.uid) {
+            return NodeDriverResult.Continue;
         }
+
+        switch (msg.scmd) {
+            //结束回合
+            case GamePto.C_END_ROUND.prototype.scmd:
+                return NodeDriverResult.GoOn;
+        }
+
 
         //TODO Logic
 

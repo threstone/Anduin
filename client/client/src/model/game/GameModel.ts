@@ -2,12 +2,33 @@ let TEST_GAME = true;
 class GameModel extends BaseModel {
 
     handCards: GamePto.ICard[];
-    mapData: GamePto.IMapData;
 
     /**准备开始(包含更换卡牌数据) */
     C_PREPARE_TO_START(replareplaceCardIndexes: number[]) {
         const msg = new GamePto.C_PREPARE_TO_START();
         msg.replaceCardIndexes = replareplaceCardIndexes;
+        this.sendMsg(msg);
+    }
+
+    /**请求结束回合 */
+    C_END_ROUND() {
+        const msg = new GamePto.C_END_ROUND();
+        this.sendMsg(msg);
+    }
+
+    /**请求弃牌 */
+    C_DISCARD(cardIndex: number) {
+        const msg = new GamePto.C_DISCARD();
+        msg.cardIndex = cardIndex;
+        this.sendMsg(msg);
+    }
+
+    /**使用卡牌 */
+    C_USE_CARD(cardIndex: number, mapPoint: egret.Point) {
+        const msg = new GamePto.C_USE_CARD();
+        msg.cardIndex = cardIndex;
+        msg.x = mapPoint.x;
+        msg.x = mapPoint.y;
         this.sendMsg(msg);
     }
 
@@ -27,7 +48,7 @@ class GameModel extends BaseModel {
     S_GAME_START(msg: GamePto.S_GAME_START) {
         this.emit('S_GAME_START', msg);
         this.handCards = msg.cards;
-        this.mapData = msg.mapData;
+        MapModel.ins().mapData = msg.mapData;
     }
 
     //替换手牌
@@ -57,5 +78,23 @@ class GameModel extends BaseModel {
     //费用协议
     S_FEE_INFO(msg: GamePto.S_FEE_INFO) {
         this.emit('S_FEE_INFO', msg);
+    }
+
+    //弃牌
+    S_DISCARD(msg: GamePto.S_DISCARD) {
+        if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
+            this.handCards.splice(msg.cardIndex, 1);
+        }
+        this.emit('S_DISCARD', msg);
+    }
+
+    //使用卡牌
+    S_USE_CARD(msg: GamePto.S_USE_CARD) {
+        if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
+            this.handCards.splice(msg.cardIndex, 1);
+        }
+
+        MapModel.ins().onCardUse(msg)
+        this.emit('S_USE_CARD', msg);
     }
 }

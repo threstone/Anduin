@@ -10,11 +10,12 @@ import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 import { GameMapData } from './GameMapData';
+import { NodeDefine } from './GameDefine';
 
 export class GameTable extends BaseTable {
 
-    /**接下来执行回合操作的玩家 */
-    nextRoundUserIndex: number;
+    /**执行回合操作的玩家 */
+    roundUserIndex: number;
 
     /**地图数据 */
     private _mapData: GameMapData;
@@ -52,6 +53,20 @@ export class GameTable extends BaseTable {
         return false;
     }
 
+    /**检查用户是否有回合操作权限 */
+    public allowRoundOprate(user: GameUser) {
+        //此时非此用户的回合
+        if (this.users[this.roundUserIndex].uid !== user.uid) {
+            return false
+        }
+
+        //检查node是否在回合流程中
+        if (!this.nodeDriver || this.nodeDriver.getCurNode() !== NodeDefine.Round) {
+            return false;
+        }
+
+        return true;
+    }
 
     public getOtherUser(uid: number) {
         if (this._users[0].uid === uid) {
@@ -65,26 +80,8 @@ export class GameTable extends BaseTable {
         const mapData = new GamePto.MapData();
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
-            for (let eventIndex = 0; eventIndex < user.eventPool?.length; eventIndex++) {
-                const eventCard = user.eventPool[eventIndex];
-                // const gameCard = new GamePto.Card();
-                // gameCard.cardId = eventCard.cardId;
-                // gameCard.attack = eventCard.attack;
-                // gameCard.health = eventCard.health;
-                // gameCard.uid = user.uid;
-                mapData.eventCard.push(eventCard);
-            }
-
-            for (let unitIndex = 0; unitIndex < user.unitPool?.length; unitIndex++) {
-                const unitCard = user.unitPool[unitIndex];
-                // const gameCard = new GamePto.Card();
-                // gameCard.cardId = unitCard.cardId;
-                // gameCard.attack = unitCard.attack;
-                // gameCard.health = unitCard.health;
-                // gameCard.allowAtk = unitCard.allowAtk;
-                // gameCard.uid = user.uid;
-                mapData.eventCard.push(unitCard);
-            }
+            mapData.eventCards.push(...user.eventPool);
+            mapData.unitCards.push(...user.unitPool);
         }
         return mapData;
     }

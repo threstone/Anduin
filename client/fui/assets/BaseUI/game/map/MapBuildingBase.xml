@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="140,95" mask="n0_hzsg">
+  <displayList>
+    <image id="n2_hzsg" name="tempBg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="3,3" size="140,95"/>
+    <text id="n3_hzsg" name="tempCardName" xy="13,34" size="120,32" fontSize="22" align="center" vAlign="middle" leading="2" autoSize="none" bold="true" text="农夫"/>
+    <loader id="n4_hzsg" name="cardImg" xy="3,3" size="140,95" fill="scaleFree"/>
+    <graph id="n0_hzsg" name="zhezhao" xy="20,3" size="100,88" type="rect"/>
+  </displayList>
+</component>

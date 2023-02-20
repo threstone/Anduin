@@ -102,6 +102,14 @@ class SelfInfoBox extends UserInfoBox {
         super.init();
         this.view = GameSceneView.ins().getView().selfInfoBox;
     }
+
+    public isInDeadPool(x: number, y: number) {
+        if (x >= this.view.x && x <= this.view.x + this.view.width &&
+            y >= this.view.y && y <= this.view.y + this.view.height) {
+            return true;
+        }
+        return false;
+    }
 }
 
 class TargetInfoBox extends UserInfoBox {

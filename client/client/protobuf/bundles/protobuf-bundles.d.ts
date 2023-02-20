@@ -2084,6 +2084,12 @@ declare namespace GamePto {
 
         /** Card uid */
         uid?: (number|null);
+
+        /** Card x */
+        x?: (number|null);
+
+        /** Card y */
+        y?: (number|null);
     }
 
     /** Represents a Card. */
@@ -2112,6 +2118,12 @@ declare namespace GamePto {
 
         /** Card uid. */
         public uid: number;
+
+        /** Card x. */
+        public x: number;
+
+        /** Card y. */
+        public y: number;
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -2142,11 +2154,11 @@ declare namespace GamePto {
     /** Properties of a MapData. */
     interface IMapData {
 
-        /** MapData eventCard */
-        eventCard?: (GamePto.ICard[]|null);
+        /** MapData eventCards */
+        eventCards?: (GamePto.ICard[]|null);
 
-        /** MapData unitCard */
-        unitCard?: (GamePto.ICard[]|null);
+        /** MapData unitCards */
+        unitCards?: (GamePto.ICard[]|null);
     }
 
     /** Represents a MapData. */
@@ -2158,11 +2170,11 @@ declare namespace GamePto {
          */
         constructor(properties?: GamePto.IMapData);
 
-        /** MapData eventCard. */
-        public eventCard: GamePto.ICard[];
+        /** MapData eventCards. */
+        public eventCards: GamePto.ICard[];
 
-        /** MapData unitCard. */
-        public unitCard: GamePto.ICard[];
+        /** MapData unitCards. */
+        public unitCards: GamePto.ICard[];
 
         /**
          * Encodes the specified MapData message. Does not implicitly {@link GamePto.MapData.verify|verify} messages.
@@ -2241,6 +2253,183 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for C_PREPARE_TO_START
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_END_ROUND. */
+    interface IC_END_ROUND {
+
+        /** C_END_ROUND cmd */
+        cmd?: (number|null);
+
+        /** C_END_ROUND scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_END_ROUND. */
+    class C_END_ROUND implements IC_END_ROUND {
+
+        /**
+         * Constructs a new C_END_ROUND.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_END_ROUND);
+
+        /** C_END_ROUND cmd. */
+        public cmd: number;
+
+        /** C_END_ROUND scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_END_ROUND message. Does not implicitly {@link GamePto.C_END_ROUND.verify|verify} messages.
+         * @param message C_END_ROUND message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_END_ROUND, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_END_ROUND message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_END_ROUND
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_END_ROUND;
+
+        /**
+         * Gets the default type url for C_END_ROUND
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_DISCARD. */
+    interface IC_DISCARD {
+
+        /** C_DISCARD cmd */
+        cmd?: (number|null);
+
+        /** C_DISCARD scmd */
+        scmd?: (number|null);
+
+        /** C_DISCARD cardIndex */
+        cardIndex?: (number|null);
+    }
+
+    /** Represents a C_DISCARD. */
+    class C_DISCARD implements IC_DISCARD {
+
+        /**
+         * Constructs a new C_DISCARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_DISCARD);
+
+        /** C_DISCARD cmd. */
+        public cmd: number;
+
+        /** C_DISCARD scmd. */
+        public scmd: number;
+
+        /** C_DISCARD cardIndex. */
+        public cardIndex: number;
+
+        /**
+         * Encodes the specified C_DISCARD message. Does not implicitly {@link GamePto.C_DISCARD.verify|verify} messages.
+         * @param message C_DISCARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_DISCARD, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_DISCARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_DISCARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_DISCARD;
+
+        /**
+         * Gets the default type url for C_DISCARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_USE_CARD. */
+    interface IC_USE_CARD {
+
+        /** C_USE_CARD cmd */
+        cmd?: (number|null);
+
+        /** C_USE_CARD scmd */
+        scmd?: (number|null);
+
+        /** C_USE_CARD cardIndex */
+        cardIndex?: (number|null);
+
+        /** C_USE_CARD x */
+        x?: (number|null);
+
+        /** C_USE_CARD y */
+        y?: (number|null);
+    }
+
+    /** Represents a C_USE_CARD. */
+    class C_USE_CARD implements IC_USE_CARD {
+
+        /**
+         * Constructs a new C_USE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_USE_CARD);
+
+        /** C_USE_CARD cmd. */
+        public cmd: number;
+
+        /** C_USE_CARD scmd. */
+        public scmd: number;
+
+        /** C_USE_CARD cardIndex. */
+        public cardIndex: number;
+
+        /** C_USE_CARD x. */
+        public x: number;
+
+        /** C_USE_CARD y. */
+        public y: number;
+
+        /**
+         * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.
+         * @param message C_USE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_USE_CARD, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_USE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_USE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_USE_CARD;
+
+        /**
+         * Gets the default type url for C_USE_CARD
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -2787,6 +2976,174 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_FEE_INFO
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_DISCARD. */
+    interface IS_DISCARD {
+
+        /** S_DISCARD cmd */
+        cmd?: (number|null);
+
+        /** S_DISCARD scmd */
+        scmd?: (number|null);
+
+        /** S_DISCARD isSuccess */
+        isSuccess?: (boolean|null);
+
+        /** S_DISCARD cardIndex */
+        cardIndex?: (number|null);
+
+        /** S_DISCARD fee */
+        fee?: (number|null);
+
+        /** S_DISCARD feeMax */
+        feeMax?: (number|null);
+
+        /** S_DISCARD uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_DISCARD. */
+    class S_DISCARD implements IS_DISCARD {
+
+        /**
+         * Constructs a new S_DISCARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_DISCARD);
+
+        /** S_DISCARD cmd. */
+        public cmd: number;
+
+        /** S_DISCARD scmd. */
+        public scmd: number;
+
+        /** S_DISCARD isSuccess. */
+        public isSuccess: boolean;
+
+        /** S_DISCARD cardIndex. */
+        public cardIndex: number;
+
+        /** S_DISCARD fee. */
+        public fee: number;
+
+        /** S_DISCARD feeMax. */
+        public feeMax: number;
+
+        /** S_DISCARD uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_DISCARD message. Does not implicitly {@link GamePto.S_DISCARD.verify|verify} messages.
+         * @param message S_DISCARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_DISCARD, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_DISCARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_DISCARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_DISCARD;
+
+        /**
+         * Gets the default type url for S_DISCARD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_USE_CARD. */
+    interface IS_USE_CARD {
+
+        /** S_USE_CARD cmd */
+        cmd?: (number|null);
+
+        /** S_USE_CARD scmd */
+        scmd?: (number|null);
+
+        /** S_USE_CARD isSuccess */
+        isSuccess?: (boolean|null);
+
+        /** S_USE_CARD fee */
+        fee?: (number|null);
+
+        /** S_USE_CARD feeMax */
+        feeMax?: (number|null);
+
+        /** S_USE_CARD uid */
+        uid?: (number|null);
+
+        /** S_USE_CARD cardIndex */
+        cardIndex?: (number|null);
+
+        /** S_USE_CARD card */
+        card?: (GamePto.ICard|null);
+    }
+
+    /** Represents a S_USE_CARD. */
+    class S_USE_CARD implements IS_USE_CARD {
+
+        /**
+         * Constructs a new S_USE_CARD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_USE_CARD);
+
+        /** S_USE_CARD cmd. */
+        public cmd: number;
+
+        /** S_USE_CARD scmd. */
+        public scmd: number;
+
+        /** S_USE_CARD isSuccess. */
+        public isSuccess: boolean;
+
+        /** S_USE_CARD fee. */
+        public fee: number;
+
+        /** S_USE_CARD feeMax. */
+        public feeMax: number;
+
+        /** S_USE_CARD uid. */
+        public uid: number;
+
+        /** S_USE_CARD cardIndex. */
+        public cardIndex: number;
+
+        /** S_USE_CARD card. */
+        public card?: (GamePto.ICard|null);
+
+        /**
+         * Encodes the specified S_USE_CARD message. Does not implicitly {@link GamePto.S_USE_CARD.verify|verify} messages.
+         * @param message S_USE_CARD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_USE_CARD, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_USE_CARD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_USE_CARD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_USE_CARD;
+
+        /**
+         * Gets the default type url for S_USE_CARD
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
