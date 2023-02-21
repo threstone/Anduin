@@ -3,6 +3,7 @@ import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
 import { NodeDefine } from '../game/GameDefine';
 import { BaseHandler } from './BaseHandler';
+import { UnitCard } from '../card/UnitCard';
 
 export class GameHandler extends BaseHandler {
 
@@ -50,24 +51,29 @@ export class GameHandler extends BaseHandler {
     }
 
     //使用卡牌
-    static C_USE_CARD(user: GameUser, table: GameTable, msg: GamePto.C_DISCARD) {
+    static C_USE_CARD(user: GameUser, table: GameTable, msg: GamePto.C_USE_CARD) {
         if (!table.allowRoundOprate(user)) {
             return;
         }
 
         const replay = new GamePto.S_USE_CARD();
         replay.isSuccess = false;
+        replay.cardIndex = msg.cardIndex;
         replay.uid = user.uid;
-        const card = user.handCards[msg.cardIndex];
+        const card = user.handCards[msg.cardIndex] as UnitCard;
         if (card && card.fee <= user.fee) {
             replay.isSuccess = true;
+            card.blockX = msg.blockX;
+            card.blockY = msg.blockY;
             replay.card = card;
             user.handCards.splice(msg.cardIndex, 1)
-            replay.cardIndex = msg.cardIndex;
             //减费用
             user.fee -= card.fee;
             replay.fee = user.fee;
             replay.feeMax = user.feeMax;
+
+            //置入战场
+            table.mapData.setCard(card);
         }
         table.broadcast(replay);
     }

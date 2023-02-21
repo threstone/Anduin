@@ -15,16 +15,22 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+    public addMapItem(cardInfo: GamePto.ICard) {
+        const cardItem = MapItem.getItem(cardInfo)
+        this.unitPool[cardInfo.blockX][cardInfo.blockY] = cardItem;
+        this.view.addChild(cardItem);
+        cardItem.x = cardInfo.blockX * this.blockWidth;
+        cardItem.y = cardInfo.blockY * this.blockHeight;
+    }
+
     public updateMap() {
-        const unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "x": 3, "y": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "x": 3, "y": 7 }];
-        // const unitCards = MapModel.ins().mapData?.unitCards;
+        let unitCards = MapModel.ins().mapData?.unitCards;
+        if (TEST_GAME) {
+            unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
+        }
         for (let index = 0; index < unitCards.length; index++) {
             const cardInfo = unitCards[index];
-            const cardItem = MapItem.getItem(cardInfo)
-            this.unitPool[cardInfo.x][cardInfo.y] = cardItem;
-            this.view.addChild(cardItem);
-            cardItem.x = cardInfo.x * this.blockWidth;
-            cardItem.y = cardInfo.y * this.blockHeight;
+            this.addMapItem(cardInfo)
         }
     }
 
@@ -34,11 +40,17 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const position = map.localToRoot();
         if (x >= position.x && x <= position.x + map.width &&
             y >= position.y && y <= position.y + map.height) {
-            mapPoint.x = 1;
-            mapPoint.y = 1;
+            const localPoint = this.view.rootToLocal(x, y);
+            mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
+            mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
             return true;
         }
         return false;
+    }
+
+    /**根据地图坐标返回场景坐标 */
+    public getScenePoint(blockX: number, blockY: number) {
+        return this.view.localToRoot(blockX * this.blockWidth, blockY * this.blockHeight);
     }
 
     /**根据数据生成地图 */

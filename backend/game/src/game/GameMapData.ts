@@ -21,7 +21,7 @@ export class GameMapData {
     }
 
     public setCard(card: UnitCard) {
-        const position = card.y * this._width + card.x;
+        const position = card.blockY * this._width + card.blockX;
         if (this._mapData[position]) {
             return;
         }
@@ -39,13 +39,13 @@ export class GameMapData {
 
     public move(targetX: number, targetY: number, card: UnitCard) {
         const resultSet = new Set<number>();
-        this.canMove(card.x, card.y, 2, resultSet)
+        this.canMove(card.blockX, card.blockY, 2, resultSet)
         if (!resultSet.has(targetY * this._width + targetX)) {
             return false;
         }
-        this.delete(card.x, card.y);
-        card.x = targetX;
-        card.y = targetY;
+        this.delete(card.blockX, card.blockY);
+        card.blockX = targetX;
+        card.blockY = targetY;
         this.setCard(card);
         return true;
     }

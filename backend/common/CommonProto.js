@@ -3316,8 +3316,8 @@ $root.GamePto = (function() {
         Card.prototype.fee = 0;
         Card.prototype.allowAtk = false;
         Card.prototype.uid = 0;
-        Card.prototype.x = 0;
-        Card.prototype.y = 0;
+        Card.prototype.blockX = 0;
+        Card.prototype.blockY = 0;
 
         Card.create = function create(properties) {
             return new Card(properties);
@@ -3338,10 +3338,10 @@ $root.GamePto = (function() {
                 w.uint32(32).bool(m.allowAtk);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(40).int32(m.uid);
-            if (m.x != null && Object.hasOwnProperty.call(m, "x"))
-                w.uint32(48).int32(m.x);
-            if (m.y != null && Object.hasOwnProperty.call(m, "y"))
-                w.uint32(56).int32(m.y);
+            if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
+                w.uint32(48).int32(m.blockX);
+            if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
+                w.uint32(56).int32(m.blockY);
             return w;
         };
 
@@ -3377,11 +3377,11 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 6: {
-                        m.x = r.int32();
+                        m.blockX = r.int32();
                         break;
                     }
                 case 7: {
-                        m.y = r.int32();
+                        m.blockY = r.int32();
                         break;
                     }
                 default:
@@ -3414,11 +3414,11 @@ $root.GamePto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
-            if (d.x != null) {
-                m.x = d.x | 0;
+            if (d.blockX != null) {
+                m.blockX = d.blockX | 0;
             }
-            if (d.y != null) {
-                m.y = d.y | 0;
+            if (d.blockY != null) {
+                m.blockY = d.blockY | 0;
             }
             return m;
         };
@@ -3434,8 +3434,8 @@ $root.GamePto = (function() {
                 d.fee = 0;
                 d.allowAtk = false;
                 d.uid = 0;
-                d.x = 0;
-                d.y = 0;
+                d.blockX = 0;
+                d.blockY = 0;
             }
             if (m.cardId != null && m.hasOwnProperty("cardId")) {
                 d.cardId = m.cardId;
@@ -3455,11 +3455,11 @@ $root.GamePto = (function() {
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
             }
-            if (m.x != null && m.hasOwnProperty("x")) {
-                d.x = m.x;
+            if (m.blockX != null && m.hasOwnProperty("blockX")) {
+                d.blockX = m.blockX;
             }
-            if (m.y != null && m.hasOwnProperty("y")) {
-                d.y = m.y;
+            if (m.blockY != null && m.hasOwnProperty("blockY")) {
+                d.blockY = m.blockY;
             }
             return d;
         };
@@ -3942,8 +3942,8 @@ $root.GamePto = (function() {
         C_USE_CARD.prototype.cmd = 200;
         C_USE_CARD.prototype.scmd = 4;
         C_USE_CARD.prototype.cardIndex = 0;
-        C_USE_CARD.prototype.x = 0;
-        C_USE_CARD.prototype.y = 0;
+        C_USE_CARD.prototype.blockX = 0;
+        C_USE_CARD.prototype.blockY = 0;
 
         C_USE_CARD.create = function create(properties) {
             return new C_USE_CARD(properties);
@@ -3958,10 +3958,10 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.scmd);
             if (m.cardIndex != null && Object.hasOwnProperty.call(m, "cardIndex"))
                 w.uint32(24).int32(m.cardIndex);
-            if (m.x != null && Object.hasOwnProperty.call(m, "x"))
-                w.uint32(32).int32(m.x);
-            if (m.y != null && Object.hasOwnProperty.call(m, "y"))
-                w.uint32(40).int32(m.y);
+            if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
+                w.uint32(32).int32(m.blockX);
+            if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
+                w.uint32(40).int32(m.blockY);
             return w;
         };
 
@@ -3985,11 +3985,11 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        m.x = r.int32();
+                        m.blockX = r.int32();
                         break;
                     }
                 case 5: {
-                        m.y = r.int32();
+                        m.blockY = r.int32();
                         break;
                     }
                 default:
@@ -4013,11 +4013,11 @@ $root.GamePto = (function() {
             if (d.cardIndex != null) {
                 m.cardIndex = d.cardIndex | 0;
             }
-            if (d.x != null) {
-                m.x = d.x | 0;
+            if (d.blockX != null) {
+                m.blockX = d.blockX | 0;
             }
-            if (d.y != null) {
-                m.y = d.y | 0;
+            if (d.blockY != null) {
+                m.blockY = d.blockY | 0;
             }
             return m;
         };
@@ -4030,8 +4030,8 @@ $root.GamePto = (function() {
                 d.cmd = 200;
                 d.scmd = 4;
                 d.cardIndex = 0;
-                d.x = 0;
-                d.y = 0;
+                d.blockX = 0;
+                d.blockY = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -4042,11 +4042,11 @@ $root.GamePto = (function() {
             if (m.cardIndex != null && m.hasOwnProperty("cardIndex")) {
                 d.cardIndex = m.cardIndex;
             }
-            if (m.x != null && m.hasOwnProperty("x")) {
-                d.x = m.x;
+            if (m.blockX != null && m.hasOwnProperty("blockX")) {
+                d.blockX = m.blockX;
             }
-            if (m.y != null && m.hasOwnProperty("y")) {
-                d.y = m.y;
+            if (m.blockY != null && m.hasOwnProperty("blockY")) {
+                d.blockY = m.blockY;
             }
             return d;
         };

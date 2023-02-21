@@ -4659,8 +4659,8 @@ $root.GamePto = (function() {
          * @property {number|null} [fee] Card fee
          * @property {boolean|null} [allowAtk] Card allowAtk
          * @property {number|null} [uid] Card uid
-         * @property {number|null} [x] Card x
-         * @property {number|null} [y] Card y
+         * @property {number|null} [blockX] Card blockX
+         * @property {number|null} [blockY] Card blockY
          */
 
         /**
@@ -4727,20 +4727,20 @@ $root.GamePto = (function() {
         Card.prototype.uid = 0;
 
         /**
-         * Card x.
-         * @member {number} x
+         * Card blockX.
+         * @member {number} blockX
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.x = 0;
+        Card.prototype.blockX = 0;
 
         /**
-         * Card y.
-         * @member {number} y
+         * Card blockY.
+         * @member {number} blockY
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.y = 0;
+        Card.prototype.blockY = 0;
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -4766,10 +4766,10 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowAtk);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.y);
+            if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.blockX);
+            if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.blockY);
             return writer;
         };
 
@@ -4816,11 +4816,11 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 6: {
-                        message.x = reader.int32();
+                        message.blockX = reader.int32();
                         break;
                     }
                 case 7: {
-                        message.y = reader.int32();
+                        message.blockY = reader.int32();
                         break;
                     }
                 default:
@@ -5356,8 +5356,8 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] C_USE_CARD cmd
          * @property {number|null} [scmd] C_USE_CARD scmd
          * @property {number|null} [cardIndex] C_USE_CARD cardIndex
-         * @property {number|null} [x] C_USE_CARD x
-         * @property {number|null} [y] C_USE_CARD y
+         * @property {number|null} [blockX] C_USE_CARD blockX
+         * @property {number|null} [blockY] C_USE_CARD blockY
          */
 
         /**
@@ -5400,20 +5400,20 @@ $root.GamePto = (function() {
         C_USE_CARD.prototype.cardIndex = 0;
 
         /**
-         * C_USE_CARD x.
-         * @member {number} x
+         * C_USE_CARD blockX.
+         * @member {number} blockX
          * @memberof GamePto.C_USE_CARD
          * @instance
          */
-        C_USE_CARD.prototype.x = 0;
+        C_USE_CARD.prototype.blockX = 0;
 
         /**
-         * C_USE_CARD y.
-         * @member {number} y
+         * C_USE_CARD blockY.
+         * @member {number} blockY
          * @memberof GamePto.C_USE_CARD
          * @instance
          */
-        C_USE_CARD.prototype.y = 0;
+        C_USE_CARD.prototype.blockY = 0;
 
         /**
          * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.
@@ -5433,10 +5433,10 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardIndex);
-            if (message.x != null && Object.hasOwnProperty.call(message, "x"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.x);
-            if (message.y != null && Object.hasOwnProperty.call(message, "y"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.y);
+            if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.blockX);
+            if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.blockY);
             return writer;
         };
 
@@ -5471,11 +5471,11 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        message.x = reader.int32();
+                        message.blockX = reader.int32();
                         break;
                     }
                 case 5: {
-                        message.y = reader.int32();
+                        message.blockY = reader.int32();
                         break;
                     }
                 default:

@@ -2856,11 +2856,11 @@ export namespace GamePto {
         /** Card uid */
         uid?: (number|null);
 
-        /** Card x */
-        x?: (number|null);
+        /** Card blockX */
+        blockX?: (number|null);
 
-        /** Card y */
-        y?: (number|null);
+        /** Card blockY */
+        blockY?: (number|null);
     }
 
     /** Represents a Card. */
@@ -2890,11 +2890,11 @@ export namespace GamePto {
         /** Card uid. */
         public uid: number;
 
-        /** Card x. */
-        public x: number;
+        /** Card blockX. */
+        public blockX: number;
 
-        /** Card y. */
-        public y: number;
+        /** Card blockY. */
+        public blockY: number;
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -3375,11 +3375,11 @@ export namespace GamePto {
         /** C_USE_CARD cardIndex */
         cardIndex?: (number|null);
 
-        /** C_USE_CARD x */
-        x?: (number|null);
+        /** C_USE_CARD blockX */
+        blockX?: (number|null);
 
-        /** C_USE_CARD y */
-        y?: (number|null);
+        /** C_USE_CARD blockY */
+        blockY?: (number|null);
     }
 
     /** Represents a C_USE_CARD. */
@@ -3400,11 +3400,11 @@ export namespace GamePto {
         /** C_USE_CARD cardIndex. */
         public cardIndex: number;
 
-        /** C_USE_CARD x. */
-        public x: number;
+        /** C_USE_CARD blockX. */
+        public blockX: number;
 
-        /** C_USE_CARD y. */
-        public y: number;
+        /** C_USE_CARD blockY. */
+        public blockY: number;
 
         /**
          * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.

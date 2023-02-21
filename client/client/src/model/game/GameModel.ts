@@ -27,8 +27,8 @@ class GameModel extends BaseModel {
     C_USE_CARD(cardIndex: number, mapPoint: egret.Point) {
         const msg = new GamePto.C_USE_CARD();
         msg.cardIndex = cardIndex;
-        msg.x = mapPoint.x;
-        msg.x = mapPoint.y;
+        msg.blockX = mapPoint.x;
+        msg.blockY = mapPoint.y;
         this.sendMsg(msg);
     }
 
@@ -46,15 +46,15 @@ class GameModel extends BaseModel {
 
     //开始游戏
     S_GAME_START(msg: GamePto.S_GAME_START) {
-        this.emit('S_GAME_START', msg);
         this.handCards = msg.cards;
         MapModel.ins().mapData = msg.mapData;
+        this.emit('S_GAME_START', msg);
     }
 
     //替换手牌
     S_REPLACE_CARDS(msg: GamePto.S_REPLACE_CARDS) {
-        this.emit('S_REPLACE_CARDS', msg);
         this.handCards = msg.cards;
+        this.emit('S_REPLACE_CARDS', msg);
     }
 
     //回合开始
@@ -92,9 +92,9 @@ class GameModel extends BaseModel {
     S_USE_CARD(msg: GamePto.S_USE_CARD) {
         if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
             this.handCards.splice(msg.cardIndex, 1);
+            MapModel.ins().onCardUse(msg)
         }
 
-        MapModel.ins().onCardUse(msg)
         this.emit('S_USE_CARD', msg);
     }
 }

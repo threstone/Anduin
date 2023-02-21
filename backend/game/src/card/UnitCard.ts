@@ -1,8 +1,8 @@
 import { EventCard } from "./EventCard";
 
 export abstract class UnitCard extends EventCard {
-    x: number;
-    y: number;
+    blockX: number;
+    blockY: number;
     allowAtk: boolean;
 
     /**被攻击前触发 */

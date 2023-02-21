@@ -17,8 +17,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         super.open();
 
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards);
+        this.addEffectListener('S_USE_CARD', this.onUseCard);
         this.observe('S_DISCARD', this.onDeleteCard);
-        this.observe('S_USE_CARD', this.onDeleteCard);
     }
 
     public close(): void {
@@ -78,6 +78,13 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                     const mapPoint = new egret.Point();
                     if (MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
                         GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), mapPoint);
+                        if (TEST_GAME) {
+                            cardItem.x = gameCard.cacheX;
+                            cardItem.y = gameCard.cacheY;
+                            cardItem.scaleX = 0.5;
+                            cardItem.scaleY = 0.5;
+                            GameDispatcher.getInstance().emit('S_USE_CARD', { "isSuccess": true, "fee": 0, "feeMax": 10, "uid": 2, "cardIndex": this.getCardIndex(cardItem), "card": { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 2, "blockX": mapPoint.x, "blockY": mapPoint.y } })
+                        }
                         return;
                     }
                 }
@@ -167,9 +174,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         //TODO
     }
 
-    /**弃牌或成功使用卡牌 */
+    /**弃牌 */
     private onDeleteCard(evt: EventData) {
-        const msg: GamePto.S_DISCARD | GamePto.S_USE_CARD = evt.data;
+        const msg: GamePto.S_DISCARD = evt.data;
         if (msg.uid !== UserModel.ins().uid) {
             return;
         }
@@ -183,6 +190,28 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const cardItem = gameCard.cardItem;
             cardItem.x = gameCard.cacheX;
             cardItem.y = gameCard.cacheX;
+            cardItem.scaleX = 0.5;
+            cardItem.scaleY = 0.5;
+        }
+    }
+
+    /**使用卡牌 */
+    private async onUseCard(msg: GamePto.S_USE_CARD) {
+        if (msg.uid !== UserModel.ins().uid) {
+            return;
+        }
+
+        const gameCard = this._cards[msg.cardIndex];
+        if (msg.isSuccess) {
+            gameCard.cardInfo = msg.card;
+            this.removeCard(gameCard);
+            SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
+            this.updateCardsPostion(500);
+            return GameSceneView.ins().useCardShow(gameCard);
+        } else {
+            const cardItem = gameCard.cardItem;
+            cardItem.x = gameCard.cacheX;
+            cardItem.y = gameCard.cacheY;
             cardItem.scaleX = 0.5;
             cardItem.scaleY = 0.5;
         }

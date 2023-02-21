@@ -10,6 +10,9 @@ class BuildingItem {
             building.healthText.color = 0xFF0000;
         }
         building.info.tempCardName.text = `${cardConfig.cardName}`;
+        if(cardInfo.uid === UserModel.ins().uid){
+            building.info.tempCardName.strokeColor = 0x00FF00;
+        }
         return building;
     }
 }

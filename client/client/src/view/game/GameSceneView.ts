@@ -45,6 +45,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.observe('GameSceneClose', this.close);
         this.observe('S_GAME_START', this.onGameStart);
         this.observe('S_ROUND_START_EVENT', this.onRoundStart);
+        this.observe('S_ROUND_END_EVENT', this.onRoundEnd);
 
         this.AddClick(this.view.close, this.close);
     }
@@ -75,13 +76,22 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         }
     }
 
+    private onRoundEnd(evt: EventData) {
+        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+        //自己的回合结束了
+        if (msg.uid === UserModel.ins().uid) {
+            this._allowToOprate = false;
+        }
+    }
+
+
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
         ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid);
         MapView.ins().updateMap();
     }
 
-    public useCardShow(card: GameCard) {
+    public async useCardShow(card: GameCard) {
         const cardItem = card.cardItem
         this.view.addChild(cardItem);
 
@@ -95,18 +105,23 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             }, 400).to({}, 2000).call(() => {
                 this.view.removeChild(cardItem);
             });
+
+            //TODO 实际这里是执行卡牌的特效的等待时间
+            return this.wait(2400);
         } else {
-            //对地图进行刷新
-            // GameMap
+            //单位卡,建筑卡会移动到指定位置然后变成对应的map对象
+            const scenePoint = MapView.ins().getScenePoint(card.cardInfo.blockX, card.cardInfo.blockY);
+            egret.Tween.get(cardItem).to({
+                scaleX: 0.25,
+                scaleY: 0.25,
+                x: scenePoint.x + (MapView.ins().blockHeight - cardItem.width * 0.25),
+                y: scenePoint.y
+            }, 400).call(() => {
+                this.view.removeChild(cardItem);
+                //变身
+                MapView.ins().addMapItem(card.cardInfo);
+            });
+            return this.wait(400);
         }
-
-        //如果是单位卡，卡牌移动到对应的位置然后放在那
-
-        //switch card type(unit\ event\ magic) and do something
-        //case unit  
-        //move to target block 
-        //scale to some value
     }
-
-
 }

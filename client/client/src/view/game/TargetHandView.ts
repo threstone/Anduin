@@ -10,10 +10,11 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     public open(): void {
         super.open();
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
+        this.addEffectListener('S_USE_CARD', this.onUseCard)
+
         this.observe('S_REPLACE_CARDS', this.onReplaceCards);
         this.observe('S_GAME_START', this.drawStartHandCards);
         this.observe('S_DISCARD', this.onDeleteCard);
-        this.observe('S_USE_CARD', this.onUseCard);
     }
 
     public close(): void {
@@ -60,6 +61,8 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
             card.y = poolPosition.y;
             card.scaleX = 0.5;
             card.scaleY = 0.5;
+            card.skewX = 90;
+            card.skewY = 90;
             this.view.addChild(card)
             this._cards[replaceIndex] = card;
         }
@@ -123,14 +126,16 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     /**将一张卡设置到墓地 */
     private removeCardToDeadPool(index: number) {
-        const poolPosition = GameSceneView.ins().getView().targetInfoBox.deadPoolBg.localToRoot();
+        let poolPosition = GameSceneView.ins().getView().targetInfoBox.deadPoolBg.localToRoot();
+        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y);
         this.removeCardTween(index, poolPosition.x, poolPosition.y);
         this._cards.splice(index, 1);
     }
 
     /**将卡设置到牌池 */
     private removeCardToCardPool(index: number) {
-        const poolPosition = GameSceneView.ins().getView().targetInfoBox.cardPoolBg.localToRoot();
+        let poolPosition = GameSceneView.ins().getView().targetInfoBox.cardPoolBg.localToRoot();
+        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y);
         this.removeCardTween(index, poolPosition.x, poolPosition.y);
         this._cards.splice(index, 1);
     }
@@ -158,17 +163,18 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     private onDeleteCard(evt: EventData) {
         const msg: GamePto.S_DISCARD = evt.data;
         if (msg.isSuccess && msg.uid !== UserModel.ins().uid) {
-            this.removeCardToCardPool(msg.cardIndex);
+            this.removeCardToDeadPool(msg.cardIndex);
             TargetInfoBox.ins().feeSet(msg.fee, msg.feeMax);
         }
     }
 
     /**使用卡牌 */
-    private onUseCard(evt: EventData) {
-        const msg: GamePto.S_USE_CARD = evt.data;
+    private onUseCard(msg: GamePto.S_USE_CARD) {
         if (!msg.isSuccess || msg.uid === UserModel.ins().uid) {
             return;
         }
+
+        TargetInfoBox.ins().feeSet(msg.fee, msg.feeMax);
 
         //将手牌位置的卡换成对应的卡牌
         const gameCard = new GameCard(msg.card);
@@ -177,8 +183,10 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         gameCard.cardItem.y = cardBg.y;
         gameCard.cardItem.scaleX = 0.5;
         gameCard.cardItem.scaleY = 0.5;
+        //删卡数据
         this.view.removeChild(cardBg);
-
-        GameSceneView.ins().useCardShow(gameCard);
+        this._cards.splice(msg.cardIndex, 1);
+        this.updateCardsPostion(400);
+        return GameSceneView.ins().useCardShow(gameCard);
     }
 }
