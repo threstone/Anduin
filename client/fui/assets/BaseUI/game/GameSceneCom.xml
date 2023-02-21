@@ -2,6 +2,7 @@
 <component size="1600,1200">
   <displayList>
     <image id="n26_pg48" name="bg" src="pg482c" fileName="game/res/bbg_arena.jpg" xy="0,0" size="1600,1200"/>
+    <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/map/MapView.xml" xy="310,219"/>
     <graph id="n23_jig1" name="record" xy="1,385" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
     <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1152,990">
       <relation target="" sidePair="right-right,bottom-bottom"/>
@@ -13,6 +14,5 @@
     <component id="n33_pg48" name="targetHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="335,0"/>
     <component id="n35_uym4" name="rightCtrl" src="uym42i" fileName="game/RightCtrlCom.xml" xy="1314,400"/>
     <component id="n36_hzsg" name="close" src="fjkiy" fileName="common/btn/Button3.xml" xy="40,33"/>
-    <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/MapView.xml" xy="310,219"/>
   </displayList>
 </component>

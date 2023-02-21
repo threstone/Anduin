@@ -20,12 +20,16 @@ abstract class BaseView<T extends fairygui.GComponent> {
         return self.__instance__;
     }
 
+
     protected view: T;
     public getView(): T { return this.view }
 
     private eventList: EventListenerData[] = [];
 
     private _bindViewList: BaseView<fairygui.GComponent>[];
+
+    /**是独立的界面还是父级容器的一个组件，如果是的话就不需要从根场景中添加或移除,在bindView时用到 */
+    private _isChildComponet: boolean = false;
 
     protected abstract init(...param: any[]);
 
@@ -92,7 +96,9 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @param param 参数
      */
     public open(...param: any[]) {
-        fairygui.GRoot.inst.addChild(this.view);
+        if (!this._isChildComponet) {
+            fairygui.GRoot.inst.addChild(this.view);
+        }
         if (this._bindViewList) {
             for (let index = 0; index < this._bindViewList.length; index++) {
                 const bindView = this._bindViewList[index];
@@ -112,12 +118,15 @@ abstract class BaseView<T extends fairygui.GComponent> {
                 bindView.close(param);
             }
         }
-        fairygui.GRoot.inst.removeChild(this.view);
+
+        if (!this._isChildComponet) {
+            fairygui.GRoot.inst.removeChild(this.view);
+        }
         this.removeEvents();
     }
 
     /**
-     * @returns 返回是否处于场景中
+     * @returns 返回是否处于根场景中
      */
     public isOnStage() {
         return (fairygui.GRoot.inst.displayObject as egret.DisplayObjectContainer).contains(this.view.displayObject);
@@ -169,13 +178,19 @@ abstract class BaseView<T extends fairygui.GComponent> {
         });
     }
 
+    public isChildInView(comp: fairygui.GComponent) {
+        return (this.view.displayObject as egret.DisplayObjectContainer).contains(comp.displayObject);
+    }
+
     /**
      * 绑定此view和自身共同显示和关闭
+     * @param childView 
      */
-    protected bindView(view: BaseView<fairygui.GComponent>) {
+    protected bindView(childView: BaseView<fairygui.GComponent>) {
         if (!this._bindViewList) {
             this._bindViewList = [];
         }
-        this._bindViewList.push(view);
+        childView._isChildComponet = this.isChildInView(childView.getView());
+        this._bindViewList.push(childView);
     }
 }

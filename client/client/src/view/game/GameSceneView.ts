@@ -87,8 +87,10 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
-        ChooseCards.ins().open(msg.cards, msg.firstUid === UserModel.ins().uid);
-        MapView.ins().updateMap();
+        const isFirst = msg.firstUid === UserModel.ins().uid;
+        TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
+        ChooseCards.ins().open(msg.cards);
+        MapView.ins().updateMap(isFirst);
     }
 
     public async useCardShow(card: GameCard) {

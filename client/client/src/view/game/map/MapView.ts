@@ -1,5 +1,8 @@
 class MapView extends BaseView<BaseUI.UIMapView> {
 
+    //先手方一定是在下方，所以后手方需要做地图反转
+    private _isFirst: boolean;
+
     blockWidth: number;
     blockHeight: number;
 
@@ -19,11 +22,18 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const cardItem = MapItem.getItem(cardInfo)
         this.unitPool[cardInfo.blockX][cardInfo.blockY] = cardItem;
         this.view.addChild(cardItem);
-        cardItem.x = cardInfo.blockX * this.blockWidth;
-        cardItem.y = cardInfo.blockY * this.blockHeight;
+
+        if (this._isFirst) {
+            cardItem.x = cardInfo.blockX * this.blockWidth;
+            cardItem.y = cardInfo.blockY * this.blockHeight;
+        } else {
+            cardItem.x = this.view.width - (cardInfo.blockX + 1) * this.blockWidth;
+            cardItem.y = this.view.height - (cardInfo.blockY + 1) * this.blockHeight;
+        }
     }
 
-    public updateMap() {
+    public updateMap(isFirst: boolean) {
+        this._isFirst = isFirst;
         let unitCards = MapModel.ins().mapData?.unitCards;
         if (TEST_GAME) {
             unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
@@ -41,8 +51,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (x >= position.x && x <= position.x + map.width &&
             y >= position.y && y <= position.y + map.height) {
             const localPoint = this.view.rootToLocal(x, y);
-            mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
-            mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
+            if (this._isFirst) {
+                mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
+                mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
+            } else {
+                mapPoint.x = Math.floor((this.view.width - localPoint.x) / this.blockWidth);
+                mapPoint.y = Math.floor((this.view.height - localPoint.y) / this.blockHeight);
+            }
             return true;
         }
         return false;
@@ -50,7 +65,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**根据地图坐标返回场景坐标 */
     public getScenePoint(blockX: number, blockY: number) {
-        return this.view.localToRoot(blockX * this.blockWidth, blockY * this.blockHeight);
+        if (this._isFirst) {
+            return this.view.localToRoot(blockX * this.blockWidth, blockY * this.blockHeight);
+        } else {
+            return this.view.localToRoot(this.view.width - (blockX + 1) * this.blockWidth, this.view.height - (blockY + 1) * this.blockHeight);
+        }
     }
 
     /**根据数据生成地图 */

@@ -11,12 +11,10 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
 
     /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
-    public open(handCards: GamePto.ICard[], isFirst: boolean): void {
+    public open(handCards: GamePto.ICard[]): void {
         super.open();
 
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
-
-        TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
 
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
