@@ -44,8 +44,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         //以下三个事件考虑是否有用,未来可能用的到,如果用不到就都单独抽到对应的组件中
         this.observe('GameSceneClose', this.close);
         this.observe('S_GAME_START', this.onGameStart);
-        this.observe('S_ROUND_START_EVENT', this.onRoundStart);
-        this.observe('S_ROUND_END_EVENT', this.onRoundEnd);
+        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
+        this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
 
         this.AddClick(this.view.close, this.close);
     }
@@ -67,17 +67,15 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this._isPlaying = false;
     }
 
-
-    private onRoundStart(evt: EventData) {
-        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+    private onRoundStart(msg: GamePto.S_ROUND_START_EVENT) {
         //自己的回合开始了
         if (msg.uid === UserModel.ins().uid) {
+            TipsView.ins().showTips('轮到你的回合了!')
             this._allowToOprate = true;
         }
     }
 
-    private onRoundEnd(evt: EventData) {
-        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+    private onRoundEnd(msg: GamePto.S_ROUND_START_EVENT) {
         //自己的回合结束了
         if (msg.uid === UserModel.ins().uid) {
             this._allowToOprate = false;

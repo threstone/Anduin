@@ -9,7 +9,7 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
         super.open();
         this.view.endRound.visible = false;
 
-        this.observe('S_ROUND_START_EVENT', this.onRoundStart);
+        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.observe('S_ROUND_END_EVENT', this.onRoundEnd);
 
         this.AddClick(this.view.endRound, this.endRoundBtnClick);
@@ -19,8 +19,7 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
         GameModel.ins().C_END_ROUND();
     }
 
-    private onRoundStart(evt: EventData) {
-        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+    private onRoundStart(msg: GamePto.S_ROUND_START_EVENT) {
         if (msg.uid === UserModel.ins().uid) {
             this.view.endRound.visible = true;
         }

@@ -8,8 +8,8 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
     public open(): void {
         super.open();
 
-        this.observe('S_ROUND_START_EVENT', this.onRoundStart);
-        this.observe('S_FEE_INFO', this.onFeeInfo);
+        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
+        this.addEffectListener('S_FEE_INFO', this.onFeeInfo);
 
         this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
     }
@@ -27,8 +27,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         }
     }
 
-    private onRoundStart(evt: EventData) {
-        const msg: GamePto.S_ROUND_START_EVENT = evt.data;
+    private onRoundStart(msg: GamePto.S_ROUND_START_EVENT) {
         if (msg.uid === UserModel.ins().uid) {
             SelfInfoBox.ins().setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
             SelfInfoBox.ins().setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
@@ -37,8 +36,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
             TargetInfoBox.ins().setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
     }
-    private onFeeInfo(evt: EventData) {
-        const msg: GamePto.S_FEE_INFO = evt.data;
+    private onFeeInfo(msg: GamePto.S_FEE_INFO) {
         if (msg.uid === UserModel.ins().uid) {
             SelfInfoBox.ins().feeSet(msg.fee, msg.maxFee);
         } else {
