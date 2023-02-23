@@ -20,7 +20,6 @@ export class NodeRound extends BaseNode {
         }
 
         this.deal(table);
-        this.nodeDriver.waitTime(GlobalVar.configMgr.common.roundOptTime);
         return NodeDriverResult.Wait;
     }
 
@@ -31,6 +30,12 @@ export class NodeRound extends BaseNode {
 
     private deal(table: GameTable) {
         const user = table.users[table.roundUserIndex];
+        //派发回合结束时间
+        const endTimeMsg = new GamePto.S_ROUND_END_TIME();
+        endTimeMsg.endTime = Date.now() + GlobalVar.configMgr.common.roundOptTime;
+        endTimeMsg.uid = user.uid;
+        this.nodeDriver.waitTime(GlobalVar.configMgr.common.roundOptTime);
+        table.broadcast(endTimeMsg)
     }
 
     //玩家回合操作

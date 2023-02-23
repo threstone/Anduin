@@ -1,4 +1,9 @@
 class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
+
+    private intervalId: number;
+    private reqEndTime: number;
+    private tipsStart: string
+
     protected init(view: BaseUI.UIRightCtrlCom) {
         this.view = GameSceneView.ins().getView().rightCtrl;
         this.view.randBtn.describe.text = '丢骰子';
@@ -11,8 +16,14 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
 
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.observe('S_ROUND_END_EVENT', this.onRoundEnd);
+        this.observe('S_ROUND_END_TIME', this.roundEndTime);
 
         this.AddClick(this.view.endRound, this.endRoundBtnClick);
+    }
+
+    public close(): void {
+        super.close();
+        clearInterval(this.intervalId);
     }
 
     private endRoundBtnClick() {
@@ -32,4 +43,18 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
         }
     }
 
+    private roundEndTime(evt: EventData) {
+        const msg: GamePto.S_ROUND_END_TIME = evt.data;
+
+        //倒计时
+        clearInterval(this.intervalId);
+        this.reqEndTime = msg.endTime as number;
+        this.tipsStart = msg.uid === UserModel.ins().uid ? '你的回合' : '等待对方';
+        this.updateDesc();
+        this.intervalId = setInterval(this.updateDesc.bind(this), 1000);
+    }
+
+    private updateDesc() {
+        this.view.tips.text = `${this.tipsStart}\n${Utils.formatTime(this.reqEndTime - Date.now())}`;
+    }
 }

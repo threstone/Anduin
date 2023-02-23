@@ -4,6 +4,7 @@ module BaseUI {
 
 	export class UIChooseCards extends fairygui.GComponent {
 		public chooseBtn:UIButton1;
+		public tips:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpopg482g";
 
 		public static createInstance():UIChooseCards {
@@ -14,6 +15,7 @@ module BaseUI {
 			super.constructFromXML(xml);
 
 			this.chooseBtn = <UIButton1>(this.getChildAt(1));
+			this.tips = <fairygui.GTextField>(this.getChildAt(2));
 		}
 	}
 }

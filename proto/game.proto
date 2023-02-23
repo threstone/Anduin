@@ -156,3 +156,11 @@ message S_USE_CARD{
 	int32 cardIndex = 8;
 	Card card = 9;
 }
+
+//下发回合结束时间
+message S_ROUND_END_TIME{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10010];
+	int64 endTime = 3;
+	int32 uid = 4;
+}

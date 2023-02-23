@@ -5,5 +5,8 @@
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
     <component id="n1_pg48" name="chooseBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="714,918"/>
+    <text id="n3_sbft" name="tips" xy="702,335" size="196,59" fontSize="44" color="#660000" align="center" autoSize="none" strokeColor="#000000" text="00:00:00">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
   </displayList>
 </component>

@@ -4,20 +4,27 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     private _cards: GameCard[];
     get cards() { return this._cards }
 
+    private intervalId: number;
+    private reqEndTime: number;
+
     protected init() {
         this.view = BaseUI.UIChooseCards.createInstance();
         this.view.chooseBtn.describe.text = '确定';
     }
 
-
     /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
-    public open(handCards: GamePto.ICard[]): void {
+    public open(handCards: GamePto.ICard[], replaceEndTime: number): void {
         super.open();
 
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
 
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
+
+        //倒计时
+        this.reqEndTime = replaceEndTime;
+        this.updateDesc();
+        this.intervalId = setInterval(this.updateDesc.bind(this), 1000);
 
         this._cards = [];
 
@@ -41,6 +48,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
     public close(): void {
         super.close()
+        clearInterval(this.intervalId);
 
         //close已经把所有时间清除了
         for (let index = 0; index < this._cards.length; index++) {
@@ -50,6 +58,10 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
         this.view.touchable = true;
         this.view.chooseBtn.visible = true;
+    }
+
+    private updateDesc() {
+        this.view.tips.text = `${Utils.formatTime(this.reqEndTime - Date.now())}`;
     }
 
     private onBtnClick() {

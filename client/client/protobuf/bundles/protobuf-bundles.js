@@ -7189,6 +7189,148 @@ $root.GamePto = (function() {
         return S_USE_CARD;
     })();
 
+    GamePto.S_ROUND_END_TIME = (function() {
+
+        /**
+         * Properties of a S_ROUND_END_TIME.
+         * @memberof GamePto
+         * @interface IS_ROUND_END_TIME
+         * @property {number|null} [cmd] S_ROUND_END_TIME cmd
+         * @property {number|null} [scmd] S_ROUND_END_TIME scmd
+         * @property {number|Long|null} [endTime] S_ROUND_END_TIME endTime
+         * @property {number|null} [uid] S_ROUND_END_TIME uid
+         */
+
+        /**
+         * Constructs a new S_ROUND_END_TIME.
+         * @memberof GamePto
+         * @classdesc Represents a S_ROUND_END_TIME.
+         * @implements IS_ROUND_END_TIME
+         * @constructor
+         * @param {GamePto.IS_ROUND_END_TIME=} [properties] Properties to set
+         */
+        function S_ROUND_END_TIME(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_ROUND_END_TIME cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @instance
+         */
+        S_ROUND_END_TIME.prototype.cmd = 200;
+
+        /**
+         * S_ROUND_END_TIME scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @instance
+         */
+        S_ROUND_END_TIME.prototype.scmd = 10010;
+
+        /**
+         * S_ROUND_END_TIME endTime.
+         * @member {number|Long} endTime
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @instance
+         */
+        S_ROUND_END_TIME.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * S_ROUND_END_TIME uid.
+         * @member {number} uid
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @instance
+         */
+        S_ROUND_END_TIME.prototype.uid = 0;
+
+        /**
+         * Encodes the specified S_ROUND_END_TIME message. Does not implicitly {@link GamePto.S_ROUND_END_TIME.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @static
+         * @param {GamePto.IS_ROUND_END_TIME} message S_ROUND_END_TIME message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_ROUND_END_TIME.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.endTime);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_ROUND_END_TIME message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_ROUND_END_TIME} S_ROUND_END_TIME
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_ROUND_END_TIME.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_ROUND_END_TIME();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.endTime = reader.int64();
+                        break;
+                    }
+                case 4: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ROUND_END_TIME
+         * @function getTypeUrl
+         * @memberof GamePto.S_ROUND_END_TIME
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ROUND_END_TIME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_END_TIME";
+        };
+
+        return S_ROUND_END_TIME;
+    })();
+
     return GamePto;
 })();
 

@@ -7,8 +7,11 @@
     <component id="n2_pg48" name="endRound" src="ru1k2" fileName="common/btn/Button1.xml" xy="56,322">
       <relation target="" sidePair="center-center"/>
     </component>
-    <component id="n3_pg48" name="randBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="56,36">
+    <component id="n3_pg48" name="randBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="56,121">
       <relation target="" sidePair="center-center"/>
     </component>
+    <text id="n4_sbft" name="tips" xy="46,3" size="183,115" fontSize="44" color="#660000" align="center" strokeColor="#000000" text="你的回合&#xA;00:00:00">
+      <relation target="" sidePair="center-center,top-top"/>
+    </text>
   </displayList>
 </component>

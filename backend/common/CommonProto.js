@@ -5611,6 +5611,141 @@ $root.GamePto = (function() {
         return S_USE_CARD;
     })();
 
+    GamePto.S_ROUND_END_TIME = (function() {
+
+        function S_ROUND_END_TIME(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_ROUND_END_TIME.prototype.cmd = 200;
+        S_ROUND_END_TIME.prototype.scmd = 10010;
+        S_ROUND_END_TIME.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        S_ROUND_END_TIME.prototype.uid = 0;
+
+        S_ROUND_END_TIME.create = function create(properties) {
+            return new S_ROUND_END_TIME(properties);
+        };
+
+        S_ROUND_END_TIME.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.endTime != null && Object.hasOwnProperty.call(m, "endTime"))
+                w.uint32(24).int64(m.endTime);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(32).int32(m.uid);
+            return w;
+        };
+
+        S_ROUND_END_TIME.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_ROUND_END_TIME();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.endTime = r.int64();
+                        break;
+                    }
+                case 4: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_ROUND_END_TIME.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_ROUND_END_TIME)
+                return d;
+            var m = new $root.GamePto.S_ROUND_END_TIME();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.endTime != null) {
+                if ($util.Long)
+                    (m.endTime = $util.Long.fromValue(d.endTime)).unsigned = false;
+                else if (typeof d.endTime === "string")
+                    m.endTime = parseInt(d.endTime, 10);
+                else if (typeof d.endTime === "number")
+                    m.endTime = d.endTime;
+                else if (typeof d.endTime === "object")
+                    m.endTime = new $util.LongBits(d.endTime.low >>> 0, d.endTime.high >>> 0).toNumber();
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            return m;
+        };
+
+        S_ROUND_END_TIME.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10010;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.endTime = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.endTime = o.longs === String ? "0" : 0;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.endTime != null && m.hasOwnProperty("endTime")) {
+                if (typeof m.endTime === "number")
+                    d.endTime = o.longs === String ? String(m.endTime) : m.endTime;
+                else
+                    d.endTime = o.longs === String ? $util.Long.prototype.toString.call(m.endTime) : o.longs === Number ? new $util.LongBits(m.endTime.low >>> 0, m.endTime.high >>> 0).toNumber() : m.endTime;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            return d;
+        };
+
+        S_ROUND_END_TIME.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_ROUND_END_TIME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ROUND_END_TIME";
+        };
+
+        return S_ROUND_END_TIME;
+    })();
+
     return GamePto;
 })();
 

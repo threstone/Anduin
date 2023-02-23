@@ -4646,6 +4646,114 @@ export namespace GamePto {
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
+
+    /** Properties of a S_ROUND_END_TIME. */
+    interface IS_ROUND_END_TIME {
+
+        /** S_ROUND_END_TIME cmd */
+        cmd?: (number|null);
+
+        /** S_ROUND_END_TIME scmd */
+        scmd?: (number|null);
+
+        /** S_ROUND_END_TIME endTime */
+        endTime?: (number|null);
+
+        /** S_ROUND_END_TIME uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_ROUND_END_TIME. */
+    class S_ROUND_END_TIME implements IS_ROUND_END_TIME {
+
+        /**
+         * Constructs a new S_ROUND_END_TIME.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ROUND_END_TIME);
+
+        /** S_ROUND_END_TIME cmd. */
+        public cmd: number;
+
+        /** S_ROUND_END_TIME scmd. */
+        public scmd: number;
+
+        /** S_ROUND_END_TIME endTime. */
+        public endTime: number;
+
+        /** S_ROUND_END_TIME uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_ROUND_END_TIME message. Does not implicitly {@link GamePto.S_ROUND_END_TIME.verify|verify} messages.
+         * @param message S_ROUND_END_TIME message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ROUND_END_TIME, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_ROUND_END_TIME message, length delimited. Does not implicitly {@link GamePto.S_ROUND_END_TIME.verify|verify} messages.
+         * @param message S_ROUND_END_TIME message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_ROUND_END_TIME, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_ROUND_END_TIME message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ROUND_END_TIME
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_END_TIME;
+
+        /**
+         * Decodes a S_ROUND_END_TIME message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_ROUND_END_TIME
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_ROUND_END_TIME;
+
+        /**
+         * Verifies a S_ROUND_END_TIME message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_ROUND_END_TIME message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_ROUND_END_TIME
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_ROUND_END_TIME;
+
+        /**
+         * Creates a plain object from a S_ROUND_END_TIME message. Also converts values to other types if specified.
+         * @param message S_ROUND_END_TIME
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_ROUND_END_TIME, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_ROUND_END_TIME to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_ROUND_END_TIME
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
 }
 
 /** Namespace FriendlyMatchPto. */

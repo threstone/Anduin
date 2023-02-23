@@ -105,4 +105,9 @@ class GameModel extends BaseModel {
 
         this.emit('S_USE_CARD', msg);
     }
+
+    //下发回合结束时间
+    S_ROUND_END_TIME(msg: GamePto.S_ROUND_END_TIME) {
+        this.emit('S_ROUND_END_TIME', msg);
+    }
 }

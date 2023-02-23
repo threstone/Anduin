@@ -42,8 +42,9 @@ class Utils {
      * @returns string
      */
     public static formatTime(ms: number) {
-        var n = 0;
-        var result = "##:##:##";
+        ms = Math.max(ms, 0);
+        let n = 0;
+        let result = "##:##:##";
         n = Math.floor(ms / MS_PER_HOUR);
         result = result.replace("##", this.formatTimeNum(n));
         if (n)
