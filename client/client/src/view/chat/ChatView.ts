@@ -185,6 +185,9 @@ class ChatView extends BaseView<BaseUI.UIChatCom>{
                 return;
             }
             ChatItem.addItemToList(channel.chatList, UserModel.ins().nick, text, true);
+            //加入缓存的聊天数据中心
+            const chatInfo = ChatModel.ins().getFriendMsg(ChatModel.ins().selectUid);
+            chatInfo.msgArr.push({ nick: UserModel.ins().nick, uid: UserModel.ins().uid, msg: text });
         }
 
         ChatModel.ins().C_SEND_MESSAGE(text, chatType);
