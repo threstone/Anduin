@@ -65,4 +65,13 @@ class CardItem {
                 break;
         }
     }
+
+    static getUnitCard(cardInfo: GamePto.ICard) {
+        const cardItem = BaseUI.UICardItem.createInstance();
+        //TODO  同样要显示实时的血量和buff
+        cardItem.cardNum.visible = false;
+        const cardConfig = CardsModel.ins().getCardInfoById(cardInfo.cardId)
+        this.updateCard(cardItem, cardConfig);
+        return cardItem;
+    }
 }

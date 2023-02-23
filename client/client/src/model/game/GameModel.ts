@@ -4,6 +4,9 @@ class GameModel extends BaseModel {
     handCards: GamePto.ICard[];
     targetUid: number;
 
+    atkTimes: number
+    moveTimes: number
+
     /**准备开始(包含更换卡牌数据) */
     C_PREPARE_TO_START(replareplaceCardIndexes: number[]) {
         const msg = new GamePto.C_PREPARE_TO_START();
@@ -68,6 +71,10 @@ class GameModel extends BaseModel {
     //回合开始
     S_ROUND_START_EVENT(msg: GamePto.S_ROUND_START_EVENT) {
         this.emit('S_ROUND_START_EVENT', msg);
+        if (msg.uid === UserModel.ins().uid) {
+            this.atkTimes = msg.atkTimes;
+            this.moveTimes = msg.moveTimes;
+        }
     }
 
     //回合结束

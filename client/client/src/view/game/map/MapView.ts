@@ -3,10 +3,16 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     //先手方一定是在下方，所以后手方需要做地图反转
     private _isFirst: boolean;
 
+    /**悬浮时的显示卡牌 */
+    private _detailCard: BaseUI.UICardItem;
+    /**选中的卡牌信息 */
+    private _selectCardInfo: GamePto.ICard
+
     blockWidth: number;
     blockHeight: number;
 
     unitPool: BaseUI.UIMapUnit[][] | BaseUI.UIMapBuilding[][];
+
 
     protected init() {
         this.view = GameSceneView.ins().getView().map;
@@ -18,11 +24,34 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+    public close(): void {
+        super.close();
+        this.view.removeChildren();
+        this.view.addChild(this.view.bg);
+    }
+
     public addMapItem(cardInfo: GamePto.ICard) {
         const cardItem = MapItem.getItem(cardInfo)
         this.unitPool[cardInfo.blockX][cardInfo.blockY] = cardItem;
         this.view.addChild(cardItem);
 
+        //增加悬浮事件
+        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
+            this._detailCard = CardItem.getUnitCard(cardInfo);
+            this.view.addChild(this._detailCard);
+            this._detailCard.x = cardItem.x + cardItem.width;
+            this._detailCard.y = cardItem.y;
+            if (this._detailCard.y + this._detailCard.height > this.view.height) {
+                this._detailCard.y = this.view.height - this._detailCard.height;
+            }
+        }, this);
+        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
+            this.view.removeChild(this._detailCard);
+        }, this);
+
+        this.AddClick(cardItem, this.onUnitClick.bind(this, cardInfo));
+
+        //根据先后手设置位置
         if (this._isFirst) {
             cardItem.x = cardInfo.blockX * this.blockWidth;
             cardItem.y = cardInfo.blockY * this.blockHeight;
@@ -32,11 +61,33 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+    /**当地图元素被点击 */
+    private onUnitClick(cardInfo: GamePto.ICard) {
+        //如果是对方的卡牌被点击,那么有可能是尝试攻击,或者对他使用法术
+        if (cardInfo.uid !== UserModel.ins().uid) {
+            //攻击对方卡牌
+            if (this._selectCardInfo != null) {
+                //TODO检查攻击是否有效，比如攻击距离够不够
+
+            } else {
+
+                //TODO 对卡牌使用法术
+            }
+            return;
+        }
+        //自己的卡牌被点击
+        if (GameSceneView.ins().allowToOprate) {
+            // 显示所有可移动路径
+        }
+    }
+
     public updateMap(isFirst: boolean) {
         this._isFirst = isFirst;
-        let unitCards = MapModel.ins().mapData.unitCards;
+        let unitCards: GamePto.ICard[];
         if (TEST_GAME) {
             unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
+        } else {
+            unitCards = MapModel.ins().mapData.unitCards;
         }
         for (let index = 0; index < unitCards.length; index++) {
             const cardInfo = unitCards[index];

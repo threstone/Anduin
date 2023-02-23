@@ -185,10 +185,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         }
 
         this.AddClick(miniCard, onClick.bind(this, index, info));
-        this.addEvent(miniCard.dragLoader, mouse.MouseEvent.ROLL_OVER, () => {
+        this.addEvent(miniCard, mouse.MouseEvent.MOUSE_OVER, () => {
             this.showCardDetail(info.cardInfo, list.x, miniCard.y);
         }, this);
-        this.addEvent(miniCard.dragLoader, mouse.MouseEvent.ROLL_OUT, () => {
+        this.addEvent(miniCard, mouse.MouseEvent.MOUSE_OUT, () => {
             fairygui.GRoot.inst.removeChild(this._hoverItem);
         }, this);
 

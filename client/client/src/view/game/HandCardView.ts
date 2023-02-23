@@ -60,12 +60,12 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
             //初始化悬浮事件
             let oldIndex = this.view.getChildIndex(cardItem);
-            this.addEvent(cardItem.dragLoader, mouse.MouseEvent.ROLL_OVER, () => {
+            this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
                 this.view.setChildIndex(cardItem, 99);
                 cardItem.scaleX = 1;
                 cardItem.scaleY = 1;
             }, this);
-            this.addEvent(cardItem.dragLoader, mouse.MouseEvent.ROLL_OUT, () => {
+            this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
                 this.view.setChildIndex(cardItem, oldIndex);
                 cardItem.scaleX = 0.5;
                 cardItem.scaleY = 0.5;
@@ -118,7 +118,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             return;
         }
         this.removeTargetEvents(gameCard.cardItem);
-        this.removeTargetEvents(gameCard.cardItem.dragLoader);
         this.view.removeChild(gameCard.cardItem);
         this._cards.splice(index, 1);
     }
