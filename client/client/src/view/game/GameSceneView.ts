@@ -126,4 +126,18 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             return this.wait(400);
         }
     }
+
+    /**疲劳伤害 */
+    public async fatigue(damages: number[], uid: number) {
+        for (let index = 0; index < damages.length; index++) {
+            const damage = damages[index];
+            const hero = MapModel.ins().getHero(uid);
+            //扣血
+            hero.health -= damage;
+            //展示
+            MapView.ins().unitReduceHeath(hero, damage);
+            TipsView.ins().showTips(`${uid === UserModel.ins().uid ? '你' : '对方'}收到了${damage}点疲劳伤害!`,)
+            await this.wait(500);
+        }
+    }
 }

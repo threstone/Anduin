@@ -6,7 +6,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     blockWidth: number;
     blockHeight: number;
 
-    unitPool: BaseUI.UIMapUnit | BaseUI.UIMapUnit[][]
+    unitPool: BaseUI.UIMapUnit[][] | BaseUI.UIMapBuilding[][];
 
     protected init() {
         this.view = GameSceneView.ins().getView().map;
@@ -34,7 +34,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public updateMap(isFirst: boolean) {
         this._isFirst = isFirst;
-        let unitCards = MapModel.ins().mapData?.unitCards;
+        let unitCards = MapModel.ins().mapData.unitCards;
         if (TEST_GAME) {
             unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
         }
@@ -70,6 +70,28 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         } else {
             return this.view.localToRoot(this.view.width - (blockX + 1) * this.blockWidth, this.view.height - (blockY + 1) * this.blockHeight);
         }
+    }
+
+    /**单位扣血 */
+    public unitReduceHeath(unitCard: GamePto.ICard, damage: number) {
+        const unit = this.unitPool[unitCard.blockX][unitCard.blockY];
+        unit.healthText.text = `${unitCard.health}`;
+        this.unitShowTips(unit, `${-damage}`);
+    }
+
+    public unitShowTips(unit: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string, color: number = 0xFF0000) {
+        let tips = new fairygui.GTextField();
+        tips.fontSize = 26;
+        tips.color = color;
+        tips.bold = true;
+        tips.text = text;
+        const point = unit.localToRoot((unit.width - tips.width) / 2, (unit.height - tips.height) / 2);
+        tips.x = point.x;
+        tips.y = point.y;
+        fairygui.GRoot.inst.addChild(tips)
+        egret.Tween.get(tips).to({ y: tips.y - unit.height }, 2500).call(() => {
+            fairygui.GRoot.inst.removeChild(tips)
+        })
     }
 
     /**根据数据生成地图 */

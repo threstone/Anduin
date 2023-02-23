@@ -12,4 +12,10 @@ class MapItem {
                 return hero;
         }
     }
+
+    public static updateDesc(unit: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
+        if (unit.healthText) {
+
+        }
+    }
 }

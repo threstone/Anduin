@@ -8,9 +8,18 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     private _cards: GameCard[];
     get cards() { return this._cards }
 
+    private _cardPoolPosition: egret.Point;
+    private _deadPoolPosition: egret.Point;
+
     protected init() {
         this.view = GameSceneView.ins().getView().selfHand;;
         this._cards = [];
+
+        const cardPoolRoot = SelfInfoBox.ins().getView().cardPoolBg.localToRoot();
+        this._cardPoolPosition = this.view.rootToLocal(cardPoolRoot.x, cardPoolRoot.y);
+
+        const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
+        this._deadPoolPosition = this.view.rootToLocal(deadPoolRoot.x, deadPoolRoot.y);
     }
 
     public open(): void {
@@ -35,8 +44,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid === UserModel.ins().uid) {
             await this.drawCards(...msg.cards);
-            this.fatigue(msg.damages);
-            SelfInfoBox.ins().setLeastCardNum(msg.cardPoolNum);
+            GameSceneView.ins().fatigue(msg.damages, UserModel.ins().uid);
+            SelfInfoBox.ins().setCardPoolNum(msg.cardPoolNum);
+            SelfInfoBox.ins().setDeadCardPoolNum(msg.deadPoolNum);
         }
     }
 
@@ -163,15 +173,43 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     }
 
     /**抽卡 */
-    public drawCards(...cardsInfo: GamePto.ICard[]) {
-        const cardPoolPoint = SelfInfoBox.ins().getCardPoolRootPosition();
-        const localPoint = this.view.rootToLocal(cardPoolPoint.x, cardPoolPoint.y);
-        return this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(cardsInfo, localPoint.x, localPoint.y, 0.5, 90));
+    public async drawCards(...cardsInfo: GamePto.ICard[]) {
+        if (cardsInfo.length === 0) {
+            return;
+        }
+
+        //确定弃牌的数量
+        const deadNum = this._cards.length + cardsInfo.length - ConfigMgr.ins().common.maxHandCardNum;
+        let deadCards: GamePto.ICard[];
+        if (deadNum > 0) {
+            deadCards = cardsInfo.splice(cardsInfo.length - deadNum);
+        }
+
+        await this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(cardsInfo, this._cardPoolPosition.x, this._cardPoolPosition.y, 0.5, 90));
+
+        //弃掉拿不下的卡牌
+        if (deadCards) {
+            await this.deleteCardByMaxHandCardNum(deadCards);
+        }
     }
 
-    /**疲劳伤害 */
-    public fatigue(damages: number[]) {
-        //TODO
+    /**弃掉手牌拿不下的牌 */
+    private deleteCardByMaxHandCardNum(cardsInfo: GamePto.ICard[]) {
+        const deadCards = GameCard.getGameCards(cardsInfo, this._cardPoolPosition.x, this._cardPoolPosition.y, 0.5, 90);
+        for (let index = 0; index < deadCards.length; index++) {
+            const cardItem = deadCards[index].cardItem;
+            this.view.addChild(cardItem);
+            const showX = cardItem.x - cardItem.height * cardItem.scaleY + (index * cardItem.width * cardItem.scaleX);
+            egret.Tween.get(cardItem).to({ x: showX, y: cardItem.y - cardItem.height * cardItem.scaleY, skewX: 0, skewY: 0 }, 400)
+                .to({}, 1500)
+                .to({ x: this._deadPoolPosition.x, y: this._deadPoolPosition.y, skewX: 90, skewY: 90 }, 300)
+                .call(() => {
+                    this.view.removeChild(cardItem);
+                });
+        }
+        if (cardsInfo.length !== 0) {
+            return this.wait(2200);
+        }
     }
 
     /**弃牌 */

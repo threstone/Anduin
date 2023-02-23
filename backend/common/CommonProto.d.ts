@@ -4166,6 +4166,9 @@ export namespace GamePto {
 
         /** S_DRAW_CARDS cardPoolNum */
         cardPoolNum?: (number|null);
+
+        /** S_DRAW_CARDS deadPoolNum */
+        deadPoolNum?: (number|null);
     }
 
     /** Represents a S_DRAW_CARDS. */
@@ -4197,6 +4200,9 @@ export namespace GamePto {
 
         /** S_DRAW_CARDS cardPoolNum. */
         public cardPoolNum: number;
+
+        /** S_DRAW_CARDS deadPoolNum. */
+        public deadPoolNum: number;
 
         /**
          * Encodes the specified S_DRAW_CARDS message. Does not implicitly {@link GamePto.S_DRAW_CARDS.verify|verify} messages.

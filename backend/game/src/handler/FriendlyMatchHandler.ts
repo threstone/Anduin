@@ -3,9 +3,7 @@ import { RedisType } from '../../../common/ConstDefine';
 import { FriendlyMatchInfoMgr } from '../game/friendly_match/FriendlyMatchInfoMgr';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
-import { getLogger } from 'log4js';
 
-const logger = getLogger();
 export class FriendlyMatchHandler extends BaseHandler {
 
     private static _friendlyMatchInfoMgr = new FriendlyMatchInfoMgr();
@@ -40,8 +38,8 @@ export class FriendlyMatchHandler extends BaseHandler {
         }
 
         let bindResult = true;
-        bindResult = bindResult || await GlobalVar.socketServer.callBindUserGameNode(clientName, uid);
-        bindResult = bindResult || await GlobalVar.socketServer.callBindUserGameNode(friendClientName, msg.targetUid);
+        bindResult = bindResult && await GlobalVar.socketServer.callBindUserGameNode(clientName, uid);
+        bindResult = bindResult && await GlobalVar.socketServer.callBindUserGameNode(friendClientName, msg.targetUid);
         if (!bindResult) {
             GlobalVar.socketServer.sendUnbindUserGameNode(clientName, uid);
             GlobalVar.socketServer.sendUnbindUserGameNode(friendClientName, msg.targetUid);

@@ -122,6 +122,7 @@ message S_DRAW_CARDS{
 	repeated int32 damages = 5;
 	int32 uid = 6;
 	int32 cardPoolNum = 7;
+	int32 deadPoolNum = 8;
 }
 
 //费用协议

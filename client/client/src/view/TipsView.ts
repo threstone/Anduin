@@ -44,11 +44,11 @@ class TipsView extends BaseView<BaseUI.UITipsCom> {
     }
 
     private createTipsField() {
-        let tips = new fairygui.GTextField()
-        tips.fontSize = 26
-        tips.color = 0xFF0000
-        tips.bold = true
-        return tips
+        let tips = new fairygui.GTextField();
+        tips.fontSize = 26;
+        tips.color = 0xFF0000;
+        tips.bold = true;
+        return tips;
     }
 
     private getTipsField() {

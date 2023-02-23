@@ -1,10 +1,18 @@
 class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     private _cards: BaseUI.UICardBackItem[];
+    private _cardPoolPosition: egret.Point;
+    private _deadPoolPosition: egret.Point;
 
     protected init() {
         this.view = GameSceneView.ins().getView().targetHand;
         this._cards = [];
+
+        const cardPoolRoot = TargetInfoBox.ins().getView().cardPoolBg.localToRoot();
+        this._cardPoolPosition = this.view.rootToLocal(cardPoolRoot.x, cardPoolRoot.y);
+
+        const deadPoolRoot = TargetInfoBox.ins().getView().deadPoolBg.localToRoot();
+        this._deadPoolPosition = this.view.rootToLocal(deadPoolRoot.x, deadPoolRoot.y);
     }
 
     public open(): void {
@@ -39,8 +47,9 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid !== UserModel.ins().uid) {
             await TargetHandView.ins().drawCardsToHand(msg.cardCount);
-            TargetHandView.ins().fatigue(msg.damages);
-            TargetInfoBox.ins().setLeastCardNum(msg.cardPoolNum);
+            GameSceneView.ins().fatigue(msg.damages, GameModel.ins().targetUid);
+            TargetInfoBox.ins().setCardPoolNum(msg.cardPoolNum);
+            TargetInfoBox.ins().setDeadCardPoolNum(msg.deadPoolNum);
         }
     }
 
@@ -51,40 +60,63 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     /**换牌 */
     public replace(replaceIndexs: number[]) {
-        let poolPosition = GameSceneView.ins().getView().targetInfoBox.cardPoolBg.localToRoot();
-        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y)
         for (let index = 0; index < replaceIndexs.length; index++) {
             const replaceIndex = replaceIndexs[index];
-            this.removeCardTween(replaceIndex, poolPosition.x, poolPosition.y);
-            const card = BaseUI.UICardBackItem.createInstance();
-            card.x = poolPosition.x;
-            card.y = poolPosition.y;
-            card.scaleX = 0.5;
-            card.scaleY = 0.5;
-            card.skewX = 90;
-            card.skewY = 90;
+            this.removeCardTween(replaceIndex, this._cardPoolPosition.x, this._cardPoolPosition.y);
+            const card = this.getCardByPool();
             this.view.addChild(card)
             this._cards[replaceIndex] = card;
         }
         this.updateCardsPostion(800);
     }
 
+    /**获取一张在卡池上的卡 */
+    private getCardByPool() {
+        const card = BaseUI.UICardBackItem.createInstance();
+        card.x = this._cardPoolPosition.x;
+        card.y = this._cardPoolPosition.y;
+        card.scaleX = 0.5;
+        card.scaleY = 0.5;
+        card.skewX = 90;
+        card.skewY = 90;
+        return card;
+    }
+
     /**抽牌到手牌 */
-    public drawCardsToHand(cardNum: number, time: number = ConfigMgr.ins().common.drawCardTime) {
-        let poolPosition = GameSceneView.ins().getView().targetInfoBox.cardPoolBg.localToRoot();
-        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y)
+    public async drawCardsToHand(cardNum: number, time: number = ConfigMgr.ins().common.drawCardTime) {
+        if (cardNum === 0) {
+            return;
+        }
+
+        //确定弃牌的数量
+        const deadNum = this._cards.length + cardNum - ConfigMgr.ins().common.maxHandCardNum;
+        if (deadNum > 0) {
+            cardNum -= deadNum;
+        }
+
         for (let index = 0; index < cardNum; index++) {
-            const card = BaseUI.UICardBackItem.createInstance();
-            card.x = poolPosition.x;
-            card.y = poolPosition.y;
-            card.scaleX = 0.5;
-            card.scaleY = 0.5;
-            card.skewX = 90;
-            card.skewY = 90;
+            const card = this.getCardByPool();
             this.view.addChild(card)
             this._cards.push(card);
         }
-        return this.updateCardsPostion(time);
+
+        await this.updateCardsPostion(time);
+
+        //弃牌动画
+        for (let index = 0; index < deadNum; index++) {
+            const card = this.getCardByPool();
+            this.view.addChild(card);
+            const showX = card.x - card.height * card.scaleY + (index * card.width * card.scaleX);
+            egret.Tween.get(card).to({ x: showX, y: card.height * card.scaleY, skewX: 0, skewY: 0 }, 400)
+                .to({}, 1500)
+                .to({ x: this._deadPoolPosition.x, y: this._deadPoolPosition.y, skewX: 90, skewY: 90 }, 300)
+                .call(() => {
+                    this.view.removeChild(card);
+                });
+        }
+        if (deadNum > 0) {
+            await this.wait(2200);
+        }
     }
 
     /**根据手牌数量和卡牌大小计算卡牌位置并移动 */
@@ -126,17 +158,13 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     /**将一张卡设置到墓地 */
     private removeCardToDeadPool(index: number) {
-        let poolPosition = GameSceneView.ins().getView().targetInfoBox.deadPoolBg.localToRoot();
-        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y);
-        this.removeCardTween(index, poolPosition.x, poolPosition.y);
+        this.removeCardTween(index, this._deadPoolPosition.x, this._deadPoolPosition.y);
         this._cards.splice(index, 1);
     }
 
     /**将卡设置到牌池 */
     private removeCardToCardPool(index: number) {
-        let poolPosition = GameSceneView.ins().getView().targetInfoBox.cardPoolBg.localToRoot();
-        poolPosition = this.view.rootToLocal(poolPosition.x, poolPosition.y);
-        this.removeCardTween(index, poolPosition.x, poolPosition.y);
+        this.removeCardTween(index, this._cardPoolPosition.x, this._cardPoolPosition.y);
         this._cards.splice(index, 1);
     }
 
@@ -147,16 +175,11 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         const cardItem = this._cards[index];
         egret.Tween.get(cardItem).to({ y: cardItem.y + cardItem.height * cardItem.scaleY, skewX: 90, skewY: 90 }, 400)
             .to({ x: x }, 400)
-            .to({ y: y }, 900)
+            .to({ y: y }, 500)
             .call(() => {
                 this.view.removeChild(cardItem);
                 this.updateCardsPostion(400);
             });
-    }
-
-    /**疲劳伤害 */
-    public fatigue(damages: number[]) {
-        //TODO
     }
 
     /**弃牌 */

@@ -8,7 +8,7 @@ export abstract class RPCClient {
     get port() { return this.rpc.port }
     get host() { return this.rpc.host }
     get isClose() { return this.rpc.isClose }
-    get name() { return this.rpc.myName }
+    get name() { return this.rpc.name }
     constructor(host: string, port: number, serverName: string, myName: string, uuid: string, logger: ILog) {
         this.myRpcClient.startClient(host, port, serverName, myName, uuid, logger)
     }

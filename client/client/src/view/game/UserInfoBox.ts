@@ -50,7 +50,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.view.nick.text = userInfo.nick;;
         this.view.power.text = ConfigMgr.ins().powerConfig[userInfo.power].powerName;
         this.feeSet(0, 0);
-        this.setLeastCardNum(29);
+        this.setCardPoolNum(30 - ConfigMgr.ins().common.startHandCardNum - 1);
     }
 
     /**设置费用 */
@@ -76,14 +76,14 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.view.feeDesc.text = `能量:${fee}`;
     }
 
-    /**设置剩余卡牌 */
-    public setLeastCardNum(num: number) {
+    /**设置剩余卡牌数量 */
+    public setCardPoolNum(num: number) {
         this.view.leastCardNum.text = `剩余卡牌\n${num}`
     }
 
-    /** 获取卡尺的全局位置*/
-    public getCardPoolRootPosition() {
-        return this.view.cardPoolBg.localToRoot();
+    /**设置墓地卡牌数量 */
+    public setDeadCardPoolNum(num: number) {
+        this.view.deadCardNum.text = `墓地卡牌\n${num}`
     }
 
     /**设置攻击次数信息 */

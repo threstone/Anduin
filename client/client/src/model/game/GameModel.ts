@@ -2,6 +2,7 @@ let TEST_GAME = true;
 class GameModel extends BaseModel {
 
     handCards: GamePto.ICard[];
+    targetUid: number;
 
     /**准备开始(包含更换卡牌数据) */
     C_PREPARE_TO_START(replareplaceCardIndexes: number[]) {
@@ -41,6 +42,13 @@ class GameModel extends BaseModel {
     //初始化游戏
     S_INIT_GAME(msg: GamePto.S_INIT_GAME) {
         TEST_GAME = false;
+        for (let index = 0; index < msg.users.length; index++) {
+            const user = msg.users[index];
+            if (user.uid !== UserModel.ins().uid) {
+                this.targetUid = user.uid;
+                break;
+            }
+        }
         this.emit('S_INIT_GAME', msg);
     }
 

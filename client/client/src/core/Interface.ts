@@ -33,4 +33,5 @@ interface CommonConfig {
     maxGroupNum: number
     startHandCardNum: number
     drawCardTime: number
+    maxHandCardNum: number
 }

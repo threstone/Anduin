@@ -4938,6 +4938,7 @@ $root.GamePto = (function() {
         S_DRAW_CARDS.prototype.damages = $util.emptyArray;
         S_DRAW_CARDS.prototype.uid = 0;
         S_DRAW_CARDS.prototype.cardPoolNum = 0;
+        S_DRAW_CARDS.prototype.deadPoolNum = 0;
 
         S_DRAW_CARDS.create = function create(properties) {
             return new S_DRAW_CARDS(properties);
@@ -4966,6 +4967,8 @@ $root.GamePto = (function() {
                 w.uint32(48).int32(m.uid);
             if (m.cardPoolNum != null && Object.hasOwnProperty.call(m, "cardPoolNum"))
                 w.uint32(56).int32(m.cardPoolNum);
+            if (m.deadPoolNum != null && Object.hasOwnProperty.call(m, "deadPoolNum"))
+                w.uint32(64).int32(m.deadPoolNum);
             return w;
         };
 
@@ -5013,6 +5016,10 @@ $root.GamePto = (function() {
                         m.cardPoolNum = r.int32();
                         break;
                     }
+                case 8: {
+                        m.deadPoolNum = r.int32();
+                        break;
+                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5058,6 +5065,9 @@ $root.GamePto = (function() {
             if (d.cardPoolNum != null) {
                 m.cardPoolNum = d.cardPoolNum | 0;
             }
+            if (d.deadPoolNum != null) {
+                m.deadPoolNum = d.deadPoolNum | 0;
+            }
             return m;
         };
 
@@ -5075,6 +5085,7 @@ $root.GamePto = (function() {
                 d.cardCount = 0;
                 d.uid = 0;
                 d.cardPoolNum = 0;
+                d.deadPoolNum = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -5102,6 +5113,9 @@ $root.GamePto = (function() {
             }
             if (m.cardPoolNum != null && m.hasOwnProperty("cardPoolNum")) {
                 d.cardPoolNum = m.cardPoolNum;
+            }
+            if (m.deadPoolNum != null && m.hasOwnProperty("deadPoolNum")) {
+                d.deadPoolNum = m.deadPoolNum;
             }
             return d;
         };

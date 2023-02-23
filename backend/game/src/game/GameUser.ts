@@ -130,17 +130,25 @@ export class GameUser {
         const message = new GamePto.S_DRAW_CARDS();
         message.uid = this.uid;
         for (let index = 0; index < num; index++) {
-            if (this.cardPool.length === 0) {
+            if (this._cardPool.length === 0) {
                 message.damages.push(this._fatigue);
                 this.hero.health -= this._fatigue;
                 this._fatigue++;
                 continue;
             }
-            const card = this.cardPool.pop();
+            const card = this._cardPool.pop();
             message.cards.push(card);
-            this.handCards.push(this.cardPool.pop());
+            //小于手牌上限
+            if (this._handCards.length < GlobalVar.configMgr.common.maxHandCardNum) {
+                this._handCards.push(card);
+            } else {
+                //大于手牌上限直接放到墓地中
+                this._deadPool.push(card);
+            }
         }
         message.cardCount = message.cards.length;
+        message.cardPoolNum = this._cardPool.length;
+        message.deadPoolNum = this._deadPool.length;
         this.sendMsg(message);
         message.cards = [];
         //派发消息给另外一个玩家
