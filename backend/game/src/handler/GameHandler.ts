@@ -1,4 +1,4 @@
-import { GamePto } from '../../../common/CommonProto';
+import { CardsPto, GamePto } from '../../../common/CommonProto';
 import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
 import { NodeDefine } from '../game/GameDefine';
@@ -63,8 +63,7 @@ export class GameHandler extends BaseHandler {
         const card = user.handCards[msg.cardIndex] as UnitCard;
         if (card && card.fee <= user.fee) {
             replay.isSuccess = true;
-            card.blockX = msg.blockX;
-            card.blockY = msg.blockY;
+
             replay.card = card;
             user.handCards.splice(msg.cardIndex, 1)
             //减费用
@@ -72,8 +71,22 @@ export class GameHandler extends BaseHandler {
             replay.fee = user.fee;
             replay.feeMax = user.feeMax;
 
-            //置入战场
-            table.mapData.setCard(card);
+
+            switch (card.cardType) {
+                case CardsPto.CardType.Building:
+                case CardsPto.CardType.Unit:
+                    //单位卡置入战场
+                    card.blockX = msg.blockX;
+                    card.blockY = msg.blockY;
+                    table.mapData.setCard(card);
+                    user.unitPool.push(card);
+                    break;
+                case CardsPto.CardType.Magic:
+                    break;
+                case CardsPto.CardType.Event:
+                    user.eventPool.push(card);
+                    break;
+            }
         }
         table.broadcast(replay);
     }

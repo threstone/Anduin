@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="140,95">
+  <displayList>
+    <graph id="n0_sbft" name="tips0" xy="20,18" size="100,59" type="eclipse" lineSize="2" lineColor="#ff66ff00" fillColor="#00ffffff"/>
+    <graph id="n1_sbft" name="tips1" xy="67,2" size="4,45" type="rect" lineSize="2" lineColor="#ff66ff00" fillColor="#00ffffff"/>
+  </displayList>
+</component>

@@ -58,7 +58,7 @@ class GameModel extends BaseModel {
     //开始游戏
     S_GAME_START(msg: GamePto.S_GAME_START) {
         this.handCards = msg.cards;
-        MapModel.ins().mapData = msg.mapData;
+        MapModel.ins().mapEntityData = msg.mapData;
         this.emit('S_GAME_START', msg);
     }
 
@@ -121,7 +121,7 @@ class GameModel extends BaseModel {
 
     //地图数据
     S_MAP_DATA(msg: GamePto.S_MAP_DATA) {
-        MapModel.ins().mapData = msg.mapData;
+        MapModel.ins().mapEntityData = msg.mapData;
         this.emit('S_MAP_DATA', msg);
     }
 }

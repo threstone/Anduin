@@ -31,6 +31,9 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegisterCom.URL, UIRegisterCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UILoginCom.URL, UILoginCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIHallCom.URL, UIHallCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMoveTips.URL, UIMoveTips);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIAtkTips.URL, UIAtkTips);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIMapTipsView.URL, UIMapTipsView);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendCom.URL, UIFriendCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendItem.URL, UIFriendItem);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton2.URL, UIButton2);

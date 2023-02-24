@@ -18,6 +18,10 @@ class CardsModel extends BaseModel {
         this.initCards()
     }
 
+    public getCardMoveStep(cardInfo: CardInterface) {
+        return 2;
+    }
+
     /**用于用户创建卡组没有设置卡组名时的逻辑 */
     public getCardGroupName(powerId: CardsPto.PowerType) {
         const arr = [];

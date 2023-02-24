@@ -28,7 +28,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         for (let x = 0; x < 7; x++) {
             this.unitPool[x] = [];
         }
-        
+
         this.addEffectListener('S_MAP_DATA', this.updateMap);
         this.addEffectListener('S_ROUND_END_EVENT', this.updateMap);
     }
@@ -60,14 +60,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         this.AddClick(cardItem, this.onUnitClick.bind(this, cardInfo.blockX, cardInfo.blockY));
 
-        //根据先后手设置位置
-        if (this._isFirst) {
-            cardItem.x = cardInfo.blockX * this.blockWidth;
-            cardItem.y = cardInfo.blockY * this.blockHeight;
-        } else {
-            cardItem.x = this.view.width - (cardInfo.blockX + 1) * this.blockWidth;
-            cardItem.y = this.view.height - (cardInfo.blockY + 1) * this.blockHeight;
-        }
+        const mapPoint = this.getMapPoint(cardInfo.blockX, cardInfo.blockY);
+        cardItem.x = mapPoint.x;
+        cardItem.y = mapPoint.y;
     }
 
     public updateMapItem(cardInfo: GamePto.ICard) {
@@ -92,18 +87,21 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             //攻击对方卡牌
             if (this._selectCardInfo != null) {
                 //TODO检查攻击是否有效，比如攻击距离够不够
-
             } else {
-
                 //TODO 对卡牌使用法术
             }
             return;
         }
+
+        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
         //自己的卡牌被点击
-        if (GameSceneView.ins().allowToOprate) {
+        if (GameSceneView.ins().allowToOprate && config.cardType !== CardsPto.CardType.Building) {
+            // this.clearTips();
             // 显示所有可移动路径
             if (cardInfo.allowMove) {
-
+                const resultSet = new Set<number>();
+                this.canMove(blockX, blockY, CardsModel.ins().getCardMoveStep(config), resultSet);
+                MapTipsView.ins().showMoveTips(resultSet);
             }
 
             if (cardInfo.allowAtk) {
@@ -112,12 +110,14 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+
+    /**更新地图信息 */
     public updateMap() {
         let unitCards: GamePto.ICard[];
         if (TEST_GAME) {
             unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
         } else {
-            unitCards = MapModel.ins().mapData.unitCards;
+            unitCards = MapModel.ins().mapEntityData.unitCards;
         }
         for (let index = 0; index < unitCards.length; index++) {
             const cardInfo = unitCards[index];
@@ -152,6 +152,19 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         return false;
     }
 
+    /**根据地图坐标返回地图坐标 */
+    public getMapPoint(blockX: number, blockY: number) {
+        const mapPoint = new egret.Point();
+        if (this._isFirst) {
+            mapPoint.x = blockX * this.blockWidth;
+            mapPoint.y = blockY * this.blockHeight;
+        } else {
+            mapPoint.x = this.view.width - (blockX + 1) * this.blockWidth;
+            mapPoint.y = this.view.height - (blockY + 1) * this.blockHeight;
+        }
+        return mapPoint
+    }
+
     /**根据地图坐标返回场景坐标 */
     public getScenePoint(blockX: number, blockY: number) {
         if (this._isFirst) {
@@ -168,6 +181,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.unitShowTips(unit, `${-damage}`);
     }
 
+    /**单位头上飘提示 */
     public unitShowTips(unit: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string, color: number = 0xFF0000) {
         let tips = new fairygui.GTextField();
         tips.fontSize = 26;
@@ -182,6 +196,42 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             fairygui.GRoot.inst.removeChild(tips)
         })
     }
+
+    /**获取可以去的位置 */
+    private canMove(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
+        if (step === 0) {
+            return;
+        }
+
+        const checkXArr = [baseX - 1, baseX + 1, baseX, baseX];
+        const checkYArr = [baseY, baseY, baseY + 1, baseY - 1];
+        for (let index = 0; index < 4; index++) {
+            const x = checkXArr[index];
+            const y = checkYArr[index];
+            if (this.checkMove(x, y)) {
+                resultSet.add(y * 7 + x);
+                this.canMove(x, y, step - 1, resultSet)
+            }
+        }
+    }
+
+    private checkMove(x: number, y: number) {
+        if (x < 0 || x >= 7 || y < 0 || y >= 8) {
+            return false;
+        }
+        return this.unitPool[x][y] == null;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     /**根据数据生成地图 */
     private initMapBlock() {

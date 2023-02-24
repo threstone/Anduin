@@ -66,4 +66,34 @@ class Utils {
     public static formatTimeNum(t: number) {
         return t >= 10 ? t.toString() : "0" + t;
     }
+
+    /**
+     * 当值被改变时变色
+     * @param textField 
+     * @param baseValue 
+     */
+    public static defineTextFieldSet(textField: fairygui.GTextField, baseValue: number, moreColor = 0x00FF00, lessColor = 0xFF0000) {
+        Object.defineProperty(textField, 'text', {
+            set: function (value) {
+                this._text = value;
+                textField.color = 0xFFFFFF;
+                const intValue = parseInt(value);
+                if (!Number.isNaN(intValue)) {
+                    if (intValue > baseValue) {
+                        textField.color = moreColor;
+                    } else if (intValue < baseValue) {
+                        textField.color = lessColor;
+                    }
+                }
+                if (this._text == null)
+                    this._text = "";
+                this.updateGear(6);
+                if (this.parent && this.parent._underConstruct)
+                    this.renderNow();
+                else
+                    this.render();
+            },
+        });
+    }
+
 }

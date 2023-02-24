@@ -20,9 +20,15 @@ class CardItem {
     }
 
     static getItem(cardInfo: CardInterface) {
-        const card = BaseUI.UICardItem.createInstance();
-        this.updateCard(card, cardInfo);
-        return card;
+        const cardItem = BaseUI.UICardItem.createInstance();
+        //血量设置会变色
+        Utils.defineTextFieldSet(cardItem.healthText, cardInfo.health);
+        //攻击设置会变色
+        Utils.defineTextFieldSet(cardItem.atkText, cardInfo.attack);
+        //费用设置会变色
+        Utils.defineTextFieldSet(cardItem.feeText, cardInfo.fee, 0xFF0000, 0x00FF00);
+        this.updateCard(cardItem, cardInfo);
+        return cardItem;
     }
 
     static updateCard(card: BaseUI.UICardItem, cardInfo: CardInterface) {
@@ -67,11 +73,10 @@ class CardItem {
     }
 
     static getUnitCard(cardInfo: GamePto.ICard) {
-        const cardItem = BaseUI.UICardItem.createInstance();
-        //TODO  同样要显示实时的血量和buff
-        cardItem.cardNum.visible = false;
         const cardConfig = CardsModel.ins().getCardInfoById(cardInfo.cardId)
-        this.updateCard(cardItem, cardConfig);
+        const cardItem = this.getItem(cardConfig);
+        cardItem.cardNum.visible = false;
+        //TODO  同样要显示实时的血量和buff
         return cardItem;
     }
 }

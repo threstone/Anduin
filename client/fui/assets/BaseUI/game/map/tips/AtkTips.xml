@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="140,95">
+  <displayList>
+    <graph id="n0_sbft" name="tips0" xy="20,18" size="100,59" type="eclipse" lineSize="2" lineColor="#ffff0000" fillColor="#00ffffff"/>
+    <image id="n2_sbft" name="img" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="50,28"/>
+  </displayList>
+</component>
