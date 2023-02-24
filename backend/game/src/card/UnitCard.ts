@@ -1,19 +1,33 @@
-import { EventCard } from "./EventCard";
+import { BuildingCard } from "./BuildingCard";
 
-export abstract class UnitCard extends EventCard {
-    blockX: number;
-    blockY: number;
-    allowAtk: boolean;
+export abstract class UnitCard extends BuildingCard {
 
-    /**被攻击前触发 */
-    public onPreAtk() {
+    allowAtk: boolean = false;
+    allowMove: boolean = false;
+
+    /**
+     * 回合开始触发
+     * @returns 操作时间
+     */
+    public onRoundStart(): number {
+        super.onRoundStart();
+        //重置攻击移动数据
+        this.allowAtk = true;
+        this.allowMove = true;
+        return 0;
     }
 
-    /**当被攻击 */
-    public onAtkAfter() {
-        //死亡了
-        if (this.health <= 0) {
+    /**
+     * 回合结束触发
+     * @returns 操作时间
+     */
+    public onRoundEnd(): number {
+        super.onRoundEnd();
 
-        }
+        //重置攻击移动数据
+        this.allowAtk = false;
+        this.allowMove = false;
+        return 0;
     }
+
 }

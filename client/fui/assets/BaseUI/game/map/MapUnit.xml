@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="140,95" overflow="hidden">
   <displayList>
-    <graph id="n20_hzsg" name="allowAtk" xy="0,0" size="140,95" visible="false" alpha="0.3" type="rect" fillColor="#ff66ff00"/>
+    <graph id="n20_hzsg" name="allowOperate" xy="0,0" size="140,95" visible="false" alpha="0.3" type="rect" fillColor="#ff66ff00"/>
     <component id="n13_hzsg" name="info" src="hzsg2k" fileName="game/map/MapUnitBase.xml" xy="0,0"/>
     <image id="n14_hzsg" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="2,60" group="n19_hzsg"/>
     <image id="n15_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/DR_atk_til.png" xy="38,97" group="n17_hzsg" rotation="-135"/>

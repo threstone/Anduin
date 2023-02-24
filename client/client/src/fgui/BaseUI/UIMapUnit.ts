@@ -3,7 +3,7 @@
 module BaseUI {
 
 	export class UIMapUnit extends fairygui.GComponent {
-		public allowAtk:fairygui.GGraph;
+		public allowOperate:fairygui.GGraph;
 		public info:UIMapUnitBase;
 		public closeRange:fairygui.GImage;
 		public longRange1:fairygui.GImage;
@@ -24,7 +24,7 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.allowAtk = <fairygui.GGraph>(this.getChildAt(0));
+			this.allowOperate = <fairygui.GGraph>(this.getChildAt(0));
 			this.info = <UIMapUnitBase>(this.getChildAt(1));
 			this.closeRange = <fairygui.GImage>(this.getChildAt(2));
 			this.longRange1 = <fairygui.GImage>(this.getChildAt(3));

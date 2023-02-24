@@ -17,7 +17,7 @@ export class GameHandler extends BaseHandler {
 
     //请求结束回合
     static C_END_ROUND(user: GameUser, table: GameTable, msg: GamePto.C_END_ROUND) {
-        if (!table.allowRoundOprate(user)) {
+        if (!table?.allowRoundOprate(user)) {
             return;
         }
         table.nodeDriver.onTrigger(user, msg);
@@ -25,7 +25,7 @@ export class GameHandler extends BaseHandler {
 
     //请求弃牌
     static C_DISCARD(user: GameUser, table: GameTable, msg: GamePto.C_DISCARD) {
-        if (!table.allowRoundOprate(user)) {
+        if (!table?.allowRoundOprate(user)) {
             return;
         }
 
@@ -52,7 +52,7 @@ export class GameHandler extends BaseHandler {
 
     //使用卡牌
     static C_USE_CARD(user: GameUser, table: GameTable, msg: GamePto.C_USE_CARD) {
-        if (!table.allowRoundOprate(user)) {
+        if (!table?.allowRoundOprate(user)) {
             return;
         }
 

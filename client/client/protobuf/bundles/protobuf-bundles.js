@@ -4507,16 +4507,14 @@ $root.GamePto = (function() {
     var GamePto = {};
 
     /**
-     * EventType enum.
-     * @name GamePto.EventType
+     * BuffEnum enum.
+     * @name GamePto.BuffEnum
      * @enum {number}
-     * @property {number} DrawCard=0 DrawCard value
-     * @property {number} FATIGUE=1 FATIGUE value
+     * @property {number} Freeze=0 Freeze value
      */
-    GamePto.EventType = (function() {
+    GamePto.BuffEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "DrawCard"] = 0;
-        values[valuesById[1] = "FATIGUE"] = 1;
+        values[valuesById[0] = "Freeze"] = 0;
         return values;
     })();
 
@@ -4657,10 +4655,12 @@ $root.GamePto = (function() {
          * @property {number|null} [attack] Card attack
          * @property {number|null} [health] Card health
          * @property {number|null} [fee] Card fee
-         * @property {boolean|null} [allowAtk] Card allowAtk
          * @property {number|null} [uid] Card uid
          * @property {number|null} [blockX] Card blockX
          * @property {number|null} [blockY] Card blockY
+         * @property {boolean|null} [allowAtk] Card allowAtk
+         * @property {boolean|null} [allowMove] Card allowMove
+         * @property {Array.<GamePto.BuffEnum>|null} [buffArr] Card buffArr
          */
 
         /**
@@ -4672,6 +4672,7 @@ $root.GamePto = (function() {
          * @param {GamePto.ICard=} [properties] Properties to set
          */
         function Card(properties) {
+            this.buffArr = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4711,14 +4712,6 @@ $root.GamePto = (function() {
         Card.prototype.fee = 0;
 
         /**
-         * Card allowAtk.
-         * @member {boolean} allowAtk
-         * @memberof GamePto.Card
-         * @instance
-         */
-        Card.prototype.allowAtk = false;
-
-        /**
          * Card uid.
          * @member {number} uid
          * @memberof GamePto.Card
@@ -4743,6 +4736,30 @@ $root.GamePto = (function() {
         Card.prototype.blockY = 0;
 
         /**
+         * Card allowAtk.
+         * @member {boolean} allowAtk
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.allowAtk = false;
+
+        /**
+         * Card allowMove.
+         * @member {boolean} allowMove
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.allowMove = false;
+
+        /**
+         * Card buffArr.
+         * @member {Array.<GamePto.BuffEnum>} buffArr
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.buffArr = $util.emptyArray;
+
+        /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
          * @function encode
          * @memberof GamePto.Card
@@ -4762,14 +4779,22 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.health);
             if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.fee);
-            if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
-                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.allowAtk);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
             if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.blockX);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.blockX);
             if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.blockY);
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.blockY);
+            if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowAtk);
+            if (message.allowMove != null && Object.hasOwnProperty.call(message, "allowMove"))
+                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.allowMove);
+            if (message.buffArr != null && message.buffArr.length) {
+                writer.uint32(/* id 9, wireType 2 =*/74).fork();
+                for (var i = 0; i < message.buffArr.length; ++i)
+                    writer.int32(message.buffArr[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -4808,19 +4833,34 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        message.allowAtk = reader.bool();
-                        break;
-                    }
-                case 5: {
                         message.uid = reader.int32();
                         break;
                     }
-                case 6: {
+                case 5: {
                         message.blockX = reader.int32();
                         break;
                     }
-                case 7: {
+                case 6: {
                         message.blockY = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.allowAtk = reader.bool();
+                        break;
+                    }
+                case 8: {
+                        message.allowMove = reader.bool();
+                        break;
+                    }
+                case 9: {
+                        if (!(message.buffArr && message.buffArr.length))
+                            message.buffArr = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.buffArr.push(reader.int32());
+                        } else
+                            message.buffArr.push(reader.int32());
                         break;
                     }
                 default:
@@ -7329,6 +7369,133 @@ $root.GamePto = (function() {
         };
 
         return S_ROUND_END_TIME;
+    })();
+
+    GamePto.S_MAP_DATA = (function() {
+
+        /**
+         * Properties of a S_MAP_DATA.
+         * @memberof GamePto
+         * @interface IS_MAP_DATA
+         * @property {number|null} [cmd] S_MAP_DATA cmd
+         * @property {number|null} [scmd] S_MAP_DATA scmd
+         * @property {GamePto.IMapData|null} [mapData] S_MAP_DATA mapData
+         */
+
+        /**
+         * Constructs a new S_MAP_DATA.
+         * @memberof GamePto
+         * @classdesc Represents a S_MAP_DATA.
+         * @implements IS_MAP_DATA
+         * @constructor
+         * @param {GamePto.IS_MAP_DATA=} [properties] Properties to set
+         */
+        function S_MAP_DATA(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_MAP_DATA cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_MAP_DATA
+         * @instance
+         */
+        S_MAP_DATA.prototype.cmd = 200;
+
+        /**
+         * S_MAP_DATA scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_MAP_DATA
+         * @instance
+         */
+        S_MAP_DATA.prototype.scmd = 10011;
+
+        /**
+         * S_MAP_DATA mapData.
+         * @member {GamePto.IMapData|null|undefined} mapData
+         * @memberof GamePto.S_MAP_DATA
+         * @instance
+         */
+        S_MAP_DATA.prototype.mapData = null;
+
+        /**
+         * Encodes the specified S_MAP_DATA message. Does not implicitly {@link GamePto.S_MAP_DATA.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_MAP_DATA
+         * @static
+         * @param {GamePto.IS_MAP_DATA} message S_MAP_DATA message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_MAP_DATA.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.mapData != null && Object.hasOwnProperty.call(message, "mapData"))
+                $root.GamePto.MapData.encode(message.mapData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_MAP_DATA message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_MAP_DATA
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_MAP_DATA} S_MAP_DATA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_MAP_DATA.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_MAP_DATA();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_MAP_DATA
+         * @function getTypeUrl
+         * @memberof GamePto.S_MAP_DATA
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_MAP_DATA.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_MAP_DATA";
+        };
+
+        return S_MAP_DATA;
     })();
 
     return GamePto;

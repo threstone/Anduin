@@ -2,6 +2,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     //先手方一定是在下方，所以后手方需要做地图反转
     private _isFirst: boolean;
+    set isFirst(v: boolean) {
+        this._isFirst = v;
+    }
 
     /**悬浮时的显示卡牌 */
     private _detailCard: BaseUI.UICardItem;
@@ -13,15 +16,21 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     unitPool: BaseUI.UIMapUnit[][] | BaseUI.UIMapBuilding[][];
 
-
     protected init() {
         this.view = GameSceneView.ins().getView().map;
         this.blockWidth = 140;
         this.blockHeight = 95;
+    }
+
+    public open(): void {
+        super.open();
         this.unitPool = [];
         for (let x = 0; x < 7; x++) {
             this.unitPool[x] = [];
         }
+        
+        this.addEffectListener('S_MAP_DATA', this.updateMap);
+        this.addEffectListener('S_ROUND_END_EVENT', this.updateMap);
     }
 
     public close(): void {
@@ -49,7 +58,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             this.view.removeChild(this._detailCard);
         }, this);
 
-        this.AddClick(cardItem, this.onUnitClick.bind(this, cardInfo));
+        this.AddClick(cardItem, this.onUnitClick.bind(this, cardInfo.blockX, cardInfo.blockY));
 
         //根据先后手设置位置
         if (this._isFirst) {
@@ -61,8 +70,23 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+    public updateMapItem(cardInfo: GamePto.ICard) {
+        const mapItem = this.unitPool[cardInfo.blockX][cardInfo.blockY];
+
+        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        if (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero) {
+            const unit = mapItem as BaseUI.UIMapUnit;
+            unit.allowOperate.visible = cardInfo.allowAtk || cardInfo.allowMove;
+        }
+    }
+
     /**当地图元素被点击 */
-    private onUnitClick(cardInfo: GamePto.ICard) {
+    private onUnitClick(blockX: number, blockY: number) {
+        const cardInfo = MapModel.ins().getUnitCardByPosition(blockX, blockY);
+        if (!cardInfo) {
+            return;
+        }
+
         //如果是对方的卡牌被点击,那么有可能是尝试攻击,或者对他使用法术
         if (cardInfo.uid !== UserModel.ins().uid) {
             //攻击对方卡牌
@@ -78,11 +102,17 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         //自己的卡牌被点击
         if (GameSceneView.ins().allowToOprate) {
             // 显示所有可移动路径
+            if (cardInfo.allowMove) {
+
+            }
+
+            if (cardInfo.allowAtk) {
+
+            }
         }
     }
 
-    public updateMap(isFirst: boolean) {
-        this._isFirst = isFirst;
+    public updateMap() {
         let unitCards: GamePto.ICard[];
         if (TEST_GAME) {
             unitCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
@@ -91,7 +121,15 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
         for (let index = 0; index < unitCards.length; index++) {
             const cardInfo = unitCards[index];
-            this.addMapItem(cardInfo)
+            const curUnit = this.unitPool[cardInfo.blockX][cardInfo.blockY];
+            if (curUnit) {
+                this.updateMapItem(cardInfo);
+            } else {
+                if (arguments.length !== 0) {
+                    throw '由S_MAP_DATA协议驱动的地图更新,正常来说都应该是update的才对,检查为什么这个位置缺少了对象'
+                }
+                this.addMapItem(cardInfo)
+            }
         }
     }
 

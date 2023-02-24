@@ -202,8 +202,9 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         //将手牌位置的卡换成对应的卡牌
         const gameCard = new GameCard(msg.card);
         const cardBg = this._cards[msg.cardIndex];
-        gameCard.cardItem.x = cardBg.x;
-        gameCard.cardItem.y = cardBg.y;
+        const root = cardBg.localToRoot();
+        gameCard.cardItem.x = root.x;
+        gameCard.cardItem.y = root.y;
         gameCard.cardItem.scaleX = 0.5;
         gameCard.cardItem.scaleY = 0.5;
         //删卡数据

@@ -241,6 +241,10 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         const gameCard = this._cards[msg.cardIndex];
         if (msg.isSuccess) {
             gameCard.cardInfo = msg.card;
+            const root = gameCard.cardItem.localToRoot();
+            gameCard.cardItem.x = root.x;
+            gameCard.cardItem.y = root.y;
+            gameCard.cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
             this.updateCardsPostion(500);

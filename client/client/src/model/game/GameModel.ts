@@ -79,6 +79,7 @@ class GameModel extends BaseModel {
 
     //回合结束
     S_ROUND_END_EVENT(msg: GamePto.S_ROUND_END_EVENT) {
+        MapModel.ins().onGameEnd();
         this.emit('S_ROUND_END_EVENT', msg);
     }
 
@@ -116,5 +117,11 @@ class GameModel extends BaseModel {
     //下发回合结束时间
     S_ROUND_END_TIME(msg: GamePto.S_ROUND_END_TIME) {
         this.emit('S_ROUND_END_TIME', msg);
+    }
+
+    //地图数据
+    S_MAP_DATA(msg: GamePto.S_MAP_DATA) {
+        MapModel.ins().mapData = msg.mapData;
+        this.emit('S_MAP_DATA', msg);
     }
 }

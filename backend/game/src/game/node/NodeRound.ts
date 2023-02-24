@@ -35,7 +35,12 @@ export class NodeRound extends BaseNode {
         endTimeMsg.endTime = Date.now() + GlobalVar.configMgr.common.roundOptTime;
         endTimeMsg.uid = user.uid;
         this.nodeDriver.waitTime(GlobalVar.configMgr.common.roundOptTime);
-        table.broadcast(endTimeMsg)
+        table.broadcast(endTimeMsg);
+
+        //派发地图数据给操作者
+        const mapData = new GamePto.S_MAP_DATA();
+        mapData.mapData = table.getMapData();
+        user.sendMsg(mapData);
     }
 
     //玩家回合操作

@@ -53,7 +53,7 @@ class UnitItem {
         } else {
             unit.closeRange.visible = false;
         }
-        unit.allowAtk.visible = cardInfo.allowAtk;
+        unit.allowOperate.visible = cardInfo.allowAtk || cardInfo.allowMove;
 
         unit.info.tempCardName.text = `${cardConfig.cardName}`;
         if (cardInfo.uid === UserModel.ins().uid) {

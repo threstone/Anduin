@@ -20,4 +20,22 @@ class MapModel extends BaseModel {
             }
         }
     }
+
+    public getUnitCardByPosition(blockX: number, blockY: number): GamePto.ICard {
+        for (let index = 0; index < this.mapData.unitCards.length; index++) {
+            const unitCard = this.mapData.unitCards[index];
+            if (unitCard.blockX === blockX && unitCard.blockY === blockY) {
+                return unitCard;
+            }
+        }
+    }
+
+    /**回合结束将所有卡牌的可操作性权限中止 */
+    public onGameEnd() {
+        for (let index = 0; index < this.mapData.unitCards.length; index++) {
+            const unitCard = this.mapData.unitCards[index];
+            unitCard.allowAtk = false;
+            unitCard.allowMove = false;
+        }
+    }
 }

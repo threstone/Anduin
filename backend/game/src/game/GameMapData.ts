@@ -1,4 +1,5 @@
 
+import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
 
 export class GameMapData {
@@ -7,7 +8,7 @@ export class GameMapData {
     private _height: number;
 
     /**战场足够小，直接用数组实现 */
-    private _mapData: UnitCard[];
+    private _mapData: UnitCard | BuildingCard[];
 
     constructor(width: number, height: number) {
         this._width = width;
@@ -20,7 +21,7 @@ export class GameMapData {
         }
     }
 
-    public setCard(card: UnitCard) {
+    public setCard(card: UnitCard | BuildingCard) {
         const position = card.blockY * this._width + card.blockX;
         if (this._mapData[position]) {
             return;

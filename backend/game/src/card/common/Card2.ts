@@ -1,6 +1,6 @@
 import { UnitCard } from "../UnitCard";
 
-/**hero */
+/**小兵 */
 export class Card2 extends UnitCard {
     onUse() {
     }

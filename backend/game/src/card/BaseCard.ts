@@ -10,6 +10,7 @@ export abstract class BaseCard implements CardInterface {
     attack: number;
     atkType: CardsPto.AtkType;
     health: number;
+    healthUpperLimit: number;
     fee: number;
     quality: CardsPto.QualityType;
     attr: any;
@@ -25,7 +26,8 @@ export abstract class BaseCard implements CardInterface {
         for (const key in cardConfig) {
             this[key] = cardConfig[key];
         }
+        this.healthUpperLimit = this.health;
     }
 
-    abstract onUse();
+    public abstract onUse();
 }

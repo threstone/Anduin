@@ -2,6 +2,7 @@ import { CardsPto, GamePto } from '../../../common/CommonProto';
 import { RedisType } from '../../../common/ConstDefine';
 import { IGameMessage } from '../../../common/I';
 import { BaseCard } from '../card/BaseCard';
+import { BuildingCard } from '../card/BuildingCard';
 import { EventCard } from '../card/EventCard';
 import { UnitCard } from '../card/UnitCard';
 import { GlobalVar } from '../GlobalVar';
@@ -38,7 +39,7 @@ export class GameUser {
     get eventPool() { return this._eventPool; }
 
     /**正在战场上起作用的单位卡 */
-    private _unitPool: UnitCard[];
+    private _unitPool: (UnitCard | BuildingCard)[];
     get unitPool() { return this._unitPool; }
 
     get hero() { return this._unitPool[0] }
@@ -157,7 +158,7 @@ export class GameUser {
     }
 
     /**设置单位卡到地图 */
-    public setUnitCardToMap(card: UnitCard) {
+    public setUnitCardToMap(card: UnitCard | BuildingCard) {
         this.table.mapData.setCard(card);
         this._unitPool.push(card);
     }

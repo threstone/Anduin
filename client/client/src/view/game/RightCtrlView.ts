@@ -23,6 +23,9 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
 
     public close(): void {
         super.close();
+        this.reqEndTime = 0;
+        this.tipsStart = '等待游戏开始'
+        this.updateDesc();
         clearInterval(this.intervalId);
     }
 

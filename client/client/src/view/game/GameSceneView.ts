@@ -22,6 +22,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.bindView(TargetInfoBox.ins());
         this.bindView(HandCardView.ins());
         this.bindView(TargetHandView.ins());
+        this.bindView(MapView.ins());
 
         this.view.close.describe.text = 'tempCloseBtn'
     }
@@ -88,7 +89,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         const isFirst = msg.firstUid === UserModel.ins().uid;
         TipsView.ins().showTips(`你获得了${isFirst ? '先手' : '后手'}`)
         ChooseCards.ins().open(msg.cards, msg.replaceEndTime as number);
-        MapView.ins().updateMap(isFirst);
+        MapView.ins().isFirst = isFirst;
+        MapView.ins().updateMap();
     }
 
     public async useCardShow(card: GameCard) {

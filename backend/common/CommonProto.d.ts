@@ -2727,10 +2727,9 @@ export namespace CardsPto {
 /** Namespace GamePto. */
 export namespace GamePto {
 
-    /** EventType enum. */
-    enum EventType {
-        DrawCard = 0,
-        FATIGUE = 1
+    /** BuffEnum enum. */
+    enum BuffEnum {
+        Freeze = 0
     }
 
     /** Properties of a UserInfo. */
@@ -2850,9 +2849,6 @@ export namespace GamePto {
         /** Card fee */
         fee?: (number|null);
 
-        /** Card allowAtk */
-        allowAtk?: (boolean|null);
-
         /** Card uid */
         uid?: (number|null);
 
@@ -2861,6 +2857,15 @@ export namespace GamePto {
 
         /** Card blockY */
         blockY?: (number|null);
+
+        /** Card allowAtk */
+        allowAtk?: (boolean|null);
+
+        /** Card allowMove */
+        allowMove?: (boolean|null);
+
+        /** Card buffArr */
+        buffArr?: (GamePto.BuffEnum[]|null);
     }
 
     /** Represents a Card. */
@@ -2884,9 +2889,6 @@ export namespace GamePto {
         /** Card fee. */
         public fee: number;
 
-        /** Card allowAtk. */
-        public allowAtk: boolean;
-
         /** Card uid. */
         public uid: number;
 
@@ -2895,6 +2897,15 @@ export namespace GamePto {
 
         /** Card blockY. */
         public blockY: number;
+
+        /** Card allowAtk. */
+        public allowAtk: boolean;
+
+        /** Card allowMove. */
+        public allowMove: boolean;
+
+        /** Card buffArr. */
+        public buffArr: GamePto.BuffEnum[];
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -4749,6 +4760,108 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_ROUND_END_TIME
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MAP_DATA. */
+    interface IS_MAP_DATA {
+
+        /** S_MAP_DATA cmd */
+        cmd?: (number|null);
+
+        /** S_MAP_DATA scmd */
+        scmd?: (number|null);
+
+        /** S_MAP_DATA mapData */
+        mapData?: (GamePto.IMapData|null);
+    }
+
+    /** Represents a S_MAP_DATA. */
+    class S_MAP_DATA implements IS_MAP_DATA {
+
+        /**
+         * Constructs a new S_MAP_DATA.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_MAP_DATA);
+
+        /** S_MAP_DATA cmd. */
+        public cmd: number;
+
+        /** S_MAP_DATA scmd. */
+        public scmd: number;
+
+        /** S_MAP_DATA mapData. */
+        public mapData?: (GamePto.IMapData|null);
+
+        /**
+         * Encodes the specified S_MAP_DATA message. Does not implicitly {@link GamePto.S_MAP_DATA.verify|verify} messages.
+         * @param message S_MAP_DATA message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_MAP_DATA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_MAP_DATA message, length delimited. Does not implicitly {@link GamePto.S_MAP_DATA.verify|verify} messages.
+         * @param message S_MAP_DATA message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_MAP_DATA, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_MAP_DATA message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MAP_DATA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_MAP_DATA;
+
+        /**
+         * Decodes a S_MAP_DATA message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_MAP_DATA
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_MAP_DATA;
+
+        /**
+         * Verifies a S_MAP_DATA message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_MAP_DATA message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_MAP_DATA
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_MAP_DATA;
+
+        /**
+         * Creates a plain object from a S_MAP_DATA message. Also converts values to other types if specified.
+         * @param message S_MAP_DATA
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_MAP_DATA, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_MAP_DATA to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_MAP_DATA
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
