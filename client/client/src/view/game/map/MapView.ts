@@ -77,7 +77,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**当地图元素被点击 */
     private onUnitClick(blockX: number, blockY: number) {
-        const cardInfo = MapModel.ins().getUnitCardByPosition(blockX, blockY);
+        const cardInfo = MapModel.ins().getUnitCardByPoint(blockX, blockY);
         if (!cardInfo) {
             return;
         }
@@ -96,16 +96,17 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
         //自己的卡牌被点击
         if (GameSceneView.ins().allowToOprate && config.cardType !== CardsPto.CardType.Building) {
-            // this.clearTips();
             // 显示所有可移动路径
+            let movePointSet: Set<number>;
             if (cardInfo.allowMove) {
-                const resultSet = new Set<number>();
-                this.canMove(blockX, blockY, CardsModel.ins().getCardMoveStep(config), resultSet);
-                MapTipsView.ins().showMoveTips(resultSet);
+                movePointSet = MoveUtils.ins().getMovablePoint(cardInfo, config);
+                MapTipsView.ins().showMoveTips(movePointSet);
             }
 
+            //显示可攻击
             if (cardInfo.allowAtk) {
-
+                //获取攻击距离
+                //遍历set然后获取到攻击距离内的单位
             }
         }
     }
@@ -196,42 +197,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             fairygui.GRoot.inst.removeChild(tips)
         })
     }
-
-    /**获取可以去的位置 */
-    private canMove(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
-        if (step === 0) {
-            return;
-        }
-
-        const checkXArr = [baseX - 1, baseX + 1, baseX, baseX];
-        const checkYArr = [baseY, baseY, baseY + 1, baseY - 1];
-        for (let index = 0; index < 4; index++) {
-            const x = checkXArr[index];
-            const y = checkYArr[index];
-            if (this.checkMove(x, y)) {
-                resultSet.add(y * 7 + x);
-                this.canMove(x, y, step - 1, resultSet)
-            }
-        }
-    }
-
-    private checkMove(x: number, y: number) {
-        if (x < 0 || x >= 7 || y < 0 || y >= 8) {
-            return false;
-        }
-        return this.unitPool[x][y] == null;
-    }
-
-
-
-
-
-
-
-
-
-
-
 
     /**根据数据生成地图 */
     private initMapBlock() {

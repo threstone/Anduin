@@ -18,6 +18,7 @@ class CardsModel extends BaseModel {
         this.initCards()
     }
 
+    /**返回卡牌可移动步数,负值代表飞行 */
     public getCardMoveStep(cardInfo: CardInterface) {
         return 2;
     }

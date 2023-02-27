@@ -40,7 +40,7 @@ export class GameMapData {
 
     public move(targetX: number, targetY: number, card: UnitCard) {
         const resultSet = new Set<number>();
-        this.canMove(card.blockX, card.blockY, 2, resultSet)
+        this.getMovablePoint(card)
         if (!resultSet.has(targetY * this._width + targetX)) {
             return false;
         }
@@ -56,8 +56,34 @@ export class GameMapData {
         return this._mapData[targetPosition] != null;
     }
 
-    /**获取可以去的位置 */
-    private canMove(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
+    private checkMove(x: number, y: number) {
+        if (x < 0 || x >= this._width || y < 0 || y >= this._height) {
+            return false
+        }
+        return !this.hasCard(x, y)
+    }
+
+    /**获取可移动坐标 */
+    public getMovablePoint(card: UnitCard) {
+        const resultSet = new Set<number>();
+        //要根据卡片配置决定是飞行还是行走
+        const step = this.getCardMoveStep(card);
+        const isFly = step < 0;
+        if (isFly) {
+            this.getFlyablePoint(card.blockX, card.blockY, step, resultSet);
+        } else {
+            this.getWalkablePoint(card.blockX, card.blockY, step, resultSet);
+        }
+        return resultSet;
+    }
+
+    /**获取卡牌可移动步数 */
+    public getCardMoveStep(card: UnitCard) {
+        return 2;
+    }
+
+    /**获取可以走去的位置 */
+    private getWalkablePoint(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
         if (step === 0) {
             return;
         }
@@ -68,17 +94,20 @@ export class GameMapData {
             const x = checkXArr[index];
             const y = checkYArr[index];
             if (this.checkMove(x, y)) {
-                resultSet.add(y * this._width + x);
-                this.canMove(x, y, step - 1, resultSet)
+                resultSet.add(y * 7 + x);
+                this.getWalkablePoint(x, y, step - 1, resultSet)
             }
         }
     }
 
-    private checkMove(x: number, y: number) {
-        if (x < 0 || x >= this._width || y < 0 || y >= this._height) {
-            return false
+    /**获取可以飞到的位置 */
+    private getFlyablePoint(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
+        for (let x = baseX - step; x < baseX + step; x++) {
+            for (let y = baseY - step; y < baseY + step; y++) {
+                if (this.checkMove(x, y)) {
+                    resultSet.add(y * 7 + x);
+                }
+            }
         }
-        return !this.hasCard(x, y)
     }
-
 }

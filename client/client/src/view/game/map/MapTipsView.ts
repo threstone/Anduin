@@ -28,6 +28,7 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         if (this.isOnStage() === false) {
             this.open();
         }
+        
         pointSet.forEach((point: number) => {
             const x = point % 7;
             const y = Math.floor(point / 7);

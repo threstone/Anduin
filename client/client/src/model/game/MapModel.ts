@@ -1,7 +1,7 @@
 class MapModel extends BaseModel {
 
     mapEntityData: GamePto.IMapData;
-    
+
     public onCardUse(msg: GamePto.S_USE_CARD) {
         const cardConfig = CardsModel.ins().getCardInfoById(msg.card.cardId);
         if (cardConfig.cardType === CardsPto.CardType.Event) {
@@ -21,7 +21,7 @@ class MapModel extends BaseModel {
         }
     }
 
-    public getUnitCardByPosition(blockX: number, blockY: number): GamePto.ICard {
+    public getUnitCardByPoint(blockX: number, blockY: number): GamePto.ICard {
         for (let index = 0; index < this.mapEntityData.unitCards.length; index++) {
             const unitCard = this.mapEntityData.unitCards[index];
             if (unitCard.blockX === blockX && unitCard.blockY === blockY) {
