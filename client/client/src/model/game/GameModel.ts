@@ -5,7 +5,11 @@ class GameModel extends BaseModel {
     targetUid: number;
 
     atkTimes: number
+    atkTimesLimit: number
     moveTimes: number
+    moveTimesLimit: number
+
+    fee: number
 
     /**准备开始(包含更换卡牌数据) */
     C_PREPARE_TO_START(replareplaceCardIndexes: number[]) {
@@ -58,7 +62,7 @@ class GameModel extends BaseModel {
     //开始游戏
     S_GAME_START(msg: GamePto.S_GAME_START) {
         this.handCards = msg.cards;
-        MapModel.ins().mapEntityData = msg.mapData;
+        MapModel.ins().serverData = msg.mapData;
         this.emit('S_GAME_START', msg);
     }
 
@@ -73,7 +77,9 @@ class GameModel extends BaseModel {
         this.emit('S_ROUND_START_EVENT', msg);
         if (msg.uid === UserModel.ins().uid) {
             this.atkTimes = msg.atkTimes;
+            this.atkTimesLimit = msg.atkTimesLimit;
             this.moveTimes = msg.moveTimes;
+            this.moveTimesLimit = msg.moveTimesLimit;
         }
     }
 
@@ -93,6 +99,7 @@ class GameModel extends BaseModel {
 
     //费用协议
     S_FEE_INFO(msg: GamePto.S_FEE_INFO) {
+        this.fee = msg.fee;
         this.emit('S_FEE_INFO', msg);
     }
 
@@ -101,6 +108,7 @@ class GameModel extends BaseModel {
         if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
             this.handCards.splice(msg.cardIndex, 1);
         }
+        this.fee = msg.fee;
         this.emit('S_DISCARD', msg);
     }
 
@@ -111,6 +119,7 @@ class GameModel extends BaseModel {
             MapModel.ins().onCardUse(msg)
         }
 
+        this.fee = msg.fee;
         this.emit('S_USE_CARD', msg);
     }
 
@@ -121,7 +130,7 @@ class GameModel extends BaseModel {
 
     //地图数据
     S_MAP_DATA(msg: GamePto.S_MAP_DATA) {
-        MapModel.ins().mapEntityData = msg.mapData;
+        MapModel.ins().serverData = msg.mapData;
         this.emit('S_MAP_DATA', msg);
     }
 }

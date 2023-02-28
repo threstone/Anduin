@@ -60,6 +60,26 @@ message C_USE_CARD{
 	int32 blockY = 5;
 }
 
+//请求移动
+message C_MOVE{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 5];
+	int32 sourceX = 3;
+	int32 sourceY = 4;
+	int32 targetX = 5;
+	int32 targetY = 6;	
+}
+
+//请求攻击
+message C_ATTACK{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 6];
+	int32 sourceX = 3;
+	int32 sourceY = 4;
+	int32 targetX = 5;
+	int32 targetY = 6;	
+}
+
 //===================Server message===================
 
 //服务端异常 关闭场景
@@ -170,4 +190,28 @@ message S_MAP_DATA{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10011];
 	MapData mapData = 3;
+}
+
+//请求移动返回
+message S_MOVE{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10012];
+	int32 sourceX = 3;
+	int32 sourceY = 4;
+	int32 targetX = 5;
+	int32 targetY = 6;	
+	bool allowMove = 7;
+	int32 uid = 8;
+}
+
+//请求攻击返回
+message S_ATTACK{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10013];
+	int32 sourceX = 3;
+	int32 sourceY = 4;
+	int32 targetX = 5;
+	int32 targetY = 6;
+	bool allowAtk = 7;
+	int32 uid = 8;
 }

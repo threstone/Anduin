@@ -4124,6 +4124,304 @@ $root.GamePto = (function() {
         return C_USE_CARD;
     })();
 
+    GamePto.C_MOVE = (function() {
+
+        function C_MOVE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_MOVE.prototype.cmd = 200;
+        C_MOVE.prototype.scmd = 5;
+        C_MOVE.prototype.sourceX = 0;
+        C_MOVE.prototype.sourceY = 0;
+        C_MOVE.prototype.targetX = 0;
+        C_MOVE.prototype.targetY = 0;
+
+        C_MOVE.create = function create(properties) {
+            return new C_MOVE(properties);
+        };
+
+        C_MOVE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.sourceX != null && Object.hasOwnProperty.call(m, "sourceX"))
+                w.uint32(24).int32(m.sourceX);
+            if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
+                w.uint32(32).int32(m.sourceY);
+            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
+                w.uint32(40).int32(m.targetX);
+            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
+                w.uint32(48).int32(m.targetY);
+            return w;
+        };
+
+        C_MOVE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.C_MOVE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.sourceX = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.sourceY = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.targetX = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.targetY = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_MOVE.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.C_MOVE)
+                return d;
+            var m = new $root.GamePto.C_MOVE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.sourceX != null) {
+                m.sourceX = d.sourceX | 0;
+            }
+            if (d.sourceY != null) {
+                m.sourceY = d.sourceY | 0;
+            }
+            if (d.targetX != null) {
+                m.targetX = d.targetX | 0;
+            }
+            if (d.targetY != null) {
+                m.targetY = d.targetY | 0;
+            }
+            return m;
+        };
+
+        C_MOVE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 5;
+                d.sourceX = 0;
+                d.sourceY = 0;
+                d.targetX = 0;
+                d.targetY = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.sourceX != null && m.hasOwnProperty("sourceX")) {
+                d.sourceX = m.sourceX;
+            }
+            if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
+                d.sourceY = m.sourceY;
+            }
+            if (m.targetX != null && m.hasOwnProperty("targetX")) {
+                d.targetX = m.targetX;
+            }
+            if (m.targetY != null && m.hasOwnProperty("targetY")) {
+                d.targetY = m.targetY;
+            }
+            return d;
+        };
+
+        C_MOVE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_MOVE";
+        };
+
+        return C_MOVE;
+    })();
+
+    GamePto.C_ATTACK = (function() {
+
+        function C_ATTACK(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        C_ATTACK.prototype.cmd = 200;
+        C_ATTACK.prototype.scmd = 6;
+        C_ATTACK.prototype.sourceX = 0;
+        C_ATTACK.prototype.sourceY = 0;
+        C_ATTACK.prototype.targetX = 0;
+        C_ATTACK.prototype.targetY = 0;
+
+        C_ATTACK.create = function create(properties) {
+            return new C_ATTACK(properties);
+        };
+
+        C_ATTACK.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.sourceX != null && Object.hasOwnProperty.call(m, "sourceX"))
+                w.uint32(24).int32(m.sourceX);
+            if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
+                w.uint32(32).int32(m.sourceY);
+            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
+                w.uint32(40).int32(m.targetX);
+            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
+                w.uint32(48).int32(m.targetY);
+            return w;
+        };
+
+        C_ATTACK.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.C_ATTACK();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.sourceX = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.sourceY = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.targetX = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.targetY = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        C_ATTACK.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.C_ATTACK)
+                return d;
+            var m = new $root.GamePto.C_ATTACK();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.sourceX != null) {
+                m.sourceX = d.sourceX | 0;
+            }
+            if (d.sourceY != null) {
+                m.sourceY = d.sourceY | 0;
+            }
+            if (d.targetX != null) {
+                m.targetX = d.targetX | 0;
+            }
+            if (d.targetY != null) {
+                m.targetY = d.targetY | 0;
+            }
+            return m;
+        };
+
+        C_ATTACK.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 6;
+                d.sourceX = 0;
+                d.sourceY = 0;
+                d.targetX = 0;
+                d.targetY = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.sourceX != null && m.hasOwnProperty("sourceX")) {
+                d.sourceX = m.sourceX;
+            }
+            if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
+                d.sourceY = m.sourceY;
+            }
+            if (m.targetX != null && m.hasOwnProperty("targetX")) {
+                d.targetX = m.targetX;
+            }
+            if (m.targetY != null && m.hasOwnProperty("targetY")) {
+                d.targetY = m.targetY;
+            }
+            return d;
+        };
+
+        C_ATTACK.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        C_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_ATTACK";
+        };
+
+        return C_ATTACK;
+    })();
+
     GamePto.S_SERVER_ERROR = (function() {
 
         function S_SERVER_ERROR(p) {
@@ -5912,6 +6210,360 @@ $root.GamePto = (function() {
         };
 
         return S_MAP_DATA;
+    })();
+
+    GamePto.S_MOVE = (function() {
+
+        function S_MOVE(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_MOVE.prototype.cmd = 200;
+        S_MOVE.prototype.scmd = 10012;
+        S_MOVE.prototype.sourceX = 0;
+        S_MOVE.prototype.sourceY = 0;
+        S_MOVE.prototype.targetX = 0;
+        S_MOVE.prototype.targetY = 0;
+        S_MOVE.prototype.allowMove = false;
+        S_MOVE.prototype.uid = 0;
+
+        S_MOVE.create = function create(properties) {
+            return new S_MOVE(properties);
+        };
+
+        S_MOVE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.sourceX != null && Object.hasOwnProperty.call(m, "sourceX"))
+                w.uint32(24).int32(m.sourceX);
+            if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
+                w.uint32(32).int32(m.sourceY);
+            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
+                w.uint32(40).int32(m.targetX);
+            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
+                w.uint32(48).int32(m.targetY);
+            if (m.allowMove != null && Object.hasOwnProperty.call(m, "allowMove"))
+                w.uint32(56).bool(m.allowMove);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(64).int32(m.uid);
+            return w;
+        };
+
+        S_MOVE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_MOVE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.sourceX = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.sourceY = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.targetX = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.targetY = r.int32();
+                        break;
+                    }
+                case 7: {
+                        m.allowMove = r.bool();
+                        break;
+                    }
+                case 8: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_MOVE.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_MOVE)
+                return d;
+            var m = new $root.GamePto.S_MOVE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.sourceX != null) {
+                m.sourceX = d.sourceX | 0;
+            }
+            if (d.sourceY != null) {
+                m.sourceY = d.sourceY | 0;
+            }
+            if (d.targetX != null) {
+                m.targetX = d.targetX | 0;
+            }
+            if (d.targetY != null) {
+                m.targetY = d.targetY | 0;
+            }
+            if (d.allowMove != null) {
+                m.allowMove = Boolean(d.allowMove);
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            return m;
+        };
+
+        S_MOVE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10012;
+                d.sourceX = 0;
+                d.sourceY = 0;
+                d.targetX = 0;
+                d.targetY = 0;
+                d.allowMove = false;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.sourceX != null && m.hasOwnProperty("sourceX")) {
+                d.sourceX = m.sourceX;
+            }
+            if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
+                d.sourceY = m.sourceY;
+            }
+            if (m.targetX != null && m.hasOwnProperty("targetX")) {
+                d.targetX = m.targetX;
+            }
+            if (m.targetY != null && m.hasOwnProperty("targetY")) {
+                d.targetY = m.targetY;
+            }
+            if (m.allowMove != null && m.hasOwnProperty("allowMove")) {
+                d.allowMove = m.allowMove;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            return d;
+        };
+
+        S_MOVE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_MOVE";
+        };
+
+        return S_MOVE;
+    })();
+
+    GamePto.S_ATTACK = (function() {
+
+        function S_ATTACK(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_ATTACK.prototype.cmd = 200;
+        S_ATTACK.prototype.scmd = 10013;
+        S_ATTACK.prototype.sourceX = 0;
+        S_ATTACK.prototype.sourceY = 0;
+        S_ATTACK.prototype.targetX = 0;
+        S_ATTACK.prototype.targetY = 0;
+        S_ATTACK.prototype.allowAtk = false;
+        S_ATTACK.prototype.uid = 0;
+
+        S_ATTACK.create = function create(properties) {
+            return new S_ATTACK(properties);
+        };
+
+        S_ATTACK.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.sourceX != null && Object.hasOwnProperty.call(m, "sourceX"))
+                w.uint32(24).int32(m.sourceX);
+            if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
+                w.uint32(32).int32(m.sourceY);
+            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
+                w.uint32(40).int32(m.targetX);
+            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
+                w.uint32(48).int32(m.targetY);
+            if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
+                w.uint32(56).bool(m.allowAtk);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(64).int32(m.uid);
+            return w;
+        };
+
+        S_ATTACK.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_ATTACK();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.sourceX = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.sourceY = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.targetX = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.targetY = r.int32();
+                        break;
+                    }
+                case 7: {
+                        m.allowAtk = r.bool();
+                        break;
+                    }
+                case 8: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_ATTACK.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_ATTACK)
+                return d;
+            var m = new $root.GamePto.S_ATTACK();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.sourceX != null) {
+                m.sourceX = d.sourceX | 0;
+            }
+            if (d.sourceY != null) {
+                m.sourceY = d.sourceY | 0;
+            }
+            if (d.targetX != null) {
+                m.targetX = d.targetX | 0;
+            }
+            if (d.targetY != null) {
+                m.targetY = d.targetY | 0;
+            }
+            if (d.allowAtk != null) {
+                m.allowAtk = Boolean(d.allowAtk);
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            return m;
+        };
+
+        S_ATTACK.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10013;
+                d.sourceX = 0;
+                d.sourceY = 0;
+                d.targetX = 0;
+                d.targetY = 0;
+                d.allowAtk = false;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.sourceX != null && m.hasOwnProperty("sourceX")) {
+                d.sourceX = m.sourceX;
+            }
+            if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
+                d.sourceY = m.sourceY;
+            }
+            if (m.targetX != null && m.hasOwnProperty("targetX")) {
+                d.targetX = m.targetX;
+            }
+            if (m.targetY != null && m.hasOwnProperty("targetY")) {
+                d.targetY = m.targetY;
+            }
+            if (m.allowAtk != null && m.hasOwnProperty("allowAtk")) {
+                d.allowAtk = m.allowAtk;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            return d;
+        };
+
+        S_ATTACK.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ATTACK";
+        };
+
+        return S_ATTACK;
     })();
 
     return GamePto;

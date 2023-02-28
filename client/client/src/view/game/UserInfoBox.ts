@@ -1,5 +1,12 @@
 class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
 
+    private _atkTimes: number
+    private _atkTimesLimit: number
+    private _moveTimes: number
+    private _moveTimesLimit: number
+
+    protected isSelf: boolean
+
     protected init() {
         //全局监听,不会应为界面close而中止监听
         GameDispatcher.getInstance().addEventListener('S_INIT_GAME', this.initUserInfo, this);
@@ -10,8 +17,11 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
 
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.addEffectListener('S_FEE_INFO', this.onFeeInfo);
+        this.addEffectListener('S_MOVE', this.onMove);
+    }
 
-        this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
+    private isHandler(uid: number) {
+        return (uid === UserModel.ins().uid) === this.isSelf;
     }
 
     /**初始化双方职业，昵称 */
@@ -20,27 +30,26 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         for (let index = 0; index < msg.users.length; index++) {
             const user = msg.users[index];
             if (user.uid === UserModel.ins().uid) {
-                SelfInfoBox.ins().setUserInfo(user);
-            } else {
-                TargetInfoBox.ins().setUserInfo(user);
+                this.setUserInfo(user);
             }
         }
     }
 
     private onRoundStart(msg: GamePto.S_ROUND_START_EVENT) {
-        if (msg.uid === UserModel.ins().uid) {
-            SelfInfoBox.ins().setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
-            SelfInfoBox.ins().setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
-        } else {
-            TargetInfoBox.ins().setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
-            TargetInfoBox.ins().setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
+        if (this.isHandler(msg.uid)) {
+            this.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
+            this.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
     }
     private onFeeInfo(msg: GamePto.S_FEE_INFO) {
-        if (msg.uid === UserModel.ins().uid) {
-            SelfInfoBox.ins().feeSet(msg.fee, msg.maxFee);
-        } else {
-            TargetInfoBox.ins().feeSet(msg.fee, msg.maxFee);
+        if (this.isHandler(msg.uid)) {
+            this.feeSet(msg.fee, msg.maxFee);
+        }
+    }
+
+    private onMove(msg: GamePto.S_FEE_INFO) {
+        if (this.isHandler(msg.uid)) {
+            this.reduceMoveTimes();
         }
     }
 
@@ -85,13 +94,25 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
     }
 
     /**设置攻击次数信息 */
-    public setAtkTimesInfo(times: number, timesLimit) {
+    public setAtkTimesInfo(times: number, timesLimit: number) {
+        this._atkTimes = times;
+        this._atkTimesLimit = timesLimit;
         this.view.atkTimes.text = `攻击次数${times}/${timesLimit}`
     }
 
     /**设置移动次数信息 */
-    public setMoveTimesInfo(times: number, timesLimit) {
-        this.view.moveTimes.text = `攻击次数${times}/${timesLimit}`
+    public setMoveTimesInfo(times: number, timesLimit: number) {
+        this._moveTimes = times;
+        this._moveTimesLimit = timesLimit;
+        this.view.moveTimes.text = `移动次数${times}/${timesLimit}`
+    }
+
+    public reduceMoveTimes() {
+        this.view.moveTimes.text = `移动次数${--this._moveTimes}/${this._moveTimesLimit}`
+    }
+
+    public reduceAtkTimes() {
+        this.view.atkTimes.text = `攻击次数${--this._atkTimes}/${this._atkTimesLimit}`
     }
 }
 
@@ -99,6 +120,7 @@ class SelfInfoBox extends UserInfoBox {
     protected init() {
         super.init();
         this.view = GameSceneView.ins().getView().selfInfoBox;
+        this.isSelf = true;
     }
 
     public isInDeadPool(x: number, y: number) {
@@ -114,5 +136,6 @@ class TargetInfoBox extends UserInfoBox {
     protected init() {
         super.init();
         this.view = GameSceneView.ins().getView().targetInfoBox;
+        this.isSelf = false;
     }
 }

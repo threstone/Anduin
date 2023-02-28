@@ -30,4 +30,17 @@ export abstract class UnitCard extends BuildingCard {
         return 0;
     }
 
+    /**
+     * 移动触发
+     */
+    public onMove() {
+        this.allowMove = false;
+    }
+
+    /**
+     * 攻击触发
+     */
+    public onAttack() {
+        this.allowAtk = false;
+    }
 }

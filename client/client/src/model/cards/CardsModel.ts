@@ -23,6 +23,15 @@ class CardsModel extends BaseModel {
         return 2;
     }
 
+    /**返回卡牌可攻击距离 */
+    public getCardAtkRange(cardInfo: CardInterface) {
+        if (CardsPto.AtkType.CloseRange === cardInfo.atkType) {
+            return 1;
+        } else {
+            return 3;
+        }
+    }
+
     /**用于用户创建卡组没有设置卡组名时的逻辑 */
     public getCardGroupName(powerId: CardsPto.PowerType) {
         const arr = [];

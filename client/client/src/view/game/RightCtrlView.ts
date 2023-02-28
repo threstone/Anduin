@@ -4,9 +4,8 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
     private reqEndTime: number;
     private tipsStart: string
 
-    protected init(view: BaseUI.UIRightCtrlCom) {
+    protected init() {
         this.view = GameSceneView.ins().getView().rightCtrl;
-        this.view.randBtn.describe.text = '丢骰子';
         this.view.endRound.describe.text = '结束回合';
     }
 

@@ -2447,6 +2447,156 @@ declare namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a C_MOVE. */
+    interface IC_MOVE {
+
+        /** C_MOVE cmd */
+        cmd?: (number|null);
+
+        /** C_MOVE scmd */
+        scmd?: (number|null);
+
+        /** C_MOVE sourceX */
+        sourceX?: (number|null);
+
+        /** C_MOVE sourceY */
+        sourceY?: (number|null);
+
+        /** C_MOVE targetX */
+        targetX?: (number|null);
+
+        /** C_MOVE targetY */
+        targetY?: (number|null);
+    }
+
+    /** Represents a C_MOVE. */
+    class C_MOVE implements IC_MOVE {
+
+        /**
+         * Constructs a new C_MOVE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_MOVE);
+
+        /** C_MOVE cmd. */
+        public cmd: number;
+
+        /** C_MOVE scmd. */
+        public scmd: number;
+
+        /** C_MOVE sourceX. */
+        public sourceX: number;
+
+        /** C_MOVE sourceY. */
+        public sourceY: number;
+
+        /** C_MOVE targetX. */
+        public targetX: number;
+
+        /** C_MOVE targetY. */
+        public targetY: number;
+
+        /**
+         * Encodes the specified C_MOVE message. Does not implicitly {@link GamePto.C_MOVE.verify|verify} messages.
+         * @param message C_MOVE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_MOVE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_MOVE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_MOVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_MOVE;
+
+        /**
+         * Gets the default type url for C_MOVE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a C_ATTACK. */
+    interface IC_ATTACK {
+
+        /** C_ATTACK cmd */
+        cmd?: (number|null);
+
+        /** C_ATTACK scmd */
+        scmd?: (number|null);
+
+        /** C_ATTACK sourceX */
+        sourceX?: (number|null);
+
+        /** C_ATTACK sourceY */
+        sourceY?: (number|null);
+
+        /** C_ATTACK targetX */
+        targetX?: (number|null);
+
+        /** C_ATTACK targetY */
+        targetY?: (number|null);
+    }
+
+    /** Represents a C_ATTACK. */
+    class C_ATTACK implements IC_ATTACK {
+
+        /**
+         * Constructs a new C_ATTACK.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_ATTACK);
+
+        /** C_ATTACK cmd. */
+        public cmd: number;
+
+        /** C_ATTACK scmd. */
+        public scmd: number;
+
+        /** C_ATTACK sourceX. */
+        public sourceX: number;
+
+        /** C_ATTACK sourceY. */
+        public sourceY: number;
+
+        /** C_ATTACK targetX. */
+        public targetX: number;
+
+        /** C_ATTACK targetY. */
+        public targetY: number;
+
+        /**
+         * Encodes the specified C_ATTACK message. Does not implicitly {@link GamePto.C_ATTACK.verify|verify} messages.
+         * @param message C_ATTACK message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_ATTACK, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_ATTACK message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_ATTACK
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_ATTACK;
+
+        /**
+         * Gets the default type url for C_ATTACK
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a S_SERVER_ERROR. */
     interface IS_SERVER_ERROR {
 
@@ -3281,6 +3431,180 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_MAP_DATA
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_MOVE. */
+    interface IS_MOVE {
+
+        /** S_MOVE cmd */
+        cmd?: (number|null);
+
+        /** S_MOVE scmd */
+        scmd?: (number|null);
+
+        /** S_MOVE sourceX */
+        sourceX?: (number|null);
+
+        /** S_MOVE sourceY */
+        sourceY?: (number|null);
+
+        /** S_MOVE targetX */
+        targetX?: (number|null);
+
+        /** S_MOVE targetY */
+        targetY?: (number|null);
+
+        /** S_MOVE allowMove */
+        allowMove?: (boolean|null);
+
+        /** S_MOVE uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_MOVE. */
+    class S_MOVE implements IS_MOVE {
+
+        /**
+         * Constructs a new S_MOVE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_MOVE);
+
+        /** S_MOVE cmd. */
+        public cmd: number;
+
+        /** S_MOVE scmd. */
+        public scmd: number;
+
+        /** S_MOVE sourceX. */
+        public sourceX: number;
+
+        /** S_MOVE sourceY. */
+        public sourceY: number;
+
+        /** S_MOVE targetX. */
+        public targetX: number;
+
+        /** S_MOVE targetY. */
+        public targetY: number;
+
+        /** S_MOVE allowMove. */
+        public allowMove: boolean;
+
+        /** S_MOVE uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_MOVE message. Does not implicitly {@link GamePto.S_MOVE.verify|verify} messages.
+         * @param message S_MOVE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_MOVE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_MOVE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_MOVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_MOVE;
+
+        /**
+         * Gets the default type url for S_MOVE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_ATTACK. */
+    interface IS_ATTACK {
+
+        /** S_ATTACK cmd */
+        cmd?: (number|null);
+
+        /** S_ATTACK scmd */
+        scmd?: (number|null);
+
+        /** S_ATTACK sourceX */
+        sourceX?: (number|null);
+
+        /** S_ATTACK sourceY */
+        sourceY?: (number|null);
+
+        /** S_ATTACK targetX */
+        targetX?: (number|null);
+
+        /** S_ATTACK targetY */
+        targetY?: (number|null);
+
+        /** S_ATTACK allowAtk */
+        allowAtk?: (boolean|null);
+
+        /** S_ATTACK uid */
+        uid?: (number|null);
+    }
+
+    /** Represents a S_ATTACK. */
+    class S_ATTACK implements IS_ATTACK {
+
+        /**
+         * Constructs a new S_ATTACK.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ATTACK);
+
+        /** S_ATTACK cmd. */
+        public cmd: number;
+
+        /** S_ATTACK scmd. */
+        public scmd: number;
+
+        /** S_ATTACK sourceX. */
+        public sourceX: number;
+
+        /** S_ATTACK sourceY. */
+        public sourceY: number;
+
+        /** S_ATTACK targetX. */
+        public targetX: number;
+
+        /** S_ATTACK targetY. */
+        public targetY: number;
+
+        /** S_ATTACK allowAtk. */
+        public allowAtk: boolean;
+
+        /** S_ATTACK uid. */
+        public uid: number;
+
+        /**
+         * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
+         * @param message S_ATTACK message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ATTACK, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_ATTACK message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ATTACK
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ATTACK;
+
+        /**
+         * Gets the default type url for S_ATTACK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

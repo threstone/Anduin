@@ -54,6 +54,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this._cards.push(...cards);
         for (let index = 0; index < cards.length; index++) {
             const gameCard = cards[index];
+
             const cardItem = gameCard.cardItem;
             cardItem.setPivot(0, 0, true);
             this.view.addChild(cardItem);
@@ -79,7 +80,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
                 //检查是否允许操作
-                if (GameSceneView.ins().allowToOprate) {
+                if (GameSceneView.ins().allowToOprate && gameCard.cardInfo.fee <= GameModel.ins().fee) {
                     if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
                         GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
                         return;
@@ -100,8 +101,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 }
                 cardItem.x = gameCard.cacheX;
                 cardItem.y = gameCard.cacheY;
-                cardItem.scaleX = 0.5;
                 cardItem.scaleY = 0.5;
+                cardItem.scaleX = 0.5;
             }, this);
         }
 

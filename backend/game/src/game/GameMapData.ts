@@ -8,7 +8,7 @@ export class GameMapData {
     private _height: number;
 
     /**战场足够小，直接用数组实现 */
-    private _mapData: UnitCard | BuildingCard[];
+    private _mapData: (UnitCard | BuildingCard)[];
 
     constructor(width: number, height: number) {
         this._width = width;
@@ -19,6 +19,11 @@ export class GameMapData {
         for (let index = 0; index < len; index++) {
             this._mapData.push(null);
         }
+    }
+
+    public getCard(x: number, y: number) {
+        const position = y * this._width + x;
+        return this._mapData[position];
     }
 
     public setCard(card: UnitCard | BuildingCard) {
@@ -38,9 +43,12 @@ export class GameMapData {
         this._mapData[position] = null;
     }
 
+    /**卡牌移动 */
     public move(targetX: number, targetY: number, card: UnitCard) {
-        const resultSet = new Set<number>();
-        this.getMovablePoint(card)
+        if (!card.allowMove) {
+            return false;
+        }
+        const resultSet = this.getMovablePoint(card)
         if (!resultSet.has(targetY * this._width + targetX)) {
             return false;
         }
@@ -48,6 +56,7 @@ export class GameMapData {
         card.blockX = targetX;
         card.blockY = targetY;
         this.setCard(card);
+        card.onMove();
         return true;
     }
 

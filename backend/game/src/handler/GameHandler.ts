@@ -71,7 +71,6 @@ export class GameHandler extends BaseHandler {
             replay.fee = user.fee;
             replay.feeMax = user.feeMax;
 
-
             switch (card.cardType) {
                 case CardsPto.CardType.Building:
                 case CardsPto.CardType.Unit:
@@ -91,4 +90,25 @@ export class GameHandler extends BaseHandler {
         table.broadcast(replay);
     }
 
+
+    //请求移动
+    static C_MOVE(user: GameUser, table: GameTable, msg: GamePto.C_MOVE) {
+        const card = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
+        if (card && table.mapData.move(msg.targetX, msg.targetY, card)) {
+            const replay = new GamePto.S_MOVE();
+            replay.uid = user.uid;
+            replay.sourceX = msg.sourceX;
+            replay.sourceY = msg.sourceY;
+            replay.targetX = msg.targetX;
+            replay.targetY = msg.targetY;
+            replay.allowMove = card.allowMove;
+            table.broadcast(replay);
+        }
+
+    }
+
+    //请求攻击
+    static C_ATTACK(user: GameUser, table: GameTable, msg: GamePto.C_ATTACK) {
+
+    }
 }

@@ -14,7 +14,7 @@ class GlobalView {
 
 
     static showTips(msg: string, hoverTime: number) {
-        TipsView.ins().showTips(msg, hoverTime)
+        TipsView.ins().showTips(msg, hoverTime);
     }
 
 }

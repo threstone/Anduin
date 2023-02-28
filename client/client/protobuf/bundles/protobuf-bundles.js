@@ -5544,6 +5544,350 @@ $root.GamePto = (function() {
         return C_USE_CARD;
     })();
 
+    GamePto.C_MOVE = (function() {
+
+        /**
+         * Properties of a C_MOVE.
+         * @memberof GamePto
+         * @interface IC_MOVE
+         * @property {number|null} [cmd] C_MOVE cmd
+         * @property {number|null} [scmd] C_MOVE scmd
+         * @property {number|null} [sourceX] C_MOVE sourceX
+         * @property {number|null} [sourceY] C_MOVE sourceY
+         * @property {number|null} [targetX] C_MOVE targetX
+         * @property {number|null} [targetY] C_MOVE targetY
+         */
+
+        /**
+         * Constructs a new C_MOVE.
+         * @memberof GamePto
+         * @classdesc Represents a C_MOVE.
+         * @implements IC_MOVE
+         * @constructor
+         * @param {GamePto.IC_MOVE=} [properties] Properties to set
+         */
+        function C_MOVE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_MOVE cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.cmd = 200;
+
+        /**
+         * C_MOVE scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.scmd = 5;
+
+        /**
+         * C_MOVE sourceX.
+         * @member {number} sourceX
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.sourceX = 0;
+
+        /**
+         * C_MOVE sourceY.
+         * @member {number} sourceY
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.sourceY = 0;
+
+        /**
+         * C_MOVE targetX.
+         * @member {number} targetX
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.targetX = 0;
+
+        /**
+         * C_MOVE targetY.
+         * @member {number} targetY
+         * @memberof GamePto.C_MOVE
+         * @instance
+         */
+        C_MOVE.prototype.targetY = 0;
+
+        /**
+         * Encodes the specified C_MOVE message. Does not implicitly {@link GamePto.C_MOVE.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_MOVE
+         * @static
+         * @param {GamePto.IC_MOVE} message C_MOVE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_MOVE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.sourceX != null && Object.hasOwnProperty.call(message, "sourceX"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceX);
+            if (message.sourceY != null && Object.hasOwnProperty.call(message, "sourceY"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceY);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetY);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_MOVE message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_MOVE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_MOVE} C_MOVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_MOVE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_MOVE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.sourceX = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.sourceY = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.targetX = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.targetY = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_MOVE
+         * @function getTypeUrl
+         * @memberof GamePto.C_MOVE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_MOVE";
+        };
+
+        return C_MOVE;
+    })();
+
+    GamePto.C_ATTACK = (function() {
+
+        /**
+         * Properties of a C_ATTACK.
+         * @memberof GamePto
+         * @interface IC_ATTACK
+         * @property {number|null} [cmd] C_ATTACK cmd
+         * @property {number|null} [scmd] C_ATTACK scmd
+         * @property {number|null} [sourceX] C_ATTACK sourceX
+         * @property {number|null} [sourceY] C_ATTACK sourceY
+         * @property {number|null} [targetX] C_ATTACK targetX
+         * @property {number|null} [targetY] C_ATTACK targetY
+         */
+
+        /**
+         * Constructs a new C_ATTACK.
+         * @memberof GamePto
+         * @classdesc Represents a C_ATTACK.
+         * @implements IC_ATTACK
+         * @constructor
+         * @param {GamePto.IC_ATTACK=} [properties] Properties to set
+         */
+        function C_ATTACK(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_ATTACK cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.cmd = 200;
+
+        /**
+         * C_ATTACK scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.scmd = 6;
+
+        /**
+         * C_ATTACK sourceX.
+         * @member {number} sourceX
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.sourceX = 0;
+
+        /**
+         * C_ATTACK sourceY.
+         * @member {number} sourceY
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.sourceY = 0;
+
+        /**
+         * C_ATTACK targetX.
+         * @member {number} targetX
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.targetX = 0;
+
+        /**
+         * C_ATTACK targetY.
+         * @member {number} targetY
+         * @memberof GamePto.C_ATTACK
+         * @instance
+         */
+        C_ATTACK.prototype.targetY = 0;
+
+        /**
+         * Encodes the specified C_ATTACK message. Does not implicitly {@link GamePto.C_ATTACK.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_ATTACK
+         * @static
+         * @param {GamePto.IC_ATTACK} message C_ATTACK message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_ATTACK.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.sourceX != null && Object.hasOwnProperty.call(message, "sourceX"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceX);
+            if (message.sourceY != null && Object.hasOwnProperty.call(message, "sourceY"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceY);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetY);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_ATTACK message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_ATTACK
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_ATTACK} C_ATTACK
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_ATTACK.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_ATTACK();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.sourceX = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.sourceY = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.targetX = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.targetY = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_ATTACK
+         * @function getTypeUrl
+         * @memberof GamePto.C_ATTACK
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_ATTACK";
+        };
+
+        return C_ATTACK;
+    })();
+
     GamePto.S_SERVER_ERROR = (function() {
 
         /**
@@ -7496,6 +7840,410 @@ $root.GamePto = (function() {
         };
 
         return S_MAP_DATA;
+    })();
+
+    GamePto.S_MOVE = (function() {
+
+        /**
+         * Properties of a S_MOVE.
+         * @memberof GamePto
+         * @interface IS_MOVE
+         * @property {number|null} [cmd] S_MOVE cmd
+         * @property {number|null} [scmd] S_MOVE scmd
+         * @property {number|null} [sourceX] S_MOVE sourceX
+         * @property {number|null} [sourceY] S_MOVE sourceY
+         * @property {number|null} [targetX] S_MOVE targetX
+         * @property {number|null} [targetY] S_MOVE targetY
+         * @property {boolean|null} [allowMove] S_MOVE allowMove
+         * @property {number|null} [uid] S_MOVE uid
+         */
+
+        /**
+         * Constructs a new S_MOVE.
+         * @memberof GamePto
+         * @classdesc Represents a S_MOVE.
+         * @implements IS_MOVE
+         * @constructor
+         * @param {GamePto.IS_MOVE=} [properties] Properties to set
+         */
+        function S_MOVE(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_MOVE cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.cmd = 200;
+
+        /**
+         * S_MOVE scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.scmd = 10012;
+
+        /**
+         * S_MOVE sourceX.
+         * @member {number} sourceX
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.sourceX = 0;
+
+        /**
+         * S_MOVE sourceY.
+         * @member {number} sourceY
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.sourceY = 0;
+
+        /**
+         * S_MOVE targetX.
+         * @member {number} targetX
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.targetX = 0;
+
+        /**
+         * S_MOVE targetY.
+         * @member {number} targetY
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.targetY = 0;
+
+        /**
+         * S_MOVE allowMove.
+         * @member {boolean} allowMove
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.allowMove = false;
+
+        /**
+         * S_MOVE uid.
+         * @member {number} uid
+         * @memberof GamePto.S_MOVE
+         * @instance
+         */
+        S_MOVE.prototype.uid = 0;
+
+        /**
+         * Encodes the specified S_MOVE message. Does not implicitly {@link GamePto.S_MOVE.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_MOVE
+         * @static
+         * @param {GamePto.IS_MOVE} message S_MOVE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_MOVE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.sourceX != null && Object.hasOwnProperty.call(message, "sourceX"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceX);
+            if (message.sourceY != null && Object.hasOwnProperty.call(message, "sourceY"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceY);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetY);
+            if (message.allowMove != null && Object.hasOwnProperty.call(message, "allowMove"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowMove);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_MOVE message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_MOVE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_MOVE} S_MOVE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_MOVE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_MOVE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.sourceX = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.sourceY = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.targetX = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.targetY = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.allowMove = reader.bool();
+                        break;
+                    }
+                case 8: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_MOVE
+         * @function getTypeUrl
+         * @memberof GamePto.S_MOVE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_MOVE";
+        };
+
+        return S_MOVE;
+    })();
+
+    GamePto.S_ATTACK = (function() {
+
+        /**
+         * Properties of a S_ATTACK.
+         * @memberof GamePto
+         * @interface IS_ATTACK
+         * @property {number|null} [cmd] S_ATTACK cmd
+         * @property {number|null} [scmd] S_ATTACK scmd
+         * @property {number|null} [sourceX] S_ATTACK sourceX
+         * @property {number|null} [sourceY] S_ATTACK sourceY
+         * @property {number|null} [targetX] S_ATTACK targetX
+         * @property {number|null} [targetY] S_ATTACK targetY
+         * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
+         * @property {number|null} [uid] S_ATTACK uid
+         */
+
+        /**
+         * Constructs a new S_ATTACK.
+         * @memberof GamePto
+         * @classdesc Represents a S_ATTACK.
+         * @implements IS_ATTACK
+         * @constructor
+         * @param {GamePto.IS_ATTACK=} [properties] Properties to set
+         */
+        function S_ATTACK(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_ATTACK cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.cmd = 200;
+
+        /**
+         * S_ATTACK scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.scmd = 10013;
+
+        /**
+         * S_ATTACK sourceX.
+         * @member {number} sourceX
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.sourceX = 0;
+
+        /**
+         * S_ATTACK sourceY.
+         * @member {number} sourceY
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.sourceY = 0;
+
+        /**
+         * S_ATTACK targetX.
+         * @member {number} targetX
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.targetX = 0;
+
+        /**
+         * S_ATTACK targetY.
+         * @member {number} targetY
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.targetY = 0;
+
+        /**
+         * S_ATTACK allowAtk.
+         * @member {boolean} allowAtk
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.allowAtk = false;
+
+        /**
+         * S_ATTACK uid.
+         * @member {number} uid
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.uid = 0;
+
+        /**
+         * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_ATTACK
+         * @static
+         * @param {GamePto.IS_ATTACK} message S_ATTACK message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_ATTACK.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.sourceX != null && Object.hasOwnProperty.call(message, "sourceX"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceX);
+            if (message.sourceY != null && Object.hasOwnProperty.call(message, "sourceY"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceY);
+            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetX);
+            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetY);
+            if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowAtk);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.uid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_ATTACK message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_ATTACK
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_ATTACK} S_ATTACK
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_ATTACK.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_ATTACK();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.sourceX = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.sourceY = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.targetX = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.targetY = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.allowAtk = reader.bool();
+                        break;
+                    }
+                case 8: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ATTACK
+         * @function getTypeUrl
+         * @memberof GamePto.S_ATTACK
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ATTACK";
+        };
+
+        return S_ATTACK;
     })();
 
     return GamePto;
