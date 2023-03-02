@@ -60,37 +60,33 @@ export class GameHandler extends BaseHandler {
         replay.isSuccess = false;
         replay.cardIndex = msg.cardIndex;
         replay.uid = user.uid;
-        const card = user.handCards[msg.cardIndex] as UnitCard;
-        if (card && card.fee <= user.fee) {
-            replay.isSuccess = true;
+        const card = user.handCards[msg.cardIndex];
 
-            replay.card = card;
-            user.handCards.splice(msg.cardIndex, 1)
-            //减费用
-            user.fee -= card.fee;
-            replay.fee = user.fee;
-            replay.feeMax = user.feeMax;
-
-            switch (card.cardType) {
-                case CardsPto.CardType.Building:
-                case CardsPto.CardType.Unit:
-                    //单位卡置入战场
-                    card.blockX = msg.blockX;
-                    card.blockY = msg.blockY;
-                    table.mapData.setCard(card);
-                    user.unitPool.push(card);
-                    break;
-                case CardsPto.CardType.Magic:
-                    break;
-                case CardsPto.CardType.Event:
-                    user.eventPool.push(card);
-                    break;
-            }
-            card.onUse();
+        //检查是否可以使用
+        if (!card || card.useCardCheck(...msg.dataArr)) {
+            user.sendMsg(replay);
+            return;
         }
-        table.broadcast(replay);
-    }
 
+        //扣费用
+        user.fee -= card.fee;
+
+        //执行战场使用卡牌前事件决定是否有后续  有些卡会反制使用卡牌
+        if (!table.mapData.onPreUseCard(card)) {
+            return;
+        }
+
+        //到这里说明卡牌可以执行了,执行卡牌onUse事件 扣费用、设置到战场等等
+        card.onUse(...msg.dataArr);
+        replay.isSuccess = true;
+        replay.card = card;
+        replay.fee = user.fee;
+        replay.feeMax = user.feeMax;
+        table.broadcast(replay);
+
+        //执行战场使用卡牌后事件
+        table.mapData.onUseCardAfter(card);
+    }
 
     //请求移动
     static C_MOVE(user: GameUser, table: GameTable, msg: GamePto.C_MOVE) {
@@ -104,7 +100,7 @@ export class GameHandler extends BaseHandler {
             card.allowMove = false;
 
             //执行战场移动前事件决定是否有后续
-            if (!table.mapData.onProMove(card)) {
+            if (!table.mapData.onPreMove(card)) {
                 return;
             }
 
@@ -120,12 +116,12 @@ export class GameHandler extends BaseHandler {
             replay.targetX = msg.targetX;
             replay.targetY = msg.targetY;
             replay.allowMove = card.allowMove;
-            table.broadcast(replay)
+            table.broadcast(replay);
 
             //执行卡牌移动后事件,如光环随从增加地图格子光环
             card.onMoveAfter();
             //执行战场移动后事件 如移动后受伤陷阱
-            table.mapData.onProMove(card)
+            table.mapData.onPreMove(card)
         }
     }
 

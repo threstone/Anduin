@@ -1,7 +1,7 @@
 import { CardsPto } from "../../../common/CommonProto";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { GameMapData } from "./map/GameMapData";
+import { GameMap } from "./map/GameMap";
 
 export class AttackUtils {
 
@@ -17,7 +17,7 @@ export class AttackUtils {
     }
 
     /**获取真正被攻击的单位,因为远程有可能能被路径上的敌人挡住 */
-    public static getBeAttackCard(sourceCard: UnitCard, targetCard: BuildingCard, mapData: GameMapData) {
+    public static getBeAttackCard(sourceCard: UnitCard, targetCard: BuildingCard, mapData: GameMap) {
         if (sourceCard.atkType === CardsPto.AtkType.CloseRange) {
             return targetCard;
         } else {

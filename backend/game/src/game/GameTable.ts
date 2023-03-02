@@ -9,7 +9,7 @@ import { NodeRound } from './node/NodeRound';
 import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
-import { GameMapData } from './map/GameMapData';
+import { GameMap } from './map/GameMap';
 import { DiceValueDefine, NodeDefine } from './GameDefine';
 import { UnitCard } from '../card/UnitCard';
 import { BuildingCard } from '../card/BuildingCard';
@@ -21,7 +21,7 @@ export class GameTable extends BaseTable {
     roundUserIndex: number;
 
     /**地图数据 */
-    private _mapData: GameMapData;
+    private _mapData: GameMap;
 
     get mapData() { return this._mapData; }
 
@@ -36,7 +36,7 @@ export class GameTable extends BaseTable {
     constructor(tableId: number, talbeIndex: number) {
         super(tableId, talbeIndex);
 
-        this._mapData = new GameMapData(7, 8, this);
+        this._mapData = new GameMap(7, 8, this);
         this.isGameOver = false;
 
         this._incrId = 0;
@@ -77,6 +77,13 @@ export class GameTable extends BaseTable {
         }
 
         return true;
+    }
+
+    public getUser(uid: number) {
+        if (this._users[0].uid === uid) {
+            return this._users[0];
+        }
+        return this._users[1];
     }
 
     public getOtherUser(uid: number) {

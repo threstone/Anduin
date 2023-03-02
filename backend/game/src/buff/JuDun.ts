@@ -1,7 +1,8 @@
-import { GamePto } from "../../../../common/CommonProto";
-import { BuildingCard } from "../../card/BuildingCard";
-import { UnitCard } from "../../card/UnitCard";
-import { GameTable } from "../GameTable";
+import { GamePto } from "../../../common/CommonProto";
+import { BuildingCard } from "../card/BuildingCard";
+import { UnitCard } from "../card/UnitCard";
+import { BuffTypeDefine } from "../game/GameDefine";
+import { GameTable } from "../game/GameTable";
 import { BuffData } from "./BuffData";
 
 /**
@@ -13,6 +14,9 @@ export class JuDun {
     public static buffId: number = 1;
 
     public static addToCard(card: UnitCard, buff: BuffData) {
+        if (buff.buffType === BuffTypeDefine.NormalBuff) {
+
+        }
         card.onPreMoveFuns.push({ id: buff.id, fun: this.onPreMove });
         card.onMoveAfterFuns.push({ id: buff.id, fun: this.onMoveAfter });
     }

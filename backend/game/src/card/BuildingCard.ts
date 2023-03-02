@@ -1,11 +1,11 @@
 import { GamePto } from "../../../common/CommonProto";
-import { BuffData } from "../game/buff/BuffData";
+import { BuffData } from "../buff/BuffData";
 import { GlobalVar } from "../GlobalVar";
 import { EventCard } from "./EventCard";
 
 
 
-export abstract class BuildingCard extends EventCard {
+export class BuildingCard extends EventCard {
     blockX: number;
     blockY: number;
 
@@ -42,6 +42,25 @@ export abstract class BuildingCard extends EventCard {
             this._buffMap.delete(id);
             GlobalVar.buffMgr.removeBuff(this, buff);
         }
+    }
+
+    public onUse(blockX: number, blockY: number) {
+        super.onUse();
+        this.blockX = blockX;
+        this.blockY = blockY;
+        this.table.mapData.setCard(this);
+        const user = this.table.getUser(this.uid);
+        user.unitPool.push(this);
+    }
+
+    public useCardCheck(blockX: number, blockY: number) {
+        if (super.useCardCheck()) {
+            //建筑卡
+            if (blockX != undefined && blockY != undefined && this.table.mapData.getCard(blockX, blockY) == null) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // /**被攻击前触发 */

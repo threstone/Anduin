@@ -40,6 +40,14 @@ class GameModel extends BaseModel {
         this.sendMsg(msg);
     }
 
+    //TODO
+    // useUnitCard(cardIndex: number, ...param: number[]) {
+    //     const msg = new GamePto.C_USE_CARD();
+    //     msg.cardIndex = cardIndex;
+    //     msg.dataArr = param;
+    //     this.sendMsg(msg);
+    // }
+
     //服务端异常 关闭场景
     S_SERVER_ERROR(msg: GamePto.S_SERVER_ERROR) {
         SystemModel.ins().showTips(msg.message, 10000);

@@ -59,8 +59,11 @@ message C_USE_CARD{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 4];
 	int32 cardIndex = 3;
-	int32 blockX = 4;
-	int32 blockY = 5;
+	//用于保存使用卡牌的一些数据
+	//当卡牌为建筑、单位卡时，头两个数据为放置位置数据，接着的数据为战吼目标位置等
+	//当卡牌是法术卡牌时,则接下来的数据可能为目标
+	//对于一些法术卡或者事件卡,data的数据可能是空的
+	repeated int32 dataArr = 4;
 }
 
 //请求移动

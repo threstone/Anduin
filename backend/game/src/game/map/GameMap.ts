@@ -1,12 +1,13 @@
 
-import { BuffData } from "../buff/BuffData";
+import { BuffData } from "../../buff/BuffData";
+import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
 import { EventCard } from "../../card/EventCard";
 import { UnitCard } from "../../card/UnitCard";
 import { GameTable } from "../GameTable";
 import { MapBlock } from "./MapBlock";
 
-export class GameMapData {
+export class GameMap {
     private _width: number;
     private _height: number;
     private _table: GameTable;
@@ -19,7 +20,6 @@ export class GameMapData {
 
     /**全局buff */
     public globalBuff: BuffData[];
-
 
     constructor(width: number, height: number, table: GameTable) {
         this._width = width;
@@ -41,7 +41,7 @@ export class GameMapData {
     }
 
     /**战场的移动前事件 */
-    public onProMove(moveCard: UnitCard) {
+    public onPreMove(moveCard: UnitCard) {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
             if (!card.onPreMove(moveCard)) {
@@ -60,6 +60,26 @@ export class GameMapData {
         return true;
     }
 
+    /**战场的使用卡牌前事件 */
+    public onPreUseCard(useCard: BaseCard) {
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            if (!card.onPreUseCard(useCard)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**战场的使用卡牌后事件 */
+    public onUseCardAfter(useCard: BaseCard) {
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            card.onUseCardAfter(useCard);
+        }
+        return true;
+    }
+
     public getCard(x: number, y: number) {
         return this._mapData[x][y].card;
     }
@@ -72,6 +92,19 @@ export class GameMapData {
         }
         mapBlock.setCard(card);
         this._mapCards.push(card);
+    }
+
+    /** 往战场上添加事件卡*/
+    public addEvent(card: EventCard) {
+        this._mapCards.push(card);
+    }
+
+    /** 删除战场上的事件卡*/
+    public deleteEvent(card: EventCard) {
+        const index = this._mapCards.indexOf(card);
+        if (index !== -1) {
+            this._mapCards.splice(index, 1);
+        }
     }
 
     public delete(x: number, y: number) {

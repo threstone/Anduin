@@ -4,6 +4,7 @@ import { UnitCard } from "../UnitCard";
 export class Card4 extends UnitCard {
     public onUse() {
         //给自身和周围加举盾buff
+        //给自己家的buff是normalBuff
         // this._buffMap
     }
 

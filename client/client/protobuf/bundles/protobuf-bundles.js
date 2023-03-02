@@ -5402,8 +5402,7 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] C_USE_CARD cmd
          * @property {number|null} [scmd] C_USE_CARD scmd
          * @property {number|null} [cardIndex] C_USE_CARD cardIndex
-         * @property {number|null} [blockX] C_USE_CARD blockX
-         * @property {number|null} [blockY] C_USE_CARD blockY
+         * @property {Array.<number>|null} [dataArr] C_USE_CARD dataArr
          */
 
         /**
@@ -5415,6 +5414,7 @@ $root.GamePto = (function() {
          * @param {GamePto.IC_USE_CARD=} [properties] Properties to set
          */
         function C_USE_CARD(properties) {
+            this.dataArr = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -5446,20 +5446,12 @@ $root.GamePto = (function() {
         C_USE_CARD.prototype.cardIndex = 0;
 
         /**
-         * C_USE_CARD blockX.
-         * @member {number} blockX
+         * C_USE_CARD dataArr.
+         * @member {Array.<number>} dataArr
          * @memberof GamePto.C_USE_CARD
          * @instance
          */
-        C_USE_CARD.prototype.blockX = 0;
-
-        /**
-         * C_USE_CARD blockY.
-         * @member {number} blockY
-         * @memberof GamePto.C_USE_CARD
-         * @instance
-         */
-        C_USE_CARD.prototype.blockY = 0;
+        C_USE_CARD.prototype.dataArr = $util.emptyArray;
 
         /**
          * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.
@@ -5479,10 +5471,12 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardIndex);
-            if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.blockX);
-            if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.blockY);
+            if (message.dataArr != null && message.dataArr.length) {
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                for (var i = 0; i < message.dataArr.length; ++i)
+                    writer.int32(message.dataArr[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -5517,11 +5511,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        message.blockX = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.blockY = reader.int32();
+                        if (!(message.dataArr && message.dataArr.length))
+                            message.dataArr = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.dataArr.push(reader.int32());
+                        } else
+                            message.dataArr.push(reader.int32());
                         break;
                     }
                 default:

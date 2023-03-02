@@ -1,4 +1,4 @@
-import { BuffData } from "../buff/BuffData";
+import { BuffData } from "../../buff/BuffData";
 import { BuildingCard } from "../../card/BuildingCard";
 import { UnitCard } from "../../card/UnitCard";
 

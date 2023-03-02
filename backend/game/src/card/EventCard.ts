@@ -1,10 +1,11 @@
 import { EventFunction } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { BaseCard } from "./BaseCard";
+import { BuildingCard } from "./BuildingCard";
 import { UnitCard } from "./UnitCard";
 
 /**event card用health来决定持续回合数 */
-export abstract class EventCard extends BaseCard {
+export  class EventCard extends BaseCard {
 
     /**由外部注册的回合开始函数 */
     onRundStartFuns: EventFunction[] = [];
@@ -56,15 +57,14 @@ export abstract class EventCard extends BaseCard {
         return this.callFunArr(this.onMoveAfterFuns, moveCard);
     }
 
-
     /**战场卡牌攻击前 */
-    public onPreAtk(unitCard: UnitCard): boolean {
-        return this.callFunArr(this.onPreAtkFuns, unitCard);
+    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard): boolean {
+        return this.callFunArr(this.onPreAtkFuns, sourceCard, targetCard);
     }
 
     /**战场卡牌攻击后 */
-    public onAtkAfter(unitCard: UnitCard) {
-        return this.callFunArr(this.onAtkAfterFuns, unitCard);
+    public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard) {
+        return this.callFunArr(this.onAtkAfterFuns, sourceCard, targetCard);
     }
 
     /**执行将指定的函数数组,当函数返回false的时候终止执行后续流程 */
@@ -78,5 +78,12 @@ export abstract class EventCard extends BaseCard {
             }
         }
         return true;
+    }
+
+    public onUse(...params: number[]) {
+        super.onUse();
+        this.table.mapData.addEvent(this);
+        const user = this.table.getUser(this.uid);
+        user.eventPool.push(this);
     }
 }

@@ -2393,11 +2393,8 @@ declare namespace GamePto {
         /** C_USE_CARD cardIndex */
         cardIndex?: (number|null);
 
-        /** C_USE_CARD blockX */
-        blockX?: (number|null);
-
-        /** C_USE_CARD blockY */
-        blockY?: (number|null);
+        /** C_USE_CARD dataArr */
+        dataArr?: (number[]|null);
     }
 
     /** Represents a C_USE_CARD. */
@@ -2418,11 +2415,8 @@ declare namespace GamePto {
         /** C_USE_CARD cardIndex. */
         public cardIndex: number;
 
-        /** C_USE_CARD blockX. */
-        public blockX: number;
-
-        /** C_USE_CARD blockY. */
-        public blockY: number;
+        /** C_USE_CARD dataArr. */
+        public dataArr: number[];
 
         /**
          * Encodes the specified C_USE_CARD message. Does not implicitly {@link GamePto.C_USE_CARD.verify|verify} messages.

@@ -3985,6 +3985,7 @@ $root.GamePto = (function() {
     GamePto.C_USE_CARD = (function() {
 
         function C_USE_CARD(p) {
+            this.dataArr = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -3994,8 +3995,7 @@ $root.GamePto = (function() {
         C_USE_CARD.prototype.cmd = 200;
         C_USE_CARD.prototype.scmd = 4;
         C_USE_CARD.prototype.cardIndex = 0;
-        C_USE_CARD.prototype.blockX = 0;
-        C_USE_CARD.prototype.blockY = 0;
+        C_USE_CARD.prototype.dataArr = $util.emptyArray;
 
         C_USE_CARD.create = function create(properties) {
             return new C_USE_CARD(properties);
@@ -4010,10 +4010,12 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.scmd);
             if (m.cardIndex != null && Object.hasOwnProperty.call(m, "cardIndex"))
                 w.uint32(24).int32(m.cardIndex);
-            if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
-                w.uint32(32).int32(m.blockX);
-            if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
-                w.uint32(40).int32(m.blockY);
+            if (m.dataArr != null && m.dataArr.length) {
+                w.uint32(34).fork();
+                for (var i = 0; i < m.dataArr.length; ++i)
+                    w.int32(m.dataArr[i]);
+                w.ldelim();
+            }
             return w;
         };
 
@@ -4037,11 +4039,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 4: {
-                        m.blockX = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.blockY = r.int32();
+                        if (!(m.dataArr && m.dataArr.length))
+                            m.dataArr = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dataArr.push(r.int32());
+                        } else
+                            m.dataArr.push(r.int32());
                         break;
                     }
                 default:
@@ -4065,11 +4070,13 @@ $root.GamePto = (function() {
             if (d.cardIndex != null) {
                 m.cardIndex = d.cardIndex | 0;
             }
-            if (d.blockX != null) {
-                m.blockX = d.blockX | 0;
-            }
-            if (d.blockY != null) {
-                m.blockY = d.blockY | 0;
+            if (d.dataArr) {
+                if (!Array.isArray(d.dataArr))
+                    throw TypeError(".GamePto.C_USE_CARD.dataArr: array expected");
+                m.dataArr = [];
+                for (var i = 0; i < d.dataArr.length; ++i) {
+                    m.dataArr[i] = d.dataArr[i] | 0;
+                }
             }
             return m;
         };
@@ -4078,12 +4085,13 @@ $root.GamePto = (function() {
             if (!o)
                 o = {};
             var d = {};
+            if (o.arrays || o.defaults) {
+                d.dataArr = [];
+            }
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 4;
                 d.cardIndex = 0;
-                d.blockX = 0;
-                d.blockY = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -4094,11 +4102,11 @@ $root.GamePto = (function() {
             if (m.cardIndex != null && m.hasOwnProperty("cardIndex")) {
                 d.cardIndex = m.cardIndex;
             }
-            if (m.blockX != null && m.hasOwnProperty("blockX")) {
-                d.blockX = m.blockX;
-            }
-            if (m.blockY != null && m.hasOwnProperty("blockY")) {
-                d.blockY = m.blockY;
+            if (m.dataArr && m.dataArr.length) {
+                d.dataArr = [];
+                for (var j = 0; j < m.dataArr.length; ++j) {
+                    d.dataArr[j] = m.dataArr[j];
+                }
             }
             return d;
         };

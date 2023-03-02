@@ -3,7 +3,7 @@ import { CardInterface } from "../../../common/I";
 import { GameTable } from "../game/GameTable";
 import { GlobalVar } from "../GlobalVar";
 
-export abstract class BaseCard implements CardInterface {
+export class BaseCard implements CardInterface {
 
     uid: number;
     /**游戏中给卡牌设置的唯一id */
@@ -34,5 +34,16 @@ export abstract class BaseCard implements CardInterface {
         this.healthUpperLimit = this.health;
     }
 
-    public abstract onUse();
+    /**使用卡牌 */
+    public onUse(...params: number[]) {
+        const user = this.table.getUser(this.uid);
+        user.fee -= this.fee;
+        const cardIndex = user.handCards.indexOf(this);
+        user.handCards.splice(cardIndex, 1);
+    }
+
+    /**检查卡牌是否可以使用 */
+    public useCardCheck(...params: number[]): boolean {
+        return this.fee < this.table.getUser(this.uid).fee
+    }
 }

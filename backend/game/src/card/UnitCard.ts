@@ -1,8 +1,7 @@
 import { EventFunction } from "../game/GameDefine";
-import { GameTable } from "../game/GameTable";
 import { BuildingCard } from "./BuildingCard";
 
-export abstract class UnitCard extends BuildingCard {
+export class UnitCard extends BuildingCard {
 
     allowAtk: boolean = false;
     allowMove: boolean = false;

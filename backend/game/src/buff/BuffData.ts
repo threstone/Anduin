@@ -1,4 +1,4 @@
-import { BuffTypeDefine } from "../GameDefine";
+import { BuffTypeDefine } from "../game/GameDefine";
 
 export class BuffData {
     id: number;
