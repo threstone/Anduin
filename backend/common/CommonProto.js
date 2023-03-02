@@ -3187,9 +3187,12 @@ $root.GamePto = (function() {
 
     var GamePto = {};
 
-    GamePto.BuffEnum = (function() {
+    GamePto.DiceValueEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Freeze"] = 0;
+        values[valuesById[0] = "Sword"] = 0;
+        values[valuesById[1] = "Bow"] = 1;
+        values[valuesById[2] = "Magic"] = 2;
+        values[valuesById[3] = "Miss"] = 3;
         return values;
     })();
 
@@ -3453,17 +3456,7 @@ $root.GamePto = (function() {
                     throw TypeError(".GamePto.Card.buffArr: array expected");
                 m.buffArr = [];
                 for (var i = 0; i < d.buffArr.length; ++i) {
-                    switch (d.buffArr[i]) {
-                    default:
-                        if (typeof d.buffArr[i] === "number") {
-                            m.buffArr[i] = d.buffArr[i];
-                            break;
-                        }
-                    case "Freeze":
-                    case 0:
-                        m.buffArr[i] = 0;
-                        break;
-                    }
+                    m.buffArr[i] = d.buffArr[i] | 0;
                 }
             }
             return m;
@@ -3517,7 +3510,7 @@ $root.GamePto = (function() {
             if (m.buffArr && m.buffArr.length) {
                 d.buffArr = [];
                 for (var j = 0; j < m.buffArr.length; ++j) {
-                    d.buffArr[j] = o.enums === String ? $root.GamePto.BuffEnum[m.buffArr[j]] === undefined ? m.buffArr[j] : $root.GamePto.BuffEnum[m.buffArr[j]] : m.buffArr[j];
+                    d.buffArr[j] = m.buffArr[j];
                 }
             }
             return d;
@@ -6392,6 +6385,7 @@ $root.GamePto = (function() {
     GamePto.S_ATTACK = (function() {
 
         function S_ATTACK(p) {
+            this.dices = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -6404,8 +6398,11 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.sourceY = 0;
         S_ATTACK.prototype.targetX = 0;
         S_ATTACK.prototype.targetY = 0;
+        S_ATTACK.prototype.damage = 0;
+        S_ATTACK.prototype.targetHealth = 0;
         S_ATTACK.prototype.allowAtk = false;
         S_ATTACK.prototype.uid = 0;
+        S_ATTACK.prototype.dices = $util.emptyArray;
 
         S_ATTACK.create = function create(properties) {
             return new S_ATTACK(properties);
@@ -6426,10 +6423,20 @@ $root.GamePto = (function() {
                 w.uint32(40).int32(m.targetX);
             if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
                 w.uint32(48).int32(m.targetY);
+            if (m.damage != null && Object.hasOwnProperty.call(m, "damage"))
+                w.uint32(56).int32(m.damage);
+            if (m.targetHealth != null && Object.hasOwnProperty.call(m, "targetHealth"))
+                w.uint32(64).int32(m.targetHealth);
             if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
-                w.uint32(56).bool(m.allowAtk);
+                w.uint32(72).bool(m.allowAtk);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(64).int32(m.uid);
+                w.uint32(80).int32(m.uid);
+            if (m.dices != null && m.dices.length) {
+                w.uint32(90).fork();
+                for (var i = 0; i < m.dices.length; ++i)
+                    w.int32(m.dices[i]);
+                w.ldelim();
+            }
             return w;
         };
 
@@ -6465,11 +6472,30 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 7: {
-                        m.allowAtk = r.bool();
+                        m.damage = r.int32();
                         break;
                     }
                 case 8: {
+                        m.targetHealth = r.int32();
+                        break;
+                    }
+                case 9: {
+                        m.allowAtk = r.bool();
+                        break;
+                    }
+                case 10: {
                         m.uid = r.int32();
+                        break;
+                    }
+                case 11: {
+                        if (!(m.dices && m.dices.length))
+                            m.dices = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dices.push(r.int32());
+                        } else
+                            m.dices.push(r.int32());
                         break;
                     }
                 default:
@@ -6502,11 +6528,25 @@ $root.GamePto = (function() {
             if (d.targetY != null) {
                 m.targetY = d.targetY | 0;
             }
+            if (d.damage != null) {
+                m.damage = d.damage | 0;
+            }
+            if (d.targetHealth != null) {
+                m.targetHealth = d.targetHealth | 0;
+            }
             if (d.allowAtk != null) {
                 m.allowAtk = Boolean(d.allowAtk);
             }
             if (d.uid != null) {
                 m.uid = d.uid | 0;
+            }
+            if (d.dices) {
+                if (!Array.isArray(d.dices))
+                    throw TypeError(".GamePto.S_ATTACK.dices: array expected");
+                m.dices = [];
+                for (var i = 0; i < d.dices.length; ++i) {
+                    m.dices[i] = d.dices[i] | 0;
+                }
             }
             return m;
         };
@@ -6515,6 +6555,9 @@ $root.GamePto = (function() {
             if (!o)
                 o = {};
             var d = {};
+            if (o.arrays || o.defaults) {
+                d.dices = [];
+            }
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 10013;
@@ -6522,6 +6565,8 @@ $root.GamePto = (function() {
                 d.sourceY = 0;
                 d.targetX = 0;
                 d.targetY = 0;
+                d.damage = 0;
+                d.targetHealth = 0;
                 d.allowAtk = false;
                 d.uid = 0;
             }
@@ -6543,11 +6588,23 @@ $root.GamePto = (function() {
             if (m.targetY != null && m.hasOwnProperty("targetY")) {
                 d.targetY = m.targetY;
             }
+            if (m.damage != null && m.hasOwnProperty("damage")) {
+                d.damage = m.damage;
+            }
+            if (m.targetHealth != null && m.hasOwnProperty("targetHealth")) {
+                d.targetHealth = m.targetHealth;
+            }
             if (m.allowAtk != null && m.hasOwnProperty("allowAtk")) {
                 d.allowAtk = m.allowAtk;
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
+            }
+            if (m.dices && m.dices.length) {
+                d.dices = [];
+                for (var j = 0; j < m.dices.length; ++j) {
+                    d.dices[j] = m.dices[j];
+                }
             }
             return d;
         };

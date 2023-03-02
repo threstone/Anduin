@@ -1,7 +1,7 @@
-import { FriendlyMatchPto } from '../../../../common/CommonProto';
-import { IGameMessage } from '../../../../common/I';
-import { GameMatchInfo } from '../GameMatchInfo';
-import { GlobalVar } from '../../GlobalVar';
+import { FriendlyMatchPto } from '../../../common/CommonProto';
+import { IGameMessage } from '../../../common/I';
+import { GameMatchInfo } from '../game/GameMatchInfo';
+import { GlobalVar } from '../GlobalVar';
 
 export class FriendlyMatchInfo extends GameMatchInfo {
 

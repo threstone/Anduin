@@ -36,18 +36,18 @@ export class NodeRoundEnd extends BaseNode {
         for (let index = 0; index < user.eventPool.length; index++) {
             const card = user.eventPool[index];
             //计算所有回合结束事件所需要的时间
-            sum += card.onRoundEnd();
+            card.onRoundEnd();
         }
 
         //执行场上所有单位卡牌的回合结束事件
         for (let index = 0; index < user.unitPool.length; index++) {
             const card = user.unitPool[index];
             //计算所有回合结束事件所需要的时间
-            sum += card.onRoundEnd();
+            card.onRoundEnd();
         }
 
         //发牌
-        sum += user.drawCardsFromPool(2);
+        user.drawCardsFromPool(2);
 
         //玩家有可能在这个阶段死亡
         if (table.checkGameOver()) {

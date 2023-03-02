@@ -86,6 +86,7 @@ export class GameHandler extends BaseHandler {
                     user.eventPool.push(card);
                     break;
             }
+            card.onUse();
         }
         table.broadcast(replay);
     }
@@ -93,8 +94,25 @@ export class GameHandler extends BaseHandler {
 
     //请求移动
     static C_MOVE(user: GameUser, table: GameTable, msg: GamePto.C_MOVE) {
+        if (!table?.allowRoundOprate(user)) {
+            return;
+        }
         const card = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
-        if (card && table.mapData.move(msg.targetX, msg.targetY, card)) {
+        if (card && card.allowMove && user.moveTimes > 0 && table.mapData.checkMovable(msg.targetX, msg.targetY, card)) {
+            //扣除次数
+            user.moveTimes--;
+            card.allowMove = false;
+
+            //执行战场移动前事件决定是否有后续
+            if (!table.mapData.onProMove(card)) {
+                return;
+            }
+
+            //执行卡牌移动前事件,如光环随从移除地图格子光环
+            card.onPreMove();
+            //更新卡牌位置
+            table.mapData.updateCardPosition(msg.targetX, msg.targetY, card);
+            //广播卡牌移动协议
             const replay = new GamePto.S_MOVE();
             replay.uid = user.uid;
             replay.sourceX = msg.sourceX;
@@ -102,13 +120,22 @@ export class GameHandler extends BaseHandler {
             replay.targetX = msg.targetX;
             replay.targetY = msg.targetY;
             replay.allowMove = card.allowMove;
-            table.broadcast(replay);
-        }
+            table.broadcast(replay)
 
+            //执行卡牌移动后事件,如光环随从增加地图格子光环
+            card.onMoveAfter();
+            //执行战场移动后事件 如移动后受伤陷阱
+            table.mapData.onProMove(card)
+        }
     }
 
     //请求攻击
     static C_ATTACK(user: GameUser, table: GameTable, msg: GamePto.C_ATTACK) {
-
+        if (!table?.allowRoundOprate(user)) {
+            return;
+        }
+        const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
+        const targetCard = table.mapData.getCard(msg.targetX, msg.targetY) as UnitCard;
+        table.doAttack(sourceCard, targetCard);
     }
 }

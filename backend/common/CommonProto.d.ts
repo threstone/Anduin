@@ -2727,9 +2727,12 @@ export namespace CardsPto {
 /** Namespace GamePto. */
 export namespace GamePto {
 
-    /** BuffEnum enum. */
-    enum BuffEnum {
-        Freeze = 0
+    /** DiceValueEnum enum. */
+    enum DiceValueEnum {
+        Sword = 0,
+        Bow = 1,
+        Magic = 2,
+        Miss = 3
     }
 
     /** Properties of a UserInfo. */
@@ -2865,7 +2868,7 @@ export namespace GamePto {
         allowMove?: (boolean|null);
 
         /** Card buffArr */
-        buffArr?: (GamePto.BuffEnum[]|null);
+        buffArr?: (number[]|null);
     }
 
     /** Represents a Card. */
@@ -2905,7 +2908,7 @@ export namespace GamePto {
         public allowMove: boolean;
 
         /** Card buffArr. */
-        public buffArr: GamePto.BuffEnum[];
+        public buffArr: number[];
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -5261,11 +5264,20 @@ export namespace GamePto {
         /** S_ATTACK targetY */
         targetY?: (number|null);
 
+        /** S_ATTACK damage */
+        damage?: (number|null);
+
+        /** S_ATTACK targetHealth */
+        targetHealth?: (number|null);
+
         /** S_ATTACK allowAtk */
         allowAtk?: (boolean|null);
 
         /** S_ATTACK uid */
         uid?: (number|null);
+
+        /** S_ATTACK dices */
+        dices?: (number[]|null);
     }
 
     /** Represents a S_ATTACK. */
@@ -5295,11 +5307,20 @@ export namespace GamePto {
         /** S_ATTACK targetY. */
         public targetY: number;
 
+        /** S_ATTACK damage. */
+        public damage: number;
+
+        /** S_ATTACK targetHealth. */
+        public targetHealth: number;
+
         /** S_ATTACK allowAtk. */
         public allowAtk: boolean;
 
         /** S_ATTACK uid. */
         public uid: number;
+
+        /** S_ATTACK dices. */
+        public dices: number[];
 
         /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.

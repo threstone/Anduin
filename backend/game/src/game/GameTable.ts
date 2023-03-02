@@ -9,8 +9,11 @@ import { NodeRound } from './node/NodeRound';
 import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
-import { GameMapData } from './GameMapData';
-import { NodeDefine } from './GameDefine';
+import { GameMapData } from './map/GameMapData';
+import { DiceValueDefine, NodeDefine } from './GameDefine';
+import { UnitCard } from '../card/UnitCard';
+import { BuildingCard } from '../card/BuildingCard';
+import { AttackUtils } from './AttackUtils';
 
 export class GameTable extends BaseTable {
 
@@ -24,11 +27,19 @@ export class GameTable extends BaseTable {
 
     isGameOver: boolean;
 
+    private _incrId: number;
+    /**用于游戏中出现的各种唯一id */
+    get uniqueId() {
+        return this._incrId++;
+    }
+
     constructor(tableId: number, talbeIndex: number) {
         super(tableId, talbeIndex);
 
-        this._mapData = new GameMapData(7, 8);
+        this._mapData = new GameMapData(7, 8, this);
         this.isGameOver = false;
+
+        this._incrId = 0;
 
         this._nodeDriver = new NodeDriver(this);
         this._nodeDriver.setNodes([
@@ -130,5 +141,59 @@ export class GameTable extends BaseTable {
         this._users.push(user2);
         GlobalVar.userMgr.setUser(user2);
         return Promise.all([user1.syncUserInfo(), user2.syncUserInfo()]);
+    }
+
+    /**
+     * 
+     * @param sourceCard 发起攻击者
+     * @param targetCard 被攻击的单位
+     * @returns 
+     */
+    public doAttack(sourceCard: UnitCard, targetCard: BuildingCard) {
+        if (!sourceCard || !targetCard) {
+            return;
+        }
+        //判断是否能够攻击
+        if (!sourceCard.allowAtk || !AttackUtils.allowAtk(sourceCard, targetCard)) {
+            return;
+        }
+
+        // const msg = new GamePto.S_ATTACK();
+        // msg.sourceX = sourceCard.blockX;
+        // msg.sourceY = sourceCard.blockY;
+        // msg.targetX = targetCard.blockX;
+        // msg.targetY = targetCard.blockY;
+        // //获取到真正会受到伤害的卡牌
+        // const beAttackCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, this.mapData);
+        // //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
+        // const dices = this.getDices(sourceCard.attack);
+        // //实际扣除的血量
+        // const targetNum = this.getTargetDiceValueNum(dices, sourceCard.atkType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+        // beAttackCard.onPreAtk(targetNum);
+        // sourceCard.onAttack(targetNum);
+        // beAttackCard.onAtkAfter(targetNum);
+    }
+
+    /** 根据骰子的数量获得结果*/
+    private getDices(diceNum: number) {
+        const res: number[] = [];
+        for (let index = 0; index < diceNum; index++) {
+            res.push(this.random(6));
+        }
+        return res;
+    }
+
+    private getTargetDiceValueNum(diceResArr: number[], targetType: GamePto.DiceValueEnum) {
+        let num = 0;
+        for (let index = 0; index < diceResArr.length; index++) {
+            const dice = diceResArr[index];
+            const DiceValueArr = DiceValueDefine[dice]
+            for (let d = 0; d < DiceValueArr.length; d++) {
+                if (DiceValueArr[d] === targetType) {
+                    num++;
+                }
+            }
+        }
+        return num;
     }
 }

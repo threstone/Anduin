@@ -1,8 +1,11 @@
 syntax = "proto3";
 package GamePto;
 
-enum BuffEnum{
-	Freeze = 0;//冰冻
+enum DiceValueEnum{
+	Sword = 0;//剑
+	Bow = 1;//远程
+	Magic = 2;//魔法
+	Miss = 3;
 }
 
 message UserInfo{
@@ -21,7 +24,7 @@ message Card{
 	int32 blockY = 6;
 	bool allowAtk = 7;
 	bool allowMove = 8;
-	repeated BuffEnum buffArr = 9;
+	repeated int32 buffArr = 9;
 }
 
 message MapData{
@@ -212,6 +215,10 @@ message S_ATTACK{
 	int32 sourceY = 4;
 	int32 targetX = 5;
 	int32 targetY = 6;
-	bool allowAtk = 7;
-	int32 uid = 8;
+	int32 damage = 7;
+	int32 targetHealth = 8;
+	bool allowAtk = 9;
+	int32 uid = 10;
+	repeated int32 dices = 11;
 }
+

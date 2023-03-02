@@ -12,6 +12,7 @@ import { UserMgr } from './core/UserMgr';
 import { LauncherOption } from '../../common/LauncherOption';
 import { ConfigMgr } from '../../common/config/ConfigMgr';
 import { CardMgr } from './core/CardMgr';
+import { BuffMgr } from './core/BuffMgr';
 
 const logger = getLogger();
 export class GlobalVar {
@@ -23,6 +24,7 @@ export class GlobalVar {
     public static userMgr: UserMgr;
     public static configMgr: ConfigMgr;
     public static cardMgr: CardMgr;
+    public static buffMgr: BuffMgr;
 
     public static init() {
         this.startupParam = new LauncherOption();

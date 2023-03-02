@@ -4507,14 +4507,20 @@ $root.GamePto = (function() {
     var GamePto = {};
 
     /**
-     * BuffEnum enum.
-     * @name GamePto.BuffEnum
+     * DiceValueEnum enum.
+     * @name GamePto.DiceValueEnum
      * @enum {number}
-     * @property {number} Freeze=0 Freeze value
+     * @property {number} Sword=0 Sword value
+     * @property {number} Bow=1 Bow value
+     * @property {number} Magic=2 Magic value
+     * @property {number} Miss=3 Miss value
      */
-    GamePto.BuffEnum = (function() {
+    GamePto.DiceValueEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Freeze"] = 0;
+        values[valuesById[0] = "Sword"] = 0;
+        values[valuesById[1] = "Bow"] = 1;
+        values[valuesById[2] = "Magic"] = 2;
+        values[valuesById[3] = "Miss"] = 3;
         return values;
     })();
 
@@ -4660,7 +4666,7 @@ $root.GamePto = (function() {
          * @property {number|null} [blockY] Card blockY
          * @property {boolean|null} [allowAtk] Card allowAtk
          * @property {boolean|null} [allowMove] Card allowMove
-         * @property {Array.<GamePto.BuffEnum>|null} [buffArr] Card buffArr
+         * @property {Array.<number>|null} [buffArr] Card buffArr
          */
 
         /**
@@ -4753,7 +4759,7 @@ $root.GamePto = (function() {
 
         /**
          * Card buffArr.
-         * @member {Array.<GamePto.BuffEnum>} buffArr
+         * @member {Array.<number>} buffArr
          * @memberof GamePto.Card
          * @instance
          */
@@ -8056,8 +8062,11 @@ $root.GamePto = (function() {
          * @property {number|null} [sourceY] S_ATTACK sourceY
          * @property {number|null} [targetX] S_ATTACK targetX
          * @property {number|null} [targetY] S_ATTACK targetY
+         * @property {number|null} [damage] S_ATTACK damage
+         * @property {number|null} [targetHealth] S_ATTACK targetHealth
          * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
          * @property {number|null} [uid] S_ATTACK uid
+         * @property {Array.<number>|null} [dices] S_ATTACK dices
          */
 
         /**
@@ -8069,6 +8078,7 @@ $root.GamePto = (function() {
          * @param {GamePto.IS_ATTACK=} [properties] Properties to set
          */
         function S_ATTACK(properties) {
+            this.dices = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -8124,6 +8134,22 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.targetY = 0;
 
         /**
+         * S_ATTACK damage.
+         * @member {number} damage
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.damage = 0;
+
+        /**
+         * S_ATTACK targetHealth.
+         * @member {number} targetHealth
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.targetHealth = 0;
+
+        /**
          * S_ATTACK allowAtk.
          * @member {boolean} allowAtk
          * @memberof GamePto.S_ATTACK
@@ -8138,6 +8164,14 @@ $root.GamePto = (function() {
          * @instance
          */
         S_ATTACK.prototype.uid = 0;
+
+        /**
+         * S_ATTACK dices.
+         * @member {Array.<number>} dices
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.dices = $util.emptyArray;
 
         /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
@@ -8163,10 +8197,20 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetX);
             if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetY);
+            if (message.damage != null && Object.hasOwnProperty.call(message, "damage"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.damage);
+            if (message.targetHealth != null && Object.hasOwnProperty.call(message, "targetHealth"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.targetHealth);
             if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
-                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowAtk);
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.allowAtk);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.uid);
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.uid);
+            if (message.dices != null && message.dices.length) {
+                writer.uint32(/* id 11, wireType 2 =*/90).fork();
+                for (var i = 0; i < message.dices.length; ++i)
+                    writer.int32(message.dices[i]);
+                writer.ldelim();
+            }
             return writer;
         };
 
@@ -8213,11 +8257,30 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 7: {
-                        message.allowAtk = reader.bool();
+                        message.damage = reader.int32();
                         break;
                     }
                 case 8: {
+                        message.targetHealth = reader.int32();
+                        break;
+                    }
+                case 9: {
+                        message.allowAtk = reader.bool();
+                        break;
+                    }
+                case 10: {
                         message.uid = reader.int32();
+                        break;
+                    }
+                case 11: {
+                        if (!(message.dices && message.dices.length))
+                            message.dices = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.dices.push(reader.int32());
+                        } else
+                            message.dices.push(reader.int32());
                         break;
                     }
                 default:

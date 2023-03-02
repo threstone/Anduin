@@ -1,8 +1,14 @@
 import { CardsPto } from "../../../common/CommonProto";
 import { CardInterface } from "../../../common/I";
+import { GameTable } from "../game/GameTable";
 import { GlobalVar } from "../GlobalVar";
 
 export abstract class BaseCard implements CardInterface {
+
+    uid: number;
+    /**游戏中给卡牌设置的唯一id */
+    id: number;
+    table: GameTable;
 
     cardId: number;
     powerId: CardsPto.PowerType;
@@ -15,7 +21,6 @@ export abstract class BaseCard implements CardInterface {
     quality: CardsPto.QualityType;
     attr: any;
     isDerivation: number;
-    uid: number;
 
     public static create(cardId: number) {
         return new (this as any)(cardId);
