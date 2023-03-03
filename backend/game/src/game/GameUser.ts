@@ -108,6 +108,7 @@ export class GameUser {
         this._handCards = [];
         this.replaceIndexes = [];
 
+        //TODO 要使用useCard逻辑
         /**设置英雄到战场 */
         const heroCard = this._cardPool.shift() as UnitCard;
         heroCard.blockX = 3;

@@ -1,37 +1,46 @@
-import { GamePto } from "../../../common/CommonProto";
+import { CardsPto } from "../../../common/CommonProto";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { BuffTypeDefine } from "../game/GameDefine";
+import { BuffEffectiveDefine, BuffTypeDefine } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { BuffData } from "./BuffData";
+import { PositionBuff } from "./PositionBuff";
 
 /**
  * 举盾
  * 自身和相邻友军受到远程攻击时伤害-1
  */
-export class JuDun {
+export class JuDun extends PositionBuff {
 
-    public static buffId: number = 1;
+    protected effectiveDistance: number = 1;
+    public buffId: number = 1;
 
-    public static addToCard(card: UnitCard, buff: BuffData) {
-        if (buff.buffType === BuffTypeDefine.NormalBuff) {
+    public addPositionBuff(card: BuildingCard, buff: BuffData): void {
+        card.onDamageFuns.push({ id: buff.id, fun: this.onDemage });
+        card.addBuff(buff);
+    }
 
+    public deletePositionBuff(card: BuildingCard, buff: BuffData): void {
+        card.deleteBuff(buff);
+        card.deleteFunById(card.onDamageFuns, buff.id);
+    }
+
+    public addBuff(card: BuildingCard) {
+        const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffTypeDefine.NormalBuff, BuffEffectiveDefine.Friend);
+        card.addBuff(buff);
+        super.addBuff(card, buff);
+        card.onDamageFuns.push({ id: buff.id, fun: this.onDemage });
+    }
+
+    public deleteBuff(card: BuildingCard, buff: BuffData) {
+        super.deleteBuff(card, buff);
+        card.deleteFunById(card.onDamageFuns, buff.id);
+    }
+
+    public onDemage(damage: number, atkCard: UnitCard, self: BuildingCard) {
+        //当攻击方是远程的时候
+        if (atkCard.atkType === CardsPto.AtkType.LongRange && damage > 0) {
+            self.health += 1;
         }
-        card.onPreMoveFuns.push({ id: buff.id, fun: this.onPreMove });
-        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onMoveAfter });
     }
-
-    public static removeFromCard(card: BuildingCard) {
-
-    }
-
-    public static onPreMove(table: GameTable, moveCard: UnitCard) {
-        // 移除周围单位buff
-
-    }
-
-    public static onMoveAfter(table: GameTable, moveCard: UnitCard) {
-        // 移除周围单位buff
-    }
-
 }

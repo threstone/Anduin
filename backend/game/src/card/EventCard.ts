@@ -5,27 +5,27 @@ import { BuildingCard } from "./BuildingCard";
 import { UnitCard } from "./UnitCard";
 
 /**event card用health来决定持续回合数 */
-export  class EventCard extends BaseCard {
+export class EventCard extends BaseCard {
 
     /**由外部注册的回合开始函数 */
-    onRundStartFuns: EventFunction[] = [];
+    public onRundStartFuns: EventFunction[] = [];
     /**由外部注册的回合结束函数 */
-    onRoundEndFuns: EventFunction[] = [];
+    public onRoundEndFuns: EventFunction[] = [];
 
     /**战场卡牌使用前 */
-    onPreUseCardFuns: EventFunction[];
+    public onPreUseCardFuns: EventFunction[];
     /**战场卡牌使用后 */
-    onUseCardAfterFuns: EventFunction[];
+    public onUseCardAfterFuns: EventFunction[];
 
     /**战场卡牌移动前 */
-    onPreMoveFuns: EventFunction[];
+    public onPreMoveFuns: EventFunction[];
     /**战场卡牌移动后 */
-    onMoveAfterFuns: EventFunction[];
+    public onMoveAfterFuns: EventFunction[];
 
     /**战场卡牌攻击前 */
-    onPreAtkFuns: EventFunction[];
+    public onPreAtkFuns: EventFunction[];
     /**战场卡牌攻击后 */
-    onAtkAfterFuns: EventFunction[];
+    public onAtkAfterFuns: EventFunction[];
 
     /**回合开始触发 */
     public onRoundStart() {

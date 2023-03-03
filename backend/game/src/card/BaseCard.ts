@@ -36,6 +36,7 @@ export class BaseCard implements CardInterface {
 
     /**使用卡牌 */
     public onUse(...params: number[]) {
+        //减去费用,删除手牌
         const user = this.table.getUser(this.uid);
         user.fee -= this.fee;
         const cardIndex = user.handCards.indexOf(this);

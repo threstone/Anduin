@@ -141,8 +141,8 @@ class MapModel extends BaseModel {
 
     /**获取可以飞到的位置 */
     private getFlyablePoint(baseX: number, baseY: number, step: number, resultSet: Set<number>) {
-        for (let x = baseX - step; x < baseX + step; x++) {
-            for (let y = baseY - step; y < baseY + step; y++) {
+        for (let x = baseX - step; x <= baseX + step; x++) {
+            for (let y = baseY - step; y <= baseY + step; y++) {
                 if (this.getMovable(x, y)) {
                     resultSet.add(y * 7 + x);
                 }

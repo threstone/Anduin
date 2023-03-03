@@ -37,3 +37,13 @@ export enum BuffTypeDefine {
     /**自身的buff,可以被沉默,如务农:每回合开始时获得一个法力水晶 */
     NormalBuff
 }
+
+/** buff生效定义 */
+export enum BuffEffectiveDefine {
+    /**全局生效,所有战场卡牌都被影响*/
+    All,
+    /**友方Buff,仅仅对友方卡牌生效 */
+    Friend,
+    /**敌方Buff,仅仅对敌方卡牌生效  */
+    Enemy
+}

@@ -1,17 +1,17 @@
-import { GamePto } from "../../../common/CommonProto";
 import { BuffData } from "../buff/BuffData";
+import { EventFunction } from "../game/GameDefine";
 import { GlobalVar } from "../GlobalVar";
+import { BaseCard } from "./BaseCard";
 import { EventCard } from "./EventCard";
 
-
-
 export class BuildingCard extends EventCard {
-    blockX: number;
-    blockY: number;
+    public blockX: number;
+    public blockY: number;
 
     /**自身的所有buff,包括全局buff、位置buff、普通buff */
     private _buffMap: Map<number, BuffData>;
 
+    public onDamageFuns: EventFunction[];
 
     /**发送到客户端的状态数据 */
     get buffArr() {
@@ -20,27 +20,34 @@ export class BuildingCard extends EventCard {
         }
         const res: number[] = [];
         this._buffMap.forEach((value) => {
-            res.push(value.buffType);
+            if (!value.ignore) {
+                res.push(value.buffId);
+            }
         });
         return res;
     }
 
     /**添加指定的buff */
-    public setBuff(buff: BuffData) {
+    public addBuff(buff: BuffData) {
         if (!this._buffMap) {
             this._buffMap = new Map<number, BuffData>();
         }
         //置入数据
         this._buffMap.set(buff.id, buff);
-        GlobalVar.buffMgr.addBuff(this, buff);
     }
 
-    /**移除buff */
-    public removeBuff(id: number) {
-        const buff = this._buffMap?.get(id);
-        if (buff) {
-            this._buffMap.delete(id);
-            GlobalVar.buffMgr.removeBuff(this, buff);
+    /**删除指定的buff */
+    public deleteBuff(buff: BuffData) {
+        this._buffMap?.delete(buff.id);
+    }
+
+    /**执行将指定的函数数组,当函数返回false的时候终止执行后续流程 */
+    public deleteFunById(funcArr: EventFunction[], id: number) {
+        for (let index = 0; index < funcArr.length; index++) {
+            const funcInfo = funcArr[index];
+            if (funcInfo.id === id) {
+                funcArr.splice(index, 1);
+            }
         }
     }
 
@@ -51,6 +58,9 @@ export class BuildingCard extends EventCard {
         this.table.mapData.setCard(this);
         const user = this.table.getUser(this.uid);
         user.unitPool.push(this);
+
+        //TODO ADD Buff
+        GlobalVar.buffMgr.addBuff(this, 1);
     }
 
     public useCardCheck(blockX: number, blockY: number) {
@@ -61,6 +71,11 @@ export class BuildingCard extends EventCard {
             }
         }
         return false;
+    }
+
+    /** 当受到伤害 */
+    public onDamage(damage: number, atkCard: BaseCard, self = this) {
+        return this.callFunArr(this.onDamageFuns, damage, atkCard, self);
     }
 
     // /**被攻击前触发 */
