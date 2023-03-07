@@ -1,4 +1,3 @@
-import { GlobalVar } from "../GlobalVar";
 import * as path from 'path';
 import { CommonUtils } from "../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
@@ -27,7 +26,7 @@ export class CardMgr {
             if (filePath.indexOf('BaseCard') !== -1) {
                 continue;
             }
-            let cardClass = require(filePath)
+            const cardClass = require(filePath)
             const className = Object.keys(cardClass)[0];
             const cardId = parseInt(className.substring(4));
             this._cardClassMap.set(cardId, cardClass[className])

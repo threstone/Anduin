@@ -41,13 +41,13 @@ export class GlobalVar {
 
         this.userMgr = new UserMgr();
         this.cardMgr = new CardMgr();
+        this.buffMgr = new BuffMgr();
 
         this.tableMgr = new TableMgr();
         this.tableMgr.startLogic();
 
         //init socket server
         this.socketServer = new SocketServer(this.startupParam.socketListenPort, logger);
-        this.cardMgr.getCardInstance(123);
     }
 
     /**

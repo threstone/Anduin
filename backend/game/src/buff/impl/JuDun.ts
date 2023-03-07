@@ -1,10 +1,9 @@
-import { CardsPto } from "../../../common/CommonProto";
-import { BuildingCard } from "../card/BuildingCard";
-import { UnitCard } from "../card/UnitCard";
-import { BuffEffectiveDefine, BuffTypeDefine } from "../game/GameDefine";
-import { GameTable } from "../game/GameTable";
-import { BuffData } from "./BuffData";
-import { PositionBuff } from "./PositionBuff";
+import { CardsPto } from "../../../../common/CommonProto";
+import { BuildingCard } from "../../card/BuildingCard";
+import { UnitCard } from "../../card/UnitCard";
+import { BuffEffectiveDefine, BuffTypeDefine } from "../../game/GameDefine";
+import { BuffData } from "../BuffData";
+import { PositionBuff } from "../PositionBuff";
 
 /**
  * 举盾

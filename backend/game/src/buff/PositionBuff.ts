@@ -1,6 +1,6 @@
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { BuffTypeDefine, BuffEffectiveDefine } from "../game/GameDefine";
+import { BuffTypeDefine } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { BuffData } from "./BuffData";
 import { GameBuff } from "./GameBuff";

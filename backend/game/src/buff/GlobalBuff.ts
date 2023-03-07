@@ -4,6 +4,10 @@ import { BuffData } from "./BuffData";
 import { GameBuff } from "./GameBuff";
 
 export abstract class GlobalBuff extends GameBuff {
+
+    public abstract addGlobalBuff(card: BuildingCard, buff: BuffData): void;
+    public abstract deleteGlobalBuff(card: BuildingCard, buff: BuffData): void;
+
     public addBuff(card: BuildingCard) {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffTypeDefine.GlobalBuff, BuffEffectiveDefine.Friend);
         card.addBuff(buff);
