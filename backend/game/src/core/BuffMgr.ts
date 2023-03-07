@@ -1,7 +1,6 @@
 import { BuildingCard } from "../card/BuildingCard";
 import { BuffData } from "../buff/BuffData";
-import { BuffEffectiveDefine, BuffTypeDefine } from "../game/GameDefine";
-import { JuDun } from "../buff/impl/JuDun";
+import { BuffEffectiveDefine } from "../game/GameDefine";
 import { GlobalBuff } from "../buff/GlobalBuff";
 import { GameBuff } from "../buff/GameBuff";
 import { PositionBuff } from "../buff/PositionBuff";
@@ -36,13 +35,13 @@ export class BuffMgr {
         }
         logger.info(`结束buff初始化,耗时:${Date.now() - makeTime}ms`);
     }
-    
-    public getBuffByType(buffType: BuffTypeDefine): GameBuff {
-        return this._buffMap.get(buffType);
+
+    public getBuffByType(buffId: number): GameBuff {
+        return this._buffMap.get(buffId);
     }
 
-    public addBuff(card: BuildingCard, buffType: BuffTypeDefine) {
-        const buffClass = this.getBuffByType(buffType);
+    public addBuff(card: BuildingCard, buffId: number) {
+        const buffClass = this.getBuffByType(buffId);
         buffClass.addBuff(card);
     }
 

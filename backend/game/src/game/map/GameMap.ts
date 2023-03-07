@@ -121,7 +121,7 @@ export class GameMap {
                 GlobalVar.buffMgr.deleteGlobalBuff(mapBlock.card, buff);
             }
         }
-        
+
         mapBlock.removeCard();
     }
 
@@ -257,6 +257,32 @@ export class GameMap {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
             card.onUseCardAfter(useCard);
+        }
+        return true;
+    }
+
+    /**
+     * 战场的攻击前事件
+     * @returns 返回是否可以攻击 | 攻击的伤害
+     */
+    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): number | false {
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            const result = card.onPreAtk(sourceCard, targetCard, damage, dices);
+            if (result === false) {
+                return false;
+            } else {
+                damage = result;
+            }
+        }
+        return Math.max(0, damage);
+    }
+
+    /**战场的攻击后事件 */
+    public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]) {
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            card.onAtkAfter(sourceCard, targetCard, damage, dices);
         }
         return true;
     }

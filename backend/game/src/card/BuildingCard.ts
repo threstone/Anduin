@@ -59,8 +59,11 @@ export class BuildingCard extends EventCard {
         const user = this.table.getUser(this.uid);
         user.unitPool.push(this);
 
-        //TODO ADD Buff
-        GlobalVar.buffMgr.addBuff(this, 1);
+        //ADD Buff
+        for (let index = 0; index < this.buffs.length; index++) {
+            const buff = this.buffs[index];
+            GlobalVar.buffMgr.addBuff(this, buff);
+        }
     }
 
     public useCardCheck(blockX: number, blockY: number) {
@@ -73,22 +76,19 @@ export class BuildingCard extends EventCard {
         return false;
     }
 
-    /** 当受到伤害 */
-    public onDamage(damage: number, atkCard: BaseCard, self = this) {
-        return this.callFunArr(this.onDamageFuns, damage, atkCard, self);
+    /**
+     * 当受到伤害
+     * @returns 实际受到的伤害
+     */
+    public onDamage(damage: number, atkCard: BaseCard, self = this): number {
+        for (let index = 0; index < this.onDamageFuns.length; index++) {
+            const funcObj = this.onDamageFuns[index];
+            damage = funcObj.fun.call(this, damage, atkCard, self);
+        }
+        damage = Math.max(0, damage);
+        this.health -= damage;
+        return damage;
     }
-
-    // /**被攻击前触发 */
-    // public onPreAtk(demage: number) {
-    // }
-
-    // /**当被攻击 */
-    // public onAtkAfter(demage: number) {
-    //     //死亡了
-    //     if (this.health <= 0) {
-
-    //     }
-    // }
 
     // /**
     //  * 回合结束触发

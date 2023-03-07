@@ -36,10 +36,11 @@ export class JuDun extends PositionBuff {
         card.deleteFunById(card.onDamageFuns, buff.id);
     }
 
-    public onDemage(damage: number, atkCard: UnitCard, self: BuildingCard) {
+    public onDemage(damage: number, atkCard: UnitCard) {
         //当攻击方是远程的时候
         if (atkCard.atkType === CardsPto.AtkType.LongRange && damage > 0) {
-            self.health += 1;
+            return damage - 1;
         }
+        return damage;
     }
 }

@@ -4,6 +4,7 @@ import { GameUser } from '../game/GameUser';
 import { NodeDefine } from '../game/GameDefine';
 import { BaseHandler } from './BaseHandler';
 import { UnitCard } from '../card/UnitCard';
+import { AttackUtils } from '../game/AttackUtils';
 
 export class GameHandler extends BaseHandler {
 
@@ -105,7 +106,7 @@ export class GameHandler extends BaseHandler {
             }
 
             //执行卡牌移动前事件,如光环随从移除地图格子光环
-            card.onPreMove();
+            card.onPreMove(card);
             //更新卡牌位置
             table.mapData.updateCardPosition(msg.targetX, msg.targetY, card);
             //广播卡牌移动协议
@@ -119,7 +120,7 @@ export class GameHandler extends BaseHandler {
             table.broadcast(replay);
 
             //执行卡牌移动后事件,如光环随从增加地图格子光环
-            card.onMoveAfter();
+            card.onMoveAfter(card);
             //执行战场移动后事件 如移动后受伤陷阱
             table.mapData.onPreMove(card)
         }
@@ -131,7 +132,53 @@ export class GameHandler extends BaseHandler {
             return;
         }
         const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
-        const targetCard = table.mapData.getCard(msg.targetX, msg.targetY) as UnitCard;
-        table.doAttack(sourceCard, targetCard);
+        let targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
+        //获取到真正会受到伤害的卡牌(远程攻击会被挡住)
+        targetCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
+
+        if (sourceCard && targetCard && sourceCard.allowAtk && user.atkTimes > 0) {
+            user.atkTimes--;
+            sourceCard.allowAtk = false;
+
+
+            //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
+            const dices = table.getDices(sourceCard.attack);
+            //实际扣除的血量
+            let damage = table.getTargetDiceValueNum(dices, sourceCard.atkType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+
+            //执行战场攻击前事件决定是否有后续
+            const mapPreAtkResult = table.mapData.onPreAtk(sourceCard, targetCard, damage, dices);
+            //攻击被禁止了
+            if (mapPreAtkResult === false) {
+                return;
+            }
+            //战场的事件可能会导致伤害变化
+            damage = mapPreAtkResult;
+
+            //执行攻击前事件,可能会导致伤害变化
+            damage = sourceCard.onPreAtk(sourceCard, targetCard, damage, dices) as number;
+
+            //返回实际收到的伤害
+            damage = targetCard.onDamage(damage, sourceCard);
+            //广播卡牌攻击协议
+            const replay = new GamePto.S_ATTACK();
+            replay.uid = user.uid;
+            replay.sourceX = msg.sourceX;
+            replay.sourceY = msg.sourceY;
+            replay.targetX = targetCard.blockX;
+            replay.targetY = targetCard.blockY;
+            replay.damage = damage;
+            replay.targetHealth = targetCard.health;
+            replay.allowAtk = sourceCard.allowAtk;
+            replay.uid = user.uid;
+            replay.allowAtk = sourceCard.allowAtk;
+            replay.dices = dices;
+            table.broadcast(replay);
+            //执行卡牌攻击后事件
+            sourceCard.onAtkAfter(sourceCard, targetCard, damage, dices);
+
+            //执行战场攻击后事件
+            table.mapData.onAtkAfter(sourceCard, targetCard, damage, dices);
+        }
     }
 }

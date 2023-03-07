@@ -19,7 +19,7 @@ export class BaseCard implements CardInterface {
     healthUpperLimit: number;
     fee: number;
     quality: CardsPto.QualityType;
-    attr: any;
+    buffs: number[];
     isDerivation: number;
 
     public static create(cardId: number) {

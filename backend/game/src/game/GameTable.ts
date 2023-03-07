@@ -182,7 +182,7 @@ export class GameTable extends BaseTable {
     }
 
     /** 根据骰子的数量获得结果*/
-    private getDices(diceNum: number) {
+    public getDices(diceNum: number) {
         const res: number[] = [];
         for (let index = 0; index < diceNum; index++) {
             res.push(this.random(6));
@@ -190,7 +190,7 @@ export class GameTable extends BaseTable {
         return res;
     }
 
-    private getTargetDiceValueNum(diceResArr: number[], targetType: GamePto.DiceValueEnum) {
+    public getTargetDiceValueNum(diceResArr: number[], targetType: GamePto.DiceValueEnum) {
         let num = 0;
         for (let index = 0; index < diceResArr.length; index++) {
             const dice = diceResArr[index];

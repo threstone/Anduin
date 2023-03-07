@@ -23,8 +23,8 @@ export abstract class PositionBuff extends GameBuff {
         }
 
         //增加移动事件
-        card.onPreMoveFuns.push({ id: buff.id, fun: this.onPreMove.bind(card, positionBuff) });
-        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onMoveAfter.bind(card, positionBuff) });
+        card.onPreMoveFuns.push({ id: buff.id, fun: this.onSourcePreMove.bind(card, positionBuff) });
+        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onSourceMoveAfter.bind(card, positionBuff) });
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {
@@ -40,7 +40,7 @@ export abstract class PositionBuff extends GameBuff {
         card.deleteBuff(buff);
     }
 
-    private onPreMove(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
+    private onSourcePreMove(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
         // 移除周围格子buff
         const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
         for (let index = 0; index < pointArr.length; index++) {
@@ -49,7 +49,7 @@ export abstract class PositionBuff extends GameBuff {
         }
     }
 
-    private onMoveAfter(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
+    private onSourceMoveAfter(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
         // 增加周围格子位置buff
         const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
         for (let index = 0; index < pointArr.length; index++) {

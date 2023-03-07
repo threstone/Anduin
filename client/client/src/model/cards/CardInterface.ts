@@ -10,7 +10,7 @@ interface CardInterface {
     fee: number;
     quality: CardsPto.QualityType;
     desc: string;
-    attr: string;
+    buffs: number[];
     count: number;
     isDerivation: number;
 }

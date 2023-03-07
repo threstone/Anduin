@@ -73,7 +73,7 @@ export class CardInterface {
     /**品质 */
     quality: CardsPto.QualityType;
 
-    attr: any;
+    buffs: number[];
 
     /**是否衍生 */
     isDerivation: number;

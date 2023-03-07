@@ -11,7 +11,7 @@
  "fee":0,
  "quality":1,
  "desc":"获得一点费用",
- "attr":[],
+ "buffs":[],
  "isDerivation":1
   },
 {
@@ -26,7 +26,7 @@
  "fee":0,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -40,8 +40,8 @@
  "health":4,
  "fee":1,
  "quality":1,
- "desc":"冲锋",
- "attr":[0],
+ "desc":"",
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -56,7 +56,7 @@
  "fee":1,
  "quality":2,
  "desc":"",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -71,22 +71,22 @@
  "fee":2,
  "quality":1,
  "desc":"举盾：自身和相邻友军受到远程攻击时伤害-1",
- "attr":[1],
+ "buffs":[1],
  "isDerivation":0
   },
 {
  "cardId":5,
- "cardName":"农夫4",
- "powerId":0,
- "cardType":4,
+ "cardName":"农夫",
+ "powerId":1,
+ "cardType":1,
  "type2":1,
- "attack":3,
- "atkType":1,
- "health":5,
- "fee":5,
- "quality":1,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "attack":1,
+ "atkType":0,
+ "health":2,
+ "fee":0,
+ "quality":0,
+ "desc":"务农：回合开始阶段获得一点费用",
+ "buffs":[0],
  "isDerivation":0
   },
 {
@@ -101,7 +101,7 @@
  "fee":0,
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -116,7 +116,7 @@
  "fee":7,
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -131,7 +131,7 @@
  "fee":8,
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -146,7 +146,7 @@
  "fee":9,
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -161,7 +161,7 @@
  "fee":1,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -176,7 +176,7 @@
  "fee":0,
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -191,7 +191,7 @@
  "fee":4,
  "quality":3,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -206,7 +206,7 @@
  "fee":5,
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -221,7 +221,7 @@
  "fee":6,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -236,7 +236,7 @@
  "fee":7,
  "quality":3,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -251,7 +251,7 @@
  "fee":0,
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -266,7 +266,7 @@
  "fee":4,
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -281,7 +281,7 @@
  "fee":1,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -296,7 +296,7 @@
  "fee":2,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -311,7 +311,7 @@
  "fee":3,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -326,7 +326,7 @@
  "fee":4,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -341,7 +341,7 @@
  "fee":4,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升2",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -356,7 +356,7 @@
  "fee":4,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升3",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   },
 {
@@ -371,7 +371,7 @@
  "fee":4,
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升4",
- "attr":[],
+ "buffs":[],
  "isDerivation":0
   }
 ]
