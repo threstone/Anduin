@@ -45,6 +45,6 @@ export class BaseCard implements CardInterface {
 
     /**检查卡牌是否可以使用 */
     public useCardCheck(...params: number[]): boolean {
-        return this.fee < this.table.getUser(this.uid).fee
+        return this.fee <= this.table.getUser(this.uid).fee;
     }
 }

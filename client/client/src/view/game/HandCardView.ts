@@ -80,15 +80,19 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
                 //检查是否允许操作
-                if (GameSceneView.ins().allowToOprate && gameCard.cardInfo.fee <= GameModel.ins().fee) {
+                if (GameSceneView.ins().allowToOprate) {
                     if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
                         GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
                         return;
                     }
 
                     const mapPoint = new egret.Point();
-                    if (MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
-                        GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), mapPoint);
+                    //使用卡牌
+                    if (gameCard.cardInfo.fee > GameModel.ins().fee) {
+                        TipsView.ins().showTips("费用不够!");
+                    } else if (MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
+                        //TODO 有些卡牌要指向一切卡牌作为目标
+                        GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), [mapPoint.x, mapPoint.y]);
                         if (TEST_GAME) {
                             cardItem.x = gameCard.cacheX;
                             cardItem.y = gameCard.cacheY;

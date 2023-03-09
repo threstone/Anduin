@@ -32,21 +32,12 @@ class GameModel extends BaseModel {
     }
 
     /**使用卡牌 */
-    C_USE_CARD(cardIndex: number, mapPoint: egret.Point) {
+    C_USE_CARD(cardIndex: number, dataArr: number[]) {
         const msg = new GamePto.C_USE_CARD();
         msg.cardIndex = cardIndex;
-        msg.blockX = mapPoint.x;
-        msg.blockY = mapPoint.y;
+        msg.dataArr = dataArr;
         this.sendMsg(msg);
     }
-
-    //TODO
-    // useUnitCard(cardIndex: number, ...param: number[]) {
-    //     const msg = new GamePto.C_USE_CARD();
-    //     msg.cardIndex = cardIndex;
-    //     msg.dataArr = param;
-    //     this.sendMsg(msg);
-    // }
 
     //服务端异常 关闭场景
     S_SERVER_ERROR(msg: GamePto.S_SERVER_ERROR) {
@@ -124,10 +115,10 @@ class GameModel extends BaseModel {
     S_USE_CARD(msg: GamePto.S_USE_CARD) {
         if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
             this.handCards.splice(msg.cardIndex, 1);
-            MapModel.ins().onCardUse(msg)
+            MapModel.ins().onCardUse(msg);
+            this.fee = msg.fee;
         }
-
-        this.fee = msg.fee;
+        
         this.emit('S_USE_CARD', msg);
     }
 

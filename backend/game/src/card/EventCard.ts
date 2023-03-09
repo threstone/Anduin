@@ -1,3 +1,4 @@
+import { CardsPto } from "../../../common/CommonProto";
 import { BaseEvent, EventFunction } from "../game/GameDefine";
 import { BaseCard } from "./BaseCard";
 import { BuildingCard } from "./BuildingCard";
@@ -7,9 +8,9 @@ import { UnitCard } from "./UnitCard";
 export class EventCard extends BaseCard implements BaseEvent {
 
     /**由外部注册的回合开始函数 */
-    public onRoundStartFuns: EventFunction[] = [];
+    public onRoundStartFuns: EventFunction[];
     /**由外部注册的回合结束函数 */
-    public onRoundEndFuns: EventFunction[] = [];
+    public onRoundEndFuns: EventFunction[];
 
     /**战场卡牌使用前 */
     public onPreUseCardFuns: EventFunction[];
@@ -25,6 +26,21 @@ export class EventCard extends BaseCard implements BaseEvent {
     public onPreAtkFuns: EventFunction[];
     /**战场卡牌攻击后 */
     public onAtkAfterFuns: EventFunction[];
+
+    constructor(cardId: number) {
+        super(cardId);
+        this.onRoundStartFuns = [];
+        this.onRoundEndFuns = [];
+
+        this.onPreUseCardFuns = [];
+        this.onUseCardAfterFuns = [];
+
+        this.onPreMoveFuns = [];
+        this.onMoveAfterFuns = [];
+
+        this.onPreAtkFuns = [];
+        this.onAtkAfterFuns = [];
+    }
 
     /**回合开始触发 */
     public onRoundStart(self = this) {
@@ -43,7 +59,7 @@ export class EventCard extends BaseCard implements BaseEvent {
 
     /**战场卡牌使用后 */
     public onUseCardAfter(useCard: BaseCard) {
-         this.callFuns(this.onUseCardAfterFuns, useCard);
+        this.callFuns(this.onUseCardAfterFuns, useCard);
     }
 
     /**
@@ -61,7 +77,7 @@ export class EventCard extends BaseCard implements BaseEvent {
      * 有可能一张卡被同时两张周围的卡片光环影响，例如炉石随从左右都是恐狼，那么就会+2攻击力
      */
     public onMoveAfter(moveCard: UnitCard) {
-         this.callFuns(this.onMoveAfterFuns, moveCard);
+        this.callFuns(this.onMoveAfterFuns, moveCard);
     }
 
     /**
@@ -83,7 +99,7 @@ export class EventCard extends BaseCard implements BaseEvent {
 
     /**战场卡牌攻击后 */
     public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]) {
-         this.callFuns(this.onAtkAfterFuns, sourceCard, targetCard, damage, dices);
+        this.callFuns(this.onAtkAfterFuns, sourceCard, targetCard, damage, dices);
     }
 
     /**执行将指定的函数数组,当函数返回false的时候终止执行后续流程 */
@@ -101,8 +117,10 @@ export class EventCard extends BaseCard implements BaseEvent {
 
     public onUse(...params: number[]) {
         super.onUse();
-        this.table.mapData.addEvent(this);
-        const user = this.table.getUser(this.uid);
-        user.eventPool.push(this);
+        if (this.cardType === CardsPto.CardType.Event) {
+            this.table.mapData.addEvent(this);
+            const user = this.table.getUser(this.uid);
+            user.eventPool.push(this);
+        }
     }
 }

@@ -61,16 +61,16 @@ export class GameHandler extends BaseHandler {
         replay.isSuccess = false;
         replay.cardIndex = msg.cardIndex;
         replay.uid = user.uid;
+        replay.fee = user.fee;
+        replay.feeMax = user.feeMax;
+
         const card = user.handCards[msg.cardIndex];
 
         //检查是否可以使用
-        if (!card || card.useCardCheck(...msg.dataArr)) {
+        if (!card || card.useCardCheck(...msg.dataArr) === false) {
             user.sendMsg(replay);
             return;
         }
-
-        //扣费用
-        user.fee -= card.fee;
 
         //执行战场使用卡牌前事件决定是否有后续  有些卡会反制使用卡牌
         if (!table.mapData.onPreUseCard(card)) {

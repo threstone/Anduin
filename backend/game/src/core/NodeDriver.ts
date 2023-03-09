@@ -55,6 +55,7 @@ export class NodeDriver {
             case NodeDriverResult.Wait:
                 if (this._awakenTime === -1) {
                     logger.error('未设置等待时间!');
+                    this._table.destroy();
                 }
                 break;
             case NodeDriverResult.Continue:

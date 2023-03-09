@@ -16,14 +16,11 @@ export class CardMgr {
     private init() {
         const makeTime = Date.now();
         logger.info(`开始卡片初始化`);
-        const handlerPath = path.join(__dirname, '../card/');
+        const handlerPath = path.join(__dirname, '../card/impl/');
         const files = CommonUtils.getAllFiles(handlerPath);
         for (let index = 0; index < files.length; index++) {
             const filePath = files[index];
             if (filePath.endsWith('.js.map')) {
-                continue;
-            }
-            if (filePath.indexOf('BaseCard') !== -1) {
                 continue;
             }
             const cardClass = require(filePath)
