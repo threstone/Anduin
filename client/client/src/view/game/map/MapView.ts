@@ -67,9 +67,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         cardItem.y = mapPoint.y;
     }
 
+    /**更新指定地图卡 */
     public updateMapItem(cardInfo: GamePto.ICard) {
         const mapItem = this.entityPool[cardInfo.blockX][cardInfo.blockY];
         const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        MapItem.updateEntityDesc(mapItem, cardInfo);
         if (cardInfo.uid === UserModel.ins().uid && (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero)) {
             this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo, config);
         }
@@ -136,12 +138,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**移动单位 */
     public async moveUnit(msg: GamePto.S_MOVE) {
-        const mapItem = this.entityPool[msg.sourceX][msg.sourceY];
+        const mapItem = this.entityPool[msg.sourceX][msg.sourceY] as BaseUI.UIMapUnit;
         this.entityPool[msg.targetX][msg.targetY] = mapItem;
         this.entityPool[msg.sourceX][msg.sourceY] = null;
         const targetPoint = this.getMapPoint(msg.targetX, msg.targetY);
         const cardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY);
-        this.updateMapItem(cardInfo)
+        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        this.updateUnitOperateTips(mapItem, cardInfo, config);
         egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
     }
 
@@ -156,20 +159,30 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         await RightCtrlView.ins().showDices(msg.dices);
 
-        //攻击动画
-        this.showAttack(sourceEntity, targetEntity);
-        MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY)
-        // this.updateMapItem(MapModel.ins().unitCards[msg.sourceX][msg.sourceY])
-        // this.updateMapItem(MapModel.ins().unitCards[msg.targetX][msg.targetY])
+        const sourceCardInfo = MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY);
+        const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY);
 
-        //飘血
+        //攻击效果
+        const sourceConfig = CardsModel.ins().getCardInfoById(sourceCardInfo.cardId);
+        await this.showAttack(sourceEntity, targetEntity, sourceConfig);
+
+        //执行完效果后就飘血扣血
         this.entityShowTips(targetEntity, `-${msg.damage}`);
 
+        this.updateMapItem(sourceCardInfo);
+        this.updateMapItem(targetCardInfo);
     }
 
-    private showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
+    /**攻击效果 根据近战远程区分效果 */
+    private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface) {
+        //近战
+        if (sourceConfig.atkType === CardsPto.AtkType.CloseRange) {
 
-        throw new Error("Method not implemented.");
+        }//远程 
+        else if (sourceConfig.atkType === CardsPto.AtkType.LongRange) {
+
+        }
+
     }
 
     /**更新地图信息 */

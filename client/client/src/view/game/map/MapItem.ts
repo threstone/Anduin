@@ -13,7 +13,7 @@ class MapItem {
         }
     }
 
-    public static updateDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
+    public static updateEntityDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, cardInfo: GamePto.ICard) {
         if (entity.healthText) {
 
         }
