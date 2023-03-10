@@ -11,45 +11,44 @@ class MapModel extends BaseModel {
         for (let x = 0; x < 7; x++) {
             this._mapData[x] = [];
         }
-        for (let index = 0; index < data.unitCards.length; index++) {
-            const unitCard = data.unitCards[index];
-            this._mapData[unitCard.blockX][unitCard.blockY] = unitCard;
+        for (let index = 0; index < data.entityCards.length; index++) {
+            const entityCard = data.entityCards[index];
+            this._mapData[entityCard.blockX][entityCard.blockY] = entityCard;
         }
     }
 
-    get unitCards() {
-        return this._serverData.unitCards;
+    get entityCards() {
+        return this._serverData.entityCards;
     }
 
-    public onCardUse(msg: GamePto.S_USE_CARD) {
-        const cardConfig = CardsModel.ins().getCardInfoById(msg.card.cardId);
+    public onUseCard(msg: GamePto.S_USE_CARD, cardConfig: CardInterface) {
         if (cardConfig.cardType === CardsPto.CardType.Event) {
             this._serverData.eventCards.push(msg.card);
         } else if (cardConfig.cardType === CardsPto.CardType.Building
             || cardConfig.cardType === CardsPto.CardType.Unit) {
-            this._serverData.unitCards.push(msg.card);
+            this._serverData.entityCards.push(msg.card);
             this._mapData[msg.card.blockX][msg.card.blockY] = msg.card;
         }
     }
 
     public getHero(uid: number) {
-        for (let index = 0; index < this._serverData.unitCards.length; index++) {
-            const unit = this._serverData.unitCards[index];
-            if (unit.uid === uid && CardsModel.ins().getCardInfoById(unit.cardId).cardType === CardsPto.CardType.Hero) {
-                return unit;
+        for (let index = 0; index < this._serverData.entityCards.length; index++) {
+            const entity = this._serverData.entityCards[index];
+            if (entity.uid === uid && CardsModel.ins().getCardInfoById(entity.cardId).cardType === CardsPto.CardType.Hero) {
+                return entity;
             }
         }
     }
 
     /**获取指定位置的单位 */
-    public getUnitCardByPoint(blockX: number, blockY: number): GamePto.ICard {
+    public getEntityCardByPoint(blockX: number, blockY: number): GamePto.ICard {
         return this._mapData[blockX][blockY];
     }
 
     /**回合结束将所有卡牌的可操作性权限中止 */
     public onGameEnd() {
-        for (let index = 0; index < this._serverData.unitCards.length; index++) {
-            const unitCard = this._serverData.unitCards[index];
+        for (let index = 0; index < this._serverData.entityCards.length; index++) {
+            const unitCard = this._serverData.entityCards[index];
             unitCard.allowAtk = false;
             unitCard.allowMove = false;
         }
@@ -70,7 +69,7 @@ class MapModel extends BaseModel {
     public getAttackablePoint(baseX: number, baseY: number, config: CardInterface, resultMap = new Map<number, number>()) {
         //获取攻击距离
         const atkRange = CardsModel.ins().getCardAtkRange(config);
-        const basePoint = baseY * 7 + baseY;
+        const basePoint = baseY * 7 + baseX;
         for (let x = baseX - atkRange; x <= baseX + atkRange; x++) {
             const targetPoint = baseY * 7 + x;
             if (!resultMap.has(targetPoint) && this.allowAtk(x, baseY)) {
@@ -100,17 +99,16 @@ class MapModel extends BaseModel {
     }
 
     /**获取可移动坐标 */
-    public getMovablePoint(cardInfo: GamePto.ICard, config: CardInterface) {
-        const resultSet = new Set<number>();
+    public getMovablePoint(cardInfo: GamePto.ICard, config: CardInterface, movePointSet = new Set<number>()) {
         //要根据卡片配置决定是飞行还是行走
         const step = CardsModel.ins().getCardMoveStep(config);
         const isFly = step < 0;
         if (isFly) {
-            this.getFlyablePoint(cardInfo.blockX, cardInfo.blockY, step, resultSet);
+            this.getFlyablePoint(cardInfo.blockX, cardInfo.blockY, step, movePointSet);
         } else {
-            this.getWalkablePoint(cardInfo.blockX, cardInfo.blockY, step, resultSet);
+            this.getWalkablePoint(cardInfo.blockX, cardInfo.blockY, step, movePointSet);
         }
-        return resultSet;
+        return movePointSet;
     }
 
     /**获取目标位置是否可以移动 */
@@ -151,7 +149,7 @@ class MapModel extends BaseModel {
     }
 
     /**请求移动 */
-    C_MOVE(sourceX: number, sourceY: number, targetX: number, targetY: number) {
+    public C_MOVE(sourceX: number, sourceY: number, targetX: number, targetY: number) {
         const msg = new GamePto.C_MOVE();
         msg.sourceX = sourceX;
         msg.sourceY = sourceY;
@@ -161,7 +159,7 @@ class MapModel extends BaseModel {
     }
 
     /**请求攻击 */
-    C_ATTACK(sourceX: number, sourceY: number, targetX: number, targetY: number) {
+    public C_ATTACK(sourceX: number, sourceY: number, targetX: number, targetY: number) {
         const msg = new GamePto.C_ATTACK();
         msg.sourceX = sourceX;
         msg.sourceY = sourceY;
@@ -171,7 +169,7 @@ class MapModel extends BaseModel {
     }
 
     //请求移动返回
-    S_MOVE(msg: GamePto.S_MOVE) {
+    private S_MOVE(msg: GamePto.S_MOVE) {
         const card = this._mapData[msg.sourceX][msg.sourceY];
         this._mapData[msg.sourceX][msg.sourceY] = null;
         this._mapData[msg.targetX][msg.targetY] = card;
@@ -182,6 +180,38 @@ class MapModel extends BaseModel {
         GameModel.ins().moveTimes--;
         if (GameModel.ins().moveTimes === 0) {
             this.emit('S_MAP_DATA', msg);
+        }
+    }
+
+    //请求攻击返回
+    private S_ATTACK(msg: GamePto.S_ATTACK) {
+        const sourceCard = this._mapData[msg.sourceX][msg.sourceY];
+        const targetCard = this._mapData[msg.targetX][msg.targetY];
+        if (!sourceCard || !targetCard) {
+            console.error('攻击所需对象缺失', msg);
+            return;
+        }
+        sourceCard.allowAtk = msg.allowAtk;
+        targetCard.health = msg.targetHealth;
+        this.emit('S_ATTACK', msg);
+    }
+
+    //单位死亡
+    private S_ENTITY_DEAD(msg: GamePto.S_ENTITY_DEAD) {
+        this._mapData[msg.blockX][msg.blockY] = null;
+        GameModel.ins().deadPool.push(msg.deadCard);
+        this.emit('S_ENTITY_DEAD', msg);
+    }
+
+    //事件卡结束
+    private S_EVENT_FINISH(msg: GamePto.S_EVENT_FINISH) {
+        for (let index = 0; index < this._serverData.eventCards.length; index++) {
+            const eventCard = this._serverData.eventCards[index];
+            if (eventCard.id === msg.card.id) {
+                GameModel.ins().deadPool.push(msg.card);
+                this._serverData.eventCards.splice(index, 1);
+                return;
+            }
         }
     }
 }

@@ -133,6 +133,9 @@ export class GameHandler extends BaseHandler {
         }
         const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
         let targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
+        if (!sourceCard || !targetCard) {
+            return;
+        }
         //获取到真正会受到伤害的卡牌(远程攻击会被挡住)
         targetCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
 
@@ -171,9 +174,12 @@ export class GameHandler extends BaseHandler {
             replay.targetHealth = targetCard.health;
             replay.allowAtk = sourceCard.allowAtk;
             replay.uid = user.uid;
-            replay.allowAtk = sourceCard.allowAtk;
             replay.dices = dices;
             table.broadcast(replay);
+
+            //执行卡牌受伤后事件
+            targetCard.onDamageAfter();
+
             //执行卡牌攻击后事件
             sourceCard.onAtkAfter(sourceCard, targetCard, damage, dices);
 

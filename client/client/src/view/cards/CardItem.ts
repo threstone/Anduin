@@ -72,7 +72,7 @@ class CardItem {
         }
     }
 
-    static getUnitCard(cardInfo: GamePto.ICard) {
+    static getEntityCard(cardInfo: GamePto.ICard) {
         const cardConfig = CardsModel.ins().getCardInfoById(cardInfo.cardId)
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;

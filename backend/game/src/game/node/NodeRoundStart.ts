@@ -46,8 +46,8 @@ export class NodeRoundStart extends BaseNode {
         }
 
         //执行场上所有单位卡牌的回合开始事件
-        for (let index = 0; index < user.unitPool.length; index++) {
-            const card = user.unitPool[index];
+        for (let index = 0; index < user.entityPool.length; index++) {
+            const card = user.entityPool[index];
             //计算所有回合开始事件所需要的时间
             card.onRoundStart();
         }

@@ -59,4 +59,8 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
     private updateDesc() {
         this.view.tips.text = `${this.tipsStart}\n${Utils.formatTime(this.reqEndTime - Date.now())}`;
     }
+
+    public async showDices(dices: number[]) {
+        //TODO
+    }
 }

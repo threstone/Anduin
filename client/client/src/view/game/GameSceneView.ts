@@ -135,7 +135,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             //扣血
             hero.health -= damage;
             //展示
-            MapView.ins().unitReduceHeath(hero, damage);
+            MapView.ins().entityReduceHeath(hero, damage);
             TipsView.ins().showTips(`${uid === UserModel.ins().uid ? '你' : '对方'}收到了${damage}点疲劳伤害!`,)
             await this.wait(500);
         }

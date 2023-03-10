@@ -4,7 +4,7 @@ class FriendlyMatchModel extends BaseModel {
     get friendUid() { return this._friendUid }
 
     /**请求友谊赛 */
-    C_REQ_MATCH(uid: number) {
+    public C_REQ_MATCH(uid: number) {
         const msg = new FriendlyMatchPto.C_REQ_MATCH();
         msg.targetUid = uid;
         this._friendUid = uid;
@@ -12,33 +12,33 @@ class FriendlyMatchModel extends BaseModel {
     }
 
     /**取消请求友谊赛 */
-    C_CANCEL_REQ_MATCH() {
+    public C_CANCEL_REQ_MATCH() {
         const msg = new FriendlyMatchPto.C_CANCEL_REQ_MATCH();
         this.sendMsg(msg);
     }
 
     /**接受或拒绝好友的友谊赛请求 */
-    C_REQ_MATCH_RESULT(result: boolean) {
+    public C_REQ_MATCH_RESULT(result: boolean) {
         const msg = new FriendlyMatchPto.C_REQ_MATCH_RESULT();
         msg.result = result;
         this.sendMsg(msg);
     }
 
     /**玩家挑选卡组*/
-    C_GROUP_CHOOSE(cardGroupId: number) {
+    public C_GROUP_CHOOSE(cardGroupId: number) {
         const msg = new FriendlyMatchPto.C_GROUP_CHOOSE();
         msg.cardGroupId = cardGroupId;
         this.sendMsg(msg);
     }
 
     /**友谊赛取消挑选卡组*/
-    C_MATCH_CANCEL_GROUP() {
+    public C_MATCH_CANCEL_GROUP() {
         const msg = new FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
         this.sendMsg(msg);
     }
 
     /**友谊赛离开*/
-    C_MATCH_LEAVE() {
+    public C_MATCH_LEAVE() {
         const msg = new FriendlyMatchPto.C_MATCH_LEAVE();
         this.sendMsg(msg);
     }

@@ -1,8 +1,12 @@
+import { getLogger } from "log4js";
+import { GamePto } from "../../../common/CommonProto";
 import { CardsPto } from "../../../common/CommonProto";
 import { BaseEvent, EventFunction } from "../game/GameDefine";
 import { BaseCard } from "./BaseCard";
 import { BuildingCard } from "./BuildingCard";
 import { UnitCard } from "./UnitCard";
+
+const logger = getLogger();
 
 /**event card用health来决定持续回合数 */
 export class EventCard extends BaseCard implements BaseEvent {
@@ -121,6 +125,29 @@ export class EventCard extends BaseCard implements BaseEvent {
             this.table.mapData.addEvent(this);
             const user = this.table.getUser(this.uid);
             user.eventPool.push(this);
+        }
+    }
+
+    /**检查时间是否结束 */
+    public checkEventClose() {
+        if (this.cardType === CardsPto.CardType.Event && this.health <= 0) {
+            const user = this.table.getUser(this.uid);
+            const index = user.eventPool.indexOf(this);
+            if (index === -1) {
+                logger.error('应该删除的事件卡不在玩家事件卡池中!', this);
+                return;
+            }
+            //删除战场中的生效的此事件卡
+            this.table.mapData.deleteEvent(this);
+            //删除玩家事件卡池中的此卡
+            user.eventPool.splice(index, 1);
+            //进入墓地
+            user.deadPool.push(this);
+
+            //派发结束时间
+            const msg = new GamePto.S_EVENT_FINISH();
+            msg.card = this;
+            this.table.broadcast(msg);
         }
     }
 }

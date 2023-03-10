@@ -106,7 +106,7 @@ export class GameMap {
         }
     }
 
-    public delete(x: number, y: number, isDeleteGlobalBuff: boolean = true) {
+    public deleteCard(x: number, y: number, isDeleteGlobalBuff: boolean = true) {
         const mapBlock = this._mapData[x][y];
         if (!mapBlock.card) {
             return;
@@ -146,7 +146,7 @@ export class GameMap {
 
     /**更新卡牌位置 */
     public updateCardPosition(targetX: number, targetY: number, card: UnitCard) {
-        this.delete(card.blockX, card.blockY, false);
+        this.deleteCard(card.blockX, card.blockY, false);
         card.blockX = targetX;
         card.blockY = targetY;
         this.setCard(card, false);
@@ -174,12 +174,12 @@ export class GameMap {
     }
 
     /**获取根据距离附近的坐标 */
-    public getAroundByDistance(baseX: number, baseY: number, distance: number) {
+public getAroundByDistance(baseX: number, baseY: number, distance: number) {
         const result: { x: number, y: number }[] = [];
         for (let x = baseX - distance; x <= baseX + distance; x++) {
             for (let y = baseY - distance; y <= baseY + distance; y++) {
                 const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
-                if (tempDistance !== 0) {
+                if (tempDistance !== 0 && x >= 0 && x < this._width && y >= 0 && y < this._height) {
                     result.push({ x, y });
                 }
             }

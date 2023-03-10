@@ -99,7 +99,7 @@ export class GameTable extends BaseTable {
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
             mapData.eventCards.push(...user.eventPool);
-            mapData.unitCards.push(...user.unitPool);
+            mapData.entityCards.push(...user.entityPool);
         }
         return mapData;
     }
@@ -190,6 +190,7 @@ export class GameTable extends BaseTable {
         return res;
     }
 
+    /**根据骰子获取指定结果的数额 */
     public getTargetDiceValueNum(diceResArr: number[], targetType: GamePto.DiceValueEnum) {
         let num = 0;
         for (let index = 0; index < diceResArr.length; index++) {

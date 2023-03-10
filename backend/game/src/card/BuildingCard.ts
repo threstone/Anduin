@@ -1,3 +1,4 @@
+import { GamePto } from "../../../common/CommonProto";
 import { BuffData } from "../buff/BuffData";
 import { EventFunction } from "../game/GameDefine";
 import { GlobalVar } from "../GlobalVar";
@@ -12,6 +13,15 @@ export class BuildingCard extends EventCard {
     private _buffMap: Map<number, BuffData>;
 
     public onDamageFuns: EventFunction[];
+    public onDamageAfterFuns: EventFunction[];
+    public onDeadFuns: EventFunction[];
+
+    constructor(cardId: number) {
+        super(cardId);
+        this.onDamageFuns = [];
+        this.onDamageAfterFuns = [];
+        this.onDeadFuns = [];
+    }
 
     /**发送到客户端的状态数据 */
     get buffArr() {
@@ -57,7 +67,7 @@ export class BuildingCard extends EventCard {
         this.blockY = blockY;
         this.table.mapData.setCard(this);
         const user = this.table.getUser(this.uid);
-        user.unitPool.push(this);
+        user.entityPool.push(this);
 
         //ADD Buff
         for (let index = 0; index < this.buffs.length; index++) {
@@ -89,6 +99,41 @@ export class BuildingCard extends EventCard {
         this.health -= damage;
         return damage;
     }
+
+    /**
+     * 当受到伤害之后
+     */
+    public onDamageAfter(self = this) {
+        this.callFuns(this.onDamageAfterFuns, self);
+        //死亡了
+        if (this.health <= 0) {
+            this.onDead();
+        }
+    }
+
+    public onDead(self = this) {
+        const user = this.table.getUser(this.uid);
+        const index = user.entityPool.indexOf(this);
+        if (index === -1) {
+            return;
+        }
+
+        /**从地图上删除卡牌 */
+        this.table.mapData.deleteCard(this.blockX, this.blockY);
+        user.entityPool.splice(index, 1);
+        user.deadPool.push(this);
+
+        //派发死亡协议
+        const msg = new GamePto.S_ENTITY_DEAD();
+        msg.blockX = this.blockX;
+        msg.blockY = this.blockY;
+        msg.deadCard = this;
+        this.table.broadcast(msg);
+
+        //执行卡牌死亡事件,亡语就在此执行
+        this.callFuns(this.onDeadFuns, self);
+    }
+
 
     // /**
     //  * 回合结束触发

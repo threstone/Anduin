@@ -3313,6 +3313,7 @@ $root.GamePto = (function() {
                         this[ks[i]] = p[ks[i]];
         }
 
+        Card.prototype.id = 0;
         Card.prototype.cardId = 0;
         Card.prototype.attack = 0;
         Card.prototype.health = 0;
@@ -3331,26 +3332,28 @@ $root.GamePto = (function() {
         Card.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
+            if (m.id != null && Object.hasOwnProperty.call(m, "id"))
+                w.uint32(0).int32(m.id);
             if (m.cardId != null && Object.hasOwnProperty.call(m, "cardId"))
-                w.uint32(0).int32(m.cardId);
+                w.uint32(8).int32(m.cardId);
             if (m.attack != null && Object.hasOwnProperty.call(m, "attack"))
-                w.uint32(8).int32(m.attack);
+                w.uint32(16).int32(m.attack);
             if (m.health != null && Object.hasOwnProperty.call(m, "health"))
-                w.uint32(16).int32(m.health);
+                w.uint32(24).int32(m.health);
             if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(24).int32(m.fee);
+                w.uint32(32).int32(m.fee);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(32).int32(m.uid);
+                w.uint32(40).int32(m.uid);
             if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
-                w.uint32(40).int32(m.blockX);
+                w.uint32(48).int32(m.blockX);
             if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
-                w.uint32(48).int32(m.blockY);
+                w.uint32(56).int32(m.blockY);
             if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
-                w.uint32(56).bool(m.allowAtk);
+                w.uint32(64).bool(m.allowAtk);
             if (m.allowMove != null && Object.hasOwnProperty.call(m, "allowMove"))
-                w.uint32(64).bool(m.allowMove);
+                w.uint32(72).bool(m.allowMove);
             if (m.buffArr != null && m.buffArr.length) {
-                w.uint32(74).fork();
+                w.uint32(82).fork();
                 for (var i = 0; i < m.buffArr.length; ++i)
                     w.int32(m.buffArr[i]);
                 w.ldelim();
@@ -3366,42 +3369,46 @@ $root.GamePto = (function() {
                 var t = r.uint32();
                 switch (t >>> 3) {
                 case 0: {
-                        m.cardId = r.int32();
+                        m.id = r.int32();
                         break;
                     }
                 case 1: {
-                        m.attack = r.int32();
+                        m.cardId = r.int32();
                         break;
                     }
                 case 2: {
-                        m.health = r.int32();
+                        m.attack = r.int32();
                         break;
                     }
                 case 3: {
-                        m.fee = r.int32();
+                        m.health = r.int32();
                         break;
                     }
                 case 4: {
-                        m.uid = r.int32();
+                        m.fee = r.int32();
                         break;
                     }
                 case 5: {
-                        m.blockX = r.int32();
+                        m.uid = r.int32();
                         break;
                     }
                 case 6: {
-                        m.blockY = r.int32();
+                        m.blockX = r.int32();
                         break;
                     }
                 case 7: {
-                        m.allowAtk = r.bool();
+                        m.blockY = r.int32();
                         break;
                     }
                 case 8: {
-                        m.allowMove = r.bool();
+                        m.allowAtk = r.bool();
                         break;
                     }
                 case 9: {
+                        m.allowMove = r.bool();
+                        break;
+                    }
+                case 10: {
                         if (!(m.buffArr && m.buffArr.length))
                             m.buffArr = [];
                         if ((t & 7) === 2) {
@@ -3424,6 +3431,9 @@ $root.GamePto = (function() {
             if (d instanceof $root.GamePto.Card)
                 return d;
             var m = new $root.GamePto.Card();
+            if (d.id != null) {
+                m.id = d.id | 0;
+            }
             if (d.cardId != null) {
                 m.cardId = d.cardId | 0;
             }
@@ -3470,6 +3480,7 @@ $root.GamePto = (function() {
                 d.buffArr = [];
             }
             if (o.defaults) {
+                d.id = 0;
                 d.cardId = 0;
                 d.attack = 0;
                 d.health = 0;
@@ -3479,6 +3490,9 @@ $root.GamePto = (function() {
                 d.blockY = 0;
                 d.allowAtk = false;
                 d.allowMove = false;
+            }
+            if (m.id != null && m.hasOwnProperty("id")) {
+                d.id = m.id;
             }
             if (m.cardId != null && m.hasOwnProperty("cardId")) {
                 d.cardId = m.cardId;
@@ -3534,7 +3548,7 @@ $root.GamePto = (function() {
 
         function MapData(p) {
             this.eventCards = [];
-            this.unitCards = [];
+            this.entityCards = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -3542,7 +3556,7 @@ $root.GamePto = (function() {
         }
 
         MapData.prototype.eventCards = $util.emptyArray;
-        MapData.prototype.unitCards = $util.emptyArray;
+        MapData.prototype.entityCards = $util.emptyArray;
 
         MapData.create = function create(properties) {
             return new MapData(properties);
@@ -3555,9 +3569,9 @@ $root.GamePto = (function() {
                 for (var i = 0; i < m.eventCards.length; ++i)
                     $root.GamePto.Card.encode(m.eventCards[i], w.uint32(2).fork()).ldelim();
             }
-            if (m.unitCards != null && m.unitCards.length) {
-                for (var i = 0; i < m.unitCards.length; ++i)
-                    $root.GamePto.Card.encode(m.unitCards[i], w.uint32(10).fork()).ldelim();
+            if (m.entityCards != null && m.entityCards.length) {
+                for (var i = 0; i < m.entityCards.length; ++i)
+                    $root.GamePto.Card.encode(m.entityCards[i], w.uint32(10).fork()).ldelim();
             }
             return w;
         };
@@ -3576,9 +3590,9 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 1: {
-                        if (!(m.unitCards && m.unitCards.length))
-                            m.unitCards = [];
-                        m.unitCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        if (!(m.entityCards && m.entityCards.length))
+                            m.entityCards = [];
+                        m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
                         break;
                     }
                 default:
@@ -3603,14 +3617,14 @@ $root.GamePto = (function() {
                     m.eventCards[i] = $root.GamePto.Card.fromObject(d.eventCards[i]);
                 }
             }
-            if (d.unitCards) {
-                if (!Array.isArray(d.unitCards))
-                    throw TypeError(".GamePto.MapData.unitCards: array expected");
-                m.unitCards = [];
-                for (var i = 0; i < d.unitCards.length; ++i) {
-                    if (typeof d.unitCards[i] !== "object")
-                        throw TypeError(".GamePto.MapData.unitCards: object expected");
-                    m.unitCards[i] = $root.GamePto.Card.fromObject(d.unitCards[i]);
+            if (d.entityCards) {
+                if (!Array.isArray(d.entityCards))
+                    throw TypeError(".GamePto.MapData.entityCards: array expected");
+                m.entityCards = [];
+                for (var i = 0; i < d.entityCards.length; ++i) {
+                    if (typeof d.entityCards[i] !== "object")
+                        throw TypeError(".GamePto.MapData.entityCards: object expected");
+                    m.entityCards[i] = $root.GamePto.Card.fromObject(d.entityCards[i]);
                 }
             }
             return m;
@@ -3622,7 +3636,7 @@ $root.GamePto = (function() {
             var d = {};
             if (o.arrays || o.defaults) {
                 d.eventCards = [];
-                d.unitCards = [];
+                d.entityCards = [];
             }
             if (m.eventCards && m.eventCards.length) {
                 d.eventCards = [];
@@ -3630,10 +3644,10 @@ $root.GamePto = (function() {
                     d.eventCards[j] = $root.GamePto.Card.toObject(m.eventCards[j], o);
                 }
             }
-            if (m.unitCards && m.unitCards.length) {
-                d.unitCards = [];
-                for (var j = 0; j < m.unitCards.length; ++j) {
-                    d.unitCards[j] = $root.GamePto.Card.toObject(m.unitCards[j], o);
+            if (m.entityCards && m.entityCards.length) {
+                d.entityCards = [];
+                for (var j = 0; j < m.entityCards.length; ++j) {
+                    d.entityCards[j] = $root.GamePto.Card.toObject(m.entityCards[j], o);
                 }
             }
             return d;
@@ -6629,6 +6643,252 @@ $root.GamePto = (function() {
         };
 
         return S_ATTACK;
+    })();
+
+    GamePto.S_ENTITY_DEAD = (function() {
+
+        function S_ENTITY_DEAD(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_ENTITY_DEAD.prototype.cmd = 200;
+        S_ENTITY_DEAD.prototype.scmd = 10014;
+        S_ENTITY_DEAD.prototype.blockX = 0;
+        S_ENTITY_DEAD.prototype.blockY = 0;
+        S_ENTITY_DEAD.prototype.deadCard = null;
+
+        S_ENTITY_DEAD.create = function create(properties) {
+            return new S_ENTITY_DEAD(properties);
+        };
+
+        S_ENTITY_DEAD.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
+                w.uint32(24).int32(m.blockX);
+            if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
+                w.uint32(32).int32(m.blockY);
+            if (m.deadCard != null && Object.hasOwnProperty.call(m, "deadCard"))
+                $root.GamePto.Card.encode(m.deadCard, w.uint32(42).fork()).ldelim();
+            return w;
+        };
+
+        S_ENTITY_DEAD.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_ENTITY_DEAD();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.blockX = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.blockY = r.int32();
+                        break;
+                    }
+                case 5: {
+                        m.deadCard = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_ENTITY_DEAD.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_ENTITY_DEAD)
+                return d;
+            var m = new $root.GamePto.S_ENTITY_DEAD();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.blockX != null) {
+                m.blockX = d.blockX | 0;
+            }
+            if (d.blockY != null) {
+                m.blockY = d.blockY | 0;
+            }
+            if (d.deadCard != null) {
+                if (typeof d.deadCard !== "object")
+                    throw TypeError(".GamePto.S_ENTITY_DEAD.deadCard: object expected");
+                m.deadCard = $root.GamePto.Card.fromObject(d.deadCard);
+            }
+            return m;
+        };
+
+        S_ENTITY_DEAD.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10014;
+                d.blockX = 0;
+                d.blockY = 0;
+                d.deadCard = null;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.blockX != null && m.hasOwnProperty("blockX")) {
+                d.blockX = m.blockX;
+            }
+            if (m.blockY != null && m.hasOwnProperty("blockY")) {
+                d.blockY = m.blockY;
+            }
+            if (m.deadCard != null && m.hasOwnProperty("deadCard")) {
+                d.deadCard = $root.GamePto.Card.toObject(m.deadCard, o);
+            }
+            return d;
+        };
+
+        S_ENTITY_DEAD.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_ENTITY_DEAD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ENTITY_DEAD";
+        };
+
+        return S_ENTITY_DEAD;
+    })();
+
+    GamePto.S_EVENT_FINISH = (function() {
+
+        function S_EVENT_FINISH(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_EVENT_FINISH.prototype.cmd = 200;
+        S_EVENT_FINISH.prototype.scmd = 10015;
+        S_EVENT_FINISH.prototype.card = null;
+
+        S_EVENT_FINISH.create = function create(properties) {
+            return new S_EVENT_FINISH(properties);
+        };
+
+        S_EVENT_FINISH.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.card != null && Object.hasOwnProperty.call(m, "card"))
+                $root.GamePto.Card.encode(m.card, w.uint32(26).fork()).ldelim();
+            return w;
+        };
+
+        S_EVENT_FINISH.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_EVENT_FINISH();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.card = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_EVENT_FINISH.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_EVENT_FINISH)
+                return d;
+            var m = new $root.GamePto.S_EVENT_FINISH();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.card != null) {
+                if (typeof d.card !== "object")
+                    throw TypeError(".GamePto.S_EVENT_FINISH.card: object expected");
+                m.card = $root.GamePto.Card.fromObject(d.card);
+            }
+            return m;
+        };
+
+        S_EVENT_FINISH.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10015;
+                d.card = null;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.card != null && m.hasOwnProperty("card")) {
+                d.card = $root.GamePto.Card.toObject(m.card, o);
+            }
+            return d;
+        };
+
+        S_EVENT_FINISH.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_EVENT_FINISH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_EVENT_FINISH";
+        };
+
+        return S_EVENT_FINISH;
     })();
 
     return GamePto;

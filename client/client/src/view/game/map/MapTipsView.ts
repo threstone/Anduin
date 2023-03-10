@@ -57,6 +57,9 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         pointSet.forEach((point: number) => {
             const x = point % 7;
             const y = Math.floor(point / 7);
+            if (baseCard.blockX === x && baseCard.blockY === y) {
+                return;
+            }
             const position = MapView.ins().getScenePoint(x, y);
             const tips = BaseUI.UIMoveTips.createInstance();
             tips.x = position.x;

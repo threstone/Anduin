@@ -2840,6 +2840,9 @@ export namespace GamePto {
     /** Properties of a Card. */
     interface ICard {
 
+        /** Card id */
+        id?: (number|null);
+
         /** Card cardId */
         cardId?: (number|null);
 
@@ -2879,6 +2882,9 @@ export namespace GamePto {
          * @param [properties] Properties to set
          */
         constructor(properties?: GamePto.ICard);
+
+        /** Card id. */
+        public id: number;
 
         /** Card cardId. */
         public cardId: number;
@@ -2987,8 +2993,8 @@ export namespace GamePto {
         /** MapData eventCards */
         eventCards?: (GamePto.ICard[]|null);
 
-        /** MapData unitCards */
-        unitCards?: (GamePto.ICard[]|null);
+        /** MapData entityCards */
+        entityCards?: (GamePto.ICard[]|null);
     }
 
     /** Represents a MapData. */
@@ -3003,8 +3009,8 @@ export namespace GamePto {
         /** MapData eventCards. */
         public eventCards: GamePto.ICard[];
 
-        /** MapData unitCards. */
-        public unitCards: GamePto.ICard[];
+        /** MapData entityCards. */
+        public entityCards: GamePto.ICard[];
 
         /**
          * Encodes the specified MapData message. Does not implicitly {@link GamePto.MapData.verify|verify} messages.
@@ -5381,6 +5387,222 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_ATTACK
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_ENTITY_DEAD. */
+    interface IS_ENTITY_DEAD {
+
+        /** S_ENTITY_DEAD cmd */
+        cmd?: (number|null);
+
+        /** S_ENTITY_DEAD scmd */
+        scmd?: (number|null);
+
+        /** S_ENTITY_DEAD blockX */
+        blockX?: (number|null);
+
+        /** S_ENTITY_DEAD blockY */
+        blockY?: (number|null);
+
+        /** S_ENTITY_DEAD deadCard */
+        deadCard?: (GamePto.ICard|null);
+    }
+
+    /** Represents a S_ENTITY_DEAD. */
+    class S_ENTITY_DEAD implements IS_ENTITY_DEAD {
+
+        /**
+         * Constructs a new S_ENTITY_DEAD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ENTITY_DEAD);
+
+        /** S_ENTITY_DEAD cmd. */
+        public cmd: number;
+
+        /** S_ENTITY_DEAD scmd. */
+        public scmd: number;
+
+        /** S_ENTITY_DEAD blockX. */
+        public blockX: number;
+
+        /** S_ENTITY_DEAD blockY. */
+        public blockY: number;
+
+        /** S_ENTITY_DEAD deadCard. */
+        public deadCard?: (GamePto.ICard|null);
+
+        /**
+         * Encodes the specified S_ENTITY_DEAD message. Does not implicitly {@link GamePto.S_ENTITY_DEAD.verify|verify} messages.
+         * @param message S_ENTITY_DEAD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ENTITY_DEAD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_ENTITY_DEAD message, length delimited. Does not implicitly {@link GamePto.S_ENTITY_DEAD.verify|verify} messages.
+         * @param message S_ENTITY_DEAD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_ENTITY_DEAD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_ENTITY_DEAD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ENTITY_DEAD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_ENTITY_DEAD;
+
+        /**
+         * Decodes a S_ENTITY_DEAD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_ENTITY_DEAD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_ENTITY_DEAD;
+
+        /**
+         * Verifies a S_ENTITY_DEAD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_ENTITY_DEAD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_ENTITY_DEAD
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_ENTITY_DEAD;
+
+        /**
+         * Creates a plain object from a S_ENTITY_DEAD message. Also converts values to other types if specified.
+         * @param message S_ENTITY_DEAD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_ENTITY_DEAD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_ENTITY_DEAD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_ENTITY_DEAD
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_EVENT_FINISH. */
+    interface IS_EVENT_FINISH {
+
+        /** S_EVENT_FINISH cmd */
+        cmd?: (number|null);
+
+        /** S_EVENT_FINISH scmd */
+        scmd?: (number|null);
+
+        /** S_EVENT_FINISH card */
+        card?: (GamePto.ICard|null);
+    }
+
+    /** Represents a S_EVENT_FINISH. */
+    class S_EVENT_FINISH implements IS_EVENT_FINISH {
+
+        /**
+         * Constructs a new S_EVENT_FINISH.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_EVENT_FINISH);
+
+        /** S_EVENT_FINISH cmd. */
+        public cmd: number;
+
+        /** S_EVENT_FINISH scmd. */
+        public scmd: number;
+
+        /** S_EVENT_FINISH card. */
+        public card?: (GamePto.ICard|null);
+
+        /**
+         * Encodes the specified S_EVENT_FINISH message. Does not implicitly {@link GamePto.S_EVENT_FINISH.verify|verify} messages.
+         * @param message S_EVENT_FINISH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_EVENT_FINISH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_EVENT_FINISH message, length delimited. Does not implicitly {@link GamePto.S_EVENT_FINISH.verify|verify} messages.
+         * @param message S_EVENT_FINISH message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_EVENT_FINISH, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_EVENT_FINISH message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_EVENT_FINISH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_EVENT_FINISH;
+
+        /**
+         * Decodes a S_EVENT_FINISH message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_EVENT_FINISH
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_EVENT_FINISH;
+
+        /**
+         * Verifies a S_EVENT_FINISH message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_EVENT_FINISH message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_EVENT_FINISH
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_EVENT_FINISH;
+
+        /**
+         * Creates a plain object from a S_EVENT_FINISH message. Also converts values to other types if specified.
+         * @param message S_EVENT_FINISH
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_EVENT_FINISH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_EVENT_FINISH to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_EVENT_FINISH
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

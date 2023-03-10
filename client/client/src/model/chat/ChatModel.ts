@@ -7,8 +7,7 @@ class ChatModel extends BaseModel {
 
     selectUid: number = -1;
 
-
-    getUnreadNumByType(type: ChatPto.MsgType) {
+    public getUnreadNumByType(type: ChatPto.MsgType) {
         switch (type) {
             case ChatPto.MsgType.normal:
                 return this.normalMsgInfo.unreadNum;
@@ -19,7 +18,7 @@ class ChatModel extends BaseModel {
         }
     }
 
-    clearUnreadByType(type: ChatPto.MsgType) {
+    public clearUnreadByType(type: ChatPto.MsgType) {
         switch (type) {
             case ChatPto.MsgType.normal:
                 this.normalMsgInfo.unreadNum = 0;
@@ -31,7 +30,7 @@ class ChatModel extends BaseModel {
     }
 
 
-    getMsgArrByType(type: ChatPto.MsgType) {
+    public getMsgArrByType(type: ChatPto.MsgType) {
         switch (type) {
             case ChatPto.MsgType.normal:
                 return this.normalMsgInfo.msgArr;
@@ -40,7 +39,7 @@ class ChatModel extends BaseModel {
         }
     }
 
-    getFriendMsg(uid: number) {
+    public getFriendMsg(uid: number) {
         let info = this._friendMsgMap.get(uid);
         if (!info) {
             info = new ChatMsgInfo();
@@ -71,7 +70,7 @@ class ChatModel extends BaseModel {
     /**
      * 如果是私聊信息则必须有uid
      */
-    C_SEND_MESSAGE(message: string, msgType: ChatPto.MsgType,) {
+    public C_SEND_MESSAGE(message: string, msgType: ChatPto.MsgType,) {
         const msg = new ChatPto.C_SEND_MESSAGE();
         msg.uid = this.selectUid;
         msg.msg = message;

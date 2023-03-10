@@ -13,8 +13,8 @@ class MapItem {
         }
     }
 
-    public static updateDesc(unit: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
-        if (unit.healthText) {
+    public static updateDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
+        if (entity.healthText) {
 
         }
     }

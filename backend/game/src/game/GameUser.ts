@@ -39,10 +39,10 @@ export class GameUser {
     get eventPool() { return this._eventPool; }
 
     /**正在战场上起作用的单位卡 */
-    private _unitPool: (UnitCard | BuildingCard)[];
-    get unitPool() { return this._unitPool; }
+    private _entityPool: (UnitCard | BuildingCard)[];
+    get entityPool() { return this._entityPool; }
 
-    get hero() { return this._unitPool[0] }
+    get hero() { return this._entityPool[0] }
 
     /**是否换牌 */
     isReplace: boolean;
@@ -104,7 +104,7 @@ export class GameUser {
         }
         this._deadPool = [];
         this._eventPool = [];
-        this._unitPool = [];
+        this._entityPool = [];
         this._handCards = [];
         this.replaceIndexes = [];
 
@@ -163,7 +163,7 @@ export class GameUser {
     /**设置单位卡到地图 */
     public setUnitCardToMap(card: UnitCard | BuildingCard) {
         this.table.mapData.setCard(card);
-        this._unitPool.push(card);
+        this._entityPool.push(card);
     }
 
     /**广播费用 */
