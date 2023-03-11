@@ -199,7 +199,12 @@ class MapModel extends BaseModel {
     //单位死亡
     private S_ENTITY_DEAD(msg: GamePto.S_ENTITY_DEAD) {
         this._mapData[msg.blockX][msg.blockY] = null;
-        GameModel.ins().deadPool.push(msg.deadCard);
+        if (msg.deadCard.uid === UserModel.ins().uid) {
+            GameModel.ins().deadPool.push(msg.deadCard);
+        } else {
+            GameModel.ins().targetDeadPoolNum++;
+        }
+        this.emit('UpdateDeadCardNum');
         this.emit('S_ENTITY_DEAD', msg);
     }
 
@@ -208,7 +213,12 @@ class MapModel extends BaseModel {
         for (let index = 0; index < this._serverData.eventCards.length; index++) {
             const eventCard = this._serverData.eventCards[index];
             if (eventCard.id === msg.card.id) {
-                GameModel.ins().deadPool.push(msg.card);
+                if (msg.card.uid === UserModel.ins().uid) {
+                    GameModel.ins().deadPool.push(msg.card);
+                } else {
+                    GameModel.ins().targetDeadPoolNum++;
+                }
+                this.emit('UpdateDeadCardNum');
                 this._serverData.eventCards.splice(index, 1);
                 return;
             }

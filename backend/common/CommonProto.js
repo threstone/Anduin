@@ -5295,7 +5295,8 @@ $root.GamePto = (function() {
     GamePto.S_DRAW_CARDS = (function() {
 
         function S_DRAW_CARDS(p) {
-            this.cards = [];
+            this.inHandCards = [];
+            this.discards = [];
             this.damages = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -5305,8 +5306,10 @@ $root.GamePto = (function() {
 
         S_DRAW_CARDS.prototype.cmd = 200;
         S_DRAW_CARDS.prototype.scmd = 10006;
-        S_DRAW_CARDS.prototype.cards = $util.emptyArray;
-        S_DRAW_CARDS.prototype.cardCount = 0;
+        S_DRAW_CARDS.prototype.inHandCards = $util.emptyArray;
+        S_DRAW_CARDS.prototype.inHandCardCount = 0;
+        S_DRAW_CARDS.prototype.discards = $util.emptyArray;
+        S_DRAW_CARDS.prototype.discardsCount = 0;
         S_DRAW_CARDS.prototype.damages = $util.emptyArray;
         S_DRAW_CARDS.prototype.uid = 0;
         S_DRAW_CARDS.prototype.cardPoolNum = 0;
@@ -5323,24 +5326,30 @@ $root.GamePto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.cards != null && m.cards.length) {
-                for (var i = 0; i < m.cards.length; ++i)
-                    $root.GamePto.Card.encode(m.cards[i], w.uint32(26).fork()).ldelim();
+            if (m.inHandCards != null && m.inHandCards.length) {
+                for (var i = 0; i < m.inHandCards.length; ++i)
+                    $root.GamePto.Card.encode(m.inHandCards[i], w.uint32(26).fork()).ldelim();
             }
-            if (m.cardCount != null && Object.hasOwnProperty.call(m, "cardCount"))
-                w.uint32(32).int32(m.cardCount);
+            if (m.inHandCardCount != null && Object.hasOwnProperty.call(m, "inHandCardCount"))
+                w.uint32(32).int32(m.inHandCardCount);
+            if (m.discards != null && m.discards.length) {
+                for (var i = 0; i < m.discards.length; ++i)
+                    $root.GamePto.Card.encode(m.discards[i], w.uint32(42).fork()).ldelim();
+            }
+            if (m.discardsCount != null && Object.hasOwnProperty.call(m, "discardsCount"))
+                w.uint32(48).int32(m.discardsCount);
             if (m.damages != null && m.damages.length) {
-                w.uint32(42).fork();
+                w.uint32(58).fork();
                 for (var i = 0; i < m.damages.length; ++i)
                     w.int32(m.damages[i]);
                 w.ldelim();
             }
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(48).int32(m.uid);
+                w.uint32(64).int32(m.uid);
             if (m.cardPoolNum != null && Object.hasOwnProperty.call(m, "cardPoolNum"))
-                w.uint32(56).int32(m.cardPoolNum);
+                w.uint32(72).int32(m.cardPoolNum);
             if (m.deadPoolNum != null && Object.hasOwnProperty.call(m, "deadPoolNum"))
-                w.uint32(64).int32(m.deadPoolNum);
+                w.uint32(80).int32(m.deadPoolNum);
             return w;
         };
 
@@ -5360,16 +5369,26 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        if (!(m.cards && m.cards.length))
-                            m.cards = [];
-                        m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        if (!(m.inHandCards && m.inHandCards.length))
+                            m.inHandCards = [];
+                        m.inHandCards.push($root.GamePto.Card.decode(r, r.uint32()));
                         break;
                     }
                 case 4: {
-                        m.cardCount = r.int32();
+                        m.inHandCardCount = r.int32();
                         break;
                     }
                 case 5: {
+                        if (!(m.discards && m.discards.length))
+                            m.discards = [];
+                        m.discards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        break;
+                    }
+                case 6: {
+                        m.discardsCount = r.int32();
+                        break;
+                    }
+                case 7: {
                         if (!(m.damages && m.damages.length))
                             m.damages = [];
                         if ((t & 7) === 2) {
@@ -5380,15 +5399,15 @@ $root.GamePto = (function() {
                             m.damages.push(r.int32());
                         break;
                     }
-                case 6: {
+                case 8: {
                         m.uid = r.int32();
                         break;
                     }
-                case 7: {
+                case 9: {
                         m.cardPoolNum = r.int32();
                         break;
                     }
-                case 8: {
+                case 10: {
                         m.deadPoolNum = r.int32();
                         break;
                     }
@@ -5410,18 +5429,31 @@ $root.GamePto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.cards) {
-                if (!Array.isArray(d.cards))
-                    throw TypeError(".GamePto.S_DRAW_CARDS.cards: array expected");
-                m.cards = [];
-                for (var i = 0; i < d.cards.length; ++i) {
-                    if (typeof d.cards[i] !== "object")
-                        throw TypeError(".GamePto.S_DRAW_CARDS.cards: object expected");
-                    m.cards[i] = $root.GamePto.Card.fromObject(d.cards[i]);
+            if (d.inHandCards) {
+                if (!Array.isArray(d.inHandCards))
+                    throw TypeError(".GamePto.S_DRAW_CARDS.inHandCards: array expected");
+                m.inHandCards = [];
+                for (var i = 0; i < d.inHandCards.length; ++i) {
+                    if (typeof d.inHandCards[i] !== "object")
+                        throw TypeError(".GamePto.S_DRAW_CARDS.inHandCards: object expected");
+                    m.inHandCards[i] = $root.GamePto.Card.fromObject(d.inHandCards[i]);
                 }
             }
-            if (d.cardCount != null) {
-                m.cardCount = d.cardCount | 0;
+            if (d.inHandCardCount != null) {
+                m.inHandCardCount = d.inHandCardCount | 0;
+            }
+            if (d.discards) {
+                if (!Array.isArray(d.discards))
+                    throw TypeError(".GamePto.S_DRAW_CARDS.discards: array expected");
+                m.discards = [];
+                for (var i = 0; i < d.discards.length; ++i) {
+                    if (typeof d.discards[i] !== "object")
+                        throw TypeError(".GamePto.S_DRAW_CARDS.discards: object expected");
+                    m.discards[i] = $root.GamePto.Card.fromObject(d.discards[i]);
+                }
+            }
+            if (d.discardsCount != null) {
+                m.discardsCount = d.discardsCount | 0;
             }
             if (d.damages) {
                 if (!Array.isArray(d.damages))
@@ -5448,13 +5480,15 @@ $root.GamePto = (function() {
                 o = {};
             var d = {};
             if (o.arrays || o.defaults) {
-                d.cards = [];
+                d.inHandCards = [];
+                d.discards = [];
                 d.damages = [];
             }
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 10006;
-                d.cardCount = 0;
+                d.inHandCardCount = 0;
+                d.discardsCount = 0;
                 d.uid = 0;
                 d.cardPoolNum = 0;
                 d.deadPoolNum = 0;
@@ -5465,14 +5499,23 @@ $root.GamePto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.cards && m.cards.length) {
-                d.cards = [];
-                for (var j = 0; j < m.cards.length; ++j) {
-                    d.cards[j] = $root.GamePto.Card.toObject(m.cards[j], o);
+            if (m.inHandCards && m.inHandCards.length) {
+                d.inHandCards = [];
+                for (var j = 0; j < m.inHandCards.length; ++j) {
+                    d.inHandCards[j] = $root.GamePto.Card.toObject(m.inHandCards[j], o);
                 }
             }
-            if (m.cardCount != null && m.hasOwnProperty("cardCount")) {
-                d.cardCount = m.cardCount;
+            if (m.inHandCardCount != null && m.hasOwnProperty("inHandCardCount")) {
+                d.inHandCardCount = m.inHandCardCount;
+            }
+            if (m.discards && m.discards.length) {
+                d.discards = [];
+                for (var j = 0; j < m.discards.length; ++j) {
+                    d.discards[j] = $root.GamePto.Card.toObject(m.discards[j], o);
+                }
+            }
+            if (m.discardsCount != null && m.hasOwnProperty("discardsCount")) {
+                d.discardsCount = m.discardsCount;
             }
             if (m.damages && m.damages.length) {
                 d.damages = [];

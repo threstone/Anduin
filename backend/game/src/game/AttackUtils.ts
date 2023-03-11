@@ -26,13 +26,13 @@ export class AttackUtils {
             if (sourceCard.blockX === targetCard.blockX) {
                 const changeNum = sourceCard.blockY > targetCard.blockY ? -1 : 1;
                 let y = sourceCard.blockY + changeNum;
-                while ((beAttackCard = mapData.getCard(sourceCard.blockX, y)) == null) {
+                while ((beAttackCard = mapData.getCard(sourceCard.blockX, y)) == null || beAttackCard.uid === sourceCard.uid) {
                     y += changeNum;
                 }
             } else if (sourceCard.blockY === targetCard.blockY) {
                 const changeNum = sourceCard.blockX > targetCard.blockX ? -1 : 1;
-                let x = sourceCard.blockY + changeNum;
-                while ((beAttackCard = mapData.getCard(x, sourceCard.blockY)) == null) {
+                let x = sourceCard.blockX + changeNum;
+                while ((beAttackCard = mapData.getCard(x, sourceCard.blockY)) == null || beAttackCard.uid === sourceCard.uid) {
                     x += changeNum;
                 }
             }

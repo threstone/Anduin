@@ -19,11 +19,11 @@ export enum NodeDriverResult {
 
 export const DiceValueDefine = [
     [GamePto.DiceValueEnum.Sword, GamePto.DiceValueEnum.Bow],
-    [GamePto.DiceValueEnum.Sword, GamePto.DiceValueEnum.Bow],
     [GamePto.DiceValueEnum.Bow, GamePto.DiceValueEnum.Magic],
     [GamePto.DiceValueEnum.Sword, GamePto.DiceValueEnum.Sword],
     [GamePto.DiceValueEnum.Sword, GamePto.DiceValueEnum.Magic],
-    [GamePto.DiceValueEnum.Miss]
+    [GamePto.DiceValueEnum.Miss],
+    [GamePto.DiceValueEnum.Sword, GamePto.DiceValueEnum.Bow],
 ]
 
 

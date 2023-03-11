@@ -6835,8 +6835,10 @@ $root.GamePto = (function() {
          * @interface IS_DRAW_CARDS
          * @property {number|null} [cmd] S_DRAW_CARDS cmd
          * @property {number|null} [scmd] S_DRAW_CARDS scmd
-         * @property {Array.<GamePto.ICard>|null} [cards] S_DRAW_CARDS cards
-         * @property {number|null} [cardCount] S_DRAW_CARDS cardCount
+         * @property {Array.<GamePto.ICard>|null} [inHandCards] S_DRAW_CARDS inHandCards
+         * @property {number|null} [inHandCardCount] S_DRAW_CARDS inHandCardCount
+         * @property {Array.<GamePto.ICard>|null} [discards] S_DRAW_CARDS discards
+         * @property {number|null} [discardsCount] S_DRAW_CARDS discardsCount
          * @property {Array.<number>|null} [damages] S_DRAW_CARDS damages
          * @property {number|null} [uid] S_DRAW_CARDS uid
          * @property {number|null} [cardPoolNum] S_DRAW_CARDS cardPoolNum
@@ -6852,7 +6854,8 @@ $root.GamePto = (function() {
          * @param {GamePto.IS_DRAW_CARDS=} [properties] Properties to set
          */
         function S_DRAW_CARDS(properties) {
-            this.cards = [];
+            this.inHandCards = [];
+            this.discards = [];
             this.damages = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -6877,20 +6880,36 @@ $root.GamePto = (function() {
         S_DRAW_CARDS.prototype.scmd = 10006;
 
         /**
-         * S_DRAW_CARDS cards.
-         * @member {Array.<GamePto.ICard>} cards
+         * S_DRAW_CARDS inHandCards.
+         * @member {Array.<GamePto.ICard>} inHandCards
          * @memberof GamePto.S_DRAW_CARDS
          * @instance
          */
-        S_DRAW_CARDS.prototype.cards = $util.emptyArray;
+        S_DRAW_CARDS.prototype.inHandCards = $util.emptyArray;
 
         /**
-         * S_DRAW_CARDS cardCount.
-         * @member {number} cardCount
+         * S_DRAW_CARDS inHandCardCount.
+         * @member {number} inHandCardCount
          * @memberof GamePto.S_DRAW_CARDS
          * @instance
          */
-        S_DRAW_CARDS.prototype.cardCount = 0;
+        S_DRAW_CARDS.prototype.inHandCardCount = 0;
+
+        /**
+         * S_DRAW_CARDS discards.
+         * @member {Array.<GamePto.ICard>} discards
+         * @memberof GamePto.S_DRAW_CARDS
+         * @instance
+         */
+        S_DRAW_CARDS.prototype.discards = $util.emptyArray;
+
+        /**
+         * S_DRAW_CARDS discardsCount.
+         * @member {number} discardsCount
+         * @memberof GamePto.S_DRAW_CARDS
+         * @instance
+         */
+        S_DRAW_CARDS.prototype.discardsCount = 0;
 
         /**
          * S_DRAW_CARDS damages.
@@ -6940,23 +6959,28 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.cards != null && message.cards.length)
-                for (var i = 0; i < message.cards.length; ++i)
-                    $root.GamePto.Card.encode(message.cards[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.cardCount != null && Object.hasOwnProperty.call(message, "cardCount"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cardCount);
+            if (message.inHandCards != null && message.inHandCards.length)
+                for (var i = 0; i < message.inHandCards.length; ++i)
+                    $root.GamePto.Card.encode(message.inHandCards[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.inHandCardCount != null && Object.hasOwnProperty.call(message, "inHandCardCount"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.inHandCardCount);
+            if (message.discards != null && message.discards.length)
+                for (var i = 0; i < message.discards.length; ++i)
+                    $root.GamePto.Card.encode(message.discards[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.discardsCount != null && Object.hasOwnProperty.call(message, "discardsCount"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.discardsCount);
             if (message.damages != null && message.damages.length) {
-                writer.uint32(/* id 5, wireType 2 =*/42).fork();
+                writer.uint32(/* id 7, wireType 2 =*/58).fork();
                 for (var i = 0; i < message.damages.length; ++i)
                     writer.int32(message.damages[i]);
                 writer.ldelim();
             }
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.uid);
             if (message.cardPoolNum != null && Object.hasOwnProperty.call(message, "cardPoolNum"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.cardPoolNum);
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.cardPoolNum);
             if (message.deadPoolNum != null && Object.hasOwnProperty.call(message, "deadPoolNum"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.deadPoolNum);
+                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.deadPoolNum);
             return writer;
         };
 
@@ -6987,16 +7011,26 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        if (!(message.cards && message.cards.length))
-                            message.cards = [];
-                        message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        if (!(message.inHandCards && message.inHandCards.length))
+                            message.inHandCards = [];
+                        message.inHandCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
                         break;
                     }
                 case 4: {
-                        message.cardCount = reader.int32();
+                        message.inHandCardCount = reader.int32();
                         break;
                     }
                 case 5: {
+                        if (!(message.discards && message.discards.length))
+                            message.discards = [];
+                        message.discards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 6: {
+                        message.discardsCount = reader.int32();
+                        break;
+                    }
+                case 7: {
                         if (!(message.damages && message.damages.length))
                             message.damages = [];
                         if ((tag & 7) === 2) {
@@ -7007,15 +7041,15 @@ $root.GamePto = (function() {
                             message.damages.push(reader.int32());
                         break;
                     }
-                case 6: {
+                case 8: {
                         message.uid = reader.int32();
                         break;
                     }
-                case 7: {
+                case 9: {
                         message.cardPoolNum = reader.int32();
                         break;
                     }
-                case 8: {
+                case 10: {
                         message.deadPoolNum = reader.int32();
                         break;
                     }

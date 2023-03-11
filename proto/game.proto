@@ -144,12 +144,14 @@ message S_ROUND_END_EVENT{
 message S_DRAW_CARDS{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10006];
-	repeated Card cards = 3;
-	int32 cardCount = 4;
-	repeated int32 damages = 5;
-	int32 uid = 6;
-	int32 cardPoolNum = 7;
-	int32 deadPoolNum = 8;
+	repeated Card inHandCards = 3;
+	int32 inHandCardCount = 4;
+	repeated Card discards = 5;
+	int32 discardsCount = 6;
+	repeated int32 damages = 7;
+	int32 uid = 8;
+	int32 cardPoolNum = 9;
+	int32 deadPoolNum = 10;
 }
 
 //费用协议

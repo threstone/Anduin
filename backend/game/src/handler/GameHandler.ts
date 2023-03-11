@@ -87,6 +87,9 @@ export class GameHandler extends BaseHandler {
 
         //执行战场使用卡牌后事件
         table.mapData.onUseCardAfter(card);
+
+        //检查游戏是否结束
+        table.checkGameOver();
     }
 
     //请求移动
@@ -122,7 +125,10 @@ export class GameHandler extends BaseHandler {
             //执行卡牌移动后事件,如光环随从增加地图格子光环
             card.onMoveAfter(card);
             //执行战场移动后事件 如移动后受伤陷阱
-            table.mapData.onPreMove(card)
+            table.mapData.onPreMove(card);
+
+            //检查游戏是否结束
+            table.checkGameOver();
         }
     }
 
@@ -185,6 +191,9 @@ export class GameHandler extends BaseHandler {
 
             //执行战场攻击后事件
             table.mapData.onAtkAfter(sourceCard, targetCard, damage, dices);
+
+            //检查游戏是否结束
+            table.checkGameOver();
         }
     }
 }

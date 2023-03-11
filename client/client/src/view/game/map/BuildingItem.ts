@@ -1,6 +1,6 @@
 class BuildingItem {
     static getItem(cardInfo: GamePto.ICard, cardConfig: CardInterface) {
-        const building = BaseUI.UIMapUnit.createInstance();
+        const building = BaseUI.UIMapBuilding.createInstance();
         Utils.defineTextFieldSet(building.healthText, cardConfig.health);
 
         building.healthText.text = `${cardInfo.health}`;

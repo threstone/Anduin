@@ -141,20 +141,23 @@ export class GameUser {
                 continue;
             }
             const card = this._cardPool.pop();
-            message.cards.push(card);
             //小于手牌上限
             if (this._handCards.length < GlobalVar.configMgr.common.maxHandCardNum) {
                 this._handCards.push(card);
+                message.inHandCards.push(card);
             } else {
                 //大于手牌上限直接放到墓地中
                 this._deadPool.push(card);
+                message.discards.push(card);
             }
         }
-        message.cardCount = message.cards.length;
+        message.inHandCardCount = message.inHandCards.length;
+        message.discardsCount = message.discards.length;
         message.cardPoolNum = this._cardPool.length;
         message.deadPoolNum = this._deadPool.length;
         this.sendMsg(message);
-        message.cards = [];
+        message.inHandCards = [];
+        message.discards = [];
         //派发消息给另外一个玩家
         this.table.getOtherUser(this.uid).sendMsg(message);
         return GlobalVar.configMgr.common.drawCardTime;

@@ -17,12 +17,12 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.view = BaseUI.UIGameSceneCom.createInstance();
 
         //绑定这些控件和此控件一同显示和关闭
+        this.bindView(MapView.ins());
         this.bindView(RightCtrlView.ins());
         this.bindView(SelfInfoBox.ins());
         this.bindView(TargetInfoBox.ins());
         this.bindView(HandCardView.ins());
         this.bindView(TargetHandView.ins());
-        this.bindView(MapView.ins());
 
         this.view.close.describe.text = 'tempCloseBtn'
     }

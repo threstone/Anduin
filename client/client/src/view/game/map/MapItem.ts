@@ -15,7 +15,12 @@ class MapItem {
 
     public static updateEntityDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, cardInfo: GamePto.ICard) {
         if (entity.healthText) {
+            entity.healthText.text = `${cardInfo.health}`;
+        }
 
+        const unit = entity as BaseUI.UIMapUnit;
+        if (unit.atkText) {
+            unit.atkText.text = `${cardInfo.attack}`;
         }
     }
 }

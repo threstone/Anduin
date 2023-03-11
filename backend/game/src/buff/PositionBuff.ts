@@ -40,21 +40,31 @@ export abstract class PositionBuff extends GameBuff {
         card.deleteBuff(buff);
     }
 
-    private onSourcePreMove(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
+    private onSourcePreMove(positionBuff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
+        if (moveCard !== selfCard) {
+            return true;
+        }
+        const table = moveCard.table;
         // 移除周围格子buff
         const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
         for (let index = 0; index < pointArr.length; index++) {
             const point = pointArr[index];
             table.mapData.deleteBuffFromMap(positionBuff, point.x, point.y);
         }
+        return true;
     }
 
-    private onSourceMoveAfter(positionBuff: BuffData, table: GameTable, moveCard: UnitCard) {
+    private onSourceMoveAfter(positionBuff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
+        if (moveCard !== selfCard) {
+            return true;
+        }
+        const table = moveCard.table;
         // 增加周围格子位置buff
         const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
         for (let index = 0; index < pointArr.length; index++) {
             const point = pointArr[index];
             table.mapData.addBuffToMap(positionBuff, point.x, point.y);
         }
+        return true;
     }
 }

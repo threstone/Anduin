@@ -43,10 +43,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     /**抽卡疲劳 */
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid === UserModel.ins().uid) {
-            await this.drawCards(...msg.cards);
+            await this.drawCards(msg);
             GameSceneView.ins().fatigue(msg.damages, UserModel.ins().uid);
             SelfInfoBox.ins().setCardPoolNum(msg.cardPoolNum);
-            SelfInfoBox.ins().setDeadCardPoolNum(msg.deadPoolNum);
         }
     }
 
@@ -177,23 +176,14 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     }
 
     /**抽卡 */
-    public async drawCards(...cardsInfo: GamePto.ICard[]) {
-        if (cardsInfo.length === 0) {
-            return;
+    public async drawCards(msg: GamePto.S_DRAW_CARDS) {
+        if (msg.inHandCards.length !== 0) {
+            await this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(msg.inHandCards, this._cardPoolPosition.x, this._cardPoolPosition.y, 0.5, 90));
         }
-
-        //确定弃牌的数量
-        const deadNum = this._cards.length + cardsInfo.length - ConfigMgr.ins().common.maxHandCardNum;
-        let deadCards: GamePto.ICard[];
-        if (deadNum > 0) {
-            deadCards = cardsInfo.splice(cardsInfo.length - deadNum);
-        }
-
-        await this.addCard(ConfigMgr.ins().common.drawCardTime, ...GameCard.getGameCards(cardsInfo, this._cardPoolPosition.x, this._cardPoolPosition.y, 0.5, 90));
 
         //弃掉拿不下的卡牌
-        if (deadCards) {
-            await this.deleteCardByMaxHandCardNum(deadCards);
+        if (msg.discards.length !== 0) {
+            await this.deleteCardByMaxHandCardNum(msg.discards);
         }
     }
 

@@ -4,15 +4,17 @@ class GameModel extends BaseModel {
     handCards: GamePto.ICard[];
     targetUid: number;
 
-    atkTimes: number
-    atkTimesLimit: number
-    moveTimes: number
-    moveTimesLimit: number
+    atkTimes: number;
+    atkTimesLimit: number;
+    moveTimes: number;
+    moveTimesLimit: number;
 
-    fee: number
+    fee: number;
 
-    /**墓地 */
+    /**自己墓地 */
     deadPool: GamePto.ICard[];
+    /**对方墓地卡牌数量 */
+    targetDeadPoolNum: number;
 
     private onUseCard(msg: GamePto.S_USE_CARD) {
         const cardConfig = CardsModel.ins().getCardInfoById(msg.card.cardId);
@@ -73,6 +75,7 @@ class GameModel extends BaseModel {
     //开始游戏
     private S_GAME_START(msg: GamePto.S_GAME_START) {
         this.deadPool = [];
+        this.targetDeadPoolNum = 0;
         this.handCards = msg.cards;
         MapModel.ins().serverData = msg.mapData;
         this.emit('S_GAME_START', msg);
@@ -103,10 +106,14 @@ class GameModel extends BaseModel {
 
     //抽卡疲劳
     private S_DRAW_CARDS(msg: GamePto.S_DRAW_CARDS) {
-        if (msg.uid === UserModel.ins().uid && msg.cardCount !== 0) {
-            this.handCards.push(...msg.cards);
+        if (msg.uid === UserModel.ins().uid) {
+            this.handCards.push(...msg.inHandCards);
+            this.deadPool.push(...msg.discards);
+        } else {
+            this.targetDeadPoolNum = msg.deadPoolNum;
         }
         this.emit('S_DRAW_CARDS', msg);
+        this.emit('UpdateDeadCardNum');
     }
 
     //费用协议
@@ -123,8 +130,11 @@ class GameModel extends BaseModel {
             this.deadPool.push(this.handCards[msg.cardIndex]);
             this.handCards.splice(msg.cardIndex, 1);
             this.fee = msg.fee;
+        } else if (msg.uid !== UserModel.ins().uid) {
+            this.targetDeadPoolNum++;
         }
         this.emit('S_DISCARD', msg);
+        this.emit('UpdateDeadCardNum');
     }
 
     //使用卡牌

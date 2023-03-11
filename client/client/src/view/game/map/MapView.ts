@@ -32,7 +32,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.addEffectListener('S_MAP_DATA', this.updateMap);
         this.addEffectListener('S_ROUND_END_EVENT', this.updateMap);
         this.addEffectListener('S_MOVE', this.moveUnit);
-        this.addEffectListener('S_ATTACK', this.onAttack)
+        this.addEffectListener('S_ATTACK', this.onAttack);
+        this.addEffectListener('S_ENTITY_DEAD', this.entityDead);
     }
 
     public close(): void {
@@ -47,15 +48,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.view.addChild(cardItem);
 
         //增加悬浮事件
-        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
-            this._detailCard = CardItem.getEntityCard(cardInfo);
-            this.view.addChild(this._detailCard);
-            this._detailCard.x = cardItem.x + cardItem.width;
-            this._detailCard.y = cardItem.y;
-            if (this._detailCard.y + this._detailCard.height > this.view.height) {
-                this._detailCard.y = this.view.height - this._detailCard.height;
-            }
-        }, this);
+        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, this.onEntityHover, this);
         this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
             this.view.removeChild(this._detailCard);
         }, this);
@@ -65,6 +58,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const mapPoint = this.getMapPoint(cardInfo.blockX, cardInfo.blockY);
         cardItem.x = mapPoint.x;
         cardItem.y = mapPoint.y;
+    }
+
+    public deleteMapItem(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
+        this.view.removeChild(entity);
+        this.removeTargetEvents(entity);
     }
 
     /**更新指定地图卡 */
@@ -136,6 +134,25 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
+    /**当悬浮地图元素 */
+    private onEntityHover(evt: egret.TouchEvent) {
+        const mapBlock = new egret.Point();
+        this.isInMap(evt.stageX, evt.stageY, mapBlock);
+        const cardInfo = MapModel.ins().getEntityCardByPoint(mapBlock.x, mapBlock.y);
+        if (!cardInfo) {
+            return;
+        }
+        this._detailCard = CardItem.getEntityCard(cardInfo);
+        this.view.addChild(this._detailCard);
+
+        const cardItem = this.entityPool[mapBlock.x][mapBlock.y];
+        this._detailCard.x = cardItem.x + cardItem.width;
+        this._detailCard.y = cardItem.y;
+        if (this._detailCard.y + this._detailCard.height > this.view.height) {
+            this._detailCard.y = this.view.height - this._detailCard.height;
+        }
+    }
+
     /**移动单位 */
     public async moveUnit(msg: GamePto.S_MOVE) {
         const mapItem = this.entityPool[msg.sourceX][msg.sourceY] as BaseUI.UIMapUnit;
@@ -146,10 +163,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
         this.updateUnitOperateTips(mapItem, cardInfo, config);
         egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
+        await this.wait(500);
     }
 
     /**单位攻击单位 */
-    public async onAttack(msg: GamePto.S_ATTACK) {
+    private async onAttack(msg: GamePto.S_ATTACK) {
         const sourceEntity = this.entityPool[msg.sourceX][msg.sourceY] as BaseUI.UIMapUnit;
         const targetEntity = this.entityPool[msg.targetX][msg.targetY];
         if (!sourceEntity || !targetEntity) {
@@ -157,10 +175,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        await RightCtrlView.ins().showDices(msg.dices);
-
         const sourceCardInfo = MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY);
         const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY);
+
+        await RightCtrlView.ins().showDices(msg.dices);
 
         //攻击效果
         const sourceConfig = CardsModel.ins().getCardInfoById(sourceCardInfo.cardId);
@@ -177,12 +195,51 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface) {
         //近战
         if (sourceConfig.atkType === CardsPto.AtkType.CloseRange) {
-
+            const cacheX = source.x;
+            const cacheY = source.y;
+            let oldIndex = this.view.getChildIndex(source);
+            this.view.setChildIndex(source, 99);
+            egret.Tween.get(source).to({ x: target.x, y: target.y }, 500, egret.Ease.quintIn).to({ x: cacheX, y: cacheY }, 300).call(() => {
+                this.view.setChildIndex(source, oldIndex);
+            });
+            await this.wait(500);
         }//远程 
         else if (sourceConfig.atkType === CardsPto.AtkType.LongRange) {
+            //这里以后可能会根据不同的卡牌获取不同的攻击元素,现在直接用箭先实现
+            const arrow = fairygui.UIPackage.createObject("BaseUI", "arrow").asImage;
+            arrow.setPivot(0.5, 0.5, true);
+            arrow.x = source.x + this.blockWidth / 2;
+            arrow.y = source.y + this.blockHeight / 2;
 
+            let skew = 0;
+            let time = 0;
+            //确定旋转角度及飞行时间
+            if (source.x === target.x) {
+                skew = source.y > target.y ? -90 : 90;
+                time = Math.abs(source.y - target.y) * 5;
+            } else {
+                skew = source.x > target.x ? 180 : 0;
+                time = Math.abs(source.x - target.x) * 5;
+            }
+            arrow.skewX = skew;
+            arrow.skewY = skew;
+
+            this.view.addChild(arrow);
+            egret.Tween.get(arrow).to({ x: target.x + this.blockWidth / 2, y: target.y + this.blockHeight / 2 }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
+                this.view.removeChild(arrow);
+            });
+            await this.wait(time);
         }
+    }
 
+    /**死亡 */
+    private async entityDead(msg: GamePto.S_ENTITY_DEAD) {
+        const entity = this.entityPool[msg.blockX][msg.blockY];
+        //淡化死亡
+        egret.Tween.get(entity).to({ alpha: 0, x: entity.x, y: entity.y }, 500, egret.Ease.bounceInOut).call(() => {
+            this.deleteMapItem(entity);
+        })
+        await this.wait(500);
     }
 
     /**更新地图信息 */
@@ -202,7 +259,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 if (arguments.length !== 0) {
                     throw '由S_MAP_DATA协议驱动的地图更新,正常来说都应该是update的才对,检查为什么这个位置缺少了对象'
                 }
-                this.addMapItem(cardInfo)
+                this.addMapItem(cardInfo);
             }
         }
     }

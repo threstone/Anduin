@@ -85,6 +85,9 @@ export class GameMap {
 
     /**获取指定位置的卡牌 */
     public getCard(x: number, y: number) {
+        if (x < 0 || x >= this._width || y < 0 || y >= this._height) {
+            return null;
+        }
         return this._mapData[x][y].card;
     }
 
@@ -174,7 +177,7 @@ export class GameMap {
     }
 
     /**获取根据距离附近的坐标 */
-public getAroundByDistance(baseX: number, baseY: number, distance: number) {
+    public getAroundByDistance(baseX: number, baseY: number, distance: number) {
         const result: { x: number, y: number }[] = [];
         for (let x = baseX - distance; x <= baseX + distance; x++) {
             for (let y = baseY - distance; y <= baseY + distance; y++) {

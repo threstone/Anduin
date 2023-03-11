@@ -4406,11 +4406,17 @@ export namespace GamePto {
         /** S_DRAW_CARDS scmd */
         scmd?: (number|null);
 
-        /** S_DRAW_CARDS cards */
-        cards?: (GamePto.ICard[]|null);
+        /** S_DRAW_CARDS inHandCards */
+        inHandCards?: (GamePto.ICard[]|null);
 
-        /** S_DRAW_CARDS cardCount */
-        cardCount?: (number|null);
+        /** S_DRAW_CARDS inHandCardCount */
+        inHandCardCount?: (number|null);
+
+        /** S_DRAW_CARDS discards */
+        discards?: (GamePto.ICard[]|null);
+
+        /** S_DRAW_CARDS discardsCount */
+        discardsCount?: (number|null);
 
         /** S_DRAW_CARDS damages */
         damages?: (number[]|null);
@@ -4440,11 +4446,17 @@ export namespace GamePto {
         /** S_DRAW_CARDS scmd. */
         public scmd: number;
 
-        /** S_DRAW_CARDS cards. */
-        public cards: GamePto.ICard[];
+        /** S_DRAW_CARDS inHandCards. */
+        public inHandCards: GamePto.ICard[];
 
-        /** S_DRAW_CARDS cardCount. */
-        public cardCount: number;
+        /** S_DRAW_CARDS inHandCardCount. */
+        public inHandCardCount: number;
+
+        /** S_DRAW_CARDS discards. */
+        public discards: GamePto.ICard[];
+
+        /** S_DRAW_CARDS discardsCount. */
+        public discardsCount: number;
 
         /** S_DRAW_CARDS damages. */
         public damages: number[];

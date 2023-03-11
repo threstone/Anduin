@@ -46,16 +46,15 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     /**抽卡疲劳 */
     private async onDrawCards(msg: GamePto.S_DRAW_CARDS) {
         if (msg.uid !== UserModel.ins().uid) {
-            await TargetHandView.ins().drawCardsToHand(msg.cardCount);
+            await TargetHandView.ins().drawCardsToHand(msg.inHandCardCount, msg.discardsCount);
             GameSceneView.ins().fatigue(msg.damages, GameModel.ins().targetUid);
             TargetInfoBox.ins().setCardPoolNum(msg.cardPoolNum);
-            TargetInfoBox.ins().setDeadCardPoolNum(msg.deadPoolNum);
         }
     }
 
     /** 抽起始手牌*/
     public drawStartHandCards() {
-        this.drawCardsToHand(ConfigMgr.ins().common.startHandCardNum, 1000);
+        this.drawCardsToHand(ConfigMgr.ins().common.startHandCardNum, 0, 1000);
     }
 
     /**换牌 */
@@ -83,27 +82,19 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     }
 
     /**抽牌到手牌 */
-    public async drawCardsToHand(cardNum: number, time: number = ConfigMgr.ins().common.drawCardTime) {
-        if (cardNum === 0) {
-            return;
-        }
-
-        //确定弃牌的数量
-        const deadNum = this._cards.length + cardNum - ConfigMgr.ins().common.maxHandCardNum;
-        if (deadNum > 0) {
-            cardNum -= deadNum;
-        }
-
-        for (let index = 0; index < cardNum; index++) {
+    public async drawCardsToHand(inHandCardCount: number, discardsCount: number, time: number = ConfigMgr.ins().common.drawCardTime) {
+        //抽拍动画
+        for (let index = 0; index < inHandCardCount; index++) {
             const card = this.getCardByPool();
             this.view.addChild(card)
             this._cards.push(card);
         }
-
-        await this.updateCardsPostion(time);
+        if (inHandCardCount !== 0) {
+            await this.updateCardsPostion(time);
+        }
 
         //弃牌动画
-        for (let index = 0; index < deadNum; index++) {
+        for (let index = 0; index < discardsCount; index++) {
             const card = this.getCardByPool();
             this.view.addChild(card);
             const showX = card.x - card.height * card.scaleY + (index * card.width * card.scaleX);
@@ -114,7 +105,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
                     this.view.removeChild(card);
                 });
         }
-        if (deadNum > 0) {
+        if (discardsCount > 0) {
             await this.wait(2200);
         }
     }

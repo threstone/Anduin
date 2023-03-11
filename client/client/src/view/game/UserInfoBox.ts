@@ -18,6 +18,9 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.addEffectListener('S_FEE_INFO', this.onFeeInfo);
         this.addEffectListener('S_MOVE', this.onMove);
+        this.addEffectListener('S_ATTACK', this.onAttack);
+        this.addEffectListener('UpdateDeadCardNum', this.updateDeadCardNum);
+
     }
 
     private isHandler(uid: number) {
@@ -41,15 +44,31 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
             this.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
         }
     }
+
     private onFeeInfo(msg: GamePto.S_FEE_INFO) {
         if (this.isHandler(msg.uid)) {
             this.feeSet(msg.fee, msg.maxFee);
         }
     }
 
+    /**更新墓地卡牌数量 */
+    private updateDeadCardNum() {
+        if (this.isSelf) {
+            this.view.deadCardNum.text = `墓地卡牌\n${GameModel.ins().deadPool.length}`
+        } else {
+            this.view.deadCardNum.text = `墓地卡牌\n${GameModel.ins().targetDeadPoolNum}`
+        }
+    }
+
     private onMove(msg: GamePto.S_FEE_INFO) {
         if (this.isHandler(msg.uid)) {
             this.reduceMoveTimes();
+        }
+    }
+
+    private onAttack(msg: GamePto.S_ATTACK) {
+        if (this.isHandler(msg.uid)) {
+            this.reduceAtkTimes();
         }
     }
 
@@ -86,11 +105,6 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
     /**设置剩余卡牌数量 */
     public setCardPoolNum(num: number) {
         this.view.leastCardNum.text = `剩余卡牌\n${num}`
-    }
-
-    /**设置墓地卡牌数量 */
-    public setDeadCardPoolNum(num: number) {
-        this.view.deadCardNum.text = `墓地卡牌\n${num}`
     }
 
     /**设置攻击次数信息 */

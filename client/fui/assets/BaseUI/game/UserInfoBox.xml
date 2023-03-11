@@ -25,6 +25,6 @@
     <text id="n14_pg48" name="power" xy="179,133" size="80,32" fontSize="22" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="圣堂"/>
     <text id="n15_pg48" name="atkTimes" xy="12,173" size="150,32" fontSize="22" color="#ff0000" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="攻击次数:3/5"/>
     <text id="n16_pg48" name="moveTimes" xy="287,173" size="150,32" fontSize="22" color="#0099ff" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="移动次数:3/5"/>
-    <text id="n17_sbft" name="deadCardNum" xy="321,79" size="92,61" fontSize="22" color="#666633" align="center" vAlign="middle" strokeColor="#333333" text="墓地卡牌&#xA;00"/>
+    <text id="n17_sbft" name="deadCardNum" xy="321,79" size="92,61" fontSize="22" color="#666633" align="center" vAlign="middle" strokeColor="#333333" text="墓地卡牌&#xA;0"/>
   </displayList>
 </component>

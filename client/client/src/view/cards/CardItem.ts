@@ -77,6 +77,8 @@ class CardItem {
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;
         //TODO  同样要显示实时的血量和buff
+        cardItem.healthText.text = `${cardInfo.health}`;
+        cardItem.atkText.text = `${cardInfo.attack}`;
         return cardItem;
     }
 }

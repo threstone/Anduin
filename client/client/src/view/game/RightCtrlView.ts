@@ -60,7 +60,22 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
         this.view.tips.text = `${this.tipsStart}\n${Utils.formatTime(this.reqEndTime - Date.now())}`;
     }
 
-    public async showDices(dices: number[]) {
-        //TODO
+    public showDices(dices: number[]) {
+        if (dices.length === 0) {
+            return;
+        }
+        return new Promise<void>((resolve) => {
+            this.view.diceList.removeChildren();
+            for (let index = 0; index < dices.length; index++) {
+                const dice = dices[index];
+                const diceMC = fairygui.UIPackage.createObject("BaseUI", "DiceMovie").asMovieClip;
+                this.view.diceList.addChild(diceMC);
+                diceMC.setPlaySettings(dices.length - 1 - index, 0, 2, dice, () => {
+                    if (index === dices.length - 1) {
+                        resolve();
+                    }
+                });
+            }
+        });
     }
 }

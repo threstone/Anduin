@@ -122,7 +122,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         if (!this._isChildComponet) {
             fairygui.GRoot.inst.removeChild(this.view);
         }
-        this.removeEvents();
+        this.removeAllEvents();
     }
 
     /**
@@ -149,7 +149,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.eventList.push(eventData);
     }
 
-    protected removeEvents(): void {
+    protected removeAllEvents(): void {
         let list = this.eventList
         for (let i = 0, len = list.length; i < len; i++) {
             const eventData = list[i];
