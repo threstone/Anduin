@@ -6283,8 +6283,7 @@ $root.GamePto = (function() {
         S_MOVE.prototype.scmd = 10012;
         S_MOVE.prototype.sourceX = 0;
         S_MOVE.prototype.sourceY = 0;
-        S_MOVE.prototype.targetX = 0;
-        S_MOVE.prototype.targetY = 0;
+        S_MOVE.prototype.card = null;
         S_MOVE.prototype.allowMove = false;
         S_MOVE.prototype.uid = 0;
 
@@ -6303,14 +6302,12 @@ $root.GamePto = (function() {
                 w.uint32(24).int32(m.sourceX);
             if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
                 w.uint32(32).int32(m.sourceY);
-            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
-                w.uint32(40).int32(m.targetX);
-            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
-                w.uint32(48).int32(m.targetY);
+            if (m.card != null && Object.hasOwnProperty.call(m, "card"))
+                $root.GamePto.Card.encode(m.card, w.uint32(42).fork()).ldelim();
             if (m.allowMove != null && Object.hasOwnProperty.call(m, "allowMove"))
-                w.uint32(56).bool(m.allowMove);
+                w.uint32(48).bool(m.allowMove);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(64).int32(m.uid);
+                w.uint32(56).int32(m.uid);
             return w;
         };
 
@@ -6338,18 +6335,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        m.targetX = r.int32();
+                        m.card = $root.GamePto.Card.decode(r, r.uint32());
                         break;
                     }
                 case 6: {
-                        m.targetY = r.int32();
-                        break;
-                    }
-                case 7: {
                         m.allowMove = r.bool();
                         break;
                     }
-                case 8: {
+                case 7: {
                         m.uid = r.int32();
                         break;
                     }
@@ -6377,11 +6370,10 @@ $root.GamePto = (function() {
             if (d.sourceY != null) {
                 m.sourceY = d.sourceY | 0;
             }
-            if (d.targetX != null) {
-                m.targetX = d.targetX | 0;
-            }
-            if (d.targetY != null) {
-                m.targetY = d.targetY | 0;
+            if (d.card != null) {
+                if (typeof d.card !== "object")
+                    throw TypeError(".GamePto.S_MOVE.card: object expected");
+                m.card = $root.GamePto.Card.fromObject(d.card);
             }
             if (d.allowMove != null) {
                 m.allowMove = Boolean(d.allowMove);
@@ -6401,8 +6393,7 @@ $root.GamePto = (function() {
                 d.scmd = 10012;
                 d.sourceX = 0;
                 d.sourceY = 0;
-                d.targetX = 0;
-                d.targetY = 0;
+                d.card = null;
                 d.allowMove = false;
                 d.uid = 0;
             }
@@ -6418,11 +6409,8 @@ $root.GamePto = (function() {
             if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
                 d.sourceY = m.sourceY;
             }
-            if (m.targetX != null && m.hasOwnProperty("targetX")) {
-                d.targetX = m.targetX;
-            }
-            if (m.targetY != null && m.hasOwnProperty("targetY")) {
-                d.targetY = m.targetY;
+            if (m.card != null && m.hasOwnProperty("card")) {
+                d.card = $root.GamePto.Card.toObject(m.card, o);
             }
             if (m.allowMove != null && m.hasOwnProperty("allowMove")) {
                 d.allowMove = m.allowMove;
@@ -6461,8 +6449,10 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.scmd = 10013;
         S_ATTACK.prototype.sourceX = 0;
         S_ATTACK.prototype.sourceY = 0;
+        S_ATTACK.prototype.sourceId = 0;
         S_ATTACK.prototype.targetX = 0;
         S_ATTACK.prototype.targetY = 0;
+        S_ATTACK.prototype.targetId = 0;
         S_ATTACK.prototype.damage = 0;
         S_ATTACK.prototype.targetHealth = 0;
         S_ATTACK.prototype.allowAtk = false;
@@ -6484,20 +6474,24 @@ $root.GamePto = (function() {
                 w.uint32(24).int32(m.sourceX);
             if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
                 w.uint32(32).int32(m.sourceY);
+            if (m.sourceId != null && Object.hasOwnProperty.call(m, "sourceId"))
+                w.uint32(40).int32(m.sourceId);
             if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
-                w.uint32(40).int32(m.targetX);
+                w.uint32(48).int32(m.targetX);
             if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
-                w.uint32(48).int32(m.targetY);
+                w.uint32(56).int32(m.targetY);
+            if (m.targetId != null && Object.hasOwnProperty.call(m, "targetId"))
+                w.uint32(64).int32(m.targetId);
             if (m.damage != null && Object.hasOwnProperty.call(m, "damage"))
-                w.uint32(56).int32(m.damage);
+                w.uint32(72).int32(m.damage);
             if (m.targetHealth != null && Object.hasOwnProperty.call(m, "targetHealth"))
-                w.uint32(64).int32(m.targetHealth);
+                w.uint32(80).int32(m.targetHealth);
             if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
-                w.uint32(72).bool(m.allowAtk);
+                w.uint32(88).bool(m.allowAtk);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(80).int32(m.uid);
+                w.uint32(96).int32(m.uid);
             if (m.dices != null && m.dices.length) {
-                w.uint32(90).fork();
+                w.uint32(106).fork();
                 for (var i = 0; i < m.dices.length; ++i)
                     w.int32(m.dices[i]);
                 w.ldelim();
@@ -6529,30 +6523,38 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        m.targetX = r.int32();
+                        m.sourceId = r.int32();
                         break;
                     }
                 case 6: {
-                        m.targetY = r.int32();
+                        m.targetX = r.int32();
                         break;
                     }
                 case 7: {
-                        m.damage = r.int32();
+                        m.targetY = r.int32();
                         break;
                     }
                 case 8: {
-                        m.targetHealth = r.int32();
+                        m.targetId = r.int32();
                         break;
                     }
                 case 9: {
-                        m.allowAtk = r.bool();
+                        m.damage = r.int32();
                         break;
                     }
                 case 10: {
-                        m.uid = r.int32();
+                        m.targetHealth = r.int32();
                         break;
                     }
                 case 11: {
+                        m.allowAtk = r.bool();
+                        break;
+                    }
+                case 12: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                case 13: {
                         if (!(m.dices && m.dices.length))
                             m.dices = [];
                         if ((t & 7) === 2) {
@@ -6587,11 +6589,17 @@ $root.GamePto = (function() {
             if (d.sourceY != null) {
                 m.sourceY = d.sourceY | 0;
             }
+            if (d.sourceId != null) {
+                m.sourceId = d.sourceId | 0;
+            }
             if (d.targetX != null) {
                 m.targetX = d.targetX | 0;
             }
             if (d.targetY != null) {
                 m.targetY = d.targetY | 0;
+            }
+            if (d.targetId != null) {
+                m.targetId = d.targetId | 0;
             }
             if (d.damage != null) {
                 m.damage = d.damage | 0;
@@ -6628,8 +6636,10 @@ $root.GamePto = (function() {
                 d.scmd = 10013;
                 d.sourceX = 0;
                 d.sourceY = 0;
+                d.sourceId = 0;
                 d.targetX = 0;
                 d.targetY = 0;
+                d.targetId = 0;
                 d.damage = 0;
                 d.targetHealth = 0;
                 d.allowAtk = false;
@@ -6647,11 +6657,17 @@ $root.GamePto = (function() {
             if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
                 d.sourceY = m.sourceY;
             }
+            if (m.sourceId != null && m.hasOwnProperty("sourceId")) {
+                d.sourceId = m.sourceId;
+            }
             if (m.targetX != null && m.hasOwnProperty("targetX")) {
                 d.targetX = m.targetX;
             }
             if (m.targetY != null && m.hasOwnProperty("targetY")) {
                 d.targetY = m.targetY;
+            }
+            if (m.targetId != null && m.hasOwnProperty("targetId")) {
+                d.targetId = m.targetId;
             }
             if (m.damage != null && m.hasOwnProperty("damage")) {
                 d.damage = m.damage;
@@ -6699,8 +6715,6 @@ $root.GamePto = (function() {
 
         S_ENTITY_DEAD.prototype.cmd = 200;
         S_ENTITY_DEAD.prototype.scmd = 10014;
-        S_ENTITY_DEAD.prototype.blockX = 0;
-        S_ENTITY_DEAD.prototype.blockY = 0;
         S_ENTITY_DEAD.prototype.deadCard = null;
 
         S_ENTITY_DEAD.create = function create(properties) {
@@ -6714,12 +6728,8 @@ $root.GamePto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
-                w.uint32(24).int32(m.blockX);
-            if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
-                w.uint32(32).int32(m.blockY);
             if (m.deadCard != null && Object.hasOwnProperty.call(m, "deadCard"))
-                $root.GamePto.Card.encode(m.deadCard, w.uint32(42).fork()).ldelim();
+                $root.GamePto.Card.encode(m.deadCard, w.uint32(26).fork()).ldelim();
             return w;
         };
 
@@ -6739,14 +6749,6 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        m.blockX = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.blockY = r.int32();
-                        break;
-                    }
-                case 5: {
                         m.deadCard = $root.GamePto.Card.decode(r, r.uint32());
                         break;
                     }
@@ -6768,12 +6770,6 @@ $root.GamePto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.blockX != null) {
-                m.blockX = d.blockX | 0;
-            }
-            if (d.blockY != null) {
-                m.blockY = d.blockY | 0;
-            }
             if (d.deadCard != null) {
                 if (typeof d.deadCard !== "object")
                     throw TypeError(".GamePto.S_ENTITY_DEAD.deadCard: object expected");
@@ -6789,8 +6785,6 @@ $root.GamePto = (function() {
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 10014;
-                d.blockX = 0;
-                d.blockY = 0;
                 d.deadCard = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
@@ -6798,12 +6792,6 @@ $root.GamePto = (function() {
             }
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
-            }
-            if (m.blockX != null && m.hasOwnProperty("blockX")) {
-                d.blockX = m.blockX;
-            }
-            if (m.blockY != null && m.hasOwnProperty("blockY")) {
-                d.blockY = m.blockY;
             }
             if (m.deadCard != null && m.hasOwnProperty("deadCard")) {
                 d.deadCard = $root.GamePto.Card.toObject(m.deadCard, o);

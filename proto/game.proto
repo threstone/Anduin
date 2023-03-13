@@ -207,10 +207,9 @@ message S_MOVE{
 	int32 scmd = 2[default = 10012];
 	int32 sourceX = 3;
 	int32 sourceY = 4;
-	int32 targetX = 5;
-	int32 targetY = 6;	
-	bool allowMove = 7;
-	int32 uid = 8;
+	Card card = 5;
+	bool allowMove = 6;
+	int32 uid = 7;
 }
 
 //请求攻击返回
@@ -219,22 +218,22 @@ message S_ATTACK{
 	int32 scmd = 2[default = 10013];
 	int32 sourceX = 3;
 	int32 sourceY = 4;
-	int32 targetX = 5;
-	int32 targetY = 6;
-	int32 damage = 7;
-	int32 targetHealth = 8;
-	bool allowAtk = 9;
-	int32 uid = 10;
-	repeated int32 dices = 11;
+	int32 sourceId = 5;
+	int32 targetX = 6;
+	int32 targetY = 7;
+	int32 targetId = 8;
+	int32 damage = 9;
+	int32 targetHealth = 10;
+	bool allowAtk = 11;
+	int32 uid = 12;
+	repeated int32 dices = 13;
 }
 
 //单位死亡
 message S_ENTITY_DEAD{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10014];
-	int32 blockX = 3;
-	int32 blockY = 4;
-	Card deadCard = 5;
+	Card deadCard = 3;
 }
 
 //事件卡结束

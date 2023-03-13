@@ -15,6 +15,12 @@ class UnitItem {
         unit.allowOperate.visible = cardInfo.allowAtk || cardInfo.allowMove;
 
         unit.info.tempCardName.text = `${cardConfig.cardName}`;
+        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data) => {
+            if (!data) {
+                return
+            }
+            unit.info.cardImg.texture = data;
+        })
         if (cardInfo.uid === UserModel.ins().uid) {
             unit.info.tempCardName.strokeColor = 0x00FF00;
         }

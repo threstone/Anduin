@@ -150,37 +150,6 @@ export class GameTable extends BaseTable {
         return Promise.all([user1.syncUserInfo(), user2.syncUserInfo()]);
     }
 
-    /**
-     * 
-     * @param sourceCard 发起攻击者
-     * @param targetCard 被攻击的单位
-     * @returns 
-     */
-    public doAttack(sourceCard: UnitCard, targetCard: BuildingCard) {
-        if (!sourceCard || !targetCard) {
-            return;
-        }
-        //判断是否能够攻击
-        if (!sourceCard.allowAtk || !AttackUtils.allowAtk(sourceCard, targetCard)) {
-            return;
-        }
-
-        // const msg = new GamePto.S_ATTACK();
-        // msg.sourceX = sourceCard.blockX;
-        // msg.sourceY = sourceCard.blockY;
-        // msg.targetX = targetCard.blockX;
-        // msg.targetY = targetCard.blockY;
-        // //获取到真正会受到伤害的卡牌
-        // const beAttackCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, this.mapData);
-        // //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
-        // const dices = this.getDices(sourceCard.attack);
-        // //实际扣除的血量
-        // const targetNum = this.getTargetDiceValueNum(dices, sourceCard.atkType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
-        // beAttackCard.onPreAtk(targetNum);
-        // sourceCard.onAttack(targetNum);
-        // beAttackCard.onAtkAfter(targetNum);
-    }
-
     /** 根据骰子的数量获得结果*/
     public getDices(diceNum: number) {
         const res: number[] = [];

@@ -125,8 +125,6 @@ export class BuildingCard extends EventCard {
 
         //派发死亡协议
         const msg = new GamePto.S_ENTITY_DEAD();
-        msg.blockX = this.blockX;
-        msg.blockY = this.blockY;
         msg.deadCard = this;
         this.table.broadcast(msg);
 

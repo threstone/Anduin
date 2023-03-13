@@ -170,12 +170,8 @@ class MapModel extends BaseModel {
 
     //请求移动返回
     private S_MOVE(msg: GamePto.S_MOVE) {
-        const card = this._mapData[msg.sourceX][msg.sourceY];
         this._mapData[msg.sourceX][msg.sourceY] = null;
-        this._mapData[msg.targetX][msg.targetY] = card;
-        card.blockX = msg.targetX;
-        card.blockY = msg.targetY;
-        card.allowMove = msg.allowMove;
+        this._mapData[msg.card.blockX][msg.card.blockY] = msg.card;
         this.emit('S_MOVE', msg);
         GameModel.ins().moveTimes--;
         if (GameModel.ins().moveTimes === 0) {
@@ -198,7 +194,7 @@ class MapModel extends BaseModel {
 
     //单位死亡
     private S_ENTITY_DEAD(msg: GamePto.S_ENTITY_DEAD) {
-        this._mapData[msg.blockX][msg.blockY] = null;
+        this._mapData[msg.deadCard.blockX][msg.deadCard.blockY] = null;
         if (msg.deadCard.uid === UserModel.ins().uid) {
             GameModel.ins().deadPool.push(msg.deadCard);
         } else {

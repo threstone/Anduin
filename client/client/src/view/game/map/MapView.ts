@@ -14,7 +14,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     blockWidth: number;
     blockHeight: number;
 
-    entityPool: BaseUI.UIMapUnit[][] | BaseUI.UIMapBuilding[][];
+    entityMap: Map<number, BaseUI.UIMapUnit | BaseUI.UIMapBuilding>;
 
     protected init() {
         this.view = GameSceneView.ins().getView().map;
@@ -24,10 +24,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public open(): void {
         super.open();
-        this.entityPool = [];
-        for (let x = 0; x < 7; x++) {
-            this.entityPool[x] = [];
-        }
+        this.entityMap = new Map<number, BaseUI.UIMapUnit | BaseUI.UIMapBuilding>();
 
         this.addEffectListener('S_MAP_DATA', this.updateMap);
         this.addEffectListener('S_ROUND_END_EVENT', this.updateMap);
@@ -45,7 +42,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public addMapItem(cardInfo: GamePto.ICard) {
         const cardItem = MapItem.getItem(cardInfo)
-        this.entityPool[cardInfo.blockX][cardInfo.blockY] = cardItem;
+        this.entityMap.set(cardInfo.id, cardItem);
         this.view.addChild(cardItem);
 
         //增加悬浮事件
@@ -68,7 +65,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**更新指定地图卡 */
     public updateMapItem(cardInfo: GamePto.ICard) {
-        const mapItem = this.entityPool[cardInfo.blockX][cardInfo.blockY];
+        const mapItem = this.entityMap.get(cardInfo.id);
         const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
         MapItem.updateEntityDesc(mapItem, cardInfo);
         if (cardInfo.uid === UserModel.ins().uid && (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero)) {
@@ -146,7 +143,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this._detailCard = CardItem.getEntityCard(cardInfo);
         this.view.addChild(this._detailCard);
 
-        const cardItem = this.entityPool[mapBlock.x][mapBlock.y];
+        const cardItem = this.entityMap.get(cardInfo.id);
         this._detailCard.x = cardItem.x + cardItem.width;
         this._detailCard.y = cardItem.y;
         if (this._detailCard.y + this._detailCard.height > this.view.height) {
@@ -156,21 +153,21 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**移动单位 */
     public async moveUnit(msg: GamePto.S_MOVE) {
-        const mapItem = this.entityPool[msg.sourceX][msg.sourceY] as BaseUI.UIMapUnit;
-        this.entityPool[msg.targetX][msg.targetY] = mapItem;
-        this.entityPool[msg.sourceX][msg.sourceY] = null;
-        const targetPoint = this.getMapPoint(msg.targetX, msg.targetY);
-        const cardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY);
-        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
-        this.updateUnitOperateTips(mapItem, cardInfo, config);
+        const mapItem = this.entityMap.get(msg.card.id) as BaseUI.UIMapUnit;
+        const targetPoint = this.getMapPoint(msg.card.blockX, msg.card.blockY);
         egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
+        const cardInfo = msg.card;
+        if (cardInfo.uid === UserModel.ins().uid) {
+            const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+            this.updateUnitOperateTips(mapItem, cardInfo, config);
+        }
         await this.wait(500);
     }
 
     /**单位攻击单位 */
     private async onAttack(msg: GamePto.S_ATTACK) {
-        const sourceEntity = this.entityPool[msg.sourceX][msg.sourceY] as BaseUI.UIMapUnit;
-        const targetEntity = this.entityPool[msg.targetX][msg.targetY];
+        const sourceEntity = this.entityMap.get(msg.sourceId) as BaseUI.UIMapUnit;
+        const targetEntity = this.entityMap.get(msg.targetId);
         if (!sourceEntity || !targetEntity) {
             console.error('攻击所需对象缺失', msg);
             return;
@@ -235,7 +232,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**死亡 */
     private async entityDead(msg: GamePto.S_ENTITY_DEAD) {
-        const entity = this.entityPool[msg.blockX][msg.blockY];
+        const entity = this.entityMap.get(msg.deadCard.id);;
         //淡化死亡
         egret.Tween.get(entity).to({ alpha: 0, x: entity.x, y: entity.y }, 500, egret.Ease.bounceInOut).call(() => {
             this.deleteMapItem(entity);
@@ -253,13 +250,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
         for (let index = 0; index < entityCards.length; index++) {
             const cardInfo = entityCards[index];
-            const entity = this.entityPool[cardInfo.blockX][cardInfo.blockY];
+            const entity = this.entityMap.get(cardInfo.id);
             if (entity) {
                 this.updateMapItem(cardInfo);
             } else {
-                if (arguments.length !== 0) {
-                    throw '由S_MAP_DATA协议驱动的地图更新,正常来说都应该是update的才对,检查为什么这个位置缺少了对象'
-                }
                 this.addMapItem(cardInfo);
             }
         }
@@ -268,8 +262,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**更新战场指定entity列表 */
     private entitysUpdate(msg: GamePto.S_UPDATE_ENTITYS) {
         for (let index = 0; index < msg.entityCards.length; index++) {
-            const entity = msg.entityCards[index];
-            this.updateMapItem(entity);
+            const entityInfo = msg.entityCards[index];
+            const entity = this.entityMap.get(entityInfo.id);
+            if (entity) {
+                this.updateMapItem(entityInfo);
+            } else {
+                this.addMapItem(entityInfo);
+            }
         }
     }
 
@@ -316,7 +315,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**单位扣血 */
     public entityReduceHeath(entityCard: GamePto.ICard, damage: number) {
-        const entity = this.entityPool[entityCard.blockX][entityCard.blockY];
+        const entity = this.entityMap.get(entityCard.id);;
         entity.healthText.text = `${entityCard.health}`;
         this.entityShowTips(entity, `${-damage}`);
     }

@@ -35,13 +35,12 @@ class CardItem {
         card.feeText.text = `${cardInfo.fee}`;
         card.cardName.text = `${cardInfo.cardName}`;
         card.desc.text = `${cardInfo.desc}`;
-        // TODO waiting for img
-        // RES.getResByUrl(`./resource/card/${0/**cardInfo.cardId */}.jpg`, (data) => {
-        //     if (!data) {
-        //         return
-        //     }
-        //     card.cardImg.texture = data;
-        // })
+        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data) => {
+            if (!data) {
+                return
+            }
+            card.cardImg.texture = data;
+        })
         card.tempCardName.text = `${cardInfo.cardName}`;
         if (cardInfo.atkType === CardsPto.AtkType.CloseRange) {
             card.longRange.visible = false;

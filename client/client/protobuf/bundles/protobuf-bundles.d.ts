@@ -3467,11 +3467,8 @@ declare namespace GamePto {
         /** S_MOVE sourceY */
         sourceY?: (number|null);
 
-        /** S_MOVE targetX */
-        targetX?: (number|null);
-
-        /** S_MOVE targetY */
-        targetY?: (number|null);
+        /** S_MOVE card */
+        card?: (GamePto.ICard|null);
 
         /** S_MOVE allowMove */
         allowMove?: (boolean|null);
@@ -3501,11 +3498,8 @@ declare namespace GamePto {
         /** S_MOVE sourceY. */
         public sourceY: number;
 
-        /** S_MOVE targetX. */
-        public targetX: number;
-
-        /** S_MOVE targetY. */
-        public targetY: number;
+        /** S_MOVE card. */
+        public card?: (GamePto.ICard|null);
 
         /** S_MOVE allowMove. */
         public allowMove: boolean;
@@ -3554,11 +3548,17 @@ declare namespace GamePto {
         /** S_ATTACK sourceY */
         sourceY?: (number|null);
 
+        /** S_ATTACK sourceId */
+        sourceId?: (number|null);
+
         /** S_ATTACK targetX */
         targetX?: (number|null);
 
         /** S_ATTACK targetY */
         targetY?: (number|null);
+
+        /** S_ATTACK targetId */
+        targetId?: (number|null);
 
         /** S_ATTACK damage */
         damage?: (number|null);
@@ -3597,11 +3597,17 @@ declare namespace GamePto {
         /** S_ATTACK sourceY. */
         public sourceY: number;
 
+        /** S_ATTACK sourceId. */
+        public sourceId: number;
+
         /** S_ATTACK targetX. */
         public targetX: number;
 
         /** S_ATTACK targetY. */
         public targetY: number;
+
+        /** S_ATTACK targetId. */
+        public targetId: number;
 
         /** S_ATTACK damage. */
         public damage: number;
@@ -3653,12 +3659,6 @@ declare namespace GamePto {
         /** S_ENTITY_DEAD scmd */
         scmd?: (number|null);
 
-        /** S_ENTITY_DEAD blockX */
-        blockX?: (number|null);
-
-        /** S_ENTITY_DEAD blockY */
-        blockY?: (number|null);
-
         /** S_ENTITY_DEAD deadCard */
         deadCard?: (GamePto.ICard|null);
     }
@@ -3677,12 +3677,6 @@ declare namespace GamePto {
 
         /** S_ENTITY_DEAD scmd. */
         public scmd: number;
-
-        /** S_ENTITY_DEAD blockX. */
-        public blockX: number;
-
-        /** S_ENTITY_DEAD blockY. */
-        public blockY: number;
 
         /** S_ENTITY_DEAD deadCard. */
         public deadCard?: (GamePto.ICard|null);

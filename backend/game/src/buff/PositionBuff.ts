@@ -18,8 +18,8 @@ export abstract class PositionBuff extends GameBuff {
         //给周围位置绑定buff
         card.table.mapData.addPositionBuff(card.blockX, card.blockY, this.effectiveDistance, buff);
         //增加移动事件
-        card.onPreMoveFuns.push({ id: buff.id, fun: this.onSourcePreMove.bind(card, buff) });
-        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onSourceMoveAfter.bind(card, buff) });
+        card.onPreMoveFuns.push({ id: buff.id, fun: this.onSourcePreMove.bind(this, buff) });
+        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onSourceMoveAfter.bind(this, buff) });
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {

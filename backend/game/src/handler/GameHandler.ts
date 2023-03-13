@@ -117,8 +117,7 @@ export class GameHandler extends BaseHandler {
             replay.uid = user.uid;
             replay.sourceX = msg.sourceX;
             replay.sourceY = msg.sourceY;
-            replay.targetX = msg.targetX;
-            replay.targetY = msg.targetY;
+            replay.card = card;
             replay.allowMove = card.allowMove;
             table.broadcast(replay);
 
@@ -168,29 +167,31 @@ export class GameHandler extends BaseHandler {
             damage = sourceCard.onPreAtk(sourceCard, targetCard, damageCard, damage, dices) as number;
 
             //返回实际收到的伤害
-            damage = targetCard.onDamage(damage, sourceCard);
+            damage = damageCard.onDamage(damage, sourceCard);
             //广播卡牌攻击协议
             const replay = new GamePto.S_ATTACK();
             replay.uid = user.uid;
             replay.sourceX = msg.sourceX;
             replay.sourceY = msg.sourceY;
-            replay.targetX = targetCard.blockX;
-            replay.targetY = targetCard.blockY;
+            replay.sourceId = sourceCard.id;
+            replay.targetX = damageCard.blockX;
+            replay.targetY = damageCard.blockY;
+            replay.targetId = damageCard.id;
             replay.damage = damage;
-            replay.targetHealth = targetCard.health;
+            replay.targetHealth = damageCard.health;
             replay.allowAtk = sourceCard.allowAtk;
             replay.uid = user.uid;
             replay.dices = dices;
             table.broadcast(replay);
 
             //执行卡牌受伤后事件
-            targetCard.onDamageAfter();
+            damageCard.onDamageAfter();
 
             //执行卡牌攻击后事件
-            sourceCard.onAtkAfter(sourceCard, targetCard, damage, dices);
+            sourceCard.onAtkAfter(sourceCard, damageCard, damage, dices);
 
             //执行战场攻击后事件
-            table.mapData.onAtkAfter(sourceCard, targetCard, damage, dices);
+            table.mapData.onAtkAfter(sourceCard, damageCard, damage, dices);
 
             //检查游戏是否结束
             table.checkGameOver();
