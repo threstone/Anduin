@@ -25,7 +25,7 @@ export class JuDun extends PositionBuff {
     }
 
     public addBuff(card: BuildingCard) {
-        const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffTypeDefine.NormalBuff, BuffEffectiveDefine.Friend);
+        const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
         card.addBuff(buff);
         super.addBuff(card, buff);
         card.onDamageFuns.push({ id: buff.id, fun: this.onDemage });

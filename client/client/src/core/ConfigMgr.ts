@@ -11,10 +11,14 @@ class ConfigMgr extends BaseClass {
     }
 
     get allCardsInfo(): CardInterface[] {
-        return this._allConfig['cards']
+        return this._allConfig['cards'];
     }
 
     get common(): CommonConfig {
-        return this._allConfig['common']
+        return this._allConfig['common'];
+    }
+
+    public getBuffDataByBuffId(id: number): BuffData {
+        return this._allConfig['buff'][id];
     }
 }

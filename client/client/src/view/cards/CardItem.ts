@@ -76,9 +76,37 @@ class CardItem {
         const cardConfig = CardsModel.ins().getCardInfoById(cardInfo.cardId)
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;
-        //TODO  同样要显示实时的血量和buff
         cardItem.healthText.text = `${cardInfo.health}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
+        this.showBuffDesc(cardItem, cardInfo);
         return cardItem;
+    }
+
+    static showBuffDesc(cardItem: BaseUI.UICardItem, cardInfo: GamePto.ICard) {
+        cardInfo.buffArr.sort();
+        //显示buff
+        let buffTImes = 1;
+        for (let index = 0; index < cardInfo.buffArr.length; index++) {
+            const buffId = cardInfo.buffArr[index];
+            //堆叠次数
+            if (buffId === cardInfo.buffArr[index + 1]) {
+                buffTImes++;
+                continue;
+            } else {
+                cardItem.buffDesc.visible = true;
+                const buffData = ConfigMgr.ins().getBuffDataByBuffId(buffId);
+                if (!buffData) {
+                    console.error(`未知的buff类型 buffId:${buffId}`);
+                    return;
+                }
+                const textField = new fairygui.GTextField();
+                textField.width = cardItem.buffDesc.width;
+                textField.autoSize = fairygui.AutoSizeType.Height;
+                textField.fontSize = 52;
+                textField.text = `${buffData.buffName}${buffTImes > 1 ? `X${buffTImes}` : ''}:${buffData.desc}`;
+                cardItem.buffDesc.addChild(textField);
+                buffTImes = 1;
+            }
+        }
     }
 }

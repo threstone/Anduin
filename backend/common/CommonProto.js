@@ -6934,6 +6934,130 @@ $root.GamePto = (function() {
         return S_EVENT_FINISH;
     })();
 
+    GamePto.S_UPDATE_ENTITYS = (function() {
+
+        function S_UPDATE_ENTITYS(p) {
+            this.entityCards = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_UPDATE_ENTITYS.prototype.cmd = 200;
+        S_UPDATE_ENTITYS.prototype.scmd = 10016;
+        S_UPDATE_ENTITYS.prototype.entityCards = $util.emptyArray;
+
+        S_UPDATE_ENTITYS.create = function create(properties) {
+            return new S_UPDATE_ENTITYS(properties);
+        };
+
+        S_UPDATE_ENTITYS.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.entityCards != null && m.entityCards.length) {
+                for (var i = 0; i < m.entityCards.length; ++i)
+                    $root.GamePto.Card.encode(m.entityCards[i], w.uint32(26).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_UPDATE_ENTITYS.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_UPDATE_ENTITYS();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(m.entityCards && m.entityCards.length))
+                            m.entityCards = [];
+                        m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_UPDATE_ENTITYS.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_UPDATE_ENTITYS)
+                return d;
+            var m = new $root.GamePto.S_UPDATE_ENTITYS();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.entityCards) {
+                if (!Array.isArray(d.entityCards))
+                    throw TypeError(".GamePto.S_UPDATE_ENTITYS.entityCards: array expected");
+                m.entityCards = [];
+                for (var i = 0; i < d.entityCards.length; ++i) {
+                    if (typeof d.entityCards[i] !== "object")
+                        throw TypeError(".GamePto.S_UPDATE_ENTITYS.entityCards: object expected");
+                    m.entityCards[i] = $root.GamePto.Card.fromObject(d.entityCards[i]);
+                }
+            }
+            return m;
+        };
+
+        S_UPDATE_ENTITYS.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.entityCards = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10016;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.entityCards && m.entityCards.length) {
+                d.entityCards = [];
+                for (var j = 0; j < m.entityCards.length; ++j) {
+                    d.entityCards[j] = $root.GamePto.Card.toObject(m.entityCards[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_UPDATE_ENTITYS.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_UPDATE_ENTITYS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_UPDATE_ENTITYS";
+        };
+
+        return S_UPDATE_ENTITYS;
+    })();
+
     return GamePto;
 })();
 

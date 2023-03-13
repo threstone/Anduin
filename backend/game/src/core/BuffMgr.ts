@@ -36,43 +36,43 @@ export class BuffMgr {
         logger.info(`结束buff初始化,耗时:${Date.now() - makeTime}ms`);
     }
 
-    public getBuffByType(buffId: number): GameBuff {
+    public getBuffByBuffId(buffId: number): GameBuff {
         return this._buffMap.get(buffId);
     }
 
     public addBuff(card: BuildingCard, buffId: number) {
-        const buffClass = this.getBuffByType(buffId);
+        const buffClass = this.getBuffByBuffId(buffId);
         buffClass.addBuff(card);
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {
-        const buffClass = this.getBuffByType(buff.buffType);
+        const buffClass = this.getBuffByBuffId(buff.buffId);
         buffClass.deleteBuff(card, buff);
     }
 
     public addPositionBuff(card: BuildingCard, buff: BuffData) {
-        const buffClass = this.getBuffByType(buff.buffType) as PositionBuff;
+        const buffClass = this.getBuffByBuffId(buff.buffId) as PositionBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.addPositionBuff(card, buff);
         }
     }
 
     public deletePositionBuff(card: BuildingCard, buff: BuffData) {
-        const buffClass = this.getBuffByType(buff.buffType) as PositionBuff;
+        const buffClass = this.getBuffByBuffId(buff.buffId) as PositionBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.deletePositionBuff(card, buff);
         }
     }
 
     public addGlobalBuff(card: BuildingCard, buff: BuffData) {
-        const buffClass = this.getBuffByType(buff.buffType) as GlobalBuff;
+        const buffClass = this.getBuffByBuffId(buff.buffId) as GlobalBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.addGlobalBuff(card, buff);
         }
     }
 
     public deleteGlobalBuff(card: BuildingCard, buff: BuffData) {
-        const buffClass = this.getBuffByType(buff.buffType) as GlobalBuff;
+        const buffClass = this.getBuffByBuffId(buff.buffId) as GlobalBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.deleteGlobalBuff(card, buff);
         }

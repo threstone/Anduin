@@ -27,6 +27,7 @@ module BaseUI {
 		public heroCardTips:fairygui.GTextField;
 		public cardNum:fairygui.GTextField;
 		public dragLoader:fairygui.GLoader;
+		public buffDesc:fairygui.GList;
 		public static URL:string = "ui://yaux2xpotb7e1s";
 
 		public static createInstance():UICardItem {
@@ -60,6 +61,7 @@ module BaseUI {
 			this.heroCardTips = <fairygui.GTextField>(this.getChildAt(22));
 			this.cardNum = <fairygui.GTextField>(this.getChildAt(23));
 			this.dragLoader = <fairygui.GLoader>(this.getChildAt(24));
+			this.buffDesc = <fairygui.GList>(this.getChildAt(25));
 		}
 	}
 }

@@ -29,7 +29,7 @@ export abstract class GameBuff implements BaseEvent {
     public onMoveAfter(moveCard: UnitCard): void {
         throw new Error("Method not implemented.");
     }
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): number | false {
+    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
         throw new Error("Method not implemented.");
     }
     public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): void {

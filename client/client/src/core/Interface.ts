@@ -13,25 +13,32 @@ interface ProtoClass {
 }
 
 interface GameProtoClass {
-    cmd: number
-    scmd: number
+    cmd: number;
+    scmd: number;
 }
 
 /**
  * 势力对象
  */
 interface Power {
-    id: CardsPto.PowerType
-    powerName: string
-    desc: string
+    id: CardsPto.PowerType;
+    powerName: string;
+    desc: string;
 }
 
 interface CommonConfig {
-    maxFeeFilter: number
-    cardMakeFee: number[]
-    cardDisassembleReturnRatio: number
-    maxGroupNum: number
-    startHandCardNum: number
-    drawCardTime: number
-    maxHandCardNum: number
+    maxFeeFilter: number;
+    cardMakeFee: number[];
+    cardDisassembleReturnRatio: number;
+    maxGroupNum: number;
+    startHandCardNum: number;
+    drawCardTime: number;
+    maxHandCardNum: number;
+}
+
+interface BuffData {
+    id: number;
+    buffName: string;
+    desc: string;
+    isShow: number;
 }

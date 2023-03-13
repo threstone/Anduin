@@ -133,23 +133,4 @@ export class BuildingCard extends EventCard {
         //执行卡牌死亡事件,亡语就在此执行
         this.callFuns(this.onDeadFuns, self);
     }
-
-
-    // /**
-    //  * 回合结束触发
-    //  * @returns 操作时间
-    //  */
-    // public onRoundEnd(table: GameTable): number {
-
-    //     // //所有buff的持续回合减1
-    //     // this.buffMap?.forEach((value, key, buffMap) => {
-    //     //     if (value === 1) {
-    //     //         buffMap.delete(key);
-    //     //     } else {
-    //     //         buffMap.set(key, value - 1);
-    //     //     }
-    //     //     //TODO 有些buff可能会在结束回合的是做点什么，比如-1血
-    //     // });
-    //     return super.onRoundEnd(table);
-    // }
 }

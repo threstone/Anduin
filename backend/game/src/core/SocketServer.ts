@@ -28,10 +28,14 @@ export class SocketServer extends RpcCommon.GameRPCServer {
             return;
         }
         const user = GlobalVar.userMgr.getUser(uid);
-        if (user) {
-            return await fun(user, user.table, msg);
+        try {
+            if (user) {
+                return await fun(user, user.table, msg);
+            }
+            return await fun(clientName, uid, msg);
+        } catch (error) {
+            logger.error(`handler 处理函数出错 :${error}`);
         }
-        return await fun(clientName, uid, msg);
     }
 
     sendMsg(clientName: string, uid: number, message: IGameMessage) {

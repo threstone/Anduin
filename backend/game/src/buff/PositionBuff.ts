@@ -1,3 +1,4 @@
+import { GamePto } from "../../../common/CommonProto";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
 import { BuffTypeDefine } from "../game/GameDefine";
@@ -15,16 +16,10 @@ export abstract class PositionBuff extends GameBuff {
 
     public addBuff(card: BuildingCard, buff: BuffData) {
         //给周围位置绑定buff
-        const positionBuff = new BuffData(buff.id, card.uid, -1, this.buffId, BuffTypeDefine.PositionBuff, buff.effectiveType);
-        const pointArr = card.table.mapData.getAroundByDistance(card.blockX, card.blockY, this.effectiveDistance);
-        for (let index = 0; index < pointArr.length; index++) {
-            const point = pointArr[index];
-            card.table.mapData.addBuffToMap(positionBuff, point.x, point.y);
-        }
-
+        card.table.mapData.addPositionBuff(card.blockX, card.blockY, this.effectiveDistance, buff);
         //增加移动事件
-        card.onPreMoveFuns.push({ id: buff.id, fun: this.onSourcePreMove.bind(card, positionBuff) });
-        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onSourceMoveAfter.bind(card, positionBuff) });
+        card.onPreMoveFuns.push({ id: buff.id, fun: this.onSourcePreMove.bind(card, buff) });
+        card.onMoveAfterFuns.push({ id: buff.id, fun: this.onSourceMoveAfter.bind(card, buff) });
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {
@@ -40,31 +35,23 @@ export abstract class PositionBuff extends GameBuff {
         card.deleteBuff(buff);
     }
 
-    private onSourcePreMove(positionBuff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
+    private onSourcePreMove(buff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
         if (moveCard !== selfCard) {
             return true;
         }
         const table = moveCard.table;
         // 移除周围格子buff
-        const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
-        for (let index = 0; index < pointArr.length; index++) {
-            const point = pointArr[index];
-            table.mapData.deleteBuffFromMap(positionBuff, point.x, point.y);
-        }
+        table.mapData.deletePositionBUff(moveCard.blockX, moveCard.blockY, this.effectiveDistance, buff);
         return true;
     }
 
-    private onSourceMoveAfter(positionBuff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
+    private onSourceMoveAfter(buff: BuffData, moveCard: UnitCard, selfCard: UnitCard) {
         if (moveCard !== selfCard) {
             return true;
         }
         const table = moveCard.table;
-        // 增加周围格子位置buff
-        const pointArr = table.mapData.getAroundByDistance(moveCard.blockX, moveCard.blockY, 1);
-        for (let index = 0; index < pointArr.length; index++) {
-            const point = pointArr[index];
-            table.mapData.addBuffToMap(positionBuff, point.x, point.y);
-        }
+        //给周围位置绑定buff
+        table.mapData.addPositionBuff(moveCard.blockX, moveCard.blockY, this.effectiveDistance, buff);
         return true;
     }
 }

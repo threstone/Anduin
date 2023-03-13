@@ -1,4 +1,5 @@
 
+import { GamePto } from "../../../../common/CommonProto";
 import { CardsPto } from "../../../../common/CommonProto";
 import { BuffData } from "../../buff/BuffData";
 import { BaseCard } from "../../card/BaseCard";
@@ -43,38 +44,76 @@ export class GameMap {
         }
     }
 
-    /**向战场添加buff*/
-    public addBuffToMap(buff: BuffData, x?: number, y?: number) {
-        if (buff.buffType === BuffTypeDefine.GlobalBuff) {
-            this._globalBuff.push(buff);
-            //给战场上的单位增加buff
-            for (let index = 0; index < this._mapCards.length; index++) {
-                const card = this._mapCards[index];
-                if (card.cardType !== CardsPto.CardType.Event) {
-                    GlobalVar.buffMgr.addGlobalBuff(card as BuildingCard, buff);
-                }
+    /**向战场添加全局buff*/
+    public addGlobalBuff(buff: BuffData) {
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        this._globalBuff.push(buff);
+        //给战场上的单位增加buff
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            if (card.cardType !== CardsPto.CardType.Event) {
+                GlobalVar.buffMgr.addGlobalBuff(card as BuildingCard, buff);
+                notice.entityCards.push(card);
             }
-        } else if (buff.buffType === BuffTypeDefine.PositionBuff) {
-            this._mapData[x][y].addBuff(buff);
+        }
+        if (notice.entityCards.length !== 0) {
+            this._table.broadcast(notice);
         }
     }
 
-    /**移除战场指定buff*/
-    public deleteBuffFromMap(buff: BuffData, x?: number, y?: number) {
-        if (buff.buffType === BuffTypeDefine.GlobalBuff) {
-            const index = this._globalBuff.indexOf(buff);
-            if (index !== -1) {
-                this._globalBuff.splice(index, 1);
-                // 给战场上的单位移除buff
-                for (let index = 0; index < this._mapCards.length; index++) {
-                    const card = this._mapCards[index];
-                    if (card.cardType !== CardsPto.CardType.Event) {
-                        GlobalVar.buffMgr.deleteGlobalBuff(card as BuildingCard, buff);
-                    }
-                }
+    /**移除战场指定全局buff*/
+    public deleteGlobalBuff(buff: BuffData) {
+        const index = this._globalBuff.indexOf(buff);
+        if (index === -1) {
+            return;
+        }
+
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        this._globalBuff.splice(index, 1);
+        // 给战场上的单位移除buff
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            if (card.cardType !== CardsPto.CardType.Event) {
+                GlobalVar.buffMgr.deleteGlobalBuff(card as BuildingCard, buff);
+                notice.entityCards.push(card);
             }
-        } else if (buff.buffType === BuffTypeDefine.PositionBuff) {
-            this._mapData[x][y].deleteBuff(buff);
+        }
+        if (notice.entityCards.length !== 0) {
+            this._table.broadcast(notice);
+        }
+    }
+
+    /**增加位置buff */
+    public addPositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        const pointArr = this.getAroundByDistance(baseX, baseY, effectiveDistance);
+        for (let index = 0; index < pointArr.length; index++) {
+            const point = pointArr[index];
+            const block = this._mapData[point.x][point.y]
+            block.addBuff(buff);
+            if (block.card) {
+                notice.entityCards.push(block.card);
+            }
+        }
+        if (notice.entityCards.length !== 0) {
+            this._table.broadcast(notice);
+        }
+    }
+
+    /**删除位置buff */
+    public deletePositionBUff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        const pointArr = this.getAroundByDistance(baseX, baseY, effectiveDistance);
+        for (let index = 0; index < pointArr.length; index++) {
+            const point = pointArr[index];
+            const block = this._mapData[point.x][point.y]
+            block.deleteBuff(buff);
+            if (block.card) {
+                notice.entityCards.push(block.card);
+            }
+        }
+        if (notice.entityCards.length !== 0) {
+            this._table.broadcast(notice);
         }
     }
 
@@ -268,10 +307,10 @@ export class GameMap {
      * 战场的攻击前事件
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): number | false {
+    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
-            const result = card.onPreAtk(sourceCard, targetCard, damage, dices);
+            const result = card.onPreAtk(sourceCard, targetCard, damageCard, damage, dices);
             if (result === false) {
                 return false;
             } else {

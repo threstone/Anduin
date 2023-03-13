@@ -8639,6 +8639,137 @@ $root.GamePto = (function() {
         return S_EVENT_FINISH;
     })();
 
+    GamePto.S_UPDATE_ENTITYS = (function() {
+
+        /**
+         * Properties of a S_UPDATE_ENTITYS.
+         * @memberof GamePto
+         * @interface IS_UPDATE_ENTITYS
+         * @property {number|null} [cmd] S_UPDATE_ENTITYS cmd
+         * @property {number|null} [scmd] S_UPDATE_ENTITYS scmd
+         * @property {Array.<GamePto.ICard>|null} [entityCards] S_UPDATE_ENTITYS entityCards
+         */
+
+        /**
+         * Constructs a new S_UPDATE_ENTITYS.
+         * @memberof GamePto
+         * @classdesc Represents a S_UPDATE_ENTITYS.
+         * @implements IS_UPDATE_ENTITYS
+         * @constructor
+         * @param {GamePto.IS_UPDATE_ENTITYS=} [properties] Properties to set
+         */
+        function S_UPDATE_ENTITYS(properties) {
+            this.entityCards = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_UPDATE_ENTITYS cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @instance
+         */
+        S_UPDATE_ENTITYS.prototype.cmd = 200;
+
+        /**
+         * S_UPDATE_ENTITYS scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @instance
+         */
+        S_UPDATE_ENTITYS.prototype.scmd = 10016;
+
+        /**
+         * S_UPDATE_ENTITYS entityCards.
+         * @member {Array.<GamePto.ICard>} entityCards
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @instance
+         */
+        S_UPDATE_ENTITYS.prototype.entityCards = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_UPDATE_ENTITYS message. Does not implicitly {@link GamePto.S_UPDATE_ENTITYS.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @static
+         * @param {GamePto.IS_UPDATE_ENTITYS} message S_UPDATE_ENTITYS message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_UPDATE_ENTITYS.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.entityCards != null && message.entityCards.length)
+                for (var i = 0; i < message.entityCards.length; ++i)
+                    $root.GamePto.Card.encode(message.entityCards[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_UPDATE_ENTITYS message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_UPDATE_ENTITYS} S_UPDATE_ENTITYS
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_UPDATE_ENTITYS.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_UPDATE_ENTITYS();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        if (!(message.entityCards && message.entityCards.length))
+                            message.entityCards = [];
+                        message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_UPDATE_ENTITYS
+         * @function getTypeUrl
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_UPDATE_ENTITYS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_UPDATE_ENTITYS";
+        };
+
+        return S_UPDATE_ENTITYS;
+    })();
+
     return GamePto;
 })();
 

@@ -243,3 +243,10 @@ message S_EVENT_FINISH{
 	int32 scmd = 2[default = 10015];
 	Card card = 3;
 }
+
+//更新战场指定entity列表
+message S_UPDATE_ENTITYS{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10016];
+	repeated Card entityCards = 3;
+}

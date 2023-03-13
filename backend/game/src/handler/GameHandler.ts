@@ -138,14 +138,14 @@ export class GameHandler extends BaseHandler {
             return;
         }
         const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
-        let targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
+        const targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
         if (!sourceCard || !targetCard) {
             return;
         }
         //获取到真正会受到伤害的卡牌(远程攻击会被挡住)
-        targetCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
+        const damageCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
 
-        if (sourceCard && targetCard && sourceCard.allowAtk && user.atkTimes > 0) {
+        if (sourceCard && damageCard && sourceCard.allowAtk && user.atkTimes > 0) {
             user.atkTimes--;
             sourceCard.allowAtk = false;
 
@@ -156,7 +156,7 @@ export class GameHandler extends BaseHandler {
             let damage = table.getTargetDiceValueNum(dices, sourceCard.atkType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
 
             //执行战场攻击前事件决定是否有后续
-            const mapPreAtkResult = table.mapData.onPreAtk(sourceCard, targetCard, damage, dices);
+            const mapPreAtkResult = table.mapData.onPreAtk(sourceCard, targetCard, damageCard, damage, dices);
             //攻击被禁止了
             if (mapPreAtkResult === false) {
                 return;
@@ -165,7 +165,7 @@ export class GameHandler extends BaseHandler {
             damage = mapPreAtkResult;
 
             //执行攻击前事件,可能会导致伤害变化
-            damage = sourceCard.onPreAtk(sourceCard, targetCard, damage, dices) as number;
+            damage = sourceCard.onPreAtk(sourceCard, targetCard, damageCard, damage, dices) as number;
 
             //返回实际收到的伤害
             damage = targetCard.onDamage(damage, sourceCard);

@@ -83,7 +83,7 @@ export interface BaseEvent {
      * 战场卡牌攻击前
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
-    onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): number | false
+    onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false
 
     /**战场卡牌攻击后 */
     onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): void

@@ -1,3 +1,4 @@
+import { GamePto } from "../../../../common/CommonProto";
 import { BuffData } from "../../buff/BuffData";
 import { BuildingCard } from "../../card/BuildingCard";
 import { UnitCard } from "../../card/UnitCard";
@@ -22,6 +23,11 @@ export class MapBlock {
             const buff = this._positionBuff[index];
             GlobalVar.buffMgr.addPositionBuff(this._card, buff);
         }
+        if (this._positionBuff.length !== 0) {
+            const notice = new GamePto.S_UPDATE_ENTITYS();
+            notice.entityCards.push(card);
+            card.table.broadcast(notice);
+        }
     }
 
     public removeCard() {
@@ -29,6 +35,11 @@ export class MapBlock {
         for (let index = 0; index < this._positionBuff.length; index++) {
             const buff = this._positionBuff[index];
             GlobalVar.buffMgr.deletePositionBuff(this._card, buff);
+        }
+        if (this._positionBuff.length !== 0) {
+            const notice = new GamePto.S_UPDATE_ENTITYS();
+            notice.entityCards.push(this._card);
+            this._card.table.broadcast(notice);
         }
         this._card = null;
     }

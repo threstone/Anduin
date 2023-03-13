@@ -15,8 +15,8 @@
     <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="common/res/line.png" xy="19,225" size="184,2" group="n14_tb7e" color="#cccccc"/>
     <text id="n9_tb7e" name="desc" xy="22,231" size="180,84" group="n14_tb7e" fontSize="10" autoSize="none" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
     <image id="n2_tb7e" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="4,329" group="n19_tb7e"/>
-    <image id="n28_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/DR_atk_til.png" xy="40,366" group="n30_hzsg" rotation="-135"/>
-    <image id="n29_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/DR_atk_til.png" xy="2,360" group="n30_hzsg" rotation="-45"/>
+    <image id="n28_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="40,366" group="n30_hzsg" rotation="-135"/>
+    <image id="n29_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="2,360" group="n30_hzsg" rotation="-45"/>
     <group id="n30_hzsg" name="longRange" xy="2,360" size="88,14" group="n19_tb7e" advanced="true"/>
     <text id="n11_tb7e" name="atkText" xy="11,333" size="25,27" group="n19_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="99"/>
     <group id="n19_tb7e" name="atkGroup" xy="2,329" size="88,45" group="n14_tb7e" advanced="true"/>
@@ -28,5 +28,6 @@
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n23_tb7e" name="cardNum" xy="168,10" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="X22"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368"/>
+    <list id="n32_sgbw" name="buffDesc" xy="223,0" size="168,368" visible="false" overflow="scroll"/>
   </displayList>
 </component>

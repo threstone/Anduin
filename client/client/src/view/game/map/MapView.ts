@@ -34,6 +34,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.addEffectListener('S_MOVE', this.moveUnit);
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('S_ENTITY_DEAD', this.entityDead);
+        this.addEffectListener('S_UPDATE_ENTITYS', this.entitysUpdate);
     }
 
     public close(): void {
@@ -261,6 +262,14 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 }
                 this.addMapItem(cardInfo);
             }
+        }
+    }
+
+    /**更新战场指定entity列表 */
+    private entitysUpdate(msg: GamePto.S_UPDATE_ENTITYS) {
+        for (let index = 0; index < msg.entityCards.length; index++) {
+            const entity = msg.entityCards[index];
+            this.updateMapItem(entity);
         }
     }
 

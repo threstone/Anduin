@@ -88,10 +88,10 @@ export class EventCard extends BaseCard implements BaseEvent {
      * 战场卡牌攻击前
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): number | false {
+    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
         for (let index = 0; index < this.onPreAtkFuns.length; index++) {
             const funcObj = this.onPreAtkFuns[index];
-            const result = funcObj.fun.call(this, sourceCard, targetCard, damage, dices);
+            const result = funcObj.fun.call(this, sourceCard, targetCard, damageCard, damage, dices);
             if (result === false) {
                 return false;
             } else {

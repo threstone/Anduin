@@ -224,4 +224,18 @@ class MapModel extends BaseModel {
             }
         }
     }
+
+    //更新战场指定entity列表
+    private S_UPDATE_ENTITYS(msg: GamePto.S_UPDATE_ENTITYS) {
+        for (let index = 0; index < msg.entityCards.length; index++) {
+            const entity = msg.entityCards[index];
+            const oldCard = this._mapData[entity.blockX][entity.blockY];
+
+            const cardIndex = this._serverData.entityCards.indexOf(oldCard);
+            this._serverData.entityCards[cardIndex] = entity;
+            this._mapData[entity.blockX][entity.blockY] = entity;
+        }
+
+        this.emit('S_UPDATE_ENTITYS', msg);
+    }
 }

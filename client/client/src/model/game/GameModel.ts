@@ -139,13 +139,14 @@ class GameModel extends BaseModel {
 
     //使用卡牌
     private S_USE_CARD(msg: GamePto.S_USE_CARD) {
-        if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
-            this.handCards.splice(msg.cardIndex, 1);
+        if (msg.isSuccess) {
+            if (msg.uid === UserModel.ins().uid) {
+                this.handCards.splice(msg.cardIndex, 1);
+                this.fee = msg.fee;
+            }
             this.onUseCard(msg);
-            this.fee = msg.fee;
+            this.emit('S_USE_CARD', msg);
         }
-
-        this.emit('S_USE_CARD', msg);
     }
 
     //下发回合结束时间
