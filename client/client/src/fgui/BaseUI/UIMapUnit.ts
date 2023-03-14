@@ -10,11 +10,11 @@ module BaseUI {
 		public longRange2:fairygui.GImage;
 		public longRange:fairygui.GGroup;
 		public atkText:fairygui.GTextField;
-		public heroFlag:fairygui.GTextField;
 		public atkGroup:fairygui.GGroup;
 		public healthBg:fairygui.GImage;
 		public healthText:fairygui.GTextField;
 		public healthGroup:fairygui.GGroup;
+		public heroFlag:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpohzsg2n";
 
 		public static createInstance():UIMapUnit {
@@ -31,11 +31,11 @@ module BaseUI {
 			this.longRange2 = <fairygui.GImage>(this.getChildAt(4));
 			this.longRange = <fairygui.GGroup>(this.getChildAt(5));
 			this.atkText = <fairygui.GTextField>(this.getChildAt(6));
-			this.heroFlag = <fairygui.GTextField>(this.getChildAt(7));
-			this.atkGroup = <fairygui.GGroup>(this.getChildAt(8));
-			this.healthBg = <fairygui.GImage>(this.getChildAt(9));
-			this.healthText = <fairygui.GTextField>(this.getChildAt(10));
-			this.healthGroup = <fairygui.GGroup>(this.getChildAt(11));
+			this.atkGroup = <fairygui.GGroup>(this.getChildAt(7));
+			this.healthBg = <fairygui.GImage>(this.getChildAt(8));
+			this.healthText = <fairygui.GTextField>(this.getChildAt(9));
+			this.healthGroup = <fairygui.GGroup>(this.getChildAt(10));
+			this.heroFlag = <fairygui.GTextField>(this.getChildAt(11));
 		}
 	}
 }

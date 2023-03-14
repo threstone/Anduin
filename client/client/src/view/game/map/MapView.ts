@@ -42,6 +42,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public addMapItem(cardInfo: GamePto.ICard) {
         const cardItem = MapItem.getItem(cardInfo)
+        cardItem.setPivot(0.5, 0.5, true);
         this.entityMap.set(cardInfo.id, cardItem);
         this.view.addChild(cardItem);
 
@@ -206,8 +207,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             //这里以后可能会根据不同的卡牌获取不同的攻击元素,现在直接用箭先实现
             const arrow = fairygui.UIPackage.createObject("BaseUI", "arrow").asImage;
             arrow.setPivot(0.5, 0.5, true);
-            arrow.x = source.x + this.blockWidth / 2;
-            arrow.y = source.y + this.blockHeight / 2;
+            arrow.x = source.x;
+            arrow.y = source.y;
 
             let skew = 0;
             let time = 0;
@@ -223,7 +224,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             arrow.skewY = skew;
 
             this.view.addChild(arrow);
-            egret.Tween.get(arrow).to({ x: target.x + this.blockWidth / 2, y: target.y + this.blockHeight / 2 }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
+            egret.Tween.get(arrow).to({ x: target.x, y: target.y }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
                 this.view.removeChild(arrow);
             });
             await this.wait(time);
@@ -291,7 +292,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         return false;
     }
 
-    /**根据地图坐标返回地图坐标 */
+    /**根据地图坐标返回地图坐标格子中心 */
     public getMapPoint(blockX: number, blockY: number) {
         const mapPoint = new egret.Point();
         if (this._isFirst) {
@@ -301,7 +302,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             mapPoint.x = this.view.width - (blockX + 1) * this.blockWidth;
             mapPoint.y = this.view.height - (blockY + 1) * this.blockHeight;
         }
-        return mapPoint
+        mapPoint.x += this.blockWidth / 2;
+        mapPoint.y += this.blockHeight / 2;
+        return mapPoint;
     }
 
     /**根据地图坐标返回场景坐标 */
