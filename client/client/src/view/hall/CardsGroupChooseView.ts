@@ -67,7 +67,7 @@ class CardsGroupChooseView extends BaseView<BaseUI.UICardsGroupChooseCom>{
         
         for (let index = 0; index < cardGourpInfo.cards.length; index++) {
             const card = cardGourpInfo.cards[index];
-            const config = CardsModel.ins().getCardInfoById(card.id);
+            const config = CardsModel.ins().getCardConfigById(card.id);
             if (config.cardType === CardsPto.CardType.Hero) {
                 this.view.heroCard.visible = true;
                 CardItem.updateCard(this.view.heroCard, config);

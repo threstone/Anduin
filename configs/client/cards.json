@@ -12,7 +12,8 @@
  "quality":1,
  "desc":"获得一点费用",
  "buffs":[],
- "isDerivation":1
+ "isDerivation":1,
+ "useCondition":[0]
   },
 {
  "cardId":1,
@@ -27,7 +28,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":2,
@@ -42,7 +44,8 @@
  "quality":1,
  "desc":"",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":3,
@@ -57,7 +60,8 @@
  "quality":2,
  "desc":"",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":4,
@@ -72,7 +76,8 @@
  "quality":1,
  "desc":"举盾：自身和相邻友军受到远程攻击时伤害-1",
  "buffs":[1],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":5,
@@ -87,37 +92,40 @@
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用",
  "buffs":[0],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":6,
- "cardName":"农夫5",
+ "cardName":"魔法神箭",
  "powerId":0,
- "cardType":0,
+ "cardType":2,
  "type2":1,
- "attack":4,
+ "attack":2,
  "atkType":0,
  "health":3,
- "fee":0,
- "quality":2,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
+ "fee":1,
+ "quality":0,
+ "desc":"对一个单位造成两点伤害",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[2,1]
   },
 {
  "cardId":7,
- "cardName":"农夫6",
+ "cardName":"单位反制",
  "powerId":0,
- "cardType":1,
+ "cardType":4,
  "type2":1,
  "attack":2,
  "atkType":1,
- "health":8,
- "fee":7,
+ "health":1,
+ "fee":2,
  "quality":2,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
+ "desc":"反制一张建筑卡牌或者单位卡牌",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":8,
@@ -132,7 +140,8 @@
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":9,
@@ -147,7 +156,8 @@
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":10,
@@ -162,7 +172,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":11,
@@ -177,7 +188,8 @@
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":12,
@@ -192,7 +204,8 @@
  "quality":3,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":13,
@@ -207,7 +220,8 @@
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":14,
@@ -222,7 +236,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":15,
@@ -237,7 +252,8 @@
  "quality":3,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":16,
@@ -252,7 +268,8 @@
  "quality":2,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":17,
@@ -267,7 +284,8 @@
  "quality":0,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":18,
@@ -282,7 +300,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":19,
@@ -297,7 +316,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":20,
@@ -312,7 +332,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":21,
@@ -327,7 +348,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":22,
@@ -342,7 +364,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升2",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":23,
@@ -357,7 +380,8 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升3",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":24,
@@ -372,6 +396,7 @@
  "quality":1,
  "desc":"务农：回合开始阶段获得一点费用\n晋升4",
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   }
 ]

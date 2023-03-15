@@ -72,7 +72,7 @@ class CardItem {
     }
 
     static getEntityCard(cardInfo: GamePto.ICard) {
-        const cardConfig = CardsModel.ins().getCardInfoById(cardInfo.cardId)
+        const cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId)
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;
         cardItem.healthText.text = `${cardInfo.health}`;

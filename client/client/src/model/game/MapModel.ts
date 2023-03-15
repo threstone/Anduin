@@ -34,7 +34,7 @@ class MapModel extends BaseModel {
     public getHero(uid: number) {
         for (let index = 0; index < this._serverData.entityCards.length; index++) {
             const entity = this._serverData.entityCards[index];
-            if (entity.uid === uid && CardsModel.ins().getCardInfoById(entity.cardId).cardType === CardsPto.CardType.Hero) {
+            if (entity.uid === uid && CardsModel.ins().getCardConfigById(entity.cardId).cardType === CardsPto.CardType.Hero) {
                 return entity;
             }
         }

@@ -67,7 +67,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**更新指定地图卡 */
     public updateMapItem(cardInfo: GamePto.ICard) {
         const mapItem = this.entityMap.get(cardInfo.id);
-        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         MapItem.updateEntityDesc(mapItem, cardInfo);
         if (cardInfo.uid === UserModel.ins().uid && (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero)) {
             this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo, config);
@@ -112,7 +112,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         //自己的卡牌被点击
         if (GameSceneView.ins().allowToOprate && config.cardType !== CardsPto.CardType.Building) {
             // 显示所有可移动路径
@@ -159,7 +159,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
         const cardInfo = msg.card;
         if (cardInfo.uid === UserModel.ins().uid) {
-            const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
             this.updateUnitOperateTips(mapItem, cardInfo, config);
         }
         await this.wait(500);
@@ -180,7 +180,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         await RightCtrlView.ins().showDices(msg.dices);
 
         //攻击效果
-        const sourceConfig = CardsModel.ins().getCardInfoById(sourceCardInfo.cardId);
+        const sourceConfig = CardsModel.ins().getCardConfigById(sourceCardInfo.cardId);
         await this.showAttack(sourceEntity, targetEntity, sourceConfig);
 
         //执行完效果后就飘血扣血

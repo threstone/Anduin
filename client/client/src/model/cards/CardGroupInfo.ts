@@ -32,7 +32,7 @@ class CardGroupInfo {
             this._cardCount = 0;
             for (let index = 0; index < groupInfo.cards.length; index++) {
                 const info = groupInfo.cards[index];
-                const cardInfo = CardsModel.ins().getCardInfoById(info.id);
+                const cardInfo = CardsModel.ins().getCardConfigById(info.id);
                 this._cardsInfo.push({ count: info.count, cardInfo })
                 if (cardInfo.cardType === CardsPto.CardType.Hero) {
                     this._hasPremium = true;

@@ -17,7 +17,7 @@ class GameModel extends BaseModel {
     targetDeadPoolNum: number;
 
     private onUseCard(msg: GamePto.S_USE_CARD) {
-        const cardConfig = CardsModel.ins().getCardInfoById(msg.card.cardId);
+        const cardConfig = CardsModel.ins().getCardConfigById(msg.card.cardId);
         //法术直接入墓地
         if (cardConfig.cardType === CardsPto.CardType.Magic) {
             this.deadPool.push(msg.card);

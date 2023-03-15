@@ -77,40 +77,113 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 gameCard.cacheX = cardItem.x;
                 gameCard.cacheY = cardItem.y;
             }, this);
-            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
-                //检查是否允许操作
-                if (GameSceneView.ins().allowToOprate) {
-                    if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
-                        GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
-                        return;
-                    }
 
-                    const mapPoint = new egret.Point();
-                    //使用卡牌
-                    if (gameCard.cardInfo.fee > GameModel.ins().fee) {
-                        TipsView.ins().showTips("费用不够!");
-                    } else if (MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
-                        //TODO 有些卡牌要指向一切卡牌作为目标
-                        GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), [mapPoint.x, mapPoint.y]);
-                        if (TEST_GAME) {
-                            cardItem.x = gameCard.cacheX;
-                            cardItem.y = gameCard.cacheY;
-                            cardItem.scaleX = 0.5;
-                            cardItem.scaleY = 0.5;
-                            GameDispatcher.getInstance().emit('S_USE_CARD', { "isSuccess": true, "fee": 0, "feeMax": 10, "uid": 2, "cardIndex": this.getCardIndex(cardItem), "card": { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 2, "blockX": mapPoint.x, "blockY": mapPoint.y } })
-                        }
-                        return;
-                    }
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
+                //不允许操作的情况
+                if (!GameSceneView.ins().allowToOprate) {
+                    this.restoreCard(gameCard);
+                    return;
                 }
-                cardItem.x = gameCard.cacheX;
-                cardItem.y = gameCard.cacheY;
-                cardItem.scaleY = 0.5;
-                cardItem.scaleX = 0.5;
+                //弃牌
+                if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
+                    GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
+                    return;
+                }
+                //费用不够
+                if (gameCard.cardInfo.fee > GameModel.ins().fee) {
+                    TipsView.ins().showTips("费用不够!");
+                    this.restoreCard(gameCard);
+                    return;
+                }
+                //尝试使用卡牌
+                if (!this.tryUseCard(event, gameCard)) {
+                    this.restoreCard(gameCard);
+                }
             }, this);
         }
 
         //悬浮变大、拖动使用
         return this.updateCardsPostion(opTime);
+    }
+
+    /**还原卡牌位置和大小 */
+    private restoreCard(gameCard: GameCard) {
+        //如果没有做出操作则把还原卡牌位置和大小
+        const cardItem = gameCard.cardItem;
+        cardItem.x = gameCard.cacheX;
+        cardItem.y = gameCard.cacheY;
+        cardItem.scaleY = 0.5;
+        cardItem.scaleX = 0.5;
+    }
+
+    /**尝试使用卡牌 */
+    private tryUseCard(event: fairygui.DragEvent, gameCard: GameCard) {
+        const cardItem = gameCard.cardItem;
+
+        const mapPoint = new egret.Point();
+
+        //拖入到战场则说明要使用卡牌，然后根据卡牌使用条件来执行后续逻辑
+        if (!MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
+            return false;
+        }
+
+        const cardConfig = CardsModel.ins().getCardConfigById(gameCard.cardInfo.cardId);
+        const cardIndex = this.getCardIndex(cardItem)
+        const useType = cardConfig.useCondition[UseConditionTypeIndex];
+        switch (useType) {
+            //无条件卡牌
+            case UseConditionType.NoCondition:
+                GameModel.ins().C_USE_CARD(cardIndex, []);
+                break;
+            //空格子
+            case UseConditionType.EmptyBlock:
+                if (MapModel.ins().getEntityCardByPoint(mapPoint.x, mapPoint.y)) {
+                    return false;
+                }
+                GameModel.ins().C_USE_CARD(cardIndex, [mapPoint.x, mapPoint.y]);
+                break;
+            //友方单位
+            case UseConditionType.FriendlyUnit:
+            //友方建筑
+            case UseConditionType.FriendlyBuilding:
+            //敌方单位
+            case UseConditionType.EnemyUnit:
+            //敌方建筑
+            case UseConditionType.EnemyBuilding:
+            //所有单位
+            case UseConditionType.AllUnit:
+            //所有建筑
+            case UseConditionType.AllBuilding:
+            //友方地图实体
+            case UseConditionType.FriendEntity:
+            //敌方地图实体
+            case UseConditionType.EnemyEntity:
+            //所有地图实体
+            case UseConditionType.AllEntity:
+                return this.selectTargets(cardIndex, useType, cardConfig.useCondition[UseConditionValueIndex]);
+            default:
+                console.error("未知的使用条件类型:", useType);
+                return false;
+        }
+    }
+
+    /**
+     * 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则)
+     * 选择完毕才可以执行
+     */
+    private selectTargets(cardIndex: number, useType: UseConditionType, targetNum: number) {
+        const dataArr: number[] = [];
+        //TODO 完成卡牌的使用条件
+        //GameModel.ins().C_USE_CARD(cardIndex, dataArr);
+        // //TODO 有些卡牌要指向一切卡牌作为目标
+        // GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), [mapPoint.x, mapPoint.y]);
+        // if (TEST_GAME) {
+        //     cardItem.x = gameCard.cacheX;
+        //     cardItem.y = gameCard.cacheY;
+        //     cardItem.scaleX = 0.5;
+        //     cardItem.scaleY = 0.5;
+        //     GameDispatcher.getInstance().emit('S_USE_CARD', { "isSuccess": true, "fee": 0, "feeMax": 10, "uid": 2, "cardIndex": this.getCardIndex(cardItem), "card": { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 2, "blockX": mapPoint.x, "blockY": mapPoint.y } })
+        // }
     }
 
     /**
@@ -219,11 +292,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
             this.updateCardsPostion(500);
         } else {
-            const cardItem = gameCard.cardItem;
-            cardItem.x = gameCard.cacheX;
-            cardItem.y = gameCard.cacheX;
-            cardItem.scaleX = 0.5;
-            cardItem.scaleY = 0.5;
+            this.restoreCard(gameCard);
         }
     }
 

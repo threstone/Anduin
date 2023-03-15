@@ -118,7 +118,7 @@ class CardsModel extends BaseModel {
     }
 
     /**通过卡牌信息获取卡牌 */
-    public getCardInfoById(cardId: number) {
+    public getCardConfigById(cardId: number) {
         const cards = ConfigMgr.ins().allCardsInfo;
         for (let index = 0; index < cards.length; index++) {
             const cardInfo = cards[index];
@@ -143,7 +143,7 @@ class CardsModel extends BaseModel {
         this._ownerCardsMap = new Map<CardsPto.PowerType, CardInterface[]>();
         for (let index = 0; index < msg.cardInfos.length; index++) {
             const card = msg.cardInfos[index];
-            const cardInfo = this.getCardInfoById(card.id);
+            const cardInfo = this.getCardConfigById(card.id);
             cardInfo.count = card.count;
 
             const cardArr = this.getOwnerCardsArrByPowerId(cardInfo.powerId);
@@ -158,7 +158,7 @@ class CardsModel extends BaseModel {
     /**制作卡牌结果 */
     private S_MAKE_CARD(msg: CardsPto.S_MAKE_CARD) {
         if (msg.code === 0) {
-            const cardInfo = this.getCardInfoById(msg.cardId);
+            const cardInfo = this.getCardConfigById(msg.cardId);
             cardInfo.count = (cardInfo.count || 0) + 1;
             //如果只有一张那就要在owner里面加上这个新卡的信息
             if (cardInfo.count === 1) {
@@ -183,7 +183,7 @@ class CardsModel extends BaseModel {
     /**分解卡牌结果 */
     private S_DISASSEMBLE_CARD(msg: CardsPto.S_DISASSEMBLE_CARD) {
         if (msg.code === 0) {
-            const cardInfo = this.getCardInfoById(msg.cardId);
+            const cardInfo = this.getCardConfigById(msg.cardId);
             cardInfo.count = cardInfo.count - 1;
             //如果没有了那就要在owner里面去掉这张卡的信息
             if (cardInfo.count === 0) {

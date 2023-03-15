@@ -13,4 +13,5 @@ interface CardInterface {
     buffs: number[];
     count: number;
     isDerivation: number;
+    useCondition: number[];
 }

@@ -1,6 +1,6 @@
 class MapItem {
     public static getItem(cardInfo: GamePto.ICard) {
-        const config = CardsModel.ins().getCardInfoById(cardInfo.cardId);
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         switch (config.cardType) {
             case CardsPto.CardType.Building:
                 return BuildingItem.getItem(cardInfo, config);

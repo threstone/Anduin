@@ -97,7 +97,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         const cardItem = card.cardItem
         this.view.addChild(cardItem);
 
-        const cardConfig = CardsModel.ins().getCardInfoById(card.cardInfo.cardId);
+        const cardConfig = CardsModel.ins().getCardConfigById(card.cardInfo.cardId);
         //如果是事件卡和法术卡移动至左侧显示，然后播放对应特效
         if (cardConfig.cardType === CardsPto.CardType.Event || cardConfig.cardType === CardsPto.CardType.Magic) {
             egret.Tween.get(cardItem).to({
