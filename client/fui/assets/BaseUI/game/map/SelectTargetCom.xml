@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n10_q6kd" name="click" xy="0,0" size="1600,1200" alpha="0.01" type="rect">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <graph id="n1_q6kd" name="bg0" xy="0,0" size="1600,403" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,left-left,top-top"/>
+    </graph>
+    <graph id="n7_q6kd" name="bg1" xy="0,403" size="479,335" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="n1_q6kd" sidePair="left-left,top-bottom"/>
+    </graph>
+    <graph id="n8_q6kd" name="bg2" xy="933,403" size="667,335" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="n1_q6kd" sidePair="top-bottom"/>
+    </graph>
+    <graph id="n9_q6kd" name="bg3" xy="0,865" size="1600,335" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,left-left,bottom-bottom"/>
+    </graph>
+  </displayList>
+</component>

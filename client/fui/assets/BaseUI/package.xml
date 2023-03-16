@@ -82,6 +82,7 @@
     <component id="sbft2s" name="AtkTips.xml" path="/game/map/tips/" exported="true"/>
     <component id="sbft2t" name="MapTipsView.xml" path="/game/map/tips/" exported="true"/>
     <movieclip id="sgbw30" name="DiceMovie.jta" path="/game/" exported="true"/>
+    <component id="q6kd31" name="SelectTargetCom.xml" path="/game/map/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

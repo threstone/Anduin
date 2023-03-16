@@ -8,8 +8,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**悬浮时的显示卡牌 */
     private _detailCard: BaseUI.UICardItem;
-    /**选中的卡牌信息 */
-    private _selectCardInfo: GamePto.ICard
 
     blockWidth: number;
     blockHeight: number;
@@ -98,17 +96,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.isInMap(evt.stageX, evt.stageY, mapBlock);
         const cardInfo = MapModel.ins().getEntityCardByPoint(mapBlock.x, mapBlock.y);
         if (!cardInfo) {
-            return;
-        }
-
-        //如果是对方的卡牌被点击,那么有可能是尝试攻击,或者对他使用法术
-        if (cardInfo.uid !== UserModel.ins().uid) {
-            //攻击对方卡牌
-            if (this._selectCardInfo != null) {
-                //TODO检查攻击是否有效，比如攻击距离够不够
-            } else {
-                //TODO 对卡牌使用法术
-            }
             return;
         }
 

@@ -27,6 +27,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChooseCards.URL, UIChooseCards);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardBackItem.URL, UICardBackItem);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsGroupChooseCom.URL, UICardsGroupChooseCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UISelectTargetCom.URL, UISelectTargetCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIButton1.URL, UIButton1);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRegisterCom.URL, UIRegisterCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UILoginCom.URL, UILoginCom);

@@ -160,7 +160,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             case UseConditionType.EnemyEntity:
             //所有地图实体
             case UseConditionType.AllEntity:
-                return this.selectTargets(cardIndex, useType, cardConfig.useCondition[UseConditionValueIndex]);
+                return this.selectTargets(cardItem, cardIndex, useType, cardConfig.useCondition[UseConditionValueIndex]);
             default:
                 console.error("未知的使用条件类型:", useType);
                 return false;
@@ -171,8 +171,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
      * 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则)
      * 选择完毕才可以执行
      */
-    private selectTargets(cardIndex: number, useType: UseConditionType, targetNum: number) {
+    private selectTargets(cardItem: BaseUI.UICardItem, cardIndex: number, useType: UseConditionType, targetNum: number) {
         const dataArr: number[] = [];
+        SelectTargetView.ins().open(cardItem);
         //TODO 完成卡牌的使用条件
         //GameModel.ins().C_USE_CARD(cardIndex, dataArr);
         // //TODO 有些卡牌要指向一切卡牌作为目标
