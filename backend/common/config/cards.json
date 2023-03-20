@@ -10,7 +10,8 @@
  "fee":0,
  "quality":1,
  "buffs":[],
- "isDerivation":1
+ "isDerivation":1,
+ "useCondition":[0]
   },
 {
  "cardId":1,
@@ -23,7 +24,8 @@
  "fee":0,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":2,
@@ -36,7 +38,8 @@
  "fee":1,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":3,
@@ -49,7 +52,8 @@
  "fee":1,
  "quality":2,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":4,
@@ -62,7 +66,8 @@
  "fee":2,
  "quality":1,
  "buffs":[1],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":5,
@@ -75,7 +80,8 @@
  "fee":0,
  "quality":0,
  "buffs":[0],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":6,
@@ -88,7 +94,8 @@
  "fee":1,
  "quality":0,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[8,1]
   },
 {
  "cardId":7,
@@ -101,7 +108,8 @@
  "fee":2,
  "quality":2,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":8,
@@ -114,7 +122,8 @@
  "fee":8,
  "quality":0,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":9,
@@ -127,7 +136,8 @@
  "fee":9,
  "quality":0,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":10,
@@ -140,7 +150,8 @@
  "fee":1,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":11,
@@ -153,7 +164,8 @@
  "fee":0,
  "quality":2,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":12,
@@ -166,7 +178,8 @@
  "fee":4,
  "quality":3,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":13,
@@ -179,7 +192,8 @@
  "fee":5,
  "quality":0,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":14,
@@ -192,7 +206,8 @@
  "fee":6,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":15,
@@ -205,7 +220,8 @@
  "fee":7,
  "quality":3,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":16,
@@ -218,7 +234,8 @@
  "fee":0,
  "quality":2,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":17,
@@ -231,7 +248,8 @@
  "fee":4,
  "quality":0,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":18,
@@ -244,7 +262,8 @@
  "fee":1,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":19,
@@ -257,7 +276,8 @@
  "fee":2,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":20,
@@ -270,7 +290,8 @@
  "fee":3,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":21,
@@ -283,7 +304,8 @@
  "fee":4,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":22,
@@ -296,7 +318,8 @@
  "fee":4,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":23,
@@ -309,7 +332,8 @@
  "fee":4,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   },
 {
  "cardId":24,
@@ -322,6 +346,7 @@
  "fee":4,
  "quality":1,
  "buffs":[],
- "isDerivation":0
+ "isDerivation":0,
+ "useCondition":[0]
   }
 ]

@@ -4524,6 +4524,52 @@ $root.GamePto = (function() {
         return values;
     })();
 
+    /**
+     * UseConditionIndexEnum enum.
+     * @name GamePto.UseConditionIndexEnum
+     * @enum {number}
+     * @property {number} UseConditionTypeIndex=0 UseConditionTypeIndex value
+     * @property {number} UseConditionValueIndex=1 UseConditionValueIndex value
+     */
+    GamePto.UseConditionIndexEnum = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "UseConditionTypeIndex"] = 0;
+        values[valuesById[1] = "UseConditionValueIndex"] = 1;
+        return values;
+    })();
+
+    /**
+     * UseConditionEnum enum.
+     * @name GamePto.UseConditionEnum
+     * @enum {number}
+     * @property {number} NoCondition=0 NoCondition value
+     * @property {number} FriendlyUnit=1 FriendlyUnit value
+     * @property {number} FriendlyBuilding=2 FriendlyBuilding value
+     * @property {number} EnemyUnit=3 EnemyUnit value
+     * @property {number} EnemyBuilding=4 EnemyBuilding value
+     * @property {number} AllUnit=5 AllUnit value
+     * @property {number} AllBuilding=6 AllBuilding value
+     * @property {number} FriendEntity=7 FriendEntity value
+     * @property {number} EnemyEntity=8 EnemyEntity value
+     * @property {number} AllEntity=9 AllEntity value
+     * @property {number} EmptyBlock=10 EmptyBlock value
+     */
+    GamePto.UseConditionEnum = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "NoCondition"] = 0;
+        values[valuesById[1] = "FriendlyUnit"] = 1;
+        values[valuesById[2] = "FriendlyBuilding"] = 2;
+        values[valuesById[3] = "EnemyUnit"] = 3;
+        values[valuesById[4] = "EnemyBuilding"] = 4;
+        values[valuesById[5] = "AllUnit"] = 5;
+        values[valuesById[6] = "AllBuilding"] = 6;
+        values[valuesById[7] = "FriendEntity"] = 7;
+        values[valuesById[8] = "EnemyEntity"] = 8;
+        values[valuesById[9] = "AllEntity"] = 9;
+        values[valuesById[10] = "EmptyBlock"] = 10;
+        return values;
+    })();
+
     GamePto.UserInfo = (function() {
 
         /**
@@ -8753,6 +8799,160 @@ $root.GamePto = (function() {
         };
 
         return S_UPDATE_ENTITYS;
+    })();
+
+    GamePto.S_CARD_EFFECT = (function() {
+
+        /**
+         * Properties of a S_CARD_EFFECT.
+         * @memberof GamePto
+         * @interface IS_CARD_EFFECT
+         * @property {number|null} [cmd] S_CARD_EFFECT cmd
+         * @property {number|null} [scmd] S_CARD_EFFECT scmd
+         * @property {number|null} [effectId] S_CARD_EFFECT effectId
+         * @property {Array.<number>|null} [dataArr] S_CARD_EFFECT dataArr
+         */
+
+        /**
+         * Constructs a new S_CARD_EFFECT.
+         * @memberof GamePto
+         * @classdesc Represents a S_CARD_EFFECT.
+         * @implements IS_CARD_EFFECT
+         * @constructor
+         * @param {GamePto.IS_CARD_EFFECT=} [properties] Properties to set
+         */
+        function S_CARD_EFFECT(properties) {
+            this.dataArr = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_CARD_EFFECT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_CARD_EFFECT
+         * @instance
+         */
+        S_CARD_EFFECT.prototype.cmd = 200;
+
+        /**
+         * S_CARD_EFFECT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_CARD_EFFECT
+         * @instance
+         */
+        S_CARD_EFFECT.prototype.scmd = 10017;
+
+        /**
+         * S_CARD_EFFECT effectId.
+         * @member {number} effectId
+         * @memberof GamePto.S_CARD_EFFECT
+         * @instance
+         */
+        S_CARD_EFFECT.prototype.effectId = 0;
+
+        /**
+         * S_CARD_EFFECT dataArr.
+         * @member {Array.<number>} dataArr
+         * @memberof GamePto.S_CARD_EFFECT
+         * @instance
+         */
+        S_CARD_EFFECT.prototype.dataArr = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_CARD_EFFECT message. Does not implicitly {@link GamePto.S_CARD_EFFECT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_CARD_EFFECT
+         * @static
+         * @param {GamePto.IS_CARD_EFFECT} message S_CARD_EFFECT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_CARD_EFFECT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.effectId != null && Object.hasOwnProperty.call(message, "effectId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.effectId);
+            if (message.dataArr != null && message.dataArr.length) {
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
+                for (var i = 0; i < message.dataArr.length; ++i)
+                    writer.int32(message.dataArr[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Decodes a S_CARD_EFFECT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_CARD_EFFECT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_CARD_EFFECT} S_CARD_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_CARD_EFFECT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_CARD_EFFECT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.effectId = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.dataArr && message.dataArr.length))
+                            message.dataArr = [];
+                        if ((tag & 7) === 2) {
+                            var end2 = reader.uint32() + reader.pos;
+                            while (reader.pos < end2)
+                                message.dataArr.push(reader.int32());
+                        } else
+                            message.dataArr.push(reader.int32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_CARD_EFFECT
+         * @function getTypeUrl
+         * @memberof GamePto.S_CARD_EFFECT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_CARD_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_CARD_EFFECT";
+        };
+
+        return S_CARD_EFFECT;
     })();
 
     return GamePto;

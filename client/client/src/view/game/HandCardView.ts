@@ -59,7 +59,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             this.view.addChild(cardItem);
 
             //初始化悬浮事件
-            let oldIndex = this.view.getChildIndex(cardItem);
+            const oldIndex = this.view.getChildIndex(cardItem);
+            gameCard.childIndex = oldIndex;
             this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
                 this.view.setChildIndex(cardItem, 99);
                 cardItem.scaleX = 1;
@@ -96,9 +97,11 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                     return;
                 }
                 //尝试使用卡牌
-                if (!this.tryUseCard(event, gameCard)) {
-                    this.restoreCard(gameCard);
-                }
+                this.tryUseCard(event, gameCard).then((res) => {
+                    if (res === false) {
+                        this.restoreCard(gameCard);
+                    }
+                });
             }, this);
         }
 
@@ -108,6 +111,10 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /**还原卡牌位置和大小 */
     private restoreCard(gameCard: GameCard) {
+        if (!this.isChildInView(gameCard.cardItem)) {
+            this.view.addChildAt(gameCard.cardItem, gameCard.childIndex);
+        }
+
         //如果没有做出操作则把还原卡牌位置和大小
         const cardItem = gameCard.cardItem;
         cardItem.x = gameCard.cacheX;
@@ -117,7 +124,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     }
 
     /**尝试使用卡牌 */
-    private tryUseCard(event: fairygui.DragEvent, gameCard: GameCard) {
+    private async tryUseCard(event: fairygui.DragEvent, gameCard: GameCard) {
         const cardItem = gameCard.cardItem;
 
         const mapPoint = new egret.Point();
@@ -129,62 +136,48 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
         const cardConfig = CardsModel.ins().getCardConfigById(gameCard.cardInfo.cardId);
         const cardIndex = this.getCardIndex(cardItem)
-        const useType = cardConfig.useCondition[UseConditionTypeIndex];
+        const useType = cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
         switch (useType) {
             //无条件卡牌
-            case UseConditionType.NoCondition:
+            case GamePto.UseConditionEnum.NoCondition:
                 GameModel.ins().C_USE_CARD(cardIndex, []);
                 break;
             //空格子
-            case UseConditionType.EmptyBlock:
+            case GamePto.UseConditionEnum.EmptyBlock:
                 if (MapModel.ins().getEntityCardByPoint(mapPoint.x, mapPoint.y)) {
                     return false;
                 }
                 GameModel.ins().C_USE_CARD(cardIndex, [mapPoint.x, mapPoint.y]);
                 break;
             //友方单位
-            case UseConditionType.FriendlyUnit:
+            case GamePto.UseConditionEnum.FriendlyUnit:
             //友方建筑
-            case UseConditionType.FriendlyBuilding:
+            case GamePto.UseConditionEnum.FriendlyBuilding:
             //敌方单位
-            case UseConditionType.EnemyUnit:
+            case GamePto.UseConditionEnum.EnemyUnit:
             //敌方建筑
-            case UseConditionType.EnemyBuilding:
+            case GamePto.UseConditionEnum.EnemyBuilding:
             //所有单位
-            case UseConditionType.AllUnit:
+            case GamePto.UseConditionEnum.AllUnit:
             //所有建筑
-            case UseConditionType.AllBuilding:
+            case GamePto.UseConditionEnum.AllBuilding:
             //友方地图实体
-            case UseConditionType.FriendEntity:
+            case GamePto.UseConditionEnum.FriendEntity:
             //敌方地图实体
-            case UseConditionType.EnemyEntity:
+            case GamePto.UseConditionEnum.EnemyEntity:
             //所有地图实体
-            case UseConditionType.AllEntity:
-                return this.selectTargets(cardItem, cardIndex, useType, cardConfig.useCondition[UseConditionValueIndex]);
+            case GamePto.UseConditionEnum.AllEntity:
+                const dataArr: number[] = [];
+                // 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则), 选择完毕才可以执行
+                if (!await SelectTargetView.ins().open(cardItem, dataArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
+                    return false;
+                }
+                GameModel.ins().C_USE_CARD(cardIndex, dataArr);
+                break;
             default:
                 console.error("未知的使用条件类型:", useType);
                 return false;
         }
-    }
-
-    /**
-     * 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则)
-     * 选择完毕才可以执行
-     */
-    private selectTargets(cardItem: BaseUI.UICardItem, cardIndex: number, useType: UseConditionType, targetNum: number) {
-        const dataArr: number[] = [];
-        SelectTargetView.ins().open(cardItem);
-        //TODO 完成卡牌的使用条件
-        //GameModel.ins().C_USE_CARD(cardIndex, dataArr);
-        // //TODO 有些卡牌要指向一切卡牌作为目标
-        // GameModel.ins().C_USE_CARD(this.getCardIndex(cardItem), [mapPoint.x, mapPoint.y]);
-        // if (TEST_GAME) {
-        //     cardItem.x = gameCard.cacheX;
-        //     cardItem.y = gameCard.cacheY;
-        //     cardItem.scaleX = 0.5;
-        //     cardItem.scaleY = 0.5;
-        //     GameDispatcher.getInstance().emit('S_USE_CARD', { "isSuccess": true, "fee": 0, "feeMax": 10, "uid": 2, "cardIndex": this.getCardIndex(cardItem), "card": { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 2, "blockX": mapPoint.x, "blockY": mapPoint.y } })
-        // }
     }
 
     /**

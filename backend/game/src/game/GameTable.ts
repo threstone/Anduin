@@ -11,9 +11,6 @@ import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 import { GameMap } from './map/GameMap';
 import { DiceValueDefine, NodeDefine } from './GameDefine';
-import { UnitCard } from '../card/UnitCard';
-import { BuildingCard } from '../card/BuildingCard';
-import { AttackUtils } from './AttackUtils';
 
 export class GameTable extends BaseTable {
 

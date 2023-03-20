@@ -3196,6 +3196,29 @@ $root.GamePto = (function() {
         return values;
     })();
 
+    GamePto.UseConditionIndexEnum = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "UseConditionTypeIndex"] = 0;
+        values[valuesById[1] = "UseConditionValueIndex"] = 1;
+        return values;
+    })();
+
+    GamePto.UseConditionEnum = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "NoCondition"] = 0;
+        values[valuesById[1] = "FriendlyUnit"] = 1;
+        values[valuesById[2] = "FriendlyBuilding"] = 2;
+        values[valuesById[3] = "EnemyUnit"] = 3;
+        values[valuesById[4] = "EnemyBuilding"] = 4;
+        values[valuesById[5] = "AllUnit"] = 5;
+        values[valuesById[6] = "AllBuilding"] = 6;
+        values[valuesById[7] = "FriendEntity"] = 7;
+        values[valuesById[8] = "EnemyEntity"] = 8;
+        values[valuesById[9] = "AllEntity"] = 9;
+        values[valuesById[10] = "EmptyBlock"] = 10;
+        return values;
+    })();
+
     GamePto.UserInfo = (function() {
 
         function UserInfo(p) {
@@ -7044,6 +7067,149 @@ $root.GamePto = (function() {
         };
 
         return S_UPDATE_ENTITYS;
+    })();
+
+    GamePto.S_CARD_EFFECT = (function() {
+
+        function S_CARD_EFFECT(p) {
+            this.dataArr = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_CARD_EFFECT.prototype.cmd = 200;
+        S_CARD_EFFECT.prototype.scmd = 10017;
+        S_CARD_EFFECT.prototype.effectId = 0;
+        S_CARD_EFFECT.prototype.dataArr = $util.emptyArray;
+
+        S_CARD_EFFECT.create = function create(properties) {
+            return new S_CARD_EFFECT(properties);
+        };
+
+        S_CARD_EFFECT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.effectId != null && Object.hasOwnProperty.call(m, "effectId"))
+                w.uint32(24).int32(m.effectId);
+            if (m.dataArr != null && m.dataArr.length) {
+                w.uint32(34).fork();
+                for (var i = 0; i < m.dataArr.length; ++i)
+                    w.int32(m.dataArr[i]);
+                w.ldelim();
+            }
+            return w;
+        };
+
+        S_CARD_EFFECT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_CARD_EFFECT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.effectId = r.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(m.dataArr && m.dataArr.length))
+                            m.dataArr = [];
+                        if ((t & 7) === 2) {
+                            var c2 = r.uint32() + r.pos;
+                            while (r.pos < c2)
+                                m.dataArr.push(r.int32());
+                        } else
+                            m.dataArr.push(r.int32());
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_CARD_EFFECT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_CARD_EFFECT)
+                return d;
+            var m = new $root.GamePto.S_CARD_EFFECT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.effectId != null) {
+                m.effectId = d.effectId | 0;
+            }
+            if (d.dataArr) {
+                if (!Array.isArray(d.dataArr))
+                    throw TypeError(".GamePto.S_CARD_EFFECT.dataArr: array expected");
+                m.dataArr = [];
+                for (var i = 0; i < d.dataArr.length; ++i) {
+                    m.dataArr[i] = d.dataArr[i] | 0;
+                }
+            }
+            return m;
+        };
+
+        S_CARD_EFFECT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.dataArr = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10017;
+                d.effectId = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.effectId != null && m.hasOwnProperty("effectId")) {
+                d.effectId = m.effectId;
+            }
+            if (m.dataArr && m.dataArr.length) {
+                d.dataArr = [];
+                for (var j = 0; j < m.dataArr.length; ++j) {
+                    d.dataArr[j] = m.dataArr[j];
+                }
+            }
+            return d;
+        };
+
+        S_CARD_EFFECT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_CARD_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_CARD_EFFECT";
+        };
+
+        return S_CARD_EFFECT;
     })();
 
     return GamePto;

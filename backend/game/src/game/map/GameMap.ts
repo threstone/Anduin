@@ -7,7 +7,6 @@ import { BuildingCard } from "../../card/BuildingCard";
 import { EventCard } from "../../card/EventCard";
 import { UnitCard } from "../../card/UnitCard";
 import { GlobalVar } from "../../GlobalVar";
-import { BuffTypeDefine } from "../GameDefine";
 import { GameTable } from "../GameTable";
 import { MapBlock } from "./MapBlock";
 

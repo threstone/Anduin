@@ -2,7 +2,7 @@
 <component size="1600,1200">
   <displayList>
     <image id="n26_pg48" name="bg" src="pg482c" fileName="game/res/bbg_arena.jpg" xy="0,0" size="1600,1200"/>
-    <graph id="n23_jig1" name="record" xy="1,385" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
+    <graph id="n23_jig1" name="record" xy="0,385" size="190,400" type="rect" lineSize="0" fillColor="#ff666600"/>
     <component id="n35_uym4" name="rightCtrl" src="uym42i" fileName="game/RightCtrlCom.xml" xy="1314,400"/>
     <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/map/MapView.xml" xy="310,219"/>
     <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1152,990">

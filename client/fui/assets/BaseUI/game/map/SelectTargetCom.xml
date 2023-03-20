@@ -16,5 +16,8 @@
     <graph id="n9_q6kd" name="bg3" xy="0,865" size="1600,335" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
       <relation target="" sidePair="width-width,left-left,bottom-bottom"/>
     </graph>
+    <text id="n11_h89h" name="tips" xy="436,54" size="727,59" fontSize="44" color="#cc3300" align="center" autoSize="none" strokeColor="#003399" text="请嘎达大声道啊啊啊啊">
+      <relation target="" sidePair="center-center,middle-middle%"/>
+    </text>
   </displayList>
 </component>

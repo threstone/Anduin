@@ -8,7 +8,7 @@ class MapModel extends BaseModel {
 
         //init mapData
         this._mapData = [];
-        for (let x = 0; x < 7; x++) {
+        for (let x = 0; x < MapWidth; x++) {
             this._mapData[x] = [];
         }
         for (let index = 0; index < data.entityCards.length; index++) {
@@ -58,8 +58,8 @@ class MapModel extends BaseModel {
     public getAttackablePointSet(pointSet: Set<number>, config: CardInterface) {
         const resultMap = new Map<number, number>();
         pointSet.forEach((point) => {
-            const baseX = point % 7;
-            const baseY = Math.floor(point / 7);
+            const baseX = point % MapWidth;
+            const baseY = Math.floor(point / MapWidth);
             this.getAttackablePoint(baseX, baseY, config, resultMap);
         })
         return resultMap;
@@ -69,15 +69,15 @@ class MapModel extends BaseModel {
     public getAttackablePoint(baseX: number, baseY: number, config: CardInterface, resultMap = new Map<number, number>()) {
         //获取攻击距离
         const atkRange = CardsModel.ins().getCardAtkRange(config);
-        const basePoint = baseY * 7 + baseX;
+        const basePoint = baseY * MapWidth + baseX;
         for (let x = baseX - atkRange; x <= baseX + atkRange; x++) {
-            const targetPoint = baseY * 7 + x;
+            const targetPoint = baseY * MapWidth + x;
             if (!resultMap.has(targetPoint) && this.allowAtk(x, baseY)) {
                 resultMap.set(targetPoint, basePoint);
             }
         }
         for (let y = baseY - atkRange; y <= baseY + atkRange; y++) {
-            const targetPoint = y * 7 + baseX;
+            const targetPoint = y * MapWidth + baseX;
             if (!resultMap.has(targetPoint) && this.allowAtk(baseX, y)) {
                 resultMap.set(targetPoint, basePoint);
             }
@@ -113,7 +113,7 @@ class MapModel extends BaseModel {
 
     /**获取目标位置是否可以移动 */
     private getMovable(x: number, y: number) {
-        if (x < 0 || x >= 7 || y < 0 || y >= 8) {
+        if (x < 0 || x >= MapWidth || y < 0 || y >= MapHeight) {
             return false;
         }
         return this._mapData[x][y] == null;
@@ -131,7 +131,7 @@ class MapModel extends BaseModel {
             const x = checkXArr[index];
             const y = checkYArr[index];
             if (this.getMovable(x, y)) {
-                resultSet.add(y * 7 + x);
+                resultSet.add(y * MapWidth + x);
                 this.getWalkablePoint(x, y, step - 1, resultSet)
             }
         }
@@ -142,7 +142,7 @@ class MapModel extends BaseModel {
         for (let x = baseX - step; x <= baseX + step; x++) {
             for (let y = baseY - step; y <= baseY + step; y++) {
                 if (this.getMovable(x, y)) {
-                    resultSet.add(y * 7 + x);
+                    resultSet.add(y * MapWidth + x);
                 }
             }
         }

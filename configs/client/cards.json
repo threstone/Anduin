@@ -109,7 +109,7 @@
  "desc":"对一个单位造成两点伤害",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[2,1]
+ "useCondition":[8,1]
   },
 {
  "cardId":7,

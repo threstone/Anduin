@@ -1,6 +1,8 @@
+import { CardsPto } from "../../../common/CommonProto";
 import { GamePto } from "../../../common/CommonProto";
 import { BuffData } from "../buff/BuffData";
 import { EventFunction } from "../game/GameDefine";
+import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
 import { BaseCard } from "./BaseCard";
 import { EventCard } from "./EventCard";
@@ -61,18 +63,30 @@ export class BuildingCard extends EventCard {
         }
     }
 
-    public onUse(blockX: number, blockY: number) {
-        super.onUse();
+    public onUse(user: GameUser, cardIndex: number, blockX: number, blockY: number, ...params: number[]) {
+        super.onUse(user, cardIndex, ...params);
         this.blockX = blockX;
         this.blockY = blockY;
         this.table.mapData.setCard(this);
-        const user = this.table.getUser(this.uid);
+
         user.entityPool.push(this);
 
         //ADD Buff
         for (let index = 0; index < this.buffs.length; index++) {
             const buff = this.buffs[index];
             GlobalVar.buffMgr.addBuff(this, buff);
+        }
+
+        if (this.cardType === CardsPto.CardType.Building || this.cardType === CardsPto.CardType.Unit) {
+            //send success card message
+            const notice = new GamePto.S_USE_CARD();
+            notice.isSuccess = true;
+            notice.uid = this.uid;
+            notice.card = this;
+            notice.fee = user.fee;
+            notice.feeMax = user.feeMax;
+            notice.cardIndex = cardIndex;
+            this.table.broadcast(notice);
         }
     }
 
@@ -90,10 +104,10 @@ export class BuildingCard extends EventCard {
      * 当受到伤害
      * @returns 实际受到的伤害
      */
-    public onDamage(damage: number, atkCard: BaseCard, self = this): number {
+    public onDamage(damage: number, damageSource: BaseCard, self = this): number {
         for (let index = 0; index < this.onDamageFuns.length; index++) {
             const funcObj = this.onDamageFuns[index];
-            damage = funcObj.fun.call(this, damage, atkCard, self);
+            damage = funcObj.fun.call(this, damage, damageSource, self);
         }
         damage = Math.max(0, damage);
         this.health -= damage;
@@ -102,6 +116,7 @@ export class BuildingCard extends EventCard {
 
     /**
      * 当受到伤害之后
+     * 之所以要单独抽出来作为一个函数且不在onDamage中执行,是为了分离协议,延后卡牌死亡协议的下发。
      */
     public onDamageAfter(self = this) {
         this.callFuns(this.onDamageAfterFuns, self);

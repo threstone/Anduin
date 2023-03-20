@@ -2,12 +2,12 @@ import { getLogger } from "log4js";
 import { GamePto } from "../../../common/CommonProto";
 import { CardsPto } from "../../../common/CommonProto";
 import { BaseEvent, EventFunction } from "../game/GameDefine";
+import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
 import { BuildingCard } from "./BuildingCard";
 import { UnitCard } from "./UnitCard";
 
 const logger = getLogger();
-
 /**event card用health来决定持续回合数 */
 export class EventCard extends BaseCard implements BaseEvent {
 
@@ -119,12 +119,20 @@ export class EventCard extends BaseCard implements BaseEvent {
         return true;
     }
 
-    public onUse(...params: number[]) {
-        super.onUse();
+    public onUse(user: GameUser, cardIndex: number, ...params: number[]) {
+        super.onUse(user, cardIndex, ...params);
         if (this.cardType === CardsPto.CardType.Event) {
             this.table.mapData.addEvent(this);
-            const user = this.table.getUser(this.uid);
-            user.eventPool.push(this);
+
+            //send success card message
+            const notice = new GamePto.S_USE_CARD();
+            notice.isSuccess = true;
+            notice.uid = this.uid;
+            notice.card = this;
+            notice.fee = user.fee;
+            notice.feeMax = user.feeMax;
+            notice.cardIndex = cardIndex;
+            this.table.broadcast(notice);
         }
     }
 

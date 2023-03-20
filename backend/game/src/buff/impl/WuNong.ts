@@ -1,7 +1,6 @@
 import { GamePto } from "../../../../common/CommonProto";
-import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
-import { BuffTypeDefine, BuffEffectiveDefine } from "../../game/GameDefine";
+import { BuffEffectiveDefine } from "../../game/GameDefine";
 import { BuffData } from "../BuffData";
 import { GameBuff } from "../GameBuff";
 

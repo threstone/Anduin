@@ -145,8 +145,8 @@ class GameModel extends BaseModel {
                 this.fee = msg.fee;
             }
             this.onUseCard(msg);
-            this.emit('S_USE_CARD', msg);
         }
+        this.emit('S_USE_CARD', msg);
     }
 
     //下发回合结束时间

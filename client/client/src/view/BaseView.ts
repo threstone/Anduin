@@ -150,7 +150,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
     }
 
     protected removeAllEvents(): void {
-        let list = this.eventList
+        let list = this.eventList;
         for (let i = 0, len = list.length; i < len; i++) {
             const eventData = list[i];
             //如果不存在addObject则说明是通过observe注册的
@@ -160,7 +160,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
                 list[i].clean();
             }
         }
-        this.eventList = []
+        this.eventList = [];
     }
 
     /** 收到指定事件时将特效函数放入特效队列*/

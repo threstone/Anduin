@@ -2009,6 +2009,27 @@ declare namespace GamePto {
         Miss = 3
     }
 
+    /** UseConditionIndexEnum enum. */
+    enum UseConditionIndexEnum {
+        UseConditionTypeIndex = 0,
+        UseConditionValueIndex = 1
+    }
+
+    /** UseConditionEnum enum. */
+    enum UseConditionEnum {
+        NoCondition = 0,
+        FriendlyUnit = 1,
+        FriendlyBuilding = 2,
+        EnemyUnit = 3,
+        EnemyBuilding = 4,
+        AllUnit = 5,
+        AllBuilding = 6,
+        FriendEntity = 7,
+        EnemyEntity = 8,
+        AllEntity = 9,
+        EmptyBlock = 10
+    }
+
     /** Properties of a UserInfo. */
     interface IUserInfo {
 
@@ -3815,6 +3836,69 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_UPDATE_ENTITYS
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_CARD_EFFECT. */
+    interface IS_CARD_EFFECT {
+
+        /** S_CARD_EFFECT cmd */
+        cmd?: (number|null);
+
+        /** S_CARD_EFFECT scmd */
+        scmd?: (number|null);
+
+        /** S_CARD_EFFECT effectId */
+        effectId?: (number|null);
+
+        /** S_CARD_EFFECT dataArr */
+        dataArr?: (number[]|null);
+    }
+
+    /** Represents a S_CARD_EFFECT. */
+    class S_CARD_EFFECT implements IS_CARD_EFFECT {
+
+        /**
+         * Constructs a new S_CARD_EFFECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_CARD_EFFECT);
+
+        /** S_CARD_EFFECT cmd. */
+        public cmd: number;
+
+        /** S_CARD_EFFECT scmd. */
+        public scmd: number;
+
+        /** S_CARD_EFFECT effectId. */
+        public effectId: number;
+
+        /** S_CARD_EFFECT dataArr. */
+        public dataArr: number[];
+
+        /**
+         * Encodes the specified S_CARD_EFFECT message. Does not implicitly {@link GamePto.S_CARD_EFFECT.verify|verify} messages.
+         * @param message S_CARD_EFFECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_CARD_EFFECT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_CARD_EFFECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_CARD_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_CARD_EFFECT;
+
+        /**
+         * Gets the default type url for S_CARD_EFFECT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

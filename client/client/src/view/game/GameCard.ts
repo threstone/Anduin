@@ -6,6 +6,8 @@ class GameCard {
     cacheX: number;
     cacheY: number;
 
+    childIndex: number;
+
     constructor(cardInfo: GamePto.ICard) {
         this.cardInfo = cardInfo;
         this.cardItem = CardItem.getItem(CardsModel.ins().getCardConfigById(cardInfo.cardId));

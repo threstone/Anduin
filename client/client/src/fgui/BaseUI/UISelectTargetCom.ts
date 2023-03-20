@@ -8,6 +8,7 @@ module BaseUI {
 		public bg1:fairygui.GGraph;
 		public bg2:fairygui.GGraph;
 		public bg3:fairygui.GGraph;
+		public tips:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpoq6kd31";
 
 		public static createInstance():UISelectTargetCom {
@@ -22,6 +23,7 @@ module BaseUI {
 			this.bg1 = <fairygui.GGraph>(this.getChildAt(2));
 			this.bg2 = <fairygui.GGraph>(this.getChildAt(3));
 			this.bg3 = <fairygui.GGraph>(this.getChildAt(4));
+			this.tips = <fairygui.GTextField>(this.getChildAt(5));
 		}
 	}
 }

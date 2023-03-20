@@ -1,3 +1,6 @@
+const MapWidth = 7;
+const MapHeight = 8;
+
 class MapView extends BaseView<BaseUI.UIMapView> {
 
     //先手方一定是在下方，所以后手方需要做地图反转
@@ -104,7 +107,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (GameSceneView.ins().allowToOprate && config.cardType !== CardsPto.CardType.Building) {
             // 显示所有可移动路径
             const movePointSet = new Set<number>();
-            movePointSet.add(cardInfo.blockY * 7 + cardInfo.blockX);
+            movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
             if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
                 MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
                 MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
@@ -333,14 +336,14 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         shp.y = this.view.y;
 
         shp.graphics.lineStyle(2, 0xFFFFFF);
-        let endX = 7 * this.blockWidth;
-        let endY = 8 * this.blockHeight;
-        for (let index = 0; index < 8; index++) {
+        let endX = MapWidth * this.blockWidth;
+        let endY = MapHeight * this.blockHeight;
+        for (let index = 0; index < MapWidth + 1; index++) {
             shp.graphics.moveTo(index * this.blockWidth, 0);
             shp.graphics.lineTo(index * this.blockWidth, endY);
         }
 
-        for (let index = 0; index < 9; index++) {
+        for (let index = 0; index < MapHeight + 1; index++) {
             shp.graphics.moveTo(0, index * this.blockHeight);
             shp.graphics.lineTo(endX, index * this.blockHeight);
         }

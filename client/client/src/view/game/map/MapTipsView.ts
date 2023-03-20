@@ -30,8 +30,8 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         }
 
         atkPointMap.forEach((basePoint, atkPoint) => {
-            const x = atkPoint % 7;
-            const y = Math.floor(atkPoint / 7);
+            const x = atkPoint % MapWidth;
+            const y = Math.floor(atkPoint / MapWidth);
             const position = MapView.ins().getScenePoint(x, y);
             const tips = BaseUI.UIAtkTips.createInstance();
             tips.x = position.x;
@@ -39,8 +39,8 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
             this._tipsArr.push(tips);
             this.view.addChild(tips);
             this.AddClick(tips, () => {
-                const atkSourceX = basePoint % 7;
-                const atkSourceY = Math.floor(basePoint / 7);
+                const atkSourceX = basePoint % MapWidth;
+                const atkSourceY = Math.floor(basePoint / MapWidth);
                 if (baseCard.blockX !== atkSourceX || baseCard.blockY !== atkSourceY) {
                     MapModel.ins().C_MOVE(baseCard.blockX, baseCard.blockY, atkSourceX, atkSourceY);
                 }
@@ -55,8 +55,8 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         }
 
         pointSet.forEach((point: number) => {
-            const x = point % 7;
-            const y = Math.floor(point / 7);
+            const x = point % MapWidth;
+            const y = Math.floor(point / MapWidth);
             if (baseCard.blockX === x && baseCard.blockY === y) {
                 return;
             }

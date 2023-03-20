@@ -8,6 +8,41 @@ enum DiceValueEnum{
 	Miss = 3;
 }
 
+enum UseConditionIndexEnum{
+	UseConditionTypeIndex = 0;//条件类型
+	UseConditionValueIndex = 1;//目标数量
+}
+
+enum UseConditionEnum{
+	//无条件
+    NoCondition = 0;
+    //友方单位
+    FriendlyUnit = 1;
+    //友方建筑
+    FriendlyBuilding = 2;
+    //敌方单位
+    EnemyUnit = 3;
+    //敌方建筑
+    EnemyBuilding = 4;
+    //所有单位
+    AllUnit = 5;
+    //所有建筑
+    AllBuilding = 6;
+    //友方地图实体
+    FriendEntity = 7;
+    //敌方地图实体
+    EnemyEntity = 8;
+    //所有地图实体
+    AllEntity = 9;
+    //空格子
+    EmptyBlock = 10;
+}
+
+//enum EffectEnum{
+//	//弹道特效,类似火球术、魔法箭
+//	Ballistic = 0;
+//}
+
 message UserInfo{
 	string nick = 0;
 	int32 power = 1;
@@ -248,4 +283,33 @@ message S_UPDATE_ENTITYS{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10016];
 	repeated Card entityCards = 3;
+}
+
+//卡牌效果
+message S_COMMON_EFFECT{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10017];
+	int32 effectId = 3;
+	//用于保存使用卡牌的一些数据
+	//当卡牌是法术卡牌时,则接下来的数据可能为目标、伤害等,具体由卡牌效果决定
+	//对于一些事件卡或者没有特殊效果的卡牌,data的数据可能是空的
+	repeated int32 dataArr = 4;
+}
+
+//飞行弹道效果 类似火球术、魔法箭
+message S_FLY_EFFECT{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10018];
+	//从哪里开始,需要根据卡牌类型决定效果.如果是法术卡,则from就是法术卡本身,然后通过法术卡本身去获取特效id,音效id
+	//如果是建筑和单位卡,则一定是在战场上，要根据卡的位置来播放对应的特效,音效
+	Card from = 3;
+	Card target = 4;
+}
+
+//在自己身上的一些特效，如农夫种田特效
+message S_SELF_EFFECT{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10019];
+	int32 x = 3;
+	int32 y = 4;
 }

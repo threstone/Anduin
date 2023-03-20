@@ -57,17 +57,14 @@ export class GameHandler extends BaseHandler {
             return;
         }
 
-        const replay = new GamePto.S_USE_CARD();
-        replay.isSuccess = false;
-        replay.cardIndex = msg.cardIndex;
-        replay.uid = user.uid;
-        replay.fee = user.fee;
-        replay.feeMax = user.feeMax;
-
         const card = user.handCards[msg.cardIndex];
 
         //检查是否可以使用
         if (!card || card.useCardCheck(...msg.dataArr) === false) {
+            const replay = new GamePto.S_USE_CARD();
+            replay.isSuccess = false;
+            replay.cardIndex = msg.cardIndex;
+            replay.uid = user.uid;
             user.sendMsg(replay);
             return;
         }
@@ -78,12 +75,7 @@ export class GameHandler extends BaseHandler {
         }
 
         //到这里说明卡牌可以执行了,执行卡牌onUse事件 扣费用、设置到战场等等
-        card.onUse(...msg.dataArr);
-        replay.isSuccess = true;
-        replay.card = card;
-        replay.fee = user.fee;
-        replay.feeMax = user.feeMax;
-        table.broadcast(replay);
+        card.onUse(user, msg.cardIndex, ...msg.dataArr);
 
         //执行战场使用卡牌后事件
         table.mapData.onUseCardAfter(card);
