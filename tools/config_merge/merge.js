@@ -24,7 +24,7 @@ function doMerge(dirPath) {
         if (mergeConfig[formatName]) {
             throw `重名的配置${filePath}`
         }
-        mergeConfig[formatName] = tempConfig
+        mergeConfig[formatName] = tempConfig;
     }
 
     fs.writeFileSync(`${dirPath}config.json`, JSON.stringify(mergeConfig), { encoding: 'utf8' })

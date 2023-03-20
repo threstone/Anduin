@@ -15,8 +15,12 @@ export class ConfigMgr {
         }
     }
 
-    getCardConfigById(cardId: number) {
+    public getCardConfigById(cardId: number) {
         return this._cardConfigArr[cardId];
+    }
+
+    public getCards() {
+        return this._cardConfigArr;
     }
 
     get common() {
