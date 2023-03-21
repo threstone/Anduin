@@ -101,7 +101,7 @@ class CardItem {
                 const textField = new fairygui.GTextField();
                 textField.width = cardItem.buffDesc.width;
                 textField.autoSize = fairygui.AutoSizeType.Height;
-                textField.fontSize = 52;
+                textField.fontSize = 32;
                 textField.text = `${buffData.buffName}${buffTImes > 1 ? `X${buffTImes}` : ''}:${buffData.desc}`;
                 cardItem.buffDesc.addChild(textField);
                 buffTImes = 1;

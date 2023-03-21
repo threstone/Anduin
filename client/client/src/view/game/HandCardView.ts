@@ -60,7 +60,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
             //初始化悬浮事件
             const oldIndex = this.view.getChildIndex(cardItem);
-            gameCard.childIndex = oldIndex;
             this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
                 this.view.setChildIndex(cardItem, 99);
                 cardItem.scaleX = 1;
@@ -111,10 +110,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /**还原卡牌位置和大小 */
     private restoreCard(gameCard: GameCard) {
-        if (!this.isChildInView(gameCard.cardItem)) {
-            this.view.addChildAt(gameCard.cardItem, gameCard.childIndex);
-        }
-
         //如果没有做出操作则把还原卡牌位置和大小
         const cardItem = gameCard.cardItem;
         cardItem.x = gameCard.cacheX;
@@ -135,20 +130,26 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         }
 
         const cardConfig = CardsModel.ins().getCardConfigById(gameCard.cardInfo.cardId);
+        const dataArr: number[] = [];
+        //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中
+        if (cardConfig.cardType === CardsPto.CardType.Building || cardConfig.cardType === CardsPto.CardType.Unit) {
+            dataArr.push(mapPoint.x, mapPoint.y);
+        }
+
         const cardIndex = this.getCardIndex(cardItem)
         const useType = cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
         switch (useType) {
             //无条件卡牌
             case GamePto.UseConditionEnum.NoCondition:
-                GameModel.ins().C_USE_CARD(cardIndex, []);
+                GameModel.ins().C_USE_CARD(cardIndex, dataArr);
                 break;
             //空格子
             case GamePto.UseConditionEnum.EmptyBlock:
-                if (MapModel.ins().getEntityCardByPoint(mapPoint.x, mapPoint.y)) {
-                    return false;
-                }
-                GameModel.ins().C_USE_CARD(cardIndex, [mapPoint.x, mapPoint.y]);
-                break;
+            // if (MapModel.ins().getEntityCardByPoint(mapPoint.x, mapPoint.y)) {
+            //     return false;
+            // }
+            // GameModel.ins().C_USE_CARD(cardIndex, [mapPoint.x, mapPoint.y]);
+            // break;
             //友方单位
             case GamePto.UseConditionEnum.FriendlyUnit:
             //友方建筑
@@ -167,11 +168,12 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             case GamePto.UseConditionEnum.EnemyEntity:
             //所有地图实体
             case GamePto.UseConditionEnum.AllEntity:
-                const dataArr: number[] = [];
+                const tempArr = [];
                 // 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则), 选择完毕才可以执行
-                if (!await SelectTargetView.ins().open(cardItem, dataArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
+                if (!await SelectTargetView.ins().open(cardItem, tempArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
                     return false;
                 }
+                dataArr.push(...tempArr)
                 GameModel.ins().C_USE_CARD(cardIndex, dataArr);
                 break;
             default:

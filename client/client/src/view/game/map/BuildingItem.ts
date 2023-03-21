@@ -7,6 +7,7 @@ class BuildingItem {
         building.info.tempCardName.text = `${cardConfig.cardName}`;
         if (cardInfo.uid === UserModel.ins().uid) {
             building.info.tempCardName.strokeColor = 0x00FF00;
+            building.enemyTips.visible = false;
         }
         return building;
     }

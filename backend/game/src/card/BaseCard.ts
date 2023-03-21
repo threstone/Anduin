@@ -98,12 +98,14 @@ export class BaseCard implements CardInterface {
                     if (!entity) {
                         return false;
                     }
+                    isMatch = true;
                     break;
                 //空格子
                 case GamePto.UseConditionEnum.EmptyBlock:
                     if (entity) {
                         return false;
                     }
+                    isMatch = true;
                     break;
                 default:
                     logger.error(`位置的条件定义:${useType}`);

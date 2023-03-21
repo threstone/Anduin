@@ -17,7 +17,7 @@ class Utils {
         return maxNum;
     }
 
-    /**通过颜色或许颜色矩阵 */
+    /**通过颜色获取颜色矩阵 */
     static getFilterByColor(color: number) {
         const colorResult = { r: -1, g: -1, b: -1 };
         colorResult.b = color % 256;

@@ -23,6 +23,7 @@ class UnitItem {
         })
         if (cardInfo.uid === UserModel.ins().uid) {
             unit.info.tempCardName.strokeColor = 0x00FF00;
+            unit.enemyTips.visible = false;
         }
         return unit;
     }

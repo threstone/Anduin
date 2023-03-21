@@ -4,6 +4,9 @@
     <graph id="n20_hzsg" name="allowOperate" xy="0,0" size="138,93" visible="false" alpha="0.3" type="rect" lineSize="0" fillColor="#ff66ff00">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
+    <graph id="n22_h89h" name="enemyTips" xy="0,0" size="138,93" type="rect" lineSize="0" fillColor="#ffcc3300">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
     <component id="n13_hzsg" name="info" src="hzsg2k" fileName="game/map/MapUnitBase.xml" xy="0,0"/>
     <image id="n14_hzsg" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="2,58" group="n19_hzsg"/>
     <image id="n15_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="38,95" group="n17_hzsg" rotation="-135"/>

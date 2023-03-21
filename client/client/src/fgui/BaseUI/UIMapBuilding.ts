@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UIMapBuilding extends fairygui.GComponent {
+		public enemyTips:fairygui.GGraph;
 		public info:UIMapBuildingBase;
 		public healthBg:fairygui.GImage;
 		public healthText:fairygui.GTextField;
@@ -16,10 +17,11 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.info = <UIMapBuildingBase>(this.getChildAt(0));
-			this.healthBg = <fairygui.GImage>(this.getChildAt(1));
-			this.healthText = <fairygui.GTextField>(this.getChildAt(2));
-			this.healthGroup = <fairygui.GGroup>(this.getChildAt(3));
+			this.enemyTips = <fairygui.GGraph>(this.getChildAt(0));
+			this.info = <UIMapBuildingBase>(this.getChildAt(1));
+			this.healthBg = <fairygui.GImage>(this.getChildAt(2));
+			this.healthText = <fairygui.GTextField>(this.getChildAt(3));
+			this.healthGroup = <fairygui.GGroup>(this.getChildAt(4));
 		}
 	}
 }
