@@ -109,7 +109,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             });
 
             //TODO 实际这里是执行卡牌的特效的等待时间
-            return this.wait(2400);
+            return this.wait(400);
         } else {
             //单位卡,建筑卡会移动到指定位置然后变成对应的map对象
             const scenePoint = MapView.ins().getScenePoint(card.cardInfo.blockX, card.cardInfo.blockY);

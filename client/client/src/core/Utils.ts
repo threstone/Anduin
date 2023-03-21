@@ -96,4 +96,17 @@ class Utils {
         });
     }
 
+    /**计算两点之间的角度 */
+    public static getPointAngle(sx: number, sy: number, tx: number, ty: number) {
+        const difX = tx - sx;
+        const difY = ty - sy;
+        return 360 * Math.atan(difY / difX) / (2 * Math.PI);
+    }
+
+    /**获取两点之间的像素距离 */
+    public static getDistance(sx: number, sy: number, tx: number, ty: number) {
+        const difX = tx - sx;
+        const difY = ty - sy;
+        return Math.sqrt(difX * difX + difY * difY);
+    }
 }

@@ -35,7 +35,7 @@ class CardItem {
         card.feeText.text = `${cardInfo.fee}`;
         card.cardName.text = `${cardInfo.cardName}`;
         card.desc.text = `${cardInfo.desc}`;
-        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data) => {
+        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
             if (!data) {
                 return
             }

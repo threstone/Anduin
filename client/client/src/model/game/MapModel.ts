@@ -148,6 +148,14 @@ class MapModel extends BaseModel {
         }
     }
 
+    /**更新entity数据 */
+    private updateEntity(entity: GamePto.ICard) {
+        const oldCard = this._mapData[entity.blockX][entity.blockY];
+        const cardIndex = this._serverData.entityCards.indexOf(oldCard);
+        this._serverData.entityCards[cardIndex] = entity;
+        this._mapData[entity.blockX][entity.blockY] = entity;
+    }
+
     /**请求移动 */
     public C_MOVE(sourceX: number, sourceY: number, targetX: number, targetY: number) {
         const msg = new GamePto.C_MOVE();
@@ -225,13 +233,26 @@ class MapModel extends BaseModel {
     private S_UPDATE_ENTITYS(msg: GamePto.S_UPDATE_ENTITYS) {
         for (let index = 0; index < msg.entityCards.length; index++) {
             const entity = msg.entityCards[index];
-            const oldCard = this._mapData[entity.blockX][entity.blockY];
-
-            const cardIndex = this._serverData.entityCards.indexOf(oldCard);
-            this._serverData.entityCards[cardIndex] = entity;
-            this._mapData[entity.blockX][entity.blockY] = entity;
+            this.updateEntity(entity);
         }
 
         this.emit('S_UPDATE_ENTITYS', msg);
+    }
+
+    //公共卡牌效果
+    private S_COMMON_EFFECT(msg: GamePto.S_COMMON_EFFECT) {
+        //TODO
+    }
+
+    //飞行弹道效果 类似火球术、魔法箭
+    private S_FLY_EFFECT(msg: GamePto.S_FLY_EFFECT) {
+        this.updateEntity(msg.from);
+        this.updateEntity(msg.target);
+        this.emit('S_FLY_EFFECT', msg);
+    }
+
+    //在自己身上的一些特效，如农夫种田特效
+    private S_SELF_EFFECT(msg: GamePto.S_SELF_EFFECT) {
+        this.emit('S_SELF_EFFECT', msg);
     }
 }

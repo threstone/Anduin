@@ -28,6 +28,12 @@ export class WuNong extends GameBuff {
         //加费用
         if (user.fee < user.feeMax) {
             user.fee++;
+            //派发效果协议
+            const effectMsg = new GamePto.S_SELF_EFFECT();
+            effectMsg.x = card.blockX;
+            effectMsg.y = card.blockY;
+            card.table.broadcast(effectMsg);
+
             //派发费用协议
             const msg = new GamePto.S_FEE_INFO();
             msg.fee = user.fee;

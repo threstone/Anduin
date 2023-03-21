@@ -5738,108 +5738,330 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_CARD_EFFECT. */
-    interface IS_CARD_EFFECT {
+    /** Properties of a S_COMMON_EFFECT. */
+    interface IS_COMMON_EFFECT {
 
-        /** S_CARD_EFFECT cmd */
+        /** S_COMMON_EFFECT cmd */
         cmd?: (number|null);
 
-        /** S_CARD_EFFECT scmd */
+        /** S_COMMON_EFFECT scmd */
         scmd?: (number|null);
 
-        /** S_CARD_EFFECT effectId */
+        /** S_COMMON_EFFECT effectId */
         effectId?: (number|null);
 
-        /** S_CARD_EFFECT dataArr */
+        /** S_COMMON_EFFECT dataArr */
         dataArr?: (number[]|null);
     }
 
-    /** Represents a S_CARD_EFFECT. */
-    class S_CARD_EFFECT implements IS_CARD_EFFECT {
+    /** Represents a S_COMMON_EFFECT. */
+    class S_COMMON_EFFECT implements IS_COMMON_EFFECT {
 
         /**
-         * Constructs a new S_CARD_EFFECT.
+         * Constructs a new S_COMMON_EFFECT.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_CARD_EFFECT);
+        constructor(properties?: GamePto.IS_COMMON_EFFECT);
 
-        /** S_CARD_EFFECT cmd. */
+        /** S_COMMON_EFFECT cmd. */
         public cmd: number;
 
-        /** S_CARD_EFFECT scmd. */
+        /** S_COMMON_EFFECT scmd. */
         public scmd: number;
 
-        /** S_CARD_EFFECT effectId. */
+        /** S_COMMON_EFFECT effectId. */
         public effectId: number;
 
-        /** S_CARD_EFFECT dataArr. */
+        /** S_COMMON_EFFECT dataArr. */
         public dataArr: number[];
 
         /**
-         * Encodes the specified S_CARD_EFFECT message. Does not implicitly {@link GamePto.S_CARD_EFFECT.verify|verify} messages.
-         * @param message S_CARD_EFFECT message or plain object to encode
+         * Encodes the specified S_COMMON_EFFECT message. Does not implicitly {@link GamePto.S_COMMON_EFFECT.verify|verify} messages.
+         * @param message S_COMMON_EFFECT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_CARD_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_COMMON_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_CARD_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_CARD_EFFECT.verify|verify} messages.
-         * @param message S_CARD_EFFECT message or plain object to encode
+         * Encodes the specified S_COMMON_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_COMMON_EFFECT.verify|verify} messages.
+         * @param message S_COMMON_EFFECT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_CARD_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_COMMON_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_CARD_EFFECT message from the specified reader or buffer.
+         * Decodes a S_COMMON_EFFECT message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_CARD_EFFECT
+         * @returns S_COMMON_EFFECT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_CARD_EFFECT;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_COMMON_EFFECT;
 
         /**
-         * Decodes a S_CARD_EFFECT message from the specified reader or buffer, length delimited.
+         * Decodes a S_COMMON_EFFECT message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_CARD_EFFECT
+         * @returns S_COMMON_EFFECT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_CARD_EFFECT;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_COMMON_EFFECT;
 
         /**
-         * Verifies a S_CARD_EFFECT message.
+         * Verifies a S_COMMON_EFFECT message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_CARD_EFFECT message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_COMMON_EFFECT message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_CARD_EFFECT
+         * @returns S_COMMON_EFFECT
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_CARD_EFFECT;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_COMMON_EFFECT;
 
         /**
-         * Creates a plain object from a S_CARD_EFFECT message. Also converts values to other types if specified.
-         * @param message S_CARD_EFFECT
+         * Creates a plain object from a S_COMMON_EFFECT message. Also converts values to other types if specified.
+         * @param message S_COMMON_EFFECT
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_CARD_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_COMMON_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_CARD_EFFECT to JSON.
+         * Converts this S_COMMON_EFFECT to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_CARD_EFFECT
+         * Gets the default type url for S_COMMON_EFFECT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_FLY_EFFECT. */
+    interface IS_FLY_EFFECT {
+
+        /** S_FLY_EFFECT cmd */
+        cmd?: (number|null);
+
+        /** S_FLY_EFFECT scmd */
+        scmd?: (number|null);
+
+        /** S_FLY_EFFECT from */
+        from?: (GamePto.ICard|null);
+
+        /** S_FLY_EFFECT target */
+        target?: (GamePto.ICard|null);
+
+        /** S_FLY_EFFECT targetShowTips */
+        targetShowTips?: (string|null);
+    }
+
+    /** Represents a S_FLY_EFFECT. */
+    class S_FLY_EFFECT implements IS_FLY_EFFECT {
+
+        /**
+         * Constructs a new S_FLY_EFFECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_FLY_EFFECT);
+
+        /** S_FLY_EFFECT cmd. */
+        public cmd: number;
+
+        /** S_FLY_EFFECT scmd. */
+        public scmd: number;
+
+        /** S_FLY_EFFECT from. */
+        public from?: (GamePto.ICard|null);
+
+        /** S_FLY_EFFECT target. */
+        public target?: (GamePto.ICard|null);
+
+        /** S_FLY_EFFECT targetShowTips. */
+        public targetShowTips: string;
+
+        /**
+         * Encodes the specified S_FLY_EFFECT message. Does not implicitly {@link GamePto.S_FLY_EFFECT.verify|verify} messages.
+         * @param message S_FLY_EFFECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_FLY_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_FLY_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_FLY_EFFECT.verify|verify} messages.
+         * @param message S_FLY_EFFECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_FLY_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_FLY_EFFECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_FLY_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_FLY_EFFECT;
+
+        /**
+         * Decodes a S_FLY_EFFECT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_FLY_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_FLY_EFFECT;
+
+        /**
+         * Verifies a S_FLY_EFFECT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_FLY_EFFECT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_FLY_EFFECT
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_FLY_EFFECT;
+
+        /**
+         * Creates a plain object from a S_FLY_EFFECT message. Also converts values to other types if specified.
+         * @param message S_FLY_EFFECT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_FLY_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_FLY_EFFECT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_FLY_EFFECT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_SELF_EFFECT. */
+    interface IS_SELF_EFFECT {
+
+        /** S_SELF_EFFECT cmd */
+        cmd?: (number|null);
+
+        /** S_SELF_EFFECT scmd */
+        scmd?: (number|null);
+
+        /** S_SELF_EFFECT x */
+        x?: (number|null);
+
+        /** S_SELF_EFFECT y */
+        y?: (number|null);
+    }
+
+    /** Represents a S_SELF_EFFECT. */
+    class S_SELF_EFFECT implements IS_SELF_EFFECT {
+
+        /**
+         * Constructs a new S_SELF_EFFECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_SELF_EFFECT);
+
+        /** S_SELF_EFFECT cmd. */
+        public cmd: number;
+
+        /** S_SELF_EFFECT scmd. */
+        public scmd: number;
+
+        /** S_SELF_EFFECT x. */
+        public x: number;
+
+        /** S_SELF_EFFECT y. */
+        public y: number;
+
+        /**
+         * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
+         * @param message S_SELF_EFFECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_SELF_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_SELF_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
+         * @param message S_SELF_EFFECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_SELF_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_SELF_EFFECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_SELF_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_SELF_EFFECT;
+
+        /**
+         * Decodes a S_SELF_EFFECT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_SELF_EFFECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_SELF_EFFECT;
+
+        /**
+         * Verifies a S_SELF_EFFECT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_SELF_EFFECT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_SELF_EFFECT
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_SELF_EFFECT;
+
+        /**
+         * Creates a plain object from a S_SELF_EFFECT message. Also converts values to other types if specified.
+         * @param message S_SELF_EFFECT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_SELF_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_SELF_EFFECT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_SELF_EFFECT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

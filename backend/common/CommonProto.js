@@ -7069,9 +7069,9 @@ $root.GamePto = (function() {
         return S_UPDATE_ENTITYS;
     })();
 
-    GamePto.S_CARD_EFFECT = (function() {
+    GamePto.S_COMMON_EFFECT = (function() {
 
-        function S_CARD_EFFECT(p) {
+        function S_COMMON_EFFECT(p) {
             this.dataArr = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -7079,16 +7079,16 @@ $root.GamePto = (function() {
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_CARD_EFFECT.prototype.cmd = 200;
-        S_CARD_EFFECT.prototype.scmd = 10017;
-        S_CARD_EFFECT.prototype.effectId = 0;
-        S_CARD_EFFECT.prototype.dataArr = $util.emptyArray;
+        S_COMMON_EFFECT.prototype.cmd = 200;
+        S_COMMON_EFFECT.prototype.scmd = 10017;
+        S_COMMON_EFFECT.prototype.effectId = 0;
+        S_COMMON_EFFECT.prototype.dataArr = $util.emptyArray;
 
-        S_CARD_EFFECT.create = function create(properties) {
-            return new S_CARD_EFFECT(properties);
+        S_COMMON_EFFECT.create = function create(properties) {
+            return new S_COMMON_EFFECT(properties);
         };
 
-        S_CARD_EFFECT.encode = function encode(m, w) {
+        S_COMMON_EFFECT.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -7106,10 +7106,10 @@ $root.GamePto = (function() {
             return w;
         };
 
-        S_CARD_EFFECT.decode = function decode(r, l) {
+        S_COMMON_EFFECT.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_CARD_EFFECT();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_COMMON_EFFECT();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -7144,10 +7144,10 @@ $root.GamePto = (function() {
             return m;
         };
 
-        S_CARD_EFFECT.fromObject = function fromObject(d) {
-            if (d instanceof $root.GamePto.S_CARD_EFFECT)
+        S_COMMON_EFFECT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_COMMON_EFFECT)
                 return d;
-            var m = new $root.GamePto.S_CARD_EFFECT();
+            var m = new $root.GamePto.S_COMMON_EFFECT();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -7159,7 +7159,7 @@ $root.GamePto = (function() {
             }
             if (d.dataArr) {
                 if (!Array.isArray(d.dataArr))
-                    throw TypeError(".GamePto.S_CARD_EFFECT.dataArr: array expected");
+                    throw TypeError(".GamePto.S_COMMON_EFFECT.dataArr: array expected");
                 m.dataArr = [];
                 for (var i = 0; i < d.dataArr.length; ++i) {
                     m.dataArr[i] = d.dataArr[i] | 0;
@@ -7168,7 +7168,7 @@ $root.GamePto = (function() {
             return m;
         };
 
-        S_CARD_EFFECT.toObject = function toObject(m, o) {
+        S_COMMON_EFFECT.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -7198,18 +7198,278 @@ $root.GamePto = (function() {
             return d;
         };
 
-        S_CARD_EFFECT.prototype.toJSON = function toJSON() {
+        S_COMMON_EFFECT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_CARD_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_COMMON_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/GamePto.S_CARD_EFFECT";
+            return typeUrlPrefix + "/GamePto.S_COMMON_EFFECT";
         };
 
-        return S_CARD_EFFECT;
+        return S_COMMON_EFFECT;
+    })();
+
+    GamePto.S_FLY_EFFECT = (function() {
+
+        function S_FLY_EFFECT(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_FLY_EFFECT.prototype.cmd = 200;
+        S_FLY_EFFECT.prototype.scmd = 10018;
+        S_FLY_EFFECT.prototype.from = null;
+        S_FLY_EFFECT.prototype.target = null;
+        S_FLY_EFFECT.prototype.targetShowTips = "";
+
+        S_FLY_EFFECT.create = function create(properties) {
+            return new S_FLY_EFFECT(properties);
+        };
+
+        S_FLY_EFFECT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.from != null && Object.hasOwnProperty.call(m, "from"))
+                $root.GamePto.Card.encode(m.from, w.uint32(26).fork()).ldelim();
+            if (m.target != null && Object.hasOwnProperty.call(m, "target"))
+                $root.GamePto.Card.encode(m.target, w.uint32(34).fork()).ldelim();
+            if (m.targetShowTips != null && Object.hasOwnProperty.call(m, "targetShowTips"))
+                w.uint32(42).string(m.targetShowTips);
+            return w;
+        };
+
+        S_FLY_EFFECT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_FLY_EFFECT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.from = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                case 4: {
+                        m.target = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                case 5: {
+                        m.targetShowTips = r.string();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_FLY_EFFECT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_FLY_EFFECT)
+                return d;
+            var m = new $root.GamePto.S_FLY_EFFECT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.from != null) {
+                if (typeof d.from !== "object")
+                    throw TypeError(".GamePto.S_FLY_EFFECT.from: object expected");
+                m.from = $root.GamePto.Card.fromObject(d.from);
+            }
+            if (d.target != null) {
+                if (typeof d.target !== "object")
+                    throw TypeError(".GamePto.S_FLY_EFFECT.target: object expected");
+                m.target = $root.GamePto.Card.fromObject(d.target);
+            }
+            if (d.targetShowTips != null) {
+                m.targetShowTips = String(d.targetShowTips);
+            }
+            return m;
+        };
+
+        S_FLY_EFFECT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10018;
+                d.from = null;
+                d.target = null;
+                d.targetShowTips = "";
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.from != null && m.hasOwnProperty("from")) {
+                d.from = $root.GamePto.Card.toObject(m.from, o);
+            }
+            if (m.target != null && m.hasOwnProperty("target")) {
+                d.target = $root.GamePto.Card.toObject(m.target, o);
+            }
+            if (m.targetShowTips != null && m.hasOwnProperty("targetShowTips")) {
+                d.targetShowTips = m.targetShowTips;
+            }
+            return d;
+        };
+
+        S_FLY_EFFECT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_FLY_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_FLY_EFFECT";
+        };
+
+        return S_FLY_EFFECT;
+    })();
+
+    GamePto.S_SELF_EFFECT = (function() {
+
+        function S_SELF_EFFECT(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_SELF_EFFECT.prototype.cmd = 200;
+        S_SELF_EFFECT.prototype.scmd = 10019;
+        S_SELF_EFFECT.prototype.x = 0;
+        S_SELF_EFFECT.prototype.y = 0;
+
+        S_SELF_EFFECT.create = function create(properties) {
+            return new S_SELF_EFFECT(properties);
+        };
+
+        S_SELF_EFFECT.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.x != null && Object.hasOwnProperty.call(m, "x"))
+                w.uint32(24).int32(m.x);
+            if (m.y != null && Object.hasOwnProperty.call(m, "y"))
+                w.uint32(32).int32(m.y);
+            return w;
+        };
+
+        S_SELF_EFFECT.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_SELF_EFFECT();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.x = r.int32();
+                        break;
+                    }
+                case 4: {
+                        m.y = r.int32();
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_SELF_EFFECT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_SELF_EFFECT)
+                return d;
+            var m = new $root.GamePto.S_SELF_EFFECT();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.x != null) {
+                m.x = d.x | 0;
+            }
+            if (d.y != null) {
+                m.y = d.y | 0;
+            }
+            return m;
+        };
+
+        S_SELF_EFFECT.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10019;
+                d.x = 0;
+                d.y = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.x != null && m.hasOwnProperty("x")) {
+                d.x = m.x;
+            }
+            if (m.y != null && m.hasOwnProperty("y")) {
+                d.y = m.y;
+            }
+            return d;
+        };
+
+        S_SELF_EFFECT.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_SELF_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_SELF_EFFECT";
+        };
+
+        return S_SELF_EFFECT;
     })();
 
     return GamePto;

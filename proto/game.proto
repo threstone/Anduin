@@ -285,7 +285,7 @@ message S_UPDATE_ENTITYS{
 	repeated Card entityCards = 3;
 }
 
-//卡牌效果
+//公共卡牌效果
 message S_COMMON_EFFECT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10017];
@@ -304,6 +304,7 @@ message S_FLY_EFFECT{
 	//如果是建筑和单位卡,则一定是在战场上，要根据卡的位置来播放对应的特效,音效
 	Card from = 3;
 	Card target = 4;
+	string targetShowTips = 5;
 }
 
 //在自己身上的一些特效，如农夫种田特效

@@ -1,6 +1,6 @@
 const MapWidth = 7;
 const MapHeight = 8;
-
+const PXNeedMs = 5;
 class MapView extends BaseView<BaseUI.UIMapView> {
 
     //先手方一定是在下方，所以后手方需要做地图反转
@@ -33,6 +33,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('S_ENTITY_DEAD', this.entityDead);
         this.addEffectListener('S_UPDATE_ENTITYS', this.entitysUpdate);
+        this.addEffectListener('S_SELF_EFFECT', this.entitysSelfEffect);
+        this.addEffectListener('S_FLY_EFFECT', this.flyEffect);
     }
 
     public close(): void {
@@ -194,28 +196,31 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             await this.wait(500);
         }//远程 
         else if (sourceConfig.atkType === CardsPto.AtkType.LongRange) {
-            //这里以后可能会根据不同的卡牌获取不同的攻击元素,现在直接用箭先实现
-            const arrow = fairygui.UIPackage.createObject("BaseUI", "arrow").asImage;
-            arrow.setPivot(0.5, 0.5, true);
-            arrow.x = source.x;
-            arrow.y = source.y;
+            const effectData = ConfigMgr.ins().getEffectDataById(sourceConfig.effectId);
+            if (!effectData) {
+                return;
+            }
+            const effect = await EffectMgr.ins().loadEffectById(effectData);
+
+            effect.x = source.x;
+            effect.y = source.y;
 
             let skew = 0;
             let time = 0;
             //确定旋转角度及飞行时间
             if (source.x === target.x) {
-                skew = source.y > target.y ? -90 : 90;
-                time = Math.abs(source.y - target.y) * 5;
+                skew = source.y > target.y ? 0 : 180;
+                time = Math.abs(source.y - target.y) * PXNeedMs;
             } else {
-                skew = source.x > target.x ? 180 : 0;
-                time = Math.abs(source.x - target.x) * 5;
+                skew = source.x > target.x ? 270 : 90;
+                time = Math.abs(source.x - target.x) * PXNeedMs;
             }
-            arrow.skewX = skew;
-            arrow.skewY = skew;
+            effect.skewX = skew - effectData.defaultRotation;
+            effect.skewY = skew - effectData.defaultRotation;
 
-            this.view.addChild(arrow);
-            egret.Tween.get(arrow).to({ x: target.x, y: target.y }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
-                this.view.removeChild(arrow);
+            this.view.displayListContainer.addChild(effect);
+            egret.Tween.get(effect).to({ x: target.x, y: target.y }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
+                this.view.displayListContainer.removeChild(effect);
             });
             await this.wait(time);
         }
@@ -261,6 +266,99 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 this.addMapItem(entityInfo);
             }
         }
+    }
+
+    /**实体自身特效 */
+    private async entitysSelfEffect(msg: GamePto.S_SELF_EFFECT) {
+        const card = MapModel.ins().getEntityCardByPoint(msg.x, msg.y);
+        if (!card) {
+            return;
+        }
+
+        const cardConfig = CardsModel.ins().getCardConfigById(card.cardId);
+        if (!cardConfig) {
+            return;
+        }
+
+        const effectData = ConfigMgr.ins().getEffectDataById(cardConfig.effectId);
+        if (!effectData) {
+            return;
+        }
+        const effect = await EffectMgr.ins().loadEffectById(effectData);
+        const entityItem = this.entityMap.get(card.id);
+        effect.x = entityItem.width / 2;
+        effect.y = entityItem.height / 2;
+        entityItem.displayListContainer.addChild(effect);
+        return new Promise<void>((resolve) => {
+            //如果是bitmap那么执行一个放大变小的效果
+            if (effect instanceof egret.Bitmap) {
+                egret.Tween.get(entityItem).to({ scaleX: 1.1, scaleY: 1.1 }, 500).to({ scaleX: 1, scaleY: 1 }, 400).call(() => {
+                    entityItem.displayListContainer.removeChild(effect);
+                    resolve();
+                });
+            } else {
+                //movieClip的话直接执行就好
+                effect.once(egret.Event.COMPLETE, () => {
+                    entityItem.displayListContainer.removeChild(effect);
+                    resolve();
+                }, this)
+                effect.play(1);
+            }
+        });
+    }
+
+    /**飞行弹道效果 类似火球术、魔法箭 */
+    private async flyEffect(msg: GamePto.S_FLY_EFFECT) {
+        const targetEntity = this.entityMap.get(msg.target.id);
+        if (!targetEntity) {
+            console.error('获取不到目标');
+            return;
+        }
+
+        let sourceEntity = this.entityMap.get(msg.from.cardId);
+        //如果找不到对应的实体，那就由英雄为起点发送
+        if (!sourceEntity) {
+            const hero = MapModel.ins().getHero(msg.from.uid);
+            sourceEntity = this.entityMap.get(hero.id);
+        }
+
+        const sourceConfig = CardsModel.ins().getCardConfigById(msg.from.cardId);
+        const effectData = ConfigMgr.ins().getEffectDataById(sourceConfig.effectId);
+        if (!effectData) {
+            return;
+        }
+
+        const effect = await EffectMgr.ins().loadEffectById(effectData);
+        effect.x = sourceEntity.x;
+        effect.y = sourceEntity.y;
+        this.view.displayListContainer.addChild(effect);
+        return new Promise<void>((resolve) => {
+            //计算飞行时间
+            const time = Utils.getDistance(sourceEntity.x, sourceEntity.y, targetEntity.x, targetEntity.y) * PXNeedMs / 2;
+
+            if (effect instanceof egret.MovieClip) {
+                effect.play(-1);
+            } else {
+                //计算角度
+                let skew = Utils.getPointAngle(sourceEntity.x, sourceEntity.y, targetEntity.x, targetEntity.y) - 90;
+                if (targetEntity.x >= sourceEntity.x) {
+                    skew += 180;
+                }
+                effect.skewX = skew - effectData.defaultRotation;
+                effect.skewY = skew - effectData.defaultRotation;
+            }
+            egret.Tween.get(effect).to({ x: targetEntity.x, y: targetEntity.y }, time, egret.Ease.quintInOut).to({}, 300).call(() => {
+                this.view.displayListContainer.removeChild(effect);
+                if (effect instanceof egret.MovieClip) {
+                    effect.stop();
+                }
+                //执行完效果后就飘血扣血
+                this.entityShowTips(targetEntity, msg.targetShowTips);
+                this.updateMapItem(msg.target);
+                resolve();
+            });
+        });
+
     }
 
     /**传入一个位置，检查是否在地图范围中 */
@@ -348,6 +446,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             shp.graphics.lineTo(endX, index * this.blockHeight);
         }
         shp.graphics.endFill();
-        (GameSceneView.ins().getView().displayObject as egret.DisplayObjectContainer).addChild(shp);
+        GameSceneView.ins().getView().displayListContainer.addChild(shp);
     }
 }

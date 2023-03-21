@@ -42,3 +42,10 @@ interface BuffData {
     desc: string;
     isShow: number;
 }
+
+interface EffectData {
+    id: number;
+    effectName: string,
+    effectType: number,
+    defaultRotation: number
+}

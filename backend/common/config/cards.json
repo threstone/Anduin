@@ -25,7 +25,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10]
+ "useCondition":[0]
   },
 {
  "cardId":2,
@@ -39,7 +39,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10]
+ "useCondition":[0]
   },
 {
  "cardId":3,
@@ -53,7 +53,7 @@
  "quality":2,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10]
+ "useCondition":[0]
   },
 {
  "cardId":4,
@@ -67,7 +67,7 @@
  "quality":1,
  "buffs":[1],
  "isDerivation":0,
- "useCondition":[10]
+ "useCondition":[0]
   },
 {
  "cardId":5,
@@ -81,7 +81,7 @@
  "quality":0,
  "buffs":[0],
  "isDerivation":0,
- "useCondition":[10]
+ "useCondition":[0]
   },
 {
  "cardId":6,
@@ -113,17 +113,17 @@
   },
 {
  "cardId":8,
- "powerId":0,
- "cardType":2,
+ "powerId":1,
+ "cardType":1,
  "type2":1,
- "attack":7,
+ "attack":2,
  "atkType":1,
- "health":3,
- "fee":8,
- "quality":0,
+ "health":2,
+ "fee":1,
+ "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0]
+ "useCondition":[9,1]
   },
 {
  "cardId":9,

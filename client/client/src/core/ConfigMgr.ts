@@ -21,4 +21,8 @@ class ConfigMgr extends BaseClass {
     public getBuffDataByBuffId(id: number): BuffData {
         return this._allConfig['buff'][id];
     }
+
+    public getEffectDataById(id: number): EffectData {
+        return this._allConfig['effect'][id];
+    }
 }

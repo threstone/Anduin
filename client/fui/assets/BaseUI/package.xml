@@ -77,7 +77,7 @@
     <component id="hzsg2m" name="MapBuildingBase.xml" path="/game/map/"/>
     <component id="hzsg2n" name="MapUnit.xml" path="/game/map/" exported="true"/>
     <component id="hzsg2o" name="MapBuilding.xml" path="/game/map/" exported="true"/>
-    <image id="hzsg2p" name="arrow.png" path="/common/res/" exported="true"/>
+    <image id="hzsg2p" name="arrow.png" path="/common/res/"/>
     <component id="sbft2r" name="MoveTips.xml" path="/game/map/tips/" exported="true"/>
     <component id="sbft2s" name="AtkTips.xml" path="/game/map/tips/" exported="true"/>
     <component id="sbft2t" name="MapTipsView.xml" path="/game/map/tips/" exported="true"/>

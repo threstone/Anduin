@@ -14,4 +14,6 @@ interface CardInterface {
     count: number;
     isDerivation: number;
     useCondition: number[];
+    effectId: number;
+    soundId: number;
 }

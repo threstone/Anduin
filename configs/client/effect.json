@@ -1,0 +1,20 @@
+[
+{
+ "id":0,
+ "effectName":"弓箭",
+ "effectType":0,
+ "defaultRotation":90
+  },
+{
+ "id":1,
+ "effectName":"魔法箭",
+ "effectType":0,
+ "defaultRotation":90
+  },
+{
+ "id":2,
+ "effectName":"自身特效",
+ "effectType":0,
+ "defaultRotation":0
+  }
+]

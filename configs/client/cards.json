@@ -14,8 +14,8 @@
  "buffs":[],
  "isDerivation":1,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":1,
@@ -31,9 +31,9 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10],
- "effectId":0,
- "soundId":0
+ "useCondition":[0],
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":2,
@@ -49,9 +49,9 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10],
- "effectId":0,
- "soundId":0
+ "useCondition":[0],
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":3,
@@ -67,9 +67,9 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[10],
- "effectId":1,
- "soundId":0
+ "useCondition":[0],
+ "effectId":0,
+ "soundId":-1
   },
 {
  "cardId":4,
@@ -85,9 +85,9 @@
  "desc":"举盾：自身和相邻友军受到远程攻击时伤害-1",
  "buffs":[1],
  "isDerivation":0,
- "useCondition":[10],
- "effectId":0,
- "soundId":0
+ "useCondition":[0],
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":5,
@@ -103,9 +103,9 @@
  "desc":"务农：回合开始阶段获得一点费用",
  "buffs":[0],
  "isDerivation":0,
- "useCondition":[10],
+ "useCondition":[0],
  "effectId":2,
- "soundId":0
+ "soundId":-1
   },
 {
  "cardId":6,
@@ -122,8 +122,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[8,1],
- "effectId":3,
- "soundId":0
+ "effectId":1,
+ "soundId":-1
   },
 {
  "cardId":7,
@@ -140,26 +140,26 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":8,
- "cardName":"农夫7",
- "powerId":0,
- "cardType":2,
+ "cardName":"巫师学徒",
+ "powerId":1,
+ "cardType":1,
  "type2":1,
- "attack":7,
+ "attack":2,
  "atkType":1,
- "health":3,
- "fee":8,
- "quality":0,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
+ "health":2,
+ "fee":1,
+ "quality":1,
+ "desc":"部署：对一个单位造成一点伤害",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "useCondition":[9,1],
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":9,
@@ -176,8 +176,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":10,
@@ -194,8 +194,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":11,
@@ -212,8 +212,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":12,
@@ -230,8 +230,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":13,
@@ -248,8 +248,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":14,
@@ -266,8 +266,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":15,
@@ -284,8 +284,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":16,
@@ -302,8 +302,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":17,
@@ -320,8 +320,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":18,
@@ -338,8 +338,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":19,
@@ -356,8 +356,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":20,
@@ -374,8 +374,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":21,
@@ -392,8 +392,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":22,
@@ -410,8 +410,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":23,
@@ -428,8 +428,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   },
 {
  "cardId":24,
@@ -446,7 +446,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[0],
- "effectId":0,
- "soundId":0
+ "effectId":-1,
+ "soundId":-1
   }
 ]

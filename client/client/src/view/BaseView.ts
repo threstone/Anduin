@@ -129,7 +129,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
      * @returns 返回是否处于根场景中
      */
     public isOnStage() {
-        return (fairygui.GRoot.inst.displayObject as egret.DisplayObjectContainer).contains(this.view.displayObject);
+        return fairygui.GRoot.inst.displayListContainer.contains(this.view.displayObject);
         // 以下方法返回永远是true...
         // return fairygui.GRoot.inst.isChildInView(this.view);(new egret.DisplayObjectContainer()).contains
     }
@@ -179,7 +179,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
     }
 
     public isChildInView(comp: fairygui.GComponent) {
-        return (this.view.displayObject as egret.DisplayObjectContainer).contains(comp.displayObject);
+        return this.view.displayListContainer.contains(comp.displayObject);
     }
 
     /**
