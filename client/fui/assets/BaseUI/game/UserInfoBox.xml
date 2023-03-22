@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="446,210" bgColor="#66ff00">
   <displayList>
-    <image id="n0_pg48" name="n0" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="0,0" size="446,210">
+    <image id="n0_pg48" name="bg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="0,0" size="446,210">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <image id="n4_pg48" name="deadPoolBg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="447,51" size="120,164" rotation="90"/>

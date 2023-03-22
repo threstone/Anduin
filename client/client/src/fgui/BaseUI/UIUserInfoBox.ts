@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UIUserInfoBox extends fairygui.GComponent {
+		public bg:fairygui.GImage;
 		public deadPoolBg:fairygui.GImage;
 		public cardPoolBg:fairygui.GImage;
 		public leastCardNum:fairygui.GTextField;
@@ -22,6 +23,7 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
+			this.bg = <fairygui.GImage>(this.getChildAt(0));
 			this.deadPoolBg = <fairygui.GImage>(this.getChildAt(1));
 			this.cardPoolBg = <fairygui.GImage>(this.getChildAt(2));
 			this.leastCardNum = <fairygui.GTextField>(this.getChildAt(3));

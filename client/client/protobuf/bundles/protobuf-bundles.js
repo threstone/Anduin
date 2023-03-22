@@ -91,6 +91,20 @@ $root.CardsPto = (function() {
         return values;
     })();
 
+    /**
+     * EventType enum.
+     * @name CardsPto.EventType
+     * @enum {number}
+     * @property {number} Common=0 Common value
+     * @property {number} Secret=1 Secret value
+     */
+    CardsPto.EventType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Common"] = 0;
+        values[valuesById[1] = "Secret"] = 1;
+        return values;
+    })();
+
     CardsPto.Card = (function() {
 
         /**
@@ -4705,6 +4719,7 @@ $root.GamePto = (function() {
          * @interface ICard
          * @property {number|null} [id] Card id
          * @property {number|null} [cardId] Card cardId
+         * @property {number|null} [cardType] Card cardType
          * @property {number|null} [attack] Card attack
          * @property {number|null} [health] Card health
          * @property {number|null} [fee] Card fee
@@ -4747,6 +4762,14 @@ $root.GamePto = (function() {
          * @instance
          */
         Card.prototype.cardId = 0;
+
+        /**
+         * Card cardType.
+         * @member {number} cardType
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.cardType = 0;
 
         /**
          * Card attack.
@@ -4836,24 +4859,26 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 0, wireType 0 =*/0).int32(message.id);
             if (message.cardId != null && Object.hasOwnProperty.call(message, "cardId"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cardId);
+            if (message.cardType != null && Object.hasOwnProperty.call(message, "cardType"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.cardType);
             if (message.attack != null && Object.hasOwnProperty.call(message, "attack"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.attack);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.attack);
             if (message.health != null && Object.hasOwnProperty.call(message, "health"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.health);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.health);
             if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.fee);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
             if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.blockX);
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.blockX);
             if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.blockY);
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.blockY);
             if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
-                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.allowAtk);
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.allowAtk);
             if (message.allowMove != null && Object.hasOwnProperty.call(message, "allowMove"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.allowMove);
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.allowMove);
             if (message.buffArr != null && message.buffArr.length) {
-                writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                writer.uint32(/* id 11, wireType 2 =*/90).fork();
                 for (var i = 0; i < message.buffArr.length; ++i)
                     writer.int32(message.buffArr[i]);
                 writer.ldelim();
@@ -4888,38 +4913,42 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 2: {
-                        message.attack = reader.int32();
+                        message.cardType = reader.int32();
                         break;
                     }
                 case 3: {
-                        message.health = reader.int32();
+                        message.attack = reader.int32();
                         break;
                     }
                 case 4: {
-                        message.fee = reader.int32();
+                        message.health = reader.int32();
                         break;
                     }
                 case 5: {
-                        message.uid = reader.int32();
+                        message.fee = reader.int32();
                         break;
                     }
                 case 6: {
-                        message.blockX = reader.int32();
+                        message.uid = reader.int32();
                         break;
                     }
                 case 7: {
-                        message.blockY = reader.int32();
+                        message.blockX = reader.int32();
                         break;
                     }
                 case 8: {
-                        message.allowAtk = reader.bool();
+                        message.blockY = reader.int32();
                         break;
                     }
                 case 9: {
-                        message.allowMove = reader.bool();
+                        message.allowAtk = reader.bool();
                         break;
                     }
                 case 10: {
+                        message.allowMove = reader.bool();
+                        break;
+                    }
+                case 11: {
                         if (!(message.buffArr && message.buffArr.length))
                             message.buffArr = [];
                         if ((tag & 7) === 2) {
@@ -9252,6 +9281,178 @@ $root.GamePto = (function() {
         };
 
         return S_SELF_EFFECT;
+    })();
+
+    GamePto.S_CARD_DENY = (function() {
+
+        /**
+         * Properties of a S_CARD_DENY.
+         * @memberof GamePto
+         * @interface IS_CARD_DENY
+         * @property {number|null} [cmd] S_CARD_DENY cmd
+         * @property {number|null} [scmd] S_CARD_DENY scmd
+         * @property {GamePto.ICard|null} [from] S_CARD_DENY from
+         * @property {GamePto.ICard|null} [target] S_CARD_DENY target
+         * @property {number|null} [fee] S_CARD_DENY fee
+         * @property {number|null} [feeMax] S_CARD_DENY feeMax
+         */
+
+        /**
+         * Constructs a new S_CARD_DENY.
+         * @memberof GamePto
+         * @classdesc Represents a S_CARD_DENY.
+         * @implements IS_CARD_DENY
+         * @constructor
+         * @param {GamePto.IS_CARD_DENY=} [properties] Properties to set
+         */
+        function S_CARD_DENY(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_CARD_DENY cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.cmd = 200;
+
+        /**
+         * S_CARD_DENY scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.scmd = 10020;
+
+        /**
+         * S_CARD_DENY from.
+         * @member {GamePto.ICard|null|undefined} from
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.from = null;
+
+        /**
+         * S_CARD_DENY target.
+         * @member {GamePto.ICard|null|undefined} target
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.target = null;
+
+        /**
+         * S_CARD_DENY fee.
+         * @member {number} fee
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.fee = 0;
+
+        /**
+         * S_CARD_DENY feeMax.
+         * @member {number} feeMax
+         * @memberof GamePto.S_CARD_DENY
+         * @instance
+         */
+        S_CARD_DENY.prototype.feeMax = 0;
+
+        /**
+         * Encodes the specified S_CARD_DENY message. Does not implicitly {@link GamePto.S_CARD_DENY.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_CARD_DENY
+         * @static
+         * @param {GamePto.IS_CARD_DENY} message S_CARD_DENY message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_CARD_DENY.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                $root.GamePto.Card.encode(message.from, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                $root.GamePto.Card.encode(message.target, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
+            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.feeMax);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_CARD_DENY message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_CARD_DENY
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_CARD_DENY} S_CARD_DENY
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_CARD_DENY.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_CARD_DENY();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.from = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 4: {
+                        message.target = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 5: {
+                        message.fee = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.feeMax = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_CARD_DENY
+         * @function getTypeUrl
+         * @memberof GamePto.S_CARD_DENY
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_CARD_DENY.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_CARD_DENY";
+        };
+
+        return S_CARD_DENY;
     })();
 
     return GamePto;

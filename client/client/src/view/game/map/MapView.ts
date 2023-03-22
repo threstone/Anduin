@@ -60,6 +60,12 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const mapPoint = this.getMapPoint(cardInfo.blockX, cardInfo.blockY);
         cardItem.x = mapPoint.x;
         cardItem.y = mapPoint.y;
+
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        //英雄的添加同时也要初始化左侧英雄控件的信息
+        if (config.cardType === CardsPto.CardType.Hero) {
+            this.emit('InitLeftHeroInfo', [cardInfo, config]);
+        }
     }
 
     public deleteMapItem(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
@@ -71,6 +77,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     public updateMapItem(cardInfo: GamePto.ICard) {
         const mapItem = this.entityMap.get(cardInfo.id);
         const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        //英雄的信息变更要跟着变左侧英雄控件的信息
+        if (config.cardType === CardsPto.CardType.Hero) {
+            this.emit('UpdateLeftHeroInfo', cardInfo);
+        }
         MapItem.updateEntityDesc(mapItem, cardInfo);
         if (cardInfo.uid === UserModel.ins().uid && (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero)) {
             this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo, config);

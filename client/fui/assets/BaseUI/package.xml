@@ -83,6 +83,33 @@
     <component id="sbft2t" name="MapTipsView.xml" path="/game/map/tips/" exported="true"/>
     <movieclip id="sgbw30" name="DiceMovie.jta" path="/game/" exported="true"/>
     <component id="q6kd31" name="SelectTargetCom.xml" path="/game/map/" exported="true"/>
+    <component id="h89h32" name="LeftInfoBox.xml" path="/game/"/>
+    <image id="h89h34" name="excavate_cycle_attentio.png" path="/game/res/"/>
+    <image id="h89h35" name="excavate_cycle_engag.png" path="/game/res/"/>
+    <component id="h89h36" name="EventItem.xml" path="/game/"/>
+    <font id="h89h37" name="NumberFont1.fnt" path="/common/" exported="true"/>
+    <image id="h89h3i" name="0.png" path="/common/res/number/number1/"/>
+    <image id="h89h3j" name="1.png" path="/common/res/number/number1/"/>
+    <image id="h89h3k" name="2.png" path="/common/res/number/number1/"/>
+    <image id="h89h3l" name="3.png" path="/common/res/number/number1/"/>
+    <image id="h89h3m" name="4.png" path="/common/res/number/number1/"/>
+    <image id="h89h3n" name="5.png" path="/common/res/number/number1/"/>
+    <image id="h89h3o" name="6.png" path="/common/res/number/number1/"/>
+    <image id="h89h3p" name="7.png" path="/common/res/number/number1/"/>
+    <image id="h89h3q" name="8.png" path="/common/res/number/number1/"/>
+    <image id="h89h3r" name="9.png" path="/common/res/number/number1/"/>
+    <image id="h89h3s" name="x.png" path="/common/res/number/number1/"/>
+    <image id="h89h3t" name="0.png" path="/common/res/number/number2/"/>
+    <image id="h89h3u" name="1.png" path="/common/res/number/number2/"/>
+    <image id="h89h3v" name="2.png" path="/common/res/number/number2/"/>
+    <image id="h89h3w" name="3.png" path="/common/res/number/number2/"/>
+    <image id="h89h3x" name="4.png" path="/common/res/number/number2/"/>
+    <image id="h89h3y" name="5.png" path="/common/res/number/number2/"/>
+    <image id="h89h3z" name="6.png" path="/common/res/number/number2/"/>
+    <image id="h89h40" name="7.png" path="/common/res/number/number2/"/>
+    <image id="h89h41" name="8.png" path="/common/res/number/number2/"/>
+    <image id="h89h42" name="9.png" path="/common/res/number/number2/"/>
+    <font id="h89h43" name="NumberFont2.fnt" path="/common/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

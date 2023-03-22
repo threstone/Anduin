@@ -62,7 +62,7 @@ export class CardInterface {
     attack: number;
 
     /**攻击类型(0近战,1远程) */
-    atkType: CardsPto.AtkType;
+    atkType: CardsPto.AtkType | CardsPto.EventType;
 
     /**生命值 */
     health: number;

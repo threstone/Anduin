@@ -95,7 +95,7 @@ export class GameTable extends BaseTable {
         const mapData = new GamePto.MapData();
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
-            mapData.eventCards.push(...user.eventPool);
+            mapData.eventCards.push(...user.eventPool.map((item) => item.getCardData()));
             mapData.entityCards.push(...user.entityPool);
         }
         return mapData;

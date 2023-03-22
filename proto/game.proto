@@ -52,15 +52,16 @@ message UserInfo{
 message Card{
 	int32 id = 0;
 	int32 cardId = 1;
-	int32 attack = 2;
-	int32 health = 3;
-	int32 fee = 4;//战场上的卡用不到，手牌会用到
-	int32 uid = 5;
-	int32 blockX = 6;
-	int32 blockY = 7;
-	bool allowAtk = 8;
-	bool allowMove = 9;
-	repeated int32 buffArr = 10;
+	int32 cardType = 2;
+	int32 attack = 3;
+	int32 health = 4;
+	int32 fee = 5;//战场上的卡用不到，手牌会用到
+	int32 uid = 6;
+	int32 blockX = 7;
+	int32 blockY = 8;
+	bool allowAtk = 9;
+	bool allowMove = 10;
+	repeated int32 buffArr = 11;
 }
 
 message MapData{
@@ -313,4 +314,14 @@ message S_SELF_EFFECT{
 	int32 scmd = 2[default = 10019];
 	int32 x = 3;
 	int32 y = 4;
+}
+
+//反制类卡牌会用到的协议
+message S_CARD_DENY{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10020];
+	Card from = 3;
+	Card target = 4;
+	int32 fee = 5;
+	int32 feeMax = 6;
 }

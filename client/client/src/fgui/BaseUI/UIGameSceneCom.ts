@@ -12,6 +12,8 @@ module BaseUI {
 		public selfHand:UIHandCardsCom;
 		public targetHand:UIHandCardsCom;
 		public close:UIButton3;
+		public selfLeftInfoBox:UILeftInfoBox;
+		public targetLeftInfoBox:UILeftInfoBox;
 		public static URL:string = "ui://yaux2xpojig14";
 
 		public static createInstance():UIGameSceneCom {
@@ -30,6 +32,8 @@ module BaseUI {
 			this.selfHand = <UIHandCardsCom>(this.getChildAt(6));
 			this.targetHand = <UIHandCardsCom>(this.getChildAt(7));
 			this.close = <UIButton3>(this.getChildAt(8));
+			this.selfLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
+			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(10));
 		}
 	}
 }

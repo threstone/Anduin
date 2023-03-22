@@ -193,4 +193,8 @@ abstract class BaseView<T extends fairygui.GComponent> {
         childView._isChildComponet = this.isChildInView(childView.getView());
         this._bindViewList.push(childView);
     }
+
+    protected emit(eventName: string, data?: any) {
+        GameDispatcher.getInstance().emit(eventName, data)
+    }
 }

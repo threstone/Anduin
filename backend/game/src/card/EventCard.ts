@@ -128,16 +128,23 @@ export class EventCard extends BaseCard implements BaseEvent {
             const notice = new GamePto.S_USE_CARD();
             notice.isSuccess = true;
             notice.uid = this.uid;
-            notice.card = this;
             notice.fee = user.fee;
             notice.feeMax = user.feeMax;
             notice.cardIndex = cardIndex;
-            this.table.broadcast(notice);
+            notice.card = this;
+            //事件卡的攻击类型标识事件类型是否可被对方知晓
+            if (this.atkType == CardsPto.EventType.Common) {
+                this.table.broadcast(notice);
+            } else {
+                user.sendMsg(notice);
+                notice.card = this.getCardData();
+                this.table.getOtherUser(user.uid).sendMsg(notice);
+            }
         }
     }
 
-    /**检查时间是否结束 */
-    public checkEventClose() {
+    /**检查事件是否结束 */
+    private checkEventClose() {
         if (this.cardType === CardsPto.CardType.Event && this.health <= 0) {
             const user = this.table.getUser(this.uid);
             const index = user.eventPool.indexOf(this);
@@ -152,10 +159,34 @@ export class EventCard extends BaseCard implements BaseEvent {
             //进入墓地
             user.deadPool.push(this);
 
-            //派发结束时间
+            //派发结束事件
             const msg = new GamePto.S_EVENT_FINISH();
             msg.card = this;
             this.table.broadcast(msg);
         }
+    }
+
+    /**
+     * 事件生效时必须调用此方法
+     * 每次生效会减少一次生效次数
+     */
+    protected forceEvent() {
+        if (this.cardType === CardsPto.CardType.Event) {
+            this.health--;
+            this.checkEventClose();
+        }
+    }
+
+    /**获取发送到客户端的事件卡牌数据 */
+    public getCardData(): GamePto.ICard {
+        if (this.cardType === CardsPto.CardType.Event && this.atkType === CardsPto.EventType.Secret) {
+            const res = new GamePto.Card();
+            res.id = this.id;
+            res.attack = this.attack;
+            res.cardType = this.cardType;
+            res.uid = this.uid;
+            return res;
+        }
+        return this;
     }
 }

@@ -1481,6 +1481,12 @@ export namespace CardsPto {
         LongRange = 1
     }
 
+    /** EventType enum. */
+    enum EventType {
+        Common = 0,
+        Secret = 1
+    }
+
     /** Properties of a Card. */
     interface ICard {
 
@@ -2867,6 +2873,9 @@ export namespace GamePto {
         /** Card cardId */
         cardId?: (number|null);
 
+        /** Card cardType */
+        cardType?: (number|null);
+
         /** Card attack */
         attack?: (number|null);
 
@@ -2909,6 +2918,9 @@ export namespace GamePto {
 
         /** Card cardId. */
         public cardId: number;
+
+        /** Card cardType. */
+        public cardType: number;
 
         /** Card attack. */
         public attack: number;
@@ -6062,6 +6074,126 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_SELF_EFFECT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_CARD_DENY. */
+    interface IS_CARD_DENY {
+
+        /** S_CARD_DENY cmd */
+        cmd?: (number|null);
+
+        /** S_CARD_DENY scmd */
+        scmd?: (number|null);
+
+        /** S_CARD_DENY from */
+        from?: (GamePto.ICard|null);
+
+        /** S_CARD_DENY target */
+        target?: (GamePto.ICard|null);
+
+        /** S_CARD_DENY fee */
+        fee?: (number|null);
+
+        /** S_CARD_DENY feeMax */
+        feeMax?: (number|null);
+    }
+
+    /** Represents a S_CARD_DENY. */
+    class S_CARD_DENY implements IS_CARD_DENY {
+
+        /**
+         * Constructs a new S_CARD_DENY.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_CARD_DENY);
+
+        /** S_CARD_DENY cmd. */
+        public cmd: number;
+
+        /** S_CARD_DENY scmd. */
+        public scmd: number;
+
+        /** S_CARD_DENY from. */
+        public from?: (GamePto.ICard|null);
+
+        /** S_CARD_DENY target. */
+        public target?: (GamePto.ICard|null);
+
+        /** S_CARD_DENY fee. */
+        public fee: number;
+
+        /** S_CARD_DENY feeMax. */
+        public feeMax: number;
+
+        /**
+         * Encodes the specified S_CARD_DENY message. Does not implicitly {@link GamePto.S_CARD_DENY.verify|verify} messages.
+         * @param message S_CARD_DENY message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_CARD_DENY, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_CARD_DENY message, length delimited. Does not implicitly {@link GamePto.S_CARD_DENY.verify|verify} messages.
+         * @param message S_CARD_DENY message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_CARD_DENY, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_CARD_DENY message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_CARD_DENY
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_CARD_DENY;
+
+        /**
+         * Decodes a S_CARD_DENY message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_CARD_DENY
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_CARD_DENY;
+
+        /**
+         * Verifies a S_CARD_DENY message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_CARD_DENY message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_CARD_DENY
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_CARD_DENY;
+
+        /**
+         * Creates a plain object from a S_CARD_DENY message. Also converts values to other types if specified.
+         * @param message S_CARD_DENY
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_CARD_DENY, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_CARD_DENY to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_CARD_DENY
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

@@ -6,7 +6,7 @@ module BaseUI {
 		public tempBg:fairygui.GGraph;
 		public tempCardName:fairygui.GTextField;
 		public cardImg:fairygui.GLoader;
-		public feeBg:fairygui.GGraph;
+		public feeBg:fairygui.GImage;
 		public feeText:fairygui.GTextField;
 		public feeGroup:fairygui.GGroup;
 		public buttonBg:fairygui.GImage;
@@ -40,7 +40,7 @@ module BaseUI {
 			this.tempBg = <fairygui.GGraph>(this.getChildAt(0));
 			this.tempCardName = <fairygui.GTextField>(this.getChildAt(1));
 			this.cardImg = <fairygui.GLoader>(this.getChildAt(2));
-			this.feeBg = <fairygui.GGraph>(this.getChildAt(3));
+			this.feeBg = <fairygui.GImage>(this.getChildAt(3));
 			this.feeText = <fairygui.GTextField>(this.getChildAt(4));
 			this.feeGroup = <fairygui.GGroup>(this.getChildAt(5));
 			this.buttonBg = <fairygui.GImage>(this.getChildAt(6));

@@ -23,6 +23,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.bindView(TargetInfoBox.ins());
         this.bindView(HandCardView.ins());
         this.bindView(TargetHandView.ins());
+        this.bindView(SelfLeftInfoBox.ins());
+        this.bindView(TargetLeftInfoBox.ins());
 
         this.view.close.describe.text = 'tempCloseBtn'
     }
@@ -108,7 +110,6 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
                 this.view.removeChild(cardItem);
             });
 
-            //TODO 实际这里是执行卡牌的特效的等待时间
             return this.wait(400);
         } else {
             //单位卡,建筑卡会移动到指定位置然后变成对应的map对象

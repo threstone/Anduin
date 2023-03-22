@@ -18,7 +18,7 @@ export class BaseCard implements CardInterface {
     powerId: CardsPto.PowerType;
     cardType: CardsPto.CardType;
     attack: number;
-    atkType: CardsPto.AtkType;
+    atkType: CardsPto.AtkType | CardsPto.EventType;
     health: number;
     healthUpperLimit: number;
     fee: number;
