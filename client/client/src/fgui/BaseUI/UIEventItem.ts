@@ -8,7 +8,7 @@ module BaseUI {
 		public secret:fairygui.GImage;
 		public eventName:fairygui.GTextField;
 		public times:fairygui.GTextField;
-		public static URL:string = "ui://yaux2xpoh89h36";
+		public static URL:string = "ui://yaux2xpoh89h45";
 
 		public static createInstance():UIEventItem {
 			return <UIEventItem>(fairygui.UIPackage.createObject("BaseUI", "EventItem"));

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="70,29">
   <displayList>
-    <image id="n3_h89h" name="bg" src="ru1k6" fileName="common/res/comp_120_164_1.png" xy="0,0" size="70,29" color="#333333">
+    <image id="n0_h89h" name="bg" src="ru1k6" fileName="common/res/comp_120_164_1.png" xy="0,0" size="70,29" color="#333333">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n0_h89h" name="display" src="h89h34" fileName="game/res/excavate_cycle_attentio.png" xy="0,0"/>
-    <image id="n1_h89h" name="secret" src="h89h35" fileName="game/res/excavate_cycle_engag.png" xy="0,0"/>
-    <text id="n2_h89h" name="eventName" xy="14,5" size="52,19" fontSize="12" color="#ccff00" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="秘密事件"/>
+    <image id="n1_h89h" name="display" src="h89h34" fileName="game/res/excavate_cycle_attentio.png" xy="0,0"/>
+    <image id="n2_h89h" name="secret" src="h89h35" fileName="game/res/excavate_cycle_engag.png" xy="0,0"/>
+    <text id="n3_h89h" name="eventName" xy="14,5" size="52,19" fontSize="12" color="#ccff00" align="center" vAlign="middle" autoSize="none" strokeColor="#000000" text="秘密事件"/>
     <image id="n4_h89h" name="n4" src="tb7e23" fileName="common/res/hourglas.png" xy="60,-9" size="19,24" aspect="true"/>
-    <text id="n5_h89h" name="times" xy="65,-5" size="10,12" font="ui://yaux2xpoh89h37" fontSize="8" color="#ff0000" align="center" text="2"/>
+    <text id="n5_h89h" name="times" xy="65,-5" size="10,12" font="ui://yaux2xpoh89h37" fontSize="8" color="#ff0000" align="center" text="1"/>
   </displayList>
 </component>

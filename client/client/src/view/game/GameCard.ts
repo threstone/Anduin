@@ -8,11 +8,9 @@ class GameCard {
 
     constructor(cardInfo: GamePto.ICard) {
         this.cardInfo = cardInfo;
-        this.cardItem = CardItem.getItem(CardsModel.ins().getCardConfigById(cardInfo.cardId));
-        this.cardItem.feeText.text = `${cardInfo.fee}`;
-        this.cardItem.atkText.text = `${cardInfo.attack}`;
-        this.cardItem.healthText.text = `${cardInfo.health}`;
-        this.cardItem.cardNum.visible = false;
+        if (cardInfo.cardId !== -1) {
+            this.cardItem = CardItem.getCardByServerCard(cardInfo);
+        }
     }
 
     public static getGameCards(cardsInfo: GamePto.ICard[], x: number = 0, y: number = 0, scale: number = 1, skew: number = 0) {

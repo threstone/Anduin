@@ -11,13 +11,15 @@ export class Card7 extends EventCard {
         if (useCard.cardType === CardsPto.CardType.Building || useCard.cardType === CardsPto.CardType.Unit) {
             //对方这张卡没了,减费用
             const targetUser = this.table.getUser(useCard.uid);
-            targetUser.fee -= this.fee;
-            targetUser.handCards.splice(targetUser.handCards.indexOf(useCard), 1);
+            targetUser.fee -= useCard.fee;
+            const targetCardIndex = targetUser.handCards.indexOf(useCard);
+            targetUser.handCards.splice(targetCardIndex, 1);
 
             //通知
             const notice = new GamePto.S_CARD_DENY();
             notice.from = this;
             notice.target = useCard;
+            notice.targetCardIndex = targetCardIndex;
             notice.fee = targetUser.fee;
             notice.feeMax = targetUser.feeMax;
             this.table.broadcast(notice);

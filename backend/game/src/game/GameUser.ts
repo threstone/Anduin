@@ -65,7 +65,14 @@ export class GameUser {
     /**最大费用值 */
     feeMax: number;
     /**当前费用 */
-    fee: number;
+    private _fee: number;
+    get fee() {
+        return this._fee;
+    }
+
+    set fee(v: number) {
+        this._fee = Math.max(0, v);
+    }
 
     /** 替换的卡牌，用于首轮游戏给对方看换了哪些*/
     replaceIndexes: number[];

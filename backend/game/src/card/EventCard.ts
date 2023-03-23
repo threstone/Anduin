@@ -123,6 +123,8 @@ export class EventCard extends BaseCard implements BaseEvent {
         super.onUse(user, cardIndex, ...params);
         if (this.cardType === CardsPto.CardType.Event) {
             this.table.mapData.addEvent(this);
+            const user = this.table.getUser(this.uid);
+            user.eventPool.push(this);
 
             //send success card message
             const notice = new GamePto.S_USE_CARD();
@@ -158,12 +160,11 @@ export class EventCard extends BaseCard implements BaseEvent {
             user.eventPool.splice(index, 1);
             //进入墓地
             user.deadPool.push(this);
-
-            //派发结束事件
-            const msg = new GamePto.S_EVENT_FINISH();
-            msg.card = this;
-            this.table.broadcast(msg);
         }
+        //派发事件更新协议
+        const msg = new GamePto.S_EVENT_UPDATE();
+        msg.card = this;
+        this.table.broadcast(msg);
     }
 
     /**
@@ -182,9 +183,10 @@ export class EventCard extends BaseCard implements BaseEvent {
         if (this.cardType === CardsPto.CardType.Event && this.atkType === CardsPto.EventType.Secret) {
             const res = new GamePto.Card();
             res.id = this.id;
-            res.attack = this.attack;
             res.cardType = this.cardType;
             res.uid = this.uid;
+            res.cardId = -1;
+            res.health = this.health;
             return res;
         }
         return this;

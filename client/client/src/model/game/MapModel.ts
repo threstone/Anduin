@@ -21,6 +21,10 @@ class MapModel extends BaseModel {
         return this._serverData.entityCards;
     }
 
+    get eventCards() {
+        return this._serverData.eventCards;
+    }
+
     public onUseCard(msg: GamePto.S_USE_CARD) {
         if (msg.card.cardType === CardsPto.CardType.Event) {
             this._serverData.eventCards.push(msg.card);
@@ -213,17 +217,22 @@ class MapModel extends BaseModel {
     }
 
     //事件卡结束
-    private S_EVENT_FINISH(msg: GamePto.S_EVENT_FINISH) {
+    private S_EVENT_UPDATE(msg: GamePto.S_EVENT_UPDATE) {
         for (let index = 0; index < this._serverData.eventCards.length; index++) {
             const eventCard = this._serverData.eventCards[index];
             if (eventCard.id === msg.card.id) {
-                if (msg.card.uid === UserModel.ins().uid) {
-                    GameModel.ins().deadPool.push(msg.card);
-                } else {
-                    GameModel.ins().targetDeadPoolNum++;
+                //事件卡结束了
+                if (msg.card.health <= 0) {
+                    if (msg.card.uid === UserModel.ins().uid) {
+                        GameModel.ins().deadPool.push(msg.card);
+                    } else {
+                        GameModel.ins().targetDeadPoolNum++;
+                    }
+                    this.emit('UpdateDeadCardNum');
+                    this._serverData.eventCards.splice(index, 1);
                 }
-                this.emit('UpdateDeadCardNum');
-                this._serverData.eventCards.splice(index, 1);
+
+                this.emit('S_EVENT_UPDATE', msg.card);
                 return;
             }
         }
@@ -254,5 +263,20 @@ class MapModel extends BaseModel {
     //在自己身上的一些特效，如农夫种田特效
     private S_SELF_EFFECT(msg: GamePto.S_SELF_EFFECT) {
         this.emit('S_SELF_EFFECT', msg);
+    }
+
+    //反制类卡牌会用到的协议
+    private S_CARD_DENY(msg: GamePto.S_CARD_DENY) {
+        //自己的卡被反制
+        const gameModel = GameModel.ins();
+        if (msg.target.uid === UserModel.ins().uid) {
+            gameModel.deadPool.push(gameModel.handCards[msg.targetCardIndex]);
+            gameModel.handCards.splice(msg.targetCardIndex, 1);
+            gameModel.fee = msg.fee;
+        } else {
+            gameModel.targetDeadPoolNum++;
+        }
+        this.emit('S_CARD_DENY', msg);
+        this.emit('UpdateDeadCardNum');
     }
 }

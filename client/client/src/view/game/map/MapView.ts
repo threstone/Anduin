@@ -143,7 +143,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (!cardInfo) {
             return;
         }
-        this._detailCard = CardItem.getEntityCard(cardInfo);
+        this._detailCard = CardItem.getCardDetail(cardInfo);
         this.view.addChild(this._detailCard);
 
         const cardItem = this.entityMap.get(cardInfo.id);

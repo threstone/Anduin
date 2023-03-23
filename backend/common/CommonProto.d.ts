@@ -5546,102 +5546,102 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_EVENT_FINISH. */
-    interface IS_EVENT_FINISH {
+    /** Properties of a S_EVENT_UPDATE. */
+    interface IS_EVENT_UPDATE {
 
-        /** S_EVENT_FINISH cmd */
+        /** S_EVENT_UPDATE cmd */
         cmd?: (number|null);
 
-        /** S_EVENT_FINISH scmd */
+        /** S_EVENT_UPDATE scmd */
         scmd?: (number|null);
 
-        /** S_EVENT_FINISH card */
+        /** S_EVENT_UPDATE card */
         card?: (GamePto.ICard|null);
     }
 
-    /** Represents a S_EVENT_FINISH. */
-    class S_EVENT_FINISH implements IS_EVENT_FINISH {
+    /** Represents a S_EVENT_UPDATE. */
+    class S_EVENT_UPDATE implements IS_EVENT_UPDATE {
 
         /**
-         * Constructs a new S_EVENT_FINISH.
+         * Constructs a new S_EVENT_UPDATE.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_EVENT_FINISH);
+        constructor(properties?: GamePto.IS_EVENT_UPDATE);
 
-        /** S_EVENT_FINISH cmd. */
+        /** S_EVENT_UPDATE cmd. */
         public cmd: number;
 
-        /** S_EVENT_FINISH scmd. */
+        /** S_EVENT_UPDATE scmd. */
         public scmd: number;
 
-        /** S_EVENT_FINISH card. */
+        /** S_EVENT_UPDATE card. */
         public card?: (GamePto.ICard|null);
 
         /**
-         * Encodes the specified S_EVENT_FINISH message. Does not implicitly {@link GamePto.S_EVENT_FINISH.verify|verify} messages.
-         * @param message S_EVENT_FINISH message or plain object to encode
+         * Encodes the specified S_EVENT_UPDATE message. Does not implicitly {@link GamePto.S_EVENT_UPDATE.verify|verify} messages.
+         * @param message S_EVENT_UPDATE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_EVENT_FINISH, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_EVENT_UPDATE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_EVENT_FINISH message, length delimited. Does not implicitly {@link GamePto.S_EVENT_FINISH.verify|verify} messages.
-         * @param message S_EVENT_FINISH message or plain object to encode
+         * Encodes the specified S_EVENT_UPDATE message, length delimited. Does not implicitly {@link GamePto.S_EVENT_UPDATE.verify|verify} messages.
+         * @param message S_EVENT_UPDATE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_EVENT_FINISH, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_EVENT_UPDATE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_EVENT_FINISH message from the specified reader or buffer.
+         * Decodes a S_EVENT_UPDATE message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_EVENT_FINISH
+         * @returns S_EVENT_UPDATE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_EVENT_FINISH;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_EVENT_UPDATE;
 
         /**
-         * Decodes a S_EVENT_FINISH message from the specified reader or buffer, length delimited.
+         * Decodes a S_EVENT_UPDATE message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_EVENT_FINISH
+         * @returns S_EVENT_UPDATE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_EVENT_FINISH;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_EVENT_UPDATE;
 
         /**
-         * Verifies a S_EVENT_FINISH message.
+         * Verifies a S_EVENT_UPDATE message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_EVENT_FINISH message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_EVENT_UPDATE message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_EVENT_FINISH
+         * @returns S_EVENT_UPDATE
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_EVENT_FINISH;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_EVENT_UPDATE;
 
         /**
-         * Creates a plain object from a S_EVENT_FINISH message. Also converts values to other types if specified.
-         * @param message S_EVENT_FINISH
+         * Creates a plain object from a S_EVENT_UPDATE message. Also converts values to other types if specified.
+         * @param message S_EVENT_UPDATE
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_EVENT_FINISH, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_EVENT_UPDATE, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_EVENT_FINISH to JSON.
+         * Converts this S_EVENT_UPDATE to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_EVENT_FINISH
+         * Gets the default type url for S_EVENT_UPDATE
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -6095,6 +6095,9 @@ export namespace GamePto {
         /** S_CARD_DENY target */
         target?: (GamePto.ICard|null);
 
+        /** S_CARD_DENY targetCardIndex */
+        targetCardIndex?: (number|null);
+
         /** S_CARD_DENY fee */
         fee?: (number|null);
 
@@ -6122,6 +6125,9 @@ export namespace GamePto {
 
         /** S_CARD_DENY target. */
         public target?: (GamePto.ICard|null);
+
+        /** S_CARD_DENY targetCardIndex. */
+        public targetCardIndex: number;
 
         /** S_CARD_DENY fee. */
         public fee: number;

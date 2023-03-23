@@ -31,6 +31,15 @@ class CardItem {
         return cardItem;
     }
 
+    static getCardByServerCard(cardInfo: GamePto.ICard) {
+        const cardItem = CardItem.getItem(CardsModel.ins().getCardConfigById(cardInfo.cardId));
+        cardItem.feeText.text = `${cardInfo.fee}`;
+        cardItem.atkText.text = `${cardInfo.attack}`;
+        cardItem.healthText.text = `${cardInfo.health}`;
+        cardItem.cardNum.visible = false;
+        return cardItem;
+    }
+
     static updateCard(card: BaseUI.UICardItem, cardInfo: CardInterface) {
         card.feeText.text = `${cardInfo.fee}`;
         card.cardName.text = `${cardInfo.cardName}`;
@@ -71,7 +80,7 @@ class CardItem {
         }
     }
 
-    static getEntityCard(cardInfo: GamePto.ICard) {
+    static getCardDetail(cardInfo: GamePto.ICard) {
         const cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId)
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;

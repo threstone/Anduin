@@ -95,21 +95,26 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         MapView.ins().updateMap();
     }
 
-    public async useCardShow(card: GameCard) {
+    /**将卡片放置到左侧展示 */
+    public showCardToLeft(card: BaseUI.UICardItem | BaseUI.UICardBackItem) {
+        this.view.addChild(card);
+        egret.Tween.get(card).to({
+            scaleX: 1, scaleY: 1,
+            x: this.view.map.x - card.width,
+            y: (this.view.height - card.height) / 2
+        }, 400).to({}, 2000).call(() => {
+            this.view.removeChild(card);
+        });
+        return this.wait(400);
+    }
+
+    /**使用的卡牌展示 */
+    public useCardShow(card: GameCard) {
         const cardItem = card.cardItem
-        this.view.addChild(cardItem);
 
-        //如果是事件卡和法术卡移动至左侧显示，然后播放对应特效
+        // 如果是事件卡和法术卡移动至左侧显示，然后播放对应特效 
         if (card.cardInfo.cardType === CardsPto.CardType.Event || card.cardInfo.cardType === CardsPto.CardType.Magic) {
-            egret.Tween.get(cardItem).to({
-                scaleX: 1, scaleY: 1,
-                x: this.view.map.x - cardItem.width,
-                y: (this.view.height - cardItem.height) / 2
-            }, 400).to({}, 2000).call(() => {
-                this.view.removeChild(cardItem);
-            });
-
-            return this.wait(400);
+            return this.showCardToLeft(cardItem);
         } else {
             //单位卡,建筑卡会移动到指定位置然后变成对应的map对象
             const scenePoint = MapView.ins().getScenePoint(card.cardInfo.blockX, card.cardInfo.blockY);

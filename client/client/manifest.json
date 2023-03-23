@@ -106,6 +106,7 @@
 		"bin-debug/view/chat/ChatItem.js",
 		"bin-debug/view/chat/ChatView.js",
 		"bin-debug/view/game/ChooseCards.js",
+		"bin-debug/view/game/EventItem.js",
 		"bin-debug/view/game/GameCard.js",
 		"bin-debug/view/game/GameSceneView.js",
 		"bin-debug/view/game/HandCardView.js",

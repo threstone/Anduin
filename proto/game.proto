@@ -272,8 +272,8 @@ message S_ENTITY_DEAD{
 	Card deadCard = 3;
 }
 
-//事件卡结束
-message S_EVENT_FINISH{
+//事件卡数据更新,如果health小于等于0则说明结束了
+message S_EVENT_UPDATE{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10015];
 	Card card = 3;
@@ -322,6 +322,7 @@ message S_CARD_DENY{
 	int32 scmd = 2[default = 10020];
 	Card from = 3;
 	Card target = 4;
-	int32 fee = 5;
-	int32 feeMax = 6;
+	int32 targetCardIndex = 5;
+	int32 fee = 6;
+	int32 feeMax = 7;
 }

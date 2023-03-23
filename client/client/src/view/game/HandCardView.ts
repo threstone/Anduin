@@ -27,6 +27,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards);
         this.addEffectListener('S_USE_CARD', this.onUseCard);
+        this.addEffectListener('S_CARD_DENY', this.cardDeny);
+
         this.observe('S_DISCARD', this.onDeleteCard);
     }
 
@@ -38,6 +40,38 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             this.view.removeChild(card.cardItem);
         }
         this._cards = [];
+    }
+
+    /**反制卡牌 */
+    private cardDeny(msg: GamePto.S_CARD_DENY) {
+        if (msg.target.uid === UserModel.ins().uid) {
+            const gameCard = this._cards[msg.targetCardIndex];
+            const root = gameCard.cardItem.localToRoot();
+            gameCard.cardItem.x = root.x;
+            gameCard.cardItem.y = root.y;
+            gameCard.cardItem.setPivot(0, 0);
+            this.removeCard(gameCard);
+            const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
+            GameSceneView.ins().getView().addChild(gameCard.cardItem);
+            this.removeCardTween(gameCard.cardItem, deadPoolRoot.x, deadPoolRoot.y).then(() => {
+                GameSceneView.ins().getView().removeChild(gameCard.cardItem);
+            })
+            this.updateCardsPostion(500);
+        }
+    }
+
+    /**
+   * 将卡牌换到指定位置
+   */
+    private removeCardTween(cardItem: BaseUI.UICardBackItem | BaseUI.UICardItem, x: number, y: number) {
+        return new Promise<void>((resolve) => {
+            egret.Tween.get(cardItem).to({ y: cardItem.y + cardItem.height * cardItem.scaleY, skewX: 90, skewY: 90 }, 400)
+                .to({ x: x }, 400)
+                .to({ y: y }, 500)
+                .call(() => {
+                    resolve();
+                });
+        })
     }
 
     /**抽卡疲劳 */
