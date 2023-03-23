@@ -144,8 +144,7 @@ class SelectTargetView extends BaseView<BaseUI.UISelectTargetCom>{
             if (filterOwner !== AnyOwner && (entityCard.uid === UserModel.ins().uid) !== (filterOwner === SelfOwner)) {
                 continue;
             }
-            const cardConfig = CardsModel.ins().getCardConfigById(entityCard.cardId);
-            if (filterEntity !== AnyEntity && (cardConfig.cardType === CardsPto.CardType.Building) !== (filterEntity === BuildingEntity)) {
+            if (filterEntity !== AnyEntity && (entityCard.cardType === CardsPto.CardType.Building) !== (filterEntity === BuildingEntity)) {
                 continue;
             }
             //高亮
@@ -189,32 +188,31 @@ class SelectTargetView extends BaseView<BaseUI.UISelectTargetCom>{
             return;
         }
 
-        const cardConfig = CardsModel.ins().getCardConfigById(entity.cardId);
         let isMatch = false;
         switch (this._useType) {
             //友方单位
             case GamePto.UseConditionEnum.FriendlyUnit:
-                isMatch = entity.uid === UserModel.ins().uid && cardConfig.cardType === CardsPto.CardType.Unit;
+                isMatch = entity.uid === UserModel.ins().uid && entity.cardType === CardsPto.CardType.Unit;
                 break;
             //友方建筑
             case GamePto.UseConditionEnum.FriendlyBuilding:
-                isMatch = entity.uid === UserModel.ins().uid && cardConfig.cardType === CardsPto.CardType.Building;
+                isMatch = entity.uid === UserModel.ins().uid && entity.cardType === CardsPto.CardType.Building;
                 break;
             //敌方单位
             case GamePto.UseConditionEnum.EnemyUnit:
-                isMatch = entity.uid !== UserModel.ins().uid && cardConfig.cardType === CardsPto.CardType.Unit;
+                isMatch = entity.uid !== UserModel.ins().uid && entity.cardType === CardsPto.CardType.Unit;
                 break;
             //敌方建筑
             case GamePto.UseConditionEnum.EnemyBuilding:
-                isMatch = entity.uid !== UserModel.ins().uid && cardConfig.cardType === CardsPto.CardType.Building;
+                isMatch = entity.uid !== UserModel.ins().uid && entity.cardType === CardsPto.CardType.Building;
                 break;
             //所有单位
             case GamePto.UseConditionEnum.AllUnit:
-                isMatch = cardConfig.cardType === CardsPto.CardType.Unit;
+                isMatch = entity.cardType === CardsPto.CardType.Unit;
                 break;
             //所有建筑
             case GamePto.UseConditionEnum.AllBuilding:
-                isMatch = cardConfig.cardType === CardsPto.CardType.Building;
+                isMatch = entity.cardType === CardsPto.CardType.Building;
                 break;
             //友方地图实体
             case GamePto.UseConditionEnum.FriendEntity:

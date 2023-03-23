@@ -145,11 +145,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 break;
             //空格子
             case GamePto.UseConditionEnum.EmptyBlock:
-            // if (MapModel.ins().getEntityCardByPoint(mapPoint.x, mapPoint.y)) {
-            //     return false;
-            // }
-            // GameModel.ins().C_USE_CARD(cardIndex, [mapPoint.x, mapPoint.y]);
-            // break;
             //友方单位
             case GamePto.UseConditionEnum.FriendlyUnit:
             //友方建筑

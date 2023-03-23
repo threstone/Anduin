@@ -17,7 +17,7 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
 
         //不是事件卡也不处理
         const cardConfig = CardsModel.ins().getCardConfigById(msg.card.cardId);
-        if (cardConfig.cardType !== CardsPto.CardType.Event) {
+        if (msg.card.cardType !== CardsPto.CardType.Event) {
             return;
         }
 
@@ -26,8 +26,8 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
     }
 
     private initLeftHero(evt: EventData) {
-        const card: GamePto.ICard = evt.data[0];
-        const cardConfig: CardInterface = evt.data[1];
+        const card: GamePto.ICard = evt.data;
+        const cardConfig = CardsModel.ins().getCardConfigById(card.cardId);
         if (this.isHandler(card.uid)) {
             RES.getResByUrl(`./resource/card/${card.cardId}.jpg`, (data: egret.Texture) => {
                 if (!data) {

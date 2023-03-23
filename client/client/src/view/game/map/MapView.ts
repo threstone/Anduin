@@ -61,10 +61,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         cardItem.x = mapPoint.x;
         cardItem.y = mapPoint.y;
 
-        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         //英雄的添加同时也要初始化左侧英雄控件的信息
-        if (config.cardType === CardsPto.CardType.Hero) {
-            this.emit('InitLeftHeroInfo', [cardInfo, config]);
+        if (cardInfo.cardType === CardsPto.CardType.Hero) {
+            this.emit('InitLeftHeroInfo', cardInfo);
         }
     }
 
@@ -76,19 +75,19 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**更新指定地图卡 */
     public updateMapItem(cardInfo: GamePto.ICard) {
         const mapItem = this.entityMap.get(cardInfo.id);
-        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         //英雄的信息变更要跟着变左侧英雄控件的信息
-        if (config.cardType === CardsPto.CardType.Hero) {
+        if (cardInfo.cardType === CardsPto.CardType.Hero) {
             this.emit('UpdateLeftHeroInfo', cardInfo);
         }
         MapItem.updateEntityDesc(mapItem, cardInfo);
-        if (cardInfo.uid === UserModel.ins().uid && (config.cardType === CardsPto.CardType.Unit || config.cardType === CardsPto.CardType.Hero)) {
-            this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo, config);
+        if (cardInfo.uid === UserModel.ins().uid && (cardInfo.cardType === CardsPto.CardType.Unit || cardInfo.cardType === CardsPto.CardType.Hero)) {
+            this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo);
         }
     }
 
     /**根据可移动状态以及可攻击对象来决定是否显示提示 */
-    private updateUnitOperateTips(unit: BaseUI.UIMapUnit, cardInfo: GamePto.ICard, config: CardInterface) {
+    private updateUnitOperateTips(unit: BaseUI.UIMapUnit, cardInfo: GamePto.ICard) {
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         unit.allowOperate.visible = false;
         if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
             if (MapModel.ins().getMovablePoint(cardInfo, config).size > 0) {
@@ -114,12 +113,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         //自己的卡牌被点击
-        if (GameSceneView.ins().allowToOprate && config.cardType !== CardsPto.CardType.Building) {
+        if (GameSceneView.ins().allowToOprate && cardInfo.cardType !== CardsPto.CardType.Building) {
+            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
             // 显示所有可移动路径
             const movePointSet = new Set<number>();
             movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
+            //检查是否允许移动
             if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
                 MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
                 MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
@@ -161,8 +161,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
         const cardInfo = msg.card;
         if (cardInfo.uid === UserModel.ins().uid) {
-            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
-            this.updateUnitOperateTips(mapItem, cardInfo, config);
+            this.updateUnitOperateTips(mapItem, cardInfo);
         }
         await this.wait(500);
     }

@@ -21,11 +21,11 @@ class MapModel extends BaseModel {
         return this._serverData.entityCards;
     }
 
-    public onUseCard(msg: GamePto.S_USE_CARD, cardConfig: CardInterface) {
-        if (cardConfig.cardType === CardsPto.CardType.Event) {
+    public onUseCard(msg: GamePto.S_USE_CARD) {
+        if (msg.card.cardType === CardsPto.CardType.Event) {
             this._serverData.eventCards.push(msg.card);
-        } else if (cardConfig.cardType === CardsPto.CardType.Building
-            || cardConfig.cardType === CardsPto.CardType.Unit) {
+        } else if (msg.card.cardType === CardsPto.CardType.Building
+            || msg.card.cardType === CardsPto.CardType.Unit) {
             this._serverData.entityCards.push(msg.card);
             this._mapData[msg.card.blockX][msg.card.blockY] = msg.card;
         }
@@ -34,7 +34,7 @@ class MapModel extends BaseModel {
     public getHero(uid: number) {
         for (let index = 0; index < this._serverData.entityCards.length; index++) {
             const entity = this._serverData.entityCards[index];
-            if (entity.uid === uid && CardsModel.ins().getCardConfigById(entity.cardId).cardType === CardsPto.CardType.Hero) {
+            if (entity.uid === uid && entity.cardType === CardsPto.CardType.Hero) {
                 return entity;
             }
         }
