@@ -3607,6 +3607,9 @@ declare namespace GamePto {
 
         /** S_ATTACK dices */
         dices?: (number[]|null);
+
+        /** S_ATTACK leastAtkTimes */
+        leastAtkTimes?: (number|null);
     }
 
     /** Represents a S_ATTACK. */
@@ -3656,6 +3659,9 @@ declare namespace GamePto {
 
         /** S_ATTACK dices. */
         public dices: number[];
+
+        /** S_ATTACK leastAtkTimes. */
+        public leastAtkTimes: number;
 
         /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
@@ -4124,6 +4130,120 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_CARD_DENY
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_GAME_OVER. */
+    interface IS_GAME_OVER {
+
+        /** S_GAME_OVER cmd */
+        cmd?: (number|null);
+
+        /** S_GAME_OVER scmd */
+        scmd?: (number|null);
+
+        /** S_GAME_OVER winnerUid */
+        winnerUid?: (number|null);
+    }
+
+    /** Represents a S_GAME_OVER. */
+    class S_GAME_OVER implements IS_GAME_OVER {
+
+        /**
+         * Constructs a new S_GAME_OVER.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_GAME_OVER);
+
+        /** S_GAME_OVER cmd. */
+        public cmd: number;
+
+        /** S_GAME_OVER scmd. */
+        public scmd: number;
+
+        /** S_GAME_OVER winnerUid. */
+        public winnerUid: number;
+
+        /**
+         * Encodes the specified S_GAME_OVER message. Does not implicitly {@link GamePto.S_GAME_OVER.verify|verify} messages.
+         * @param message S_GAME_OVER message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_GAME_OVER, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_GAME_OVER message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_GAME_OVER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_OVER;
+
+        /**
+         * Gets the default type url for S_GAME_OVER
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_RECONNECT. */
+    interface IS_RECONNECT {
+
+        /** S_RECONNECT cmd */
+        cmd?: (number|null);
+
+        /** S_RECONNECT scmd */
+        scmd?: (number|null);
+
+        /** S_RECONNECT mapData */
+        mapData?: (GamePto.IMapData|null);
+    }
+
+    /** Represents a S_RECONNECT. */
+    class S_RECONNECT implements IS_RECONNECT {
+
+        /**
+         * Constructs a new S_RECONNECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_RECONNECT);
+
+        /** S_RECONNECT cmd. */
+        public cmd: number;
+
+        /** S_RECONNECT scmd. */
+        public scmd: number;
+
+        /** S_RECONNECT mapData. */
+        public mapData?: (GamePto.IMapData|null);
+
+        /**
+         * Encodes the specified S_RECONNECT message. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
+         * @param message S_RECONNECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_RECONNECT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_RECONNECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_RECONNECT;
+
+        /**
+         * Gets the default type url for S_RECONNECT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

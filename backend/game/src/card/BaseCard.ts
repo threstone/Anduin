@@ -66,6 +66,12 @@ export class BaseCard implements CardInterface {
                 return false;
             }
         }
+        
+        //如果进入循环体的数据少于两个或数据不是2的倍数,则false
+        if (params.length - index < 2 || params.length % 2 !== 0) {
+            return false;
+        }
+
         const useType = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
         for (; index < params.length; index += 2) {
             const entity = this.table.mapData.getCard(params[index], params[index + 1]);

@@ -1,4 +1,3 @@
-let TEST_GAME = true;
 class GameModel extends BaseModel {
 
     handCards: GamePto.ICard[];
@@ -60,7 +59,6 @@ class GameModel extends BaseModel {
 
     //初始化游戏
     private S_INIT_GAME(msg: GamePto.S_INIT_GAME) {
-        TEST_GAME = false;
         for (let index = 0; index < msg.users.length; index++) {
             const user = msg.users[index];
             if (user.uid !== UserModel.ins().uid) {
@@ -157,5 +155,10 @@ class GameModel extends BaseModel {
     private S_MAP_DATA(msg: GamePto.S_MAP_DATA) {
         MapModel.ins().serverData = msg.mapData;
         this.emit('S_MAP_DATA', msg);
+    }
+
+    //游戏结束
+    private S_GAME_OVER(msg: GamePto.S_GAME_OVER){
+        this.emit('S_GAME_OVER', msg);
     }
 }

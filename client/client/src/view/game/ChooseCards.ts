@@ -66,22 +66,6 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
     private onBtnClick() {
         GameModel.ins().C_PREPARE_TO_START(this._replaceIndexes);
-        //TODO test
-        if (TEST_GAME) {
-            GameDispatcher.getInstance().emit('S_REPLACE_CARDS', {
-                "uid": UserModel.ins().uid,
-                "cards": [
-                    { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 },
-                    { "cardId": 2, "attack": 2, "health": 4, "fee": 1, "uid": 1 }
-                ], "replaceCardIndexes": [0, 1]
-            })
-            GameDispatcher.getInstance().emit('S_ROUND_START_EVENT', { "uid": 1, "fee": 1, "maxFee": 10 });
-        }
     }
 
     private replaceCards(msg: GamePto.S_REPLACE_CARDS) {
@@ -140,12 +124,5 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         this.close();
         await HandCardView.ins().showAddStartHandCards(this.cards);
         this._cards = null;
-        if (TEST_GAME) {
-            //TEST CODE
-            GameSceneView.ins().addToEffectPool(HandCardView.ins().drawCards.bind(HandCardView.ins(),
-                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 },
-                { "cardId": 3, "attack": 1, "health": 2, "fee": 1, "uid": 1 }));
-            TargetHandView.ins().replace([1, 3]);
-        }
     }
 }

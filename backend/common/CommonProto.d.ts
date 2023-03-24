@@ -5323,6 +5323,9 @@ export namespace GamePto {
 
         /** S_ATTACK dices */
         dices?: (number[]|null);
+
+        /** S_ATTACK leastAtkTimes */
+        leastAtkTimes?: (number|null);
     }
 
     /** Represents a S_ATTACK. */
@@ -5372,6 +5375,9 @@ export namespace GamePto {
 
         /** S_ATTACK dices. */
         public dices: number[];
+
+        /** S_ATTACK leastAtkTimes. */
+        public leastAtkTimes: number;
 
         /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
@@ -6200,6 +6206,210 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_CARD_DENY
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_GAME_OVER. */
+    interface IS_GAME_OVER {
+
+        /** S_GAME_OVER cmd */
+        cmd?: (number|null);
+
+        /** S_GAME_OVER scmd */
+        scmd?: (number|null);
+
+        /** S_GAME_OVER winnerUid */
+        winnerUid?: (number|null);
+    }
+
+    /** Represents a S_GAME_OVER. */
+    class S_GAME_OVER implements IS_GAME_OVER {
+
+        /**
+         * Constructs a new S_GAME_OVER.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_GAME_OVER);
+
+        /** S_GAME_OVER cmd. */
+        public cmd: number;
+
+        /** S_GAME_OVER scmd. */
+        public scmd: number;
+
+        /** S_GAME_OVER winnerUid. */
+        public winnerUid: number;
+
+        /**
+         * Encodes the specified S_GAME_OVER message. Does not implicitly {@link GamePto.S_GAME_OVER.verify|verify} messages.
+         * @param message S_GAME_OVER message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_GAME_OVER, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_GAME_OVER message, length delimited. Does not implicitly {@link GamePto.S_GAME_OVER.verify|verify} messages.
+         * @param message S_GAME_OVER message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_GAME_OVER, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_GAME_OVER message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_GAME_OVER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_OVER;
+
+        /**
+         * Decodes a S_GAME_OVER message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_GAME_OVER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_GAME_OVER;
+
+        /**
+         * Verifies a S_GAME_OVER message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_GAME_OVER message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_GAME_OVER
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_GAME_OVER;
+
+        /**
+         * Creates a plain object from a S_GAME_OVER message. Also converts values to other types if specified.
+         * @param message S_GAME_OVER
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_GAME_OVER, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_GAME_OVER to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_GAME_OVER
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_RECONNECT. */
+    interface IS_RECONNECT {
+
+        /** S_RECONNECT cmd */
+        cmd?: (number|null);
+
+        /** S_RECONNECT scmd */
+        scmd?: (number|null);
+
+        /** S_RECONNECT mapData */
+        mapData?: (GamePto.IMapData|null);
+    }
+
+    /** Represents a S_RECONNECT. */
+    class S_RECONNECT implements IS_RECONNECT {
+
+        /**
+         * Constructs a new S_RECONNECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_RECONNECT);
+
+        /** S_RECONNECT cmd. */
+        public cmd: number;
+
+        /** S_RECONNECT scmd. */
+        public scmd: number;
+
+        /** S_RECONNECT mapData. */
+        public mapData?: (GamePto.IMapData|null);
+
+        /**
+         * Encodes the specified S_RECONNECT message. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
+         * @param message S_RECONNECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_RECONNECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_RECONNECT message, length delimited. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
+         * @param message S_RECONNECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_RECONNECT, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_RECONNECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_RECONNECT;
+
+        /**
+         * Decodes a S_RECONNECT message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_RECONNECT;
+
+        /**
+         * Verifies a S_RECONNECT message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_RECONNECT message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_RECONNECT
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_RECONNECT;
+
+        /**
+         * Creates a plain object from a S_RECONNECT message. Also converts values to other types if specified.
+         * @param message S_RECONNECT
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_RECONNECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_RECONNECT to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_RECONNECT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

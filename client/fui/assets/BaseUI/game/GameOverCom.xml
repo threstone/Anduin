@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n0_h89h" name="bg" xy="0,0" size="1600,1200" alpha="0.5" type="rect" fillColor="#ff000000"/>
+    <text id="n2_h89h" name="res" xy="721,498" size="157,100" group="n4_h89h" font="STCaiyun" fontSize="77" text="胜利"/>
+    <component id="n3_h89h" name="click" src="fjkiy" fileName="common/btn/Button3.xml" xy="735,633" group="n4_h89h"/>
+    <group id="n4_h89h" name="n4" xy="721,498" size="157,202"/>
+  </displayList>
+</component>

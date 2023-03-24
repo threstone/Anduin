@@ -14,8 +14,7 @@ export class SocketServer extends RpcCommon.GameRPCServer {
             user.table.onUserOffline(user);
             //TODO 双方都离线了销毁桌子，为了方便测试
             if (user.table.getOtherUser(user.uid).isOnline === false) {
-                user.table.destroy();
-                console.log('清理table');
+                user.table.destroy(false);
             }
         }
     }

@@ -55,12 +55,10 @@ export class NodeRound extends BaseNode {
             case GamePto.C_END_ROUND.prototype.scmd:
                 return NodeDriverResult.GoOn;
         }
-
-
         //TODO Logic
 
         //玩家有可能在这个阶段死亡
-        if (table.checkGameOver()) {
+        if (table.isGameOver) {
             return NodeDriverResult.GoOn;
         }
         return NodeDriverResult.Continue;

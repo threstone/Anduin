@@ -48,19 +48,6 @@ export class GameTable extends BaseTable {
         ]);
     }
 
-    /**检查是否结束 */
-    public checkGameOver() {
-        for (let index = 0; index < this._users.length; index++) {
-            const user = this._users[index];
-            //英雄死亡
-            if (user.hero.health <= 0) {
-                this.isGameOver = true;
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**检查用户是否有回合操作权限 */
     public allowRoundOprate(user: GameUser) {
         //此时非此用户的回合
@@ -169,5 +156,19 @@ export class GameTable extends BaseTable {
             }
         }
         return num;
+    }
+
+    /**游戏结束 */
+    public doGameOver() {
+        const msg = new GamePto.S_GAME_OVER();
+        //平局判断
+        if (this.users[0].hero.health <= 0 && this.users[1].hero.health <= 0) {
+            msg.winnerUid = -1;
+        } else {
+            const winner = this.users[0].hero.health > 0 ? this.users[0] : this.users[1];
+            msg.winnerUid = winner.uid;
+        }
+        this.broadcast(msg);
+        this.destroy(false)
     }
 }

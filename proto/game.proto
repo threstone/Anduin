@@ -263,6 +263,7 @@ message S_ATTACK{
 	bool allowAtk = 11;
 	int32 uid = 12;
 	repeated int32 dices = 13;
+	int32 leastAtkTimes = 14;
 }
 
 //单位死亡
@@ -325,4 +326,18 @@ message S_CARD_DENY{
 	int32 targetCardIndex = 5;
 	int32 fee = 6;
 	int32 feeMax = 7;
+}
+
+//游戏结束
+message S_GAME_OVER{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10021];
+	int32 winnerUid = 3;
+}
+
+//重连信息 要根据不同阶段组织重连数据
+message S_RECONNECT{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10022];
+	MapData mapData = 3; 
 }

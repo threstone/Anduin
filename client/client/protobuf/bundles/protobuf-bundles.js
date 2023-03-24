@@ -8175,6 +8175,7 @@ $root.GamePto = (function() {
          * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
          * @property {number|null} [uid] S_ATTACK uid
          * @property {Array.<number>|null} [dices] S_ATTACK dices
+         * @property {number|null} [leastAtkTimes] S_ATTACK leastAtkTimes
          */
 
         /**
@@ -8298,6 +8299,14 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.dices = $util.emptyArray;
 
         /**
+         * S_ATTACK leastAtkTimes.
+         * @member {number} leastAtkTimes
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.leastAtkTimes = 0;
+
+        /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_ATTACK
@@ -8339,6 +8348,8 @@ $root.GamePto = (function() {
                     writer.int32(message.dices[i]);
                 writer.ldelim();
             }
+            if (message.leastAtkTimes != null && Object.hasOwnProperty.call(message, "leastAtkTimes"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.leastAtkTimes);
             return writer;
         };
 
@@ -8417,6 +8428,10 @@ $root.GamePto = (function() {
                                 message.dices.push(reader.int32());
                         } else
                             message.dices.push(reader.int32());
+                        break;
+                    }
+                case 14: {
+                        message.leastAtkTimes = reader.int32();
                         break;
                     }
                 default:
@@ -9468,6 +9483,260 @@ $root.GamePto = (function() {
         };
 
         return S_CARD_DENY;
+    })();
+
+    GamePto.S_GAME_OVER = (function() {
+
+        /**
+         * Properties of a S_GAME_OVER.
+         * @memberof GamePto
+         * @interface IS_GAME_OVER
+         * @property {number|null} [cmd] S_GAME_OVER cmd
+         * @property {number|null} [scmd] S_GAME_OVER scmd
+         * @property {number|null} [winnerUid] S_GAME_OVER winnerUid
+         */
+
+        /**
+         * Constructs a new S_GAME_OVER.
+         * @memberof GamePto
+         * @classdesc Represents a S_GAME_OVER.
+         * @implements IS_GAME_OVER
+         * @constructor
+         * @param {GamePto.IS_GAME_OVER=} [properties] Properties to set
+         */
+        function S_GAME_OVER(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_GAME_OVER cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_GAME_OVER
+         * @instance
+         */
+        S_GAME_OVER.prototype.cmd = 200;
+
+        /**
+         * S_GAME_OVER scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_GAME_OVER
+         * @instance
+         */
+        S_GAME_OVER.prototype.scmd = 10021;
+
+        /**
+         * S_GAME_OVER winnerUid.
+         * @member {number} winnerUid
+         * @memberof GamePto.S_GAME_OVER
+         * @instance
+         */
+        S_GAME_OVER.prototype.winnerUid = 0;
+
+        /**
+         * Encodes the specified S_GAME_OVER message. Does not implicitly {@link GamePto.S_GAME_OVER.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_GAME_OVER
+         * @static
+         * @param {GamePto.IS_GAME_OVER} message S_GAME_OVER message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_GAME_OVER.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.winnerUid != null && Object.hasOwnProperty.call(message, "winnerUid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.winnerUid);
+            return writer;
+        };
+
+        /**
+         * Decodes a S_GAME_OVER message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_GAME_OVER
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_GAME_OVER} S_GAME_OVER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_GAME_OVER.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_GAME_OVER();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.winnerUid = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_GAME_OVER
+         * @function getTypeUrl
+         * @memberof GamePto.S_GAME_OVER
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_GAME_OVER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_GAME_OVER";
+        };
+
+        return S_GAME_OVER;
+    })();
+
+    GamePto.S_RECONNECT = (function() {
+
+        /**
+         * Properties of a S_RECONNECT.
+         * @memberof GamePto
+         * @interface IS_RECONNECT
+         * @property {number|null} [cmd] S_RECONNECT cmd
+         * @property {number|null} [scmd] S_RECONNECT scmd
+         * @property {GamePto.IMapData|null} [mapData] S_RECONNECT mapData
+         */
+
+        /**
+         * Constructs a new S_RECONNECT.
+         * @memberof GamePto
+         * @classdesc Represents a S_RECONNECT.
+         * @implements IS_RECONNECT
+         * @constructor
+         * @param {GamePto.IS_RECONNECT=} [properties] Properties to set
+         */
+        function S_RECONNECT(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_RECONNECT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.cmd = 200;
+
+        /**
+         * S_RECONNECT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.scmd = 10022;
+
+        /**
+         * S_RECONNECT mapData.
+         * @member {GamePto.IMapData|null|undefined} mapData
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.mapData = null;
+
+        /**
+         * Encodes the specified S_RECONNECT message. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_RECONNECT
+         * @static
+         * @param {GamePto.IS_RECONNECT} message S_RECONNECT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_RECONNECT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.mapData != null && Object.hasOwnProperty.call(message, "mapData"))
+                $root.GamePto.MapData.encode(message.mapData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_RECONNECT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_RECONNECT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_RECONNECT} S_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_RECONNECT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_RECONNECT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_RECONNECT
+         * @function getTypeUrl
+         * @memberof GamePto.S_RECONNECT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_RECONNECT";
+        };
+
+        return S_RECONNECT;
     })();
 
     return GamePto;

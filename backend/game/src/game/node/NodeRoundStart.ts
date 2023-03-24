@@ -52,16 +52,6 @@ export class NodeRoundStart extends BaseNode {
             card.onRoundStart();
         }
 
-        //玩家有可能在这个阶段死亡
-        table.checkGameOver();
         return NodeDriverResult.GoOn;
-
-        
-        if (table.checkGameOver()) {
-            return NodeDriverResult.GoOn;
-        }
-
-        this.nodeDriver.waitTime(1000);
-        return NodeDriverResult.Wait;
     }
 }

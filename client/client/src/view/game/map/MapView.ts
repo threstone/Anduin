@@ -39,6 +39,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public close(): void {
         super.close();
+        this.entityMap.clear();
         this.view.removeChildren();
         this.view.addChild(this.view.bg);
     }
@@ -188,7 +189,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.entityShowTips(targetEntity, `-${msg.damage}`);
 
         this.updateMapItem(sourceCardInfo);
-        this.updateMapItem(targetCardInfo);
+        //如果单位死亡了可能就没有了，就不需要更新了
+        if(targetCardInfo){
+            this.updateMapItem(targetCardInfo);
+        }
     }
 
     /**攻击效果 根据近战远程区分效果 */
@@ -247,12 +251,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**更新地图信息 */
     public updateMap() {
-        let entityCards: GamePto.ICard[];
-        if (TEST_GAME) {
-            entityCards = [{ "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 2, "blockX": 3, "blockY": 0 }, { "cardId": 1, "attack": 4, "health": 10, "fee": 0, "uid": 1, "blockX": 3, "blockY": 7 }];
-        } else {
-            entityCards = MapModel.ins().entityCards;
-        }
+        const entityCards= MapModel.ins().entityCards;
         for (let index = 0; index < entityCards.length; index++) {
             const cardInfo = entityCards[index];
             const entity = this.entityMap.get(cardInfo.id);

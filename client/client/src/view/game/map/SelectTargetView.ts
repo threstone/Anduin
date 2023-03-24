@@ -46,10 +46,12 @@ class SelectTargetView extends BaseView<BaseUI.UISelectTargetCom>{
             this._allowReapet = targetNum < 0;
 
             this.AddClick(this.view.click, this.onClick);
-            this.AddClick(this.view.bg0, this.close);
-            this.AddClick(this.view.bg1, this.close);
-            this.AddClick(this.view.bg2, this.close);
-            this.AddClick(this.view.bg3, this.close);
+            this.AddClick(this.view.bg0, this.close.bind(this, false));
+            this.AddClick(this.view.bg1, this.close.bind(this, false));
+            this.AddClick(this.view.bg2, this.close.bind(this, false));
+            this.AddClick(this.view.bg3, this.close.bind(this, false));
+
+            this.observe('S_ROUND_END_EVENT', this.close.bind(this, false))
 
             //把卡片缓动到右侧展示出来
             cardItem.scaleX = 1;

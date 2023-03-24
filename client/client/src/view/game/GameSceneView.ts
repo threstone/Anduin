@@ -49,6 +49,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.observe('S_GAME_START', this.onGameStart);
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
+        this.addEffectListener('S_GAME_OVER', this.onGameOver);
 
         this.AddClick(this.view.close, this.close);
     }
@@ -85,6 +86,9 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         }
     }
 
+    private onGameOver(msg: GamePto.S_GAME_OVER) {
+        GameOverView.ins().open(msg.winnerUid);
+    }
 
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
@@ -125,7 +129,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     public useCardShow(card: GameCard) {
         const cardItem = card.cardItem
         this.view.addChild(cardItem);
-        
+
         // 如果是事件卡和法术卡移动至左侧显示，然后播放对应特效 
         if (card.cardInfo.cardType === CardsPto.CardType.Event || card.cardInfo.cardType === CardsPto.CardType.Magic) {
             return this.showCardToLeft(cardItem);

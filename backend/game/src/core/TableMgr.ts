@@ -56,14 +56,14 @@ export class TableMgr {
                 try {
                     table.onRun(now);
                 } catch (err) {
-                    table.destroy();
+                    table.destroy(true);
                     let message = err.message;
                     let stack = err.stack;
                     logger.error(`桌局执行发生错误:\nmessage:${message}\nstack:${stack}`);
-                    table.destroy();
                 }
             } else {
                 this.destroyTable(table);
+                console.log('清理table');
             }
             count++;
             if (count >= 30) {

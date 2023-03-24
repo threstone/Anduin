@@ -3,12 +3,12 @@ import { CommonUtils } from "../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
 import { getLogger } from "log4js";
 import { GlobalVar } from '../GlobalVar';
-import { BaseClass } from '../../../common/base/BaseClass';
 import { CardsPto } from '../../../common/CommonProto';
 import { BuildingCard } from '../card/BuildingCard';
 import { UnitCard } from '../card/UnitCard';
 import { EventCard } from '../card/EventCard';
 import { MagicCard } from '../card/MagicCard';
+import { HeroCard } from '../card/HeroCard';
 
 const logger = getLogger();
 export class CardMgr {
@@ -57,7 +57,7 @@ export class CardMgr {
                         this._cardClassMap.set(cardConfig.cardId, class tempMagicClass extends MagicCard { })
                         break;
                     case CardsPto.CardType.Hero:
-                        this._cardClassMap.set(cardConfig.cardId, class tempHeroClass extends UnitCard { })
+                        this._cardClassMap.set(cardConfig.cardId, class tempHeroClass extends HeroCard { })
                         break;
                 }
             }

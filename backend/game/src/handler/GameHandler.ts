@@ -80,8 +80,6 @@ export class GameHandler extends BaseHandler {
         //执行战场使用卡牌后事件
         table.mapData.onUseCardAfter(card);
 
-        //检查游戏是否结束
-        table.checkGameOver();
     }
 
     //请求移动
@@ -117,9 +115,6 @@ export class GameHandler extends BaseHandler {
             card.onMoveAfter(card);
             //执行战场移动后事件 如移动后受伤陷阱
             table.mapData.onPreMove(card);
-
-            //检查游戏是否结束
-            table.checkGameOver();
         }
     }
 
@@ -174,6 +169,7 @@ export class GameHandler extends BaseHandler {
             replay.allowAtk = sourceCard.allowAtk;
             replay.uid = user.uid;
             replay.dices = dices;
+            replay.leastAtkTimes = user.atkTimes;
             table.broadcast(replay);
 
             //执行卡牌受伤后事件
@@ -184,9 +180,6 @@ export class GameHandler extends BaseHandler {
 
             //执行战场攻击后事件
             table.mapData.onAtkAfter(sourceCard, damageCard, damage, dices);
-
-            //检查游戏是否结束
-            table.checkGameOver();
         }
     }
 }

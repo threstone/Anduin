@@ -55,14 +55,14 @@ export class NodeDriver {
             case NodeDriverResult.Wait:
                 if (this._awakenTime === -1) {
                     logger.error('未设置等待时间!');
-                    this._table.destroy();
+                    this._table.destroy(true);
                 }
                 break;
             case NodeDriverResult.Continue:
                 break;
             default:
                 logger.error(`NodeDriver tableId:${this._table.tableId} 未知的返回值:${result}`);
-                this._table.destroy();
+                this._table.destroy(true);
         }
     }
 

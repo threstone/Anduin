@@ -202,6 +202,10 @@ class MapModel extends BaseModel {
         sourceCard.allowAtk = msg.allowAtk;
         targetCard.health = msg.targetHealth;
         this.emit('S_ATTACK', msg);
+        GameModel.ins().atkTimes--;
+        if (GameModel.ins().atkTimes === 0) {
+            this.emit('S_MAP_DATA', msg);
+        }
     }
 
     //单位死亡

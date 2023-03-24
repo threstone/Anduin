@@ -70,11 +70,13 @@ export class BaseTable {
         }
     }
 
-    public destroy() {
-        //send tips
-        const msg = new GamePto.S_SERVER_ERROR();
-        msg.message = '出现异常,请联系相关人员(QQ:790325011)!';
-        this.broadcast(msg);
+    public destroy(isError: boolean) {
+        if (isError) {
+            //send tips
+            const msg = new GamePto.S_SERVER_ERROR();
+            msg.message = '出现异常,请联系相关人员(QQ:790325011)!';
+            this.broadcast(msg);
+        }
 
         const users = this._users;
         for (let index = 0; index < users.length; index++) {

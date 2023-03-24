@@ -70,7 +70,7 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
                 const dice = dices[index];
                 const diceMC = fairygui.UIPackage.createObject("BaseUI", "DiceMovie").asMovieClip;
                 this.view.diceList.addChild(diceMC);
-                diceMC.setPlaySettings(dices.length - 1 - index, 0, 2, dice, () => {
+                diceMC.setPlaySettings(dices.length - 1 - index, 0, 1, dice, () => {
                     if (index === dices.length - 1) {
                         resolve();
                     }

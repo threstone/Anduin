@@ -50,7 +50,7 @@ export class NodeRoundEnd extends BaseNode {
         user.drawCardsFromPool(2);
 
         //玩家有可能在这个阶段死亡
-        if (table.checkGameOver()) {
+        if (table.isGameOver) {
             return NodeDriverResult.GoOn;
         }
 

@@ -74,6 +74,9 @@ class Utils {
      */
     public static defineTextFieldSet(textField: fairygui.GTextField, baseValue: number, moreColor = 0x00FF00, lessColor = 0xFF0000) {
         Object.defineProperty(textField, 'text', {
+            get: function () {
+                return this._text;
+            },
             set: function (value) {
                 this._text = value;
                 textField.color = 0xFFFFFF;
@@ -93,6 +96,8 @@ class Utils {
                 else
                     this.render();
             },
+            enumerable: true,
+            configurable: true
         });
     }
 
