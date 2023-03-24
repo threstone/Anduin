@@ -324,7 +324,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        let sourceEntity = this.entityMap.get(msg.from.cardId);
+        let sourceEntity = this.entityMap.get(msg.from.id);
         //如果找不到对应的实体，那就由英雄为起点发送
         if (!sourceEntity) {
             const hero = MapModel.ins().getHero(msg.from.uid);

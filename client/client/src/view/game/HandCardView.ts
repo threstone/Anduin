@@ -46,28 +46,33 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     private cardDeny(msg: GamePto.S_CARD_DENY) {
         if (msg.target.uid === UserModel.ins().uid) {
             const gameCard = this._cards[msg.targetCardIndex];
-            const root = gameCard.cardItem.localToRoot();
-            gameCard.cardItem.x = root.x;
-            gameCard.cardItem.y = root.y;
-            gameCard.cardItem.setPivot(0, 0);
+            const cardItem = gameCard.cardItem;
+            const root = cardItem.localToRoot();
+            cardItem.x = root.x;
+            cardItem.y = root.y;
+            cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
-            GameSceneView.ins().getView().addChild(gameCard.cardItem);
-            this.removeCardTween(gameCard.cardItem, deadPoolRoot.x, deadPoolRoot.y).then(() => {
-                GameSceneView.ins().getView().removeChild(gameCard.cardItem);
-            })
+            GameSceneView.ins().getView().addChild(cardItem);
+
+            egret.Tween.get(cardItem).to({ y: this.view.y - cardItem.height * cardItem.scaleY, x: deadPoolRoot.x - cardItem.width, scaleX: 1, scaleY: 1 }, 400)
+                .to({}, 2300)
+                .to({ y: deadPoolRoot.y, skewX: 90, skewY: 90, scaleX: 0.5, scaleY: 0.5, x: deadPoolRoot.x }, 500)
+                .call(() => {
+                    GameSceneView.ins().getView().removeChild(cardItem);
+                });
             this.updateCardsPostion(500);
         }
     }
 
     /**
-   * 将卡牌换到指定位置
-   */
+     * 将卡牌换到指定位置
+     */
     private removeCardTween(cardItem: BaseUI.UICardBackItem | BaseUI.UICardItem, x: number, y: number) {
         return new Promise<void>((resolve) => {
-            egret.Tween.get(cardItem).to({ y: cardItem.y + cardItem.height * cardItem.scaleY, skewX: 90, skewY: 90 }, 400)
-                .to({ x: x }, 400)
-                .to({ y: y }, 500)
+            egret.Tween.get(cardItem).to({ y: this.view.y - cardItem.height * cardItem.scaleY, x: x - cardItem.width, scaleX: 1, scaleY: 1 }, 400)
+                .to({}, 400)
+                .to({ y: y, skewX: 90, skewY: 90, scaleX: 0.5, scaleY: 0.5, x: x }, 700)
                 .call(() => {
                     resolve();
                 });

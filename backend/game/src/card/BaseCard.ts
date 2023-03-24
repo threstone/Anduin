@@ -56,8 +56,18 @@ export class BaseCard implements CardInterface {
 
     /**检查所选单位是否符合条件 */
     private checkUseCondition(params: number[]): boolean {
+        let index = 0;
+        //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中,即前两个参数是卡牌放置的位置
+        if (this.cardType === CardsPto.CardType.Building || this.cardType === CardsPto.CardType.Unit) {
+            const x = params[0];
+            const y = params[1];
+            index = 2;
+            if (this.table.mapData.getCard(x, y)) {
+                return false;
+            }
+        }
         const useType = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        for (let index = 0; index < params.length; index += 2) {
+        for (; index < params.length; index += 2) {
             const entity = this.table.mapData.getCard(params[index], params[index + 1]);
             let isMatch = false;
             switch (useType) {

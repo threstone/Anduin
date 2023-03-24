@@ -108,10 +108,24 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         return this.wait(400);
     }
 
+    /**将卡片放置到中间展示 */
+    public showCardToCenter(card: BaseUI.UICardItem | BaseUI.UICardBackItem) {
+        this.view.addChild(card);
+        egret.Tween.get(card).to({
+            scaleX: 1, scaleY: 1,
+            x: (this.view.width - card.width) / 2,
+            y: (this.view.height - card.height) / 2
+        }, 400).to({}, 2000).call(() => {
+            this.view.removeChild(card);
+        });
+        return this.wait(400);
+    }
+
     /**使用的卡牌展示 */
     public useCardShow(card: GameCard) {
         const cardItem = card.cardItem
-
+        this.view.addChild(cardItem);
+        
         // 如果是事件卡和法术卡移动至左侧显示，然后播放对应特效 
         if (card.cardInfo.cardType === CardsPto.CardType.Event || card.cardInfo.cardType === CardsPto.CardType.Magic) {
             return this.showCardToLeft(cardItem);

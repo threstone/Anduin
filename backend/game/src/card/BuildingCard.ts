@@ -90,8 +90,8 @@ export class BuildingCard extends EventCard {
         }
     }
 
-    public useCardCheck(blockX: number, blockY: number) {
-        if (super.useCardCheck()) {
+    public useCardCheck(blockX: number, blockY: number, ...params: number[]) {
+        if (super.useCardCheck(blockX, blockY, ...params)) {
             //建筑卡
             if (blockX != undefined && blockY != undefined && this.table.mapData.getCard(blockX, blockY) == null) {
                 return true;

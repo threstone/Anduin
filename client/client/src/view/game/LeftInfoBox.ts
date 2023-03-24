@@ -31,13 +31,34 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
     /**反制卡牌 */
     private cardDeny(msg: GamePto.S_CARD_DENY) {
         if (this.isHandler(msg.from.uid)) {
-            const eventItem = this._eventMap.get(msg.from.id);
-            this.removeEventItem(msg.from.id, eventItem);
-            const cardDetail = CardItem.getCardDetail(msg.from);
-            const rootPoint = eventItem.localToRoot();
-            cardDetail.x = rootPoint.x;
-            cardDetail.y = rootPoint.y;
-            return GameSceneView.ins().showCardToLeft(cardDetail);
+            return new Promise<void>((resolve) => {
+                const eventItem = this._eventMap.get(msg.from.id);
+                const rootPoint = eventItem.localToRoot()
+                this.removeEventItem(msg.from.id, eventItem);
+
+                const gameSceneView = GameSceneView.ins().getView();
+                eventItem.x = rootPoint.x;
+                eventItem.y = rootPoint.y;
+                gameSceneView.addChild(eventItem);
+
+                egret.Tween.get(eventItem).to({
+                    x: (gameSceneView.width - eventItem.width) / 2,
+                    y: (gameSceneView.height - eventItem.height) / 2
+                }, 400).call(async () => {
+                    gameSceneView.removeChild(eventItem);
+                    const cardDetail = CardItem.getCardDetail(msg.from);
+                    cardDetail.setPivot(0.5, 0.5, true);
+                    cardDetail.x = gameSceneView.width / 2;
+                    cardDetail.y = gameSceneView.height / 2;
+                    gameSceneView.addChild(cardDetail);
+                    cardDetail.scaleX = 0.1;
+                    cardDetail.scaleY = 0.1;
+                    egret.Tween.get(cardDetail).to({ scaleX: 1, scaleY: 1 }, 300).to({}, 2000).call(() => {
+                        gameSceneView.removeChild(cardDetail);
+                        resolve();
+                    })
+                });
+            });
         }
     }
 
@@ -98,7 +119,7 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
         if (this.isHandler(card.uid) === false) {
             return;
         }
-        
+
         const eventItem = EventItem.getItem(card);
         this._eventMap.set(card.id, eventItem);
         this.view.eventList.addChild(eventItem);

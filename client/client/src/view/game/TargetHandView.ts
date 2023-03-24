@@ -41,20 +41,26 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         if (msg.target.uid !== UserModel.ins().uid) {
             //将手牌位置的卡换成对应的卡牌
             const cardItem = CardItem.getCardByServerCard(msg.target);
+
             const cardBg = this._cards[msg.targetCardIndex];
             const root = cardBg.localToRoot();
-            cardItem.x = root.x;
-            cardItem.y = root.y;
+            cardItem.x = cardItem.x;
+            cardItem.y = cardItem.y;
             cardItem.scaleX = 0.5;
             cardItem.scaleY = 0.5;
-            GameSceneView.ins().getView().addChild(cardItem);
+
+            this.view.addChild(cardItem);
             //删卡数据
             this.view.removeChild(cardBg);
             this._cards.splice(msg.targetCardIndex, 1);
             this.updateCardsPostion(400);
-            this.removeCardTween(cardItem, this._deadPoolPosition.x, this._deadPoolPosition.y).then(() => {
-                GameSceneView.ins().getView().removeChild(cardItem)
-            });
+
+            egret.Tween.get(cardItem).to({ y: cardItem.y + cardItem.height * cardItem.scaleY, x: this._deadPoolPosition.x - cardItem.width, scaleX: 1, scaleY: 1 }, 400)
+                .to({}, 2300)
+                .to({ y: this._deadPoolPosition.y, skewX: 90, skewY: 90, scaleX: 0.5, scaleY: 0.5, x: this._deadPoolPosition.x }, 500)
+                .call(() => {
+                    this.view.removeChild(cardItem);
+                });
         }
     }
 
@@ -84,7 +90,10 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
     public replace(replaceIndexs: number[]) {
         for (let index = 0; index < replaceIndexs.length; index++) {
             const replaceIndex = replaceIndexs[index];
-            this.removeCardTween(this._cards[replaceIndex], this._cardPoolPosition.x, this._cardPoolPosition.y);
+            const deleteCard = this._cards[replaceIndex];
+            this.removeCardTween(deleteCard, this._cardPoolPosition.x, this._cardPoolPosition.y).then(() => {
+                this.view.removeChild(deleteCard);
+            });
             const card = this.getCardByPool();
             this.view.addChild(card)
             this._cards[replaceIndex] = card;
