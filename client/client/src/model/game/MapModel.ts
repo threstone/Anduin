@@ -276,7 +276,6 @@ class MapModel extends BaseModel {
         if (msg.target.uid === UserModel.ins().uid) {
             gameModel.deadPool.push(gameModel.handCards[msg.targetCardIndex]);
             gameModel.handCards.splice(msg.targetCardIndex, 1);
-            gameModel.fee = msg.fee;
         } else {
             gameModel.targetDeadPoolNum++;
         }

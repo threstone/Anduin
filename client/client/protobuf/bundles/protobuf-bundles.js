@@ -7321,8 +7321,6 @@ $root.GamePto = (function() {
          * @property {number|null} [scmd] S_DISCARD scmd
          * @property {boolean|null} [isSuccess] S_DISCARD isSuccess
          * @property {number|null} [cardIndex] S_DISCARD cardIndex
-         * @property {number|null} [fee] S_DISCARD fee
-         * @property {number|null} [feeMax] S_DISCARD feeMax
          * @property {number|null} [uid] S_DISCARD uid
          */
 
@@ -7374,22 +7372,6 @@ $root.GamePto = (function() {
         S_DISCARD.prototype.cardIndex = 0;
 
         /**
-         * S_DISCARD fee.
-         * @member {number} fee
-         * @memberof GamePto.S_DISCARD
-         * @instance
-         */
-        S_DISCARD.prototype.fee = 0;
-
-        /**
-         * S_DISCARD feeMax.
-         * @member {number} feeMax
-         * @memberof GamePto.S_DISCARD
-         * @instance
-         */
-        S_DISCARD.prototype.feeMax = 0;
-
-        /**
          * S_DISCARD uid.
          * @member {number} uid
          * @memberof GamePto.S_DISCARD
@@ -7417,12 +7399,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSuccess);
             if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cardIndex);
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
-            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.feeMax);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
             return writer;
         };
 
@@ -7461,14 +7439,6 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        message.fee = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.feeMax = reader.int32();
-                        break;
-                    }
-                case 7: {
                         message.uid = reader.int32();
                         break;
                     }
@@ -7507,8 +7477,6 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] S_USE_CARD cmd
          * @property {number|null} [scmd] S_USE_CARD scmd
          * @property {boolean|null} [isSuccess] S_USE_CARD isSuccess
-         * @property {number|null} [fee] S_USE_CARD fee
-         * @property {number|null} [feeMax] S_USE_CARD feeMax
          * @property {number|null} [uid] S_USE_CARD uid
          * @property {number|null} [cardIndex] S_USE_CARD cardIndex
          * @property {GamePto.ICard|null} [card] S_USE_CARD card
@@ -7554,22 +7522,6 @@ $root.GamePto = (function() {
         S_USE_CARD.prototype.isSuccess = false;
 
         /**
-         * S_USE_CARD fee.
-         * @member {number} fee
-         * @memberof GamePto.S_USE_CARD
-         * @instance
-         */
-        S_USE_CARD.prototype.fee = 0;
-
-        /**
-         * S_USE_CARD feeMax.
-         * @member {number} feeMax
-         * @memberof GamePto.S_USE_CARD
-         * @instance
-         */
-        S_USE_CARD.prototype.feeMax = 0;
-
-        /**
          * S_USE_CARD uid.
          * @member {number} uid
          * @memberof GamePto.S_USE_CARD
@@ -7611,16 +7563,12 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.isSuccess != null && Object.hasOwnProperty.call(message, "isSuccess"))
                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.isSuccess);
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
-            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.feeMax);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
             if (message.cardIndex != null && Object.hasOwnProperty.call(message, "cardIndex"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.cardIndex);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.cardIndex);
             if (message.card != null && Object.hasOwnProperty.call(message, "card"))
-                $root.GamePto.Card.encode(message.card, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                $root.GamePto.Card.encode(message.card, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
 
@@ -7654,23 +7602,15 @@ $root.GamePto = (function() {
                         message.isSuccess = reader.bool();
                         break;
                     }
-                case 5: {
-                        message.fee = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.feeMax = reader.int32();
-                        break;
-                    }
-                case 7: {
+                case 4: {
                         message.uid = reader.int32();
                         break;
                     }
-                case 8: {
+                case 5: {
                         message.cardIndex = reader.int32();
                         break;
                     }
-                case 9: {
+                case 6: {
                         message.card = $root.GamePto.Card.decode(reader, reader.uint32());
                         break;
                     }
@@ -9309,8 +9249,6 @@ $root.GamePto = (function() {
          * @property {GamePto.ICard|null} [from] S_CARD_DENY from
          * @property {GamePto.ICard|null} [target] S_CARD_DENY target
          * @property {number|null} [targetCardIndex] S_CARD_DENY targetCardIndex
-         * @property {number|null} [fee] S_CARD_DENY fee
-         * @property {number|null} [feeMax] S_CARD_DENY feeMax
          */
 
         /**
@@ -9369,22 +9307,6 @@ $root.GamePto = (function() {
         S_CARD_DENY.prototype.targetCardIndex = 0;
 
         /**
-         * S_CARD_DENY fee.
-         * @member {number} fee
-         * @memberof GamePto.S_CARD_DENY
-         * @instance
-         */
-        S_CARD_DENY.prototype.fee = 0;
-
-        /**
-         * S_CARD_DENY feeMax.
-         * @member {number} feeMax
-         * @memberof GamePto.S_CARD_DENY
-         * @instance
-         */
-        S_CARD_DENY.prototype.feeMax = 0;
-
-        /**
          * Encodes the specified S_CARD_DENY message. Does not implicitly {@link GamePto.S_CARD_DENY.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_CARD_DENY
@@ -9406,10 +9328,6 @@ $root.GamePto = (function() {
                 $root.GamePto.Card.encode(message.target, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.targetCardIndex != null && Object.hasOwnProperty.call(message, "targetCardIndex"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetCardIndex);
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.fee);
-            if (message.feeMax != null && Object.hasOwnProperty.call(message, "feeMax"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.feeMax);
             return writer;
         };
 
@@ -9449,14 +9367,6 @@ $root.GamePto = (function() {
                     }
                 case 5: {
                         message.targetCardIndex = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.fee = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.feeMax = reader.int32();
                         break;
                     }
                 default:

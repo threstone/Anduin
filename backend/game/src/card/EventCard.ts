@@ -130,8 +130,6 @@ export class EventCard extends BaseCard implements BaseEvent {
             const notice = new GamePto.S_USE_CARD();
             notice.isSuccess = true;
             notice.uid = this.uid;
-            notice.fee = user.fee;
-            notice.feeMax = user.feeMax;
             notice.cardIndex = cardIndex;
             notice.card = this;
             //事件卡的攻击类型标识事件类型是否可被对方知晓
@@ -142,6 +140,9 @@ export class EventCard extends BaseCard implements BaseEvent {
                 notice.card = this.getCardData();
                 this.table.getOtherUser(user.uid).sendMsg(notice);
             }
+
+            //通知用户费用信息
+            this.table.noticeUserFeeInfo(user);
         }
     }
 

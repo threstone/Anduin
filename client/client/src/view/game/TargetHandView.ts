@@ -218,7 +218,6 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         const msg: GamePto.S_DISCARD = evt.data;
         if (msg.isSuccess && msg.uid !== UserModel.ins().uid) {
             this.removeCardToDeadPool(msg.cardIndex);
-            TargetInfoBox.ins().feeSet(msg.fee, msg.feeMax);
         }
     }
 
@@ -227,8 +226,6 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         if (!msg.isSuccess || msg.uid === UserModel.ins().uid) {
             return;
         }
-
-        TargetInfoBox.ins().feeSet(msg.fee, msg.feeMax);
 
         //如果是秘密事件卡则不允许被看到
         if (msg.card.cardType === CardsPto.CardType.Event && msg.card.cardId === -1) {

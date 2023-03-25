@@ -72,4 +72,8 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         });
     }
 
+    /**展示可以放置的位置 */
+    public showUsePosition(){
+        
+    }
 }

@@ -14,9 +14,10 @@ export class MagicCard extends BaseCard {
         notice.isSuccess = true;
         notice.uid = this.uid;
         notice.card = this;
-        notice.fee = user.fee;
-        notice.feeMax = user.feeMax;
         notice.cardIndex = cardIndex;
         this.table.broadcast(notice);
+
+        //通知用户费用信息
+        this.table.noticeUserFeeInfo(user);
     }
 }

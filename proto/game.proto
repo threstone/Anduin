@@ -205,9 +205,7 @@ message S_DISCARD{
 	int32 scmd = 2[default = 10008];
 	bool isSuccess = 3;
 	int32 cardIndex = 4;
-	int32 fee = 5;
-	int32 feeMax = 6;
-	int32 uid = 7;
+	int32 uid = 5;
 }
 
 //使用卡牌
@@ -215,11 +213,9 @@ message S_USE_CARD{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10009];
 	bool isSuccess = 3;
-	int32 fee = 5;
-	int32 feeMax = 6;	
-	int32 uid = 7;
-	int32 cardIndex = 8;
-	Card card = 9;
+	int32 uid = 4;
+	int32 cardIndex = 5;
+	Card card = 6;
 }
 
 //下发回合结束时间
@@ -324,8 +320,6 @@ message S_CARD_DENY{
 	Card from = 3;
 	Card target = 4;
 	int32 targetCardIndex = 5;
-	int32 fee = 6;
-	int32 feeMax = 7;
 }
 
 //游戏结束

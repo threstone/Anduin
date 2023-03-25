@@ -28,7 +28,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards);
         this.addEffectListener('S_USE_CARD', this.onUseCard);
         this.addEffectListener('S_CARD_DENY', this.cardDeny);
-
+        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
+        this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
+        this.addEffectListener('S_FEE_INFO', this.updateCardUseTips);
         this.observe('S_DISCARD', this.onDeleteCard);
     }
 
@@ -40,6 +42,36 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             this.view.removeChild(card.cardItem);
         }
         this._cards = [];
+    }
+
+    private onRoundStart(msg: GamePto.S_ROUND_START_EVENT) {
+        //自己的回合开始了
+        if (msg.uid === UserModel.ins().uid) {
+            //根据卡牌的使用条件来展示出使用提示
+            this.updateCardUseTips();
+        }
+    }
+
+    /**根据卡牌的使用条件来展示出使用提示 */
+    private updateCardUseTips() {
+        if (GameSceneView.ins().allowToOprate) {
+            for (let index = 0; index < this._cards.length; index++) {
+                const gameCard = this._cards[index];
+                const cardItem = gameCard.cardItem;
+                cardItem.canUse.visible = GameModel.ins().fee >= gameCard.cardInfo.fee;
+            }
+        }
+    }
+
+    private onRoundEnd(msg: GamePto.S_ROUND_START_EVENT) {
+        //自己的回合结束了
+        if (msg.uid === UserModel.ins().uid) {
+            //去掉使用提示
+            for (let index = 0; index < this._cards.length; index++) {
+                const cardItem = this._cards[index].cardItem;
+                cardItem.canUse.visible = false;
+            }
+        }
     }
 
     /**反制卡牌 */
@@ -63,20 +95,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 });
             this.updateCardsPostion(500);
         }
-    }
-
-    /**
-     * 将卡牌换到指定位置
-     */
-    private removeCardTween(cardItem: BaseUI.UICardBackItem | BaseUI.UICardItem, x: number, y: number) {
-        return new Promise<void>((resolve) => {
-            egret.Tween.get(cardItem).to({ y: this.view.y - cardItem.height * cardItem.scaleY, x: x - cardItem.width, scaleX: 1, scaleY: 1 }, 400)
-                .to({}, 400)
-                .to({ y: y, skewX: 90, skewY: 90, scaleX: 0.5, scaleY: 0.5, x: x }, 700)
-                .call(() => {
-                    resolve();
-                });
-        })
     }
 
     /**抽卡疲劳 */
@@ -143,8 +161,11 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
         }
 
-        //悬浮变大、拖动使用
-        return this.updateCardsPostion(opTime);
+        if (cards.length > 0) {
+            this.updateCardUseTips();
+            //悬浮变大、拖动使用
+            return this.updateCardsPostion(opTime);
+        }
     }
 
     /**还原卡牌位置和大小 */
@@ -319,7 +340,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         const gameCard = this._cards[msg.cardIndex];
         if (msg.isSuccess) {
             this.removeCard(gameCard);
-            SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
             this.updateCardsPostion(500);
         } else {
             this.restoreCard(gameCard);
@@ -338,9 +358,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const root = gameCard.cardItem.localToRoot();
             gameCard.cardItem.x = root.x;
             gameCard.cardItem.y = root.y;
+            gameCard.cardItem.canUse.visible = false;
             gameCard.cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
-            SelfInfoBox.ins().feeSet(msg.fee, msg.feeMax);
             this.updateCardsPostion(500);
             return GameSceneView.ins().useCardShow(gameCard);
         } else {

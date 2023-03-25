@@ -20,9 +20,10 @@ export class Card7 extends EventCard {
             notice.from = this;
             notice.target = useCard;
             notice.targetCardIndex = targetCardIndex;
-            notice.fee = targetUser.fee;
-            notice.feeMax = targetUser.feeMax;
             this.table.broadcast(notice);
+
+            //通知用户费用信息
+            this.table.noticeUserFeeInfo(targetUser);
 
             // 事件生效时必须调用此方法
             this.forceEvent();

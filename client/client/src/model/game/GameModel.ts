@@ -126,7 +126,6 @@ class GameModel extends BaseModel {
         if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
             this.deadPool.push(this.handCards[msg.cardIndex]);
             this.handCards.splice(msg.cardIndex, 1);
-            this.fee = msg.fee;
         } else if (msg.uid !== UserModel.ins().uid) {
             this.targetDeadPoolNum++;
         }
@@ -139,7 +138,6 @@ class GameModel extends BaseModel {
         if (msg.isSuccess) {
             if (msg.uid === UserModel.ins().uid) {
                 this.handCards.splice(msg.cardIndex, 1);
-                this.fee = msg.fee;
             }
             this.onUseCard(msg);
         }

@@ -4703,12 +4703,6 @@ export namespace GamePto {
         /** S_DISCARD cardIndex */
         cardIndex?: (number|null);
 
-        /** S_DISCARD fee */
-        fee?: (number|null);
-
-        /** S_DISCARD feeMax */
-        feeMax?: (number|null);
-
         /** S_DISCARD uid */
         uid?: (number|null);
     }
@@ -4733,12 +4727,6 @@ export namespace GamePto {
 
         /** S_DISCARD cardIndex. */
         public cardIndex: number;
-
-        /** S_DISCARD fee. */
-        public fee: number;
-
-        /** S_DISCARD feeMax. */
-        public feeMax: number;
 
         /** S_DISCARD uid. */
         public uid: number;
@@ -4826,12 +4814,6 @@ export namespace GamePto {
         /** S_USE_CARD isSuccess */
         isSuccess?: (boolean|null);
 
-        /** S_USE_CARD fee */
-        fee?: (number|null);
-
-        /** S_USE_CARD feeMax */
-        feeMax?: (number|null);
-
         /** S_USE_CARD uid */
         uid?: (number|null);
 
@@ -4859,12 +4841,6 @@ export namespace GamePto {
 
         /** S_USE_CARD isSuccess. */
         public isSuccess: boolean;
-
-        /** S_USE_CARD fee. */
-        public fee: number;
-
-        /** S_USE_CARD feeMax. */
-        public feeMax: number;
 
         /** S_USE_CARD uid. */
         public uid: number;
@@ -6103,12 +6079,6 @@ export namespace GamePto {
 
         /** S_CARD_DENY targetCardIndex */
         targetCardIndex?: (number|null);
-
-        /** S_CARD_DENY fee */
-        fee?: (number|null);
-
-        /** S_CARD_DENY feeMax */
-        feeMax?: (number|null);
     }
 
     /** Represents a S_CARD_DENY. */
@@ -6134,12 +6104,6 @@ export namespace GamePto {
 
         /** S_CARD_DENY targetCardIndex. */
         public targetCardIndex: number;
-
-        /** S_CARD_DENY fee. */
-        public fee: number;
-
-        /** S_CARD_DENY feeMax. */
-        public feeMax: number;
 
         /**
          * Encodes the specified S_CARD_DENY message. Does not implicitly {@link GamePto.S_CARD_DENY.verify|verify} messages.

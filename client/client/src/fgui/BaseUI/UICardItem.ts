@@ -3,6 +3,7 @@
 module BaseUI {
 
 	export class UICardItem extends fairygui.GComponent {
+		public canUse:fairygui.GGraph;
 		public tempBg:fairygui.GGraph;
 		public tempCardName:fairygui.GTextField;
 		public cardImg:fairygui.GLoader;
@@ -37,31 +38,32 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.tempBg = <fairygui.GGraph>(this.getChildAt(0));
-			this.tempCardName = <fairygui.GTextField>(this.getChildAt(1));
-			this.cardImg = <fairygui.GLoader>(this.getChildAt(2));
-			this.feeBg = <fairygui.GImage>(this.getChildAt(3));
-			this.feeText = <fairygui.GTextField>(this.getChildAt(4));
-			this.feeGroup = <fairygui.GGroup>(this.getChildAt(5));
-			this.buttonBg = <fairygui.GImage>(this.getChildAt(6));
-			this.powerText = <fairygui.GTextField>(this.getChildAt(7));
-			this.quality = <fairygui.GGraph>(this.getChildAt(8));
-			this.cardName = <fairygui.GTextField>(this.getChildAt(9));
-			this.desc = <fairygui.GTextField>(this.getChildAt(11));
-			this.closeRange = <fairygui.GImage>(this.getChildAt(12));
-			this.longRange1 = <fairygui.GImage>(this.getChildAt(13));
-			this.longRange2 = <fairygui.GImage>(this.getChildAt(14));
-			this.longRange = <fairygui.GGroup>(this.getChildAt(15));
-			this.atkText = <fairygui.GTextField>(this.getChildAt(16));
-			this.atkGroup = <fairygui.GGroup>(this.getChildAt(17));
-			this.times = <fairygui.GImage>(this.getChildAt(18));
-			this.healthBg = <fairygui.GImage>(this.getChildAt(19));
-			this.healthText = <fairygui.GTextField>(this.getChildAt(20));
-			this.healthGroup = <fairygui.GGroup>(this.getChildAt(21));
-			this.heroCardTips = <fairygui.GTextField>(this.getChildAt(22));
-			this.cardNum = <fairygui.GTextField>(this.getChildAt(23));
-			this.dragLoader = <fairygui.GLoader>(this.getChildAt(24));
-			this.buffDesc = <fairygui.GList>(this.getChildAt(25));
+			this.canUse = <fairygui.GGraph>(this.getChildAt(0));
+			this.tempBg = <fairygui.GGraph>(this.getChildAt(1));
+			this.tempCardName = <fairygui.GTextField>(this.getChildAt(2));
+			this.cardImg = <fairygui.GLoader>(this.getChildAt(3));
+			this.feeBg = <fairygui.GImage>(this.getChildAt(4));
+			this.feeText = <fairygui.GTextField>(this.getChildAt(5));
+			this.feeGroup = <fairygui.GGroup>(this.getChildAt(6));
+			this.buttonBg = <fairygui.GImage>(this.getChildAt(7));
+			this.powerText = <fairygui.GTextField>(this.getChildAt(8));
+			this.quality = <fairygui.GGraph>(this.getChildAt(9));
+			this.cardName = <fairygui.GTextField>(this.getChildAt(10));
+			this.desc = <fairygui.GTextField>(this.getChildAt(12));
+			this.closeRange = <fairygui.GImage>(this.getChildAt(13));
+			this.longRange1 = <fairygui.GImage>(this.getChildAt(14));
+			this.longRange2 = <fairygui.GImage>(this.getChildAt(15));
+			this.longRange = <fairygui.GGroup>(this.getChildAt(16));
+			this.atkText = <fairygui.GTextField>(this.getChildAt(17));
+			this.atkGroup = <fairygui.GGroup>(this.getChildAt(18));
+			this.times = <fairygui.GImage>(this.getChildAt(19));
+			this.healthBg = <fairygui.GImage>(this.getChildAt(20));
+			this.healthText = <fairygui.GTextField>(this.getChildAt(21));
+			this.healthGroup = <fairygui.GGroup>(this.getChildAt(22));
+			this.heroCardTips = <fairygui.GTextField>(this.getChildAt(23));
+			this.cardNum = <fairygui.GTextField>(this.getChildAt(24));
+			this.dragLoader = <fairygui.GLoader>(this.getChildAt(25));
+			this.buffDesc = <fairygui.GList>(this.getChildAt(26));
 		}
 	}
 }

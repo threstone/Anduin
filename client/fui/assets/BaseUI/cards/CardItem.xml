@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="218,368">
   <displayList>
+    <graph id="n34_h89h" name="canUse" xy="0,0" size="218,368" visible="false" alpha="0.372" type="rect" lineSize="0" fillColor="#ff66ff33"/>
     <graph id="n27_pg48" name="tempBg" xy="12,10" size="198,173" group="n25_pg48" type="rect" lineSize="0"/>
     <text id="n26_pg48" name="tempCardName" xy="25,56" size="176,54" group="n25_pg48" fontSize="40" align="center" vAlign="middle" autoSize="height" strokeColor="#000000" strokeSize="2" text="农夫农夫"/>
     <loader id="n13_tb7e" name="cardImg" xy="12,10" size="198,173" group="n25_pg48" fill="scaleMatchWidth" shrinkOnly="true"/>

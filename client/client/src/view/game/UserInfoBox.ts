@@ -20,19 +20,10 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.addEffectListener('S_MOVE', this.onMove);
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('UpdateDeadCardNum', this.updateDeadCardNum);
-        this.addEffectListener('S_CARD_DENY', this.cardDeny);
-
     }
 
     private isHandler(uid: number) {
         return (uid === UserModel.ins().uid) === this.isSelf;
-    }
-
-    /**反制卡牌 */
-    private cardDeny(msg: GamePto.S_CARD_DENY) {
-        if (this.isHandler(msg.target.uid)) {
-           this.feeSet(msg.fee,msg.feeMax);
-        }
     }
 
     /**初始化双方职业，昵称 */

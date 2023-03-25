@@ -11,6 +11,7 @@ import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 import { GameMap } from './map/GameMap';
 import { DiceValueDefine, NodeDefine } from './GameDefine';
+import { IGameMessage } from '../../../common/I';
 
 export class GameTable extends BaseTable {
 
@@ -170,5 +171,14 @@ export class GameTable extends BaseTable {
         }
         this.broadcast(msg);
         this.destroy(false)
+    }
+
+    /**广播指定用户的费用信息 */
+    public noticeUserFeeInfo(user: GameUser) {
+        const feeNotice = new GamePto.S_FEE_INFO();
+        feeNotice.uid = user.uid
+        feeNotice.fee = user.fee;
+        feeNotice.maxFee = user.feeMax;
+        this.broadcast(feeNotice);
     }
 }

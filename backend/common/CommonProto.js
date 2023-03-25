@@ -5741,8 +5741,6 @@ $root.GamePto = (function() {
         S_DISCARD.prototype.scmd = 10008;
         S_DISCARD.prototype.isSuccess = false;
         S_DISCARD.prototype.cardIndex = 0;
-        S_DISCARD.prototype.fee = 0;
-        S_DISCARD.prototype.feeMax = 0;
         S_DISCARD.prototype.uid = 0;
 
         S_DISCARD.create = function create(properties) {
@@ -5760,12 +5758,8 @@ $root.GamePto = (function() {
                 w.uint32(24).bool(m.isSuccess);
             if (m.cardIndex != null && Object.hasOwnProperty.call(m, "cardIndex"))
                 w.uint32(32).int32(m.cardIndex);
-            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(40).int32(m.fee);
-            if (m.feeMax != null && Object.hasOwnProperty.call(m, "feeMax"))
-                w.uint32(48).int32(m.feeMax);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(56).int32(m.uid);
+                w.uint32(40).int32(m.uid);
             return w;
         };
 
@@ -5793,14 +5787,6 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        m.fee = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.feeMax = r.int32();
-                        break;
-                    }
-                case 7: {
                         m.uid = r.int32();
                         break;
                     }
@@ -5828,12 +5814,6 @@ $root.GamePto = (function() {
             if (d.cardIndex != null) {
                 m.cardIndex = d.cardIndex | 0;
             }
-            if (d.fee != null) {
-                m.fee = d.fee | 0;
-            }
-            if (d.feeMax != null) {
-                m.feeMax = d.feeMax | 0;
-            }
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
@@ -5849,8 +5829,6 @@ $root.GamePto = (function() {
                 d.scmd = 10008;
                 d.isSuccess = false;
                 d.cardIndex = 0;
-                d.fee = 0;
-                d.feeMax = 0;
                 d.uid = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
@@ -5864,12 +5842,6 @@ $root.GamePto = (function() {
             }
             if (m.cardIndex != null && m.hasOwnProperty("cardIndex")) {
                 d.cardIndex = m.cardIndex;
-            }
-            if (m.fee != null && m.hasOwnProperty("fee")) {
-                d.fee = m.fee;
-            }
-            if (m.feeMax != null && m.hasOwnProperty("feeMax")) {
-                d.feeMax = m.feeMax;
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
@@ -5903,8 +5875,6 @@ $root.GamePto = (function() {
         S_USE_CARD.prototype.cmd = 200;
         S_USE_CARD.prototype.scmd = 10009;
         S_USE_CARD.prototype.isSuccess = false;
-        S_USE_CARD.prototype.fee = 0;
-        S_USE_CARD.prototype.feeMax = 0;
         S_USE_CARD.prototype.uid = 0;
         S_USE_CARD.prototype.cardIndex = 0;
         S_USE_CARD.prototype.card = null;
@@ -5922,16 +5892,12 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.scmd);
             if (m.isSuccess != null && Object.hasOwnProperty.call(m, "isSuccess"))
                 w.uint32(24).bool(m.isSuccess);
-            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(40).int32(m.fee);
-            if (m.feeMax != null && Object.hasOwnProperty.call(m, "feeMax"))
-                w.uint32(48).int32(m.feeMax);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(56).int32(m.uid);
+                w.uint32(32).int32(m.uid);
             if (m.cardIndex != null && Object.hasOwnProperty.call(m, "cardIndex"))
-                w.uint32(64).int32(m.cardIndex);
+                w.uint32(40).int32(m.cardIndex);
             if (m.card != null && Object.hasOwnProperty.call(m, "card"))
-                $root.GamePto.Card.encode(m.card, w.uint32(74).fork()).ldelim();
+                $root.GamePto.Card.encode(m.card, w.uint32(50).fork()).ldelim();
             return w;
         };
 
@@ -5954,23 +5920,15 @@ $root.GamePto = (function() {
                         m.isSuccess = r.bool();
                         break;
                     }
-                case 5: {
-                        m.fee = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.feeMax = r.int32();
-                        break;
-                    }
-                case 7: {
+                case 4: {
                         m.uid = r.int32();
                         break;
                     }
-                case 8: {
+                case 5: {
                         m.cardIndex = r.int32();
                         break;
                     }
-                case 9: {
+                case 6: {
                         m.card = $root.GamePto.Card.decode(r, r.uint32());
                         break;
                     }
@@ -5995,12 +5953,6 @@ $root.GamePto = (function() {
             if (d.isSuccess != null) {
                 m.isSuccess = Boolean(d.isSuccess);
             }
-            if (d.fee != null) {
-                m.fee = d.fee | 0;
-            }
-            if (d.feeMax != null) {
-                m.feeMax = d.feeMax | 0;
-            }
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
@@ -6023,8 +5975,6 @@ $root.GamePto = (function() {
                 d.cmd = 200;
                 d.scmd = 10009;
                 d.isSuccess = false;
-                d.fee = 0;
-                d.feeMax = 0;
                 d.uid = 0;
                 d.cardIndex = 0;
                 d.card = null;
@@ -6037,12 +5987,6 @@ $root.GamePto = (function() {
             }
             if (m.isSuccess != null && m.hasOwnProperty("isSuccess")) {
                 d.isSuccess = m.isSuccess;
-            }
-            if (m.fee != null && m.hasOwnProperty("fee")) {
-                d.fee = m.fee;
-            }
-            if (m.feeMax != null && m.hasOwnProperty("feeMax")) {
-                d.feeMax = m.feeMax;
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
@@ -7521,8 +7465,6 @@ $root.GamePto = (function() {
         S_CARD_DENY.prototype.from = null;
         S_CARD_DENY.prototype.target = null;
         S_CARD_DENY.prototype.targetCardIndex = 0;
-        S_CARD_DENY.prototype.fee = 0;
-        S_CARD_DENY.prototype.feeMax = 0;
 
         S_CARD_DENY.create = function create(properties) {
             return new S_CARD_DENY(properties);
@@ -7541,10 +7483,6 @@ $root.GamePto = (function() {
                 $root.GamePto.Card.encode(m.target, w.uint32(34).fork()).ldelim();
             if (m.targetCardIndex != null && Object.hasOwnProperty.call(m, "targetCardIndex"))
                 w.uint32(40).int32(m.targetCardIndex);
-            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(48).int32(m.fee);
-            if (m.feeMax != null && Object.hasOwnProperty.call(m, "feeMax"))
-                w.uint32(56).int32(m.feeMax);
             return w;
         };
 
@@ -7573,14 +7511,6 @@ $root.GamePto = (function() {
                     }
                 case 5: {
                         m.targetCardIndex = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.fee = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.feeMax = r.int32();
                         break;
                     }
                 default:
@@ -7614,12 +7544,6 @@ $root.GamePto = (function() {
             if (d.targetCardIndex != null) {
                 m.targetCardIndex = d.targetCardIndex | 0;
             }
-            if (d.fee != null) {
-                m.fee = d.fee | 0;
-            }
-            if (d.feeMax != null) {
-                m.feeMax = d.feeMax | 0;
-            }
             return m;
         };
 
@@ -7633,8 +7557,6 @@ $root.GamePto = (function() {
                 d.from = null;
                 d.target = null;
                 d.targetCardIndex = 0;
-                d.fee = 0;
-                d.feeMax = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -7650,12 +7572,6 @@ $root.GamePto = (function() {
             }
             if (m.targetCardIndex != null && m.hasOwnProperty("targetCardIndex")) {
                 d.targetCardIndex = m.targetCardIndex;
-            }
-            if (m.fee != null && m.hasOwnProperty("fee")) {
-                d.fee = m.fee;
-            }
-            if (m.feeMax != null && m.hasOwnProperty("feeMax")) {
-                d.feeMax = m.feeMax;
             }
             return d;
         };

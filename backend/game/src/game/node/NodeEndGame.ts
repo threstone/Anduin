@@ -18,23 +18,10 @@ export class NodeEndGame extends BaseNode {
             this.nodeDriver.resetNode();
             return NodeDriverResult.GoOn;
         }
-        this.deal(table);
         return NodeDriverResult.GoOn;
     }
 
     public onWaitTimeArrive(table: GameTable): NodeDriverResult {
         return NodeDriverResult.GoOn;
-    }
-
-    private deal(table: GameTable) {
-        const msg = new GamePto.S_GAME_OVER();
-        //平局判断
-        if (table.users[0].hero.health <= 0 && table.users[1].hero.health <= 0) {
-            msg.winnerUid = -1;
-        } else {
-            const winner = table.users[0].hero.health > 0 ? table.users[0] : table.users[1];
-            msg.winnerUid = winner.uid;
-        }
-        table.broadcast(msg);
     }
 }

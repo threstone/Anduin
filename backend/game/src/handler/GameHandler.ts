@@ -43,8 +43,8 @@ export class GameHandler extends BaseHandler {
             //加费用
             if (user.fee < user.feeMax) {
                 user.fee += 1;
-                replay.fee = user.fee;
-                replay.feeMax = user.feeMax;
+                //通知用户费用信息
+                table.noticeUserFeeInfo(user);
             }
         }
 

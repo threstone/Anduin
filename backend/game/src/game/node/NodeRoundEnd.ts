@@ -31,7 +31,6 @@ export class NodeRoundEnd extends BaseNode {
         table.broadcast(roundStartMsg);
         console.log("派发回合结束协议");
 
-        let sum = 0;
         //执行场上所有乙方事件卡的回合结束事件
         for (let index = 0; index < user.eventPool.length; index++) {
             const card = user.eventPool[index];
@@ -54,7 +53,7 @@ export class NodeRoundEnd extends BaseNode {
             return NodeDriverResult.GoOn;
         }
 
-        this.nodeDriver.waitTime(sum);
+        this.nodeDriver.waitTime(100);
 
         //更改下一个回合操作玩家
         table.roundUserIndex = (table.roundUserIndex + 1) % table.users.length;
