@@ -25,6 +25,20 @@ class MapModel extends BaseModel {
         return this._serverData.eventCards;
     }
 
+    /**是否有出兵建筑 */
+    public hasCampBuilding(uid: number) {
+        for (let index = 0; index < this.entityCards.length; index++) {
+            const entity = this.entityCards[index];
+            if (entity.uid === uid && entity.cardType === CardsPto.CardType.Building) {
+                const cardConfig = CardsModel.ins().getCardConfigById(entity.cardId);
+                if (cardConfig.detailType === CardsPto.BuilingType.Camp) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public onUseCard(msg: GamePto.S_USE_CARD) {
         if (msg.card.cardType === CardsPto.CardType.Event) {
             this._serverData.eventCards.push(msg.card);

@@ -10,10 +10,10 @@
     <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/map/MapView.xml" xy="310,219">
       <relation target="" sidePair="center-center%,middle-middle%"/>
     </component>
-    <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1152,990">
+    <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1147,990">
       <relation target="n32_pg48" sidePair="left-right,top-top"/>
     </component>
-    <component id="n29_pg48" name="targetInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1154,2">
+    <component id="n29_pg48" name="targetInfoBox" src="pg482d" fileName="game/UserInfoBox.xml" xy="1147,2">
       <relation target="n33_pg48" sidePair="left-right,top-top"/>
     </component>
     <component id="n32_pg48" name="selfHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="337,990">
@@ -23,10 +23,10 @@
       <relation target="" sidePair="center-center%,top-top"/>
     </component>
     <component id="n36_hzsg" name="close" src="fjkiy" fileName="common/btn/Button3.xml" xy="29,259"/>
-    <component id="n38_h89h" name="selfLeftInfoBox" src="h89h32" fileName="game/LeftInfoBox.xml" xy="1,990" size="322,210">
+    <component id="n38_h89h" name="selfLeftInfoBox" src="h89h32" fileName="game/LeftInfoBox.xml" xy="5,990" size="322,210">
       <relation target="n32_pg48" sidePair="right-left,top-top"/>
     </component>
-    <component id="n39_h89h" name="targetLeftInfoBox" src="h89h32" fileName="game/LeftInfoBox.xml" xy="0,0" size="322,210">
+    <component id="n39_h89h" name="targetLeftInfoBox" src="h89h32" fileName="game/LeftInfoBox.xml" xy="5,0" size="322,210">
       <relation target="n33_pg48" sidePair="right-left,top-top"/>
     </component>
   </displayList>

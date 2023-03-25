@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1600,1200">
+  <displayList>
+    <graph id="n1_h89h" name="bg0" xy="0,0" size="1600,424" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="width-width,left-left,top-top"/>
+    </graph>
+    <graph id="n2_h89h" name="bg1" xy="0,424" size="479,441" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="n1_h89h" sidePair="left-left,top-bottom"/>
+    </graph>
+    <graph id="n3_h89h" name="bg2" xy="933,424" size="667,441" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="n1_h89h" sidePair="top-bottom"/>
+    </graph>
+    <graph id="n6_h89h" name="bg3" xy="0,865" size="1600,84" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="n2_h89h" sidePair="top-bottom"/>
+    </graph>
+    <graph id="n4_h89h" name="bg4" xy="0,949" size="976,251" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="left-left,bottom-bottom"/>
+    </graph>
+    <graph id="n7_h89h" name="bg5" xy="1448,949" size="152,251" alpha="0.5" type="rect" lineSize="0" fillColor="#ff000000">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+    </graph>
+  </displayList>
+</component>

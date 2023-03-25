@@ -2,7 +2,6 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
 
     private _tipsArr: (BaseUI.UIAtkTips | BaseUI.UIMoveTips)[];
 
-
     protected init() {
         this.view = BaseUI.UIMapTipsView.createInstance();
         this._tipsArr = [];
@@ -10,10 +9,13 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
 
     public open(): void {
         super.open();
-        this.AddClick(this.view, () => {
-            this.clearTips();
-            this.close();
-        })
+        this.addEffectListener('S_ROUND_END_EVENT', this.close);
+        this.AddClick(this.view, this.close);
+    }
+
+    public close(): void {
+        super.close();
+        this.clearTips();
     }
 
     private clearTips() {
@@ -73,7 +75,8 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
     }
 
     /**展示可以放置的位置 */
-    public showUsePosition(){
-        
+    public showUseTips(baseCard: GamePto.ICard) {
+        // 建筑后三排以及英雄旁边
+
     }
 }

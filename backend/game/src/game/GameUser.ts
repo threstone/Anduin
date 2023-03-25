@@ -145,6 +145,10 @@ export class GameUser {
                 message.damages.push(this._fatigue);
                 this.hero.health -= this._fatigue;
                 this._fatigue++;
+
+                if (this.hero.health <= 0) {
+                    this.table.doGameOver();
+                }
                 continue;
             }
             const card = this._cardPool.pop();

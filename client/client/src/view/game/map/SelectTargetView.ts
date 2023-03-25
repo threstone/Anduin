@@ -19,27 +19,33 @@ class SelectTargetView extends BaseView<BaseUI.UISelectTargetCom>{
     private _allowReapet: boolean;
 
     private _tips: string;
+    private _canUseVisibleCache: boolean;
 
     protected init() {
         this.view = BaseUI.UISelectTargetCom.createInstance();
-        const scencView = GameSceneView.ins().getView();
+        const sceneView = GameSceneView.ins().getView();
         //初始化遮罩
-        this.view.bg0.height = scencView.map.y;
+        this.view.bg0.height = sceneView.map.y;
 
-        this.view.bg1.width = scencView.map.x;
-        this.view.bg1.height = scencView.map.height;
+        this.view.bg1.width = sceneView.map.x;
+        this.view.bg1.height = sceneView.map.height;
 
-        this.view.bg2.x = scencView.map.x + scencView.map.width;
+        this.view.bg2.x = sceneView.map.x + sceneView.map.width;
         this.view.bg2.width = this.view.width - this.view.bg2.x;
-        this.view.bg2.height = scencView.map.height;
+        this.view.bg2.height = sceneView.map.height;
 
-        this.view.bg3.height = this.view.height - scencView.map.y - scencView.map.height;
+        this.view.bg3.height = this.view.height - sceneView.map.y - sceneView.map.height;
     }
 
     public open(cardItem: BaseUI.UICardItem, dataArr: number[], useType: GamePto.UseConditionEnum, targetNum: number): Promise<boolean> {
         return new Promise<boolean>((resolve) => {
             super.open();
-            this._resolve = resolve;
+            this._canUseVisibleCache = cardItem.canUse.visible;
+            cardItem.canUse.visible = false;
+            this._resolve = (res: boolean) => {
+                cardItem.canUse.visible = this._canUseVisibleCache;
+                resolve(res);
+            };
             this._dataArr = dataArr;
             this._useType = useType;
             this._targetNum = Math.abs(targetNum);

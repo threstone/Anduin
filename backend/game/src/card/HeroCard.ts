@@ -21,7 +21,6 @@ export class HeroCard extends UnitCard {
 
         //如果没有因为复生等buff复活,则游戏就结束了
         if (this.health <= 0) {
-            this.table.isGameOver = true;
             this.table.doGameOver();
         }
     }

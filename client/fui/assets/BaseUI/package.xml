@@ -111,6 +111,7 @@
     <font id="h89h43" name="NumberFont2.fnt" path="/common/" exported="true"/>
     <component id="h89h45" name="EventItem.xml" path="/game/" exported="true"/>
     <component id="h89h46" name="GameOverCom.xml" path="/game/" exported="true"/>
+    <component id="h89h48" name="UseCardTipsCom.xml" path="/game/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

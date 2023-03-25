@@ -4,8 +4,8 @@ interface CardInterface {
     powerId: number;
     cardType: CardsPto.CardType;
     type2: number;
-    attack: number;
     detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
+    attack: number;
     health: number;
     fee: number;
     quality: CardsPto.QualityType;

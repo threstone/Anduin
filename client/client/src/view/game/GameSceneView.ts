@@ -30,13 +30,13 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     }
 
     public open(): void {
-        super.open();
-
         this._effectPool = [];
         this._isPlaying = false;
 
         this.initEvents();
         this.initView();
+
+        super.open();
     }
 
     private initView() {

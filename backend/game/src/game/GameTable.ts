@@ -161,6 +161,7 @@ export class GameTable extends BaseTable {
 
     /**游戏结束 */
     public doGameOver() {
+        this.isGameOver = true;
         const msg = new GamePto.S_GAME_OVER();
         //平局判断
         if (this.users[0].hero.health <= 0 && this.users[1].hero.health <= 0) {
@@ -170,7 +171,7 @@ export class GameTable extends BaseTable {
             msg.winnerUid = winner.uid;
         }
         this.broadcast(msg);
-        this.destroy(false)
+        this.destroy(false);
     }
 
     /**广播指定用户的费用信息 */

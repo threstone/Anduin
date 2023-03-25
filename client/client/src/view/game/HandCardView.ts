@@ -30,7 +30,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this.addEffectListener('S_CARD_DENY', this.cardDeny);
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
-        this.addEffectListener('S_FEE_INFO', this.updateCardUseTips);
+        this.addEffectListener('S_FEE_INFO', this.updateHandCardStats);
         this.observe('S_DISCARD', this.onDeleteCard);
     }
 
@@ -48,30 +48,38 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         //自己的回合开始了
         if (msg.uid === UserModel.ins().uid) {
             //根据卡牌的使用条件来展示出使用提示
-            this.updateCardUseTips();
-        }
-    }
-
-    /**根据卡牌的使用条件来展示出使用提示 */
-    private updateCardUseTips() {
-        if (GameSceneView.ins().allowToOprate) {
-            for (let index = 0; index < this._cards.length; index++) {
-                const gameCard = this._cards[index];
-                const cardItem = gameCard.cardItem;
-                cardItem.canUse.visible = GameModel.ins().fee >= gameCard.cardInfo.fee;
-            }
+            this.updateHandCardStats();
         }
     }
 
     private onRoundEnd(msg: GamePto.S_ROUND_START_EVENT) {
         //自己的回合结束了
         if (msg.uid === UserModel.ins().uid) {
-            //去掉使用提示
-            for (let index = 0; index < this._cards.length; index++) {
-                const cardItem = this._cards[index].cardItem;
-                cardItem.canUse.visible = false;
-            }
+            this.updateHandCardStats();
         }
+    }
+
+    /**根据卡牌的使用条件来展示出使用提示 */
+    private updateHandCardStats() {
+        this._cards.forEach((card) => {
+            const isAlive = this.checkUseStatus(card);
+            card.cardItem.canUse.visible = isAlive;
+            card.cardItem.draggable = GameSceneView.ins().allowToOprate;
+        });
+    }
+
+    /**检查是否可以使用次卡牌 */
+    private checkUseStatus(card: GameCard) {
+        /**费用和可操作性检查 */
+        if (GameSceneView.ins().allowToOprate && GameModel.ins().fee >= card.cardInfo.fee) {
+            //单位卡要增加一层判断,因为单位卡只能放置到出兵建筑附近
+            if (card.cardInfo.cardType === CardsPto.CardType.Unit) {
+                //检查有没有出兵建筑
+                return MapModel.ins().hasCampBuilding(card.cardInfo.uid);
+            }
+            return true;
+        }
+        return false;
     }
 
     /**反制卡牌 */
@@ -129,18 +137,21 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
 
             //初始化拖动事件
-            cardItem.draggable = true;
-            this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, () => {
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, (event: fairygui.DragEvent) => {
                 gameCard.cacheX = cardItem.x;
                 gameCard.cacheY = cardItem.y;
+
+                cardItem.x = event.stageX - cardItem.width / 2;
+                cardItem.y = event.stageY - cardItem.height / 2;
+                UseCardTipsView.ins().open(gameCard);
             }, this);
 
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
-                //不允许操作的情况
-                if (!GameSceneView.ins().allowToOprate) {
-                    this.restoreCard(gameCard);
-                    return;
-                }
+                UseCardTipsView.ins().close();
+                this.view.addChild(cardItem);
+                const localPoint = this.view.rootToLocal(event.stageX - cardItem.width / 2, event.stageY - cardItem.height / 2);
+                cardItem.x = localPoint.x;
+                cardItem.y = localPoint.y;
                 //弃牌
                 if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
                     GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
@@ -162,7 +173,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         }
 
         if (cards.length > 0) {
-            this.updateCardUseTips();
+            this.updateHandCardStats();
             //悬浮变大、拖动使用
             return this.updateCardsPostion(opTime);
         }
