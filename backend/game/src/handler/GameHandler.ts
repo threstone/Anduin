@@ -139,7 +139,7 @@ export class GameHandler extends BaseHandler {
             //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
             const dices = table.getDices(sourceCard.attack);
             //实际扣除的血量
-            let damage = table.getTargetDiceValueNum(dices, sourceCard.atkType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+            let damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
 
             //执行战场攻击前事件决定是否有后续
             const mapPreAtkResult = table.mapData.onPreAtk(sourceCard, targetCard, damageCard, damage, dices);
@@ -173,7 +173,7 @@ export class GameHandler extends BaseHandler {
             table.broadcast(replay);
 
             //执行卡牌受伤后事件
-            damageCard.onDamageAfter();
+            damageCard.onDamageAfter(sourceCard);
 
             //执行卡牌攻击后事件
             sourceCard.onAtkAfter(sourceCard, damageCard, damage, dices);

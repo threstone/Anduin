@@ -25,7 +25,7 @@ class CardsModel extends BaseModel {
 
     /**返回卡牌可攻击距离 */
     public getCardAtkRange(cardInfo: CardInterface) {
-        if (CardsPto.AtkType.CloseRange === cardInfo.atkType) {
+        if (CardsPto.AtkType.CloseRange === cardInfo.detailType) {
             return 1;
         } else {
             return 3;

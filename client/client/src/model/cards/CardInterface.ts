@@ -5,7 +5,7 @@ interface CardInterface {
     cardType: CardsPto.CardType;
     type2: number;
     attack: number;
-    atkType: CardsPto.AtkType;
+    detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
     health: number;
     fee: number;
     quality: CardsPto.QualityType;

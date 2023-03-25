@@ -133,7 +133,7 @@ export class EventCard extends BaseCard implements BaseEvent {
             notice.cardIndex = cardIndex;
             notice.card = this;
             //事件卡的攻击类型标识事件类型是否可被对方知晓
-            if (this.atkType == CardsPto.EventType.Common) {
+            if (this.detailType == CardsPto.EventType.Common) {
                 this.table.broadcast(notice);
             } else {
                 user.sendMsg(notice);
@@ -181,7 +181,7 @@ export class EventCard extends BaseCard implements BaseEvent {
 
     /**获取发送到客户端的事件卡牌数据 */
     public getCardData(): GamePto.ICard {
-        if (this.cardType === CardsPto.CardType.Event && this.atkType === CardsPto.EventType.Secret) {
+        if (this.cardType === CardsPto.CardType.Event && this.detailType === CardsPto.EventType.Secret) {
             const res = new GamePto.Card();
             res.id = this.id;
             res.cardType = this.cardType;

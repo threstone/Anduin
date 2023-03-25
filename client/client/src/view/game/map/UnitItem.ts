@@ -7,7 +7,7 @@ class UnitItem {
         unit.healthText.text = `${cardInfo.health}`;
         unit.atkText.text = `${cardInfo.attack}`;
 
-        if (cardConfig.atkType === CardsPto.AtkType.CloseRange) {
+        if (cardConfig.detailType === CardsPto.AtkType.CloseRange) {
             unit.longRange.visible = false;
         } else {
             unit.closeRange.visible = false;

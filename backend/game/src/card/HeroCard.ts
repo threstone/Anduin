@@ -1,9 +1,10 @@
 import { GamePto } from "../../../common/CommonProto";
+import { BaseCard } from "./BaseCard";
 import { UnitCard } from "./UnitCard";
 
 export class HeroCard extends UnitCard {
 
-    public onDead(self = this) {
+    public onDead(damageSource: BaseCard, self = this) {
         const user = this.table.getUser(this.uid);
         const index = user.entityPool.indexOf(this);
         if (index === -1) {

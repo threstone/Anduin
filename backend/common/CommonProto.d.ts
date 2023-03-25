@@ -1487,6 +1487,11 @@ export namespace CardsPto {
         Secret = 1
     }
 
+    /** BuilingType enum. */
+    enum BuilingType {
+        Camp = 0
+    }
+
     /** Properties of a Card. */
     interface ICard {
 

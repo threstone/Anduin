@@ -158,7 +158,7 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
             });
             this.view.cardName.text = `${cardConfig.cardName}`;
             this.view.desc.text = `${cardConfig.desc}`;
-            if (cardConfig.atkType === CardsPto.AtkType.CloseRange) {
+            if (cardConfig.detailType === CardsPto.AtkType.CloseRange) {
                 this.view.longRange.visible = false;
                 this.view.closeRange.visible = true;
             } else {

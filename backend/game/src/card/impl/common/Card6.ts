@@ -14,6 +14,6 @@ export class Card6 extends MagicCard {
         msg.targetShowTips = `-${damage}`;
         this.table.broadcast(msg);
         //执行卡牌受伤后事件
-        entity.onDamageAfter();
+        entity.onDamageAfter(this);
     }
 }

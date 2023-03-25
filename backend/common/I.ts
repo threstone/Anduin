@@ -61,8 +61,12 @@ export class CardInterface {
     /**攻击力 */
     attack: number;
 
-    /**攻击类型(0近战,1远程) */
-    atkType: CardsPto.AtkType | CardsPto.EventType;
+    /**
+     * unitCard  攻击类型(0近战,1远程)
+     * eventCard 事件类型(0公共,1秘密)
+     * buildCard 建筑类型(0出兵建筑,1待定)
+     */
+    detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
 
     /**生命值 */
     health: number;

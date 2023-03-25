@@ -7,7 +7,7 @@ export class AttackUtils {
 
     /**判断是否可以攻击 */
     public static allowAtk(sourceCard: UnitCard, targetCard: BuildingCard) {
-        const atkRange = sourceCard.atkType === CardsPto.AtkType.CloseRange ? 1 : 3;
+        const atkRange = sourceCard.detailType === CardsPto.AtkType.CloseRange ? 1 : 3;
         if (sourceCard.blockX === targetCard.blockX) {
             return atkRange >= Math.abs(sourceCard.blockY - targetCard.blockY);
         } else if (sourceCard.blockY === targetCard.blockY) {
@@ -18,7 +18,7 @@ export class AttackUtils {
 
     /**获取真正被攻击的单位,因为远程有可能能被路径上的敌人挡住 */
     public static getBeAttackCard(sourceCard: UnitCard, targetCard: BuildingCard, mapData: GameMap) {
-        if (sourceCard.atkType === CardsPto.AtkType.CloseRange) {
+        if (sourceCard.detailType === CardsPto.AtkType.CloseRange) {
             return targetCard;
         } else {
             let beAttackCard: BuildingCard;

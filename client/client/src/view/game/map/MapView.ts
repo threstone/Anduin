@@ -198,7 +198,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**攻击效果 根据近战远程区分效果 */
     private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface) {
         //近战
-        if (sourceConfig.atkType === CardsPto.AtkType.CloseRange) {
+        if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
             const cacheX = source.x;
             const cacheY = source.y;
             let oldIndex = this.view.getChildIndex(source);
@@ -208,7 +208,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             });
             await this.wait(500);
         }//远程 
-        else if (sourceConfig.atkType === CardsPto.AtkType.LongRange) {
+        else if (sourceConfig.detailType === CardsPto.AtkType.LongRange) {
             const effectData = ConfigMgr.ins().getEffectDataById(sourceConfig.effectId);
             if (!effectData) {
                 return;

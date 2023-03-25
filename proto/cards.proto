@@ -36,6 +36,11 @@ enum EventType{
 	Secret = 1;
 }
 
+enum BuilingType{
+	//营地:出兵建筑
+	Camp = 0;
+}
+
 message Card{
 	int32 id = 0;
 	int32 count = 1;

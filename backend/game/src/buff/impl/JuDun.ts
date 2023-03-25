@@ -38,7 +38,7 @@ export class JuDun extends PositionBuff {
 
     public onDamage(damage: number, damageSource: BaseCard) {
         //当攻击方是远程的时候
-        if (damageSource.cardType === CardsPto.CardType.Unit && damageSource.atkType === CardsPto.AtkType.LongRange && damage > 0) {
+        if (damageSource.cardType === CardsPto.CardType.Unit && damageSource.detailType === CardsPto.AtkType.LongRange && damage > 0) {
             return damage - 1;
         }
         return damage;

@@ -119,15 +119,15 @@ export class BuildingCard extends EventCard {
      * 当受到伤害之后
      * 之所以要单独抽出来作为一个函数且不在onDamage中执行,是为了分离协议,延后卡牌死亡协议的下发。
      */
-    public onDamageAfter(self = this) {
+    public onDamageAfter(damageSource: BaseCard, self = this) {
         this.callFuns(this.onDamageAfterFuns, self);
         //死亡了
         if (this.health <= 0) {
-            this.onDead();
+            this.onDead(damageSource);
         }
     }
 
-    public onDead(self = this) {
+    public onDead(damageSource: BaseCard, self = this) {
         const user = this.table.getUser(this.uid);
         const index = user.entityPool.indexOf(this);
         if (index === -1) {
@@ -146,5 +146,16 @@ export class BuildingCard extends EventCard {
 
         //执行卡牌死亡事件,亡语就在此执行
         this.callFuns(this.onDeadFuns, self);
+
+        //如果造成伤害方式对方,则对方增加一点费用
+        if (damageSource.uid !== this.uid) {
+            const targetUser = this.table.getOtherUser(this.uid);
+            //加费用
+            if (targetUser.fee < targetUser.feeMax) {
+                targetUser.fee += 1;
+                //通知用户费用信息
+                this.table.noticeUserFeeInfo(targetUser);
+            }
+        }
     }
 }

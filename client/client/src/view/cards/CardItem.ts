@@ -51,7 +51,7 @@ class CardItem {
             card.cardImg.texture = data;
         })
         card.tempCardName.text = `${cardInfo.cardName}`;
-        if (cardInfo.atkType === CardsPto.AtkType.CloseRange) {
+        if (cardInfo.detailType === CardsPto.AtkType.CloseRange) {
             card.longRange.visible = false;
         } else {
             card.closeRange.visible = false;

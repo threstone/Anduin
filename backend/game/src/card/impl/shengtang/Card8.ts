@@ -15,6 +15,6 @@ export class Card8 extends UnitCard {
         msg.targetShowTips = `-${damage}`;
         this.table.broadcast(msg);
         //执行卡牌受伤后事件
-        targetEntity.onDamageAfter();
+        targetEntity.onDamageAfter(this);
     }
 }
