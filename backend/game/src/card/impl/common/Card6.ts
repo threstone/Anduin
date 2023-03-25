@@ -2,6 +2,7 @@ import { GamePto } from "../../../../../common/CommonProto";
 import { GameUser } from "../../../game/GameUser";
 import { MagicCard } from "../../MagicCard";
 
+/**魔法神箭 */
 export class Card6 extends MagicCard {
     public onUse(user: GameUser, cardIndex: number, x: number, y: number): void {
         super.onUse(user, cardIndex);

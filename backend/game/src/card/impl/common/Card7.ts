@@ -3,10 +3,14 @@ import { CardsPto } from "../../../../../common/CommonProto";
 import { BaseCard } from "../../BaseCard";
 import { EventCard } from "../../EventCard";
 
+/**单位反制 */
 export class Card7 extends EventCard {
 
     /**战场卡牌使用前 */
     public onPreUseCard(useCard: BaseCard): boolean {
+        if (useCard.uid === this.uid) {
+            return true;
+        }
         //如果是单位卡和建筑卡,反制
         if (useCard.cardType === CardsPto.CardType.Building || useCard.cardType === CardsPto.CardType.Unit) {
             //对方这张卡没了,减费用

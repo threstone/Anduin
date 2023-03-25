@@ -2,6 +2,7 @@ import { GamePto } from "../../../../../common/CommonProto";
 import { GameUser } from "../../../game/GameUser";
 import { UnitCard } from "../../UnitCard";
 
+/**巫师学徒 */
 export class Card8 extends UnitCard {
     public onUse(user: GameUser, cardIndex: number, blockX: number, blockY: number, targetX: number, targetY: number): void {
         super.onUse(user, cardIndex, blockX, blockY);
