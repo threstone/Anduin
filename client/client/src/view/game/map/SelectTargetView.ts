@@ -193,6 +193,7 @@ class SelectTargetView extends BaseView<BaseUI.UISelectTargetCom>{
         const entity = MapModel.ins().getEntityCardByPoint(mapBlock.x, mapBlock.y);
         //是否有单位
         if (!entity && GamePto.UseConditionEnum.EmptyBlock !== this._useType) {
+            this.close(false);
             return;
         }
 

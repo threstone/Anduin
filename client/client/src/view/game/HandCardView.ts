@@ -141,6 +141,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 gameCard.cacheX = cardItem.x;
                 gameCard.cacheY = cardItem.y;
 
+                cardItem.scaleX = 1;
+                cardItem.scaleY = 1;
                 cardItem.x = event.stageX - cardItem.width / 2;
                 cardItem.y = event.stageY - cardItem.height / 2;
                 UseCardTipsView.ins().open(gameCard);
@@ -157,12 +159,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                     GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
                     return;
                 }
-                //费用不够
-                if (gameCard.cardInfo.fee > GameModel.ins().fee) {
-                    TipsView.ins().showTips("费用不够!");
-                    this.restoreCard(gameCard);
-                    return;
-                }
+
                 //尝试使用卡牌
                 this.tryUseCard(event, gameCard).then((res) => {
                     if (res === false) {
@@ -198,6 +195,13 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         //拖入到战场则说明要使用卡牌，然后根据卡牌使用条件来执行后续逻辑
         if (!MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
             return false;
+        }
+
+        //费用不够
+        if (gameCard.cardInfo.fee > GameModel.ins().fee) {
+            TipsView.ins().showTips("费用不够!");
+            this.restoreCard(gameCard);
+            return;
         }
 
         const cardConfig = CardsModel.ins().getCardConfigById(gameCard.cardInfo.cardId);

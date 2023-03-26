@@ -9,6 +9,8 @@ module BaseUI {
 		public bg3:fairygui.GGraph;
 		public bg4:fairygui.GGraph;
 		public bg5:fairygui.GGraph;
+		public mapTips:fairygui.GTextField;
+		public discardTips:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpoh89h48";
 
 		public static createInstance():UIUseCardTipsCom {
@@ -24,6 +26,8 @@ module BaseUI {
 			this.bg3 = <fairygui.GGraph>(this.getChildAt(3));
 			this.bg4 = <fairygui.GGraph>(this.getChildAt(4));
 			this.bg5 = <fairygui.GGraph>(this.getChildAt(5));
+			this.mapTips = <fairygui.GTextField>(this.getChildAt(6));
+			this.discardTips = <fairygui.GTextField>(this.getChildAt(7));
 		}
 	}
 }

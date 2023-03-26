@@ -20,6 +20,8 @@ class UseCardTipsView extends BaseView<BaseUI.UIUseCardTipsCom>{
 
         this.view.bg5.height = sceneView.selfInfoBox.height;
         this.view.bg5.width = sceneView.width - sceneView.selfInfoBox.x - sceneView.selfInfoBox.width;
+
+        this.view.discardTips.x = sceneView.selfInfoBox.x + (sceneView.selfInfoBox.width - this.view.discardTips.width) / 2;
     }
 
     public open(card: GameCard): void {
