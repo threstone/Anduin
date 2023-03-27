@@ -3219,16 +3219,18 @@ $root.GamePto = (function() {
     GamePto.UseConditionEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "NoCondition"] = 0;
-        values[valuesById[1] = "FriendlyUnit"] = 1;
-        values[valuesById[2] = "FriendlyBuilding"] = 2;
-        values[valuesById[3] = "EnemyUnit"] = 3;
-        values[valuesById[4] = "EnemyBuilding"] = 4;
-        values[valuesById[5] = "AllUnit"] = 5;
-        values[valuesById[6] = "AllBuilding"] = 6;
-        values[valuesById[7] = "FriendEntity"] = 7;
-        values[valuesById[8] = "EnemyEntity"] = 8;
-        values[valuesById[9] = "AllEntity"] = 9;
-        values[valuesById[10] = "EmptyBlock"] = 10;
+        values[valuesById[1] = "BuidingCondition"] = 1;
+        values[valuesById[2] = "UnitCondition"] = 2;
+        values[valuesById[3] = "EmptyBlock"] = 3;
+        values[valuesById[4] = "FriendlyUnit"] = 4;
+        values[valuesById[5] = "FriendlyBuilding"] = 5;
+        values[valuesById[6] = "EnemyUnit"] = 6;
+        values[valuesById[7] = "EnemyBuilding"] = 7;
+        values[valuesById[8] = "AllUnit"] = 8;
+        values[valuesById[9] = "AllBuilding"] = 9;
+        values[valuesById[10] = "FriendEntity"] = 10;
+        values[valuesById[11] = "EnemyEntity"] = 11;
+        values[valuesById[12] = "AllEntity"] = 12;
         return values;
     })();
 

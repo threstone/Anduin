@@ -16,26 +16,30 @@ enum UseConditionIndexEnum{
 enum UseConditionEnum{
 	//无条件
     NoCondition = 0;
+	//建筑部署限制
+	BuidingCondition = 1;
+	//单位部署限制
+	UnitCondition = 2;
+	//空格子
+    EmptyBlock = 3;
     //友方单位
-    FriendlyUnit = 1;
+    FriendlyUnit = 4;
     //友方建筑
-    FriendlyBuilding = 2;
+    FriendlyBuilding = 5;
     //敌方单位
-    EnemyUnit = 3;
+    EnemyUnit = 6;
     //敌方建筑
-    EnemyBuilding = 4;
+    EnemyBuilding = 7;
     //所有单位
-    AllUnit = 5;
+    AllUnit = 8;
     //所有建筑
-    AllBuilding = 6;
+    AllBuilding = 9;
     //友方地图实体
-    FriendEntity = 7;
+    FriendEntity = 10;
     //敌方地图实体
-    EnemyEntity = 8;
+    EnemyEntity = 11;
     //所有地图实体
-    AllEntity = 9;
-    //空格子
-    EmptyBlock = 10;
+    AllEntity = 12;
 }
 
 //enum EffectEnum{

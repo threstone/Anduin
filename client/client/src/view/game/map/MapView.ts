@@ -2,13 +2,6 @@ const MapWidth = 7;
 const MapHeight = 8;
 const PXNeedMs = 5;
 class MapView extends BaseView<BaseUI.UIMapView> {
-
-    //先手方一定是在下方，所以后手方需要做地图反转
-    private _isFirst: boolean;
-    set isFirst(v: boolean) {
-        this._isFirst = v;
-    }
-
     /**悬浮时的显示卡牌 */
     private _detailCard: BaseUI.UICardItem;
 
@@ -374,7 +367,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             y >= position.y && y <= position.y + map.height) {
             const localPoint = this.view.rootToLocal(x, y);
             if (mapPoint) {
-                if (this._isFirst) {
+                if (GameModel.ins().isFirst) {
                     mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
                     mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
                 } else {
@@ -390,7 +383,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**根据地图坐标返回地图坐标格子中心 */
     public getMapPoint(blockX: number, blockY: number) {
         const mapPoint = new egret.Point();
-        if (this._isFirst) {
+        if (GameModel.ins().isFirst) {
             mapPoint.x = blockX * this.blockWidth;
             mapPoint.y = blockY * this.blockHeight;
         } else {
@@ -404,7 +397,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**根据地图坐标返回场景坐标 */
     public getScenePoint(blockX: number, blockY: number) {
-        if (this._isFirst) {
+        if (GameModel.ins().isFirst) {
             return this.view.localToRoot(blockX * this.blockWidth, blockY * this.blockHeight);
         } else {
             return this.view.localToRoot(this.view.width - (blockX + 1) * this.blockWidth, this.view.height - (blockY + 1) * this.blockHeight);

@@ -103,15 +103,10 @@ class Utils {
 
     /**计算两点之间的角度 */
     public static getPointAngle(sx: number, sy: number, tx: number, ty: number) {
-        const difX = tx - sx;
-        const difY = ty - sy;
-
-        let res = 360 * Math.atan(difY / difX) / (2 * Math.PI) - 90;
-
-        if (tx >= sx) {
-            res += 180;
-        }
-        return res;
+        const deltaX = tx - sx;
+        const deltaY = ty - sy;
+        const angle = 360 * Math.atan2(deltaY, deltaX) / (2 * Math.PI) + 90;
+        return angle;
     }
 
     /**获取两点之间的像素距离 */
@@ -119,5 +114,19 @@ class Utils {
         const difX = tx - sx;
         const difY = ty - sy;
         return Math.sqrt(difX * difX + difY * difY);
+    }
+
+    /**获取根据距离附近的坐标 */
+    public static getAroundByDistance(baseX: number, baseY: number, distance: number) {
+        const result: { x: number, y: number }[] = [];
+        for (let x = baseX - distance; x <= baseX + distance; x++) {
+            for (let y = baseY - distance; y <= baseY + distance; y++) {
+                const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
+                if (tempDistance !== 0 && x >= 0 && x < MapWidth && y >= 0 && y < MapHeight) {
+                    result.push({ x, y });
+                }
+            }
+        }
+        return result;
     }
 }

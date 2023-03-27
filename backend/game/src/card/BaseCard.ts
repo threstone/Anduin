@@ -73,6 +73,7 @@ export class BaseCard implements CardInterface {
         }
 
         const useType = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+        const num = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
         for (; index < params.length; index += 2) {
             const entity = this.table.mapData.getCard(params[index], params[index + 1]);
             let isMatch = false;

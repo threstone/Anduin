@@ -4569,30 +4569,34 @@ $root.GamePto = (function() {
      * @name GamePto.UseConditionEnum
      * @enum {number}
      * @property {number} NoCondition=0 NoCondition value
-     * @property {number} FriendlyUnit=1 FriendlyUnit value
-     * @property {number} FriendlyBuilding=2 FriendlyBuilding value
-     * @property {number} EnemyUnit=3 EnemyUnit value
-     * @property {number} EnemyBuilding=4 EnemyBuilding value
-     * @property {number} AllUnit=5 AllUnit value
-     * @property {number} AllBuilding=6 AllBuilding value
-     * @property {number} FriendEntity=7 FriendEntity value
-     * @property {number} EnemyEntity=8 EnemyEntity value
-     * @property {number} AllEntity=9 AllEntity value
-     * @property {number} EmptyBlock=10 EmptyBlock value
+     * @property {number} BuidingCondition=1 BuidingCondition value
+     * @property {number} UnitCondition=2 UnitCondition value
+     * @property {number} EmptyBlock=3 EmptyBlock value
+     * @property {number} FriendlyUnit=4 FriendlyUnit value
+     * @property {number} FriendlyBuilding=5 FriendlyBuilding value
+     * @property {number} EnemyUnit=6 EnemyUnit value
+     * @property {number} EnemyBuilding=7 EnemyBuilding value
+     * @property {number} AllUnit=8 AllUnit value
+     * @property {number} AllBuilding=9 AllBuilding value
+     * @property {number} FriendEntity=10 FriendEntity value
+     * @property {number} EnemyEntity=11 EnemyEntity value
+     * @property {number} AllEntity=12 AllEntity value
      */
     GamePto.UseConditionEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "NoCondition"] = 0;
-        values[valuesById[1] = "FriendlyUnit"] = 1;
-        values[valuesById[2] = "FriendlyBuilding"] = 2;
-        values[valuesById[3] = "EnemyUnit"] = 3;
-        values[valuesById[4] = "EnemyBuilding"] = 4;
-        values[valuesById[5] = "AllUnit"] = 5;
-        values[valuesById[6] = "AllBuilding"] = 6;
-        values[valuesById[7] = "FriendEntity"] = 7;
-        values[valuesById[8] = "EnemyEntity"] = 8;
-        values[valuesById[9] = "AllEntity"] = 9;
-        values[valuesById[10] = "EmptyBlock"] = 10;
+        values[valuesById[1] = "BuidingCondition"] = 1;
+        values[valuesById[2] = "UnitCondition"] = 2;
+        values[valuesById[3] = "EmptyBlock"] = 3;
+        values[valuesById[4] = "FriendlyUnit"] = 4;
+        values[valuesById[5] = "FriendlyBuilding"] = 5;
+        values[valuesById[6] = "EnemyUnit"] = 6;
+        values[valuesById[7] = "EnemyBuilding"] = 7;
+        values[valuesById[8] = "AllUnit"] = 8;
+        values[valuesById[9] = "AllBuilding"] = 9;
+        values[valuesById[10] = "FriendEntity"] = 10;
+        values[valuesById[11] = "EnemyEntity"] = 11;
+        values[valuesById[12] = "AllEntity"] = 12;
         return values;
     })();
 

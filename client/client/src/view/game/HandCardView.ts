@@ -147,61 +147,38 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
             //初始化拖动事件
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_START, (event: fairygui.DragEvent) => {
-                gameCard.cacheX = cardItem.x;
-                gameCard.cacheY = cardItem.y;
-
-                cardItem.scaleX = 1;
-                cardItem.scaleY = 1;
-                cardItem.x = event.stageX - cardItem.width / 2;
-                cardItem.y = event.stageY - cardItem.height / 2;
-                UseCardTipsView.ins().open(gameCard);
+                UseCardView.ins().open(gameCard, event);
             }, this);
 
             //初始化拖动事件
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_MOVING, (event: fairygui.DragEvent) => {
-                if ((gameCard.cardInfo.cardType === CardsPto.CardType.Building || gameCard.cardInfo.cardType === CardsPto.CardType.Unit) && MapView.ins().isInMap(event.stageX, event.stageY)) {
-                    //如果在地图中，卡牌还原位置然后展示出箭头指引
-                    const localPoint = this.view.localToRoot(gameCard.cacheX, gameCard.cacheY);
-                    cardItem.x = localPoint.x;
-                    cardItem.y = localPoint.y;
-                    cardItem.scaleX = 0.5;
-                    cardItem.scaleY = 0.5;
-                    //展示箭头
-                    UseCardTipsView.ins().getView().addChild(this._tipsArrow);
-                    this._tipsArrow.x = localPoint.x + cardItem.width / 4;
-                    this._tipsArrow.y = localPoint.y + cardItem.height / 4 * 3;
-                    const distance = Utils.getDistance(this._tipsArrow.x, this._tipsArrow.y, event.stageX, event.stageY);
-                    this._tipsArrow.height = distance;
-                    const skew = Utils.getPointAngle(this._tipsArrow.x, this._tipsArrow.y, event.stageX, event.stageY);
-                    this._tipsArrow.skewX = skew;
-                    this._tipsArrow.skewY = skew;
-                } else {
-                    cardItem.scaleX = 1;
-                    cardItem.scaleY = 1;
-                    cardItem.x = event.stageX - cardItem.width / 2;
-                    cardItem.y = event.stageY - cardItem.height / 2;
-                    UseCardTipsView.ins().getView().removeChild(this._tipsArrow);
-                }
+                UseCardView.ins().onMoving(event);
             }, this);
 
-            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
-                UseCardTipsView.ins().close();
-                this.view.addChild(cardItem);
-                const localPoint = this.view.rootToLocal(event.stageX - cardItem.width / 2, event.stageY - cardItem.height / 2);
-                cardItem.x = localPoint.x;
-                cardItem.y = localPoint.y;
-                //弃牌
-                if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
-                    GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
-                    return;
-                }
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, async (event: fairygui.DragEvent) => {
+                await UseCardView.ins().doUseCard(event);
 
-                //尝试使用卡牌
-                this.tryUseCard(event, gameCard).then((res) => {
-                    if (res === false) {
-                        this.restoreCard(gameCard);
-                    }
-                });
+                this.view.addChild(cardItem);
+                this.restoreCard(gameCard);
+
+                // return
+                // UseCardView.ins().close();
+                // this.view.addChild(cardItem);
+                // const localPoint = this.view.rootToLocal(event.stageX - cardItem.width / 2, event.stageY - cardItem.height / 2);
+                // cardItem.x = localPoint.x;
+                // cardItem.y = localPoint.y;
+                // //弃牌
+                // if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
+                //     GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
+                //     return;
+                // }
+
+                // //尝试使用卡牌
+                // this.tryUseCard(event, gameCard).then((res) => {
+                //     if (res === false) {
+                //         this.restoreCard(gameCard);
+                //     }
+                // });
             }, this);
         }
 
@@ -224,68 +201,68 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
     /**尝试使用卡牌 */
     private async tryUseCard(event: fairygui.DragEvent, gameCard: GameCard) {
-        const cardItem = gameCard.cardItem;
+        // const cardItem = gameCard.cardItem;
 
-        const mapPoint = new egret.Point();
+        // const mapPoint = new egret.Point();
 
-        //拖入到战场则说明要使用卡牌，然后根据卡牌使用条件来执行后续逻辑
-        if (!MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
-            return false;
-        }
+        // //拖入到战场则说明要使用卡牌，然后根据卡牌使用条件来执行后续逻辑
+        // if (!MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
+        //     return false;
+        // }
 
-        //费用不够
-        if (gameCard.cardInfo.fee > GameModel.ins().fee) {
-            TipsView.ins().showTips("费用不够!");
-            this.restoreCard(gameCard);
-            return;
-        }
+        // //费用不够
+        // if (gameCard.cardInfo.fee > GameModel.ins().fee) {
+        //     TipsView.ins().showTips("费用不够!");
+        //     this.restoreCard(gameCard);
+        //     return;
+        // }
 
-        const cardConfig = CardsModel.ins().getCardConfigById(gameCard.cardInfo.cardId);
-        const dataArr: number[] = [];
-        //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中
-        if (cardConfig.cardType === CardsPto.CardType.Building || cardConfig.cardType === CardsPto.CardType.Unit) {
-            dataArr.push(mapPoint.x, mapPoint.y);
-        }
+        // const cardConfig = gameCard.cardConfig;
+        // const dataArr: number[] = [];
+        // //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中
+        // if (cardConfig.cardType === CardsPto.CardType.Building || cardConfig.cardType === CardsPto.CardType.Unit) {
+        //     dataArr.push(mapPoint.x, mapPoint.y);
+        // }
 
-        const cardIndex = this.getCardIndex(cardItem)
-        const useType = cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        switch (useType) {
-            //无条件卡牌
-            case GamePto.UseConditionEnum.NoCondition:
-                GameModel.ins().C_USE_CARD(cardIndex, dataArr);
-                break;
-            //空格子
-            case GamePto.UseConditionEnum.EmptyBlock:
-            //友方单位
-            case GamePto.UseConditionEnum.FriendlyUnit:
-            //友方建筑
-            case GamePto.UseConditionEnum.FriendlyBuilding:
-            //敌方单位
-            case GamePto.UseConditionEnum.EnemyUnit:
-            //敌方建筑
-            case GamePto.UseConditionEnum.EnemyBuilding:
-            //所有单位
-            case GamePto.UseConditionEnum.AllUnit:
-            //所有建筑
-            case GamePto.UseConditionEnum.AllBuilding:
-            //友方地图实体
-            case GamePto.UseConditionEnum.FriendEntity:
-            //敌方地图实体
-            case GamePto.UseConditionEnum.EnemyEntity:
-            //所有地图实体
-            case GamePto.UseConditionEnum.AllEntity:
-                const tempArr = [];
-                // 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则), 选择完毕才可以执行
-                if (!await SelectTargetView.ins().open(cardItem, tempArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
-                    return false;
-                }
-                dataArr.push(...tempArr)
-                GameModel.ins().C_USE_CARD(cardIndex, dataArr);
-                break;
-            default:
-                console.error("未知的使用条件类型:", useType);
-                return false;
-        }
+        // const cardIndex = this.getCardIndex(cardItem)
+        // const useType = cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+        // switch (useType) {
+        //     //无条件卡牌
+        //     case GamePto.UseConditionEnum.NoCondition:
+        //         GameModel.ins().C_USE_CARD(cardIndex, dataArr);
+        //         break;
+        //     //空格子
+        //     case GamePto.UseConditionEnum.EmptyBlock:
+        //     //友方单位
+        //     case GamePto.UseConditionEnum.FriendlyUnit:
+        //     //友方建筑
+        //     case GamePto.UseConditionEnum.FriendlyBuilding:
+        //     //敌方单位
+        //     case GamePto.UseConditionEnum.EnemyUnit:
+        //     //敌方建筑
+        //     case GamePto.UseConditionEnum.EnemyBuilding:
+        //     //所有单位
+        //     case GamePto.UseConditionEnum.AllUnit:
+        //     //所有建筑
+        //     case GamePto.UseConditionEnum.AllBuilding:
+        //     //友方地图实体
+        //     case GamePto.UseConditionEnum.FriendEntity:
+        //     //敌方地图实体
+        //     case GamePto.UseConditionEnum.EnemyEntity:
+        //     //所有地图实体
+        //     case GamePto.UseConditionEnum.AllEntity:
+        //         const tempArr = [];
+        //         // 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则), 选择完毕才可以执行
+        //         if (!await SelectTargetView.ins().open(cardItem, tempArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
+        //             return false;
+        //         }
+        //         dataArr.push(...tempArr)
+        //         GameModel.ins().C_USE_CARD(cardIndex, dataArr);
+        //         break;
+        //     default:
+        //         console.error("未知的使用条件类型:", useType);
+        //         return false;
+        // }
     }
 
     /**
@@ -421,15 +398,5 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             cardItem.scaleX = 0.5;
             cardItem.scaleY = 0.5;
         }
-    }
-
-    /**获取卡牌下标 */
-    private getCardIndex(cardItem: CardItem) {
-        for (let index = 0; index < this._cards.length; index++) {
-            if (this._cards[index].cardItem === cardItem) {
-                return index;
-            }
-        }
-        return -1;
     }
 }

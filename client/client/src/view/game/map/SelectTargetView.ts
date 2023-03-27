@@ -1,9 +1,9 @@
-const AnyOwner = 0;
-const SelfOwner = 1;
-const EnemyOwner = 2;
-const AnyEntity = 0;
-const BuildingEntity = 1;
-const UnitEntity = 2;
+// const AnyOwner = 0;
+// const SelfOwner = 1;
+// const EnemyOwner = 2;
+// const AnyEntity = 0;
+// const BuildingEntity = 1;
+// const UnitEntity = 2;
 /**
  * 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则)
  * 选择完毕才可以执行

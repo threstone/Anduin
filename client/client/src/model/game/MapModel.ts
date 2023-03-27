@@ -25,6 +25,29 @@ class MapModel extends BaseModel {
         return this._serverData.eventCards;
     }
 
+    /**获得可以放置建筑位置 */
+    public getAccessPointForUseBuilding(uid: number) {
+        //英雄旁边
+        const pointSet = new Set<number>();
+        const hero = MapModel.ins().getHero(uid);
+        Utils.getAroundByDistance(hero.blockX, hero.blockY, 1).forEach((p) => {
+            if (!this.getEntityCardByPoint(p.x, p.y)) {
+                pointSet.add(p.x + p.y * MapWidth);
+            }
+        });
+        // 或者后三格
+        let y = GameModel.ins().isFirst ? MapHeight - 3 : 0;
+        const yMax = GameModel.ins().isFirst ? MapHeight : 3;
+        for (let x = 0; x < MapWidth; x++) {
+            for (; y < yMax; y++) {
+                if (!this.getEntityCardByPoint(x, y)) {
+                    pointSet.add(x + y * MapWidth);
+                }
+            }
+        }
+        return pointSet;
+    }
+
     /**是否有出兵建筑 */
     public hasCampBuilding(uid: number) {
         for (let index = 0; index < this.entityCards.length; index++) {
@@ -37,6 +60,21 @@ class MapModel extends BaseModel {
             }
         }
         return false;
+    }
+
+    /**获取到所有出兵建筑 */
+    public getCampBuildings(uid: number) {
+        const res: GamePto.ICard[] = [];
+        for (let index = 0; index < this.entityCards.length; index++) {
+            const entity = this.entityCards[index];
+            if (entity.uid === uid && entity.cardType === CardsPto.CardType.Building) {
+                const cardConfig = CardsModel.ins().getCardConfigById(entity.cardId);
+                if (cardConfig.detailType === CardsPto.BuilingType.Camp) {
+                    res.push(entity)
+                }
+            }
+        }
+        return res;
     }
 
     public onUseCard(msg: GamePto.S_USE_CARD) {

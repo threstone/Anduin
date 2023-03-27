@@ -2029,16 +2029,18 @@ declare namespace GamePto {
     /** UseConditionEnum enum. */
     enum UseConditionEnum {
         NoCondition = 0,
-        FriendlyUnit = 1,
-        FriendlyBuilding = 2,
-        EnemyUnit = 3,
-        EnemyBuilding = 4,
-        AllUnit = 5,
-        AllBuilding = 6,
-        FriendEntity = 7,
-        EnemyEntity = 8,
-        AllEntity = 9,
-        EmptyBlock = 10
+        BuidingCondition = 1,
+        UnitCondition = 2,
+        EmptyBlock = 3,
+        FriendlyUnit = 4,
+        FriendlyBuilding = 5,
+        EnemyUnit = 6,
+        EnemyBuilding = 7,
+        AllUnit = 8,
+        AllBuilding = 9,
+        FriendEntity = 10,
+        EnemyEntity = 11,
+        AllEntity = 12
     }
 
     /** Properties of a UserInfo. */

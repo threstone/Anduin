@@ -2,6 +2,7 @@ class GameCard {
 
     cardItem: BaseUI.UICardItem;
     cardInfo: GamePto.ICard;
+    cardConfig:CardInterface;
 
     cacheX: number;
     cacheY: number;
@@ -10,6 +11,7 @@ class GameCard {
         this.cardInfo = cardInfo;
         if (cardInfo.cardId !== -1) {
             this.cardItem = CardItem.getCardByServerCard(cardInfo);
+            this.cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         }
     }
 

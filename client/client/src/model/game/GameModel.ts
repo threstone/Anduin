@@ -15,6 +15,13 @@ class GameModel extends BaseModel {
     /**对方墓地卡牌数量 */
     targetDeadPoolNum: number;
 
+    /**先手方一定是在下方，所以后手方需要用这个变量做地图反转*/
+    isFirst:boolean;
+
+    public getHandCardIndex(card: GamePto.ICard) {
+        return this.handCards.indexOf(card);
+    }
+
     private onUseCard(msg: GamePto.S_USE_CARD) {
         //法术直接入墓地
         if (msg.card.cardType === CardsPto.CardType.Magic) {
@@ -75,6 +82,7 @@ class GameModel extends BaseModel {
         this.targetDeadPoolNum = 0;
         this.handCards = msg.cards;
         MapModel.ins().serverData = msg.mapData;
+        this.isFirst = msg.firstUid === UserModel.ins().uid;
         this.emit('S_GAME_START', msg);
     }
 
@@ -156,7 +164,7 @@ class GameModel extends BaseModel {
     }
 
     //游戏结束
-    private S_GAME_OVER(msg: GamePto.S_GAME_OVER){
+    private S_GAME_OVER(msg: GamePto.S_GAME_OVER) {
         this.emit('S_GAME_OVER', msg);
     }
 }

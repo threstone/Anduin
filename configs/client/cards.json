@@ -13,7 +13,7 @@
  "desc":"获得一点费用",
  "buffs":[],
  "isDerivation":1,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -31,7 +31,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -49,7 +49,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[2,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -67,7 +67,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[2,0],
  "effectId":0,
  "soundId":-1
   },
@@ -85,7 +85,7 @@
  "desc":"举盾：自身和相邻友军受到远程攻击时伤害-1",
  "buffs":[1],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[2,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -103,7 +103,7 @@
  "desc":"务农：回合开始阶段获得一点费用",
  "buffs":[0],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[2,0],
  "effectId":2,
  "soundId":-1
   },
@@ -121,7 +121,7 @@
  "desc":"对一个单位造成两点伤害",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[8,1],
+ "useCondition":[11,1],
  "effectId":1,
  "soundId":-1
   },
@@ -139,7 +139,7 @@
  "desc":"反制一张建筑卡牌或者单位卡牌",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -157,7 +157,7 @@
  "desc":"部署：对一个单位造成一点伤害",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[9,1],
+ "useCondition":[2,0,12,1],
  "effectId":3,
  "soundId":-1
   },
@@ -175,7 +175,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[1,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -193,7 +193,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -211,7 +211,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -229,7 +229,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -247,7 +247,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -265,7 +265,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -283,7 +283,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -301,7 +301,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -319,7 +319,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -337,7 +337,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -355,7 +355,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -373,7 +373,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -391,7 +391,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升1",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -409,7 +409,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升2",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -427,7 +427,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升3",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   },
@@ -445,7 +445,7 @@
  "desc":"务农：回合开始阶段获得一点费用\n晋升4",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0],
+ "useCondition":[0,0],
  "effectId":-1,
  "soundId":-1
   }

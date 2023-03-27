@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UIUseCardTipsCom extends fairygui.GComponent {
+	export class UIUseCardCom extends fairygui.GComponent {
 		public bg0:fairygui.GGraph;
 		public bg1:fairygui.GGraph;
 		public bg2:fairygui.GGraph;
@@ -13,8 +13,8 @@ module BaseUI {
 		public discardTips:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpoh89h48";
 
-		public static createInstance():UIUseCardTipsCom {
-			return <UIUseCardTipsCom>(fairygui.UIPackage.createObject("BaseUI", "UseCardTipsCom"));
+		public static createInstance():UIUseCardCom {
+			return <UIUseCardCom>(fairygui.UIPackage.createObject("BaseUI", "UseCardCom"));
 		}
 
 		protected constructFromXML(xml:any):void {
