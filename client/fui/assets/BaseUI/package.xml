@@ -112,6 +112,7 @@
     <component id="h89h45" name="EventItem.xml" path="/game/" exported="true"/>
     <component id="h89h46" name="GameOverCom.xml" path="/game/" exported="true"/>
     <component id="h89h48" name="UseCardTipsCom.xml" path="/game/" exported="true"/>
+    <image id="h89h49" name="use_arrow.png" path="/game/res/" exported="true" scale="9grid" scale9grid="27,91,54,269"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

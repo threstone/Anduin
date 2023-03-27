@@ -11,6 +11,8 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     private _cardPoolPosition: egret.Point;
     private _deadPoolPosition: egret.Point;
 
+    private _tipsArrow: fairygui.GImage;
+
     protected init() {
         this.view = GameSceneView.ins().getView().selfHand;;
         this._cards = [];
@@ -20,6 +22,9 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
         const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
         this._deadPoolPosition = this.view.rootToLocal(deadPoolRoot.x, deadPoolRoot.y);
+
+        this._tipsArrow = fairygui.UIPackage.createObject('BaseUI', 'use_arrow').asImage;
+        this._tipsArrow.setPivot(0.5, 1, true);
     }
 
     public open(): void {
@@ -90,7 +95,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const root = cardItem.localToRoot();
             cardItem.x = root.x;
             cardItem.y = root.y;
-            cardItem.setPivot(0, 0);
+            // cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
             GameSceneView.ins().getView().addChild(cardItem);
@@ -120,20 +125,24 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const gameCard = cards[index];
 
             const cardItem = gameCard.cardItem;
-            cardItem.setPivot(0, 0, true);
+            // cardItem.setPivot(0, 0, true);
             this.view.addChild(cardItem);
 
             //初始化悬浮事件
             const oldIndex = this.view.getChildIndex(cardItem);
             this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, () => {
-                this.view.setChildIndex(cardItem, 99);
-                cardItem.scaleX = 1;
-                cardItem.scaleY = 1;
+                if (this.isChildInView(cardItem)) {
+                    this.view.setChildIndex(cardItem, 99);
+                    cardItem.scaleX = 1;
+                    cardItem.scaleY = 1;
+                }
             }, this);
             this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
-                this.view.setChildIndex(cardItem, oldIndex);
-                cardItem.scaleX = 0.5;
-                cardItem.scaleY = 0.5;
+                if (this.isChildInView(cardItem)) {
+                    this.view.setChildIndex(cardItem, oldIndex);
+                    cardItem.scaleX = 0.5;
+                    cardItem.scaleY = 0.5;
+                }
             }, this);
 
             //初始化拖动事件
@@ -146,6 +155,33 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
                 cardItem.x = event.stageX - cardItem.width / 2;
                 cardItem.y = event.stageY - cardItem.height / 2;
                 UseCardTipsView.ins().open(gameCard);
+            }, this);
+
+            //初始化拖动事件
+            this.addEvent(cardItem, fairygui.DragEvent.DRAG_MOVING, (event: fairygui.DragEvent) => {
+                if ((gameCard.cardInfo.cardType === CardsPto.CardType.Building || gameCard.cardInfo.cardType === CardsPto.CardType.Unit) && MapView.ins().isInMap(event.stageX, event.stageY)) {
+                    //如果在地图中，卡牌还原位置然后展示出箭头指引
+                    const localPoint = this.view.localToRoot(gameCard.cacheX, gameCard.cacheY);
+                    cardItem.x = localPoint.x;
+                    cardItem.y = localPoint.y;
+                    cardItem.scaleX = 0.5;
+                    cardItem.scaleY = 0.5;
+                    //展示箭头
+                    UseCardTipsView.ins().getView().addChild(this._tipsArrow);
+                    this._tipsArrow.x = localPoint.x + cardItem.width / 4;
+                    this._tipsArrow.y = localPoint.y + cardItem.height / 4 * 3;
+                    const distance = Utils.getDistance(this._tipsArrow.x, this._tipsArrow.y, event.stageX, event.stageY);
+                    this._tipsArrow.height = distance;
+                    const skew = Utils.getPointAngle(this._tipsArrow.x, this._tipsArrow.y, event.stageX, event.stageY);
+                    this._tipsArrow.skewX = skew;
+                    this._tipsArrow.skewY = skew;
+                } else {
+                    cardItem.scaleX = 1;
+                    cardItem.scaleY = 1;
+                    cardItem.x = event.stageX - cardItem.width / 2;
+                    cardItem.y = event.stageY - cardItem.height / 2;
+                    UseCardTipsView.ins().getView().removeChild(this._tipsArrow);
+                }
             }, this);
 
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, (event: fairygui.DragEvent) => {
@@ -374,7 +410,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             gameCard.cardItem.x = root.x;
             gameCard.cardItem.y = root.y;
             gameCard.cardItem.canUse.visible = false;
-            gameCard.cardItem.setPivot(0, 0);
+            // gameCard.cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             this.updateCardsPostion(500);
             return GameSceneView.ins().useCardShow(gameCard);

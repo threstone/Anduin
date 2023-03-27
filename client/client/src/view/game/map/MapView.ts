@@ -190,7 +190,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         this.updateMapItem(sourceCardInfo);
         //如果单位死亡了可能就没有了，就不需要更新了
-        if(targetCardInfo){
+        if (targetCardInfo) {
             this.updateMapItem(targetCardInfo);
         }
     }
@@ -251,7 +251,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**更新地图信息 */
     public updateMap() {
-        const entityCards= MapModel.ins().entityCards;
+        const entityCards = MapModel.ins().entityCards;
         for (let index = 0; index < entityCards.length; index++) {
             const cardInfo = entityCards[index];
             const entity = this.entityMap.get(cardInfo.id);
@@ -348,10 +348,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 effect.play(-1);
             } else {
                 //计算角度
-                let skew = Utils.getPointAngle(sourceEntity.x, sourceEntity.y, targetEntity.x, targetEntity.y) - 90;
-                if (targetEntity.x >= sourceEntity.x) {
-                    skew += 180;
-                }
+                let skew = Utils.getPointAngle(sourceEntity.x, sourceEntity.y, targetEntity.x, targetEntity.y);
                 effect.skewX = skew - effectData.defaultRotation;
                 effect.skewY = skew - effectData.defaultRotation;
             }
@@ -370,18 +367,20 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     }
 
     /**传入一个位置，检查是否在地图范围中 */
-    public isInMap(x: number, y: number, mapPoint: egret.Point) {
+    public isInMap(x: number, y: number, mapPoint?: egret.Point) {
         const map = this.view;
         const position = map.localToRoot();
         if (x >= position.x && x <= position.x + map.width &&
             y >= position.y && y <= position.y + map.height) {
             const localPoint = this.view.rootToLocal(x, y);
-            if (this._isFirst) {
-                mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
-                mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
-            } else {
-                mapPoint.x = Math.floor((this.view.width - localPoint.x) / this.blockWidth);
-                mapPoint.y = Math.floor((this.view.height - localPoint.y) / this.blockHeight);
+            if (mapPoint) {
+                if (this._isFirst) {
+                    mapPoint.x = Math.floor(localPoint.x / this.blockWidth);
+                    mapPoint.y = Math.floor(localPoint.y / this.blockHeight);
+                } else {
+                    mapPoint.x = Math.floor((this.view.width - localPoint.x) / this.blockWidth);
+                    mapPoint.y = Math.floor((this.view.height - localPoint.y) / this.blockHeight);
+                }
             }
             return true;
         }
