@@ -16,10 +16,15 @@ class GameModel extends BaseModel {
     targetDeadPoolNum: number;
 
     /**先手方一定是在下方，所以后手方需要用这个变量做地图反转*/
-    isFirst:boolean;
+    isFirst: boolean;
 
     public getHandCardIndex(card: GamePto.ICard) {
-        return this.handCards.indexOf(card);
+        for (let index = 0; index < this.handCards.length; index++) {
+            const tempCard = this.handCards[index];
+            if (tempCard.id === card.id) {
+                return index;
+            }
+        }
     }
 
     private onUseCard(msg: GamePto.S_USE_CARD) {
@@ -88,7 +93,9 @@ class GameModel extends BaseModel {
 
     //替换手牌
     private S_REPLACE_CARDS(msg: GamePto.S_REPLACE_CARDS) {
-        this.handCards = msg.cards;
+        if (msg.uid === UserModel.ins().uid) {
+            this.handCards = msg.cards;
+        }
         this.emit('S_REPLACE_CARDS', msg);
     }
 

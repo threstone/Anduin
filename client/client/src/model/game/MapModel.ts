@@ -36,10 +36,10 @@ class MapModel extends BaseModel {
             }
         });
         // 或者后三格
-        let y = GameModel.ins().isFirst ? MapHeight - 3 : 0;
+        let yStart = GameModel.ins().isFirst ? MapHeight - 3 : 0;
         const yMax = GameModel.ins().isFirst ? MapHeight : 3;
         for (let x = 0; x < MapWidth; x++) {
-            for (; y < yMax; y++) {
+            for (let y = yStart; y < yMax; y++) {
                 if (!this.getEntityCardByPoint(x, y)) {
                     pointSet.add(x + y * MapWidth);
                 }

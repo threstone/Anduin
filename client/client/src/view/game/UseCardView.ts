@@ -72,8 +72,8 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         this._resolve = null;
         this._useData = [];
 
-        this._tipsComponts = [];
         this.isShowDeadPool(true);
+        this.clearUseTips();
     }
 
     private onClick(evt: egret.TouchEvent) {
@@ -87,6 +87,10 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
     }
 
     public onMoving(event: fairygui.DragEvent) {
+        if (this._card === null) {
+            return;
+        }
+        
         const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
         if (conditionType === GamePto.UseConditionEnum.NoCondition) {
             return;
@@ -179,9 +183,11 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
     }
 
     /**检查传入的位置是否满足当前条件 */
-    private checkPoint(x: number, y: number) {
+    private checkPoint(x: number, y: number): boolean {
         const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        const selectNum = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+        let selectNum = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+        const allowRepeat = selectNum < 0;
+        selectNum = Math.abs(selectNum);
 
         let isMatch = false;
         const entity = MapModel.ins().getEntityCardByPoint(x, y);
@@ -249,14 +255,21 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 break;
             default:
                 this.close();
-                return;
+                return false;
         }
 
         //不匹配弹出提示
         if (!isMatch) {
             TipsView.ins().showTips(this._tips);
             this.close();
-            return;
+            return false;
+        }
+
+        //重复判断
+        const pointData = x + MapWidth * y;
+        if (!allowRepeat && this._useData.indexOf(pointData) !== -1) {
+            TipsView.ins().showTips('不允许选择重复的目标');
+            return false;
         }
 
         //匹配的话
@@ -267,94 +280,129 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         }
 
         if (conditionType !== GamePto.UseConditionEnum.NoCondition) {
-            this._useData.push(x, y);
+            this._useData.push(pointData);
         }
         return true;
     }
 
     /**使用卡牌 */
     private useCard() {
+        //数据展开
+        const len = this._useData.length;
+        for (let index = len - 1; index > -1; index--) {
+            const position = this._useData[index];
+            this._useData[index] = position % MapWidth;;
+            this._useData[index + 1] = Math.floor(position / MapWidth);
+        }
         GameModel.ins().C_USE_CARD(GameModel.ins().getHandCardIndex(this._card.cardInfo), this._useData);
         this.close();
     }
 
-    /**展示提示 */
-    private showUseTips() {
-        //根据卡牌使用条件展示出对应的提示,是建筑卡或者单位卡限制,那么提示放置位置
+    /**在地图上放置一个提示对象 */
+    private showTipsInMap(x: number, y: number) {
+        const position = MapView.ins().getScenePoint(x, y);
+        const tips = BaseUI.UIMoveTips.createInstance();
+        tips.x = position.x;
+        tips.y = position.y;
+        this._tipsComponts.push(tips);
+        this.view.addChild(tips);
+    }
 
-        //如果是目标选择限制则高亮低亮相应目标
-        let changeGray = true;
-        let filterOwner = AnyOwner;
-        let filterEntity = AnyEntity;
+    /**
+     * 展示提示 
+     * 根据卡牌使用条件展示出对应的提示,是建筑卡或者单位卡限制,那么提示放置位置
+     * 如果是目标选择限制则高亮低亮相应目标
+     */
+    private showUseTips() {
         const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+
+        let selectNum = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+        const allowRepeat = selectNum < 0;
+        selectNum = Math.abs(selectNum);
         switch (conditionType) {
             //无条件
             case GamePto.UseConditionEnum.NoCondition:
-                changeGray = false;
+                this._tips = '拖入战场以使用';
                 break;
             //建筑部署限制
             case GamePto.UseConditionEnum.BuidingCondition:
-                changeGray = false;
-                break;
+                {
+                    this._tips = '请选择一个位置部署建筑';
+                    const pointSet = MapModel.ins().getAccessPointForUseBuilding(this._card.cardInfo.uid);
+                    pointSet.forEach((point) => {
+                        const x = point % MapWidth;
+                        const y = Math.floor(point / MapWidth);
+                        this.showTipsInMap(x, y);
+                    });
+                    break;
+                }
             //单位部署限制
             case GamePto.UseConditionEnum.UnitCondition:
-                changeGray = false;
+                this._tips = '请选择一个位置部署单位';
+                const pointSet = new Set<number>();
+                const buildings = MapModel.ins().getCampBuildings(this._card.cardInfo.uid);
+                for (let index = 0; index < buildings.length; index++) {
+                    const building = buildings[index];
+                    Utils.getAroundByDistance(building.blockX, building.blockY, 1).forEach((p) => {
+                        if (!MapModel.ins().getEntityCardByPoint(p.x, p.y)) {
+                            pointSet.add(p.x + p.y * MapWidth);
+                        }
+                    });
+                }
+                pointSet.forEach((point) => {
+                    const x = point % MapWidth;
+                    const y = Math.floor(point / MapWidth);
+                    this.showTipsInMap(x, y);
+                });
                 break;
             //空格子
             case GamePto.UseConditionEnum.EmptyBlock:
                 this._tips = '请选择一个未被占用的位置';
                 break;
-                break;
             //友方单位
             case GamePto.UseConditionEnum.FriendlyUnit:
                 this._tips = '请选择友方单位';
-                filterOwner = SelfOwner;
-                filterEntity = UnitEntity;
+                this.highLightEntity(SelfOwner, UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //友方建筑
             case GamePto.UseConditionEnum.FriendlyBuilding:
                 this._tips = '请选择友方建筑';
-                filterOwner = SelfOwner;
-                filterEntity = BuildingEntity;
+                this.highLightEntity(SelfOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方单位
             case GamePto.UseConditionEnum.EnemyUnit:
                 this._tips = '请选择敌方单位';
-                filterOwner = EnemyOwner;
-                filterEntity = UnitEntity;
+                this.highLightEntity(EnemyOwner, UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方建筑
             case GamePto.UseConditionEnum.EnemyBuilding:
                 this._tips = '请选择敌方建筑';
-                filterOwner = EnemyOwner;
-                filterEntity = BuildingEntity;
+                this.highLightEntity(EnemyOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有单位
             case GamePto.UseConditionEnum.AllUnit:
                 this._tips = '请选择单位';
-                filterEntity = UnitEntity;
-                break;
+                this.highLightEntity(AnyOwner, UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有建筑
             case GamePto.UseConditionEnum.AllBuilding:
                 this._tips = '请选择建筑';
-                filterEntity = BuildingEntity;
+                this.highLightEntity(AnyOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //友方地图实体
             case GamePto.UseConditionEnum.FriendEntity:
                 this._tips = '请选择友方单位或建筑';
-                filterOwner = SelfOwner;
-                break;
+                this.highLightEntity(SelfOwner, AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方地图实体
             case GamePto.UseConditionEnum.EnemyEntity:
                 this._tips = '请选择敌方单位或建筑';
-                filterOwner = EnemyOwner;
-                break;
+                this.highLightEntity(EnemyOwner, AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有地图实体
             case GamePto.UseConditionEnum.AllEntity:
                 this._tips = '请选择单位或建筑';
+                this.highLightEntity(AnyOwner, AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             default:
                 console.error("未知的使用条件类型:", conditionType);
@@ -362,37 +410,48 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 return;
         }
 
-        if (changeGray) {
-            const entitys = MapModel.ins().entityCards;
-            for (let index = 0; index < entitys.length; index++) {
-                const entityCard = entitys[index];
-                const mapEntity = MapView.ins().entityMap.get(entityCard.id);
-                if (!mapEntity) {
-                    console.error(`为在场景中获取到指定的entity ${entityCard}`);
-                    this.close();
-                    return;
-                }
-                //低亮
-                mapEntity.filters = Utils.getFilterByColor(0x666666);
-                //空格子的话直接全部低亮
-                if (GamePto.UseConditionEnum.EmptyBlock === conditionType) {
-                    continue;
-                }
-                if (filterOwner !== AnyOwner && (entityCard.uid === UserModel.ins().uid) !== (filterOwner === SelfOwner)) {
-                    continue;
-                }
-                if (filterEntity !== AnyEntity && (entityCard.cardType === CardsPto.CardType.Building) !== (filterEntity === BuildingEntity)) {
-                    continue;
-                }
-                //高亮
-                mapEntity.filters = Utils.getFilterByColor(0xFFFFFF);
-            }
+        if (selectNum > 1) {
+            this._tips += `(${allowRepeat ? '允许重复选择同一单位' : '禁止重复选择同一单位'})`;
         }
+        this.view.mapTips.text = this._tips;
+    }
 
-        // if (this._targetNum > 1) {
-        //     this._tips += `(${this._allowReapet ? '允许重复选择同一单位' : '禁止重复选择同一单位'})`;
-        // }
-        // this.view.tips.text = this._tips;
+    /**高亮地图指定元素 */
+    private highLightEntity(filterOwner: number, filterEntity: number, conditionType: number, selectNum: number, allowRepeat: boolean) {
+        const entitys = MapModel.ins().entityCards;
+        for (let index = 0; index < entitys.length; index++) {
+            const entityCard = entitys[index];
+            const mapEntity = MapView.ins().entityMap.get(entityCard.id);
+            if (!mapEntity) {
+                console.error(`为在场景中获取到指定的entity ${entityCard}`);
+                this.close();
+                return;
+            }
+            //低亮
+            mapEntity.filters = Utils.getFilterByColor(0x666666);
+            //空格子的话直接全部低亮
+            if (GamePto.UseConditionEnum.EmptyBlock === conditionType) {
+                continue;
+            }
+
+            //所有者筛选
+            if (filterOwner !== AnyOwner && (entityCard.uid === UserModel.ins().uid) !== (filterOwner === SelfOwner)) {
+                continue;
+            }
+
+            //类型筛选
+            if (filterEntity !== AnyEntity && (entityCard.cardType === CardsPto.CardType.Building) !== (filterEntity === BuildingEntity)) {
+                continue;
+            }
+
+            //重复筛选
+            if (selectNum > 1 && !allowRepeat && this._useData.indexOf(entityCard.blockX + entityCard.blockY * MapWidth) !== -1) {
+                continue;
+            }
+
+            //高亮
+            mapEntity.filters = Utils.getFilterByColor(0xFFFFFF);
+        }
     }
 
     /**移除提示 */

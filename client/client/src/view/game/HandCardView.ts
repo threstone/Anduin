@@ -157,7 +157,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
 
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, async (event: fairygui.DragEvent) => {
                 await UseCardView.ins().doUseCard(event);
-
                 this.view.addChild(cardItem);
                 this.restoreCard(gameCard);
 

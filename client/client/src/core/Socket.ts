@@ -37,7 +37,7 @@ class Socket extends BaseClass {
     */
     public sendProtoMsg(msg: GameProtoClass): void {
         let msgAny: any = msg;
-        console.log(`send message: cmd:${msg.cmd} scmd:${msg.scmd}`);
+        console.log(`send message: cmd:${msg.cmd} scmd:${msg.scmd} ${JSON.stringify(msg)}`);
 
         let buffer = MessageManager.getProtoCls(msgAny.__proto__.cmd, msgAny.__proto__.scmd).encode(msg).finish();
 
