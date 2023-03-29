@@ -19,21 +19,22 @@
   },
 {
  "cardId":1,
- "cardName":"安度因",
+ "cardName":"神圣骑士王",
  "powerId":1,
  "cardType":0,
  "type2":1,
  "detailType":0,
- "attack":4,
- "health":10,
+ "attack":3,
+ "health":22,
  "fee":0,
- "quality":1,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "buffs":[],
+ "quality":3,
+ "desc":"神圣护甲：受到的所有伤害-1\n英雄集结：5费及以上的卡牌需要的费用降低1",
+ "buffs":[3,4],
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":2,
@@ -51,7 +52,8 @@
  "isDerivation":0,
  "useCondition":[2,1],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":3,
@@ -60,7 +62,7 @@
  "cardType":1,
  "type2":1,
  "detailType":1,
- "attack":1,
+ "attack":2,
  "health":2,
  "fee":1,
  "quality":2,
@@ -69,7 +71,8 @@
  "isDerivation":0,
  "useCondition":[2,1],
  "effectId":0,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":4,
@@ -87,7 +90,8 @@
  "isDerivation":0,
  "useCondition":[2,1],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":5,
@@ -105,7 +109,8 @@
  "isDerivation":0,
  "useCondition":[2,1],
  "effectId":2,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":6,
@@ -159,7 +164,8 @@
  "isDerivation":0,
  "useCondition":[2,1,12,1],
  "effectId":3,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":9,
@@ -181,21 +187,22 @@
   },
 {
  "cardId":10,
- "cardName":"农夫9",
+ "cardName":"冠军骑士",
  "powerId":1,
- "cardType":4,
+ "cardType":1,
  "type2":1,
- "detailType":1,
- "attack":8,
- "health":2,
- "fee":1,
- "quality":1,
- "desc":"务农：回合开始阶段获得一点费用\n晋升1",
- "buffs":[],
+ "detailType":0,
+ "attack":4,
+ "health":8,
+ "fee":5,
+ "quality":2,
+ "desc":"机动：移动力+1\n冲锋：本回合每移动一格，攻击力+1，且对目标背后的单位造成同等伤害",
+ "buffs":[2],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":3
   },
 {
  "cardId":11,
@@ -213,7 +220,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":12,
@@ -231,7 +239,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":13,
@@ -249,7 +258,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":14,
@@ -267,7 +277,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":15,
@@ -285,7 +296,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":16,
@@ -303,7 +315,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":17,
@@ -321,7 +334,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":18,
@@ -339,7 +353,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":19,
@@ -357,7 +372,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":20,
@@ -375,7 +391,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":21,
@@ -393,7 +410,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":22,
@@ -411,7 +429,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":23,
@@ -429,7 +448,8 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   },
 {
  "cardId":24,
@@ -447,6 +467,7 @@
  "isDerivation":0,
  "useCondition":[0,0],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "movement":2
   }
 ]

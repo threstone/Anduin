@@ -19,7 +19,7 @@ export class WuNong extends GameBuff {
 
     public deleteBuff(card: BuildingCard, buff: BuffData): void {
         card.deleteBuff(buff);
-        card.deleteFunById(card.onDamageFuns, buff.id);
+        card.deleteFunById(card.onRoundStartFuns, buff.id);
     }
 
     /**回合开始时费用加1 */

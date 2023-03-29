@@ -89,4 +89,9 @@ export class CardInterface {
      * 下标1数据表示作用者数量,有的卡可能要选择多个目标,如果是负数则说明可以选择同一单位,如果是正数则不允许选择重复的单位
      */
     useCondition: number[];
+
+    /**
+     * 移动力(负值代表飞行)
+     */
+    movement?: number;
 }

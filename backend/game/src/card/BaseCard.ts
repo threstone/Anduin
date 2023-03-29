@@ -26,6 +26,7 @@ export class BaseCard implements CardInterface {
     buffs: number[];
     isDerivation: number;
     useCondition: number[];
+    movement: number;
 
     public static create(cardId: number) {
         return new (this as any)(cardId);

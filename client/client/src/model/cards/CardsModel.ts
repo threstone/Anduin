@@ -20,7 +20,7 @@ class CardsModel extends BaseModel {
 
     /**返回卡牌可移动步数,负值代表飞行 */
     public getCardMoveStep(cardInfo: CardInterface) {
-        return 2;
+        return cardInfo.movement;
     }
 
     /**返回卡牌可攻击距离 */

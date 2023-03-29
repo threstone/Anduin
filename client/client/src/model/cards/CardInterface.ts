@@ -16,4 +16,8 @@ interface CardInterface {
     useCondition: number[];
     effectId: number;
     soundId: number;
+    /**
+     * 移动力(负值代表飞行)
+     */
+    movement?: number;
 }

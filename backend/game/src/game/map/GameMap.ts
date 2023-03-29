@@ -236,7 +236,7 @@ export class GameMap {
 
     /**获取卡牌可移动步数 */
     public getCardMoveStep(card: UnitCard) {
-        return 2;
+        return card.movement;
     }
 
     /**获取可以走去的位置 */
