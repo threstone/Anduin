@@ -2,6 +2,7 @@ class BuildingItem {
     static getItem(cardInfo: GamePto.ICard, cardConfig: CardInterface) {
         const building = BaseUI.UIMapBuilding.createInstance();
         Utils.defineTextFieldSet(building.healthText, cardConfig.health);
+        building.setPivot(0.5, 0.5, true);
 
         building.healthText.text = `${cardInfo.health}`;
         building.info.tempCardName.text = `${cardConfig.cardName}`;

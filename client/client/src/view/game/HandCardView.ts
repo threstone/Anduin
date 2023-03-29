@@ -95,7 +95,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const root = cardItem.localToRoot();
             cardItem.x = root.x;
             cardItem.y = root.y;
-            // cardItem.setPivot(0, 0);
+            cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             const deadPoolRoot = SelfInfoBox.ins().getView().deadPoolBg.localToRoot();
             GameSceneView.ins().getView().addChild(cardItem);
@@ -125,7 +125,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             const gameCard = cards[index];
 
             const cardItem = gameCard.cardItem;
-            // cardItem.setPivot(0, 0, true);
+            cardItem.setPivot(0, 0, true);
             this.view.addChild(cardItem);
 
             //初始化悬浮事件
@@ -156,28 +156,11 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             }, this);
 
             this.addEvent(cardItem, fairygui.DragEvent.DRAG_END, async (event: fairygui.DragEvent) => {
-                await UseCardView.ins().doUseCard(event);
+                if (UseCardView.ins().isOnStage()) {
+                    await UseCardView.ins().doUseCard(event);
+                }
                 this.view.addChild(cardItem);
                 this.restoreCard(gameCard);
-
-                // return
-                // UseCardView.ins().close();
-                // this.view.addChild(cardItem);
-                // const localPoint = this.view.rootToLocal(event.stageX - cardItem.width / 2, event.stageY - cardItem.height / 2);
-                // cardItem.x = localPoint.x;
-                // cardItem.y = localPoint.y;
-                // //弃牌
-                // if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
-                //     GameModel.ins().C_DISCARD(this.getCardIndex(cardItem));
-                //     return;
-                // }
-
-                // //尝试使用卡牌
-                // this.tryUseCard(event, gameCard).then((res) => {
-                //     if (res === false) {
-                //         this.restoreCard(gameCard);
-                //     }
-                // });
             }, this);
         }
 
@@ -196,72 +179,6 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         cardItem.y = gameCard.cacheY;
         cardItem.scaleY = 0.5;
         cardItem.scaleX = 0.5;
-    }
-
-    /**尝试使用卡牌 */
-    private async tryUseCard(event: fairygui.DragEvent, gameCard: GameCard) {
-        // const cardItem = gameCard.cardItem;
-
-        // const mapPoint = new egret.Point();
-
-        // //拖入到战场则说明要使用卡牌，然后根据卡牌使用条件来执行后续逻辑
-        // if (!MapView.ins().isInMap(event.stageX, event.stageY, mapPoint)) {
-        //     return false;
-        // }
-
-        // //费用不够
-        // if (gameCard.cardInfo.fee > GameModel.ins().fee) {
-        //     TipsView.ins().showTips("费用不够!");
-        //     this.restoreCard(gameCard);
-        //     return;
-        // }
-
-        // const cardConfig = gameCard.cardConfig;
-        // const dataArr: number[] = [];
-        // //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中
-        // if (cardConfig.cardType === CardsPto.CardType.Building || cardConfig.cardType === CardsPto.CardType.Unit) {
-        //     dataArr.push(mapPoint.x, mapPoint.y);
-        // }
-
-        // const cardIndex = this.getCardIndex(cardItem)
-        // const useType = cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        // switch (useType) {
-        //     //无条件卡牌
-        //     case GamePto.UseConditionEnum.NoCondition:
-        //         GameModel.ins().C_USE_CARD(cardIndex, dataArr);
-        //         break;
-        //     //空格子
-        //     case GamePto.UseConditionEnum.EmptyBlock:
-        //     //友方单位
-        //     case GamePto.UseConditionEnum.FriendlyUnit:
-        //     //友方建筑
-        //     case GamePto.UseConditionEnum.FriendlyBuilding:
-        //     //敌方单位
-        //     case GamePto.UseConditionEnum.EnemyUnit:
-        //     //敌方建筑
-        //     case GamePto.UseConditionEnum.EnemyBuilding:
-        //     //所有单位
-        //     case GamePto.UseConditionEnum.AllUnit:
-        //     //所有建筑
-        //     case GamePto.UseConditionEnum.AllBuilding:
-        //     //友方地图实体
-        //     case GamePto.UseConditionEnum.FriendEntity:
-        //     //敌方地图实体
-        //     case GamePto.UseConditionEnum.EnemyEntity:
-        //     //所有地图实体
-        //     case GamePto.UseConditionEnum.AllEntity:
-        //         const tempArr = [];
-        //         // 有些卡牌需要选择某些单位(友方、敌方或者都可以选择则), 选择完毕才可以执行
-        //         if (!await SelectTargetView.ins().open(cardItem, tempArr, useType, cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex])) {
-        //             return false;
-        //         }
-        //         dataArr.push(...tempArr)
-        //         GameModel.ins().C_USE_CARD(cardIndex, dataArr);
-        //         break;
-        //     default:
-        //         console.error("未知的使用条件类型:", useType);
-        //         return false;
-        // }
     }
 
     /**
@@ -306,9 +223,12 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         }
         const y = (this.view.height - cardHeight) / 2 - cardHeight;
         for (let index = 0; index < cardsLen; index++) {
-            const cardItem = this._cards[index].cardItem;
+            const gameCard = this._cards[index];
+            const cardItem = gameCard.cardItem;
+            gameCard.cacheX = startX + index * cardWidth + cardSpacing * index;
+            gameCard.cacheY = y;
             egret.Tween.get(cardItem).to({
-                x: startX + index * cardWidth + cardSpacing * index, y: y, scaleX: scale, scaleY: scale, skewX: 0, skewY: 0, pivotY: 1
+                x: gameCard.cacheX, y: gameCard.cacheY, scaleX: scale, scaleY: scale, skewX: 0, skewY: 0, pivotY: 1
             }, time);
 
         }
@@ -386,7 +306,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             gameCard.cardItem.x = root.x;
             gameCard.cardItem.y = root.y;
             gameCard.cardItem.canUse.visible = false;
-            // gameCard.cardItem.setPivot(0, 0);
+            gameCard.cardItem.setPivot(0, 0);
             this.removeCard(gameCard);
             this.updateCardsPostion(500);
             return GameSceneView.ins().useCardShow(gameCard);

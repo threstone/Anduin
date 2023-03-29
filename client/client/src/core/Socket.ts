@@ -37,9 +37,9 @@ class Socket extends BaseClass {
     */
     public sendProtoMsg(msg: GameProtoClass): void {
         let msgAny: any = msg;
-        console.log(`send message: cmd:${msg.cmd} scmd:${msg.scmd} ${JSON.stringify(msg)}`);
-
-        let buffer = MessageManager.getProtoCls(msgAny.__proto__.cmd, msgAny.__proto__.scmd).encode(msg).finish();
+        const protoCls = MessageManager.getProtoCls(msgAny.__proto__.cmd, msgAny.__proto__.scmd);
+        let buffer = protoCls.encode(msg).finish();
+        console.log(`send message: ${protoCls.name} cmd:${msg.cmd} scmd:${msg.scmd} data: ${JSON.stringify(msg)}`);
 
         let byteArray = new egret.ByteArray(buffer);
         byteArray.endian = egret.Endian.LITTLE_ENDIAN;

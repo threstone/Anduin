@@ -17,6 +17,8 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
     private _tipsComponts: fairygui.GComponent[] = [];
     private _tips: string;
 
+    private _showEntity: boolean = false;
+
     protected init() {
         this.view = BaseUI.UIUseCardCom.createInstance();
 
@@ -49,8 +51,6 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         super.open();
         this._card = card;
         const cardItem = card.cardItem;
-        card.cacheX = cardItem.x;
-        card.cacheY = cardItem.y;
 
         cardItem.scaleX = 1;
         cardItem.scaleY = 1;
@@ -60,7 +60,6 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
 
         this.observe('S_ROUND_END_EVENT', this.close);
         this.AddClick(this.view, this.onClick);
-
     }
 
     public close(): void {
@@ -68,9 +67,12 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         this._card = null;
         this._conditionIndex = 0;
         this._curConditionSelectNum = 0;
-        this._resolve();
+        if (this._resolve) {
+            this._resolve();
+        }
         this._resolve = null;
         this._useData = [];
+        this._showEntity = false;
 
         this.isShowDeadPool(true);
         this.clearUseTips();
@@ -90,7 +92,7 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         if (this._card === null) {
             return;
         }
-        
+
         const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
         if (conditionType === GamePto.UseConditionEnum.NoCondition) {
             return;
@@ -184,8 +186,8 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
 
     /**检查传入的位置是否满足当前条件 */
     private checkPoint(x: number, y: number): boolean {
-        const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        let selectNum = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+        const conditionType = this._card.cardConfig.useCondition[this._conditionIndex * 2 + GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+        let selectNum = this._card.cardConfig.useCondition[this._conditionIndex * 2 + GamePto.UseConditionIndexEnum.UseConditionValueIndex];
         const allowRepeat = selectNum < 0;
         selectNum = Math.abs(selectNum);
 
@@ -198,17 +200,25 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 break;
             //建筑部署限制
             case GamePto.UseConditionEnum.BuidingCondition:
+                if (entity) {
+                    return false;
+                }
                 const pointSet = MapModel.ins().getAccessPointForUseBuilding(this._card.cardInfo.uid);
                 isMatch = pointSet.has(x + y * MapWidth);
+                this._showEntity = isMatch;
                 break;
             //单位部署限制
             case GamePto.UseConditionEnum.UnitCondition:
+                if (entity) {
+                    return false;
+                }
                 const buildings = MapModel.ins().getCampBuildings(this._card.cardInfo.uid);
                 for (let index = 0; index < buildings.length; index++) {
                     const building = buildings[index];
                     //距离出兵建筑1格
                     if (Math.abs(building.blockX - x) + Math.abs(building.blockY - y) === 1) {
                         isMatch = true;
+                        this._showEntity = true;
                         break;
                     }
                 }
@@ -254,14 +264,12 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 isMatch = entity != null;
                 break;
             default:
-                this.close();
                 return false;
         }
 
         //不匹配弹出提示
         if (!isMatch) {
             TipsView.ins().showTips(this._tips);
-            this.close();
             return false;
         }
 
@@ -291,8 +299,8 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         const len = this._useData.length;
         for (let index = len - 1; index > -1; index--) {
             const position = this._useData[index];
-            this._useData[index] = position % MapWidth;;
-            this._useData[index + 1] = Math.floor(position / MapWidth);
+            this._useData[index * 2] = position % MapWidth;;
+            this._useData[index * 2 + 1] = Math.floor(position / MapWidth);
         }
         GameModel.ins().C_USE_CARD(GameModel.ins().getHandCardIndex(this._card.cardInfo), this._useData);
         this.close();
@@ -314,9 +322,21 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
      * 如果是目标选择限制则高亮低亮相应目标
      */
     private showUseTips() {
-        const conditionType = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+        //如果使用的卡牌是建筑卡或者单位卡
+        if (this._showEntity && (this._card.cardInfo.cardType === CardsPto.CardType.Building || this._card.cardInfo.cardType === CardsPto.CardType.Unit)) {
+            const x = this._useData[0] % MapWidth;;
+            const y = Math.floor(this._useData[0] / MapWidth);
+            const mapPoint = MapView.ins().getMapPoint(x, y);
+            const cardItem = MapItem.getItem(this._card.cardInfo);
+            cardItem.alpha = 0.7;
+            cardItem.x = mapPoint.x + MapView.ins().getView().x;
+            cardItem.y = mapPoint.y + MapView.ins().getView().y;
+            this._tipsComponts.push(cardItem);
+            this.view.addChildAt(cardItem, 0);
+        }
 
-        let selectNum = this._card.cardConfig.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+        const conditionType = this._card.cardConfig.useCondition[this._conditionIndex * 2 + GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+        let selectNum = this._card.cardConfig.useCondition[this._conditionIndex * 2 + GamePto.UseConditionIndexEnum.UseConditionValueIndex];
         const allowRepeat = selectNum < 0;
         selectNum = Math.abs(selectNum);
         switch (conditionType) {

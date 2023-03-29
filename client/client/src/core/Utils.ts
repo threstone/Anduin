@@ -121,9 +121,11 @@ class Utils {
         const result: { x: number, y: number }[] = [];
         for (let x = baseX - distance; x <= baseX + distance; x++) {
             for (let y = baseY - distance; y <= baseY + distance; y++) {
-                const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
-                if (tempDistance !== 0 && x >= 0 && x < MapWidth && y >= 0 && y < MapHeight) {
-                    result.push({ x, y });
+                if (x >= 0 && x < MapWidth && y >= 0 && y < MapHeight) {
+                    const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
+                    if (tempDistance !== 0 && tempDistance <= distance) {
+                        result.push({ x, y });
+                    }
                 }
             }
         }

@@ -26,7 +26,9 @@ class MessageManager {
                 //服务器的代码需要注册一下
                 if (key.startsWith("S_")) {
                     if (handle && handle[key]) {
-                        MessageManager._recMsgHandlerObj[protoIndex] = handle[key].bind(handle)
+                        const handler = handle[key].bind(handle);
+                        handler._name = key;
+                        MessageManager._recMsgHandlerObj[protoIndex] = handler;
                     } else {
                         console.error("服务端协议:", `cmd:${protoClass.prototype.cmd}    scmd:${protoClass.prototype.scmd}`, "  ", key, "未找到处理函数")
                     }
@@ -56,8 +58,9 @@ class MessageManager {
         }
         try {
             let data = MessageManager.getProtoCls(cmd, scmd).decode(msg.bytes);
-            console.log(`rcv message: cmd:${cmd} scmd:${scmd} data:${JSON.stringify(data)}`);
-            MessageManager._recMsgHandlerObj[cmd + "_" + scmd](data);
+            const handler = MessageManager._recMsgHandlerObj[cmd + "_" + scmd];
+            handler(data);
+            console.log(`rcv message : ${handler._name} cmd:${cmd} scmd:${scmd} data: ${JSON.stringify(data)}`);
         } catch (error) {
             console.error(error);
         }

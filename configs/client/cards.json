@@ -49,7 +49,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[2,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1
   },
@@ -67,7 +67,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[2,0],
+ "useCondition":[2,1],
  "effectId":0,
  "soundId":-1
   },
@@ -85,7 +85,7 @@
  "desc":"举盾：自身和相邻友军受到远程攻击时伤害-1",
  "buffs":[1],
  "isDerivation":0,
- "useCondition":[2,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1
   },
@@ -103,7 +103,7 @@
  "desc":"务农：回合开始阶段获得一点费用",
  "buffs":[0],
  "isDerivation":0,
- "useCondition":[2,0],
+ "useCondition":[2,1],
  "effectId":2,
  "soundId":-1
   },
@@ -157,7 +157,7 @@
  "desc":"部署：对一个单位造成一点伤害",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[2,0,12,1],
+ "useCondition":[2,1,12,1],
  "effectId":3,
  "soundId":-1
   },
@@ -175,7 +175,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[1,0],
+ "useCondition":[1,1],
  "effectId":-1,
  "soundId":-1
   },

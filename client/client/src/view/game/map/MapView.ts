@@ -38,8 +38,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     }
 
     public addMapItem(cardInfo: GamePto.ICard) {
-        const cardItem = MapItem.getItem(cardInfo)
-        cardItem.setPivot(0.5, 0.5, true);
+        const cardItem = MapItem.getItem(cardInfo);
+        // cardItem.setPivot(0.5, 0.5, true);
         this.entityMap.set(cardInfo.id, cardItem);
         this.view.addChild(cardItem);
 

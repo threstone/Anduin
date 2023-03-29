@@ -47,6 +47,9 @@ export class GameUser {
     /**是否换牌 */
     isReplace: boolean;
 
+    /**是否先手 */
+    isFirst: boolean;
+
     /**疲劳值 */
     private _fatigue: number;
 
@@ -97,7 +100,8 @@ export class GameUser {
 
     /**重置用户游戏数据 */
     public resetInfo() {
-        this.isReplace = false
+        this.isReplace = false;
+        this.isFirst = false;
         this._cardPool = [];
         for (let index = 0; index < this._cardGroup.cards.length; index++) {
             const cardInfo = this._cardGroup.cards[index];

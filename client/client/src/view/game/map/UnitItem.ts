@@ -1,6 +1,7 @@
 class UnitItem {
     static getItem(cardInfo: GamePto.ICard, cardConfig: CardInterface) {
         const unit = BaseUI.UIMapUnit.createInstance();
+        unit.setPivot(0.5, 0.5, true);
         Utils.defineTextFieldSet(unit.healthText, cardConfig.health);
         Utils.defineTextFieldSet(unit.atkText, cardConfig.attack);
 

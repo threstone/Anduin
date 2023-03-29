@@ -11,8 +11,12 @@ import { GameTable } from "../GameTable";
 import { MapBlock } from "./MapBlock";
 
 export class GameMap {
+
     private _width: number;
+    get width() { return this._width }
     private _height: number;
+    get height() { return this._height }
+
     private _table: GameTable;
 
     /**战场上生效的卡牌 */
@@ -219,9 +223,11 @@ export class GameMap {
         const result: { x: number, y: number }[] = [];
         for (let x = baseX - distance; x <= baseX + distance; x++) {
             for (let y = baseY - distance; y <= baseY + distance; y++) {
-                const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
-                if (tempDistance !== 0 && x >= 0 && x < this._width && y >= 0 && y < this._height) {
-                    result.push({ x, y });
+                if (x >= 0 && x < this._width && y >= 0 && y < this._height) {
+                    const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
+                    if (tempDistance !== 0 && tempDistance <= distance) {
+                        result.push({ x, y });
+                    }
                 }
             }
         }
@@ -260,6 +266,44 @@ export class GameMap {
                 }
             }
         }
+    }
+
+    /**获得可以放置建筑位置 */
+    public getAccessPointForUseBuilding(uid: number) {
+        //英雄旁边
+        const pointSet = new Set<number>();
+        const user = this._table.getUser(uid);
+        const hero = user.hero;
+        this.getAroundByDistance(hero.blockX, hero.blockY, 1).forEach((p) => {
+            if (!this.getCard(p.x, p.y)) {
+                pointSet.add(p.x + p.y * this._width);
+            }
+        });
+        // 或者后三格
+        let yStart = user.isFirst ? this._height - 3 : 0;
+        const yMax = user.isFirst ? this._height : 3;
+        for (let x = 0; x < this._width; x++) {
+            for (let y = yStart; y < yMax; y++) {
+                if (!this.getCard(x, y)) {
+                    pointSet.add(x + y * this._width);
+                }
+            }
+        }
+        return pointSet;
+    }
+
+    /**获取到所有出兵建筑 */
+    public getCampBuildings(uid: number) {
+        const res: BuildingCard[] = [];
+        for (let index = 0; index < this._mapCards.length; index++) {
+            const card = this._mapCards[index];
+            if (card.uid === uid && card.cardType === CardsPto.CardType.Building) {
+                if (card.detailType === CardsPto.BuilingType.Camp) {
+                    res.push(card as BuildingCard);
+                }
+            }
+        }
+        return res;
     }
 
     /**战场的移动前事件 */

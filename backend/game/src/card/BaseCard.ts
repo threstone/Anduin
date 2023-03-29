@@ -17,7 +17,7 @@ export class BaseCard implements CardInterface {
     cardId: number;
     powerId: CardsPto.PowerType;
     cardType: CardsPto.CardType;
-    detailType: CardsPto.AtkType | CardsPto.EventType;
+    detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
     attack: number;
     health: number;
     healthUpperLimit: number;
@@ -48,7 +48,7 @@ export class BaseCard implements CardInterface {
 
     /**检查卡牌是否可以使用 */
     public useCardCheck(...params: number[]): boolean {
-        if (this.useCondition[0] !== 0 && this.checkUseCondition(params) === false) {
+        if (this.useCondition[0] !== GamePto.UseConditionEnum.NoCondition && this.checkUseCondition(params) === false) {
             return false;
         }
         return this.fee <= this.table.getUser(this.uid).fee;
@@ -56,83 +56,89 @@ export class BaseCard implements CardInterface {
 
     /**检查所选单位是否符合条件 */
     private checkUseCondition(params: number[]): boolean {
-        let index = 0;
-        //如果卡牌是建筑卡或者单位卡,则一定需要放到一个空格子中,即前两个参数是卡牌放置的位置
-        if (this.cardType === CardsPto.CardType.Building || this.cardType === CardsPto.CardType.Unit) {
-            const x = params[0];
-            const y = params[1];
-            index = 2;
-            if (this.table.mapData.getCard(x, y)) {
-                return false;
-            }
-        }
-        
-        //如果进入循环体的数据少于两个或数据不是2的倍数,则false
-        if (params.length - index < 2 || params.length % 2 !== 0) {
-            return false;
-        }
-
-        const useType = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
-        const num = this.useCondition[GamePto.UseConditionIndexEnum.UseConditionValueIndex];
-        for (; index < params.length; index += 2) {
-            const entity = this.table.mapData.getCard(params[index], params[index + 1]);
-            let isMatch = false;
-            switch (useType) {
-                //友方单位
-                case GamePto.UseConditionEnum.FriendlyUnit:
-                    isMatch = entity.uid === this.uid && entity.cardType === CardsPto.CardType.Unit;
-                    break;
-                //友方建筑
-                case GamePto.UseConditionEnum.FriendlyBuilding:
-                    isMatch = entity.uid === this.uid && entity.cardType === CardsPto.CardType.Building;
-                    break;
-                //敌方单位
-                case GamePto.UseConditionEnum.EnemyUnit:
-                    isMatch = entity.uid !== this.uid && entity.cardType === CardsPto.CardType.Unit;
-                    break;
-                //敌方建筑
-                case GamePto.UseConditionEnum.EnemyBuilding:
-                    isMatch = entity.uid !== this.uid && entity.cardType === CardsPto.CardType.Building;
-                    break;
-                //所有单位
-                case GamePto.UseConditionEnum.AllUnit:
-                    isMatch = entity.cardType === CardsPto.CardType.Unit;
-                    break;
-                //所有建筑
-                case GamePto.UseConditionEnum.AllBuilding:
-                    isMatch = entity.cardType === CardsPto.CardType.Building;
-                    break;
-                //友方地图实体
-                case GamePto.UseConditionEnum.FriendEntity:
-                    isMatch = entity.uid === this.uid;
-                    break;
-                //敌方地图实体
-                case GamePto.UseConditionEnum.EnemyEntity:
-                    isMatch = entity.uid !== this.uid;
-                    break;
-                //所有地图实体
-                case GamePto.UseConditionEnum.AllEntity:
-                    if (!entity) {
-                        return false;
-                    }
-                    isMatch = true;
-                    break;
-                //空格子
-                case GamePto.UseConditionEnum.EmptyBlock:
-                    if (entity) {
-                        return false;
-                    }
-                    isMatch = true;
-                    break;
-                default:
-                    logger.error(`位置的条件定义:${useType}`);
-                    return;
-            }
-            if (!isMatch) {
-                return false;
+        const dupParams = [...params];
+        const pointSet = new Set<number>();
+        for (let index = 0; index < this.useCondition.length; index += 2) {
+            const conditionType = this.useCondition[index + GamePto.UseConditionIndexEnum.UseConditionTypeIndex];
+            let conditionValue = this.useCondition[index + GamePto.UseConditionIndexEnum.UseConditionValueIndex];
+            const allowRepeat = conditionValue < 0;
+            conditionValue = Math.abs(conditionValue);
+            for (let num = 0; num < conditionValue; num++) {
+                const x = dupParams.shift();
+                const y = dupParams.shift();
+                if (!this.checkCondition(x, y, conditionType)) {
+                    return false;
+                }
+                //去重逻辑
+                const point = x + y * this.table.mapData.width;
+                if (!allowRepeat && pointSet.has(point)) {
+                    return false;
+                }
+                pointSet.add(point);
             }
         }
 
         return true;
+    }
+
+    private checkCondition(x: number, y: number, conditionType: number): boolean {
+        if (x == undefined || y == undefined) {
+            return false;
+        }
+        const gameMap = this.table.mapData;
+        const entity = gameMap.getCard(x, y);
+        switch (conditionType) {
+            //无条件
+            case GamePto.UseConditionEnum.NoCondition:
+                return true;
+            //建筑部署限制
+            case GamePto.UseConditionEnum.BuidingCondition:
+                const pointSet = gameMap.getAccessPointForUseBuilding(this.uid);
+                return pointSet.has(x + y * gameMap.width);
+            //单位部署限制
+            case GamePto.UseConditionEnum.UnitCondition:
+                const buildings = gameMap.getCampBuildings(this.uid);
+                for (let index = 0; index < buildings.length; index++) {
+                    const building = buildings[index];
+                    //距离出兵建筑1格
+                    if (Math.abs(building.blockX - x) + Math.abs(building.blockY - y) === 1) {
+                        return true;
+                    }
+                }
+                return false;
+            //空格子
+            case GamePto.UseConditionEnum.EmptyBlock:
+                return entity == null;
+            //友方单位
+            case GamePto.UseConditionEnum.FriendlyUnit:
+                return entity != null && entity.uid === this.uid && entity.cardType === CardsPto.CardType.Unit;
+            //友方建筑
+            case GamePto.UseConditionEnum.FriendlyBuilding:
+                return entity != null && entity.uid === this.uid && entity.cardType === CardsPto.CardType.Building;
+            //敌方单位
+            case GamePto.UseConditionEnum.EnemyUnit:
+                return entity != null && entity.uid !== this.uid && entity.cardType === CardsPto.CardType.Unit;
+            //敌方建筑
+            case GamePto.UseConditionEnum.EnemyBuilding:
+                return entity != null && entity.uid !== this.uid && entity.cardType === CardsPto.CardType.Building;
+            //所有单位
+            case GamePto.UseConditionEnum.AllUnit:
+                return entity != null && entity.cardType === CardsPto.CardType.Unit;
+            //所有建筑
+            case GamePto.UseConditionEnum.AllBuilding:
+                return entity != null && entity.cardType === CardsPto.CardType.Building;
+            //友方地图实体
+            case GamePto.UseConditionEnum.FriendEntity:
+                return entity != null && entity.uid === this.uid;
+            //敌方地图实体
+            case GamePto.UseConditionEnum.EnemyEntity:
+                return entity != null && entity.uid !== this.uid;
+            //所有地图实体
+            case GamePto.UseConditionEnum.AllEntity:
+                return entity != null;
+            default:
+                logger.error(`BaseCard checkCondition : unkonw conditionType${conditionType}`);
+                return false;
+        }
     }
 }

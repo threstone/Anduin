@@ -1,4 +1,5 @@
 interface ProtoClass {
+    name: string;
     /**
      * 编码
      */

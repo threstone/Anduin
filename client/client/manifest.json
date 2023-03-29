@@ -122,7 +122,6 @@
 		"bin-debug/view/game/map/MapItem.js",
 		"bin-debug/view/game/map/MapTipsView.js",
 		"bin-debug/view/game/map/MapView.js",
-		"bin-debug/view/game/map/SelectTargetView.js",
 		"bin-debug/view/game/map/UnitItem.js",
 		"bin-debug/core/EventListenerData.js",
 		"bin-debug/view/hall/FriendlyMatchView.js",

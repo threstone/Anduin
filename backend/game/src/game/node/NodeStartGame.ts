@@ -85,10 +85,12 @@ export class NodeStartGame extends BaseNode {
         const gameStartMsg = new GamePto.S_GAME_START();
         gameStartMsg.firstUid = table.users[table.roundUserIndex].uid;
         gameStartMsg.replaceEndTime = Date.now() + GlobalVar.configMgr.common.replaceCardTime;
+        
         //初始化信息
         table.users[0].resetInfo();
         table.users[1].resetInfo();
         gameStartMsg.mapData = table.getMapData();
+        table.users[table.roundUserIndex].isFirst = true;
 
         //洗牌shuffle
         for (let index = 0; index < table.users.length; index++) {
