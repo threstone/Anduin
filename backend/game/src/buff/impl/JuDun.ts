@@ -26,7 +26,6 @@ export class JuDun extends PositionBuff {
 
     public addBuff(card: BuildingCard) {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
-        card.addBuff(buff);
         super.addBuff(card, buff);
         card.onDamageFuns.push({ id: buff.id, fun: this.onDamage });
     }
@@ -38,7 +37,7 @@ export class JuDun extends PositionBuff {
 
     public onDamage(damage: number, damageSource: BaseCard) {
         //当攻击方是远程的时候
-        if (damageSource.cardType === CardsPto.CardType.Unit && damageSource.detailType === CardsPto.AtkType.LongRange && damage > 0) {
+        if (damageSource.cardType === CardsPto.CardType.Unit && damageSource.detailType === CardsPto.AtkType.LongRange) {
             return damage - 1;
         }
         return damage;

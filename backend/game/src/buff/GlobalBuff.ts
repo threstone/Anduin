@@ -8,11 +8,9 @@ export abstract class GlobalBuff extends GameBuff {
     public abstract addGlobalBuff(card: BuildingCard, buff: BuffData): void;
     public abstract deleteGlobalBuff(card: BuildingCard, buff: BuffData): void;
 
-    public addBuff(card: BuildingCard) {
-        const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
+    public addBuff(card: BuildingCard, buff: BuffData) {
         card.addBuff(buff);
         card.table.mapData.addGlobalBuff(buff);
-        return buff.id;
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {

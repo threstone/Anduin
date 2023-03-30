@@ -1,13 +1,13 @@
 import { BaseCard } from "../card/BaseCard";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { BaseEvent } from "../game/GameDefine";
+import { BaseEvent } from "../game/EventDefine";
 import { BuffData } from "./BuffData";
 
 export abstract class GameBuff implements BaseEvent {
     public abstract buffId: number;
     /**给卡牌添加buff */
-    public abstract addBuff(card: BuildingCard, ...param: any[]): void;
+    public abstract addBuff(card: BuildingCard, buff: BuffData): void;
     /**移除卡牌上的指定buff */
     public abstract deleteBuff(card: BuildingCard, buff: BuffData): void;
 
