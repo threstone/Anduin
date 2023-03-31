@@ -1,12 +1,15 @@
+import { getLogger } from "log4js";
 import { CardsPto } from "../../../common/CommonProto";
 import { GamePto } from "../../../common/CommonProto";
 import { BuffData } from "../buff/BuffData";
+import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
 import { BaseCard } from "./BaseCard";
 import { EventCard } from "./EventCard";
 
+const logger = getLogger();
 export class BuildingCard extends EventCard {
     public blockX: number;
     public blockY: number;
@@ -14,15 +17,11 @@ export class BuildingCard extends EventCard {
     /**自身的所有buff,包括全局buff、位置buff、普通buff */
     private _buffMap: Map<number, BuffData>;
 
-    public onDamageFuns: EventFunction[];
-    public onDamageAfterFuns: EventFunction[];
-    public onDeadFuns: EventFunction[];
-
-    constructor(cardId: number) {
-        super(cardId);
-        this.onDamageFuns = [];
-        this.onDamageAfterFuns = [];
-        this.onDeadFuns = [];
+    constructor(cardId: number, id: number) {
+        super(cardId, id);
+        this.on(EventType.Damage, { id, fun: this.onDamage, canSilent: false });
+        this.on(EventType.DamageAfter, { id, fun: this.onDamageAfter, canSilent: false });
+        this.on(EventType.Dead, { id, fun: this.onDead, canSilent: false });
     }
 
     /**发送到客户端的状态数据 */
@@ -105,32 +104,29 @@ export class BuildingCard extends EventCard {
      * 当受到伤害
      * @returns 实际受到的伤害
      */
-    public onDamage(damage: number, damageSource: BaseCard, self = this): number {
-        for (let index = 0; index < this.onDamageFuns.length; index++) {
-            const funcObj = this.onDamageFuns[index];
-            damage = funcObj.fun.call(this, damage, damageSource, self);
-        }
-        damage = Math.max(0, damage);
-        this.health -= damage;
-        return damage;
+    public onDamage(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
+        next();
+        eventData.data = Math.max(0, eventData.data);
+        this.health -= eventData.data;
     }
 
     /**
      * 当受到伤害之后
      * 之所以要单独抽出来作为一个函数且不在onDamage中执行,是为了分离协议,延后卡牌死亡协议的下发。
      */
-    public onDamageAfter(damageSource: BaseCard, self = this) {
-        this.callFuns(this.onDamageAfterFuns, self);
+    public onDamageAfter(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
+        next();
         //死亡了
         if (this.health <= 0) {
-            this.onDead(damageSource);
+            this.emit(EventType.Dead, damageTarget, damageSource)
         }
     }
 
-    public onDead(damageSource: BaseCard, self = this) {
+    public onDead(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         const user = this.table.getUser(this.uid);
         const index = user.entityPool.indexOf(this);
         if (index === -1) {
+            logger.error("无法获取到死亡的entity");
             return;
         }
 
@@ -138,6 +134,10 @@ export class BuildingCard extends EventCard {
         this.table.mapData.deleteCard(this.blockX, this.blockY);
         user.entityPool.splice(index, 1);
         user.deadPool.push(this);
+        //进入墓地先把身上的buff清理掉
+        if (this._buffMap) {
+            this._buffMap.clear();
+        }
 
         //派发死亡协议
         const msg = new GamePto.S_ENTITY_DEAD();
@@ -145,7 +145,7 @@ export class BuildingCard extends EventCard {
         this.table.broadcast(msg);
 
         //执行卡牌死亡事件,亡语就在此执行
-        this.callFuns(this.onDeadFuns, self);
+        next();
 
         //如果造成伤害方式对方,则对方增加一点费用
         if (damageSource.uid !== this.uid) {

@@ -1,28 +1,35 @@
 import { GamePto } from "../../../../../common/CommonProto";
 import { CardsPto } from "../../../../../common/CommonProto";
+import { EventData, EventType } from "../../../game/EventDefine";
 import { BaseCard } from "../../BaseCard";
 import { EventCard } from "../../EventCard";
 
 /**单位反制 */
 export class Card7 extends EventCard {
 
+    constructor(cardId: number, id: number) {
+        super(cardId, id);
+        this.on(EventType.PreUseCard, { id: this.id, fun: this.onPreUseCard });
+    }
+
     /**战场卡牌使用前 */
-    public onPreUseCard(useCard: BaseCard): boolean {
-        if (useCard.uid === this.uid) {
-            return true;
+    public onPreUseCard(eventData: EventData, next: Function, card: BaseCard): void {
+        if (card.uid === this.uid) {
+            next();
+            return;
         }
         //如果是单位卡和建筑卡,反制
-        if (useCard.cardType === CardsPto.CardType.Building || useCard.cardType === CardsPto.CardType.Unit) {
+        if (card.cardType === CardsPto.CardType.Building || card.cardType === CardsPto.CardType.Unit) {
             //对方这张卡没了,减费用
-            const targetUser = this.table.getUser(useCard.uid);
-            targetUser.fee -= useCard.fee;
-            const targetCardIndex = targetUser.handCards.indexOf(useCard);
+            const targetUser = this.table.getUser(card.uid);
+            targetUser.fee -= card.fee;
+            const targetCardIndex = targetUser.handCards.indexOf(card);
             targetUser.handCards.splice(targetCardIndex, 1);
 
             //通知
             const notice = new GamePto.S_CARD_DENY();
             notice.from = this;
-            notice.target = useCard;
+            notice.target = card;
             notice.targetCardIndex = targetCardIndex;
             this.table.broadcast(notice);
 
@@ -31,9 +38,10 @@ export class Card7 extends EventCard {
 
             // 事件生效时必须调用此方法
             this.forceEvent();
-            return false;
+            eventData.isContinue = false;
+            return;
         }
 
-        return super.onPreUseCard(useCard);
+        next();
     }
 }

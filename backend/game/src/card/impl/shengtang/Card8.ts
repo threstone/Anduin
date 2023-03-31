@@ -1,4 +1,5 @@
 import { GamePto } from "../../../../../common/CommonProto";
+import { EventData, EventType } from "../../../game/EventDefine";
 import { GameUser } from "../../../game/GameUser";
 import { UnitCard } from "../../UnitCard";
 
@@ -8,14 +9,18 @@ export class Card8 extends UnitCard {
         super.onUse(user, cardIndex, blockX, blockY);
 
         const targetEntity = this.table.mapData.getCard(targetX, targetY);
-        const damage = targetEntity.onDamage(1, this);
+
+        const damageEvent = new EventData(EventType.Damage);
+        damageEvent.data = 1;
+        targetEntity.emit(damageEvent, targetEntity, this);
+
         //派发飞行特效协议
         const msg = new GamePto.S_FLY_EFFECT();
         msg.from = this;
         msg.target = targetEntity;
-        msg.targetShowTips = `-${damage}`;
+        msg.targetShowTips = `-${damageEvent.data}`;
         this.table.broadcast(msg);
         //执行卡牌受伤后事件
-        targetEntity.onDamageAfter(this);
+        targetEntity.emit(damageEvent.changeType(EventType.DamageAfter), targetEntity, this);
     }
 }

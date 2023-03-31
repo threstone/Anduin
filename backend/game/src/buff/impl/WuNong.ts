@@ -1,5 +1,6 @@
 import { GamePto } from "../../../../common/CommonProto";
 import { BuildingCard } from "../../card/BuildingCard";
+import { EventData, EventType } from "../../game/EventDefine";
 import { BuffEffectiveDefine } from "../../game/GameDefine";
 import { BuffData } from "../BuffData";
 import { GameBuff } from "../GameBuff";
@@ -14,16 +15,16 @@ export class WuNong extends GameBuff {
     public addBuff(card: BuildingCard): void {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
         card.addBuff(buff);
-        card.onRoundStartFuns.push({ id: buff.id, fun: this.onRoundStart });
+        card.on(EventType.RoundStart, { id: buff.id, fun: this.onRoundStart })
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData): void {
         card.deleteBuff(buff);
-        card.deleteFunById(card.onRoundStartFuns, buff.id);
+        card.off(EventType.RoundStart, buff.id);
     }
 
     /**回合开始时费用加1 */
-    onRoundStart(card: BuildingCard) {
+    public onRoundStart(eventData: EventData, next: Function, card: BuildingCard) {
         const user = card.table.getUser(card.uid);
         //加费用
         if (user.fee < user.feeMax) {
@@ -41,5 +42,6 @@ export class WuNong extends GameBuff {
             msg.uid = user.uid;
             card.table.broadcast(msg);
         }
+        next();
     }
 }

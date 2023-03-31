@@ -3,6 +3,7 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { BaseNode } from './BaseNode';
 import { GamePto } from '../../../../common/CommonProto';
+import { EventType } from '../EventDefine';
 
 //回合结束,执行一些回合结束时的任务,如卡牌结束事件
 export class NodeRoundEnd extends BaseNode {
@@ -35,14 +36,14 @@ export class NodeRoundEnd extends BaseNode {
         for (let index = 0; index < user.eventPool.length; index++) {
             const card = user.eventPool[index];
             //计算所有回合结束事件所需要的时间
-            card.onRoundEnd();
+            card.emit(EventType.RoundEnd, card);
         }
 
         //执行场上所有单位卡牌的回合结束事件
         for (let index = 0; index < user.entityPool.length; index++) {
             const card = user.entityPool[index];
             //计算所有回合结束事件所需要的时间
-            card.onRoundEnd();
+            card.emit(EventType.RoundEnd, card);
         }
 
         //发牌

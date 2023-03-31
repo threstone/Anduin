@@ -1,41 +1,48 @@
 import { BaseCard } from "../card/BaseCard";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { BaseEvent } from "../game/EventDefine";
+import { BaseEvent, EventData } from "../game/EventDefine";
 import { BuffData } from "./BuffData";
 
 export abstract class GameBuff implements BaseEvent {
+
     public abstract buffId: number;
     /**给卡牌添加buff */
-    public abstract addBuff(card: BuildingCard, buff: BuffData): void;
+    public abstract addBuff(card: BuildingCard, buff?: BuffData): void;
     /**移除卡牌上的指定buff */
     public abstract deleteBuff(card: BuildingCard, buff: BuffData): void;
 
-    public onRoundStart(card: BaseCard): void {
+    public onDamage(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onRoundEnd(card: BaseCard): void {
+    public onDamageAfter(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onPreUseCard(card: BaseCard): boolean {
+    public onDead(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onUseCardAfter(card: BaseCard): void {
+    public onRoundStart(eventData: EventData, next: Function, card: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onPreMove(moveCard: UnitCard): boolean {
+    public onRoundEnd(eventData: EventData, next: Function, card: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onMoveAfter(moveCard: UnitCard): void {
+    public onPreUseCard(eventData: EventData, next: Function, card: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
+    public onUseCardAfter(eventData: EventData, next: Function, card: BaseCard): void {
         throw new Error("Method not implemented.");
     }
-    public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]): void {
+    public onPreMove(eventData: EventData, next: Function, moveCard: UnitCard): void {
         throw new Error("Method not implemented.");
     }
-    public onDamage(damage: number, atkCard: BaseCard, card: BuildingCard): number {
+    public onMoveAfter(eventData: EventData, next: Function, moveCard: UnitCard): void {
+        throw new Error("Method not implemented.");
+    }
+    public onPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, dices: number[]): void {
+        throw new Error("Method not implemented.");
+    }
+    public onAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, dices: number[]): void {
         throw new Error("Method not implemented.");
     }
 }

@@ -3,6 +3,7 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { BaseNode } from './BaseNode';
 import { GamePto } from '../../../../common/CommonProto';
+import { EventType } from '../EventDefine';
 
 //回合开始,执行一些回合开始时的任务,如卡牌开始事件,确定操作者
 export class NodeRoundStart extends BaseNode {
@@ -42,14 +43,14 @@ export class NodeRoundStart extends BaseNode {
         for (let index = 0; index < user.eventPool.length; index++) {
             const card = user.eventPool[index];
             //计算所有回合开始事件所需要的时间
-            card.onRoundStart();
+            card.emit(EventType.RoundStart, card);
         }
 
         //执行场上所有单位卡牌的回合开始事件
         for (let index = 0; index < user.entityPool.length; index++) {
             const card = user.entityPool[index];
             //计算所有回合开始事件所需要的时间
-            card.onRoundStart();
+            card.emit(EventType.RoundStart, card);
         }
 
         return NodeDriverResult.GoOn;

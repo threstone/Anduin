@@ -65,7 +65,7 @@ export class CardMgr {
         logger.info(`结束卡片初始化,耗时:${Date.now() - makeTime}ms`);
     }
 
-    public getCardInstance(cardId: number): BaseCard {
-        return this._cardClassMap.get(cardId)?.create(cardId);
+    public getCardInstance(cardId: number, id: number): BaseCard {
+        return this._cardClassMap.get(cardId)?.create(cardId, id);
     }
 }

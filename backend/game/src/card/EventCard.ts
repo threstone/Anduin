@@ -1,7 +1,8 @@
 import { getLogger } from "log4js";
 import { GamePto } from "../../../common/CommonProto";
 import { CardsPto } from "../../../common/CommonProto";
-import { BaseEvent, EventFunction } from "../game/GameDefine";
+import { EventData, EventType } from "../game/EventDefine";
+import { EventFunction } from "../game/GameDefine";
 import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
 import { BuildingCard } from "./BuildingCard";
@@ -9,114 +10,64 @@ import { UnitCard } from "./UnitCard";
 
 const logger = getLogger();
 /**event card用health来决定持续回合数 */
-export class EventCard extends BaseCard implements BaseEvent {
+export class EventCard extends BaseCard {
 
-    /**由外部注册的回合开始函数 */
-    public onRoundStartFuns: EventFunction[];
-    /**由外部注册的回合结束函数 */
-    public onRoundEndFuns: EventFunction[];
+    protected eventMap: Map<EventType, EventFunction[]>;
 
-    /**战场卡牌使用前 */
-    public onPreUseCardFuns: EventFunction[];
-    /**战场卡牌使用后 */
-    public onUseCardAfterFuns: EventFunction[];
-
-    /**战场卡牌移动前 */
-    public onPreMoveFuns: EventFunction[];
-    /**战场卡牌移动后 */
-    public onMoveAfterFuns: EventFunction[];
-
-    /**战场卡牌攻击前 */
-    public onPreAtkFuns: EventFunction[];
-    /**战场卡牌攻击后 */
-    public onAtkAfterFuns: EventFunction[];
-
-    constructor(cardId: number) {
-        super(cardId);
-        this.onRoundStartFuns = [];
-        this.onRoundEndFuns = [];
-
-        this.onPreUseCardFuns = [];
-        this.onUseCardAfterFuns = [];
-
-        this.onPreMoveFuns = [];
-        this.onMoveAfterFuns = [];
-
-        this.onPreAtkFuns = [];
-        this.onAtkAfterFuns = [];
+    constructor(cardId: number, id: number) {
+        super(cardId, id);
+        this.eventMap = new Map<EventType, EventFunction[]>();
     }
 
-    /**回合开始触发 */
-    public onRoundStart(self = this) {
-        this.callFuns(this.onRoundStartFuns, self);
+    /**监听 */
+    public on(eventType: EventType, fun: EventFunction) {
+        let eventFunArr = this.eventMap.get(eventType);
+        if (!eventFunArr) {
+            eventFunArr = [];
+            this.eventMap.set(eventType, eventFunArr);
+        }
+        eventFunArr.push(fun);
     }
 
-    /**回合结束触发 */
-    public onRoundEnd(self = this) {
-        this.callFuns(this.onRoundEndFuns, self);
+    /**取消监听 */
+    public off(eventType: EventType, id: number) {
+        const eventFunArr = this.eventMap.get(eventType);
+        if (eventFunArr) {
+            for (let index = 0; index < eventFunArr.length; index++) {
+                const funcInfo = eventFunArr[index];
+                if (funcInfo.id === id) {
+                    eventFunArr.splice(index, 1);
+                }
+            }
+        }
     }
 
-    /**战场卡牌使用前 */
-    public onPreUseCard(useCard: BaseCard): boolean {
-        return this.callFuns(this.onPreUseCardFuns, useCard);
-    }
+    public emit(event: EventType | EventData, ...params: any[]): EventData {
+        let eventType: EventType;
+        if (event instanceof EventData) {
+            eventType = event.eventType;
+        } else {
+            eventType = event;
+        }
 
-    /**战场卡牌使用后 */
-    public onUseCardAfter(useCard: BaseCard) {
-        this.callFuns(this.onUseCardAfterFuns, useCard);
-    }
-
-    /**
-     * 移动前触发
-     * 一些卡牌会对周围的卡造成效果，当移动时，需要更新周围卡牌的效果，通过S_MAP_DATA协议
-     * 有可能一张卡被同时两张周围的卡片光环影响，例如炉石随从左右都是恐狼，那么就会+2攻击力
-     */
-    public onPreMove(moveCard: UnitCard): boolean {
-        return this.callFuns(this.onPreMoveFuns, moveCard);
-    }
-
-    /**
-     * 移动后触发
-     * 一些卡牌会对周围的卡造成效果，当移动时，需要更新周围卡牌的效果，通过S_MAP_DATA协议
-     * 有可能一张卡被同时两张周围的卡片光环影响，例如炉石随从左右都是恐狼，那么就会+2攻击力
-     */
-    public onMoveAfter(moveCard: UnitCard) {
-        this.callFuns(this.onMoveAfterFuns, moveCard);
-    }
-
-    /**
-     * 战场卡牌攻击前
-     * @returns 返回是否可以攻击 | 攻击的伤害
-     */
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
-        for (let index = 0; index < this.onPreAtkFuns.length; index++) {
-            const funcObj = this.onPreAtkFuns[index];
-            const result = funcObj.fun.call(this, sourceCard, targetCard, damageCard, damage, dices);
-            if (result === false) {
-                return false;
+        let eventData: EventData;
+        const eventFunArr = this.eventMap.get(eventType);
+        if (eventFunArr) {
+            if (event instanceof EventData) {
+                eventData = event;
             } else {
-                damage = result;
+                eventData = new EventData(event);
             }
+            this.dispatch(eventData, eventFunArr, 0, params);
         }
-        return Math.max(0, damage);
+        return eventData;
     }
 
-    /**战场卡牌攻击后 */
-    public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]) {
-        this.callFuns(this.onAtkAfterFuns, sourceCard, targetCard, damage, dices);
-    }
-
-    /**执行将指定的函数数组,当函数返回false的时候终止执行后续流程 */
-    protected callFuns(funs: EventFunction[], ...param: any[]) {
-        param.push(this);
-        for (let index = 0; index < funs.length; index++) {
-            const funcObj = funs[index];
-            const res = funcObj.fun.apply(this, param);
-            if (!res) {
-                return false;
-            }
+    private dispatch(eventData: EventData, eventFunArr: EventFunction[], index: number, params: any[]) {
+        const fn = eventFunArr[index]?.fun;
+        if (fn) {
+            fn.call(this, eventData, this.dispatch.bind(this, eventData, eventFunArr, index + 1, params), ...params);
         }
-        return true;
     }
 
     public onUse(user: GameUser, cardIndex: number, ...params: number[]) {

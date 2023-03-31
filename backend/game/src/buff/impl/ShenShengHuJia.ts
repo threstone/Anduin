@@ -1,4 +1,6 @@
+import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
+import { EventData, EventType } from "../../game/EventDefine";
 import { BuffEffectiveDefine } from "../../game/GameDefine";
 import { BuffData } from "../BuffData";
 import { GameBuff } from "../GameBuff";
@@ -13,15 +15,15 @@ export class ShenShengHuJia extends GameBuff {
     public addBuff(card: BuildingCard): void {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
         card.addBuff(buff);
-        card.onDamageFuns.push({ id: buff.id, fun: this.onDamage });
+        card.on(EventType.Damage, { id: buff.id, fun: this.onDamage })
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData): void {
         card.deleteBuff(buff);
-        card.deleteFunById(card.onDamageFuns, buff.id);
+        card.off(EventType.Damage, buff.id)
     }
 
-    public onDamage(damage: number) {
-        return damage - 1;
+    public onDamage(eventData: EventData) {
+        return eventData.data -= 1;
     }
 }

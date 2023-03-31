@@ -28,16 +28,17 @@ export class BaseCard implements CardInterface {
     useCondition: number[];
     movement: number;
 
-    public static create(cardId: number) {
-        return new (this as any)(cardId);
+    public static create(cardId: number, id: number) {
+        return new (this as any)(cardId, id);
     }
 
-    constructor(cardId: number) {
+    constructor(cardId: number, id: number) {
         const cardConfig = GlobalVar.configMgr.getCardConfigById(cardId)
         for (const key in cardConfig) {
             this[key] = cardConfig[key];
         }
         this.healthUpperLimit = this.health;
+        this.id = id;
     }
 
     /**使用卡牌 */

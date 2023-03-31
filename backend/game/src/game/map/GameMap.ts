@@ -7,6 +7,7 @@ import { BuildingCard } from "../../card/BuildingCard";
 import { EventCard } from "../../card/EventCard";
 import { UnitCard } from "../../card/UnitCard";
 import { GlobalVar } from "../../GlobalVar";
+import { EventData, EventType } from "../EventDefine";
 import { GameTable } from "../GameTable";
 import { MapBlock } from "./MapBlock";
 
@@ -104,7 +105,7 @@ export class GameMap {
     }
 
     /**删除位置buff */
-    public deletePositionBUff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
+    public deletePositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
         const notice = new GamePto.S_UPDATE_ENTITYS();
         const pointArr = this.getAroundByDistance(baseX, baseY, effectiveDistance);
         for (let index = 0; index < pointArr.length; index++) {
@@ -306,69 +307,21 @@ export class GameMap {
         return res;
     }
 
-    /**战场的移动前事件 */
-    public onPreMove(moveCard: UnitCard) {
+    public emit(event: EventType | EventData, ...param: any[]) {
+        //根据传入的参数构建出EventData
+        let eventData: EventData;
+        if (event instanceof EventData) {
+            eventData = event;
+        } else {
+            eventData = new EventData(event);
+        }
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
-            if (!card.onPreMove(moveCard)) {
-                return false;
+            card.emit(eventData, ...param);
+            if (eventData.isContinue === false) {
+                break;
             }
         }
-        return true;
-    }
-
-    /**战场的移动后事件 */
-    public onMoveAfter(moveCard: UnitCard) {
-        for (let index = 0; index < this._mapCards.length; index++) {
-            const card = this._mapCards[index];
-            card.onMoveAfter(moveCard);
-        }
-        return true;
-    }
-
-    /**战场的使用卡牌前事件 */
-    public onPreUseCard(useCard: BaseCard) {
-        for (let index = 0; index < this._mapCards.length; index++) {
-            const card = this._mapCards[index];
-            if (!card.onPreUseCard(useCard)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**战场的使用卡牌后事件 */
-    public onUseCardAfter(useCard: BaseCard) {
-        for (let index = 0; index < this._mapCards.length; index++) {
-            const card = this._mapCards[index];
-            card.onUseCardAfter(useCard);
-        }
-        return true;
-    }
-
-    /**
-     * 战场的攻击前事件
-     * @returns 返回是否可以攻击 | 攻击的伤害
-     */
-    public onPreAtk(sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, damage: number, dices: number[]): number | false {
-        for (let index = 0; index < this._mapCards.length; index++) {
-            const card = this._mapCards[index];
-            const result = card.onPreAtk(sourceCard, targetCard, damageCard, damage, dices);
-            if (result === false) {
-                return false;
-            } else {
-                damage = result;
-            }
-        }
-        return Math.max(0, damage);
-    }
-
-    /**战场的攻击后事件 */
-    public onAtkAfter(sourceCard: UnitCard, targetCard: BuildingCard, damage: number, dices: number[]) {
-        for (let index = 0; index < this._mapCards.length; index++) {
-            const card = this._mapCards[index];
-            card.onAtkAfter(sourceCard, targetCard, damage, dices);
-        }
-        return true;
+        return eventData;
     }
 }

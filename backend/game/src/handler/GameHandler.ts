@@ -5,6 +5,7 @@ import { NodeDefine } from '../game/GameDefine';
 import { BaseHandler } from './BaseHandler';
 import { UnitCard } from '../card/UnitCard';
 import { AttackUtils } from '../game/AttackUtils';
+import { EventData, EventType } from '../game/EventDefine';
 
 export class GameHandler extends BaseHandler {
 
@@ -69,8 +70,10 @@ export class GameHandler extends BaseHandler {
             return;
         }
 
+        const useCardEvent = new EventData(EventType.PreUseCard);
         //执行战场使用卡牌前事件决定是否有后续  有些卡会反制使用卡牌
-        if (!table.mapData.onPreUseCard(card)) {
+        table.mapData.emit(useCardEvent, card)
+        if (useCardEvent.isContinue === false) {
             return;
         }
 
@@ -78,8 +81,7 @@ export class GameHandler extends BaseHandler {
         card.onUse(user, msg.cardIndex, ...msg.dataArr);
 
         //执行战场使用卡牌后事件
-        table.mapData.onUseCardAfter(card);
-
+        table.mapData.emit(useCardEvent.changeType(EventType.UseCardAfter), card);
     }
 
     //请求移动
@@ -93,13 +95,15 @@ export class GameHandler extends BaseHandler {
             user.moveTimes--;
             card.allowMove = false;
 
+            const moveEvent = new EventData(EventType.PreMove);
             //执行战场移动前事件决定是否有后续
-            if (!table.mapData.onPreMove(card)) {
+            table.mapData.emit(moveEvent, card);
+            if (moveEvent.isContinue === false) {
                 return;
             }
 
             //执行卡牌移动前事件,如光环随从移除地图格子光环
-            card.onPreMove(card);
+            card.emit(moveEvent, card);
             //更新卡牌位置
             table.mapData.updateCardPosition(msg.targetX, msg.targetY, card);
             //广播卡牌移动协议
@@ -112,9 +116,9 @@ export class GameHandler extends BaseHandler {
             table.broadcast(replay);
 
             //执行卡牌移动后事件,如光环随从增加地图格子光环
-            card.onMoveAfter(card);
+            card.emit(moveEvent.changeType(EventType.MoveAfter), card);
             //执行战场移动后事件 如移动后受伤陷阱
-            table.mapData.onPreMove(card);
+            table.mapData.emit(moveEvent, card);
         }
     }
 
@@ -129,43 +133,45 @@ export class GameHandler extends BaseHandler {
             return;
         }
         //获取到真正会受到伤害的卡牌(远程攻击会被挡住)
-        const damageCard = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
+        const damageTarget = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
 
-        if (sourceCard && damageCard && sourceCard.allowAtk && user.atkTimes > 0) {
+        if (sourceCard && damageTarget && sourceCard.allowAtk && user.atkTimes > 0) {
             user.atkTimes--;
             sourceCard.allowAtk = false;
-
 
             //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
             const dices = table.getDices(sourceCard.attack);
             //实际扣除的血量
-            let damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+            const damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+
+            const atkEvent = new EventData(EventType.PreAtk);
+            atkEvent.data = damage;
 
             //执行战场攻击前事件决定是否有后续
-            const mapPreAtkResult = table.mapData.onPreAtk(sourceCard, targetCard, damageCard, damage, dices);
+            table.mapData.emit(EventType.PreAtk, sourceCard, targetCard, damageTarget, dices);
             //攻击被禁止了
-            if (mapPreAtkResult === false) {
+            if (atkEvent.isContinue === false) {
                 return;
             }
-            //战场的事件可能会导致伤害变化
-            damage = mapPreAtkResult;
 
             //执行攻击前事件,可能会导致伤害变化
-            damage = sourceCard.onPreAtk(sourceCard, targetCard, damageCard, damage, dices) as number;
+            sourceCard.emit(atkEvent, sourceCard, targetCard, damageTarget, dices);
+
 
             //返回实际收到的伤害
-            damage = damageCard.onDamage(damage, sourceCard);
+            damageTarget.emit(atkEvent.changeType(EventType.Damage), damage, sourceCard);
+
             //广播卡牌攻击协议
             const replay = new GamePto.S_ATTACK();
             replay.uid = user.uid;
             replay.sourceX = msg.sourceX;
             replay.sourceY = msg.sourceY;
             replay.sourceId = sourceCard.id;
-            replay.targetX = damageCard.blockX;
-            replay.targetY = damageCard.blockY;
-            replay.targetId = damageCard.id;
-            replay.damage = damage;
-            replay.targetHealth = damageCard.health;
+            replay.targetX = damageTarget.blockX;
+            replay.targetY = damageTarget.blockY;
+            replay.targetId = damageTarget.id;
+            replay.damage = atkEvent.data;
+            replay.targetHealth = damageTarget.health;
             replay.allowAtk = sourceCard.allowAtk;
             replay.uid = user.uid;
             replay.dices = dices;
@@ -173,13 +179,13 @@ export class GameHandler extends BaseHandler {
             table.broadcast(replay);
 
             //执行卡牌受伤后事件
-            damageCard.onDamageAfter(sourceCard);
+            damageTarget.emit(atkEvent.changeType(EventType.DamageAfter), damageTarget, sourceCard);
 
             //执行卡牌攻击后事件
-            sourceCard.onAtkAfter(sourceCard, damageCard, damage, dices);
+            sourceCard.emit(atkEvent.changeType(EventType.AtkAfter), sourceCard, damageTarget, dices);
 
             //执行战场攻击后事件
-            table.mapData.onAtkAfter(sourceCard, damageCard, damage, dices);
+            table.mapData.emit(atkEvent, sourceCard, damageTarget, dices);
         }
     }
 }

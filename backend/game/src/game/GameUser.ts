@@ -106,8 +106,7 @@ export class GameUser {
         for (let index = 0; index < this._cardGroup.cards.length; index++) {
             const cardInfo = this._cardGroup.cards[index];
             for (let z = 0; z < cardInfo.count; z++) {
-                const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id);
-                card.id = this.table.uniqueId;
+                const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id, this.table.uniqueId);
                 card.uid = this.uid;
                 card.table = this.table;
                 this._cardPool.push(card);

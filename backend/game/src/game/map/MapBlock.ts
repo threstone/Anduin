@@ -36,6 +36,9 @@ export class MapBlock {
 
     /**向位置添加buff */
     public addBuff(buff: BuffData) {
+        if (this._positionBuff.indexOf(buff) !== -1) {
+            return;
+        }
         this._positionBuff.push(buff);
         if (this._card) {
             GlobalVar.buffMgr.addPositionBuff(this._card, buff);
