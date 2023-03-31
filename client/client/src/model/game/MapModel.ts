@@ -234,8 +234,13 @@ class MapModel extends BaseModel {
 
     //请求移动返回
     private S_MOVE(msg: GamePto.S_MOVE) {
+        const oldCard = this._mapData[msg.sourceX][msg.sourceY];
+        const cardIndex = this._serverData.entityCards.indexOf(oldCard);
+        this._serverData.entityCards[cardIndex] = msg.card;
+
         this._mapData[msg.sourceX][msg.sourceY] = null;
         this._mapData[msg.card.blockX][msg.card.blockY] = msg.card;
+
         this.emit('S_MOVE', msg);
         GameModel.ins().moveTimes--;
         if (GameModel.ins().moveTimes === 0) {
