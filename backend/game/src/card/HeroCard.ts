@@ -1,5 +1,6 @@
 import { GamePto } from "../../../common/CommonProto";
 import { EventData, EventType } from "../game/EventDefine";
+import { GameTable } from "../game/GameTable";
 import { BaseCard } from "./BaseCard";
 import { BuildingCard } from "./BuildingCard";
 import { UnitCard } from "./UnitCard";

@@ -7,7 +7,7 @@
     <loader id="n13_tb7e" name="cardImg" xy="12,10" size="198,173" group="n25_pg48" fill="scaleMatchWidth" shrinkOnly="true"/>
     <group id="n25_pg48" name="cardImgGroup" xy="12,10" size="198,173"/>
     <image id="n33_h89h" name="feeBg" src="tb7e1u" fileName="common/res/herodetail_soulstone_ico.png" xy="0,0" group="n18_tb7e"/>
-    <text id="n17_tb7e" name="feeText" xy="8,14" size="30,22" group="n18_tb7e" font="ui://yaux2xpoh89h37" fontSize="18" color="#ffffff" bold="true" singleLine="true" text="12">
+    <text id="n17_tb7e" name="feeText" xy="10,11" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" singleLine="true" text="12">
       <relation target="n18_tb7e" sidePair="center-center,middle-middle"/>
     </text>
     <group id="n18_tb7e" name="feeGroup" xy="0,0" size="42,49" advanced="true"/>

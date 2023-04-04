@@ -4738,7 +4738,7 @@ $root.GamePto = (function() {
          * @property {number|null} [cardType] Card cardType
          * @property {number|null} [attack] Card attack
          * @property {number|null} [health] Card health
-         * @property {number|null} [fee] Card fee
+         * @property {number|null} [cardFee] Card cardFee
          * @property {number|null} [uid] Card uid
          * @property {number|null} [blockX] Card blockX
          * @property {number|null} [blockY] Card blockY
@@ -4804,12 +4804,12 @@ $root.GamePto = (function() {
         Card.prototype.health = 0;
 
         /**
-         * Card fee.
-         * @member {number} fee
+         * Card cardFee.
+         * @member {number} cardFee
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.fee = 0;
+        Card.prototype.cardFee = 0;
 
         /**
          * Card uid.
@@ -4881,8 +4881,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.attack);
             if (message.health != null && Object.hasOwnProperty.call(message, "health"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.health);
-            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.fee);
+            if (message.cardFee != null && Object.hasOwnProperty.call(message, "cardFee"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.cardFee);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
             if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
@@ -4941,7 +4941,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        message.fee = reader.int32();
+                        message.cardFee = reader.int32();
                         break;
                     }
                 case 6: {
@@ -9663,6 +9663,152 @@ $root.GamePto = (function() {
         };
 
         return S_RECONNECT;
+    })();
+
+    GamePto.S_HANDCARDS_UPDATE = (function() {
+
+        /**
+         * Properties of a S_HANDCARDS_UPDATE.
+         * @memberof GamePto
+         * @interface IS_HANDCARDS_UPDATE
+         * @property {number|null} [cmd] S_HANDCARDS_UPDATE cmd
+         * @property {number|null} [scmd] S_HANDCARDS_UPDATE scmd
+         * @property {number|null} [uid] S_HANDCARDS_UPDATE uid
+         * @property {Array.<GamePto.ICard>|null} [cards] S_HANDCARDS_UPDATE cards
+         */
+
+        /**
+         * Constructs a new S_HANDCARDS_UPDATE.
+         * @memberof GamePto
+         * @classdesc Represents a S_HANDCARDS_UPDATE.
+         * @implements IS_HANDCARDS_UPDATE
+         * @constructor
+         * @param {GamePto.IS_HANDCARDS_UPDATE=} [properties] Properties to set
+         */
+        function S_HANDCARDS_UPDATE(properties) {
+            this.cards = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_HANDCARDS_UPDATE cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @instance
+         */
+        S_HANDCARDS_UPDATE.prototype.cmd = 200;
+
+        /**
+         * S_HANDCARDS_UPDATE scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @instance
+         */
+        S_HANDCARDS_UPDATE.prototype.scmd = 10023;
+
+        /**
+         * S_HANDCARDS_UPDATE uid.
+         * @member {number} uid
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @instance
+         */
+        S_HANDCARDS_UPDATE.prototype.uid = 0;
+
+        /**
+         * S_HANDCARDS_UPDATE cards.
+         * @member {Array.<GamePto.ICard>} cards
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @instance
+         */
+        S_HANDCARDS_UPDATE.prototype.cards = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_HANDCARDS_UPDATE message. Does not implicitly {@link GamePto.S_HANDCARDS_UPDATE.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @static
+         * @param {GamePto.IS_HANDCARDS_UPDATE} message S_HANDCARDS_UPDATE message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_HANDCARDS_UPDATE.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.cards != null && message.cards.length)
+                for (var i = 0; i < message.cards.length; ++i)
+                    $root.GamePto.Card.encode(message.cards[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_HANDCARDS_UPDATE message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_HANDCARDS_UPDATE} S_HANDCARDS_UPDATE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_HANDCARDS_UPDATE.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_HANDCARDS_UPDATE();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(message.cards && message.cards.length))
+                            message.cards = [];
+                        message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_HANDCARDS_UPDATE
+         * @function getTypeUrl
+         * @memberof GamePto.S_HANDCARDS_UPDATE
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_HANDCARDS_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_HANDCARDS_UPDATE";
+        };
+
+        return S_HANDCARDS_UPDATE;
     })();
 
     return GamePto;

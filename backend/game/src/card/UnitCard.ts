@@ -1,5 +1,6 @@
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
+import { GameTable } from "../game/GameTable";
 import { BuildingCard } from "./BuildingCard";
 
 export class UnitCard extends BuildingCard {
@@ -10,10 +11,10 @@ export class UnitCard extends BuildingCard {
     onPreMoveFuns: EventFunction[] = [];
     onMoveAfterFuns: EventFunction[] = [];
 
-    constructor(cardId: number, id: number) {
-        super(cardId, id);
-        this.on(EventType.RoundStart, { id, fun: this.onRoundStart, canSilent: false });
-        this.on(EventType.RoundEnd, { id, fun: this.onRoundEnd, canSilent: false });
+    constructor(cardId: number, uid: number, table: GameTable) {
+        super(cardId, uid, table);
+        this.on(EventType.RoundStart, { id: this.id, fun: this.onRoundStart, canSilent: false });
+        this.on(EventType.RoundEnd, { id: this.id, fun: this.onRoundEnd, canSilent: false });
     }
 
     /**

@@ -60,6 +60,7 @@ class ChatModel extends BaseModel {
         info.unreadNum++;
 
         info.msgArr.push(msg);
+        //如果消息数组长度超过 30，则移除第一条消息（即最早的一条）
         if (info.msgArr.length > 30) {
             info.msgArr.shift();
         }

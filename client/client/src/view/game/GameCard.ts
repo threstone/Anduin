@@ -1,20 +1,5 @@
 class GameCard {
 
-    cardItem: BaseUI.UICardItem;
-    cardInfo: GamePto.ICard;
-    cardConfig:CardInterface;
-
-    cacheX: number;
-    cacheY: number;
-
-    constructor(cardInfo: GamePto.ICard) {
-        this.cardInfo = cardInfo;
-        if (cardInfo.cardId !== -1) {
-            this.cardItem = CardItem.getCardByServerCard(cardInfo);
-            this.cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId);
-        }
-    }
-
     public static getGameCards(cardsInfo: GamePto.ICard[], x: number = 0, y: number = 0, scale: number = 1, skew: number = 0) {
         const gameCards: GameCard[] = [];
         for (let index = 0; index < cardsInfo.length; index++) {
@@ -28,5 +13,27 @@ class GameCard {
             gameCard.cardItem.skewY = skew;
         }
         return gameCards;
+    }
+
+    cardItem: BaseUI.UICardItem;
+    cardInfo: GamePto.ICard;
+    cardConfig: CardInterface;
+
+    cacheX: number;
+    cacheY: number;
+
+    constructor(cardInfo: GamePto.ICard) {
+        this.cardInfo = cardInfo;
+        if (cardInfo.cardId !== -1) {
+            this.cardItem = CardItem.getCardByServerCard(cardInfo);
+            this.cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        }
+    }
+
+    public update(cardInfo: GamePto.ICard) {
+        this.cardInfo = cardInfo;
+        this.cardItem.feeText.text = `${Math.max(0,cardInfo.cardFee)}`;
+        this.cardItem.atkText.text = `${cardInfo.attack}`;
+        this.cardItem.healthText.text = `${cardInfo.health}`;
     }
 }

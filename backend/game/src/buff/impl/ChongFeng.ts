@@ -8,9 +8,9 @@ import { GameBuff } from "../GameBuff";
 export class ChongFeng extends GameBuff {
     public buffId: number = 2;
     public addBuff(card: BuildingCard, ...param: any[]): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
     public deleteBuff(card: BuildingCard, buff: BuffData): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 }

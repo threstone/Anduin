@@ -8,6 +8,7 @@ import { EventCard } from "../../card/EventCard";
 import { UnitCard } from "../../card/UnitCard";
 import { GlobalVar } from "../../GlobalVar";
 import { EventData, EventType } from "../EventDefine";
+import { CardStatus } from "../GameDefine";
 import { GameTable } from "../GameTable";
 import { MapBlock } from "./MapBlock";
 
@@ -48,6 +49,13 @@ export class GameMap {
         }
     }
 
+    /**向手牌新增的卡牌增加全局buff */
+    public addGlobalBuffForNewHandCard(card: BaseCard) {
+        this._globalBuff.forEach((buff) => {
+            GlobalVar.buffMgr.addGlobalBuff(card, buff);
+        });
+    }
+
     /**向战场添加全局buff*/
     public addGlobalBuff(buff: BuffData) {
         const notice = new GamePto.S_UPDATE_ENTITYS();
@@ -56,13 +64,22 @@ export class GameMap {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
             if (card.cardType !== CardsPto.CardType.Event) {
-                GlobalVar.buffMgr.addGlobalBuff(card as BuildingCard, buff);
+                GlobalVar.buffMgr.addGlobalBuff(card, buff);
                 notice.entityCards.push(card);
             }
         }
         if (notice.entityCards.length !== 0) {
             this._table.broadcast(notice);
         }
+
+        //给手牌增加buff
+        this._table.users.forEach((user) => {
+            user.handCards.forEach((card) => {
+                GlobalVar.buffMgr.addGlobalBuff(card, buff);
+            });
+            //通知手牌变化
+            user.noticeHandCardsChange();
+        });
     }
 
     /**移除战场指定全局buff*/
@@ -85,6 +102,15 @@ export class GameMap {
         if (notice.entityCards.length !== 0) {
             this._table.broadcast(notice);
         }
+
+        //给手牌增加buff
+        this._table.users.forEach((user) => {
+            user.handCards.forEach((card) => {
+                GlobalVar.buffMgr.deleteGlobalBuff(card, buff);
+            });
+            //通知手牌变化
+            user.noticeHandCardsChange();
+        });
     }
 
     /**增加位置buff */
@@ -140,15 +166,16 @@ export class GameMap {
         if (mapBlock.card) {
             return;
         }
+
+        card.cardStatus = CardStatus.Scene;
         mapBlock.setCard(card);
         this._mapCards.push(card);
 
         //增加全局Buff到卡牌
         if (isAddGlobalBuff) {
-            for (let index = 0; index < this._globalBuff.length; index++) {
-                const buff = this._globalBuff[index];
+            this._globalBuff.forEach((buff) => {
                 GlobalVar.buffMgr.addGlobalBuff(card, buff);
-            }
+            });
         }
     }
 
@@ -162,10 +189,10 @@ export class GameMap {
 
         //删除卡牌全局Buff
         if (isDeleteGlobalBuff) {
-            for (let index = 0; index < this._globalBuff.length; index++) {
-                const buff = this._globalBuff[index];
+            this._globalBuff.forEach((buff) => {
                 GlobalVar.buffMgr.deleteGlobalBuff(mapBlock.card, buff);
-            }
+
+            });
         }
 
         mapBlock.removeCard();
@@ -173,6 +200,7 @@ export class GameMap {
 
     /** 往战场上添加事件卡*/
     public addEvent(card: EventCard) {
+        card.cardStatus = CardStatus.Scene;
         this._mapCards.push(card);
     }
 

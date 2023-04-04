@@ -33,7 +33,7 @@ class CardItem {
 
     static getCardByServerCard(cardInfo: GamePto.ICard) {
         const cardItem = CardItem.getItem(CardsModel.ins().getCardConfigById(cardInfo.cardId));
-        cardItem.feeText.text = `${cardInfo.fee}`;
+        cardItem.feeText.text = `${Math.max(0, cardInfo.cardFee)}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
         cardItem.healthText.text = `${cardInfo.health}`;
         cardItem.cardNum.visible = false;

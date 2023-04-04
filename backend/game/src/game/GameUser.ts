@@ -6,6 +6,7 @@ import { BuildingCard } from '../card/BuildingCard';
 import { EventCard } from '../card/EventCard';
 import { UnitCard } from '../card/UnitCard';
 import { GlobalVar } from '../GlobalVar';
+import { CardStatus } from './GameDefine';
 import { MatchUser } from './GameMatchInfo';
 import { GameTable } from './GameTable';
 
@@ -25,14 +26,31 @@ export class GameUser {
     /**卡池 */
     private _cardPool: BaseCard[];
     get cardPool() { return this._cardPool; }
+    public addToCardPool(card: BaseCard) {
+        card.cardStatus = CardStatus.CardPool;
+        this._cardPool.push(card);
+    }
 
     /**手牌 */
     private _handCards: BaseCard[];
     get handCards() { return this._handCards; }
+    public addToHand(card: BaseCard) {
+        card.cardStatus = CardStatus.Hand;
+        //向手牌新增的卡牌增加全局buff
+        this.table.mapData.addGlobalBuffForNewHandCard(card);
+        this._handCards.push(card);
+    }
+    public deleteHandCard(cardIndex: number, delNum: number) {
+        this._handCards.splice(cardIndex, delNum);
+    }
 
     /**坟场 */
     private _deadPool: BaseCard[];
     get deadPool() { return this._deadPool; }
+    public addToDeadPool(card: BaseCard) {
+        card.cardStatus = CardStatus.DeadPool;
+        this._deadPool.push(card);
+    }
 
     /**正在战场上起作用的事件卡 */
     private _eventPool: EventCard[];
@@ -72,6 +90,9 @@ export class GameUser {
     get fee() {
         return this._fee;
     }
+    public reduceFee(fee: number) {
+        this._fee -= Math.max(fee, 0);
+    }
 
     set fee(v: number) {
         this._fee = Math.max(0, v);
@@ -106,10 +127,8 @@ export class GameUser {
         for (let index = 0; index < this._cardGroup.cards.length; index++) {
             const cardInfo = this._cardGroup.cards[index];
             for (let z = 0; z < cardInfo.count; z++) {
-                const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id, this.table.uniqueId);
-                card.uid = this.uid;
-                card.table = this.table;
-                this._cardPool.push(card);
+                const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id, this.uid, this.table);
+                this.addToCardPool(card);
             }
         }
         this._deadPool = [];
@@ -118,21 +137,23 @@ export class GameUser {
         this._handCards = [];
         this.replaceIndexes = [];
 
-        //TODO 要使用useCard逻辑
-        /**设置英雄到战场 */
-        const heroCard = this._cardPool.shift() as UnitCard;
-        heroCard.blockX = 3;
-        //如果自己是先手玩家,那么自己的英雄的位置在下方
-        heroCard.blockY = this === this.table.users[this.table.roundUserIndex] ? 7 : 0;
-        this.setUnitCardToMap(heroCard);
-
         this._fatigue = 1;
 
         this.feeUpperLimit = 10;
         this.feeMax = 10;
         this.fee = 1;
+
+        this.initHero();
     }
 
+    public initHero() {
+        /**设置英雄到战场 */
+        const heroCard = this._cardPool.shift() as UnitCard;
+        heroCard.blockX = 3;
+        //如果自己是先手玩家,那么自己的英雄的位置在下方
+        heroCard.blockY = this === this.table.users[this.table.roundUserIndex] ? 7 : 0;
+        this.setEntityToMap(heroCard);
+    }
 
     /**
      * 从卡池中抽牌
@@ -157,11 +178,11 @@ export class GameUser {
             const card = this._cardPool.pop();
             //小于手牌上限
             if (this._handCards.length < GlobalVar.configMgr.common.maxHandCardNum) {
-                this._handCards.push(card);
+                this.addToHand(card);
                 message.inHandCards.push(card);
             } else {
                 //大于手牌上限直接放到墓地中
-                this._deadPool.push(card);
+                this.addToDeadPool(card);
                 message.discards.push(card);
             }
         }
@@ -178,7 +199,7 @@ export class GameUser {
     }
 
     /**设置单位卡到地图 */
-    public setUnitCardToMap(card: UnitCard | BuildingCard) {
+    public setEntityToMap(card: UnitCard | BuildingCard) {
         this.table.mapData.setCard(card);
         this._entityPool.push(card);
     }
@@ -214,4 +235,13 @@ export class GameUser {
         const sInfo = await redis.hmget(this.uid, ['nick']);
         this.nick = sInfo[0];
     }
+
+    /**通知手牌变化,例如因为光环全部加减费用了,或者Buff改变了手牌的属性等 */
+    public noticeHandCardsChange() {
+        const notice = new GamePto.S_HANDCARDS_UPDATE();
+        notice.uid = this.uid;
+        notice.cards = this.handCards;
+        this.sendMsg(notice);
+    }
+
 }

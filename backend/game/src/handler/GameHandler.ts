@@ -38,8 +38,8 @@ export class GameHandler extends BaseHandler {
         if (card) {
             //入墓地
             replay.isSuccess = true;
-            user.handCards.splice(msg.cardIndex, 1)
-            user.deadPool.push(card);
+            user.deleteHandCard(msg.cardIndex, 1);
+            user.addToDeadPool(card);
             replay.cardIndex = msg.cardIndex;
             //加费用
             if (user.fee < user.feeMax) {

@@ -3,10 +3,9 @@ import { GamePto } from "../../../common/CommonProto";
 import { CardsPto } from "../../../common/CommonProto";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
+import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
-import { BuildingCard } from "./BuildingCard";
-import { UnitCard } from "./UnitCard";
 
 const logger = getLogger();
 /**event card用health来决定持续回合数 */
@@ -14,8 +13,8 @@ export class EventCard extends BaseCard {
 
     protected eventMap: Map<EventType, EventFunction[]>;
 
-    constructor(cardId: number, id: number) {
-        super(cardId, id);
+    constructor(cardId: number, uid: number, table: GameTable) {
+        super(cardId, uid, table);
         this.eventMap = new Map<EventType, EventFunction[]>();
     }
 
@@ -111,7 +110,7 @@ export class EventCard extends BaseCard {
             //删除玩家事件卡池中的此卡
             user.eventPool.splice(index, 1);
             //进入墓地
-            user.deadPool.push(this);
+            user.addToDeadPool(this);
         }
         //派发事件更新协议
         const msg = new GamePto.S_EVENT_UPDATE();

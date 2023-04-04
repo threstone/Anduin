@@ -1,5 +1,5 @@
 import { GamePto } from '../../../../common/CommonProto';
-import { NodeDefine, NodeDriverResult } from '../GameDefine';
+import { CardStatus, NodeDefine, NodeDriverResult } from '../GameDefine';
 import { GlobalVar } from '../../GlobalVar';
 import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
@@ -21,6 +21,7 @@ export class NodeStartGame extends BaseNode {
 
     //跳到下一节点
     public onWaitTimeArrive(table: GameTable): NodeDriverResult {
+        this.endStartNode(table);
         return NodeDriverResult.GoOn;
     }
 
@@ -43,9 +44,10 @@ export class NodeStartGame extends BaseNode {
             user.replaceIndexes.push(cardIndex);
             //替换掉卡牌
             user.handCards[cardIndex] = user.cardPool.pop();
+            user.handCards[cardIndex].cardStatus = CardStatus.Hand;
             replay.replaceCardIndexes.push(cardIndex);
             //将卡牌重新放入卡池
-            user.cardPool.push(replaceCardId);
+            user.addToCardPool(replaceCardId)
         }
 
         //如果插入了卡牌,洗牌
@@ -61,7 +63,7 @@ export class NodeStartGame extends BaseNode {
         //检查是否所有玩家都换牌了
         if (this.isAllUserReplace(table)) {
             //广播换牌信息
-            this.brodcastReplaceMsg(user, table);
+            this.endStartNode(table);
             return NodeDriverResult.GoOn;
         }
         return NodeDriverResult.Continue;
@@ -85,7 +87,7 @@ export class NodeStartGame extends BaseNode {
         const gameStartMsg = new GamePto.S_GAME_START();
         gameStartMsg.firstUid = table.users[table.roundUserIndex].uid;
         gameStartMsg.replaceEndTime = Date.now() + GlobalVar.configMgr.common.replaceCardTime;
-        
+
         //初始化信息
         table.users[0].resetInfo();
         table.users[1].resetInfo();
@@ -96,11 +98,10 @@ export class NodeStartGame extends BaseNode {
         for (let index = 0; index < table.users.length; index++) {
             const user = table.users[index];
 
-
             table.shuffle(user.cardPool);
             //抽n张
             for (let cardNum = 0; cardNum < GlobalVar.configMgr.common.startHandCardNum; cardNum++) {
-                user.handCards.push(user.cardPool.pop())
+                user.addToHand(user.cardPool.pop())
             }
             //后手多一费
             if (table.roundUserIndex !== index) {
@@ -117,9 +118,11 @@ export class NodeStartGame extends BaseNode {
         console.log("派发游戏开始协议");
     }
 
-    /**广播换牌信息 */
-    private brodcastReplaceMsg(user: GameUser, table: GameTable) {
-        const otherUser = table.getOtherUser(user.uid);
+    private endStartNode(table: GameTable) {
+        const user = table.users[0];
+        const otherUser = table.users[1];
+
+        /**广播换牌信息 */
         const replay = new GamePto.S_REPLACE_CARDS();
         replay.uid = user.uid;
         replay.replaceCardIndexes = user.replaceIndexes;
@@ -127,5 +130,9 @@ export class NodeStartGame extends BaseNode {
         replay.uid = otherUser.uid;
         replay.replaceCardIndexes = otherUser.replaceIndexes;
         user.sendMsg(replay);
+
+        /**初始化英雄buff */
+        user.hero.initBuffs();
+        otherUser.hero.initBuffs();
     }
 }

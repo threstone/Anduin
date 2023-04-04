@@ -59,7 +59,7 @@ message Card{
 	int32 cardType = 2;
 	int32 attack = 3;
 	int32 health = 4;
-	int32 fee = 5;//战场上的卡用不到，手牌会用到
+	int32 cardFee = 5;
 	int32 uid = 6;
 	int32 blockX = 7;
 	int32 blockY = 8;
@@ -338,4 +338,12 @@ message S_RECONNECT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10022];
 	MapData mapData = 3; 
+}
+
+//更新手牌信息
+message S_HANDCARDS_UPDATE{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10023];
+	int32 uid = 3;
+	repeated Card cards = 4;
 }

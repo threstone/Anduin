@@ -153,7 +153,7 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             }
 
             //费用不够
-            if (this._card.cardInfo.fee > GameModel.ins().fee) {
+            if (this._card.cardInfo.cardFee > GameModel.ins().fee) {
                 TipsView.ins().showTips("费用不够!");
                 this.close();
                 return;

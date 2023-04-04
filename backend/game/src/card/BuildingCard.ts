@@ -4,6 +4,7 @@ import { GamePto } from "../../../common/CommonProto";
 import { BuffData } from "../buff/BuffData";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
+import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
 import { BaseCard } from "./BaseCard";
@@ -17,11 +18,11 @@ export class BuildingCard extends EventCard {
     /**自身的所有buff,包括全局buff、位置buff、普通buff */
     private _buffMap: Map<number, BuffData>;
 
-    constructor(cardId: number, id: number) {
-        super(cardId, id);
-        this.on(EventType.Damage, { id, fun: this.onDamage, canSilent: false });
-        this.on(EventType.DamageAfter, { id, fun: this.onDamageAfter, canSilent: false });
-        this.on(EventType.Dead, { id, fun: this.onDead, canSilent: false });
+    constructor(cardId: number, uid: number, table: GameTable) {
+        super(cardId, uid, table);
+        this.on(EventType.Damage, { id: this.id, fun: this.onDamage, canSilent: false });
+        this.on(EventType.DamageAfter, { id: this.id, fun: this.onDamageAfter, canSilent: false });
+        this.on(EventType.Dead, { id: this.id, fun: this.onDead, canSilent: false });
     }
 
     /**发送到客户端的状态数据 */
@@ -66,15 +67,10 @@ export class BuildingCard extends EventCard {
         super.onUse(user, cardIndex, ...params);
         this.blockX = blockX;
         this.blockY = blockY;
-        this.table.mapData.setCard(this);
 
-        user.entityPool.push(this);
+        user.setEntityToMap(this);
 
-        //ADD Buff
-        for (let index = 0; index < this.buffs.length; index++) {
-            const buff = this.buffs[index];
-            GlobalVar.buffMgr.addBuff(this, buff);
-        }
+        this.initBuffs();
 
         if (this.cardType === CardsPto.CardType.Building || this.cardType === CardsPto.CardType.Unit) {
             //send success card message
@@ -87,6 +83,15 @@ export class BuildingCard extends EventCard {
 
             //通知用户费用信息
             this.table.noticeUserFeeInfo(user);
+        }
+    }
+
+    /**初始化buff */
+    public initBuffs() {
+        //ADD Buff
+        for (let index = 0; index < this.buffs.length; index++) {
+            const buff = this.buffs[index];
+            GlobalVar.buffMgr.addBuff(this, buff);
         }
     }
 
@@ -133,7 +138,7 @@ export class BuildingCard extends EventCard {
         /**从地图上删除卡牌 */
         this.table.mapData.deleteCard(this.blockX, this.blockY);
         user.entityPool.splice(index, 1);
-        user.deadPool.push(this);
+        user.addToDeadPool(this);
         //进入墓地先把身上的buff清理掉
         if (this._buffMap) {
             this._buffMap.clear();

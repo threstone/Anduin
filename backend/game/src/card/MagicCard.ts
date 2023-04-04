@@ -7,7 +7,7 @@ export class MagicCard extends BaseCard {
         super.onUse(user, cardIndex, ...params);
 
         //进墓地
-        user.deadPool.push(this);
+        user.addToDeadPool(this);
 
         //send success card message
         const notice = new GamePto.S_USE_CARD();

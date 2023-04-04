@@ -2,6 +2,7 @@ import { getLogger } from "log4js";
 import { GamePto } from "../../../common/CommonProto";
 import { CardsPto } from "../../../common/CommonProto";
 import { CardInterface } from "../../../common/I";
+import { CardStatus } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
@@ -14,6 +15,8 @@ export class BaseCard implements CardInterface {
     id: number;
     table: GameTable;
 
+    cardStatus: CardStatus;
+
     cardId: number;
     powerId: CardsPto.PowerType;
     cardType: CardsPto.CardType;
@@ -22,30 +25,37 @@ export class BaseCard implements CardInterface {
     health: number;
     healthUpperLimit: number;
     fee: number;
+    /**最终使用的费用,初始时和fee相同,但是可能收到一些减费效果的影响 */
+    cardFee: number;
     quality: CardsPto.QualityType;
     buffs: number[];
     isDerivation: number;
     useCondition: number[];
     movement: number;
 
-    public static create(cardId: number, id: number) {
-        return new (this as any)(cardId, id);
+    public static create(cardId: number, uid: number, table: GameTable) {
+        return new (this as any)(cardId, uid, table);
     }
 
-    constructor(cardId: number, id: number) {
+    constructor(cardId: number, uid: number, table: GameTable) {
         const cardConfig = GlobalVar.configMgr.getCardConfigById(cardId)
         for (const key in cardConfig) {
             this[key] = cardConfig[key];
         }
+        this.id = table.uniqueId;
+        this.uid = uid;
+        this.table = table;
         this.healthUpperLimit = this.health;
-        this.id = id;
+        this.cardFee = this.fee;
     }
 
     /**使用卡牌 */
     public onUse(user: GameUser, cardIndex: number, ...params: number[]) {
-        //减去费用,删除手牌
-        user.fee -= this.fee;
-        user.handCards.splice(cardIndex, 1);
+        if (this.cardType !== CardsPto.CardType.Hero) {
+            //减去费用,删除手牌
+            user.reduceFee(this.cardFee);
+            user.deleteHandCard(cardIndex, 1);
+        }
     }
 
     /**检查卡牌是否可以使用 */
@@ -53,7 +63,7 @@ export class BaseCard implements CardInterface {
         if (this.useCondition[0] !== GamePto.UseConditionEnum.NoCondition && this.checkUseCondition(params) === false) {
             return false;
         }
-        return this.fee <= this.table.getUser(this.uid).fee;
+        return this.cardFee <= this.table.getUser(this.uid).fee;
     }
 
     /**检查所选单位是否符合条件 */

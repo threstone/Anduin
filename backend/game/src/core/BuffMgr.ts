@@ -5,8 +5,9 @@ import { GlobalBuff } from "../buff/GlobalBuff";
 import { GameBuff } from "../buff/GameBuff";
 import { PositionBuff } from "../buff/PositionBuff";
 import { getLogger } from "log4js";
-import path = require("path");
+import * as path from "path";
 import { CommonUtils } from "../../../common/CommonUtils";
+import { BaseCard } from "../card/BaseCard";
 
 const logger = getLogger();
 export class BuffMgr {
@@ -64,14 +65,14 @@ export class BuffMgr {
         }
     }
 
-    public addGlobalBuff(card: BuildingCard, buff: BuffData) {
+    public addGlobalBuff(card: BaseCard, buff: BuffData) {
         const buffClass = this.getBuffByBuffId(buff.buffId) as GlobalBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.addGlobalBuff(card, buff);
         }
     }
 
-    public deleteGlobalBuff(card: BuildingCard, buff: BuffData) {
+    public deleteGlobalBuff(card: BaseCard, buff: BuffData) {
         const buffClass = this.getBuffByBuffId(buff.buffId) as GlobalBuff;
         if (buff.effectiveType === BuffEffectiveDefine.All || (card.uid === buff.uid) === (buff.effectiveType === BuffEffectiveDefine.Friend)) {
             buffClass.deleteGlobalBuff(card, buff);

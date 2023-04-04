@@ -1,14 +1,15 @@
 import { GamePto } from "../../../../../common/CommonProto";
 import { CardsPto } from "../../../../../common/CommonProto";
 import { EventData, EventType } from "../../../game/EventDefine";
+import { GameTable } from "../../../game/GameTable";
 import { BaseCard } from "../../BaseCard";
 import { EventCard } from "../../EventCard";
 
 /**单位反制 */
 export class Card7 extends EventCard {
 
-    constructor(cardId: number, id: number) {
-        super(cardId, id);
+    constructor(cardId: number, uid: number, table: GameTable) {
+        super(cardId, uid, table);
         this.on(EventType.PreUseCard, { id: this.id, fun: this.onPreUseCard });
     }
 
@@ -22,9 +23,9 @@ export class Card7 extends EventCard {
         if (card.cardType === CardsPto.CardType.Building || card.cardType === CardsPto.CardType.Unit) {
             //对方这张卡没了,减费用
             const targetUser = this.table.getUser(card.uid);
-            targetUser.fee -= card.fee;
+            targetUser.reduceFee(card.cardFee);
             const targetCardIndex = targetUser.handCards.indexOf(card);
-            targetUser.handCards.splice(targetCardIndex, 1);
+            targetUser.deleteHandCard(targetCardIndex, 1);
 
             //通知
             const notice = new GamePto.S_CARD_DENY();

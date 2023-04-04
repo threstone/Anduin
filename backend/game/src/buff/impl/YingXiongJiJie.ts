@@ -1,7 +1,7 @@
+import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
-import { BuffEffectiveDefine } from "../../game/GameDefine";
+import { BuffEffectiveDefine, CardStatus } from "../../game/GameDefine";
 import { BuffData } from "../BuffData";
-import { GameBuff } from "../GameBuff";
 import { GlobalBuff } from "../GlobalBuff";
 
 /**
@@ -11,20 +11,22 @@ export class YingXiongJiJie extends GlobalBuff {
 
     public buffId: number = 4;
 
-    public addBuff(card: BuildingCard,): void {
+    public addBuff(card: BuildingCard): void {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
         super.addBuff(card, buff);
     }
-    
-    public deleteBuff(card: BuildingCard, buff: BuffData): void {
-        throw new Error("Method not implemented.");
+
+    public addGlobalBuff(card: BaseCard, buff: BuffData): void {
+        /**手牌中,费用大于5,属于自己 */
+        if (card.cardStatus === CardStatus.Hand && card.fee >= 5 && card.uid === buff.uid) {
+            card.cardFee--;
+        }
     }
 
-    public addGlobalBuff(card: BuildingCard, buff: BuffData): void {
-        throw new Error("Method not implemented.");
-    }
-
-    public deleteGlobalBuff(card: BuildingCard, buff: BuffData): void {
-        throw new Error("Method not implemented.");
+    public deleteGlobalBuff(card: BaseCard, buff: BuffData): void {
+        /**手牌中,费用大于5,属于自己 */
+        if (card.cardStatus === CardStatus.Hand && card.fee >= 5 && card.uid === buff.uid) {
+            card.cardFee++;
+        }
     }
 }

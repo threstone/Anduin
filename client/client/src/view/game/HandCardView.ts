@@ -36,6 +36,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
         this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
         this.addEffectListener('S_FEE_INFO', this.updateHandCardStats);
+        this.addEffectListener('S_HANDCARDS_UPDATE', this.updateHandCards);
         this.observe('S_DISCARD', this.onDeleteCard);
     }
 
@@ -73,10 +74,24 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         });
     }
 
+    /**更新手牌信息 */
+    private updateHandCards() {
+        const handCard = GameModel.ins().handCards;
+        if (handCard.length !== this._cards.length) {
+            console.error('卡牌数量与更新数据数量不一致!');
+            TipsView.ins().showTips('卡牌数量与更新数据数量不一致!', 55555)
+            return;
+        }
+        for (let index = 0; index < handCard.length; index++) {
+            const cardInfo = handCard[index];
+            this._cards[index].update(cardInfo);
+        }
+    }
+
     /**检查是否可以使用次卡牌 */
     private checkUseStatus(card: GameCard) {
         /**费用和可操作性检查 */
-        if (GameSceneView.ins().allowToOprate && GameModel.ins().fee >= card.cardInfo.fee) {
+        if (GameSceneView.ins().allowToOprate && GameModel.ins().fee >= card.cardInfo.cardFee) {
             //单位卡要增加一层判断,因为单位卡只能放置到出兵建筑附近
             if (card.cardInfo.cardType === CardsPto.CardType.Unit) {
                 //检查有没有出兵建筑

@@ -1,4 +1,4 @@
-const GroupCardsNum = 30;
+const GroupCardsNum = 40;
 class CardGroupInfo {
     /**创建卡组数据缓存 */
     private _cardsInfo: { count: number, cardInfo: CardInterface }[];

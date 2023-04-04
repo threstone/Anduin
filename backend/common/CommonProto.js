@@ -3356,7 +3356,7 @@ $root.GamePto = (function() {
         Card.prototype.cardType = 0;
         Card.prototype.attack = 0;
         Card.prototype.health = 0;
-        Card.prototype.fee = 0;
+        Card.prototype.cardFee = 0;
         Card.prototype.uid = 0;
         Card.prototype.blockX = 0;
         Card.prototype.blockY = 0;
@@ -3381,8 +3381,8 @@ $root.GamePto = (function() {
                 w.uint32(24).int32(m.attack);
             if (m.health != null && Object.hasOwnProperty.call(m, "health"))
                 w.uint32(32).int32(m.health);
-            if (m.fee != null && Object.hasOwnProperty.call(m, "fee"))
-                w.uint32(40).int32(m.fee);
+            if (m.cardFee != null && Object.hasOwnProperty.call(m, "cardFee"))
+                w.uint32(40).int32(m.cardFee);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(48).int32(m.uid);
             if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
@@ -3430,7 +3430,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 5: {
-                        m.fee = r.int32();
+                        m.cardFee = r.int32();
                         break;
                     }
                 case 6: {
@@ -3491,8 +3491,8 @@ $root.GamePto = (function() {
             if (d.health != null) {
                 m.health = d.health | 0;
             }
-            if (d.fee != null) {
-                m.fee = d.fee | 0;
+            if (d.cardFee != null) {
+                m.cardFee = d.cardFee | 0;
             }
             if (d.uid != null) {
                 m.uid = d.uid | 0;
@@ -3533,7 +3533,7 @@ $root.GamePto = (function() {
                 d.cardType = 0;
                 d.attack = 0;
                 d.health = 0;
-                d.fee = 0;
+                d.cardFee = 0;
                 d.uid = 0;
                 d.blockX = 0;
                 d.blockY = 0;
@@ -3555,8 +3555,8 @@ $root.GamePto = (function() {
             if (m.health != null && m.hasOwnProperty("health")) {
                 d.health = m.health;
             }
-            if (m.fee != null && m.hasOwnProperty("fee")) {
-                d.fee = m.fee;
+            if (m.cardFee != null && m.hasOwnProperty("cardFee")) {
+                d.cardFee = m.cardFee;
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
@@ -7812,6 +7812,144 @@ $root.GamePto = (function() {
         };
 
         return S_RECONNECT;
+    })();
+
+    GamePto.S_HANDCARDS_UPDATE = (function() {
+
+        function S_HANDCARDS_UPDATE(p) {
+            this.cards = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        S_HANDCARDS_UPDATE.prototype.cmd = 200;
+        S_HANDCARDS_UPDATE.prototype.scmd = 10023;
+        S_HANDCARDS_UPDATE.prototype.uid = 0;
+        S_HANDCARDS_UPDATE.prototype.cards = $util.emptyArray;
+
+        S_HANDCARDS_UPDATE.create = function create(properties) {
+            return new S_HANDCARDS_UPDATE(properties);
+        };
+
+        S_HANDCARDS_UPDATE.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
+                w.uint32(8).int32(m.cmd);
+            if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
+                w.uint32(16).int32(m.scmd);
+            if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
+                w.uint32(24).int32(m.uid);
+            if (m.cards != null && m.cards.length) {
+                for (var i = 0; i < m.cards.length; ++i)
+                    $root.GamePto.Card.encode(m.cards[i], w.uint32(34).fork()).ldelim();
+            }
+            return w;
+        };
+
+        S_HANDCARDS_UPDATE.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_HANDCARDS_UPDATE();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1: {
+                        m.cmd = r.int32();
+                        break;
+                    }
+                case 2: {
+                        m.scmd = r.int32();
+                        break;
+                    }
+                case 3: {
+                        m.uid = r.int32();
+                        break;
+                    }
+                case 4: {
+                        if (!(m.cards && m.cards.length))
+                            m.cards = [];
+                        m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        break;
+                    }
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        S_HANDCARDS_UPDATE.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_HANDCARDS_UPDATE)
+                return d;
+            var m = new $root.GamePto.S_HANDCARDS_UPDATE();
+            if (d.cmd != null) {
+                m.cmd = d.cmd | 0;
+            }
+            if (d.scmd != null) {
+                m.scmd = d.scmd | 0;
+            }
+            if (d.uid != null) {
+                m.uid = d.uid | 0;
+            }
+            if (d.cards) {
+                if (!Array.isArray(d.cards))
+                    throw TypeError(".GamePto.S_HANDCARDS_UPDATE.cards: array expected");
+                m.cards = [];
+                for (var i = 0; i < d.cards.length; ++i) {
+                    if (typeof d.cards[i] !== "object")
+                        throw TypeError(".GamePto.S_HANDCARDS_UPDATE.cards: object expected");
+                    m.cards[i] = $root.GamePto.Card.fromObject(d.cards[i]);
+                }
+            }
+            return m;
+        };
+
+        S_HANDCARDS_UPDATE.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.cards = [];
+            }
+            if (o.defaults) {
+                d.cmd = 200;
+                d.scmd = 10023;
+                d.uid = 0;
+            }
+            if (m.cmd != null && m.hasOwnProperty("cmd")) {
+                d.cmd = m.cmd;
+            }
+            if (m.scmd != null && m.hasOwnProperty("scmd")) {
+                d.scmd = m.scmd;
+            }
+            if (m.uid != null && m.hasOwnProperty("uid")) {
+                d.uid = m.uid;
+            }
+            if (m.cards && m.cards.length) {
+                d.cards = [];
+                for (var j = 0; j < m.cards.length; ++j) {
+                    d.cards[j] = $root.GamePto.Card.toObject(m.cards[j], o);
+                }
+            }
+            return d;
+        };
+
+        S_HANDCARDS_UPDATE.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        S_HANDCARDS_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_HANDCARDS_UPDATE";
+        };
+
+        return S_HANDCARDS_UPDATE;
     })();
 
     return GamePto;

@@ -2118,8 +2118,8 @@ declare namespace GamePto {
         /** Card health */
         health?: (number|null);
 
-        /** Card fee */
-        fee?: (number|null);
+        /** Card cardFee */
+        cardFee?: (number|null);
 
         /** Card uid */
         uid?: (number|null);
@@ -2164,8 +2164,8 @@ declare namespace GamePto {
         /** Card health. */
         public health: number;
 
-        /** Card fee. */
-        public fee: number;
+        /** Card cardFee. */
+        public cardFee: number;
 
         /** Card uid. */
         public uid: number;
@@ -4215,6 +4215,69 @@ declare namespace GamePto {
 
         /**
          * Gets the default type url for S_RECONNECT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_HANDCARDS_UPDATE. */
+    interface IS_HANDCARDS_UPDATE {
+
+        /** S_HANDCARDS_UPDATE cmd */
+        cmd?: (number|null);
+
+        /** S_HANDCARDS_UPDATE scmd */
+        scmd?: (number|null);
+
+        /** S_HANDCARDS_UPDATE uid */
+        uid?: (number|null);
+
+        /** S_HANDCARDS_UPDATE cards */
+        cards?: (GamePto.ICard[]|null);
+    }
+
+    /** Represents a S_HANDCARDS_UPDATE. */
+    class S_HANDCARDS_UPDATE implements IS_HANDCARDS_UPDATE {
+
+        /**
+         * Constructs a new S_HANDCARDS_UPDATE.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_HANDCARDS_UPDATE);
+
+        /** S_HANDCARDS_UPDATE cmd. */
+        public cmd: number;
+
+        /** S_HANDCARDS_UPDATE scmd. */
+        public scmd: number;
+
+        /** S_HANDCARDS_UPDATE uid. */
+        public uid: number;
+
+        /** S_HANDCARDS_UPDATE cards. */
+        public cards: GamePto.ICard[];
+
+        /**
+         * Encodes the specified S_HANDCARDS_UPDATE message. Does not implicitly {@link GamePto.S_HANDCARDS_UPDATE.verify|verify} messages.
+         * @param message S_HANDCARDS_UPDATE message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_HANDCARDS_UPDATE, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a S_HANDCARDS_UPDATE message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_HANDCARDS_UPDATE
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_HANDCARDS_UPDATE;
+
+        /**
+         * Gets the default type url for S_HANDCARDS_UPDATE
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

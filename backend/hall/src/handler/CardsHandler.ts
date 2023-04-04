@@ -5,8 +5,10 @@ import { GlobalVar } from '../GlobalVar';
 import { RedisType } from '../../../common/ConstDefine';
 import { getLogger } from 'log4js';
 
+//禁止枚举值改为枚举name
 CardsPto.CardGroup.prototype.toJSON = null;
-const GroupCardsNum = 30;
+
+const GroupCardsNum = 40;
 const logger = getLogger();
 export class CardsHandler extends BaseHandler {
     //请求卡牌收藏数据
@@ -258,7 +260,7 @@ export class CardsHandler extends BaseHandler {
             sum += card.count;
             cardSet.add(card.id);
         }
-        //最多携带30张卡牌
+        //最多携带40张卡牌
         if (sum > GroupCardsNum) {
             return false;
         }
@@ -283,7 +285,7 @@ export class CardsHandler extends BaseHandler {
             }
             sum += cardInfo.count;
         }
-        if (sum !== 30) {
+        if (sum !== GroupCardsNum) {
             cardGroup.accessToUse = false;
         }
     }

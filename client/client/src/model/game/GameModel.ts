@@ -174,4 +174,10 @@ class GameModel extends BaseModel {
     private S_GAME_OVER(msg: GamePto.S_GAME_OVER) {
         this.emit('S_GAME_OVER', msg);
     }
+
+    //更新手牌信息
+    private S_HANDCARDS_UPDATE(msg: GamePto.S_HANDCARDS_UPDATE) {
+        this.handCards = msg.cards;
+        this.emit('S_HANDCARDS_UPDATE');
+    }
 }

@@ -9,6 +9,8 @@ import { UnitCard } from '../card/UnitCard';
 import { EventCard } from '../card/EventCard';
 import { MagicCard } from '../card/MagicCard';
 import { HeroCard } from '../card/HeroCard';
+import { BaseTable } from '../game/BaseTable';
+import { GameTable } from '../game/GameTable';
 
 const logger = getLogger();
 export class CardMgr {
@@ -65,7 +67,7 @@ export class CardMgr {
         logger.info(`结束卡片初始化,耗时:${Date.now() - makeTime}ms`);
     }
 
-    public getCardInstance(cardId: number, id: number): BaseCard {
-        return this._cardClassMap.get(cardId)?.create(cardId, id);
+    public getCardInstance(cardId: number, uid: number, table: GameTable): BaseCard {
+        return this._cardClassMap.get(cardId)?.create(cardId, uid, table);
     }
 }

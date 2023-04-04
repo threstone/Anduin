@@ -51,3 +51,17 @@ export enum BuffEffectiveDefine {
     /**敌方Buff,仅仅对敌方卡牌生效  */
     Enemy
 }
+
+/**
+ * 定义卡牌状态枚举，包括以下 3 种状态：
+ * cardPool: 表示当前卡牌在牌库中，未被抽取；
+ * Hand: 表示当前卡牌在玩家手牌里；
+ * Scene: 表示当前卡牌正在场景中作用。
+ * DeadPool: 表示当前卡牌已经死亡并被放入弃牌堆。
+ */
+export enum CardStatus{
+    CardPool,
+    Hand,
+    Scene,
+    DeadPool
+}
