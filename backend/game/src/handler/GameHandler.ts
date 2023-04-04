@@ -97,13 +97,12 @@ export class GameHandler extends BaseHandler {
 
             const moveEvent = new EventData(EventType.PreMove);
             //执行战场移动前事件决定是否有后续
+            //执行卡牌移动前事件,如光环随从移除地图格子光环
             table.mapData.emit(moveEvent, card);
             if (moveEvent.isContinue === false) {
                 return;
             }
 
-            //执行卡牌移动前事件,如光环随从移除地图格子光环
-            card.emit(moveEvent, card);
             //更新卡牌位置
             table.mapData.updateCardPosition(msg.targetX, msg.targetY, card);
             //广播卡牌移动协议
@@ -148,18 +147,15 @@ export class GameHandler extends BaseHandler {
             atkEvent.data = damage;
 
             //执行战场攻击前事件决定是否有后续
+            //执行攻击前事件,可能会导致伤害变化
             table.mapData.emit(EventType.PreAtk, sourceCard, targetCard, damageTarget, dices);
             //攻击被禁止了
             if (atkEvent.isContinue === false) {
                 return;
             }
 
-            //执行攻击前事件,可能会导致伤害变化
-            sourceCard.emit(atkEvent, sourceCard, targetCard, damageTarget, dices);
-
-
             //返回实际收到的伤害
-            damageTarget.emit(atkEvent.changeType(EventType.Damage), damage, sourceCard);
+            damageTarget.emit(atkEvent.changeType(EventType.Damage), atkEvent.data, sourceCard);
 
             //广播卡牌攻击协议
             const replay = new GamePto.S_ATTACK();
