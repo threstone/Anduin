@@ -45,6 +45,20 @@ export interface BaseEvent {
     onMoveAfter(eventData: EventData, next: Function, moveCard: UnitCard): void
 
     /**
+    * 卡牌自身移动前触发
+    * 一些卡牌会对周围的卡造成效果，当移动时，需要更新周围卡牌的效果，通过S_MAP_DATA协议
+    * 有可能一张卡被同时两张周围的卡片光环影响，例如炉石随从左右都是恐狼，那么就会+2攻击力
+    */
+    onSelfPreMove(eventData: EventData, next: Function, source: UnitCard): void
+
+    /**
+     * 卡牌自身移动后触发
+     * 一些卡牌会对周围的卡造成效果，当移动时，需要更新周围卡牌的效果，通过S_MAP_DATA协议
+     * 有可能一张卡被同时两张周围的卡片光环影响，例如炉石随从左右都是恐狼，那么就会+2攻击力
+     */
+    onSelfMoveAfter(eventData: EventData, next: Function, source: UnitCard): void
+
+    /**
      * 战场卡牌攻击前
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
@@ -52,6 +66,15 @@ export interface BaseEvent {
 
     /**战场卡牌攻击后 */
     onAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, dices: number[]): void
+
+    /**
+     * 卡牌自身攻击前
+     * @returns 返回是否可以攻击 | 攻击的伤害
+     */
+    onSelfPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, dices: number[]): void
+
+    /**卡牌自身攻击后 */
+    onSelfAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, dices: number[]): void
 }
 
 export enum EventType {
@@ -69,14 +92,22 @@ export enum EventType {
     PreUseCard,
     /**卡牌使用后 */
     UseCardAfter,
-    /**卡牌移动前 */
-    PreMove,
-    /**卡牌移动后 */
-    MoveAfter,
-    /**卡牌攻击前 */
-    PreAtk,
-    /**卡牌攻击后 */
-    AtkAfter,
+    /**战场卡牌移动前 */
+    UnitPreMove,
+    /**战场卡牌移动后 */
+    UnitMoveAfter,
+    /**卡牌自身移动前 */
+    SelfPreMove,
+    /**卡牌自身移动后 */
+    SelfMoveAfter,
+    /**战场卡牌攻击前 */
+    UnitPreAtk,
+    /**战场卡牌攻击后 */
+    UnitAtkAfter,
+    /**卡牌自身攻击前 */
+    SelfPreAtk,
+    /**卡牌自身攻击后 */
+    SelfAtkAfter,
 }
 
 export class EventData {

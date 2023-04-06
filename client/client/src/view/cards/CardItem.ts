@@ -91,13 +91,13 @@ class CardItem {
     }
 
     static showBuffDesc(cardItem: BaseUI.UICardItem, cardInfo: GamePto.ICard) {
-        cardInfo.buffArr.sort();
+        cardInfo.buffList.sort();
         //显示buff
         let buffTImes = 1;
-        for (let index = 0; index < cardInfo.buffArr.length; index++) {
-            const buffId = cardInfo.buffArr[index];
+        for (let index = 0; index < cardInfo.buffList.length; index++) {
+            const buffId = cardInfo.buffList[index];
             //堆叠次数
-            if (buffId === cardInfo.buffArr[index + 1]) {
+            if (buffId === cardInfo.buffList[index + 1]) {
                 buffTImes++;
                 continue;
             } else {

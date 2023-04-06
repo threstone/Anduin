@@ -17,14 +17,14 @@ export abstract class PositionBuff extends GameBuff {
         //给周围位置绑定buff
         card.table.mapData.addPositionBuff(card.blockX, card.blockY, this.effectiveDistance, buff);
         //增加移动事件
-        card.on(EventType.PreMove, { id: buff.id, fun: this.onSourcePreMove.bind(this, buff, card) });
-        card.on(EventType.MoveAfter, { id: buff.id, fun: this.onSourceMoveAfter.bind(this, buff, card) });
+        card.on(EventType.SelfPreMove, { id: buff.id, fun: this.onSourcePreMove.bind(this, buff) });
+        card.on(EventType.SelfMoveAfter, { id: buff.id, fun: this.onSourceMoveAfter.bind(this, buff) });
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {
         //说明是光环源被移除
-        card.off(EventType.PreMove, buff.id);
-        card.off(EventType.MoveAfter, buff.id);
+        card.off(EventType.SelfPreMove, buff.id);
+        card.off(EventType.SelfMoveAfter, buff.id);
         //移除周围地图格子绑定的光环
         const pointArr = card.table.mapData.getAroundByDistance(card.blockX, card.blockY, this.effectiveDistance);
         for (let index = 0; index < pointArr.length; index++) {
@@ -34,21 +34,17 @@ export abstract class PositionBuff extends GameBuff {
         card.deleteBuff(buff);
     }
 
-    private onSourcePreMove(buff: BuffData, sourceCard: BuildingCard, eventData: EventData, next: Function, moveCard: UnitCard) {
-        if (sourceCard === moveCard) {
-            const table = moveCard.table;
-            // 移除周围格子buff
-            table.mapData.deletePositionBuff(moveCard.blockX, moveCard.blockY, this.effectiveDistance, buff);
-        }
+    private onSourcePreMove(buff: BuffData, eventData: EventData, next: Function, source: UnitCard) {
+        const table = source.table;
+        // 移除周围格子buff
+        table.mapData.deletePositionBuff(source.blockX, source.blockY, this.effectiveDistance, buff);
         next();
     }
 
-    private onSourceMoveAfter(buff: BuffData, sourceCard: BuildingCard, eventData: EventData, next: Function, moveCard: UnitCard) {
-        if (sourceCard === moveCard) {
-            const table = moveCard.table;
-            //给周围位置绑定buff
-            table.mapData.addPositionBuff(moveCard.blockX, moveCard.blockY, this.effectiveDistance, buff);
-        }
+    private onSourceMoveAfter(buff: BuffData, eventData: EventData, next: Function, source: UnitCard) {
+        const table = source.table;
+        //给周围位置绑定buff
+        table.mapData.addPositionBuff(source.blockX, source.blockY, this.effectiveDistance, buff);
         next();
     }
 }

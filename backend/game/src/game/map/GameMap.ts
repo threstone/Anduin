@@ -221,6 +221,8 @@ export class GameMap {
     /**更新卡牌位置 */
     public updateCardPosition(targetX: number, targetY: number, card: UnitCard) {
         this.deleteCard(card.blockX, card.blockY, false);
+        card.lastX = card.blockX;
+        card.lastY = card.blockY;
         card.blockX = targetX;
         card.blockY = targetY;
         this.setCard(card, false);

@@ -3344,7 +3344,7 @@ $root.GamePto = (function() {
     GamePto.Card = (function() {
 
         function Card(p) {
-            this.buffArr = [];
+            this.buffList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -3362,7 +3362,7 @@ $root.GamePto = (function() {
         Card.prototype.blockY = 0;
         Card.prototype.allowAtk = false;
         Card.prototype.allowMove = false;
-        Card.prototype.buffArr = $util.emptyArray;
+        Card.prototype.buffList = $util.emptyArray;
 
         Card.create = function create(properties) {
             return new Card(properties);
@@ -3393,10 +3393,10 @@ $root.GamePto = (function() {
                 w.uint32(72).bool(m.allowAtk);
             if (m.allowMove != null && Object.hasOwnProperty.call(m, "allowMove"))
                 w.uint32(80).bool(m.allowMove);
-            if (m.buffArr != null && m.buffArr.length) {
+            if (m.buffList != null && m.buffList.length) {
                 w.uint32(90).fork();
-                for (var i = 0; i < m.buffArr.length; ++i)
-                    w.int32(m.buffArr[i]);
+                for (var i = 0; i < m.buffList.length; ++i)
+                    w.int32(m.buffList[i]);
                 w.ldelim();
             }
             return w;
@@ -3454,14 +3454,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 11: {
-                        if (!(m.buffArr && m.buffArr.length))
-                            m.buffArr = [];
+                        if (!(m.buffList && m.buffList.length))
+                            m.buffList = [];
                         if ((t & 7) === 2) {
                             var c2 = r.uint32() + r.pos;
                             while (r.pos < c2)
-                                m.buffArr.push(r.int32());
+                                m.buffList.push(r.int32());
                         } else
-                            m.buffArr.push(r.int32());
+                            m.buffList.push(r.int32());
                         break;
                     }
                 default:
@@ -3509,12 +3509,12 @@ $root.GamePto = (function() {
             if (d.allowMove != null) {
                 m.allowMove = Boolean(d.allowMove);
             }
-            if (d.buffArr) {
-                if (!Array.isArray(d.buffArr))
-                    throw TypeError(".GamePto.Card.buffArr: array expected");
-                m.buffArr = [];
-                for (var i = 0; i < d.buffArr.length; ++i) {
-                    m.buffArr[i] = d.buffArr[i] | 0;
+            if (d.buffList) {
+                if (!Array.isArray(d.buffList))
+                    throw TypeError(".GamePto.Card.buffList: array expected");
+                m.buffList = [];
+                for (var i = 0; i < d.buffList.length; ++i) {
+                    m.buffList[i] = d.buffList[i] | 0;
                 }
             }
             return m;
@@ -3525,7 +3525,7 @@ $root.GamePto = (function() {
                 o = {};
             var d = {};
             if (o.arrays || o.defaults) {
-                d.buffArr = [];
+                d.buffList = [];
             }
             if (o.defaults) {
                 d.id = 0;
@@ -3573,10 +3573,10 @@ $root.GamePto = (function() {
             if (m.allowMove != null && m.hasOwnProperty("allowMove")) {
                 d.allowMove = m.allowMove;
             }
-            if (m.buffArr && m.buffArr.length) {
-                d.buffArr = [];
-                for (var j = 0; j < m.buffArr.length; ++j) {
-                    d.buffArr[j] = m.buffArr[j];
+            if (m.buffList && m.buffList.length) {
+                d.buffList = [];
+                for (var j = 0; j < m.buffList.length; ++j) {
+                    d.buffList[j] = m.buffList[j];
                 }
             }
             return d;
@@ -6936,6 +6936,7 @@ $root.GamePto = (function() {
 
         function S_UPDATE_ENTITYS(p) {
             this.entityCards = [];
+            this.tipsList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -6945,6 +6946,7 @@ $root.GamePto = (function() {
         S_UPDATE_ENTITYS.prototype.cmd = 200;
         S_UPDATE_ENTITYS.prototype.scmd = 10016;
         S_UPDATE_ENTITYS.prototype.entityCards = $util.emptyArray;
+        S_UPDATE_ENTITYS.prototype.tipsList = $util.emptyArray;
 
         S_UPDATE_ENTITYS.create = function create(properties) {
             return new S_UPDATE_ENTITYS(properties);
@@ -6960,6 +6962,10 @@ $root.GamePto = (function() {
             if (m.entityCards != null && m.entityCards.length) {
                 for (var i = 0; i < m.entityCards.length; ++i)
                     $root.GamePto.Card.encode(m.entityCards[i], w.uint32(26).fork()).ldelim();
+            }
+            if (m.tipsList != null && m.tipsList.length) {
+                for (var i = 0; i < m.tipsList.length; ++i)
+                    w.uint32(34).string(m.tipsList[i]);
             }
             return w;
         };
@@ -6983,6 +6989,12 @@ $root.GamePto = (function() {
                         if (!(m.entityCards && m.entityCards.length))
                             m.entityCards = [];
                         m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(m.tipsList && m.tipsList.length))
+                            m.tipsList = [];
+                        m.tipsList.push(r.string());
                         break;
                     }
                 default:
@@ -7013,6 +7025,14 @@ $root.GamePto = (function() {
                     m.entityCards[i] = $root.GamePto.Card.fromObject(d.entityCards[i]);
                 }
             }
+            if (d.tipsList) {
+                if (!Array.isArray(d.tipsList))
+                    throw TypeError(".GamePto.S_UPDATE_ENTITYS.tipsList: array expected");
+                m.tipsList = [];
+                for (var i = 0; i < d.tipsList.length; ++i) {
+                    m.tipsList[i] = String(d.tipsList[i]);
+                }
+            }
             return m;
         };
 
@@ -7022,6 +7042,7 @@ $root.GamePto = (function() {
             var d = {};
             if (o.arrays || o.defaults) {
                 d.entityCards = [];
+                d.tipsList = [];
             }
             if (o.defaults) {
                 d.cmd = 200;
@@ -7037,6 +7058,12 @@ $root.GamePto = (function() {
                 d.entityCards = [];
                 for (var j = 0; j < m.entityCards.length; ++j) {
                     d.entityCards[j] = $root.GamePto.Card.toObject(m.entityCards[j], o);
+                }
+            }
+            if (m.tipsList && m.tipsList.length) {
+                d.tipsList = [];
+                for (var j = 0; j < m.tipsList.length; ++j) {
+                    d.tipsList[j] = m.tipsList[j];
                 }
             }
             return d;

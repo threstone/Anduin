@@ -4,6 +4,12 @@ class BuildingItem {
         Utils.defineTextFieldSet(building.healthText, cardConfig.health);
         building.setPivot(0.5, 0.5, true);
 
+        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
+            if (!data) {
+                return
+            }
+            building.info.cardImg.texture = data;
+        });
         building.healthText.text = `${cardInfo.health}`;
         building.info.tempCardName.text = `${cardConfig.cardName}`;
         if (cardInfo.uid === UserModel.ins().uid) {

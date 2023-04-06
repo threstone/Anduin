@@ -39,10 +39,22 @@ export abstract class GameBuff implements BaseEvent {
     public onMoveAfter(eventData: EventData, next: Function, moveCard: UnitCard): void {
         throw new Error("Method not implemented.");
     }
+    public onSelfPreMove(eventData: EventData, next: Function, source: UnitCard): void {
+        throw new Error("Method not implemented.");
+    }
+    public onSelfMoveAfter(eventData: EventData, next: Function, source: UnitCard): void {
+        throw new Error("Method not implemented.");
+    }
     public onPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, dices: number[]): void {
         throw new Error("Method not implemented.");
     }
     public onAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, dices: number[]): void {
+        throw new Error("Method not implemented.");
+    }
+    public onSelfPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCard: BuildingCard, dices: number[]): void {
+        throw new Error("Method not implemented.");
+    }
+    public onSelfAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, dices: number[]): void {
         throw new Error("Method not implemented.");
     }
 }

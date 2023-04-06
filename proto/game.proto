@@ -65,7 +65,7 @@ message Card{
 	int32 blockY = 8;
 	bool allowAtk = 9;
 	bool allowMove = 10;
-	repeated int32 buffArr = 11;
+	repeated int32 buffList = 11;
 }
 
 message MapData{
@@ -285,6 +285,7 @@ message S_UPDATE_ENTITYS{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10016];
 	repeated Card entityCards = 3;
+	repeated string tipsList = 4;
 }
 
 //公共卡牌效果

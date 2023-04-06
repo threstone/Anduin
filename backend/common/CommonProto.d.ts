@@ -2907,8 +2907,8 @@ export namespace GamePto {
         /** Card allowMove */
         allowMove?: (boolean|null);
 
-        /** Card buffArr */
-        buffArr?: (number[]|null);
+        /** Card buffList */
+        buffList?: (number[]|null);
     }
 
     /** Represents a Card. */
@@ -2953,8 +2953,8 @@ export namespace GamePto {
         /** Card allowMove. */
         public allowMove: boolean;
 
-        /** Card buffArr. */
-        public buffArr: number[];
+        /** Card buffList. */
+        public buffList: number[];
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -5648,6 +5648,9 @@ export namespace GamePto {
 
         /** S_UPDATE_ENTITYS entityCards */
         entityCards?: (GamePto.ICard[]|null);
+
+        /** S_UPDATE_ENTITYS tipsList */
+        tipsList?: (string[]|null);
     }
 
     /** Represents a S_UPDATE_ENTITYS. */
@@ -5667,6 +5670,9 @@ export namespace GamePto {
 
         /** S_UPDATE_ENTITYS entityCards. */
         public entityCards: GamePto.ICard[];
+
+        /** S_UPDATE_ENTITYS tipsList. */
+        public tipsList: string[];
 
         /**
          * Encodes the specified S_UPDATE_ENTITYS message. Does not implicitly {@link GamePto.S_UPDATE_ENTITYS.verify|verify} messages.

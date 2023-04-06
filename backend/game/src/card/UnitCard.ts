@@ -5,6 +5,10 @@ import { BuildingCard } from "./BuildingCard";
 
 export class UnitCard extends BuildingCard {
 
+    /* ================START 临时数据开始,用于一些特殊的buff需要用到的数据 START================ */
+    tempAtkAdd: number;
+    /* ==================END 临时数据结束,用于一些特殊的buff需要用到的数据 END================== */
+
     allowAtk: boolean = false;
     allowMove: boolean = false;
 

@@ -12,6 +12,11 @@ import { EventCard } from "./EventCard";
 
 const logger = getLogger();
 export class BuildingCard extends EventCard {
+
+    /**上一次在的位置 */
+    public lastX: number;
+    public lastY: number;
+    /**当前所在位置 */
     public blockX: number;
     public blockY: number;
 
@@ -26,7 +31,7 @@ export class BuildingCard extends EventCard {
     }
 
     /**发送到客户端的状态数据 */
-    get buffArr() {
+    get buffList() {
         if (!this._buffMap) {
             return null;
         }

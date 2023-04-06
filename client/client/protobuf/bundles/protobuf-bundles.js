@@ -4744,7 +4744,7 @@ $root.GamePto = (function() {
          * @property {number|null} [blockY] Card blockY
          * @property {boolean|null} [allowAtk] Card allowAtk
          * @property {boolean|null} [allowMove] Card allowMove
-         * @property {Array.<number>|null} [buffArr] Card buffArr
+         * @property {Array.<number>|null} [buffList] Card buffList
          */
 
         /**
@@ -4756,7 +4756,7 @@ $root.GamePto = (function() {
          * @param {GamePto.ICard=} [properties] Properties to set
          */
         function Card(properties) {
-            this.buffArr = [];
+            this.buffList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4852,12 +4852,12 @@ $root.GamePto = (function() {
         Card.prototype.allowMove = false;
 
         /**
-         * Card buffArr.
-         * @member {Array.<number>} buffArr
+         * Card buffList.
+         * @member {Array.<number>} buffList
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.buffArr = $util.emptyArray;
+        Card.prototype.buffList = $util.emptyArray;
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
@@ -4893,10 +4893,10 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.allowAtk);
             if (message.allowMove != null && Object.hasOwnProperty.call(message, "allowMove"))
                 writer.uint32(/* id 10, wireType 0 =*/80).bool(message.allowMove);
-            if (message.buffArr != null && message.buffArr.length) {
+            if (message.buffList != null && message.buffList.length) {
                 writer.uint32(/* id 11, wireType 2 =*/90).fork();
-                for (var i = 0; i < message.buffArr.length; ++i)
-                    writer.int32(message.buffArr[i]);
+                for (var i = 0; i < message.buffList.length; ++i)
+                    writer.int32(message.buffList[i]);
                 writer.ldelim();
             }
             return writer;
@@ -4965,14 +4965,14 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 11: {
-                        if (!(message.buffArr && message.buffArr.length))
-                            message.buffArr = [];
+                        if (!(message.buffList && message.buffList.length))
+                            message.buffList = [];
                         if ((tag & 7) === 2) {
                             var end2 = reader.uint32() + reader.pos;
                             while (reader.pos < end2)
-                                message.buffArr.push(reader.int32());
+                                message.buffList.push(reader.int32());
                         } else
-                            message.buffArr.push(reader.int32());
+                            message.buffList.push(reader.int32());
                         break;
                     }
                 default:
@@ -8679,6 +8679,7 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] S_UPDATE_ENTITYS cmd
          * @property {number|null} [scmd] S_UPDATE_ENTITYS scmd
          * @property {Array.<GamePto.ICard>|null} [entityCards] S_UPDATE_ENTITYS entityCards
+         * @property {Array.<string>|null} [tipsList] S_UPDATE_ENTITYS tipsList
          */
 
         /**
@@ -8691,6 +8692,7 @@ $root.GamePto = (function() {
          */
         function S_UPDATE_ENTITYS(properties) {
             this.entityCards = [];
+            this.tipsList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -8722,6 +8724,14 @@ $root.GamePto = (function() {
         S_UPDATE_ENTITYS.prototype.entityCards = $util.emptyArray;
 
         /**
+         * S_UPDATE_ENTITYS tipsList.
+         * @member {Array.<string>} tipsList
+         * @memberof GamePto.S_UPDATE_ENTITYS
+         * @instance
+         */
+        S_UPDATE_ENTITYS.prototype.tipsList = $util.emptyArray;
+
+        /**
          * Encodes the specified S_UPDATE_ENTITYS message. Does not implicitly {@link GamePto.S_UPDATE_ENTITYS.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_UPDATE_ENTITYS
@@ -8740,6 +8750,9 @@ $root.GamePto = (function() {
             if (message.entityCards != null && message.entityCards.length)
                 for (var i = 0; i < message.entityCards.length; ++i)
                     $root.GamePto.Card.encode(message.entityCards[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.tipsList != null && message.tipsList.length)
+                for (var i = 0; i < message.tipsList.length; ++i)
+                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.tipsList[i]);
             return writer;
         };
 
@@ -8773,6 +8786,12 @@ $root.GamePto = (function() {
                         if (!(message.entityCards && message.entityCards.length))
                             message.entityCards = [];
                         message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 4: {
+                        if (!(message.tipsList && message.tipsList.length))
+                            message.tipsList = [];
+                        message.tipsList.push(reader.string());
                         break;
                     }
                 default:

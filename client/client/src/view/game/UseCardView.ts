@@ -476,6 +476,11 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
 
     /**移除提示 */
     private clearUseTips() {
+        //移除提示
+        if (this._tipsArrow.parent) {
+            this.view.removeChild(this._tipsArrow);
+        }
+
         this._tipsComponts.forEach((item) => {
             this.view.removeChild(item);
         });

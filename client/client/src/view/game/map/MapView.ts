@@ -266,6 +266,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             } else {
                 this.addMapItem(entityInfo);
             }
+            const tips = msg.tipsList[index];
+            if (tips) {
+                this.entityShowTips(this.entityMap.get(entityInfo.id), tips);
+            }
         }
     }
 
