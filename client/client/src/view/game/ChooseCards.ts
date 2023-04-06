@@ -16,8 +16,6 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     public open(handCards: GamePto.ICard[], replaceEndTime: number): void {
         super.open();
 
-        this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
-
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
 
@@ -70,7 +68,8 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
 
     private replaceCards(msg: GamePto.S_REPLACE_CARDS) {
         if (msg.uid !== UserModel.ins().uid) {
-            return;
+            //当接收到对方的数据时说明两边都好了
+            return this.showAddStartHandCards();
         }
         this.view.touchable = false;
         this.view.chooseBtn.visible = false;
@@ -120,7 +119,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
         egret.Tween.get(gameCard.cardItem).to({ x: startX + index * interval + index * cardWidth, y: 416 }, 1000);
     }
 
-    private async onRoundStart() {
+    private async showAddStartHandCards() {
         this.close();
         await HandCardView.ins().showAddStartHandCards(this.cards);
         this._cards = null;
