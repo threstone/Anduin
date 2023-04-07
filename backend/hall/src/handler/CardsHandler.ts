@@ -219,7 +219,6 @@ export class CardsHandler extends BaseHandler {
             return true;
         }
 
-        let hasHero = false;
         let sum = 0;
         const cardSet = new Set<number>();
         for (let index = cardGroup.cards.length - 1; index >= 0; index--) {
@@ -238,12 +237,9 @@ export class CardsHandler extends BaseHandler {
                 logger.error(`未找到卡片配置,cardId:${card.id}`);
                 return false;
             }
-            //英雄卡只能携带一张
+            //英雄卡不会在卡组内
             if (cardConfig.cardType === CardsPto.CardType.Hero) {
-                if (hasHero === true) {
-                    return false;
-                }
-                hasHero = true;
+                return false;
             }
             //同一种橙卡只能携带一张
             if (cardConfig.quality === CardsPto.QualityType.Premium && card.count > 1) {
@@ -264,10 +260,6 @@ export class CardsHandler extends BaseHandler {
         if (sum > GroupCardsNum) {
             return false;
         }
-        //卡组无英雄卡
-        if (sum === GroupCardsNum && hasHero === false) {
-            return false;
-        }
         return true;
     }
 
@@ -285,7 +277,9 @@ export class CardsHandler extends BaseHandler {
             }
             sum += cardInfo.count;
         }
-        if (sum !== GroupCardsNum) {
+
+        const heroInfo = GlobalVar.configMgr.getCardConfigById(cardGroup.heroId);
+        if (sum !== GroupCardsNum || heroInfo == null || heroInfo.powerId !== cardGroup.powerId || heroInfo.cardType !== CardsPto.CardType.Hero) {
             cardGroup.accessToUse = false;
         }
     }

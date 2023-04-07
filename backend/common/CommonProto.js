@@ -1777,7 +1777,8 @@ $root.CardsPto = (function() {
 
     CardsPto.BuilingType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Camp"] = 0;
+        values[valuesById[0] = "Base"] = 0;
+        values[valuesById[1] = "Camp"] = 1;
         return values;
     })();
 
@@ -1889,6 +1890,7 @@ $root.CardsPto = (function() {
         CardGroup.prototype.groupName = "";
         CardGroup.prototype.powerId = 0;
         CardGroup.prototype.accessToUse = false;
+        CardGroup.prototype.heroId = 0;
 
         CardGroup.create = function create(properties) {
             return new CardGroup(properties);
@@ -1909,6 +1911,8 @@ $root.CardsPto = (function() {
                 w.uint32(24).int32(m.powerId);
             if (m.accessToUse != null && Object.hasOwnProperty.call(m, "accessToUse"))
                 w.uint32(32).bool(m.accessToUse);
+            if (m.heroId != null && Object.hasOwnProperty.call(m, "heroId"))
+                w.uint32(40).int32(m.heroId);
             return w;
         };
 
@@ -1939,6 +1943,10 @@ $root.CardsPto = (function() {
                     }
                 case 4: {
                         m.accessToUse = r.bool();
+                        break;
+                    }
+                case 5: {
+                        m.heroId = r.int32();
                         break;
                     }
                 default:
@@ -2008,6 +2016,9 @@ $root.CardsPto = (function() {
             if (d.accessToUse != null) {
                 m.accessToUse = Boolean(d.accessToUse);
             }
+            if (d.heroId != null) {
+                m.heroId = d.heroId | 0;
+            }
             return m;
         };
 
@@ -2023,6 +2034,7 @@ $root.CardsPto = (function() {
                 d.groupName = "";
                 d.powerId = o.enums === String ? "Common" : 0;
                 d.accessToUse = false;
+                d.heroId = 0;
             }
             if (m.groupId != null && m.hasOwnProperty("groupId")) {
                 d.groupId = m.groupId;
@@ -2041,6 +2053,9 @@ $root.CardsPto = (function() {
             }
             if (m.accessToUse != null && m.hasOwnProperty("accessToUse")) {
                 d.accessToUse = m.accessToUse;
+            }
+            if (m.heroId != null && m.hasOwnProperty("heroId")) {
+                d.heroId = m.heroId;
             }
             return d;
         };

@@ -113,6 +113,8 @@
     <component id="h89h46" name="GameOverCom.xml" path="/game/" exported="true"/>
     <component id="h89h48" name="UseCardCom.xml" path="/game/" exported="true"/>
     <image id="h89h49" name="use_arrow.png" path="/game/res/" exported="true" scale="9grid" scale9grid="27,91,54,269"/>
+    <image id="h13w4a" name="herodetail-skill-.png" path="/cards/res/" scale="9grid" scale9grid="20,32,50,68"/>
+    <component id="h13w4c" name="MiniImg.xml" path="/cards/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

@@ -137,6 +137,20 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
         if (!this._isCreating) {
             return;
         }
+
+        const heroId = this._cacheCreateGroupInfo.heroId;
+        if (heroId !== -1) {
+            this.removeTargetEvents(this.view.heroCard);
+            this.view.removeChild(this.view.heroCard);
+
+            this.view.heroCard = MiniCard.getMiniCard(this._cacheCreateGroupInfo.heroCard, 1);
+            this.view.heroCard.group = this.view.cardGroupGroup;
+            this.view.heroCard.x = 1320;
+            this.view.heroCard.y = 93;
+            this.view.addChild(this.view.heroCard);
+            this.addMiniCardEvent(this.view.heroCard, -1, { count: 1, cardInfo: this._cacheCreateGroupInfo.heroCard });
+        }
+
         const list = this.view.createGroupList;
 
         this.removeChildrenEvents(list, ['dragLoader']);
@@ -149,14 +163,14 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             if (showItemNum !== 0) {
                 const miniCard = MiniCard.getMiniCard(info.cardInfo, showItemNum);
                 list.addChild(miniCard);
-                this.addMiniCardEvent(miniCard, index, info)
+                this.addMiniCardEvent(miniCard, index, info);
             }
             //判断自己是否拥有足够的卡牌,没有足够的卡牌的话要多一个虚的item
             if (info.cardInfo.count < info.count) {
                 const virtualCard = MiniCard.getMiniCard(info.cardInfo, info.count - info.cardInfo.count);
                 virtualCard.alpha = 0.5;
                 list.addChild(virtualCard);
-                this.addMiniCardEvent(virtualCard, index, info)
+                this.addMiniCardEvent(virtualCard, index, info);
             }
             sum += info.count;
         }
@@ -173,12 +187,17 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
                 return;
             }
             if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
-                this._cacheCreateGroupInfo.hasPremium = false;
+                this._cacheCreateGroupInfo.heroId = -1;
+                this._cacheCreateGroupInfo.heroCard = null;
+                this.removeTargetEvents(this.view.heroCard);
+                this.view.removeChild(this.view.heroCard);
+            } else {
+                info.count--;
+                if (info.count <= 0) {
+                    cardsInfo.splice(index, 1);
+                }
             }
-            info.count--;
-            if (info.count <= 0) {
-                cardsInfo.splice(index, 1);
-            }
+
             fairygui.GRoot.inst.removeChild(this._hoverItem);
             this.refreshCreateGroupList();
             ShowCardsCom.ins().changePowerChannel();
@@ -215,6 +234,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     /**获取剩余卡牌的数量 */
     public getLeftCardNum(cardInfo: CardInterface) {
+        if (cardInfo.cardType === CardsPto.CardType.Hero) {
+            return this._cacheCreateGroupInfo.heroId === -1 ? cardInfo.count : cardInfo.count - 1;
+        }
+
         const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];

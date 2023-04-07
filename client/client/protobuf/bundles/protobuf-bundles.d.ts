@@ -46,7 +46,8 @@ declare namespace CardsPto {
 
     /** BuilingType enum. */
     enum BuilingType {
-        Camp = 0
+        Base = 0,
+        Camp = 1
     }
 
     /** Properties of a Card. */
@@ -117,6 +118,9 @@ declare namespace CardsPto {
 
         /** CardGroup accessToUse */
         accessToUse?: (boolean|null);
+
+        /** CardGroup heroId */
+        heroId?: (number|null);
     }
 
     /** Represents a CardGroup. */
@@ -142,6 +146,9 @@ declare namespace CardsPto {
 
         /** CardGroup accessToUse. */
         public accessToUse: boolean;
+
+        /** CardGroup heroId. */
+        public heroId: number;
 
         /**
          * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.

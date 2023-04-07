@@ -49,7 +49,7 @@ class CardItem {
                 return
             }
             card.cardImg.texture = data;
-        })
+        });
         card.tempCardName.text = `${cardInfo.cardName}`;
         if (cardInfo.detailType === CardsPto.AtkType.CloseRange) {
             card.longRange.visible = false;

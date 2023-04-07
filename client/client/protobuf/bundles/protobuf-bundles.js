@@ -109,11 +109,13 @@ $root.CardsPto = (function() {
      * BuilingType enum.
      * @name CardsPto.BuilingType
      * @enum {number}
-     * @property {number} Camp=0 Camp value
+     * @property {number} Base=0 Base value
+     * @property {number} Camp=1 Camp value
      */
     CardsPto.BuilingType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Camp"] = 0;
+        values[valuesById[0] = "Base"] = 0;
+        values[valuesById[1] = "Camp"] = 1;
         return values;
     })();
 
@@ -240,6 +242,7 @@ $root.CardsPto = (function() {
          * @property {string|null} [groupName] CardGroup groupName
          * @property {CardsPto.PowerType|null} [powerId] CardGroup powerId
          * @property {boolean|null} [accessToUse] CardGroup accessToUse
+         * @property {number|null} [heroId] CardGroup heroId
          */
 
         /**
@@ -299,6 +302,14 @@ $root.CardsPto = (function() {
         CardGroup.prototype.accessToUse = false;
 
         /**
+         * CardGroup heroId.
+         * @member {number} heroId
+         * @memberof CardsPto.CardGroup
+         * @instance
+         */
+        CardGroup.prototype.heroId = 0;
+
+        /**
          * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
          * @function encode
          * @memberof CardsPto.CardGroup
@@ -321,6 +332,8 @@ $root.CardsPto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.powerId);
             if (message.accessToUse != null && Object.hasOwnProperty.call(message, "accessToUse"))
                 writer.uint32(/* id 4, wireType 0 =*/32).bool(message.accessToUse);
+            if (message.heroId != null && Object.hasOwnProperty.call(message, "heroId"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.heroId);
             return writer;
         };
 
@@ -362,6 +375,10 @@ $root.CardsPto = (function() {
                     }
                 case 4: {
                         message.accessToUse = reader.bool();
+                        break;
+                    }
+                case 5: {
+                        message.heroId = reader.int32();
                         break;
                     }
                 default:

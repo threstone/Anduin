@@ -9,13 +9,15 @@ import { UnitCard } from '../card/UnitCard';
 import { EventCard } from '../card/EventCard';
 import { MagicCard } from '../card/MagicCard';
 import { HeroCard } from '../card/HeroCard';
-import { BaseTable } from '../game/BaseTable';
 import { GameTable } from '../game/GameTable';
 
 const logger = getLogger();
 export class CardMgr {
 
     private _cardClassMap: Map<number, typeof BaseCard>;
+
+    /**各职业基础兵营建筑的cardId */
+    private _baseCampCards: number[];
 
     constructor() {
         this._cardClassMap = new Map<number, typeof BaseCard>();
@@ -40,10 +42,21 @@ export class CardMgr {
             this._cardClassMap.set(cardId, cardClass[className])
         }
 
-        //创建为实现的卡牌,这些卡牌可能是不需要特殊实现的
+        /**
+         * 进行一些卡牌初始化
+         * 创建未实现的卡牌,这些卡牌可能是不需要特殊实现的
+         * 基础兵营建筑
+         */
         const cardConfigs = GlobalVar.configMgr.getCards();
+        this._baseCampCards = [];
         for (let index = 0; index < cardConfigs.length; index++) {
             const cardConfig = cardConfigs[index];
+
+            // 设置基础兵营建筑
+            if (cardConfig.cardType === CardsPto.CardType.Building && cardConfig.detailType === CardsPto.BuilingType.Base) {
+                this._baseCampCards[cardConfig.powerId] = cardConfig.cardId
+            }
+
             if (!this._cardClassMap.has(cardConfig.cardId)) {
                 switch (cardConfig.cardType) {
                     case CardsPto.CardType.Building:
@@ -69,5 +82,10 @@ export class CardMgr {
 
     public getCardInstance(cardId: number, uid: number, table: GameTable): BaseCard {
         return this._cardClassMap.get(cardId)?.create(cardId, uid, table);
+    }
+
+    /**获取基础兵营建筑的cardId */
+    public getBaseCampCardId(powerId: CardsPto.PowerType) {
+        return this._baseCampCards[powerId];
     }
 }

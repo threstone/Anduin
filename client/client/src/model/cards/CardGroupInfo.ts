@@ -4,8 +4,9 @@ class CardGroupInfo {
     private _cardsInfo: { count: number, cardInfo: CardInterface }[];
     /**当前卡牌数量 */
     private _cardCount: number;
-    /**是否已经有英雄卡了 */
-    private _hasPremium: boolean;
+    /**英雄卡Id */
+    public heroId: number;
+    public heroCard: CardInterface;
 
     public powerId: CardsPto.PowerType;
     public groupName: string;
@@ -18,25 +19,23 @@ class CardGroupInfo {
         this.clear();
     }
 
-    get hasPremium() { return this._hasPremium }
-    set hasPremium(value: boolean) { this._hasPremium = value }
     get cardsInfo() { return this._cardsInfo }
 
     public startGroupEdit(powerId: CardsPto.PowerType, grouName: string, groupInfo: CardsPto.ICardGroup) {
         this.powerId = powerId;
         this.groupName = grouName;
         this.groupId = -1;
+        this.heroId = -1;
         //修改已有的卡组
         if (groupInfo !== null) {
             this.groupId = groupInfo.groupId || -1;
             this._cardCount = 0;
+            this.heroId = groupInfo.heroId || -1;
+            this.heroCard = CardsModel.ins().getCardConfigById(this.heroId);
             for (let index = 0; index < groupInfo.cards.length; index++) {
                 const info = groupInfo.cards[index];
                 const cardInfo = CardsModel.ins().getCardConfigById(info.id);
                 this._cardsInfo.push({ count: info.count, cardInfo })
-                if (cardInfo.cardType === CardsPto.CardType.Hero) {
-                    this._hasPremium = true;
-                }
                 this._cardCount += info.count;
             }
         }
@@ -44,7 +43,8 @@ class CardGroupInfo {
 
     public clear() {
         this._cardsInfo = [];
-        this._hasPremium = false;
+        this.heroId = -1;
+        this.heroCard = null;
         this._cardCount = 0;
         this.powerId = -1;
         this.groupName = '';
@@ -55,20 +55,16 @@ class CardGroupInfo {
      * 检查将要加入的卡牌是否可以加入
      */
     private addCardCheck(cardInfo: CardInterface) {
-        if (this._cardCount >= GroupCardsNum) {
+        if (cardInfo.cardType !== CardsPto.CardType.Hero && this._cardCount >= GroupCardsNum) {
             SystemModel.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
             return false;
         }
-        if (this._hasPremium && cardInfo.cardType === CardsPto.CardType.Hero) {
+        if (this.heroId !== -1 && cardInfo.cardType === CardsPto.CardType.Hero) {
             SystemModel.ins().showTips('英雄卡只能携带一张');
             return false;
         }
         if (cardInfo.powerId !== this.powerId && cardInfo.powerId !== CardsPto.PowerType.Common) {
             SystemModel.ins().showTips('只能携带本职业卡或中立卡');
-            return false;
-        }
-        if (this._cardCount === GroupCardsNum - 1 && this.hasPremium === false) {
-            SystemModel.ins().showTips('必须携带一张英雄卡');
             return false;
         }
         return true;
@@ -100,19 +96,14 @@ class CardGroupInfo {
             }
         }
 
-        //如果是橙卡,那后面就不能增加橙卡了
         if (cardInfo.cardType === CardsPto.CardType.Hero) {
-            this._hasPremium = true;
+            this.heroId = cardInfo.cardId;
+            this.heroCard = cardInfo;
+            return true;
         }
         this._cardCount++;
         cardsInfo.push({ cardInfo, count: 1 });
         cardsInfo.sort((a, b) => {
-            if (b.cardInfo.cardType === CardsPto.CardType.Hero) {
-                return 1;
-            }
-            if (a.cardInfo.cardType === CardsPto.CardType.Hero) {
-                return -1;
-            }
             if (a.cardInfo.fee === b.cardInfo.fee) {
                 return a.cardInfo.quality - b.cardInfo.quality;
             }

@@ -15,7 +15,7 @@
     </list>
     <image id="n27_pqjx" name="nameBg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="1320,0" size="280,60" group="n29_pqjx"/>
     <text id="n28_pqjx" name="groupName" xy="1320,8" size="280,45" group="n29_pqjx" fontSize="22" align="center" vAlign="middle" autoSize="none" text="groupName" input="true" maxLength="12"/>
-    <list id="n26_oo95" name="createGroupList" xy="1320,59" size="280,1074" group="n29_pqjx" overflow="scroll" autoClearItems="true">
+    <list id="n26_oo95" name="createGroupList" xy="1320,165" size="280,968" group="n29_pqjx" overflow="scroll" autoClearItems="true">
       <relation target="" sidePair="height-height"/>
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
@@ -23,6 +23,8 @@
       <item url="ui://yaux2xpooo9527"/>
       <item url="ui://yaux2xpooo9527"/>
     </list>
+    <image id="n31_h13w" name="heroBg" src="h13w4a" fileName="cards/res/herodetail-skill-.png" xy="1320,64" size="280,86" group="n29_pqjx"/>
+    <component id="n32_h13w" name="heroCard" src="oo9527" fileName="cards/MiniCard.xml" xy="1320,93" group="n29_pqjx"/>
     <group id="n29_pqjx" name="cardGroupGroup" xy="1320,0" size="280,1133" group="n30_kkcr" advanced="true"/>
     <component id="n7_z43k" name="functionBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1466,1133" group="n9_z43k"/>
     <text id="n8_z43k" name="functionTips" xy="1336,1148" size="125,37" group="n9_z43k" fontSize="26" color="#ffffff" align="center" vAlign="middle" autoSize="none" text="30/30卡牌"/>

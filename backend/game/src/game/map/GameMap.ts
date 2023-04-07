@@ -329,7 +329,7 @@ export class GameMap {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
             if (card.uid === uid && card.cardType === CardsPto.CardType.Building) {
-                if (card.detailType === CardsPto.BuilingType.Camp) {
+                if (card.detailType === CardsPto.BuilingType.Base || card.detailType === CardsPto.BuilingType.Camp) {
                     res.push(card as BuildingCard);
                 }
             }

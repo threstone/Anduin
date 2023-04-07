@@ -4,6 +4,7 @@ module BaseUI {
 
 	export class UIMiniCard extends fairygui.GComponent {
 		public bg:fairygui.GImage;
+		public miniImg:UIMiniImg;
 		public cardName:fairygui.GTextField;
 		public countText:fairygui.GTextField;
 		public feeText:fairygui.GTextField;
@@ -18,10 +19,11 @@ module BaseUI {
 			super.constructFromXML(xml);
 
 			this.bg = <fairygui.GImage>(this.getChildAt(0));
-			this.cardName = <fairygui.GTextField>(this.getChildAt(1));
-			this.countText = <fairygui.GTextField>(this.getChildAt(2));
-			this.feeText = <fairygui.GTextField>(this.getChildAt(3));
-			this.dragLoader = <fairygui.GLoader>(this.getChildAt(4));
+			this.miniImg = <UIMiniImg>(this.getChildAt(1));
+			this.cardName = <fairygui.GTextField>(this.getChildAt(2));
+			this.countText = <fairygui.GTextField>(this.getChildAt(3));
+			this.feeText = <fairygui.GTextField>(this.getChildAt(4));
+			this.dragLoader = <fairygui.GLoader>(this.getChildAt(5));
 		}
 	}
 }

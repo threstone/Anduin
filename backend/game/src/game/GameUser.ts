@@ -143,16 +143,25 @@ export class GameUser {
         this.feeMax = 10;
         this.fee = 1;
 
-        this.initHero();
+        this.initStartEntity();
     }
 
-    public initHero() {
+    /**
+     * 放置初始兵营以及英雄
+     */
+    private initStartEntity() {
         /**设置英雄到战场 */
-        const heroCard = this._cardPool.shift() as UnitCard;
+        const heroCard = GlobalVar.cardMgr.getCardInstance(this._cardGroup.heroId, this.uid, this.table) as UnitCard;
         heroCard.blockX = 3;
         //如果自己是先手玩家,那么自己的英雄的位置在下方
         heroCard.blockY = this === this.table.users[this.table.roundUserIndex] ? 7 : 0;
         this.setEntityToMap(heroCard);
+
+        const baseCampCardId = GlobalVar.cardMgr.getBaseCampCardId(this._cardGroup.powerId);
+        const baseCamp = GlobalVar.cardMgr.getCardInstance(baseCampCardId, this.uid, this.table) as UnitCard;
+        baseCamp.blockY = heroCard.blockY;
+        baseCamp.blockX = baseCamp.blockY !== 0 ? 4 : 2;
+        this.setEntityToMap(baseCamp);
     }
 
     /**

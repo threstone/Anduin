@@ -259,6 +259,7 @@ class CardsModel extends BaseModel {
         msg.cardGroup.groupId = cardGroupInfo.groupId;
         msg.cardGroup.powerId = cardGroupInfo.powerId;
         msg.cardGroup.groupName = cardGroupInfo.groupName;
+        msg.cardGroup.heroId = cardGroupInfo.heroId;
         const cardsInfo = cardGroupInfo.cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];

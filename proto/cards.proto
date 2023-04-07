@@ -37,8 +37,10 @@ enum EventType{
 }
 
 enum BuilingType{
+	//基础兵营建筑
+	Base = 0;
 	//营地:出兵建筑
-	Camp = 0;
+	Camp = 1;
 }
 
 message Card{
@@ -51,7 +53,8 @@ message CardGroup{
 	repeated Card cards = 1;
 	string groupName = 2;
 	PowerType powerId = 3;
-	bool accessToUse = 4;//是否拥有权限使用,如卡组中有未拥有的卡牌、卡组不满30张、卡组无英雄卡时则无权限使用
+	bool accessToUse = 4;//是否拥有权限使用,如卡组中有未拥有的卡牌、卡组不满40张、卡组无英雄卡时则无权限使用
+	int32 heroId = 5;
 }
 
 //请求卡牌收藏数据
