@@ -71,7 +71,7 @@ export class ChongFeng extends GameBuff {
         }
 
         const afterEntity = sourceCard.table.mapData.getCard(x, y);
-        if (afterEntity) {
+        if (afterEntity && afterEntity.uid !== sourceCard.uid) {
             //减少对应生命值
             const damage = eventData.data;
             afterEntity.health -= damage;

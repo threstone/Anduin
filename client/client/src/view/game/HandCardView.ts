@@ -254,6 +254,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     public showAddStartHandCards(cards: GameCard[]) {
         for (let index = 0; index < cards.length; index++) {
             const card = cards[index];
+            card.cardItem.grayed = false;
             const localPoint = this.view.rootToLocal(card.cardItem.x, card.cardItem.y)
             card.cardItem.x = localPoint.x;
             card.cardItem.y = localPoint.y;
