@@ -169,8 +169,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const sourceCardInfo = MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY);
-        const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY);
+        const sourceCardInfo = MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY, msg.sourceId);
+        const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY, msg.targetId);
 
         await RightCtrlView.ins().showDices(msg.dices);
 

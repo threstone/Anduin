@@ -98,7 +98,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
             const feeBtn = feeList.getChildAt(index) as BaseUI.UIFeeBtn;
             feeBtn.grayed = index >= fee;
         }
-        this.view.feeDesc.text = `能量:${fee}`;
+        this.view.feeDesc.text = `能量 : ${fee}`;
     }
 
     /**设置剩余卡牌数量 */

@@ -4,13 +4,13 @@
     <image id="n0_pg48" name="bg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="0,0" size="284,400">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <component id="n2_pg48" name="endRound" src="ru1k2" fileName="common/btn/Button1.xml" xy="56,322">
+    <component id="n2_pg48" name="endRound" src="ru1k2" fileName="common/btn/Button1.xml" xy="56,332">
       <relation target="" sidePair="center-center"/>
     </component>
-    <text id="n4_sbft" name="tips" xy="4,3" size="268,115" fontSize="44" color="#660000" align="center" strokeColor="#000000" text="等待游戏开始&#xA;00:00:00">
+    <text id="n4_sbft" name="tips" xy="8,6" size="268,115" fontSize="44" color="#660000" align="center" strokeColor="#000000" text="等待游戏开始&#xA;00:00:00">
       <relation target="" sidePair="center-center,top-top"/>
     </text>
-    <list id="n7_sgbw" name="diceList" xy="9,146" size="266,148" layout="flow_hz" overflow="scroll" scroll="both" lineGap="10" colGap="10" align="center" vAlign="middle" autoClearItems="true">
+    <list id="n7_sgbw" name="diceList" xy="9,125" size="266,203" layout="flow_hz" overflow="scroll" scroll="both" lineGap="10" colGap="10" align="center" vAlign="middle" autoClearItems="true">
       <item url="ui://yaux2xposgbw30"/>
       <item url="ui://yaux2xposgbw30"/>
       <item url="ui://yaux2xposgbw30"/>

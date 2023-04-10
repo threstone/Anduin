@@ -96,9 +96,22 @@ class MapModel extends BaseModel {
         }
     }
 
-    /**获取指定位置的单位 */
-    public getEntityCardByPoint(blockX: number, blockY: number): GamePto.ICard {
-        return this._mapData[blockX][blockY];
+    /**
+     * 获取指定位置的单位
+     * 如果在指定位置获取不到单位且传入了cardUid,则查找entity列表
+     */
+    public getEntityCardByPoint(blockX: number, blockY: number, cardUid?: number): GamePto.ICard {
+        const card = this._mapData[blockX][blockY];
+        if (cardUid == undefined || card?.id === cardUid) {
+            return card;
+        } else {
+            for (let index = 0; index < this._serverData.entityCards.length; index++) {
+                const entity = this._serverData.entityCards[index];
+                if (entity.id === cardUid) {
+                    return entity;
+                }
+            }
+        }
     }
 
     /**回合结束将所有卡牌的可操作性权限中止 */

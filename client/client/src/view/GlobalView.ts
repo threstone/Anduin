@@ -4,6 +4,8 @@ class GlobalView {
         stage.addChild(fairygui.GRoot.inst.displayObject);
         fairygui.GRoot.inst.width = stage.stageWidth;
         fairygui.GRoot.inst.height = stage.stageHeight;
+        fairygui.UIConfig.defaultFont = 'Arial';
+        egret.TextField.default_fontFamily = "Arial";
 
         //add fgui package
         fairygui.UIPackage.addPackage("BaseUI");

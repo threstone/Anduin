@@ -12,11 +12,11 @@
     <image id="n15_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="38,95" group="n17_hzsg" rotation="-135"/>
     <image id="n16_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="0,89" group="n17_hzsg" rotation="-45"/>
     <group id="n17_hzsg" name="longRange" xy="0,89" size="88,14" group="n19_hzsg" advanced="true"/>
-    <text id="n18_hzsg" name="atkText" xy="9,62" size="25,27" group="n19_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="99"/>
+    <text id="n18_hzsg" name="atkText" xy="9,62" size="25,27" group="n19_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="99"/>
     <group id="n19_hzsg" name="atkGroup" xy="0,58" size="88,45" advanced="true"/>
     <image id="n10_hzsg" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="100,61" size="38,32" group="n12_hzsg" aspect="true"/>
-    <text id="n11_hzsg" name="healthText" xy="107,63" size="25,27" group="n12_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
+    <text id="n11_hzsg" name="healthText" xy="107,63" size="25,27" group="n12_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="1"/>
     <group id="n12_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true"/>
-    <text id="n21_hzsg" name="heroFlag" xy="52,-2" size="40,27" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄"/>
+    <text id="n21_hzsg" name="heroFlag" xy="52,0" size="40,27" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄"/>
   </displayList>
 </component>

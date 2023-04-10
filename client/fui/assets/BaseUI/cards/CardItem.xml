@@ -3,11 +3,11 @@
   <displayList>
     <graph id="n34_h89h" name="canUse" xy="0,0" size="218,368" visible="false" alpha="0.372" type="rect" lineSize="0" fillColor="#ff66ff33"/>
     <graph id="n27_pg48" name="tempBg" xy="12,10" size="198,173" group="n25_pg48" type="rect" lineSize="0"/>
-    <text id="n26_pg48" name="tempCardName" xy="25,56" size="176,54" group="n25_pg48" fontSize="40" align="center" vAlign="middle" autoSize="height" strokeColor="#000000" strokeSize="2" text="农夫农夫"/>
+    <text id="n26_pg48" name="tempCardName" xy="25,56" size="176,54" group="n25_pg48" font="Verdana" fontSize="40" align="center" vAlign="middle" autoSize="height" text="农夫农夫"/>
     <loader id="n13_tb7e" name="cardImg" xy="12,10" size="198,173" group="n25_pg48" fill="scaleMatchWidth" shrinkOnly="true"/>
     <group id="n25_pg48" name="cardImgGroup" xy="12,10" size="198,173"/>
     <image id="n33_h89h" name="feeBg" src="tb7e1u" fileName="common/res/herodetail_soulstone_ico.png" xy="0,0" group="n18_tb7e"/>
-    <text id="n17_tb7e" name="feeText" xy="10,11" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" singleLine="true" text="12">
+    <text id="n17_tb7e" name="feeText" xy="10,11" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" strokeColor="#000000" singleLine="true" text="12">
       <relation target="n18_tb7e" sidePair="center-center,middle-middle"/>
     </text>
     <group id="n18_tb7e" name="feeGroup" xy="0,0" size="42,49" advanced="true"/>
@@ -21,11 +21,11 @@
     <image id="n28_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="40,366" group="n30_hzsg" rotation="-135"/>
     <image id="n29_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="2,360" group="n30_hzsg" rotation="-45"/>
     <group id="n30_hzsg" name="longRange" xy="2,360" size="88,14" group="n19_tb7e" advanced="true"/>
-    <text id="n11_tb7e" name="atkText" xy="8,333" size="33,27" group="n19_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="99"/>
+    <text id="n11_tb7e" name="atkText" xy="8,333" size="33,27" group="n19_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="99"/>
     <group id="n19_tb7e" name="atkGroup" xy="2,329" size="88,45" group="n14_tb7e" advanced="true"/>
     <image id="n22_tb7e" name="times" src="tb7e23" fileName="common/res/hourglas.png" xy="179,325" group="n20_tb7e" scale="0.8,0.8" visible="false"/>
     <image id="n1_tb7e" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="179,331" size="38,32" group="n20_tb7e" aspect="true"/>
-    <text id="n12_tb7e" name="healthText" xy="180,333" size="38,27" group="n20_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="12"/>
+    <text id="n12_tb7e" name="healthText" xy="180,333" size="38,27" group="n20_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="12"/>
     <group id="n20_tb7e" name="healthGroup" xy="179,325" size="47,58" group="n14_tb7e" advanced="true"/>
     <group id="n14_tb7e" name="buttonGroup" xy="2,175" size="224,208"/>
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>

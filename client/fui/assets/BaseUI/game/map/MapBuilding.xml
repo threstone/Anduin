@@ -6,7 +6,7 @@
     </graph>
     <component id="n5_hzsg" name="info" src="hzsg2m" fileName="game/map/MapBuildingBase.xml" xy="0,0"/>
     <image id="n6_hzsg" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="100,61" size="38,32" group="n8_hzsg" aspect="true"/>
-    <text id="n7_hzsg" name="healthText" xy="107,63" size="25,27" group="n8_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="1"/>
+    <text id="n7_hzsg" name="healthText" xy="107,63" size="25,27" group="n8_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="1"/>
     <group id="n8_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true"/>
   </displayList>
 </component>
