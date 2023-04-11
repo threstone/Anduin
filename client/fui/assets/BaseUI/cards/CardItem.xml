@@ -6,17 +6,17 @@
     <text id="n26_pg48" name="tempCardName" xy="25,56" size="176,54" group="n25_pg48" font="Verdana" fontSize="40" align="center" vAlign="middle" autoSize="height" text="农夫农夫"/>
     <loader id="n13_tb7e" name="cardImg" xy="12,10" size="198,173" group="n25_pg48" fill="scaleMatchWidth" shrinkOnly="true"/>
     <group id="n25_pg48" name="cardImgGroup" xy="12,10" size="198,173"/>
-    <image id="n33_h89h" name="feeBg" src="tb7e1u" fileName="common/res/herodetail_soulstone_ico.png" xy="0,0" group="n18_tb7e"/>
-    <text id="n17_tb7e" name="feeText" xy="10,11" size="25,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" strokeColor="#000000" singleLine="true" text="12">
+    <image id="n33_h89h" name="feeBg" src="tb7e1u" fileName="common/res/herodetail_soulstone_ico.png" xy="8,-6" group="n18_tb7e" rotation="26"/>
+    <text id="n17_tb7e" name="feeText" xy="6,14" size="24,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" strokeColor="#000000" singleLine="true" text="12">
       <relation target="n18_tb7e" sidePair="center-center,middle-middle"/>
     </text>
-    <group id="n18_tb7e" name="feeGroup" xy="0,0" size="42,49" advanced="true"/>
+    <group id="n18_tb7e" name="feeGroup" xy="6,-6" size="44,49" advanced="true"/>
     <image id="n6_tb7e" name="buttonBg" src="ru1k6" fileName="common/res/comp_120_164_1.png" xy="11,175" size="200,185" group="n14_tb7e"/>
     <text id="n4_tb7e" name="powerText" xy="49,183" size="124,17" group="n14_tb7e" fontSize="10" color="#006666" align="center" autoSize="none" text="圣堂.单位.人类"/>
     <graph id="n5_tb7e" name="quality" xy="96,324" pivot="0.5,0.5" size="25,25" group="n14_tb7e" rotation="45" type="rect" lineSize="0" lineColor="#ffffffff" fillColor="#ffff6600"/>
     <text id="n7_tb7e" name="cardName" xy="49,200" size="124,26" group="n14_tb7e" fontSize="18" color="#006666" align="center" autoSize="none" text="民兵"/>
     <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="common/res/line.png" xy="19,225" size="184,2" group="n14_tb7e" color="#cccccc"/>
-    <text id="n9_tb7e" name="desc" xy="22,231" size="180,84" group="n14_tb7e" fontSize="10" autoSize="none" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
+    <text id="n9_tb7e" name="desc" xy="22,231" size="180,84" group="n14_tb7e" fontSize="13" autoSize="none" strokeColor="#ffffff" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
     <image id="n2_tb7e" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="4,329" group="n19_tb7e"/>
     <image id="n28_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="40,366" group="n30_hzsg" rotation="-135"/>
     <image id="n29_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="2,360" group="n30_hzsg" rotation="-45"/>
@@ -29,7 +29,7 @@
     <group id="n20_tb7e" name="healthGroup" xy="179,325" size="47,58" group="n14_tb7e" advanced="true"/>
     <group id="n14_tb7e" name="buttonGroup" xy="2,175" size="224,208"/>
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
-    <text id="n23_tb7e" name="cardNum" xy="167,6" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
+    <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368"/>
     <list id="n32_sgbw" name="buffDesc" xy="223,0" size="168,368" visible="false" overflow="scroll"/>
   </displayList>

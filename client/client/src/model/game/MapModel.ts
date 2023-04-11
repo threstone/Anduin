@@ -102,7 +102,7 @@ class MapModel extends BaseModel {
      */
     public getEntityCardByPoint(blockX: number, blockY: number, cardUid?: number): GamePto.ICard {
         const card = this._mapData[blockX][blockY];
-        if (cardUid == undefined || card?.id === cardUid) {
+        if (cardUid == undefined || (card != null && card.id === cardUid)) {
             return card;
         } else {
             for (let index = 0; index < this._serverData.entityCards.length; index++) {
