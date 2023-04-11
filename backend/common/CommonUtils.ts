@@ -1,18 +1,19 @@
 import * as fs from 'fs';
+import * as path from 'path';
 export class CommonUtils {
-    static getAllFiles(dirPath: string) {
+    static getAllFiles(dirPath: string, fileList: string[] = []) {
         const files = fs.readdirSync(dirPath);
-        const result: string[] = [];
-        for (let index = 0; index < files.length; index++) {
-            const name = files[index];
-            const stat = fs.statSync(dirPath + name);
-            if (stat.isDirectory()) {
-                result.push(...this.getAllFiles(dirPath + name + "\\"))
+        for (const file of files) {
+            const filePath = path.join(dirPath, file);
+            const isDirectory = fs.statSync(filePath).isDirectory();
+            if (isDirectory) {
+                this.getAllFiles(filePath, fileList);
             } else {
-                result.push(dirPath + name)
+                if (!file.startsWith('.')) { // 过滤掉隐藏的文件和目录
+                    fileList.push(filePath);
+                }
             }
         }
-        return result;
+        return fileList;
     }
-
 }

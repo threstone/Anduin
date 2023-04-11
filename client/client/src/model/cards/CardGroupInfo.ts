@@ -46,7 +46,7 @@ class CardGroupInfo {
         this.heroId = -1;
         this.heroCard = null;
         this._cardCount = 0;
-        this.powerId = -1;
+        this.powerId = CardsPto.PowerType.Common;
         this.groupName = '';
         this.groupId = -1;
     }

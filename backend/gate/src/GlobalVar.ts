@@ -28,7 +28,7 @@ export class GlobalVar {
         configure(loggerConfig);
         ProtoBufEncoder.init(logger);
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.socketListenPort, this.startupParam.maxUser, logger);
+        this.socketServer = new SocketServer(this.startupParam.socketListenPort || 1001, this.startupParam.maxUser, logger);
 
         logger.info('init connector');
         this.initConnector();

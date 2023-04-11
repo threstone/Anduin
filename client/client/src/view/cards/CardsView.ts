@@ -93,6 +93,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             } else {
                 //保存卡组
                 this._isCreating = false;
+                this._cacheCreateGroupInfo.groupName = this.view.groupName.text;
                 CardsModel.ins().C_SAVE_CARDS(this._cacheCreateGroupInfo);
                 this._cacheCreateGroupInfo.clear();
                 this.changeRightGroupFunction(false, `${CardsModel.ins().cardGroups.length}/${ConfigMgr.ins().common.maxGroupNum}`);
