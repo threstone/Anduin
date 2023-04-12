@@ -3,14 +3,14 @@ class LoginModel extends BaseModel {
     C_LOGIN(account: string, pwd: string) {
         const msg = new LoginPto.C_LOGIN();
         msg.account = account;
-        msg.password = pwd;
+        msg.password = md5.prototype.hex_md5(pwd);
         this.sendMsg(msg);
     }
 
     C_REGISTER(account: string, pwd: string, nick: string) {
         const msg = new LoginPto.C_REGISTER();
         msg.account = account;
-        msg.password = pwd;
+        msg.password = md5.prototype.hex_md5(pwd);
         msg.nick = nick;
         this.sendMsg(msg);
     }

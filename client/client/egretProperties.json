@@ -43,6 +43,10 @@
     {
       "name": "mouse",
       "path": "./libs/mouse"
+    },
+    {
+      "name": "md5",
+      "path": "./libs/md5"
     }
   ],
   "vivo": {

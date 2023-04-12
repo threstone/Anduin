@@ -11,7 +11,8 @@
 		"libs/fairygui/fairygui.js",
 		"protobuf/library/protobuf-library.js",
 		"protobuf/bundles/protobuf-bundles.js",
-		"libs/mouse/mouse.js"
+		"libs/mouse/mouse.js",
+		"libs/md5/md5.js"
 	],
 	"game": [
 		"bin-debug/core/BaseClass.js",
