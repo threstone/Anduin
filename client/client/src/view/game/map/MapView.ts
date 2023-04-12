@@ -39,7 +39,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public addMapItem(cardInfo: GamePto.ICard) {
         const cardItem = MapItem.getItem(cardInfo);
-        // cardItem.setPivot(0.5, 0.5, true);
         this.entityMap.set(cardInfo.id, cardItem);
         this.view.addChild(cardItem);
 
@@ -59,6 +58,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (cardInfo.cardType === CardsPto.CardType.Hero) {
             this.emit('InitLeftHeroInfo', cardInfo);
         }
+
+        this.updateUnitOperateTips(cardItem as BaseUI.UIMapUnit, cardInfo);
     }
 
     public deleteMapItem(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding) {
@@ -74,26 +75,27 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             this.emit('UpdateLeftHeroInfo', cardInfo);
         }
         MapItem.updateEntityDesc(mapItem, cardInfo);
-        if (cardInfo.uid === UserModel.ins().uid && (cardInfo.cardType === CardsPto.CardType.Unit || cardInfo.cardType === CardsPto.CardType.Hero)) {
-            this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo);
-        }
+        this.updateUnitOperateTips(mapItem as BaseUI.UIMapUnit, cardInfo);
     }
 
     /**根据可移动状态以及可攻击对象来决定是否显示提示 */
     private updateUnitOperateTips(unit: BaseUI.UIMapUnit, cardInfo: GamePto.ICard) {
-        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
-        unit.allowOperate.visible = false;
-        if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
-            if (MapModel.ins().getMovablePoint(cardInfo, config).size > 0) {
-                unit.allowOperate.visible = true;
-                return;
+        //如果是自己回合、自己的单位、且是可以操作的单位,就需要判断是否显示可操作提示
+        if (GameSceneView.ins().allowToOprate && cardInfo.uid === UserModel.ins().uid && (cardInfo.cardType === CardsPto.CardType.Unit || cardInfo.cardType === CardsPto.CardType.Hero)) {
+            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+            unit.allowOperate.visible = false;
+            if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
+                if (MapModel.ins().getMovablePoint(cardInfo, config).size > 0) {
+                    unit.allowOperate.visible = true;
+                    return;
+                }
             }
-        }
 
-        if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
-            /**检查是否有可攻击的目标 */
-            if (MapModel.ins().getAttackablePoint(cardInfo.blockX, cardInfo.blockY, config).size) {
-                unit.allowOperate.visible = true;
+            if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+                /**检查是否有可攻击的目标 */
+                if (MapModel.ins().getAttackablePoint(cardInfo.blockX, cardInfo.blockY, config).size) {
+                    unit.allowOperate.visible = true;
+                }
             }
         }
     }

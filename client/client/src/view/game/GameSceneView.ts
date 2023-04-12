@@ -93,7 +93,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     private onGameStart(evt: EventData) {
         const msg: GamePto.S_GAME_START = evt.data;
         TipsView.ins().showTips(`你获得了${GameModel.ins().isFirst ? '先手' : '后手'}`)
-        ChooseCards.ins().open(msg.cards, msg.replaceEndTime as number);
+        ChooseCards.ins().open(msg.cards, msg.replaceEndTime as number, msg.isReplace);
         MapView.ins().updateMap();
     }
 

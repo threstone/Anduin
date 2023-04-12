@@ -104,6 +104,16 @@ export class LoginHandler extends BaseHandler {
         replyMsg.headIndex = userInfo.headIndex;
         replyMsg.nick = userInfo.nick;
         replyMsg.uid = uid;
+
+        //如果玩家在游戏中提示玩家重连
+        const gameName = await GlobalVar.redisMgr.getClient(RedisType.userGame).getData(uid);
+        if (gameName) {
+            replyMsg.needReconnect = true;
+            process.nextTick(()=>{
+                GlobalVar.socketServer.sendBindToGame(clientName, uid, gameName);
+            });
+        }
+
         //设置玩家信息
         GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(uid, (userInfo as any).dataValues, -1);
         GlobalVar.redisMgr.getClient(RedisType.userGate).setData(uid, `${clientName}`, -1);

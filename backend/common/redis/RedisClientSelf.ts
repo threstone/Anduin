@@ -183,7 +183,6 @@ export class RedisClientSelf {
 
     /**
      * 设置Redis数据
-     * @param db 
      * @param key 
      * @param value 
      * @param sec  设置存在时间   如果sec为-1则有效时间为永久

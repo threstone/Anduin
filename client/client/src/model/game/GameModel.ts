@@ -63,6 +63,12 @@ class GameModel extends BaseModel {
         this.sendMsg(msg);
     }
 
+    /**请求重连 */
+    public C_RECONNECT() {
+        const msg = new GamePto.C_RECONNECT();
+        this.sendMsg(msg);
+    }
+
     //服务端异常 关闭场景
     private S_SERVER_ERROR(msg: GamePto.S_SERVER_ERROR) {
         SystemModel.ins().showTips(msg.message, 10000);
@@ -101,13 +107,13 @@ class GameModel extends BaseModel {
 
     //回合开始
     private S_ROUND_START_EVENT(msg: GamePto.S_ROUND_START_EVENT) {
-        this.emit('S_ROUND_START_EVENT', msg);
         if (msg.uid === UserModel.ins().uid) {
             this.atkTimes = msg.atkTimes;
             this.atkTimesLimit = msg.atkTimesLimit;
             this.moveTimes = msg.moveTimes;
             this.moveTimesLimit = msg.moveTimesLimit;
         }
+        this.emit('S_ROUND_START_EVENT', msg);
     }
 
     //回合结束
@@ -173,6 +179,27 @@ class GameModel extends BaseModel {
     //游戏结束
     private S_GAME_OVER(msg: GamePto.S_GAME_OVER) {
         this.emit('S_GAME_OVER', msg);
+    }
+
+    //重连信息
+    private S_RECONNECT(msg: GamePto.S_RECONNECT) {
+        this.handCards = msg.selfCards;
+        this.targetDeadPoolNum = msg.targetHandCardNum;
+        this.isFirst = msg.isFirst;
+        this.deadPool = msg.deadPool;
+        this.targetDeadPoolNum = msg.targetDeadPoolNum;
+        MapModel.ins().serverData = msg.mapData;
+
+        const selfDetail = msg.users[0].uid === UserModel.ins().uid ? msg.users[0] : msg.users[1];
+        this.fee = selfDetail.fee;
+        this.atkTimes = selfDetail.atkTimes;
+        this.atkTimesLimit = selfDetail.atkTimesLimit;
+        this.moveTimes = selfDetail.moveTimes;
+        this.moveTimesLimit = selfDetail.moveTimesLimit;
+
+        this.emit('S_RECONNECT', msg);
+        this.emit('S_MAP_DATA', msg);
+        this.emit('UpdateDeadCardNum');
     }
 
     //更新手牌信息

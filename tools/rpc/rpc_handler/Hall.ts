@@ -10,4 +10,6 @@ interface HallRPC {
     transferToGate(uid: number, buffer: Buffer): void
     //关闭对应uid的socket
     closeUserSocket(uid: number): void
+    //将用户绑定到指定game
+    bindToGame(uid: number, gameNodeId: string): void
 }

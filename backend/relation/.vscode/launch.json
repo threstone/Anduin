@@ -11,6 +11,7 @@
             "program": "${workspaceFolder}\\dist\\relation\\src\\bin\\main.js",
             "args": [
                 "socketListenPort=9001",
+                "nodeId=Relation1"
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -25,6 +26,7 @@
 
             "args": [
                 "socketListenPort=9001",
+                "nodeId=Relation1"
             ]
         },
         {

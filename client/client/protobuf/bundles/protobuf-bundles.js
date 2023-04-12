@@ -5138,6 +5138,193 @@ $root.GamePto = (function() {
         return MapData;
     })();
 
+    GamePto.UserDetail = (function() {
+
+        /**
+         * Properties of a UserDetail.
+         * @memberof GamePto
+         * @interface IUserDetail
+         * @property {number|null} [fee] UserDetail fee
+         * @property {number|null} [maxFee] UserDetail maxFee
+         * @property {number|null} [uid] UserDetail uid
+         * @property {number|null} [atkTimes] UserDetail atkTimes
+         * @property {number|null} [atkTimesLimit] UserDetail atkTimesLimit
+         * @property {number|null} [moveTimes] UserDetail moveTimes
+         * @property {number|null} [moveTimesLimit] UserDetail moveTimesLimit
+         */
+
+        /**
+         * Constructs a new UserDetail.
+         * @memberof GamePto
+         * @classdesc Represents a UserDetail.
+         * @implements IUserDetail
+         * @constructor
+         * @param {GamePto.IUserDetail=} [properties] Properties to set
+         */
+        function UserDetail(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * UserDetail fee.
+         * @member {number} fee
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.fee = 0;
+
+        /**
+         * UserDetail maxFee.
+         * @member {number} maxFee
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.maxFee = 0;
+
+        /**
+         * UserDetail uid.
+         * @member {number} uid
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.uid = 0;
+
+        /**
+         * UserDetail atkTimes.
+         * @member {number} atkTimes
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.atkTimes = 0;
+
+        /**
+         * UserDetail atkTimesLimit.
+         * @member {number} atkTimesLimit
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.atkTimesLimit = 0;
+
+        /**
+         * UserDetail moveTimes.
+         * @member {number} moveTimes
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.moveTimes = 0;
+
+        /**
+         * UserDetail moveTimesLimit.
+         * @member {number} moveTimesLimit
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.moveTimesLimit = 0;
+
+        /**
+         * Encodes the specified UserDetail message. Does not implicitly {@link GamePto.UserDetail.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.UserDetail
+         * @static
+         * @param {GamePto.IUserDetail} message UserDetail message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        UserDetail.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.fee != null && Object.hasOwnProperty.call(message, "fee"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.fee);
+            if (message.maxFee != null && Object.hasOwnProperty.call(message, "maxFee"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.maxFee);
+            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
+            if (message.atkTimes != null && Object.hasOwnProperty.call(message, "atkTimes"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.atkTimes);
+            if (message.atkTimesLimit != null && Object.hasOwnProperty.call(message, "atkTimesLimit"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.atkTimesLimit);
+            if (message.moveTimes != null && Object.hasOwnProperty.call(message, "moveTimes"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.moveTimes);
+            if (message.moveTimesLimit != null && Object.hasOwnProperty.call(message, "moveTimesLimit"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.moveTimesLimit);
+            return writer;
+        };
+
+        /**
+         * Decodes a UserDetail message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.UserDetail
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.UserDetail} UserDetail
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        UserDetail.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.UserDetail();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.fee = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.maxFee = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.uid = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.atkTimes = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.atkTimesLimit = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.moveTimes = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.moveTimesLimit = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for UserDetail
+         * @function getTypeUrl
+         * @memberof GamePto.UserDetail
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        UserDetail.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.UserDetail";
+        };
+
+        return UserDetail;
+    })();
+
     GamePto.C_PREPARE_TO_START = (function() {
 
         /**
@@ -6014,6 +6201,118 @@ $root.GamePto = (function() {
         return C_ATTACK;
     })();
 
+    GamePto.C_RECONNECT = (function() {
+
+        /**
+         * Properties of a C_RECONNECT.
+         * @memberof GamePto
+         * @interface IC_RECONNECT
+         * @property {number|null} [cmd] C_RECONNECT cmd
+         * @property {number|null} [scmd] C_RECONNECT scmd
+         */
+
+        /**
+         * Constructs a new C_RECONNECT.
+         * @memberof GamePto
+         * @classdesc Represents a C_RECONNECT.
+         * @implements IC_RECONNECT
+         * @constructor
+         * @param {GamePto.IC_RECONNECT=} [properties] Properties to set
+         */
+        function C_RECONNECT(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_RECONNECT cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_RECONNECT
+         * @instance
+         */
+        C_RECONNECT.prototype.cmd = 200;
+
+        /**
+         * C_RECONNECT scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_RECONNECT
+         * @instance
+         */
+        C_RECONNECT.prototype.scmd = 7;
+
+        /**
+         * Encodes the specified C_RECONNECT message. Does not implicitly {@link GamePto.C_RECONNECT.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_RECONNECT
+         * @static
+         * @param {GamePto.IC_RECONNECT} message C_RECONNECT message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_RECONNECT.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_RECONNECT message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_RECONNECT
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_RECONNECT} C_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_RECONNECT.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_RECONNECT();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_RECONNECT
+         * @function getTypeUrl
+         * @memberof GamePto.C_RECONNECT
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_RECONNECT";
+        };
+
+        return C_RECONNECT;
+    })();
+
     GamePto.S_SERVER_ERROR = (function() {
 
         /**
@@ -6284,6 +6583,7 @@ $root.GamePto = (function() {
          * @property {Array.<GamePto.ICard>|null} [cards] S_GAME_START cards
          * @property {GamePto.IMapData|null} [mapData] S_GAME_START mapData
          * @property {number|Long|null} [replaceEndTime] S_GAME_START replaceEndTime
+         * @property {boolean|null} [isReplace] S_GAME_START isReplace
          */
 
         /**
@@ -6351,6 +6651,14 @@ $root.GamePto = (function() {
         S_GAME_START.prototype.replaceEndTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
+         * S_GAME_START isReplace.
+         * @member {boolean} isReplace
+         * @memberof GamePto.S_GAME_START
+         * @instance
+         */
+        S_GAME_START.prototype.isReplace = false;
+
+        /**
          * Encodes the specified S_GAME_START message. Does not implicitly {@link GamePto.S_GAME_START.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_GAME_START
@@ -6375,6 +6683,8 @@ $root.GamePto = (function() {
                 $root.GamePto.MapData.encode(message.mapData, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             if (message.replaceEndTime != null && Object.hasOwnProperty.call(message, "replaceEndTime"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int64(message.replaceEndTime);
+            if (message.isReplace != null && Object.hasOwnProperty.call(message, "isReplace"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.isReplace);
             return writer;
         };
 
@@ -6420,6 +6730,10 @@ $root.GamePto = (function() {
                     }
                 case 6: {
                         message.replaceEndTime = reader.int64();
+                        break;
+                    }
+                case 7: {
+                        message.isReplace = reader.bool();
                         break;
                     }
                 default:
@@ -7681,7 +7995,7 @@ $root.GamePto = (function() {
          * @interface IS_ROUND_END_TIME
          * @property {number|null} [cmd] S_ROUND_END_TIME cmd
          * @property {number|null} [scmd] S_ROUND_END_TIME scmd
-         * @property {number|Long|null} [endTime] S_ROUND_END_TIME endTime
+         * @property {number|Long|null} [roundEndTime] S_ROUND_END_TIME roundEndTime
          * @property {number|null} [uid] S_ROUND_END_TIME uid
          */
 
@@ -7717,12 +8031,12 @@ $root.GamePto = (function() {
         S_ROUND_END_TIME.prototype.scmd = 10010;
 
         /**
-         * S_ROUND_END_TIME endTime.
-         * @member {number|Long} endTime
+         * S_ROUND_END_TIME roundEndTime.
+         * @member {number|Long} roundEndTime
          * @memberof GamePto.S_ROUND_END_TIME
          * @instance
          */
-        S_ROUND_END_TIME.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        S_ROUND_END_TIME.prototype.roundEndTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * S_ROUND_END_TIME uid.
@@ -7748,8 +8062,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.endTime);
+            if (message.roundEndTime != null && Object.hasOwnProperty.call(message, "roundEndTime"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.roundEndTime);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.uid);
             return writer;
@@ -7782,7 +8096,7 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        message.endTime = reader.int64();
+                        message.roundEndTime = reader.int64();
                         break;
                     }
                 case 4: {
@@ -9583,6 +9897,14 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] S_RECONNECT cmd
          * @property {number|null} [scmd] S_RECONNECT scmd
          * @property {GamePto.IMapData|null} [mapData] S_RECONNECT mapData
+         * @property {Array.<GamePto.ICard>|null} [selfCards] S_RECONNECT selfCards
+         * @property {number|null} [targetHandCardNum] S_RECONNECT targetHandCardNum
+         * @property {boolean|null} [isFirst] S_RECONNECT isFirst
+         * @property {Array.<GamePto.ICard>|null} [deadPool] S_RECONNECT deadPool
+         * @property {number|null} [targetDeadPoolNum] S_RECONNECT targetDeadPoolNum
+         * @property {number|Long|null} [roundEndTime] S_RECONNECT roundEndTime
+         * @property {boolean|null} [isSelfRound] S_RECONNECT isSelfRound
+         * @property {Array.<GamePto.IUserDetail>|null} [users] S_RECONNECT users
          */
 
         /**
@@ -9594,6 +9916,9 @@ $root.GamePto = (function() {
          * @param {GamePto.IS_RECONNECT=} [properties] Properties to set
          */
         function S_RECONNECT(properties) {
+            this.selfCards = [];
+            this.deadPool = [];
+            this.users = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -9625,6 +9950,70 @@ $root.GamePto = (function() {
         S_RECONNECT.prototype.mapData = null;
 
         /**
+         * S_RECONNECT selfCards.
+         * @member {Array.<GamePto.ICard>} selfCards
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.selfCards = $util.emptyArray;
+
+        /**
+         * S_RECONNECT targetHandCardNum.
+         * @member {number} targetHandCardNum
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.targetHandCardNum = 0;
+
+        /**
+         * S_RECONNECT isFirst.
+         * @member {boolean} isFirst
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.isFirst = false;
+
+        /**
+         * S_RECONNECT deadPool.
+         * @member {Array.<GamePto.ICard>} deadPool
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.deadPool = $util.emptyArray;
+
+        /**
+         * S_RECONNECT targetDeadPoolNum.
+         * @member {number} targetDeadPoolNum
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.targetDeadPoolNum = 0;
+
+        /**
+         * S_RECONNECT roundEndTime.
+         * @member {number|Long} roundEndTime
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.roundEndTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * S_RECONNECT isSelfRound.
+         * @member {boolean} isSelfRound
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.isSelfRound = false;
+
+        /**
+         * S_RECONNECT users.
+         * @member {Array.<GamePto.IUserDetail>} users
+         * @memberof GamePto.S_RECONNECT
+         * @instance
+         */
+        S_RECONNECT.prototype.users = $util.emptyArray;
+
+        /**
          * Encodes the specified S_RECONNECT message. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_RECONNECT
@@ -9642,6 +10031,25 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.mapData != null && Object.hasOwnProperty.call(message, "mapData"))
                 $root.GamePto.MapData.encode(message.mapData, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.selfCards != null && message.selfCards.length)
+                for (var i = 0; i < message.selfCards.length; ++i)
+                    $root.GamePto.Card.encode(message.selfCards[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.targetHandCardNum != null && Object.hasOwnProperty.call(message, "targetHandCardNum"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.targetHandCardNum);
+            if (message.isFirst != null && Object.hasOwnProperty.call(message, "isFirst"))
+                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.isFirst);
+            if (message.deadPool != null && message.deadPool.length)
+                for (var i = 0; i < message.deadPool.length; ++i)
+                    $root.GamePto.Card.encode(message.deadPool[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+            if (message.targetDeadPoolNum != null && Object.hasOwnProperty.call(message, "targetDeadPoolNum"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.targetDeadPoolNum);
+            if (message.roundEndTime != null && Object.hasOwnProperty.call(message, "roundEndTime"))
+                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.roundEndTime);
+            if (message.isSelfRound != null && Object.hasOwnProperty.call(message, "isSelfRound"))
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.isSelfRound);
+            if (message.users != null && message.users.length)
+                for (var i = 0; i < message.users.length; ++i)
+                    $root.GamePto.UserDetail.encode(message.users[i], writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
             return writer;
         };
 
@@ -9673,6 +10081,44 @@ $root.GamePto = (function() {
                     }
                 case 3: {
                         message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 4: {
+                        if (!(message.selfCards && message.selfCards.length))
+                            message.selfCards = [];
+                        message.selfCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 5: {
+                        message.targetHandCardNum = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.isFirst = reader.bool();
+                        break;
+                    }
+                case 7: {
+                        if (!(message.deadPool && message.deadPool.length))
+                            message.deadPool = [];
+                        message.deadPool.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 8: {
+                        message.targetDeadPoolNum = reader.int32();
+                        break;
+                    }
+                case 9: {
+                        message.roundEndTime = reader.int64();
+                        break;
+                    }
+                case 10: {
+                        message.isSelfRound = reader.bool();
+                        break;
+                    }
+                case 11: {
+                        if (!(message.users && message.users.length))
+                            message.users = [];
+                        message.users.push($root.GamePto.UserDetail.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -10027,6 +10473,7 @@ $root.LoginPto = (function() {
          * @property {number|null} [uid] S_LOGIN uid
          * @property {Array.<FriendPto.IFriend>|null} [friendList] S_LOGIN friendList
          * @property {Array.<FriendPto.IFriend>|null} [reqAddList] S_LOGIN reqAddList
+         * @property {boolean|null} [needReconnect] S_LOGIN needReconnect
          */
 
         /**
@@ -10111,6 +10558,14 @@ $root.LoginPto = (function() {
         S_LOGIN.prototype.reqAddList = $util.emptyArray;
 
         /**
+         * S_LOGIN needReconnect.
+         * @member {boolean} needReconnect
+         * @memberof LoginPto.S_LOGIN
+         * @instance
+         */
+        S_LOGIN.prototype.needReconnect = false;
+
+        /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.
          * @function encode
          * @memberof LoginPto.S_LOGIN
@@ -10140,6 +10595,8 @@ $root.LoginPto = (function() {
             if (message.reqAddList != null && message.reqAddList.length)
                 for (var i = 0; i < message.reqAddList.length; ++i)
                     $root.FriendPto.Friend.encode(message.reqAddList[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.needReconnect != null && Object.hasOwnProperty.call(message, "needReconnect"))
+                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.needReconnect);
             return writer;
         };
 
@@ -10195,6 +10652,10 @@ $root.LoginPto = (function() {
                         if (!(message.reqAddList && message.reqAddList.length))
                             message.reqAddList = [];
                         message.reqAddList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
+                        break;
+                    }
+                case 9: {
+                        message.needReconnect = reader.bool();
                         break;
                     }
                 default:

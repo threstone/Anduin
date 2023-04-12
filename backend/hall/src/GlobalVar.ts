@@ -38,7 +38,7 @@ export class GlobalVar {
         //init db register
         this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo, RedisType.userRelation]);
+        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo, RedisType.userRelation, RedisType.userGame]);
 
         this.dbHelper = new DbHelper();
     }

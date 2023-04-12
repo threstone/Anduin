@@ -1,6 +1,7 @@
 import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonHall';
 import { GlobalVar } from '../GlobalVar';
 export class HallConnector extends RpcCommon.HallRPCClient {
+
     onOpen() {
     }
     onClose() {
@@ -12,5 +13,9 @@ export class HallConnector extends RpcCommon.HallRPCClient {
 
     closeUserSocket(uid: number): void {
         GlobalVar.socketServer.closeUserSocket(uid);
+    }
+
+    bindToGame(uid: number, gameNodeId: string): void {
+        GlobalVar.socketServer.bindGameNode(uid, gameNodeId);
     }
 }

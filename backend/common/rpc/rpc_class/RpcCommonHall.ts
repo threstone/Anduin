@@ -4,7 +4,7 @@ import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
-let uuid = "fc93ceee-cd32-483a-92fa-c5a44082bba6"
+let uuid = "6b108b73-bfe8-45ab-a90e-86cdc6ed5eec"
 
 //服务器的虚函数定义
 export abstract class HallRPCServer extends RPCServer {
@@ -46,6 +46,17 @@ export abstract class HallRPCServer extends RPCServer {
         this.rpc.send(clientName,"closeUserSocket",args)
     }
 
+    //将用户绑定到指定game
+    callBindToGame(clientName:string,uid:number,gameNodeId:string): Promise<void>    {
+        let args = [uid,gameNodeId]
+        return this.rpc.call(clientName,"bindToGame", args)
+    }
+
+    sendBindToGame(clientName:string,uid:number,gameNodeId:string){
+        let args = [uid,gameNodeId]
+        this.rpc.send(clientName,"bindToGame",args)
+    }
+
 }
 
 //客户端的函数定义
@@ -53,7 +64,7 @@ export abstract class HallRPCClient extends RPCClient{
 
     constructor(host: string, port: number, serverName: string, myName: string, logger: ILog) {
         super(host, port, serverName, myName, uuid, logger);
-        this._funs = ["transferToGate", "closeUserSocket"];
+        this._funs = ["transferToGate", "closeUserSocket", "bindToGame"];
         this.init();
     }
     //登录
@@ -98,5 +109,8 @@ export abstract class HallRPCClient extends RPCClient{
 
     //关闭对应uid的socket
     abstract closeUserSocket(uid:number):void
+
+    //将用户绑定到指定game
+    abstract bindToGame(uid:number,gameNodeId:string):void
 
 }

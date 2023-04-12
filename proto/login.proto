@@ -20,6 +20,7 @@ message S_LOGIN{
 	int32 uid = 6;
 	repeated Friend friendList = 7;
 	repeated Friend reqAddList = 8;
+	bool needReconnect = 9;
 }
 
 //请求注册

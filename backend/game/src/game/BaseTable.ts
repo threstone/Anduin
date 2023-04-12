@@ -5,6 +5,7 @@ import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { GlobalVar } from '../GlobalVar';
 import { NodeDriver } from '../core/NodeDriver';
 import { GameUser } from './GameUser';
+import { RedisType } from '../../../common/ConstDefine';
 
 export class BaseTable {
     randSeed_: number;
@@ -81,6 +82,9 @@ export class BaseTable {
         const users = this._users;
         for (let index = 0; index < users.length; index++) {
             const user = users[index];
+            //删除redis中的信息
+            GlobalVar.redisMgr.getClient(RedisType.userGame).delete(user.uid);
+
             //clear user manager cache
             GlobalVar.userMgr.clearUser(user.uid);
             //unbind

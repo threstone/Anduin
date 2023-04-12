@@ -6,6 +6,7 @@ import { BaseHandler } from './BaseHandler';
 import { UnitCard } from '../card/UnitCard';
 import { AttackUtils } from '../game/AttackUtils';
 import { EventData, EventType } from '../game/EventDefine';
+import { GlobalVar } from '../GlobalVar';
 
 export class GameHandler extends BaseHandler {
 
@@ -188,5 +189,17 @@ export class GameHandler extends BaseHandler {
             //执行战场攻击后事件
             table.mapData.emit(atkEvent.changeType(EventType.UnitAtkAfter), sourceCard, damageTarget, dices);
         }
+    }
+
+    static C_RECONNECT(user: GameUser, table: GameTable, msg: GamePto.C_ATTACK) {
+        //说明没有取到user的话说明进程中没有对应的信息了,取消绑定
+        if (typeof (user) === 'string' && typeof (table) === 'number') {
+            const clientName = user;
+            const uid = table;
+            GlobalVar.socketServer.sendUnbindUserGameNode(clientName, uid);
+            return;
+        }
+
+        table.onUserReconnect(user);
     }
 }

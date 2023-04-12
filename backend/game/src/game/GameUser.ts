@@ -253,4 +253,8 @@ export class GameUser {
         this.sendMsg(notice);
     }
 
+    /**更新玩家的游戏信息到redis */
+    public updateGamingStatus() {
+        GlobalVar.redisMgr.getClient(RedisType.userGame).setData(this.uid, GlobalVar.startupParam.nodeId, 15);
+    }
 }

@@ -20,6 +20,17 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.addEffectListener('S_MOVE', this.onMove);
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('UpdateDeadCardNum', this.updateDeadCardNum);
+        this.addEffectListener('S_RECONNECT', this.reconnect);
+    }
+
+    private reconnect(msg: GamePto.S_RECONNECT) {
+        msg.users.forEach((detail) => {
+            if (this.isHandler(detail.uid)) {
+                this.feeSet(detail.fee, detail.maxFee);
+                this.setAtkTimesInfo(detail.atkTimes, detail.atkTimesLimit);
+                this.setMoveTimesInfo(detail.moveTimes, detail.moveTimesLimit);
+            }
+        })
     }
 
     private isHandler(uid: number) {
@@ -31,7 +42,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         const msg: GamePto.S_INIT_GAME = evt.data;
         for (let index = 0; index < msg.users.length; index++) {
             const user = msg.users[index];
-            if (user.uid === UserModel.ins().uid) {
+            if (this.isHandler(user.uid)) {
                 this.setUserInfo(user);
             }
         }

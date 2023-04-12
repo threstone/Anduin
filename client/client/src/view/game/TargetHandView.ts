@@ -20,6 +20,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
         this.addEffectListener('S_DRAW_CARDS', this.onDrawCards)
         this.addEffectListener('S_USE_CARD', this.onUseCard)
         this.addEffectListener('S_CARD_DENY', this.cardDeny);
+        this.addEffectListener('S_RECONNECT', this.reconnect);
 
         this.observe('S_REPLACE_CARDS', this.onReplaceCards);
         this.observe('S_GAME_START', this.drawStartHandCards);
@@ -254,5 +255,9 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
             this.updateCardsPostion(400);
             return GameSceneView.ins().useCardShow(gameCard);
         }
+    }
+    
+    private reconnect(msg: GamePto.S_RECONNECT) {
+        this.drawCardsToHand(msg.targetHandCardNum, 0, 0);
     }
 }

@@ -11,7 +11,6 @@ import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 import { GameMap } from './map/GameMap';
 import { DiceValueDefine, NodeDefine } from './GameDefine';
-import { IGameMessage } from '../../../common/I';
 
 export class GameTable extends BaseTable {
 
@@ -24,6 +23,8 @@ export class GameTable extends BaseTable {
     get mapData() { return this._mapData; }
 
     isGameOver: boolean;
+
+    private nextUpdateGamingStatusTime: number = 0
 
     private _incrId: number;
     /**用于游戏中出现的各种唯一id */
@@ -91,12 +92,70 @@ export class GameTable extends BaseTable {
 
     public onRun(now: number) {
         this._nodeDriver.onRun(now);
+        //更新桌局中玩家的在线状态
+        if (now > this.nextUpdateGamingStatusTime) {
+            this.updateGamingStatus()
+            this.nextUpdateGamingStatusTime = now + 10000
+        }
+    }
+
+    /**更新玩家的游戏信息到redis */
+    private updateGamingStatus() {
+        this.users.forEach((user) => {
+            user.updateGamingStatus();
+        });
     }
 
     /**用户断开连接 */
     public onUserOffline(user: GameUser) {
         //TODO 
         user.isOnline = false;
+    }
+
+    /**用户重新连接连接 */
+    public onUserReconnect(user: GameUser) {
+
+        user.isOnline = true;
+        user.sendMsg(this.getInitMsg());
+
+        //如果还在换牌阶段
+        if (this.nodeDriver.getCurNode() === NodeDefine.GameStart) {
+            const gameStartMsg = new GamePto.S_GAME_START();
+            gameStartMsg.firstUid = this.users[this.roundUserIndex].uid;
+            gameStartMsg.replaceEndTime = this.nodeDriver.awakenTime
+            gameStartMsg.mapData = this.getMapData();
+            //发送游戏开始协议
+            gameStartMsg.cards = user.handCards;
+            gameStartMsg.isReplace = user.isReplace;
+            user.sendMsg(gameStartMsg);
+        } else {
+            const otherUser = this.getOtherUser(user.uid);
+            const msg = new GamePto.S_RECONNECT();
+            msg.mapData = this.getMapData();
+            msg.selfCards = user.handCards;
+            //敌我手牌   敌方卡牌费用等信息
+            msg.targetHandCardNum = otherUser.handCards.length;
+            msg.isFirst = user.isFirst;
+
+            msg.deadPool = user.deadPool;
+            msg.targetDeadPoolNum = otherUser.deadPool.length;
+
+            msg.roundEndTime = this.nodeDriver.awakenTime;
+            msg.isSelfRound = user === this.users[this.roundUserIndex];
+
+            this.users.forEach((u) => {
+                const detail = new GamePto.UserDetail();
+                detail.atkTimes = u.atkTimes;
+                detail.atkTimesLimit = u.atkTimesLimit;
+                detail.moveTimes = u.moveTimes;
+                detail.moveTimesLimit = u.moveTimesLimit;
+                detail.uid = u.uid;
+                detail.fee = u.fee;
+                detail.maxFee = u.feeMax;
+                msg.users.push(detail);
+            });
+            user.sendMsg(msg);
+        }
     }
 
     /**
@@ -107,6 +166,10 @@ export class GameTable extends BaseTable {
         await this.initUserInfo(matchInfo);
         this.initNode();
 
+        this.broadcast(this.getInitMsg());
+    }
+
+    private getInitMsg() {
         const message = new GamePto.S_INIT_GAME();
         for (let index = 0; index < this._users.length; index++) {
             const user = this._users[index];
@@ -116,8 +179,7 @@ export class GameTable extends BaseTable {
             userInfo.uid = user.uid;
             message.users.push(userInfo);
         }
-
-        this.broadcast(message);
+        return message;
     }
 
     private initNode() {

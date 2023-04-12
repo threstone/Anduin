@@ -14,10 +14,20 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
         this.view.endRound.visible = false;
 
         this.addEffectListener('S_ROUND_START_EVENT', this.onRoundStart);
+        this.addEffectListener('S_RECONNECT', this.reconnect);
         this.observe('S_ROUND_END_EVENT', this.onRoundEnd);
         this.observe('S_ROUND_END_TIME', this.roundEndTime);
 
         this.AddClick(this.view.endRound, this.endRoundBtnClick);
+    }
+
+    private reconnect(msg: GamePto.S_RECONNECT) {
+        const event = new GamePto.S_ROUND_END_TIME();
+        event.roundEndTime = msg.roundEndTime;
+        event.uid = msg.isSelfRound ? UserModel.ins().uid : -1;
+
+        this.emit('S_ROUND_START_EVENT', event);
+        this.emit('S_ROUND_END_TIME', event);
     }
 
     public close(): void {
@@ -50,7 +60,7 @@ class RightCtrlView extends BaseView<BaseUI.UIRightCtrlCom> {
 
         //倒计时
         clearInterval(this.intervalId);
-        this.reqEndTime = msg.endTime as number;
+        this.reqEndTime = msg.roundEndTime as number;
         this.tipsStart = msg.uid === UserModel.ins().uid ? '你的回合' : '等待对方';
         this.updateDesc();
         this.intervalId = setInterval(this.updateDesc.bind(this), 1000);

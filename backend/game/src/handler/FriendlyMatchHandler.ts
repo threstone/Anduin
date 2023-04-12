@@ -11,7 +11,7 @@ export class FriendlyMatchHandler extends BaseHandler {
     //请求友谊赛
     static async C_REQ_MATCH(clientName: string, uid: number, msg: FriendlyMatchPto.C_REQ_MATCH) {
         //已经有此人的信息了
-        if (this._friendlyMatchInfoMgr.isExits(uid)) {
+        if (this._friendlyMatchInfoMgr.isExits(uid) || typeof (uid) !== 'number') {
             return;
         }
         const replay = new FriendlyMatchPto.S_REQ_MATCH();
@@ -29,8 +29,8 @@ export class FriendlyMatchHandler extends BaseHandler {
             return;
         }
         //正在游戏中
-        let isGame = await GlobalVar.redisMgr.getClient(RedisType.userGame).hgetall(`${msg.targetUid}`);
-        isGame = isGame || await GlobalVar.redisMgr.getClient(RedisType.userGame).hgetall(`${uid}`);
+        let isGame = await GlobalVar.redisMgr.getClient(RedisType.userGame).getData(`${msg.targetUid}`);
+        isGame = isGame || await GlobalVar.redisMgr.getClient(RedisType.userGame).getData(`${uid}`);
         if (isGame) {
             replay.code = 3;
             this.sendMsg(clientName, uid, replay);

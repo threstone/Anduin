@@ -73,6 +73,16 @@ message MapData{
 	repeated Card entityCards = 1;
 }
 
+message UserDetail{
+	int32 fee = 1;
+	int32 maxFee = 2;
+	int32 uid = 3;
+	int32 atkTimes = 4;
+	int32 atkTimesLimit = 5;
+	int32 moveTimes = 6;
+	int32 moveTimesLimit = 7;
+}
+
 //===================Client message===================
 
 //准备开始(包含更换卡牌数据)
@@ -127,6 +137,12 @@ message C_ATTACK{
 	int32 targetY = 6;	
 }
 
+//请求重连
+message C_RECONNECT{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 7];
+}
+
 //===================Server message===================
 
 //服务端异常 关闭场景
@@ -136,7 +152,7 @@ message S_SERVER_ERROR{
 	string message = 3;
 }
 
-//初始化游戏
+//初始化游戏,当前收到此协议会打开对战场景
 message S_INIT_GAME{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10001];
@@ -151,6 +167,7 @@ message S_GAME_START{
 	repeated Card cards = 4;
 	MapData mapData = 5;
 	int64 replaceEndTime = 6;
+	bool isReplace = 7;
 }
 
 //替换手牌
@@ -226,7 +243,7 @@ message S_USE_CARD{
 message S_ROUND_END_TIME{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10010];
-	int64 endTime = 3;
+	int64 roundEndTime = 3;
 	int32 uid = 4;
 }
 
@@ -338,7 +355,15 @@ message S_GAME_OVER{
 message S_RECONNECT{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10022];
-	MapData mapData = 3; 
+	MapData mapData = 3;
+	repeated Card selfCards = 4;
+	int32 targetHandCardNum = 5;
+	bool isFirst = 6;
+	repeated Card deadPool = 7;
+	int32 targetDeadPoolNum = 8;
+	int64 roundEndTime = 9;
+	bool isSelfRound = 10;
+	repeated UserDetail users = 11;
 }
 
 //更新手牌信息

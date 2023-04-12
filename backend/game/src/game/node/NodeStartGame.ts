@@ -28,7 +28,7 @@ export class NodeStartGame extends BaseNode {
     /**玩家操作换牌 */
     public trigger(user: GameUser, table: GameTable, msg: GamePto.C_PREPARE_TO_START) {
         if (user.isReplace) {
-            return;
+            return NodeDriverResult.Continue;
         }
 
         //替换卡牌

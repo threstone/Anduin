@@ -2269,6 +2269,87 @@ declare namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a UserDetail. */
+    interface IUserDetail {
+
+        /** UserDetail fee */
+        fee?: (number|null);
+
+        /** UserDetail maxFee */
+        maxFee?: (number|null);
+
+        /** UserDetail uid */
+        uid?: (number|null);
+
+        /** UserDetail atkTimes */
+        atkTimes?: (number|null);
+
+        /** UserDetail atkTimesLimit */
+        atkTimesLimit?: (number|null);
+
+        /** UserDetail moveTimes */
+        moveTimes?: (number|null);
+
+        /** UserDetail moveTimesLimit */
+        moveTimesLimit?: (number|null);
+    }
+
+    /** Represents a UserDetail. */
+    class UserDetail implements IUserDetail {
+
+        /**
+         * Constructs a new UserDetail.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IUserDetail);
+
+        /** UserDetail fee. */
+        public fee: number;
+
+        /** UserDetail maxFee. */
+        public maxFee: number;
+
+        /** UserDetail uid. */
+        public uid: number;
+
+        /** UserDetail atkTimes. */
+        public atkTimes: number;
+
+        /** UserDetail atkTimesLimit. */
+        public atkTimesLimit: number;
+
+        /** UserDetail moveTimes. */
+        public moveTimes: number;
+
+        /** UserDetail moveTimesLimit. */
+        public moveTimesLimit: number;
+
+        /**
+         * Encodes the specified UserDetail message. Does not implicitly {@link GamePto.UserDetail.verify|verify} messages.
+         * @param message UserDetail message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IUserDetail, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a UserDetail message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns UserDetail
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.UserDetail;
+
+        /**
+         * Gets the default type url for UserDetail
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a C_PREPARE_TO_START. */
     interface IC_PREPARE_TO_START {
 
@@ -2647,6 +2728,57 @@ declare namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a C_RECONNECT. */
+    interface IC_RECONNECT {
+
+        /** C_RECONNECT cmd */
+        cmd?: (number|null);
+
+        /** C_RECONNECT scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_RECONNECT. */
+    class C_RECONNECT implements IC_RECONNECT {
+
+        /**
+         * Constructs a new C_RECONNECT.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_RECONNECT);
+
+        /** C_RECONNECT cmd. */
+        public cmd: number;
+
+        /** C_RECONNECT scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_RECONNECT message. Does not implicitly {@link GamePto.C_RECONNECT.verify|verify} messages.
+         * @param message C_RECONNECT message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_RECONNECT, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a C_RECONNECT message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_RECONNECT
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_RECONNECT;
+
+        /**
+         * Gets the default type url for C_RECONNECT
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a S_SERVER_ERROR. */
     interface IS_SERVER_ERROR {
 
@@ -2781,6 +2913,9 @@ declare namespace GamePto {
 
         /** S_GAME_START replaceEndTime */
         replaceEndTime?: (number|Long|null);
+
+        /** S_GAME_START isReplace */
+        isReplace?: (boolean|null);
     }
 
     /** Represents a S_GAME_START. */
@@ -2809,6 +2944,9 @@ declare namespace GamePto {
 
         /** S_GAME_START replaceEndTime. */
         public replaceEndTime: (number|Long);
+
+        /** S_GAME_START isReplace. */
+        public isReplace: boolean;
 
         /**
          * Encodes the specified S_GAME_START message. Does not implicitly {@link GamePto.S_GAME_START.verify|verify} messages.
@@ -3364,8 +3502,8 @@ declare namespace GamePto {
         /** S_ROUND_END_TIME scmd */
         scmd?: (number|null);
 
-        /** S_ROUND_END_TIME endTime */
-        endTime?: (number|Long|null);
+        /** S_ROUND_END_TIME roundEndTime */
+        roundEndTime?: (number|Long|null);
 
         /** S_ROUND_END_TIME uid */
         uid?: (number|null);
@@ -3386,8 +3524,8 @@ declare namespace GamePto {
         /** S_ROUND_END_TIME scmd. */
         public scmd: number;
 
-        /** S_ROUND_END_TIME endTime. */
-        public endTime: (number|Long);
+        /** S_ROUND_END_TIME roundEndTime. */
+        public roundEndTime: (number|Long);
 
         /** S_ROUND_END_TIME uid. */
         public uid: number;
@@ -4188,6 +4326,30 @@ declare namespace GamePto {
 
         /** S_RECONNECT mapData */
         mapData?: (GamePto.IMapData|null);
+
+        /** S_RECONNECT selfCards */
+        selfCards?: (GamePto.ICard[]|null);
+
+        /** S_RECONNECT targetHandCardNum */
+        targetHandCardNum?: (number|null);
+
+        /** S_RECONNECT isFirst */
+        isFirst?: (boolean|null);
+
+        /** S_RECONNECT deadPool */
+        deadPool?: (GamePto.ICard[]|null);
+
+        /** S_RECONNECT targetDeadPoolNum */
+        targetDeadPoolNum?: (number|null);
+
+        /** S_RECONNECT roundEndTime */
+        roundEndTime?: (number|Long|null);
+
+        /** S_RECONNECT isSelfRound */
+        isSelfRound?: (boolean|null);
+
+        /** S_RECONNECT users */
+        users?: (GamePto.IUserDetail[]|null);
     }
 
     /** Represents a S_RECONNECT. */
@@ -4207,6 +4369,30 @@ declare namespace GamePto {
 
         /** S_RECONNECT mapData. */
         public mapData?: (GamePto.IMapData|null);
+
+        /** S_RECONNECT selfCards. */
+        public selfCards: GamePto.ICard[];
+
+        /** S_RECONNECT targetHandCardNum. */
+        public targetHandCardNum: number;
+
+        /** S_RECONNECT isFirst. */
+        public isFirst: boolean;
+
+        /** S_RECONNECT deadPool. */
+        public deadPool: GamePto.ICard[];
+
+        /** S_RECONNECT targetDeadPoolNum. */
+        public targetDeadPoolNum: number;
+
+        /** S_RECONNECT roundEndTime. */
+        public roundEndTime: (number|Long);
+
+        /** S_RECONNECT isSelfRound. */
+        public isSelfRound: boolean;
+
+        /** S_RECONNECT users. */
+        public users: GamePto.IUserDetail[];
 
         /**
          * Encodes the specified S_RECONNECT message. Does not implicitly {@link GamePto.S_RECONNECT.verify|verify} messages.
@@ -4390,6 +4576,9 @@ declare namespace LoginPto {
 
         /** S_LOGIN reqAddList */
         reqAddList?: (FriendPto.IFriend[]|null);
+
+        /** S_LOGIN needReconnect */
+        needReconnect?: (boolean|null);
     }
 
     /** Represents a S_LOGIN. */
@@ -4424,6 +4613,9 @@ declare namespace LoginPto {
 
         /** S_LOGIN reqAddList. */
         public reqAddList: FriendPto.IFriend[];
+
+        /** S_LOGIN needReconnect. */
+        public needReconnect: boolean;
 
         /**
          * Encodes the specified S_LOGIN message. Does not implicitly {@link LoginPto.S_LOGIN.verify|verify} messages.

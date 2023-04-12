@@ -13,6 +13,7 @@ export class NodeDriver {
     private _table: GameTable
 
     private _awakenTime: number
+    get awakenTime() { return this._awakenTime }
 
     constructor(table: GameTable) {
         this._table = table;

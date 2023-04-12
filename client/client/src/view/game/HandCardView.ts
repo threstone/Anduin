@@ -37,6 +37,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
         this.addEffectListener('S_FEE_INFO', this.updateHandCardStats);
         this.addEffectListener('S_HANDCARDS_UPDATE', this.updateHandCards);
+        this.addEffectListener('S_RECONNECT', this.reconnect);
         this.observe('S_DISCARD', this.onDeleteCard);
     }
 
@@ -132,6 +133,10 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
             GameSceneView.ins().fatigue(msg.damages, UserModel.ins().uid);
             SelfInfoBox.ins().setCardPoolNum(msg.cardPoolNum);
         }
+    }
+
+    private reconnect(msg: GamePto.S_RECONNECT) {
+        this.addCard(0, ...GameCard.getGameCards(msg.selfCards, this._cardPoolPosition.x, this._cardPoolPosition.y, 0.5, 90));
     }
 
     public addCard(opTime: number, ...cards: GameCard[]) {

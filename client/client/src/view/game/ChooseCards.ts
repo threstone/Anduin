@@ -13,11 +13,13 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     }
 
     /**多一个isFirst是因为有可能后面有卡牌起手多发牌 */
-    public open(handCards: GamePto.ICard[], replaceEndTime: number): void {
+    public open(handCards: GamePto.ICard[], replaceEndTime: number, isReplace: boolean): void {
         super.open();
 
         this.addEffectListener('S_REPLACE_CARDS', this.replaceCards);
         this.AddClick(this.view.chooseBtn, this.onBtnClick);
+
+        this.view.chooseBtn.visible = !isReplace;
 
         //倒计时
         this.reqEndTime = replaceEndTime;
@@ -33,14 +35,16 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
             this._cards.push(gameCard);
             //卡牌出现展示动画
             this.cardAddTween(handCards.length, index);
-            this.AddClick(gameCard.cardItem, () => {
-                gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
-                if (gameCard.cardItem.grayed) {
-                    this._replaceIndexes.push(index);
-                } else {
-                    this._replaceIndexes.splice(this._replaceIndexes.indexOf(index), 1);
-                }
-            });
+            if (!isReplace) {
+                this.AddClick(gameCard.cardItem, () => {
+                    gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
+                    if (gameCard.cardItem.grayed) {
+                        this._replaceIndexes.push(index);
+                    } else {
+                        this._replaceIndexes.splice(this._replaceIndexes.indexOf(index), 1);
+                    }
+                });
+            }
         }
     }
 

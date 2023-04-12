@@ -12,6 +12,7 @@
             // "preLaunchTask": "tsc: build - tsconfig.json",
             "args": [
                 "socketListenPort=2001",
+                "nodeId=Hall1"
             ],
             "preLaunchTask": "buildjs",
             "outFiles": [
@@ -28,6 +29,7 @@
             // ],
             "args": [
                 "socketListenPort=2001",
+                "nodeId=Hall1"
             ]
         },
         {

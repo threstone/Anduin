@@ -22,10 +22,6 @@ export class SocketServer {
         this.logger.info('socket 启动 监听端口:' + listenPort);
     }
 
-    // public addProtoModule(protoModule: any, handle: any) {
-    //     ProtoBufEncoder.addProtoModule(protoModule, handle)
-    // }
-
     bindGameNode(uid: number, clientName: string) {
         const socket = this.socketMap.get(uid);
         if (!socket) {

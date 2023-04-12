@@ -21,6 +21,10 @@ class LoginModel extends BaseModel {
             UserModel.ins().onLogin(msg);
             FriendModel.ins().onLogin(msg.friendList, msg.reqAddList)
             HallView.ins().open();
+            //如果有重连信息
+            if (msg.needReconnect) {
+                GameModel.ins().C_RECONNECT();
+            }
         }
     }
 
