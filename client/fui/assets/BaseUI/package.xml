@@ -66,12 +66,12 @@
     <component id="pqjx2b" name="CardsGroupChooseCom.xml" path="/cards/" exported="true"/>
     <component id="jig14" name="GameSceneCom.xml" path="/game/" exported="true"/>
     <image id="pg482c" name="bbg_arena.jpg" path="/game/res/"/>
-    <component id="pg482d" name="UserInfoBox.xml" path="/game/"/>
+    <component id="pg482d" name="UserInfoBox.xml" path="/game/info/"/>
     <component id="pg482e" name="HandCardsCom.xml" path="/game/"/>
     <image id="pg482f" name="map.png" path="/game/res/"/>
     <component id="pg482g" name="ChooseCards.xml" path="/game/" exported="true"/>
     <component id="pg482h" name="CardBackItem.xml" path="/cards/" exported="true"/>
-    <component id="uym42i" name="RightCtrlCom.xml" path="/game/"/>
+    <component id="uym42i" name="RightCtrlCom.xml" path="/game/rightCom/"/>
     <component id="hzsg2j" name="MapView.xml" path="/game/map/"/>
     <component id="hzsg2k" name="MapUnitBase.xml" path="/game/map/"/>
     <component id="hzsg2m" name="MapBuildingBase.xml" path="/game/map/"/>
@@ -81,9 +81,9 @@
     <component id="sbft2r" name="MoveTips.xml" path="/game/map/tips/" exported="true"/>
     <component id="sbft2s" name="AtkTips.xml" path="/game/map/tips/" exported="true"/>
     <component id="sbft2t" name="MapTipsView.xml" path="/game/map/tips/" exported="true"/>
-    <movieclip id="sgbw30" name="DiceMovie.jta" path="/game/" exported="true"/>
+    <movieclip id="sgbw30" name="DiceMovie.jta" path="/game/rightCom/" exported="true"/>
     <component id="q6kd31" name="SelectTargetCom.xml" path="/game/map/" exported="true"/>
-    <component id="h89h32" name="LeftInfoBox.xml" path="/game/"/>
+    <component id="h89h32" name="LeftInfoBox.xml" path="/game/info/"/>
     <image id="h89h34" name="excavate_cycle_attentio.png" path="/game/res/"/>
     <image id="h89h35" name="excavate_cycle_engag.png" path="/game/res/"/>
     <font id="h89h37" name="NumberFont1.fnt" path="/common/" exported="true"/>
@@ -109,12 +109,13 @@
     <image id="h89h41" name="8.png" path="/common/res/number/number2/"/>
     <image id="h89h42" name="9.png" path="/common/res/number/number2/"/>
     <font id="h89h43" name="NumberFont2.fnt" path="/common/" exported="true"/>
-    <component id="h89h45" name="EventItem.xml" path="/game/" exported="true"/>
+    <component id="h89h45" name="EventItem.xml" path="/game/info/" exported="true"/>
     <component id="h89h46" name="GameOverCom.xml" path="/game/" exported="true"/>
     <component id="h89h48" name="UseCardCom.xml" path="/game/" exported="true"/>
     <image id="h89h49" name="use_arrow.png" path="/game/res/" exported="true" scale="9grid" scale9grid="27,91,54,269"/>
     <image id="h13w4a" name="herodetail-skill-.png" path="/cards/res/" scale="9grid" scale9grid="20,32,50,68"/>
     <component id="h13w4c" name="MiniImg.xml" path="/cards/"/>
+    <component id="ncgh4e" name="RecordCom.xml" path="/game/record/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

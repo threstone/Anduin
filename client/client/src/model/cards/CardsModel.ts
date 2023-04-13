@@ -138,6 +138,33 @@ class CardsModel extends BaseModel {
         return cardArr
     }
 
+    /**通过卡牌类型获得卡片类型名称 */
+    public getCardTypeName(cardType: CardsPto.CardType) {
+        switch (cardType) {
+            case CardsPto.CardType.Building:
+                return '建筑卡';
+            case CardsPto.CardType.Unit:
+                return '单位卡';
+            case CardsPto.CardType.Event:
+                return '事件卡';
+            case CardsPto.CardType.Magic:
+                return '法术卡';
+            case CardsPto.CardType.Hero:
+                return '英雄卡';
+            default:
+                return '未知卡';
+        }
+    }
+
+    /**获得卡片名称 */
+    public getCardNameByCardId(cardId: number) {
+        const cardConfig = this.getCardConfigById(cardId);
+        if (!cardConfig) {
+            return '未知';
+        }
+        return cardConfig.cardName;
+    }
+
     /**返回卡牌收藏数据 */
     private S_CARDS_INFO(msg: CardsPto.S_CARDS_INFO) {
         this._ownerCardsMap = new Map<CardsPto.PowerType, CardInterface[]>();

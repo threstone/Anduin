@@ -4,7 +4,6 @@ module BaseUI {
 
 	export class UIGameSceneCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
-		public record:fairygui.GGraph;
 		public rightCtrl:UIRightCtrlCom;
 		public map:UIMapView;
 		public selfInfoBox:UIUserInfoBox;
@@ -15,6 +14,7 @@ module BaseUI {
 		public selfLeftInfoBox:UILeftInfoBox;
 		public targetLeftInfoBox:UILeftInfoBox;
 		public surrender:UIButton3;
+		public record:UIRecordCom;
 		public static URL:string = "ui://yaux2xpojig14";
 
 		public static createInstance():UIGameSceneCom {
@@ -25,17 +25,17 @@ module BaseUI {
 			super.constructFromXML(xml);
 
 			this.bg = <fairygui.GImage>(this.getChildAt(0));
-			this.record = <fairygui.GGraph>(this.getChildAt(1));
-			this.rightCtrl = <UIRightCtrlCom>(this.getChildAt(2));
-			this.map = <UIMapView>(this.getChildAt(3));
-			this.selfInfoBox = <UIUserInfoBox>(this.getChildAt(4));
-			this.targetInfoBox = <UIUserInfoBox>(this.getChildAt(5));
-			this.selfHand = <UIHandCardsCom>(this.getChildAt(6));
-			this.targetHand = <UIHandCardsCom>(this.getChildAt(7));
-			this.close = <UIButton3>(this.getChildAt(8));
-			this.selfLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
-			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(10));
-			this.surrender = <UIButton3>(this.getChildAt(11));
+			this.rightCtrl = <UIRightCtrlCom>(this.getChildAt(1));
+			this.map = <UIMapView>(this.getChildAt(2));
+			this.selfInfoBox = <UIUserInfoBox>(this.getChildAt(3));
+			this.targetInfoBox = <UIUserInfoBox>(this.getChildAt(4));
+			this.selfHand = <UIHandCardsCom>(this.getChildAt(5));
+			this.targetHand = <UIHandCardsCom>(this.getChildAt(6));
+			this.close = <UIButton3>(this.getChildAt(7));
+			this.selfLeftInfoBox = <UILeftInfoBox>(this.getChildAt(8));
+			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
+			this.surrender = <UIButton3>(this.getChildAt(10));
+			this.record = <UIRecordCom>(this.getChildAt(11));
 		}
 	}
 }
