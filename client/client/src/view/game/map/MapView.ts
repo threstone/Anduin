@@ -153,8 +153,12 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**移动单位 */
     public async moveUnit(msg: GamePto.S_MOVE) {
         const mapItem = this.entityMap.get(msg.card.id) as BaseUI.UIMapUnit;
+        const oldIndex = this.view.getChildIndex(mapItem);
+        this.view.setChildIndex(mapItem, 999);
         const targetPoint = this.getMapPoint(msg.card.blockX, msg.card.blockY);
-        egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500);
+        egret.Tween.get(mapItem).to({ x: targetPoint.x, y: targetPoint.y }, 500).call(() => {
+            this.view.setChildIndex(mapItem, oldIndex);
+        });
         const cardInfo = msg.card;
         if (cardInfo.uid === UserModel.ins().uid) {
             this.updateUnitOperateTips(mapItem, cardInfo);
@@ -197,7 +201,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             const cacheX = source.x;
             const cacheY = source.y;
             let oldIndex = this.view.getChildIndex(source);
-            this.view.setChildIndex(source, 99);
+            this.view.setChildIndex(source, 999);
             egret.Tween.get(source).to({ x: target.x, y: target.y }, 500, egret.Ease.quintIn).to({ x: cacheX, y: cacheY }, 300).call(() => {
                 this.view.setChildIndex(source, oldIndex);
             });
