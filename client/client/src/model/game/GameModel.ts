@@ -63,6 +63,12 @@ class GameModel extends BaseModel {
         this.sendMsg(msg);
     }
 
+    /**投降 */
+    public C_SURRENDER() {
+        const msg = new GamePto.C_SURRENDER();
+        this.sendMsg(msg);
+    }
+
     /**请求重连 */
     public C_RECONNECT() {
         const msg = new GamePto.C_RECONNECT();

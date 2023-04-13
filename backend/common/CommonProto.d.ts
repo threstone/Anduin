@@ -4006,6 +4006,102 @@ export namespace GamePto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
+    /** Properties of a C_SURRENDER. */
+    interface IC_SURRENDER {
+
+        /** C_SURRENDER cmd */
+        cmd?: (number|null);
+
+        /** C_SURRENDER scmd */
+        scmd?: (number|null);
+    }
+
+    /** Represents a C_SURRENDER. */
+    class C_SURRENDER implements IC_SURRENDER {
+
+        /**
+         * Constructs a new C_SURRENDER.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IC_SURRENDER);
+
+        /** C_SURRENDER cmd. */
+        public cmd: number;
+
+        /** C_SURRENDER scmd. */
+        public scmd: number;
+
+        /**
+         * Encodes the specified C_SURRENDER message. Does not implicitly {@link GamePto.C_SURRENDER.verify|verify} messages.
+         * @param message C_SURRENDER message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IC_SURRENDER, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified C_SURRENDER message, length delimited. Does not implicitly {@link GamePto.C_SURRENDER.verify|verify} messages.
+         * @param message C_SURRENDER message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IC_SURRENDER, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a C_SURRENDER message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns C_SURRENDER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.C_SURRENDER;
+
+        /**
+         * Decodes a C_SURRENDER message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns C_SURRENDER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.C_SURRENDER;
+
+        /**
+         * Verifies a C_SURRENDER message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a C_SURRENDER message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns C_SURRENDER
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.C_SURRENDER;
+
+        /**
+         * Creates a plain object from a C_SURRENDER message. Also converts values to other types if specified.
+         * @param message C_SURRENDER
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.C_SURRENDER, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this C_SURRENDER to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for C_SURRENDER
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
     /** Properties of a S_SERVER_ERROR. */
     interface IS_SERVER_ERROR {
 

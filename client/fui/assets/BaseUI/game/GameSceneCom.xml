@@ -29,5 +29,6 @@
     <component id="n39_h89h" name="targetLeftInfoBox" src="h89h32" fileName="game/LeftInfoBox.xml" xy="5,0" size="322,210">
       <relation target="n33_pg48" sidePair="right-left,top-top"/>
     </component>
+    <component id="n41_ncgh" name="surrender" src="fjkiy" fileName="common/btn/Button3.xml" xy="1433,259"/>
   </displayList>
 </component>

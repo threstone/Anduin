@@ -81,9 +81,12 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**根据可移动状态以及可攻击对象来决定是否显示提示 */
     private updateUnitOperateTips(unit: BaseUI.UIMapUnit, cardInfo: GamePto.ICard) {
         //如果是自己回合、自己的单位、且是可以操作的单位,就需要判断是否显示可操作提示
-        if (GameSceneView.ins().allowToOprate && cardInfo.uid === UserModel.ins().uid && (cardInfo.cardType === CardsPto.CardType.Unit || cardInfo.cardType === CardsPto.CardType.Hero)) {
-            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        if (cardInfo.uid === UserModel.ins().uid && (cardInfo.cardType === CardsPto.CardType.Unit || cardInfo.cardType === CardsPto.CardType.Hero)) {
             unit.allowOperate.visible = false;
+            if (!GameSceneView.ins().allowToOprate) {
+                return;
+            }
+            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
             if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
                 if (MapModel.ins().getMovablePoint(cardInfo, config).size > 0) {
                     unit.allowOperate.visible = true;

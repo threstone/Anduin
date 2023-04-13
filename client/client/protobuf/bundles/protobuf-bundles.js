@@ -6313,6 +6313,118 @@ $root.GamePto = (function() {
         return C_RECONNECT;
     })();
 
+    GamePto.C_SURRENDER = (function() {
+
+        /**
+         * Properties of a C_SURRENDER.
+         * @memberof GamePto
+         * @interface IC_SURRENDER
+         * @property {number|null} [cmd] C_SURRENDER cmd
+         * @property {number|null} [scmd] C_SURRENDER scmd
+         */
+
+        /**
+         * Constructs a new C_SURRENDER.
+         * @memberof GamePto
+         * @classdesc Represents a C_SURRENDER.
+         * @implements IC_SURRENDER
+         * @constructor
+         * @param {GamePto.IC_SURRENDER=} [properties] Properties to set
+         */
+        function C_SURRENDER(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * C_SURRENDER cmd.
+         * @member {number} cmd
+         * @memberof GamePto.C_SURRENDER
+         * @instance
+         */
+        C_SURRENDER.prototype.cmd = 200;
+
+        /**
+         * C_SURRENDER scmd.
+         * @member {number} scmd
+         * @memberof GamePto.C_SURRENDER
+         * @instance
+         */
+        C_SURRENDER.prototype.scmd = 8;
+
+        /**
+         * Encodes the specified C_SURRENDER message. Does not implicitly {@link GamePto.C_SURRENDER.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.C_SURRENDER
+         * @static
+         * @param {GamePto.IC_SURRENDER} message C_SURRENDER message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        C_SURRENDER.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            return writer;
+        };
+
+        /**
+         * Decodes a C_SURRENDER message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.C_SURRENDER
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.C_SURRENDER} C_SURRENDER
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        C_SURRENDER.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.C_SURRENDER();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for C_SURRENDER
+         * @function getTypeUrl
+         * @memberof GamePto.C_SURRENDER
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        C_SURRENDER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.C_SURRENDER";
+        };
+
+        return C_SURRENDER;
+    })();
+
     GamePto.S_SERVER_ERROR = (function() {
 
         /**

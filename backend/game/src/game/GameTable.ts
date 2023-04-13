@@ -222,15 +222,20 @@ export class GameTable extends BaseTable {
     }
 
     /**游戏结束 */
-    public doGameOver() {
+    public doGameOver(winnerUid?: number) {
         this.isGameOver = true;
         const msg = new GamePto.S_GAME_OVER();
-        //平局判断
-        if (this.users[0].hero.health <= 0 && this.users[1].hero.health <= 0) {
-            msg.winnerUid = -1;
-        } else {
-            const winner = this.users[0].hero.health > 0 ? this.users[0] : this.users[1];
-            msg.winnerUid = winner.uid;
+        //如果传入胜利者
+        if (winnerUid) {
+            msg.winnerUid = winnerUid;
+        } else {//不传入胜利者就要通过血量进行判断
+            //平局判断
+            if (this.users[0].hero.health <= 0 && this.users[1].hero.health <= 0) {
+                msg.winnerUid = -1;
+            } else {
+                const winner = this.users[0].hero.health > 0 ? this.users[0] : this.users[1];
+                msg.winnerUid = winner.uid;
+            }
         }
         this.broadcast(msg);
         this.destroy(false);

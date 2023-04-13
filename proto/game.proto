@@ -143,6 +143,12 @@ message C_RECONNECT{
 	int32 scmd = 2[default = 7];
 }
 
+//投降
+message C_SURRENDER{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 8];
+}
+
 //===================Server message===================
 
 //服务端异常 关闭场景

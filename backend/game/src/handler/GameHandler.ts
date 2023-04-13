@@ -191,6 +191,7 @@ export class GameHandler extends BaseHandler {
         }
     }
 
+    //请求重连
     static C_RECONNECT(user: GameUser, table: GameTable, msg: GamePto.C_ATTACK) {
         //说明没有取到user的话说明进程中没有对应的信息了,取消绑定
         if (typeof (user) === 'string' && typeof (table) === 'number') {
@@ -201,5 +202,10 @@ export class GameHandler extends BaseHandler {
         }
 
         table.onUserReconnect(user);
+    }
+
+    //投降
+    static C_SURRENDER(user: GameUser, table: GameTable, msg: GamePto.C_SURRENDER) {
+        table.doGameOver(table.getOtherUser(user.uid).uid);
     }
 }

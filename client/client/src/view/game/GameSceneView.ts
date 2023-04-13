@@ -6,12 +6,9 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
     get allowToOprate() { return this._allowToOprate; }
     private _allowToOprate: boolean;
 
-
     //消息收到后就马上执行数据的变更，但是动画的展示应该维护一个pool来顺序播放
     private _effectPool: (() => Promise<any>)[];
     private _isPlaying: boolean;
-
-    // get cards() { return HandCardView.ins().cards }
 
     protected init() {
         this.view = BaseUI.UIGameSceneCom.createInstance();
@@ -26,7 +23,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.bindView(SelfLeftInfoBox.ins());
         this.bindView(TargetLeftInfoBox.ins());
 
-        this.view.close.describe.text = 'tempCloseBtn'
+        this.view.close.describe.text = 'tempCloseBtn';
+        this.view.surrender.describe.text = '投降';
     }
 
     public open(): void {
@@ -52,6 +50,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.addEffectListener('S_GAME_OVER', this.onGameOver);
 
         this.AddClick(this.view.close, this.close);
+        this.AddClick(this.view.surrender, this.surrender);
     }
 
     /**将函数加入特效池 */
@@ -159,6 +158,15 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             MapView.ins().entityReduceHeath(hero, damage);
             TipsView.ins().showTips(`${uid === UserModel.ins().uid ? '你' : '对方'}收到了${damage}点疲劳伤害!`,)
             await this.wait(500);
+        }
+    }
+
+
+    //投降
+    private async surrender() {
+        const res = await TipsView.ins().open('确定要投降吗?');
+        if (res === true) {
+            GameModel.ins().C_SURRENDER();
         }
     }
 }
