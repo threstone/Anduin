@@ -36,11 +36,7 @@ export class WuNong extends GameBuff {
             card.table.broadcast(effectMsg);
 
             //派发费用协议
-            const msg = new GamePto.S_FEE_INFO();
-            msg.fee = user.fee;
-            msg.maxFee = user.feeMax;
-            msg.uid = user.uid;
-            card.table.broadcast(msg);
+            user.table.noticeUserFeeInfo(user);
         }
         next();
     }

@@ -117,6 +117,7 @@ export class GameTable extends BaseTable {
 
         user.isOnline = true;
         user.sendMsg(this.getInitMsg());
+        const otherUser = this.getOtherUser(user.uid);
 
         //如果还在换牌阶段
         if (this.nodeDriver.getCurNode() === NodeDefine.GameStart) {
@@ -128,8 +129,9 @@ export class GameTable extends BaseTable {
             gameStartMsg.cards = user.handCards;
             gameStartMsg.isReplace = user.isReplace;
             user.sendMsg(gameStartMsg);
+            this.noticeUserFeeInfo(user);
+            this.noticeUserFeeInfo(otherUser);
         } else {
-            const otherUser = this.getOtherUser(user.uid);
             const msg = new GamePto.S_RECONNECT();
             msg.mapData = this.getMapData();
             msg.selfCards = user.handCards;
