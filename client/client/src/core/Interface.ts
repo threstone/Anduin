@@ -3,7 +3,7 @@ interface ProtoClass {
     /**
      * 编码
      */
-    encode(message: GameProtoClass, writer?: protobuf.Writer);
+    encode(message: IMessage, writer?: protobuf.Writer);
 
     /**
      * 解码
@@ -13,7 +13,7 @@ interface ProtoClass {
     verify(message: { [k: string]: any }): (string | null);
 }
 
-interface GameProtoClass {
+interface IMessage {
     cmd: number;
     scmd: number;
 }

@@ -33,6 +33,7 @@ export class WuNong extends GameBuff {
             const effectMsg = new GamePto.S_SELF_EFFECT();
             effectMsg.x = card.blockX;
             effectMsg.y = card.blockY;
+            effectMsg.card = card;
             card.table.broadcast(effectMsg);
 
             //派发费用协议

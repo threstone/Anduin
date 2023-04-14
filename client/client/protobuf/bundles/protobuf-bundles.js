@@ -9584,6 +9584,7 @@ $root.GamePto = (function() {
          * @property {number|null} [scmd] S_SELF_EFFECT scmd
          * @property {number|null} [x] S_SELF_EFFECT x
          * @property {number|null} [y] S_SELF_EFFECT y
+         * @property {GamePto.ICard|null} [card] S_SELF_EFFECT card
          */
 
         /**
@@ -9634,6 +9635,14 @@ $root.GamePto = (function() {
         S_SELF_EFFECT.prototype.y = 0;
 
         /**
+         * S_SELF_EFFECT card.
+         * @member {GamePto.ICard|null|undefined} card
+         * @memberof GamePto.S_SELF_EFFECT
+         * @instance
+         */
+        S_SELF_EFFECT.prototype.card = null;
+
+        /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_SELF_EFFECT
@@ -9653,6 +9662,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.x);
             if (message.y != null && Object.hasOwnProperty.call(message, "y"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.y);
+            if (message.card != null && Object.hasOwnProperty.call(message, "card"))
+                $root.GamePto.Card.encode(message.card, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
             return writer;
         };
 
@@ -9688,6 +9699,10 @@ $root.GamePto = (function() {
                     }
                 case 4: {
                         message.y = reader.int32();
+                        break;
+                    }
+                case 5: {
+                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
                         break;
                     }
                 default:

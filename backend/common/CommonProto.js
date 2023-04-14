@@ -7770,6 +7770,7 @@ $root.GamePto = (function() {
         S_SELF_EFFECT.prototype.scmd = 10019;
         S_SELF_EFFECT.prototype.x = 0;
         S_SELF_EFFECT.prototype.y = 0;
+        S_SELF_EFFECT.prototype.card = null;
 
         S_SELF_EFFECT.create = function create(properties) {
             return new S_SELF_EFFECT(properties);
@@ -7786,6 +7787,8 @@ $root.GamePto = (function() {
                 w.uint32(24).int32(m.x);
             if (m.y != null && Object.hasOwnProperty.call(m, "y"))
                 w.uint32(32).int32(m.y);
+            if (m.card != null && Object.hasOwnProperty.call(m, "card"))
+                $root.GamePto.Card.encode(m.card, w.uint32(42).fork()).ldelim();
             return w;
         };
 
@@ -7812,6 +7815,10 @@ $root.GamePto = (function() {
                         m.y = r.int32();
                         break;
                     }
+                case 5: {
+                        m.card = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7836,6 +7843,11 @@ $root.GamePto = (function() {
             if (d.y != null) {
                 m.y = d.y | 0;
             }
+            if (d.card != null) {
+                if (typeof d.card !== "object")
+                    throw TypeError(".GamePto.S_SELF_EFFECT.card: object expected");
+                m.card = $root.GamePto.Card.fromObject(d.card);
+            }
             return m;
         };
 
@@ -7848,6 +7860,7 @@ $root.GamePto = (function() {
                 d.scmd = 10019;
                 d.x = 0;
                 d.y = 0;
+                d.card = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -7860,6 +7873,9 @@ $root.GamePto = (function() {
             }
             if (m.y != null && m.hasOwnProperty("y")) {
                 d.y = m.y;
+            }
+            if (m.card != null && m.hasOwnProperty("card")) {
+                d.card = $root.GamePto.Card.toObject(m.card, o);
             }
             return d;
         };

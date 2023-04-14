@@ -25,6 +25,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIGameSceneCom.URL, UIGameSceneCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRecordCom.URL, UIRecordCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIRecordItem.URL, UIRecordItem);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICreateCardGroup.URL, UICreateCardGroup);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniCard.URL, UIMiniCard);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardsCom.URL, UIShowCardsCom);

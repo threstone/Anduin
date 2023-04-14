@@ -35,7 +35,7 @@ class Socket extends BaseClass {
     /**
      * 发送proto给服务器
     */
-    public sendProtoMsg(msg: GameProtoClass): void {
+    public sendProtoMsg(msg: IMessage): void {
         let msgAny: any = msg;
         const protoCls = MessageManager.getProtoCls(msgAny.__proto__.cmd, msgAny.__proto__.scmd);
         let buffer = protoCls.encode(msg).finish();

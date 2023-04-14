@@ -4191,6 +4191,9 @@ declare namespace GamePto {
 
         /** S_SELF_EFFECT y */
         y?: (number|null);
+
+        /** S_SELF_EFFECT card */
+        card?: (GamePto.ICard|null);
     }
 
     /** Represents a S_SELF_EFFECT. */
@@ -4213,6 +4216,9 @@ declare namespace GamePto {
 
         /** S_SELF_EFFECT y. */
         public y: number;
+
+        /** S_SELF_EFFECT card. */
+        public card?: (GamePto.ICard|null);
 
         /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.

@@ -2,7 +2,7 @@ abstract class BaseModel extends BaseClass {
     /**
         * 发送信息给服务器
         */
-    protected sendMsg(msg: GameProtoClass): void {
+    protected sendMsg(msg: IMessage): void {
         Socket.ins().sendProtoMsg(msg);
     }
 
