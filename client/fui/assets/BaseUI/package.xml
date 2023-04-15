@@ -122,6 +122,7 @@
     <image id="ncgh4k" name="ic_com_sina_weibo_sdk_close.png" path="/game/res/"/>
     <image id="ncgh4n" name="dead.png" path="/game/res/"/>
     <image id="ncgh4p" name="move.png" path="/game/res/"/>
+    <component id="93bw4q" name="RecordDetail.xml" path="/game/record/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>
