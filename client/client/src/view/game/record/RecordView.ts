@@ -45,6 +45,7 @@ class RecordView extends BaseView<BaseUI.UIRecordCom> {
 
     private addRecord(item: BaseUI.UIRecordItem, msg: IMessage) {
         const list = this.view.list;
+        list.touchable = true;
         if (list.numChildren >= 15) {
             const delItem = list.removeChildAt(0);
             this.removeTargetEvents(delItem);
@@ -54,11 +55,9 @@ class RecordView extends BaseView<BaseUI.UIRecordCom> {
         list.addChild(item);
         this._msgPool.push(msg);
 
-        // //增加悬浮事件
-        // this.addEvent(item, mouse.MouseEvent.MOUSE_OVER, this.onEntityHover, this);
-        // this.addEvent(item, mouse.MouseEvent.MOUSE_OUT, () => {
-        //     this.view.removeChild(this._detailCard);
-        // }, this);
+        //增加悬浮事件
+        this.addEvent(item, mouse.MouseEvent.MOUSE_OVER, this.onRecordItemHoverStart.bind(this, item), this);
+        this.addEvent(item, mouse.MouseEvent.MOUSE_OUT, this.onRecordItemHoverEnd, this);
     }
 
     private getRecordItem(uid: number, cardId: number) {
@@ -131,5 +130,28 @@ class RecordView extends BaseView<BaseUI.UIRecordCom> {
         const item = this.getRecordItem(msg.card.uid, msg.card.cardId);
         item.effectImg.visible = true;
         this.addRecord(item, msg);
+    }
+
+    private onRecordItemHoverStart(item: BaseUI.UIRecordItem) {
+        GameSceneView.ins().getView().grayed = true;
+        this.view.grayed = false;
+        const index = this.view.list.getChildIndex(item);
+        console.log(index);
+        this.showDetailRecord(index);
+    }
+
+    private onRecordItemHoverEnd() {
+        this.removeDetailRecord();
+        console.log('out');
+        GameSceneView.ins().getView().grayed = false;
+
+    }
+
+    private showDetailRecord(index: number) {
+        const msg = this._msgPool[index];
+    }
+
+    private removeDetailRecord() {
+
     }
 }
