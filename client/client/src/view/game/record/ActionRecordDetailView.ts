@@ -21,15 +21,6 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         this.view.removeChild(this.tempCard);
     }
 
-    /**将源卡牌至于中间 */
-    public middleSourceCard() {
-        this.view.unknowCard.x = (this.view.width - this.view.width) / 2;
-        if (this.tempCard) {
-            this.tempCard.x = this.view.unknowCard.x;
-        }
-        this.view.arrow.visible = false;
-    }
-
     private showDetail(msg: IMessage) {
         switch (msg.scmd) {
             // case GamePto.S_USE_CARD.prototype.scmd:
@@ -57,6 +48,10 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
     }
 
     private showSourceCard(serverCard: GamePto.ICard) {
+        if (serverCard.cardId === -1) {
+            this.view.unknowCard.visible = true;
+            return;
+        }
         const card = CardItem.getCardByServerCard(serverCard);
         card.x = this.view.unknowCard.x;
         card.y = this.view.unknowCard.y;
@@ -71,9 +66,15 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
 
     private showAffectedCard(affectedList: GamePto.IAffectedCard[]) {
         if (affectedList.length === 0) {
-            this.middleSourceCard();
+            this.view.arrow.visible = false;
         }
         //todo
+
+        affectedList.forEach(card => {
+            if (card.card.cardId === -1) {
+                //展示卡背
+            }
+        });
     }
 
     // /**使用卡牌 */
@@ -94,7 +95,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
     /**移动 */
     private async onMove(msg: GamePto.S_MOVE) {
         this.showSourceCard(msg.card);
-        this.middleSourceCard();
+        this.view.arrow.visible = false;
         const cardName = CardsModel.ins().getCardNameByCardId(msg.card.cardId);
         this.showTips(`[${cardName}] 从(${msg.sourceX},${msg.sourceY})移动到了(${msg.card.blockX},${msg.card.blockY})`, msg.uid);
     }
