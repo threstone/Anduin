@@ -2,13 +2,13 @@
 
 module BaseUI {
 
-	export class UIRecordCom extends fairygui.GComponent {
+	export class UIActionRecordCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
 		public list:fairygui.GList;
 		public static URL:string = "ui://yaux2xponcgh4e";
 
-		public static createInstance():UIRecordCom {
-			return <UIRecordCom>(fairygui.UIPackage.createObject("BaseUI", "RecordCom"));
+		public static createInstance():UIActionRecordCom {
+			return <UIActionRecordCom>(fairygui.UIPackage.createObject("BaseUI", "ActionRecordCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

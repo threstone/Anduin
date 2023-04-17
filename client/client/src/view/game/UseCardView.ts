@@ -192,7 +192,7 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         selectNum = Math.abs(selectNum);
 
         let isMatch = false;
-        const entity = MapModel.ins().getEntityCardByPoint(x, y);
+        const entity = MapModel.ins().getEntityCard(x, y);
         switch (conditionType) {
             //无条件
             case GamePto.UseConditionEnum.NoCondition:
@@ -364,7 +364,7 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 for (let index = 0; index < buildings.length; index++) {
                     const building = buildings[index];
                     Utils.getAroundByDistance(building.blockX, building.blockY, 1).forEach((p) => {
-                        if (!MapModel.ins().getEntityCardByPoint(p.x, p.y)) {
+                        if (!MapModel.ins().getEntityCard(p.x, p.y)) {
                             pointSet.add(p.x + p.y * MapWidth);
                         }
                     });

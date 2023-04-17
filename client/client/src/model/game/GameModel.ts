@@ -18,6 +18,15 @@ class GameModel extends BaseModel {
     /**先手方一定是在下方，所以后手方需要用这个变量做地图反转*/
     isFirst: boolean;
 
+    /**死亡的entity */
+    deadEntityMap: Map<number, GamePto.ICard>;
+
+    private initGameInfo() {
+        this.deadPool = [];
+        this.targetDeadPoolNum = 0;
+        this.deadEntityMap = new Map<number, GamePto.ICard>();
+    }
+
     public getHandCardIndex(card: GamePto.ICard) {
         for (let index = 0; index < this.handCards.length; index++) {
             const tempCard = this.handCards[index];
@@ -95,11 +104,10 @@ class GameModel extends BaseModel {
 
     //开始游戏
     private S_GAME_START(msg: GamePto.S_GAME_START) {
-        this.deadPool = [];
-        this.targetDeadPoolNum = 0;
+        this.initGameInfo();
+        this.isFirst = msg.firstUid === UserModel.ins().uid;
         this.handCards = msg.cards;
         MapModel.ins().serverData = msg.mapData;
-        this.isFirst = msg.firstUid === UserModel.ins().uid;
         this.emit('S_GAME_START', msg);
     }
 
@@ -189,11 +197,12 @@ class GameModel extends BaseModel {
 
     //重连信息
     private S_RECONNECT(msg: GamePto.S_RECONNECT) {
+        this.initGameInfo();
+
         this.handCards = msg.selfCards;
         this.targetDeadPoolNum = msg.targetHandCardNum;
         this.isFirst = msg.isFirst;
-        this.deadPool = msg.deadPool;
-        this.targetDeadPoolNum = msg.targetDeadPoolNum;
+
         MapModel.ins().serverData = msg.mapData;
 
         const selfDetail = msg.users[0].uid === UserModel.ins().uid ? msg.users[0] : msg.users[1];
@@ -212,5 +221,9 @@ class GameModel extends BaseModel {
     private S_HANDCARDS_UPDATE(msg: GamePto.S_HANDCARDS_UPDATE) {
         this.handCards = msg.cards;
         this.emit('S_HANDCARDS_UPDATE');
+    }
+
+    private S_ACTION_RECORD(msg: GamePto.S_ACTION_RECORD) {
+        this.emit('S_ACTION_RECORD', msg);
     }
 }

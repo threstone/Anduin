@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="981,946">
+  <displayList>
+    <text id="n1_93bw" name="tips" xy="24,23" size="932,69" fontSize="28" color="#ff0000" align="center" autoSize="none" strokeColor="#000000" text="age} 点伤害">
+      <relation target="" sidePair="center-center,top-top%"/>
+    </text>
+    <loader id="n2_93bw" name="arrow" xy="215,435" size="51,75" url="ui://yaux2xpofjkiu" autoSize="true"/>
+    <component id="n3_93bw" name="unknowCard" src="pg482h" fileName="cards/CardBackItem.xml" xy="0,289" visible="false"/>
+  </displayList>
+</component>

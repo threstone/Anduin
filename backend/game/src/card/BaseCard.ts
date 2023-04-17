@@ -153,4 +153,11 @@ export class BaseCard implements CardInterface {
                 return false;
         }
     }
+
+    /**通知双方卡牌使用 */
+    public noticeUseActionRecord() {
+        const notice = new GamePto.S_ACTION_RECORD();
+        notice.source = this;
+        this.table.broadcast(notice);
+    }
 }

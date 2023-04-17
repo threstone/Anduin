@@ -42,10 +42,19 @@ enum UseConditionEnum{
     AllEntity = 12;
 }
 
-//enum EffectEnum{
-//	//弹道特效,类似火球术、魔法箭
-//	Ballistic = 0;
-//}
+enum AffectedEnum{
+	Show = 0;
+	HealthReduce = 1;
+}
+
+enum RecordType{
+	Common = 0;
+	Attack = 1;
+	Effect = 2;
+	Move = 3;
+	Dead = 4;
+	Deny = 5;
+}
 
 message UserInfo{
 	string nick = 0;
@@ -83,6 +92,12 @@ message UserDetail{
 	int32 moveTimesLimit = 7;
 }
 
+//受影响卡数据
+message AffectedCard{
+	Card card = 1;
+	AffectedEnum type = 2;
+	int32 value = 3;
+}
 //===================Client message===================
 
 //准备开始(包含更换卡牌数据)
@@ -340,6 +355,7 @@ message S_SELF_EFFECT{
 	int32 x = 3;
 	int32 y = 4;
 	Card card = 5;
+	repeated AffectedCard affectedList = 6;
 }
 
 //反制类卡牌会用到的协议
@@ -379,4 +395,13 @@ message S_HANDCARDS_UPDATE{
 	int32 scmd = 2[default = 10023];
 	int32 uid = 3;
 	repeated Card cards = 4;
+}
+
+//日志信息
+message S_ACTION_RECORD{
+	int32 cmd = 1[default = 200]; 
+	int32 scmd = 2[default = 10024];
+	RecordType recordType = 3;
+	Card source = 4;
+	repeated AffectedCard affectedList = 5;
 }

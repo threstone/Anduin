@@ -142,4 +142,19 @@ export class EventCard extends BaseCard {
         }
         return this;
     }
+
+    /**通知双方卡牌使用 */
+    public noticeUseActionRecord() {
+        const notice = new GamePto.S_ACTION_RECORD();
+        notice.source = this;
+        //事件卡的攻击类型标识事件类型是否可被对方知晓
+        if (this.detailType == CardsPto.EventType.Common) {
+            this.table.broadcast(notice);
+        } else {
+            const user = this.table.getUser(this.uid);
+            user.sendMsg(notice);
+            notice.source = this.getCardData();
+            this.table.getOtherUser(user.uid).sendMsg(notice);
+        }
+    }
 }

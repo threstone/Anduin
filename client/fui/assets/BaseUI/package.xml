@@ -115,14 +115,16 @@
     <image id="h89h49" name="use_arrow.png" path="/game/res/" exported="true" scale="9grid" scale9grid="27,91,54,269"/>
     <image id="h13w4a" name="herodetail-skill-.png" path="/cards/res/" scale="9grid" scale9grid="20,32,50,68"/>
     <component id="h13w4c" name="MiniImg.xml" path="/cards/"/>
-    <component id="ncgh4e" name="RecordCom.xml" path="/game/record/"/>
-    <component id="ncgh4f" name="RecordItem.xml" path="/game/record/" exported="true"/>
+    <component id="ncgh4e" name="ActionRecordCom.xml" path="/game/record/"/>
+    <component id="ncgh4f" name="ActionRecordItem.xml" path="/game/record/" exported="true"/>
     <image id="ncgh4g" name="2.png" path="/game/res/"/>
     <image id="ncgh4j" name="hero_icon_unkno.png" path="/game/res/"/>
     <image id="ncgh4k" name="ic_com_sina_weibo_sdk_close.png" path="/game/res/"/>
     <image id="ncgh4n" name="dead.png" path="/game/res/"/>
     <image id="ncgh4p" name="move.png" path="/game/res/"/>
-    <component id="93bw4q" name="RecordDetail.xml" path="/game/record/" exported="true"/>
+    <component id="93bw4q" name="ActionRecordDetail.xml" path="/game/record/" exported="true"/>
+    <image id="93bw4t" name="damageBg.png" path="/game/res/"/>
+    <component id="93bw4u" name="DamageTips.xml" path="/game/map/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

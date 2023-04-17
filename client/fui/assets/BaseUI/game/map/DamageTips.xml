@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,200">
+  <displayList>
+    <image id="n0_93bw" name="damageBg" src="93bw4t" fileName="game/res/damageBg.png" xy="0,0" size="200,200"/>
+    <text id="n1_93bw" name="damageDetail" xy="42,78" size="111,42" fontSize="30" color="#ff0000" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" text="-1"/>
+  </displayList>
+</component>

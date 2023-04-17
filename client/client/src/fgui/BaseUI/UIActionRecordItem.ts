@@ -2,7 +2,7 @@
 
 module BaseUI {
 
-	export class UIRecordItem extends fairygui.GComponent {
+	export class UIActionRecordItem extends fairygui.GComponent {
 		public selfBg:fairygui.GGraph;
 		public enemyBg:fairygui.GGraph;
 		public cardImg:fairygui.GLoader;
@@ -13,8 +13,8 @@ module BaseUI {
 		public moveImg:fairygui.GImage;
 		public static URL:string = "ui://yaux2xponcgh4f";
 
-		public static createInstance():UIRecordItem {
-			return <UIRecordItem>(fairygui.UIPackage.createObject("BaseUI", "RecordItem"));
+		public static createInstance():UIActionRecordItem {
+			return <UIActionRecordItem>(fairygui.UIPackage.createObject("BaseUI", "ActionRecordItem"));
 		}
 
 		protected constructFromXML(xml:any):void {

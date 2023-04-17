@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<component size="800,600">
-  <displayList>
-    <component id="n0_93bw" name="n0" src="tb7e1s" fileName="cards/CardItem.xml" xy="0,116"/>
-    <text id="n1_93bw" name="tips" xy="54,23" size="691,69" fontSize="22" color="#ff0000" autoSize="none" strokeColor="#000000" text="[${sName}(${msg.sourceX},${msg.sourceY})] 攻击 [${tName}(${msg.targetX},${msg.targetY})] 造成了 ${msg.damage} 点伤害"/>
-  </displayList>
-</component>

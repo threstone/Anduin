@@ -31,7 +31,7 @@ class MapModel extends BaseModel {
         const pointSet = new Set<number>();
         const hero = MapModel.ins().getHero(uid);
         Utils.getAroundByDistance(hero.blockX, hero.blockY, 1).forEach((p) => {
-            if (!this.getEntityCardByPoint(p.x, p.y)) {
+            if (!this.getEntityCard(p.x, p.y)) {
                 pointSet.add(p.x + p.y * MapWidth);
             }
         });
@@ -40,7 +40,7 @@ class MapModel extends BaseModel {
         const yMax = GameModel.ins().isFirst ? MapHeight : 3;
         for (let x = 0; x < MapWidth; x++) {
             for (let y = yStart; y < yMax; y++) {
-                if (!this.getEntityCardByPoint(x, y)) {
+                if (!this.getEntityCard(x, y)) {
                     pointSet.add(x + y * MapWidth);
                 }
             }
@@ -100,7 +100,7 @@ class MapModel extends BaseModel {
      * 获取指定位置的单位
      * 如果在指定位置获取不到单位且传入了cardUid,则查找entity列表
      */
-    public getEntityCardByPoint(blockX: number, blockY: number, cardUid?: number): GamePto.ICard {
+    public getEntityCard(blockX: number, blockY: number, cardUid?: number): GamePto.ICard {
         const card = this._mapData[blockX][blockY];
         if (cardUid == undefined || (card != null && card.id === cardUid)) {
             return card;
@@ -111,6 +111,8 @@ class MapModel extends BaseModel {
                     return entity;
                 }
             }
+
+            return GameModel.ins().deadEntityMap.get(cardUid);
         }
     }
 
@@ -281,6 +283,7 @@ class MapModel extends BaseModel {
     //单位死亡
     private S_ENTITY_DEAD(msg: GamePto.S_ENTITY_DEAD) {
         this._mapData[msg.deadCard.blockX][msg.deadCard.blockY] = null;
+        GameModel.ins().deadEntityMap.set(msg.deadCard.cardId, msg.deadCard);
         if (msg.deadCard.uid === UserModel.ins().uid) {
             GameModel.ins().deadPool.push(msg.deadCard);
         } else {

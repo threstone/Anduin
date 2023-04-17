@@ -107,7 +107,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     private onEntityClick(evt: egret.TouchEvent) {
         const mapBlock = new egret.Point();
         this.isInMap(evt.stageX, evt.stageY, mapBlock);
-        const cardInfo = MapModel.ins().getEntityCardByPoint(mapBlock.x, mapBlock.y);
+        const cardInfo = MapModel.ins().getEntityCard(mapBlock.x, mapBlock.y);
         if (!cardInfo) {
             return;
         }
@@ -138,7 +138,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     private onEntityHover(evt: egret.TouchEvent) {
         const mapBlock = new egret.Point();
         this.isInMap(evt.stageX, evt.stageY, mapBlock);
-        const cardInfo = MapModel.ins().getEntityCardByPoint(mapBlock.x, mapBlock.y);
+        const cardInfo = MapModel.ins().getEntityCard(mapBlock.x, mapBlock.y);
         if (!cardInfo) {
             return;
         }
@@ -178,8 +178,8 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const sourceCardInfo = MapModel.ins().getEntityCardByPoint(msg.sourceX, msg.sourceY, msg.sourceId);
-        const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY, msg.targetId);
+        const sourceCardInfo = MapModel.ins().getEntityCard(msg.sourceX, msg.sourceY, msg.sourceId);
+        const targetCardInfo = MapModel.ins().getEntityCard(msg.targetX, msg.targetY, msg.targetId);
 
         await RightCtrlView.ins().showDices(msg.dices);
 
@@ -284,7 +284,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**实体自身特效 */
     private async entitysSelfEffect(msg: GamePto.S_SELF_EFFECT) {
-        const card = MapModel.ins().getEntityCardByPoint(msg.x, msg.y);
+        const card = MapModel.ins().getEntityCard(msg.x, msg.y);
         if (!card) {
             return;
         }

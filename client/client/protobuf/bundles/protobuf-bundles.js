@@ -4617,6 +4617,42 @@ $root.GamePto = (function() {
         return values;
     })();
 
+    /**
+     * AffectedEnum enum.
+     * @name GamePto.AffectedEnum
+     * @enum {number}
+     * @property {number} Show=0 Show value
+     * @property {number} HealthReduce=1 HealthReduce value
+     */
+    GamePto.AffectedEnum = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Show"] = 0;
+        values[valuesById[1] = "HealthReduce"] = 1;
+        return values;
+    })();
+
+    /**
+     * RecordType enum.
+     * @name GamePto.RecordType
+     * @enum {number}
+     * @property {number} Common=0 Common value
+     * @property {number} Attack=1 Attack value
+     * @property {number} Effect=2 Effect value
+     * @property {number} Move=3 Move value
+     * @property {number} Dead=4 Dead value
+     * @property {number} Deny=5 Deny value
+     */
+    GamePto.RecordType = (function() {
+        var valuesById = {}, values = Object.create(valuesById);
+        values[valuesById[0] = "Common"] = 0;
+        values[valuesById[1] = "Attack"] = 1;
+        values[valuesById[2] = "Effect"] = 2;
+        values[valuesById[3] = "Move"] = 3;
+        values[valuesById[4] = "Dead"] = 4;
+        values[valuesById[5] = "Deny"] = 5;
+        return values;
+    })();
+
     GamePto.UserInfo = (function() {
 
         /**
@@ -5323,6 +5359,133 @@ $root.GamePto = (function() {
         };
 
         return UserDetail;
+    })();
+
+    GamePto.AffectedCard = (function() {
+
+        /**
+         * Properties of an AffectedCard.
+         * @memberof GamePto
+         * @interface IAffectedCard
+         * @property {GamePto.ICard|null} [card] AffectedCard card
+         * @property {GamePto.AffectedEnum|null} [type] AffectedCard type
+         * @property {number|null} [value] AffectedCard value
+         */
+
+        /**
+         * Constructs a new AffectedCard.
+         * @memberof GamePto
+         * @classdesc Represents an AffectedCard.
+         * @implements IAffectedCard
+         * @constructor
+         * @param {GamePto.IAffectedCard=} [properties] Properties to set
+         */
+        function AffectedCard(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * AffectedCard card.
+         * @member {GamePto.ICard|null|undefined} card
+         * @memberof GamePto.AffectedCard
+         * @instance
+         */
+        AffectedCard.prototype.card = null;
+
+        /**
+         * AffectedCard type.
+         * @member {GamePto.AffectedEnum} type
+         * @memberof GamePto.AffectedCard
+         * @instance
+         */
+        AffectedCard.prototype.type = 0;
+
+        /**
+         * AffectedCard value.
+         * @member {number} value
+         * @memberof GamePto.AffectedCard
+         * @instance
+         */
+        AffectedCard.prototype.value = 0;
+
+        /**
+         * Encodes the specified AffectedCard message. Does not implicitly {@link GamePto.AffectedCard.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.AffectedCard
+         * @static
+         * @param {GamePto.IAffectedCard} message AffectedCard message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        AffectedCard.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.card != null && Object.hasOwnProperty.call(message, "card"))
+                $root.GamePto.Card.encode(message.card, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.type);
+            if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.value);
+            return writer;
+        };
+
+        /**
+         * Decodes an AffectedCard message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.AffectedCard
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.AffectedCard} AffectedCard
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        AffectedCard.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.AffectedCard();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 2: {
+                        message.type = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.value = reader.int32();
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for AffectedCard
+         * @function getTypeUrl
+         * @memberof GamePto.AffectedCard
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        AffectedCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.AffectedCard";
+        };
+
+        return AffectedCard;
     })();
 
     GamePto.C_PREPARE_TO_START = (function() {
@@ -9585,6 +9748,7 @@ $root.GamePto = (function() {
          * @property {number|null} [x] S_SELF_EFFECT x
          * @property {number|null} [y] S_SELF_EFFECT y
          * @property {GamePto.ICard|null} [card] S_SELF_EFFECT card
+         * @property {Array.<GamePto.IAffectedCard>|null} [affectedList] S_SELF_EFFECT affectedList
          */
 
         /**
@@ -9596,6 +9760,7 @@ $root.GamePto = (function() {
          * @param {GamePto.IS_SELF_EFFECT=} [properties] Properties to set
          */
         function S_SELF_EFFECT(properties) {
+            this.affectedList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -9643,6 +9808,14 @@ $root.GamePto = (function() {
         S_SELF_EFFECT.prototype.card = null;
 
         /**
+         * S_SELF_EFFECT affectedList.
+         * @member {Array.<GamePto.IAffectedCard>} affectedList
+         * @memberof GamePto.S_SELF_EFFECT
+         * @instance
+         */
+        S_SELF_EFFECT.prototype.affectedList = $util.emptyArray;
+
+        /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_SELF_EFFECT
@@ -9664,6 +9837,9 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.y);
             if (message.card != null && Object.hasOwnProperty.call(message, "card"))
                 $root.GamePto.Card.encode(message.card, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            if (message.affectedList != null && message.affectedList.length)
+                for (var i = 0; i < message.affectedList.length; ++i)
+                    $root.GamePto.AffectedCard.encode(message.affectedList[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
             return writer;
         };
 
@@ -9703,6 +9879,12 @@ $root.GamePto = (function() {
                     }
                 case 5: {
                         message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 6: {
+                        if (!(message.affectedList && message.affectedList.length))
+                            message.affectedList = [];
+                        message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -10418,6 +10600,167 @@ $root.GamePto = (function() {
         };
 
         return S_HANDCARDS_UPDATE;
+    })();
+
+    GamePto.S_ACTION_RECORD = (function() {
+
+        /**
+         * Properties of a S_ACTION_RECORD.
+         * @memberof GamePto
+         * @interface IS_ACTION_RECORD
+         * @property {number|null} [cmd] S_ACTION_RECORD cmd
+         * @property {number|null} [scmd] S_ACTION_RECORD scmd
+         * @property {GamePto.RecordType|null} [recordType] S_ACTION_RECORD recordType
+         * @property {GamePto.ICard|null} [source] S_ACTION_RECORD source
+         * @property {Array.<GamePto.IAffectedCard>|null} [affectedList] S_ACTION_RECORD affectedList
+         */
+
+        /**
+         * Constructs a new S_ACTION_RECORD.
+         * @memberof GamePto
+         * @classdesc Represents a S_ACTION_RECORD.
+         * @implements IS_ACTION_RECORD
+         * @constructor
+         * @param {GamePto.IS_ACTION_RECORD=} [properties] Properties to set
+         */
+        function S_ACTION_RECORD(properties) {
+            this.affectedList = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * S_ACTION_RECORD cmd.
+         * @member {number} cmd
+         * @memberof GamePto.S_ACTION_RECORD
+         * @instance
+         */
+        S_ACTION_RECORD.prototype.cmd = 200;
+
+        /**
+         * S_ACTION_RECORD scmd.
+         * @member {number} scmd
+         * @memberof GamePto.S_ACTION_RECORD
+         * @instance
+         */
+        S_ACTION_RECORD.prototype.scmd = 10024;
+
+        /**
+         * S_ACTION_RECORD recordType.
+         * @member {GamePto.RecordType} recordType
+         * @memberof GamePto.S_ACTION_RECORD
+         * @instance
+         */
+        S_ACTION_RECORD.prototype.recordType = 0;
+
+        /**
+         * S_ACTION_RECORD source.
+         * @member {GamePto.ICard|null|undefined} source
+         * @memberof GamePto.S_ACTION_RECORD
+         * @instance
+         */
+        S_ACTION_RECORD.prototype.source = null;
+
+        /**
+         * S_ACTION_RECORD affectedList.
+         * @member {Array.<GamePto.IAffectedCard>} affectedList
+         * @memberof GamePto.S_ACTION_RECORD
+         * @instance
+         */
+        S_ACTION_RECORD.prototype.affectedList = $util.emptyArray;
+
+        /**
+         * Encodes the specified S_ACTION_RECORD message. Does not implicitly {@link GamePto.S_ACTION_RECORD.verify|verify} messages.
+         * @function encode
+         * @memberof GamePto.S_ACTION_RECORD
+         * @static
+         * @param {GamePto.IS_ACTION_RECORD} message S_ACTION_RECORD message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        S_ACTION_RECORD.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
+            if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
+            if (message.recordType != null && Object.hasOwnProperty.call(message, "recordType"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.recordType);
+            if (message.source != null && Object.hasOwnProperty.call(message, "source"))
+                $root.GamePto.Card.encode(message.source, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.affectedList != null && message.affectedList.length)
+                for (var i = 0; i < message.affectedList.length; ++i)
+                    $root.GamePto.AffectedCard.encode(message.affectedList[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+            return writer;
+        };
+
+        /**
+         * Decodes a S_ACTION_RECORD message from the specified reader or buffer.
+         * @function decode
+         * @memberof GamePto.S_ACTION_RECORD
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {GamePto.S_ACTION_RECORD} S_ACTION_RECORD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        S_ACTION_RECORD.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_ACTION_RECORD();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1: {
+                        message.cmd = reader.int32();
+                        break;
+                    }
+                case 2: {
+                        message.scmd = reader.int32();
+                        break;
+                    }
+                case 3: {
+                        message.recordType = reader.int32();
+                        break;
+                    }
+                case 4: {
+                        message.source = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 5: {
+                        if (!(message.affectedList && message.affectedList.length))
+                            message.affectedList = [];
+                        message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
+                        break;
+                    }
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        /**
+         * Gets the default type url for S_ACTION_RECORD
+         * @function getTypeUrl
+         * @memberof GamePto.S_ACTION_RECORD
+         * @static
+         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns {string} The default type url
+         */
+        S_ACTION_RECORD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+            if (typeUrlPrefix === undefined) {
+                typeUrlPrefix = "type.googleapis.com";
+            }
+            return typeUrlPrefix + "/GamePto.S_ACTION_RECORD";
+        };
+
+        return S_ACTION_RECORD;
     })();
 
     return GamePto;

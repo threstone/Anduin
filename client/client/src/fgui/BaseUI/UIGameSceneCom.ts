@@ -14,7 +14,7 @@ module BaseUI {
 		public selfLeftInfoBox:UILeftInfoBox;
 		public targetLeftInfoBox:UILeftInfoBox;
 		public surrender:UIButton3;
-		public record:UIRecordCom;
+		public record:UIActionRecordCom;
 		public static URL:string = "ui://yaux2xpojig14";
 
 		public static createInstance():UIGameSceneCom {
@@ -35,7 +35,7 @@ module BaseUI {
 			this.selfLeftInfoBox = <UILeftInfoBox>(this.getChildAt(8));
 			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
 			this.surrender = <UIButton3>(this.getChildAt(10));
-			this.record = <UIRecordCom>(this.getChildAt(11));
+			this.record = <UIActionRecordCom>(this.getChildAt(11));
 		}
 	}
 }

@@ -2,11 +2,11 @@
 <component size="1600,1200">
   <displayList>
     <image id="n26_pg48" name="bg" src="pg482c" fileName="game/res/bbg_arena.jpg" xy="0,0" size="1600,1200"/>
-    <component id="n35_uym4" name="rightCtrl" src="uym42i" fileName="game/rightCom/RightCtrlCom.xml" xy="1314,400">
+    <component id="n35_uym4" name="rightCtrl" src="uym42i" fileName="game/rightCom/RightCtrlCom.xml" xy="1313,400">
       <relation target="n37_hzsg" sidePair="left-right"/>
       <relation target="" sidePair="middle-middle"/>
     </component>
-    <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/map/MapView.xml" xy="310,219">
+    <component id="n37_hzsg" name="map" src="hzsg2j" fileName="game/map/MapView.xml" xy="309,219">
       <relation target="" sidePair="center-center%,middle-middle%"/>
     </component>
     <component id="n28_pg48" name="selfInfoBox" src="pg482d" fileName="game/info/UserInfoBox.xml" xy="1147,990">
@@ -29,7 +29,7 @@
       <relation target="n33_pg48" sidePair="right-left,top-top"/>
     </component>
     <component id="n41_ncgh" name="surrender" src="fjkiy" fileName="common/btn/Button3.xml" xy="1433,259"/>
-    <component id="n42_ncgh" name="record" src="ncgh4e" fileName="game/record/RecordCom.xml" xy="0,400">
+    <component id="n42_ncgh" name="record" src="ncgh4e" fileName="game/record/RecordCom.xml" xy="-1,400">
       <relation target="" sidePair="middle-middle"/>
       <relation target="n37_hzsg" sidePair="right-left"/>
     </component>

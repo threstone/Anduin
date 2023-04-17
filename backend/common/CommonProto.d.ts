@@ -2782,6 +2782,22 @@ export namespace GamePto {
         AllEntity = 12
     }
 
+    /** AffectedEnum enum. */
+    enum AffectedEnum {
+        Show = 0,
+        HealthReduce = 1
+    }
+
+    /** RecordType enum. */
+    enum RecordType {
+        Common = 0,
+        Attack = 1,
+        Effect = 2,
+        Move = 3,
+        Dead = 4,
+        Deny = 5
+    }
+
     /** Properties of a UserInfo. */
     interface IUserInfo {
 
@@ -3256,6 +3272,108 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for UserDetail
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of an AffectedCard. */
+    interface IAffectedCard {
+
+        /** AffectedCard card */
+        card?: (GamePto.ICard|null);
+
+        /** AffectedCard type */
+        type?: (GamePto.AffectedEnum|null);
+
+        /** AffectedCard value */
+        value?: (number|null);
+    }
+
+    /** Represents an AffectedCard. */
+    class AffectedCard implements IAffectedCard {
+
+        /**
+         * Constructs a new AffectedCard.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IAffectedCard);
+
+        /** AffectedCard card. */
+        public card?: (GamePto.ICard|null);
+
+        /** AffectedCard type. */
+        public type: GamePto.AffectedEnum;
+
+        /** AffectedCard value. */
+        public value: number;
+
+        /**
+         * Encodes the specified AffectedCard message. Does not implicitly {@link GamePto.AffectedCard.verify|verify} messages.
+         * @param message AffectedCard message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IAffectedCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified AffectedCard message, length delimited. Does not implicitly {@link GamePto.AffectedCard.verify|verify} messages.
+         * @param message AffectedCard message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IAffectedCard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes an AffectedCard message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns AffectedCard
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.AffectedCard;
+
+        /**
+         * Decodes an AffectedCard message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns AffectedCard
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.AffectedCard;
+
+        /**
+         * Verifies an AffectedCard message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates an AffectedCard message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns AffectedCard
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.AffectedCard;
+
+        /**
+         * Creates a plain object from an AffectedCard message. Also converts values to other types if specified.
+         * @param message AffectedCard
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.AffectedCard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this AffectedCard to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for AffectedCard
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -6321,6 +6439,9 @@ export namespace GamePto {
 
         /** S_SELF_EFFECT card */
         card?: (GamePto.ICard|null);
+
+        /** S_SELF_EFFECT affectedList */
+        affectedList?: (GamePto.IAffectedCard[]|null);
     }
 
     /** Represents a S_SELF_EFFECT. */
@@ -6346,6 +6467,9 @@ export namespace GamePto {
 
         /** S_SELF_EFFECT card. */
         public card?: (GamePto.ICard|null);
+
+        /** S_SELF_EFFECT affectedList. */
+        public affectedList: GamePto.IAffectedCard[];
 
         /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
@@ -6886,6 +7010,120 @@ export namespace GamePto {
 
         /**
          * Gets the default type url for S_HANDCARDS_UPDATE
+         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+         * @returns The default type url
+         */
+        public static getTypeUrl(typeUrlPrefix?: string): string;
+    }
+
+    /** Properties of a S_ACTION_RECORD. */
+    interface IS_ACTION_RECORD {
+
+        /** S_ACTION_RECORD cmd */
+        cmd?: (number|null);
+
+        /** S_ACTION_RECORD scmd */
+        scmd?: (number|null);
+
+        /** S_ACTION_RECORD recordType */
+        recordType?: (GamePto.RecordType|null);
+
+        /** S_ACTION_RECORD source */
+        source?: (GamePto.ICard|null);
+
+        /** S_ACTION_RECORD affectedList */
+        affectedList?: (GamePto.IAffectedCard[]|null);
+    }
+
+    /** Represents a S_ACTION_RECORD. */
+    class S_ACTION_RECORD implements IS_ACTION_RECORD {
+
+        /**
+         * Constructs a new S_ACTION_RECORD.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: GamePto.IS_ACTION_RECORD);
+
+        /** S_ACTION_RECORD cmd. */
+        public cmd: number;
+
+        /** S_ACTION_RECORD scmd. */
+        public scmd: number;
+
+        /** S_ACTION_RECORD recordType. */
+        public recordType: GamePto.RecordType;
+
+        /** S_ACTION_RECORD source. */
+        public source?: (GamePto.ICard|null);
+
+        /** S_ACTION_RECORD affectedList. */
+        public affectedList: GamePto.IAffectedCard[];
+
+        /**
+         * Encodes the specified S_ACTION_RECORD message. Does not implicitly {@link GamePto.S_ACTION_RECORD.verify|verify} messages.
+         * @param message S_ACTION_RECORD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: GamePto.IS_ACTION_RECORD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified S_ACTION_RECORD message, length delimited. Does not implicitly {@link GamePto.S_ACTION_RECORD.verify|verify} messages.
+         * @param message S_ACTION_RECORD message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: GamePto.IS_ACTION_RECORD, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a S_ACTION_RECORD message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns S_ACTION_RECORD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_ACTION_RECORD;
+
+        /**
+         * Decodes a S_ACTION_RECORD message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns S_ACTION_RECORD
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_ACTION_RECORD;
+
+        /**
+         * Verifies a S_ACTION_RECORD message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a S_ACTION_RECORD message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns S_ACTION_RECORD
+         */
+        public static fromObject(object: { [k: string]: any }): GamePto.S_ACTION_RECORD;
+
+        /**
+         * Creates a plain object from a S_ACTION_RECORD message. Also converts values to other types if specified.
+         * @param message S_ACTION_RECORD
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: GamePto.S_ACTION_RECORD, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this S_ACTION_RECORD to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+
+        /**
+         * Gets the default type url for S_ACTION_RECORD
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

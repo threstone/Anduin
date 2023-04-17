@@ -80,6 +80,8 @@ export class GameHandler extends BaseHandler {
 
         //到这里说明卡牌可以执行了,执行卡牌onUse事件 扣费用、设置到战场等等
         card.onUse(user, msg.cardIndex, ...msg.dataArr);
+        //广播卡牌使用日志
+        card.noticeUseActionRecord();
 
         //执行战场使用卡牌后事件
         table.mapData.emit(useCardEvent.changeType(EventType.UseCardAfter), card);

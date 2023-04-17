@@ -16,7 +16,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         //绑定这些控件和此控件一同显示和关闭
         this.bindView(MapView.ins());
         this.bindView(RightCtrlView.ins());
-        this.bindView(RecordView.ins());
+        this.bindView(ActionRecordView.ins());
         this.bindView(SelfInfoBox.ins());
         this.bindView(TargetInfoBox.ins());
         this.bindView(HandCardView.ins());

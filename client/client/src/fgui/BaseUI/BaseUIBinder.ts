@@ -4,6 +4,8 @@ module BaseUI {
 
 	export class BaseUIBinder {
 		public static bindAll():void {
+			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordDetail.URL, UIActionRecordDetail);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIDamageTips.URL, UIDamageTips);
 			fairygui.UIObjectFactory.setPackageItemExtension(UITipsCom.URL, UITipsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatBtn.URL, UIChatBtn);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatFriendBox.URL, UIChatFriendBox);
@@ -24,8 +26,8 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIMapBuilding.URL, UIMapBuilding);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIGameSceneCom.URL, UIGameSceneCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
-			fairygui.UIObjectFactory.setPackageItemExtension(UIRecordCom.URL, UIRecordCom);
-			fairygui.UIObjectFactory.setPackageItemExtension(UIRecordItem.URL, UIRecordItem);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordCom.URL, UIActionRecordCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordItem.URL, UIActionRecordItem);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICreateCardGroup.URL, UICreateCardGroup);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniCard.URL, UIMiniCard);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardsCom.URL, UIShowCardsCom);
