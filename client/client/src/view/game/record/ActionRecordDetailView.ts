@@ -73,6 +73,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         // 如果受影响的卡牌列表为空，则隐藏箭头
         if (affectedList.length === 0) {
             this.view.arrow.visible = false;
+            return;
         }
 
         // 获取卡牌列表对象
