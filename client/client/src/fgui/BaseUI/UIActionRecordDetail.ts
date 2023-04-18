@@ -6,6 +6,7 @@ module BaseUI {
 		public tips:fairygui.GTextField;
 		public arrow:fairygui.GLoader;
 		public unknowCard:UICardBackItem;
+		public list:fairygui.GList;
 		public static URL:string = "ui://yaux2xpo93bw4q";
 
 		public static createInstance():UIActionRecordDetail {
@@ -18,6 +19,7 @@ module BaseUI {
 			this.tips = <fairygui.GTextField>(this.getChildAt(0));
 			this.arrow = <fairygui.GLoader>(this.getChildAt(1));
 			this.unknowCard = <UICardBackItem>(this.getChildAt(2));
+			this.list = <fairygui.GList>(this.getChildAt(3));
 		}
 	}
 }
