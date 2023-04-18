@@ -3827,33 +3827,6 @@ declare namespace GamePto {
         /** S_ATTACK scmd */
         scmd?: (number|null);
 
-        /** S_ATTACK sourceX */
-        sourceX?: (number|null);
-
-        /** S_ATTACK sourceY */
-        sourceY?: (number|null);
-
-        /** S_ATTACK sourceId */
-        sourceId?: (number|null);
-
-        /** S_ATTACK targetX */
-        targetX?: (number|null);
-
-        /** S_ATTACK targetY */
-        targetY?: (number|null);
-
-        /** S_ATTACK targetId */
-        targetId?: (number|null);
-
-        /** S_ATTACK damage */
-        damage?: (number|null);
-
-        /** S_ATTACK targetHealth */
-        targetHealth?: (number|null);
-
-        /** S_ATTACK allowAtk */
-        allowAtk?: (boolean|null);
-
         /** S_ATTACK uid */
         uid?: (number|null);
 
@@ -3862,6 +3835,18 @@ declare namespace GamePto {
 
         /** S_ATTACK leastAtkTimes */
         leastAtkTimes?: (number|null);
+
+        /** S_ATTACK damage */
+        damage?: (number|null);
+
+        /** S_ATTACK allowAtk */
+        allowAtk?: (boolean|null);
+
+        /** S_ATTACK from */
+        from?: (GamePto.ICard|null);
+
+        /** S_ATTACK targetList */
+        targetList?: (GamePto.ICard[]|null);
     }
 
     /** Represents a S_ATTACK. */
@@ -3879,33 +3864,6 @@ declare namespace GamePto {
         /** S_ATTACK scmd. */
         public scmd: number;
 
-        /** S_ATTACK sourceX. */
-        public sourceX: number;
-
-        /** S_ATTACK sourceY. */
-        public sourceY: number;
-
-        /** S_ATTACK sourceId. */
-        public sourceId: number;
-
-        /** S_ATTACK targetX. */
-        public targetX: number;
-
-        /** S_ATTACK targetY. */
-        public targetY: number;
-
-        /** S_ATTACK targetId. */
-        public targetId: number;
-
-        /** S_ATTACK damage. */
-        public damage: number;
-
-        /** S_ATTACK targetHealth. */
-        public targetHealth: number;
-
-        /** S_ATTACK allowAtk. */
-        public allowAtk: boolean;
-
         /** S_ATTACK uid. */
         public uid: number;
 
@@ -3914,6 +3872,18 @@ declare namespace GamePto {
 
         /** S_ATTACK leastAtkTimes. */
         public leastAtkTimes: number;
+
+        /** S_ATTACK damage. */
+        public damage: number;
+
+        /** S_ATTACK allowAtk. */
+        public allowAtk: boolean;
+
+        /** S_ATTACK from. */
+        public from?: (GamePto.ICard|null);
+
+        /** S_ATTACK targetList. */
+        public targetList: GamePto.ICard[];
 
         /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.

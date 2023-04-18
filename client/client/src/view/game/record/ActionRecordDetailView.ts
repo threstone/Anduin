@@ -23,15 +23,12 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
 
     private showDetail(msg: IMessage) {
         switch (msg.scmd) {
-            // case GamePto.S_USE_CARD.prototype.scmd:
-            //     this.onUseCard(msg as GamePto.S_USE_CARD);
-            //     break;
             case GamePto.S_MOVE.prototype.scmd:
                 this.onMove(msg as GamePto.S_MOVE);
                 break;
-            // case GamePto.S_ATTACK.prototype.scmd:
-            //     this.onAtk(msg as GamePto.S_ATTACK);
-            //     break;
+            case GamePto.S_ATTACK.prototype.scmd:
+                this.onAtk(msg as GamePto.S_ATTACK);
+                break;
             case GamePto.S_ENTITY_DEAD.prototype.scmd:
                 this.onEntityDead(msg as GamePto.S_ENTITY_DEAD);
                 break;
@@ -77,21 +74,6 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         });
     }
 
-    // /**使用卡牌 */
-    // private async onUseCard(msg: GamePto.S_USE_CARD) {
-    //     if (msg.card.cardId === -1) {
-    //         this.view.unknowCard.visible = true;
-    //         this.middleSourceCard();
-    //     } else {
-    //         this.showSourceCard(msg.card);
-    //     }
-
-    //     const cardTypeName = CardsModel.ins().getCardTypeName(msg.card.cardType);
-    //     const cardName = CardsModel.ins().getCardNameByCardId(msg.card.cardId);
-    //     this.showTips(`${msg.uid === UserModel.ins().uid ? '你' : '对方'} 使用了[${cardTypeName}] : [${cardName}]`, msg.uid);
-    //     this.showAffectedCard(msg.affectedList);
-    // }
-
     /**移动 */
     private async onMove(msg: GamePto.S_MOVE) {
         this.showSourceCard(msg.card);
@@ -100,16 +82,18 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         this.showTips(`[${cardName}] 从(${msg.sourceX},${msg.sourceY})移动到了(${msg.card.blockX},${msg.card.blockY})`, msg.uid);
     }
 
-    // /**攻击 */
-    // private async onAtk(msg: GamePto.S_ATTACK) {
-    //     const sourceCardInfo = MapModel.ins().getEntityCard(msg.sourceX, msg.sourceY, msg.sourceId);
-    //     const targetCardInfo = MapModel.ins().getEntityCard(msg.targetX, msg.targetY, msg.targetId);
-    //     this.showSourceCard(sourceCardInfo);
-    //     this.showAffectedCard([{ cardId: targetCardInfo.cardId, type: GamePto.AffectedEnum.Show }, ...msg.affectedList]);
-    //     const sName = CardsModel.ins().getCardNameByCardId(sourceCardInfo.cardId);
-    //     const tName = CardsModel.ins().getCardNameByCardId(targetCardInfo.cardId);
-    //     this.showTips(`[${sName}(${msg.sourceX},${msg.sourceY})] 攻击 [${tName}(${msg.targetX},${msg.targetY})] 造成了 ${msg.damage} 点伤害`, msg.uid);
-    // }
+    /**攻击 */
+    private async onAtk(msg: GamePto.S_ATTACK) {
+        this.showSourceCard(msg.from);
+        const affectedList: GamePto.IAffectedCard[] = [];
+        msg.targetList.forEach((targetCard) => {
+            affectedList.push({ card: targetCard, type: GamePto.AffectedEnum.HealthReduce, value: msg.damage })
+        });
+        const target = msg.targetList[0];
+        const sName = CardsModel.ins().getCardNameByCardId(msg.from.cardId);
+        const tName = CardsModel.ins().getCardNameByCardId(msg.targetList[0].cardId);
+        this.showTips(`[${sName}(${msg.from.blockX},${msg.from.blockY})] 攻击 [${tName}(${target.blockX},${target.blockY})] 造成了 ${msg.damage} 点伤害`, msg.uid);
+    }
 
     /**死亡 */
     private async onEntityDead(msg: GamePto.S_ENTITY_DEAD) {

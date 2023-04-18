@@ -69,6 +69,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**更新指定地图卡 */
     public updateMapItem(cardInfo: GamePto.ICard) {
+        if (!cardInfo) {
+            return;
+        }
         const mapItem = this.entityMap.get(cardInfo.id);
         //英雄的信息变更要跟着变左侧英雄控件的信息
         if (cardInfo.cardType === CardsPto.CardType.Hero) {
@@ -171,15 +174,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**单位攻击单位 */
     private async onAttack(msg: GamePto.S_ATTACK) {
-        const sourceEntity = this.entityMap.get(msg.sourceId) as BaseUI.UIMapUnit;
-        const targetEntity = this.entityMap.get(msg.targetId);
-        if (!sourceEntity || !targetEntity) {
-            console.error('攻击所需对象缺失', msg);
-            return;
-        }
+        const sourceEntity = this.entityMap.get(msg.from.id) as BaseUI.UIMapUnit;
+        const targetEntity = this.entityMap.get(msg.targetList[0].id);
 
-        const sourceCardInfo = MapModel.ins().getEntityCard(msg.sourceX, msg.sourceY, msg.sourceId);
-        const targetCardInfo = MapModel.ins().getEntityCard(msg.targetX, msg.targetY, msg.targetId);
+        const sourceCardInfo = msg.from;
+        const targetCardInfo = msg.targetList[0];
 
         await RightCtrlView.ins().showDices(msg.dices);
 
@@ -188,13 +187,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         await this.showAttack(sourceEntity, targetEntity, sourceConfig);
 
         //执行完效果后就飘血扣血
-        this.entityShowTips(targetEntity, `-${msg.damage}`);
+        msg.targetList.forEach((target) => {
+            const entity = this.entityMap.get(target.id);
+            this.entityShowTips(entity, `-${msg.damage}`);
+        });
 
         this.updateMapItem(sourceCardInfo);
-        //如果单位死亡了可能就没有了，就不需要更新了
-        if (targetCardInfo) {
-            this.updateMapItem(targetCardInfo);
-        }
+        this.updateMapItem(targetCardInfo);
     }
 
     /**攻击效果 根据近战远程区分效果 */

@@ -265,18 +265,16 @@ class MapModel extends BaseModel {
 
     //请求攻击返回
     private S_ATTACK(msg: GamePto.S_ATTACK) {
-        const sourceCard = this._mapData[msg.sourceX][msg.sourceY];
-        const targetCard = this._mapData[msg.targetX][msg.targetY];
-        if (!sourceCard || !targetCard) {
-            console.error('攻击所需对象缺失', msg);
-            return;
-        }
-        sourceCard.allowAtk = msg.allowAtk;
-        targetCard.health = msg.targetHealth;
+        this.updateEntity(msg.from);
+        msg.targetList.forEach((target) => {
+            this.updateEntity(target);
+        });
         this.emit('S_ATTACK', msg);
-        GameModel.ins().atkTimes--;
-        if (GameModel.ins().atkTimes === 0) {
-            this.emit('S_MAP_DATA', msg);
+        if (msg.uid === UserModel.ins().uid) {
+            GameModel.ins().atkTimes = msg.leastAtkTimes;
+            if (msg.leastAtkTimes === 0) {
+                this.emit('S_MAP_DATA', msg);
+            }
         }
     }
 

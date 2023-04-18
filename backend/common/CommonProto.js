@@ -6967,6 +6967,7 @@ $root.GamePto = (function() {
 
         function S_ATTACK(p) {
             this.dices = [];
+            this.targetList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -6975,18 +6976,13 @@ $root.GamePto = (function() {
 
         S_ATTACK.prototype.cmd = 200;
         S_ATTACK.prototype.scmd = 10013;
-        S_ATTACK.prototype.sourceX = 0;
-        S_ATTACK.prototype.sourceY = 0;
-        S_ATTACK.prototype.sourceId = 0;
-        S_ATTACK.prototype.targetX = 0;
-        S_ATTACK.prototype.targetY = 0;
-        S_ATTACK.prototype.targetId = 0;
-        S_ATTACK.prototype.damage = 0;
-        S_ATTACK.prototype.targetHealth = 0;
-        S_ATTACK.prototype.allowAtk = false;
         S_ATTACK.prototype.uid = 0;
         S_ATTACK.prototype.dices = $util.emptyArray;
         S_ATTACK.prototype.leastAtkTimes = 0;
+        S_ATTACK.prototype.damage = 0;
+        S_ATTACK.prototype.allowAtk = false;
+        S_ATTACK.prototype.from = null;
+        S_ATTACK.prototype.targetList = $util.emptyArray;
 
         S_ATTACK.create = function create(properties) {
             return new S_ATTACK(properties);
@@ -6999,34 +6995,26 @@ $root.GamePto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.sourceX != null && Object.hasOwnProperty.call(m, "sourceX"))
-                w.uint32(24).int32(m.sourceX);
-            if (m.sourceY != null && Object.hasOwnProperty.call(m, "sourceY"))
-                w.uint32(32).int32(m.sourceY);
-            if (m.sourceId != null && Object.hasOwnProperty.call(m, "sourceId"))
-                w.uint32(40).int32(m.sourceId);
-            if (m.targetX != null && Object.hasOwnProperty.call(m, "targetX"))
-                w.uint32(48).int32(m.targetX);
-            if (m.targetY != null && Object.hasOwnProperty.call(m, "targetY"))
-                w.uint32(56).int32(m.targetY);
-            if (m.targetId != null && Object.hasOwnProperty.call(m, "targetId"))
-                w.uint32(64).int32(m.targetId);
-            if (m.damage != null && Object.hasOwnProperty.call(m, "damage"))
-                w.uint32(72).int32(m.damage);
-            if (m.targetHealth != null && Object.hasOwnProperty.call(m, "targetHealth"))
-                w.uint32(80).int32(m.targetHealth);
-            if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
-                w.uint32(88).bool(m.allowAtk);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(96).int32(m.uid);
+                w.uint32(24).int32(m.uid);
             if (m.dices != null && m.dices.length) {
-                w.uint32(106).fork();
+                w.uint32(34).fork();
                 for (var i = 0; i < m.dices.length; ++i)
                     w.int32(m.dices[i]);
                 w.ldelim();
             }
             if (m.leastAtkTimes != null && Object.hasOwnProperty.call(m, "leastAtkTimes"))
-                w.uint32(112).int32(m.leastAtkTimes);
+                w.uint32(40).int32(m.leastAtkTimes);
+            if (m.damage != null && Object.hasOwnProperty.call(m, "damage"))
+                w.uint32(48).int32(m.damage);
+            if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
+                w.uint32(56).bool(m.allowAtk);
+            if (m.from != null && Object.hasOwnProperty.call(m, "from"))
+                $root.GamePto.Card.encode(m.from, w.uint32(66).fork()).ldelim();
+            if (m.targetList != null && m.targetList.length) {
+                for (var i = 0; i < m.targetList.length; ++i)
+                    $root.GamePto.Card.encode(m.targetList[i], w.uint32(74).fork()).ldelim();
+            }
             return w;
         };
 
@@ -7046,46 +7034,10 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        m.sourceX = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.sourceY = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.sourceId = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.targetX = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.targetY = r.int32();
-                        break;
-                    }
-                case 8: {
-                        m.targetId = r.int32();
-                        break;
-                    }
-                case 9: {
-                        m.damage = r.int32();
-                        break;
-                    }
-                case 10: {
-                        m.targetHealth = r.int32();
-                        break;
-                    }
-                case 11: {
-                        m.allowAtk = r.bool();
-                        break;
-                    }
-                case 12: {
                         m.uid = r.int32();
                         break;
                     }
-                case 13: {
+                case 4: {
                         if (!(m.dices && m.dices.length))
                             m.dices = [];
                         if ((t & 7) === 2) {
@@ -7096,8 +7048,26 @@ $root.GamePto = (function() {
                             m.dices.push(r.int32());
                         break;
                     }
-                case 14: {
+                case 5: {
                         m.leastAtkTimes = r.int32();
+                        break;
+                    }
+                case 6: {
+                        m.damage = r.int32();
+                        break;
+                    }
+                case 7: {
+                        m.allowAtk = r.bool();
+                        break;
+                    }
+                case 8: {
+                        m.from = $root.GamePto.Card.decode(r, r.uint32());
+                        break;
+                    }
+                case 9: {
+                        if (!(m.targetList && m.targetList.length))
+                            m.targetList = [];
+                        m.targetList.push($root.GamePto.Card.decode(r, r.uint32()));
                         break;
                     }
                 default:
@@ -7118,33 +7088,6 @@ $root.GamePto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.sourceX != null) {
-                m.sourceX = d.sourceX | 0;
-            }
-            if (d.sourceY != null) {
-                m.sourceY = d.sourceY | 0;
-            }
-            if (d.sourceId != null) {
-                m.sourceId = d.sourceId | 0;
-            }
-            if (d.targetX != null) {
-                m.targetX = d.targetX | 0;
-            }
-            if (d.targetY != null) {
-                m.targetY = d.targetY | 0;
-            }
-            if (d.targetId != null) {
-                m.targetId = d.targetId | 0;
-            }
-            if (d.damage != null) {
-                m.damage = d.damage | 0;
-            }
-            if (d.targetHealth != null) {
-                m.targetHealth = d.targetHealth | 0;
-            }
-            if (d.allowAtk != null) {
-                m.allowAtk = Boolean(d.allowAtk);
-            }
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
@@ -7159,6 +7102,27 @@ $root.GamePto = (function() {
             if (d.leastAtkTimes != null) {
                 m.leastAtkTimes = d.leastAtkTimes | 0;
             }
+            if (d.damage != null) {
+                m.damage = d.damage | 0;
+            }
+            if (d.allowAtk != null) {
+                m.allowAtk = Boolean(d.allowAtk);
+            }
+            if (d.from != null) {
+                if (typeof d.from !== "object")
+                    throw TypeError(".GamePto.S_ATTACK.from: object expected");
+                m.from = $root.GamePto.Card.fromObject(d.from);
+            }
+            if (d.targetList) {
+                if (!Array.isArray(d.targetList))
+                    throw TypeError(".GamePto.S_ATTACK.targetList: array expected");
+                m.targetList = [];
+                for (var i = 0; i < d.targetList.length; ++i) {
+                    if (typeof d.targetList[i] !== "object")
+                        throw TypeError(".GamePto.S_ATTACK.targetList: object expected");
+                    m.targetList[i] = $root.GamePto.Card.fromObject(d.targetList[i]);
+                }
+            }
             return m;
         };
 
@@ -7168,54 +7132,22 @@ $root.GamePto = (function() {
             var d = {};
             if (o.arrays || o.defaults) {
                 d.dices = [];
+                d.targetList = [];
             }
             if (o.defaults) {
                 d.cmd = 200;
                 d.scmd = 10013;
-                d.sourceX = 0;
-                d.sourceY = 0;
-                d.sourceId = 0;
-                d.targetX = 0;
-                d.targetY = 0;
-                d.targetId = 0;
-                d.damage = 0;
-                d.targetHealth = 0;
-                d.allowAtk = false;
                 d.uid = 0;
                 d.leastAtkTimes = 0;
+                d.damage = 0;
+                d.allowAtk = false;
+                d.from = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
             }
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
-            }
-            if (m.sourceX != null && m.hasOwnProperty("sourceX")) {
-                d.sourceX = m.sourceX;
-            }
-            if (m.sourceY != null && m.hasOwnProperty("sourceY")) {
-                d.sourceY = m.sourceY;
-            }
-            if (m.sourceId != null && m.hasOwnProperty("sourceId")) {
-                d.sourceId = m.sourceId;
-            }
-            if (m.targetX != null && m.hasOwnProperty("targetX")) {
-                d.targetX = m.targetX;
-            }
-            if (m.targetY != null && m.hasOwnProperty("targetY")) {
-                d.targetY = m.targetY;
-            }
-            if (m.targetId != null && m.hasOwnProperty("targetId")) {
-                d.targetId = m.targetId;
-            }
-            if (m.damage != null && m.hasOwnProperty("damage")) {
-                d.damage = m.damage;
-            }
-            if (m.targetHealth != null && m.hasOwnProperty("targetHealth")) {
-                d.targetHealth = m.targetHealth;
-            }
-            if (m.allowAtk != null && m.hasOwnProperty("allowAtk")) {
-                d.allowAtk = m.allowAtk;
             }
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
@@ -7228,6 +7160,21 @@ $root.GamePto = (function() {
             }
             if (m.leastAtkTimes != null && m.hasOwnProperty("leastAtkTimes")) {
                 d.leastAtkTimes = m.leastAtkTimes;
+            }
+            if (m.damage != null && m.hasOwnProperty("damage")) {
+                d.damage = m.damage;
+            }
+            if (m.allowAtk != null && m.hasOwnProperty("allowAtk")) {
+                d.allowAtk = m.allowAtk;
+            }
+            if (m.from != null && m.hasOwnProperty("from")) {
+                d.from = $root.GamePto.Card.toObject(m.from, o);
+            }
+            if (m.targetList && m.targetList.length) {
+                d.targetList = [];
+                for (var j = 0; j < m.targetList.length; ++j) {
+                    d.targetList[j] = $root.GamePto.Card.toObject(m.targetList[j], o);
+                }
             }
             return d;
         };

@@ -134,63 +134,35 @@ export class GameHandler extends BaseHandler {
         }
         const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
         const targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
-        if (!sourceCard || !targetCard) {
+        if (!sourceCard || !targetCard || sourceCard.allowAtk === false || user.atkTimes <= 0) {
             return;
         }
-        //获取到真正会受到伤害的卡牌(远程攻击会被挡住)
-        const damageTarget = AttackUtils.getBeAttackCard(sourceCard, targetCard, table.mapData);
 
-        if (sourceCard && damageTarget && sourceCard.allowAtk && user.atkTimes > 0) {
-            user.atkTimes--;
-            sourceCard.allowAtk = false;
+        //获取到真正会受到伤害的卡牌例如远程攻击会被挡住、一些贯穿伤害逻辑要重写此方法
+        const damageCards = sourceCard.getBeAttackCard(targetCard, sourceCard);
 
-            //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
-            const dices = table.getDices(sourceCard.attack);
-            //实际扣除的血量
-            const damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
+        user.atkTimes--;
+        sourceCard.allowAtk = false;
 
-            const atkEvent = new EventData(EventType.UnitPreAtk);
-            atkEvent.data = damage;
+        //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
+        const dices = table.getDices(sourceCard.attack);
+        //实际扣除的血量
+        const damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
 
-            //执行攻击前事件,可能会导致伤害变化
-            table.mapData.emit(atkEvent, sourceCard, targetCard, damageTarget, dices);
-            //攻击被禁止了
-            if (atkEvent.isContinue === false) {
-                return;
-            }
+        const atkEvent = new EventData(EventType.UnitPreAtk);
+        atkEvent.data = damage;
 
-            //执行卡牌自身攻击前事件
-            sourceCard.emit(atkEvent.changeType(EventType.SelfPreAtk), sourceCard, targetCard, damageTarget, dices);
-
-            //返回实际收到的伤害
-            damageTarget.emit(atkEvent.changeType(EventType.Damage), damageTarget, sourceCard);
-
-            //广播卡牌攻击协议
-            const replay = new GamePto.S_ATTACK();
-            replay.uid = user.uid;
-            replay.sourceX = msg.sourceX;
-            replay.sourceY = msg.sourceY;
-            replay.sourceId = sourceCard.id;
-            replay.targetX = damageTarget.blockX;
-            replay.targetY = damageTarget.blockY;
-            replay.targetId = damageTarget.id;
-            replay.damage = atkEvent.data;
-            replay.targetHealth = damageTarget.health;
-            replay.allowAtk = sourceCard.allowAtk;
-            replay.uid = user.uid;
-            replay.dices = dices;
-            replay.leastAtkTimes = user.atkTimes;
-            table.broadcast(replay);
-
-            //执行卡牌受伤后事件
-            damageTarget.emit(atkEvent.changeType(EventType.DamageAfter), damageTarget, sourceCard);
-
-            //执行卡牌自身攻击后事件
-            sourceCard.emit(atkEvent.changeType(EventType.SelfAtkAfter), sourceCard, targetCard, dices);
-
-            //执行战场攻击后事件
-            table.mapData.emit(atkEvent.changeType(EventType.UnitAtkAfter), sourceCard, damageTarget, dices);
+        //执行攻击前事件,可能会导致伤害变化
+        table.mapData.emit(atkEvent, sourceCard, targetCard, damageCards, dices);
+        //攻击被禁止了
+        if (atkEvent.isContinue === false) {
+            return;
         }
+
+        sourceCard.doAttack(atkEvent, targetCard, damageCards, dices);
+
+        //执行战场攻击后事件
+        table.mapData.emit(atkEvent.changeType(EventType.UnitAtkAfter), sourceCard, targetCard, damageCards, dices);
     }
 
     //请求重连

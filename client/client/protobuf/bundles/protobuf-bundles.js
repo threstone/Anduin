@@ -8726,18 +8726,13 @@ $root.GamePto = (function() {
          * @interface IS_ATTACK
          * @property {number|null} [cmd] S_ATTACK cmd
          * @property {number|null} [scmd] S_ATTACK scmd
-         * @property {number|null} [sourceX] S_ATTACK sourceX
-         * @property {number|null} [sourceY] S_ATTACK sourceY
-         * @property {number|null} [sourceId] S_ATTACK sourceId
-         * @property {number|null} [targetX] S_ATTACK targetX
-         * @property {number|null} [targetY] S_ATTACK targetY
-         * @property {number|null} [targetId] S_ATTACK targetId
-         * @property {number|null} [damage] S_ATTACK damage
-         * @property {number|null} [targetHealth] S_ATTACK targetHealth
-         * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
          * @property {number|null} [uid] S_ATTACK uid
          * @property {Array.<number>|null} [dices] S_ATTACK dices
          * @property {number|null} [leastAtkTimes] S_ATTACK leastAtkTimes
+         * @property {number|null} [damage] S_ATTACK damage
+         * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
+         * @property {GamePto.ICard|null} [from] S_ATTACK from
+         * @property {Array.<GamePto.ICard>|null} [targetList] S_ATTACK targetList
          */
 
         /**
@@ -8750,6 +8745,7 @@ $root.GamePto = (function() {
          */
         function S_ATTACK(properties) {
             this.dices = [];
+            this.targetList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -8771,78 +8767,6 @@ $root.GamePto = (function() {
          * @instance
          */
         S_ATTACK.prototype.scmd = 10013;
-
-        /**
-         * S_ATTACK sourceX.
-         * @member {number} sourceX
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.sourceX = 0;
-
-        /**
-         * S_ATTACK sourceY.
-         * @member {number} sourceY
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.sourceY = 0;
-
-        /**
-         * S_ATTACK sourceId.
-         * @member {number} sourceId
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.sourceId = 0;
-
-        /**
-         * S_ATTACK targetX.
-         * @member {number} targetX
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.targetX = 0;
-
-        /**
-         * S_ATTACK targetY.
-         * @member {number} targetY
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.targetY = 0;
-
-        /**
-         * S_ATTACK targetId.
-         * @member {number} targetId
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.targetId = 0;
-
-        /**
-         * S_ATTACK damage.
-         * @member {number} damage
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.damage = 0;
-
-        /**
-         * S_ATTACK targetHealth.
-         * @member {number} targetHealth
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.targetHealth = 0;
-
-        /**
-         * S_ATTACK allowAtk.
-         * @member {boolean} allowAtk
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.allowAtk = false;
 
         /**
          * S_ATTACK uid.
@@ -8869,6 +8793,38 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.leastAtkTimes = 0;
 
         /**
+         * S_ATTACK damage.
+         * @member {number} damage
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.damage = 0;
+
+        /**
+         * S_ATTACK allowAtk.
+         * @member {boolean} allowAtk
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.allowAtk = false;
+
+        /**
+         * S_ATTACK from.
+         * @member {GamePto.ICard|null|undefined} from
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.from = null;
+
+        /**
+         * S_ATTACK targetList.
+         * @member {Array.<GamePto.ICard>} targetList
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.targetList = $util.emptyArray;
+
+        /**
          * Encodes the specified S_ATTACK message. Does not implicitly {@link GamePto.S_ATTACK.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_ATTACK
@@ -8884,34 +8840,25 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.sourceX != null && Object.hasOwnProperty.call(message, "sourceX"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.sourceX);
-            if (message.sourceY != null && Object.hasOwnProperty.call(message, "sourceY"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.sourceY);
-            if (message.sourceId != null && Object.hasOwnProperty.call(message, "sourceId"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.sourceId);
-            if (message.targetX != null && Object.hasOwnProperty.call(message, "targetX"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.targetX);
-            if (message.targetY != null && Object.hasOwnProperty.call(message, "targetY"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.targetY);
-            if (message.targetId != null && Object.hasOwnProperty.call(message, "targetId"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.targetId);
-            if (message.damage != null && Object.hasOwnProperty.call(message, "damage"))
-                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.damage);
-            if (message.targetHealth != null && Object.hasOwnProperty.call(message, "targetHealth"))
-                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.targetHealth);
-            if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
-                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.allowAtk);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.uid);
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
             if (message.dices != null && message.dices.length) {
-                writer.uint32(/* id 13, wireType 2 =*/106).fork();
+                writer.uint32(/* id 4, wireType 2 =*/34).fork();
                 for (var i = 0; i < message.dices.length; ++i)
                     writer.int32(message.dices[i]);
                 writer.ldelim();
             }
             if (message.leastAtkTimes != null && Object.hasOwnProperty.call(message, "leastAtkTimes"))
-                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.leastAtkTimes);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.leastAtkTimes);
+            if (message.damage != null && Object.hasOwnProperty.call(message, "damage"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.damage);
+            if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
+                writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowAtk);
+            if (message.from != null && Object.hasOwnProperty.call(message, "from"))
+                $root.GamePto.Card.encode(message.from, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+            if (message.targetList != null && message.targetList.length)
+                for (var i = 0; i < message.targetList.length; ++i)
+                    $root.GamePto.Card.encode(message.targetList[i], writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
             return writer;
         };
 
@@ -8942,46 +8889,10 @@ $root.GamePto = (function() {
                         break;
                     }
                 case 3: {
-                        message.sourceX = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.sourceY = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.sourceId = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.targetX = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.targetY = reader.int32();
-                        break;
-                    }
-                case 8: {
-                        message.targetId = reader.int32();
-                        break;
-                    }
-                case 9: {
-                        message.damage = reader.int32();
-                        break;
-                    }
-                case 10: {
-                        message.targetHealth = reader.int32();
-                        break;
-                    }
-                case 11: {
-                        message.allowAtk = reader.bool();
-                        break;
-                    }
-                case 12: {
                         message.uid = reader.int32();
                         break;
                     }
-                case 13: {
+                case 4: {
                         if (!(message.dices && message.dices.length))
                             message.dices = [];
                         if ((tag & 7) === 2) {
@@ -8992,8 +8903,26 @@ $root.GamePto = (function() {
                             message.dices.push(reader.int32());
                         break;
                     }
-                case 14: {
+                case 5: {
                         message.leastAtkTimes = reader.int32();
+                        break;
+                    }
+                case 6: {
+                        message.damage = reader.int32();
+                        break;
+                    }
+                case 7: {
+                        message.allowAtk = reader.bool();
+                        break;
+                    }
+                case 8: {
+                        message.from = $root.GamePto.Card.decode(reader, reader.uint32());
+                        break;
+                    }
+                case 9: {
+                        if (!(message.targetList && message.targetList.length))
+                            message.targetList = [];
+                        message.targetList.push($root.GamePto.Card.decode(reader, reader.uint32()));
                         break;
                     }
                 default:

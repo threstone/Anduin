@@ -13,6 +13,7 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
         this.addEffectListener('S_ENTITY_DEAD', this.onEntityDead);
         this.addEffectListener('S_CARD_DENY', this.onCardDeny);
         this.addEffectListener('S_SELF_EFFECT', this.onCardEffect);
+        this.addEffectListener('S_ATTACK', this.onAtk);
         this.addEffectListener('S_ACTION_RECORD', this.onActionRecord);
     }
 
@@ -55,7 +56,7 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
     }
 
     private onRecordItemHoverStart(item: BaseUI.UIActionRecordItem) {
-        GameSceneView.ins().getView().grayed = true;
+        fairygui.GRoot.inst.grayed = true;
         this.view.grayed = false;
         const index = this.view.list.getChildIndex(item);
         console.log(index);
@@ -66,46 +67,28 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
     private onRecordItemHoverEnd() {
         ActionRecordDetailView.ins().close();
         console.log('out');
-        GameSceneView.ins().getView().grayed = false;
+        fairygui.GRoot.inst.grayed = false;
     }
-
-    // /**使用卡牌 */
-    // private async onUseCard(msg: GamePto.S_USE_CARD) {
-    //     const item = this.getRecordItem(msg.uid, msg.card.cardId);
-    //     this.addRecord(item, msg);
-    //     // const cardTypeName = CardsModel.ins().getCardTypeName(msg.card.cardType);
-    //     // const cardName = CardsModel.ins().getCardNameByCardId(msg.card.cardId);
-    //     // this.addRecord(`${msg.uid === UserModel.ins().uid ? '你' : '对方'} 使用了[${cardTypeName}] : [${cardName}]`, msg.uid);
-    // }
 
     /**移动 */
     private async onMove(msg: GamePto.S_MOVE) {
         const item = this.getRecordItem(msg.uid, msg.card.cardId);
         item.moveImg.visible = true;
         this.addRecord(item, msg);
-        // const cardName = CardsModel.ins().getCardNameByCardId(msg.card.cardId);
-        // this.addRecord(`[${cardName}] 从(${msg.sourceX},${msg.sourceY})移动到了(${msg.card.blockX},${msg.card.blockY})`, msg.uid);
     }
 
-    // /**攻击 */
-    // private async onAtk(msg: GamePto.S_ATTACK) {
-    //     const sourceCardInfo = MapModel.ins().getEntityCard(msg.sourceX, msg.sourceY, msg.sourceId);
-    //     const item = this.getRecordItem(msg.uid, sourceCardInfo.cardId);
-    //     item.atkImg.visible = true;
-    //     this.addRecord(item, msg);
-    //     // const sName = CardsModel.ins().getCardNameByCardId(sourceCardInfo.cardId);
-    //     // const targetCardInfo = MapModel.ins().getEntityCardByPoint(msg.targetX, msg.targetY, msg.targetId);
-    //     // const tName = CardsModel.ins().getCardNameByCardId(targetCardInfo.cardId);
-    //     // this.addRecord(`[${sName}(${msg.sourceX},${msg.sourceY})] 攻击 [${tName}(${msg.targetX},${msg.targetY})] 造成了 ${msg.damage} 点伤害`, msg.uid);
-    // }
+    /**攻击 */
+    private async onAtk(msg: GamePto.S_ATTACK) {
+        const item = this.getRecordItem(msg.uid, msg.from.cardId);
+        item.atkImg.visible = true;
+        this.addRecord(item, msg);
+    }
 
     /**死亡 */
     private async onEntityDead(msg: GamePto.S_ENTITY_DEAD) {
         const item = this.getRecordItem(msg.deadCard.uid, msg.deadCard.cardId);
         item.deadImg.visible = true;
         this.addRecord(item, msg);
-        // const cardName = CardsModel.ins().getCardNameByCardId(msg.deadCard.cardId);
-        // this.addRecord(`[${cardName}(${msg.deadCard.blockX},${msg.deadCard.blockY})] 死亡了`, msg.deadCard.uid);
     }
 
     /**反制 */
@@ -113,9 +96,6 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
         const item = this.getRecordItem(msg.from.uid, msg.from.cardId);
         item.denyImg.visible = true;
         this.addRecord(item, msg);
-        // const sName = CardsModel.ins().getCardNameByCardId(msg.from.cardId);
-        // const tName = CardsModel.ins().getCardNameByCardId(msg.target.cardId);
-        // this.addRecord(`[${sName}] 反制了 [${tName}]`, msg.from.uid);
     }
 
     /**卡牌效果 */
