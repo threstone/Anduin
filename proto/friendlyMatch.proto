@@ -46,21 +46,21 @@ message C_REQ_MATCH_RESULT{
 }
 
 //通知友谊赛挑选卡组
-message S_MATCH_CARD_GROUP{
+message S_MATCH_DECK{
 	int32 cmd = 1[default = 201]; 
 	int32 scmd = 2[default = 7];
 	int64 endTime = 3;
 }
 
 //玩家挑选卡组
-message C_GROUP_CHOOSE{
+message C_DECK_CHOOSE{
 	int32 cmd = 1[default = 201]; 
 	int32 scmd = 2[default = 8];
-	int32 cardGroupId = 3;
+	int32 deckId = 3;
 }
 
 //友谊赛取消挑选卡组
-message C_MATCH_CANCEL_GROUP{
+message C_MATCH_CANCEL_DECK{
 	int32 cmd = 1[default = 201]; 
 	int32 scmd = 2[default = 9];
 }
@@ -79,14 +79,14 @@ message S_MATCH_STOP{
 }
 
 //好友选择卡组状态改变
-message S_FRIEND_GROUP_STATUS_CHANGE{
+message S_FRIEND_DECK_STATUS_CHANGE{
 	int32 cmd = 1[default = 201]; 
 	int32 scmd = 2[default = 12];
 	bool isChoose = 3;
 }
 
 //选择卡组结果
-message S_GROUP_CHOOSE_RESULT{
+message S_DECK_CHOOSE_RESULT{
 	int32 cmd = 1[default = 201]; 
 	int32 scmd = 2[default = 13];
 	int32 code = 3;// 1卡组非法

@@ -107,7 +107,7 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
             });
 
             if (CardsView.ins().isCreating) {
-                const createGroupList = CardsView.ins().getView().createGroupList;
+                const createDeckList = CardsView.ins().getView().createDeckList;
                 this.addDragEvent(cardItem, cardItem.dragLoader, (evt: fairygui.DragEvent) => {
                     cardItem.dragLoader.scaleX = list.scaleX;
                     cardItem.dragLoader.scaleY = list.scaleY;
@@ -115,12 +115,12 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
                 }, (evt: fairygui.DragEvent) => {
                     cardItem.dragLoader.scaleX = 1;
                     cardItem.dragLoader.scaleY = 1;
-                    if (evt.stageX >= createGroupList.x && evt.stageY <= createGroupList.height) {
+                    if (evt.stageX >= createDeckList.x && evt.stageY <= createDeckList.height) {
                         cardItem.dragLoader.texture = null;
-                        const addRes = CardsView.ins().cacheCreateGroupInfo.doAddCard(cardInfo);
+                        const addRes = CardsView.ins().cacheCreateDeckInfo.doAddCard(cardInfo);
                         if (addRes !== false) {
                             CardItem.updateNum(cardItem, cardInfo);
-                            CardsView.ins().refreshCreateGroupList();
+                            CardsView.ins().refreshCreateDeckList();
                         }
                     }
                 });

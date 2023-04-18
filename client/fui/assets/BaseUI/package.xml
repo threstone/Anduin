@@ -58,12 +58,12 @@
     <image id="tb7e22" name="herodetail_arrow_lef.png" path="/common/res/"/>
     <image id="tb7e23" name="hourglas.png" path="/common/res/"/>
     <component id="tb7e24" name="ShowCardDetail.xml" path="/cards/" exported="true"/>
-    <component id="oo9525" name="CreateCardGroup.xml" path="/cards/" exported="true"/>
+    <component id="oo9525" name="CreateDeckCom.xml" path="/cards/" exported="true"/>
     <component id="oo9527" name="MiniCard.xml" path="/cards/" exported="true"/>
     <component id="oo9528" name="ShowCardsCom.xml" path="/cards/" exported="true"/>
     <component id="fimv29" name="TipsCom.xml" path="/common/" exported="true"/>
     <image id="fimv2a" name="dy_bj10.png" path="/common/res/"/>
-    <component id="pqjx2b" name="CardsGroupChooseCom.xml" path="/cards/" exported="true"/>
+    <component id="pqjx2b" name="DeckChooseCom.xml" path="/cards/" exported="true"/>
     <component id="jig14" name="GameSceneCom.xml" path="/game/" exported="true"/>
     <image id="pg482c" name="bbg_arena.jpg" path="/game/res/"/>
     <component id="pg482d" name="UserInfoBox.xml" path="/game/info/"/>

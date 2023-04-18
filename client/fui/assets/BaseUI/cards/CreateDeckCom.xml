@@ -23,8 +23,8 @@
       <relation target="" sidePair="right-right%,top-top%"/>
     </loader>
     <image id="n11_oo95" name="nameBg" src="ta2ra" fileName="common/res/comp_60_60_4.png" xy="575,1076" size="449,60" group="n12_kkcr"/>
-    <text id="n10_oo95" name="groupName" xy="588,1088" size="424,45" group="n12_kkcr" fontSize="33" align="center" vAlign="middle" autoSize="none" text="" input="true" prompt="点此给卡组命名" maxLength="12"/>
-    <group id="n12_kkcr" name="cardNameGroup" xy="575,1076" size="449,60" advanced="true">
+    <text id="n10_oo95" name="deckName" xy="588,1088" size="424,45" group="n12_kkcr" fontSize="33" align="center" vAlign="middle" autoSize="none" text="" input="true" prompt="点此给卡组命名" maxLength="12"/>
+    <group id="n12_kkcr" name="deckNameGroup" xy="575,1076" size="449,60" advanced="true">
       <relation target="" sidePair="center-center,bottom-bottom%"/>
     </group>
   </displayList>

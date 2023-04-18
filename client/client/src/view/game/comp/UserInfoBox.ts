@@ -86,7 +86,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.view.nick.text = userInfo.nick;;
         this.view.power.text = ConfigMgr.ins().powerConfig[userInfo.power].powerName;
         this.feeSet(0, 0);
-        this.setCardPoolNum(GroupCardsNum - ConfigMgr.ins().common.startHandCardNum - 1);
+        this.setCardPoolNum(DeckCardsNum - ConfigMgr.ins().common.startHandCardNum - 1);
     }
 
     /**设置费用 */

@@ -86,11 +86,11 @@ export class FriendlyMatchHandler extends BaseHandler {
         this.sendMsg(matchInfo.souceUser.clientName, matchInfo.souceUser.uid, replay);
         //如果接受，下发挑选卡组协议
         if (msg.result) {
-            const chooseGroup = new FriendlyMatchPto.S_MATCH_CARD_GROUP();
-            chooseGroup.endTime = Date.now() + 300000;
-            this.sendMsg(matchInfo.souceUser.clientName, matchInfo.souceUser.uid, chooseGroup);
-            this.sendMsg(matchInfo.targetUser.clientName, matchInfo.targetUser.uid, chooseGroup);
-            matchInfo.endTime = chooseGroup.endTime;
+            const chooseDeck = new FriendlyMatchPto.S_MATCH_DECK();
+            chooseDeck.endTime = Date.now() + 300000;
+            this.sendMsg(matchInfo.souceUser.clientName, matchInfo.souceUser.uid, chooseDeck);
+            this.sendMsg(matchInfo.targetUser.clientName, matchInfo.targetUser.uid, chooseDeck);
+            matchInfo.endTime = chooseDeck.endTime;
         } else {
             matchInfo.destroy();
             this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
@@ -98,7 +98,7 @@ export class FriendlyMatchHandler extends BaseHandler {
     }
 
     //玩家挑选卡组
-    static async C_GROUP_CHOOSE(clientName: string, uid: number, msg: FriendlyMatchPto.C_GROUP_CHOOSE) {
+    static async C_DECK_CHOOSE(clientName: string, uid: number, msg: FriendlyMatchPto.C_DECK_CHOOSE) {
         const matchInfo = this._friendlyMatchInfoMgr.getFriendlyMatchInfo(uid);
         //没有这个请求数据的话通知关闭
         if (!matchInfo) {
@@ -107,24 +107,24 @@ export class FriendlyMatchHandler extends BaseHandler {
             return;
         }
 
-        const replay = new FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+        const replay = new FriendlyMatchPto.S_DECK_CHOOSE_RESULT();
         replay.code = 1;
-        const cardsInfoJson = await GlobalVar.redisMgr.getClient(RedisType.userInfo).hget(uid, 'cardGroupInfo');
-        const cardsInfo: CardsPto.CardGroup[] = JSON.parse(cardsInfoJson);
-        let cardGroupInfo: CardsPto.CardGroup;
+        const cardsInfoJson = await GlobalVar.redisMgr.getClient(RedisType.userInfo).hget(uid, 'decks');
+        const cardsInfo: CardsPto.Deck[] = JSON.parse(cardsInfoJson);
+        let deck: CardsPto.Deck;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];
-            if (info.groupId === msg.cardGroupId) {
-                cardGroupInfo = info;
+            if (info.deckId === msg.deckId) {
+                deck = info;
             }
         }
-        if (!cardGroupInfo || cardGroupInfo.accessToUse === false) {
+        if (!deck || deck.accessToUse === false) {
             this.sendMsg(clientName, uid, replay);
             return;
         }
         replay.code = 0;
         this.sendMsg(clientName, uid, replay);
-        matchInfo.setCardGroup(uid, cardGroupInfo);
+        matchInfo.setDeck(uid, deck);
         //对方设置好卡组了,开始游戏
         if (matchInfo.isComplete()) {
             const gameTable = GlobalVar.tableMgr.createTable();
@@ -132,7 +132,7 @@ export class FriendlyMatchHandler extends BaseHandler {
             this._friendlyMatchInfoMgr.clearFriendlyMatchInfo(uid);
         } else {
             //通知对方选择卡组状态改变了
-            const notice = new FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            const notice = new FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE();
             notice.isChoose = true;
             const friendInfo = matchInfo.getFriend(uid);
             this.sendMsg(friendInfo.clientName, friendInfo.uid, notice);
@@ -141,7 +141,7 @@ export class FriendlyMatchHandler extends BaseHandler {
     }
 
     //友谊赛取消挑选卡组
-    static C_MATCH_CANCEL_GROUP(clientName: string, uid: number, msg: FriendlyMatchPto.C_MATCH_CANCEL_GROUP) {
+    static C_MATCH_CANCEL_DECK(clientName: string, uid: number, msg: FriendlyMatchPto.C_MATCH_CANCEL_DECK) {
         const matchInfo = this._friendlyMatchInfoMgr.getFriendlyMatchInfo(uid);
         //没有这个请求数据的话通知关闭
         if (!matchInfo) {
@@ -149,10 +149,10 @@ export class FriendlyMatchHandler extends BaseHandler {
             this.sendMsg(clientName, uid, stopMsg);
             return;
         }
-        matchInfo.clearCardGroup(uid);
+        matchInfo.clearDeck(uid);
 
         //通知对方选择卡组状态改变了
-        const notice = new FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+        const notice = new FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE();
         notice.isChoose = false;
         const friendInfo = matchInfo.getFriend(uid);
         this.sendMsg(friendInfo.clientName, friendInfo.uid, notice);

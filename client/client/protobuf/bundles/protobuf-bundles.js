@@ -231,29 +231,29 @@ $root.CardsPto = (function() {
         return Card;
     })();
 
-    CardsPto.CardGroup = (function() {
+    CardsPto.Deck = (function() {
 
         /**
-         * Properties of a CardGroup.
+         * Properties of a Deck.
          * @memberof CardsPto
-         * @interface ICardGroup
-         * @property {number|null} [groupId] CardGroup groupId
-         * @property {Array.<CardsPto.ICard>|null} [cards] CardGroup cards
-         * @property {string|null} [groupName] CardGroup groupName
-         * @property {CardsPto.PowerType|null} [powerId] CardGroup powerId
-         * @property {boolean|null} [accessToUse] CardGroup accessToUse
-         * @property {number|null} [heroId] CardGroup heroId
+         * @interface IDeck
+         * @property {number|null} [deckId] Deck deckId
+         * @property {Array.<CardsPto.ICard>|null} [cards] Deck cards
+         * @property {string|null} [deckName] Deck deckName
+         * @property {CardsPto.PowerType|null} [powerId] Deck powerId
+         * @property {boolean|null} [accessToUse] Deck accessToUse
+         * @property {number|null} [heroId] Deck heroId
          */
 
         /**
-         * Constructs a new CardGroup.
+         * Constructs a new Deck.
          * @memberof CardsPto
-         * @classdesc Represents a CardGroup.
-         * @implements ICardGroup
+         * @classdesc Represents a Deck.
+         * @implements IDeck
          * @constructor
-         * @param {CardsPto.ICardGroup=} [properties] Properties to set
+         * @param {CardsPto.IDeck=} [properties] Properties to set
          */
-        function CardGroup(properties) {
+        function Deck(properties) {
             this.cards = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -262,72 +262,72 @@ $root.CardsPto = (function() {
         }
 
         /**
-         * CardGroup groupId.
-         * @member {number} groupId
-         * @memberof CardsPto.CardGroup
+         * Deck deckId.
+         * @member {number} deckId
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.groupId = 0;
+        Deck.prototype.deckId = 0;
 
         /**
-         * CardGroup cards.
+         * Deck cards.
          * @member {Array.<CardsPto.ICard>} cards
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.cards = $util.emptyArray;
+        Deck.prototype.cards = $util.emptyArray;
 
         /**
-         * CardGroup groupName.
-         * @member {string} groupName
-         * @memberof CardsPto.CardGroup
+         * Deck deckName.
+         * @member {string} deckName
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.groupName = "";
+        Deck.prototype.deckName = "";
 
         /**
-         * CardGroup powerId.
+         * Deck powerId.
          * @member {CardsPto.PowerType} powerId
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.powerId = 0;
+        Deck.prototype.powerId = 0;
 
         /**
-         * CardGroup accessToUse.
+         * Deck accessToUse.
          * @member {boolean} accessToUse
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.accessToUse = false;
+        Deck.prototype.accessToUse = false;
 
         /**
-         * CardGroup heroId.
+         * Deck heroId.
          * @member {number} heroId
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @instance
          */
-        CardGroup.prototype.heroId = 0;
+        Deck.prototype.heroId = 0;
 
         /**
-         * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
+         * Encodes the specified Deck message. Does not implicitly {@link CardsPto.Deck.verify|verify} messages.
          * @function encode
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @static
-         * @param {CardsPto.ICardGroup} message CardGroup message or plain object to encode
+         * @param {CardsPto.IDeck} message Deck message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        CardGroup.encode = function encode(message, writer) {
+        Deck.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
-                writer.uint32(/* id 0, wireType 0 =*/0).int32(message.groupId);
+            if (message.deckId != null && Object.hasOwnProperty.call(message, "deckId"))
+                writer.uint32(/* id 0, wireType 0 =*/0).int32(message.deckId);
             if (message.cards != null && message.cards.length)
                 for (var i = 0; i < message.cards.length; ++i)
                     $root.CardsPto.Card.encode(message.cards[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-            if (message.groupName != null && Object.hasOwnProperty.call(message, "groupName"))
-                writer.uint32(/* id 2, wireType 2 =*/18).string(message.groupName);
+            if (message.deckName != null && Object.hasOwnProperty.call(message, "deckName"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.deckName);
             if (message.powerId != null && Object.hasOwnProperty.call(message, "powerId"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.powerId);
             if (message.accessToUse != null && Object.hasOwnProperty.call(message, "accessToUse"))
@@ -338,25 +338,25 @@ $root.CardsPto = (function() {
         };
 
         /**
-         * Decodes a CardGroup message from the specified reader or buffer.
+         * Decodes a Deck message from the specified reader or buffer.
          * @function decode
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CardsPto.CardGroup} CardGroup
+         * @returns {CardsPto.Deck} Deck
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        CardGroup.decode = function decode(reader, length) {
+        Deck.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.CardGroup();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.Deck();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 0: {
-                        message.groupId = reader.int32();
+                        message.deckId = reader.int32();
                         break;
                     }
                 case 1: {
@@ -366,7 +366,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 2: {
-                        message.groupName = reader.string();
+                        message.deckName = reader.string();
                         break;
                     }
                 case 3: {
@@ -390,21 +390,21 @@ $root.CardsPto = (function() {
         };
 
         /**
-         * Gets the default type url for CardGroup
+         * Gets the default type url for Deck
          * @function getTypeUrl
-         * @memberof CardsPto.CardGroup
+         * @memberof CardsPto.Deck
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        CardGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        Deck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.CardGroup";
+            return typeUrlPrefix + "/CardsPto.Deck";
         };
 
-        return CardGroup;
+        return Deck;
     })();
 
     CardsPto.C_REQ_CARDS_INFO = (function() {
@@ -528,7 +528,7 @@ $root.CardsPto = (function() {
          * @property {number|null} [cmd] S_CARDS_INFO cmd
          * @property {number|null} [scmd] S_CARDS_INFO scmd
          * @property {Array.<CardsPto.ICard>|null} [cardInfos] S_CARDS_INFO cardInfos
-         * @property {Array.<CardsPto.ICardGroup>|null} [cardGroups] S_CARDS_INFO cardGroups
+         * @property {Array.<CardsPto.IDeck>|null} [deckList] S_CARDS_INFO deckList
          */
 
         /**
@@ -541,7 +541,7 @@ $root.CardsPto = (function() {
          */
         function S_CARDS_INFO(properties) {
             this.cardInfos = [];
-            this.cardGroups = [];
+            this.deckList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -573,12 +573,12 @@ $root.CardsPto = (function() {
         S_CARDS_INFO.prototype.cardInfos = $util.emptyArray;
 
         /**
-         * S_CARDS_INFO cardGroups.
-         * @member {Array.<CardsPto.ICardGroup>} cardGroups
+         * S_CARDS_INFO deckList.
+         * @member {Array.<CardsPto.IDeck>} deckList
          * @memberof CardsPto.S_CARDS_INFO
          * @instance
          */
-        S_CARDS_INFO.prototype.cardGroups = $util.emptyArray;
+        S_CARDS_INFO.prototype.deckList = $util.emptyArray;
 
         /**
          * Encodes the specified S_CARDS_INFO message. Does not implicitly {@link CardsPto.S_CARDS_INFO.verify|verify} messages.
@@ -599,9 +599,9 @@ $root.CardsPto = (function() {
             if (message.cardInfos != null && message.cardInfos.length)
                 for (var i = 0; i < message.cardInfos.length; ++i)
                     $root.CardsPto.Card.encode(message.cardInfos[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-            if (message.cardGroups != null && message.cardGroups.length)
-                for (var i = 0; i < message.cardGroups.length; ++i)
-                    $root.CardsPto.CardGroup.encode(message.cardGroups[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+            if (message.deckList != null && message.deckList.length)
+                for (var i = 0; i < message.deckList.length; ++i)
+                    $root.CardsPto.Deck.encode(message.deckList[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             return writer;
         };
 
@@ -638,9 +638,9 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 4: {
-                        if (!(message.cardGroups && message.cardGroups.length))
-                            message.cardGroups = [];
-                        message.cardGroups.push($root.CardsPto.CardGroup.decode(reader, reader.uint32()));
+                        if (!(message.deckList && message.deckList.length))
+                            message.deckList = [];
+                        message.deckList.push($root.CardsPto.Deck.decode(reader, reader.uint32()));
                         break;
                     }
                 default:
@@ -1215,7 +1215,7 @@ $root.CardsPto = (function() {
          * @interface IC_SAVE_CARDS
          * @property {number|null} [cmd] C_SAVE_CARDS cmd
          * @property {number|null} [scmd] C_SAVE_CARDS scmd
-         * @property {CardsPto.ICardGroup|null} [cardGroup] C_SAVE_CARDS cardGroup
+         * @property {CardsPto.IDeck|null} [deck] C_SAVE_CARDS deck
          */
 
         /**
@@ -1250,12 +1250,12 @@ $root.CardsPto = (function() {
         C_SAVE_CARDS.prototype.scmd = 7;
 
         /**
-         * C_SAVE_CARDS cardGroup.
-         * @member {CardsPto.ICardGroup|null|undefined} cardGroup
+         * C_SAVE_CARDS deck.
+         * @member {CardsPto.IDeck|null|undefined} deck
          * @memberof CardsPto.C_SAVE_CARDS
          * @instance
          */
-        C_SAVE_CARDS.prototype.cardGroup = null;
+        C_SAVE_CARDS.prototype.deck = null;
 
         /**
          * Encodes the specified C_SAVE_CARDS message. Does not implicitly {@link CardsPto.C_SAVE_CARDS.verify|verify} messages.
@@ -1273,8 +1273,8 @@ $root.CardsPto = (function() {
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.cardGroup != null && Object.hasOwnProperty.call(message, "cardGroup"))
-                $root.CardsPto.CardGroup.encode(message.cardGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.deck != null && Object.hasOwnProperty.call(message, "deck"))
+                $root.CardsPto.Deck.encode(message.deck, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
@@ -1305,7 +1305,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.cardGroup = $root.CardsPto.CardGroup.decode(reader, reader.uint32());
+                        message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -1334,26 +1334,26 @@ $root.CardsPto = (function() {
         return C_SAVE_CARDS;
     })();
 
-    CardsPto.S_SAVE_CARDS = (function() {
+    CardsPto.S_SAVE_DECK = (function() {
 
         /**
-         * Properties of a S_SAVE_CARDS.
+         * Properties of a S_SAVE_DECK.
          * @memberof CardsPto
-         * @interface IS_SAVE_CARDS
-         * @property {number|null} [cmd] S_SAVE_CARDS cmd
-         * @property {number|null} [scmd] S_SAVE_CARDS scmd
-         * @property {CardsPto.ICardGroup|null} [cardGroup] S_SAVE_CARDS cardGroup
+         * @interface IS_SAVE_DECK
+         * @property {number|null} [cmd] S_SAVE_DECK cmd
+         * @property {number|null} [scmd] S_SAVE_DECK scmd
+         * @property {CardsPto.IDeck|null} [deck] S_SAVE_DECK deck
          */
 
         /**
-         * Constructs a new S_SAVE_CARDS.
+         * Constructs a new S_SAVE_DECK.
          * @memberof CardsPto
-         * @classdesc Represents a S_SAVE_CARDS.
-         * @implements IS_SAVE_CARDS
+         * @classdesc Represents a S_SAVE_DECK.
+         * @implements IS_SAVE_DECK
          * @constructor
-         * @param {CardsPto.IS_SAVE_CARDS=} [properties] Properties to set
+         * @param {CardsPto.IS_SAVE_DECK=} [properties] Properties to set
          */
-        function S_SAVE_CARDS(properties) {
+        function S_SAVE_DECK(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1361,65 +1361,65 @@ $root.CardsPto = (function() {
         }
 
         /**
-         * S_SAVE_CARDS cmd.
+         * S_SAVE_DECK cmd.
          * @member {number} cmd
-         * @memberof CardsPto.S_SAVE_CARDS
+         * @memberof CardsPto.S_SAVE_DECK
          * @instance
          */
-        S_SAVE_CARDS.prototype.cmd = 4;
+        S_SAVE_DECK.prototype.cmd = 4;
 
         /**
-         * S_SAVE_CARDS scmd.
+         * S_SAVE_DECK scmd.
          * @member {number} scmd
-         * @memberof CardsPto.S_SAVE_CARDS
+         * @memberof CardsPto.S_SAVE_DECK
          * @instance
          */
-        S_SAVE_CARDS.prototype.scmd = 8;
+        S_SAVE_DECK.prototype.scmd = 8;
 
         /**
-         * S_SAVE_CARDS cardGroup.
-         * @member {CardsPto.ICardGroup|null|undefined} cardGroup
-         * @memberof CardsPto.S_SAVE_CARDS
+         * S_SAVE_DECK deck.
+         * @member {CardsPto.IDeck|null|undefined} deck
+         * @memberof CardsPto.S_SAVE_DECK
          * @instance
          */
-        S_SAVE_CARDS.prototype.cardGroup = null;
+        S_SAVE_DECK.prototype.deck = null;
 
         /**
-         * Encodes the specified S_SAVE_CARDS message. Does not implicitly {@link CardsPto.S_SAVE_CARDS.verify|verify} messages.
+         * Encodes the specified S_SAVE_DECK message. Does not implicitly {@link CardsPto.S_SAVE_DECK.verify|verify} messages.
          * @function encode
-         * @memberof CardsPto.S_SAVE_CARDS
+         * @memberof CardsPto.S_SAVE_DECK
          * @static
-         * @param {CardsPto.IS_SAVE_CARDS} message S_SAVE_CARDS message or plain object to encode
+         * @param {CardsPto.IS_SAVE_DECK} message S_SAVE_DECK message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_SAVE_CARDS.encode = function encode(message, writer) {
+        S_SAVE_DECK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.cardGroup != null && Object.hasOwnProperty.call(message, "cardGroup"))
-                $root.CardsPto.CardGroup.encode(message.cardGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.deck != null && Object.hasOwnProperty.call(message, "deck"))
+                $root.CardsPto.Deck.encode(message.deck, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
             return writer;
         };
 
         /**
-         * Decodes a S_SAVE_CARDS message from the specified reader or buffer.
+         * Decodes a S_SAVE_DECK message from the specified reader or buffer.
          * @function decode
-         * @memberof CardsPto.S_SAVE_CARDS
+         * @memberof CardsPto.S_SAVE_DECK
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CardsPto.S_SAVE_CARDS} S_SAVE_CARDS
+         * @returns {CardsPto.S_SAVE_DECK} S_SAVE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_SAVE_CARDS.decode = function decode(reader, length) {
+        S_SAVE_DECK.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_SAVE_CARDS();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_SAVE_DECK();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1432,7 +1432,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.cardGroup = $root.CardsPto.CardGroup.decode(reader, reader.uint32());
+                        message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
                         break;
                     }
                 default:
@@ -1444,43 +1444,43 @@ $root.CardsPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_SAVE_CARDS
+         * Gets the default type url for S_SAVE_DECK
          * @function getTypeUrl
-         * @memberof CardsPto.S_SAVE_CARDS
+         * @memberof CardsPto.S_SAVE_DECK
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_SAVE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.S_SAVE_CARDS";
+            return typeUrlPrefix + "/CardsPto.S_SAVE_DECK";
         };
 
-        return S_SAVE_CARDS;
+        return S_SAVE_DECK;
     })();
 
-    CardsPto.C_DELETE_CARD_GROUP = (function() {
+    CardsPto.C_DELETE_DECK = (function() {
 
         /**
-         * Properties of a C_DELETE_CARD_GROUP.
+         * Properties of a C_DELETE_DECK.
          * @memberof CardsPto
-         * @interface IC_DELETE_CARD_GROUP
-         * @property {number|null} [cmd] C_DELETE_CARD_GROUP cmd
-         * @property {number|null} [scmd] C_DELETE_CARD_GROUP scmd
-         * @property {number|null} [groupId] C_DELETE_CARD_GROUP groupId
+         * @interface IC_DELETE_DECK
+         * @property {number|null} [cmd] C_DELETE_DECK cmd
+         * @property {number|null} [scmd] C_DELETE_DECK scmd
+         * @property {number|null} [deckId] C_DELETE_DECK deckId
          */
 
         /**
-         * Constructs a new C_DELETE_CARD_GROUP.
+         * Constructs a new C_DELETE_DECK.
          * @memberof CardsPto
-         * @classdesc Represents a C_DELETE_CARD_GROUP.
-         * @implements IC_DELETE_CARD_GROUP
+         * @classdesc Represents a C_DELETE_DECK.
+         * @implements IC_DELETE_DECK
          * @constructor
-         * @param {CardsPto.IC_DELETE_CARD_GROUP=} [properties] Properties to set
+         * @param {CardsPto.IC_DELETE_DECK=} [properties] Properties to set
          */
-        function C_DELETE_CARD_GROUP(properties) {
+        function C_DELETE_DECK(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1488,65 +1488,65 @@ $root.CardsPto = (function() {
         }
 
         /**
-         * C_DELETE_CARD_GROUP cmd.
+         * C_DELETE_DECK cmd.
          * @member {number} cmd
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @memberof CardsPto.C_DELETE_DECK
          * @instance
          */
-        C_DELETE_CARD_GROUP.prototype.cmd = 4;
+        C_DELETE_DECK.prototype.cmd = 4;
 
         /**
-         * C_DELETE_CARD_GROUP scmd.
+         * C_DELETE_DECK scmd.
          * @member {number} scmd
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @memberof CardsPto.C_DELETE_DECK
          * @instance
          */
-        C_DELETE_CARD_GROUP.prototype.scmd = 9;
+        C_DELETE_DECK.prototype.scmd = 9;
 
         /**
-         * C_DELETE_CARD_GROUP groupId.
-         * @member {number} groupId
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * C_DELETE_DECK deckId.
+         * @member {number} deckId
+         * @memberof CardsPto.C_DELETE_DECK
          * @instance
          */
-        C_DELETE_CARD_GROUP.prototype.groupId = 0;
+        C_DELETE_DECK.prototype.deckId = 0;
 
         /**
-         * Encodes the specified C_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
+         * Encodes the specified C_DELETE_DECK message. Does not implicitly {@link CardsPto.C_DELETE_DECK.verify|verify} messages.
          * @function encode
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @memberof CardsPto.C_DELETE_DECK
          * @static
-         * @param {CardsPto.IC_DELETE_CARD_GROUP} message C_DELETE_CARD_GROUP message or plain object to encode
+         * @param {CardsPto.IC_DELETE_DECK} message C_DELETE_DECK message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        C_DELETE_CARD_GROUP.encode = function encode(message, writer) {
+        C_DELETE_DECK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.groupId);
+            if (message.deckId != null && Object.hasOwnProperty.call(message, "deckId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deckId);
             return writer;
         };
 
         /**
-         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a C_DELETE_DECK message from the specified reader or buffer.
          * @function decode
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @memberof CardsPto.C_DELETE_DECK
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CardsPto.C_DELETE_CARD_GROUP} C_DELETE_CARD_GROUP
+         * @returns {CardsPto.C_DELETE_DECK} C_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        C_DELETE_CARD_GROUP.decode = function decode(reader, length) {
+        C_DELETE_DECK.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.C_DELETE_DECK();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1559,7 +1559,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.groupId = reader.int32();
+                        message.deckId = reader.int32();
                         break;
                     }
                 default:
@@ -1571,43 +1571,43 @@ $root.CardsPto = (function() {
         };
 
         /**
-         * Gets the default type url for C_DELETE_CARD_GROUP
+         * Gets the default type url for C_DELETE_DECK
          * @function getTypeUrl
-         * @memberof CardsPto.C_DELETE_CARD_GROUP
+         * @memberof CardsPto.C_DELETE_DECK
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        C_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.C_DELETE_CARD_GROUP";
+            return typeUrlPrefix + "/CardsPto.C_DELETE_DECK";
         };
 
-        return C_DELETE_CARD_GROUP;
+        return C_DELETE_DECK;
     })();
 
-    CardsPto.S_DELETE_CARD_GROUP = (function() {
+    CardsPto.S_DELETE_DECK = (function() {
 
         /**
-         * Properties of a S_DELETE_CARD_GROUP.
+         * Properties of a S_DELETE_DECK.
          * @memberof CardsPto
-         * @interface IS_DELETE_CARD_GROUP
-         * @property {number|null} [cmd] S_DELETE_CARD_GROUP cmd
-         * @property {number|null} [scmd] S_DELETE_CARD_GROUP scmd
-         * @property {number|null} [groupId] S_DELETE_CARD_GROUP groupId
+         * @interface IS_DELETE_DECK
+         * @property {number|null} [cmd] S_DELETE_DECK cmd
+         * @property {number|null} [scmd] S_DELETE_DECK scmd
+         * @property {number|null} [deckId] S_DELETE_DECK deckId
          */
 
         /**
-         * Constructs a new S_DELETE_CARD_GROUP.
+         * Constructs a new S_DELETE_DECK.
          * @memberof CardsPto
-         * @classdesc Represents a S_DELETE_CARD_GROUP.
-         * @implements IS_DELETE_CARD_GROUP
+         * @classdesc Represents a S_DELETE_DECK.
+         * @implements IS_DELETE_DECK
          * @constructor
-         * @param {CardsPto.IS_DELETE_CARD_GROUP=} [properties] Properties to set
+         * @param {CardsPto.IS_DELETE_DECK=} [properties] Properties to set
          */
-        function S_DELETE_CARD_GROUP(properties) {
+        function S_DELETE_DECK(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -1615,65 +1615,65 @@ $root.CardsPto = (function() {
         }
 
         /**
-         * S_DELETE_CARD_GROUP cmd.
+         * S_DELETE_DECK cmd.
          * @member {number} cmd
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @memberof CardsPto.S_DELETE_DECK
          * @instance
          */
-        S_DELETE_CARD_GROUP.prototype.cmd = 4;
+        S_DELETE_DECK.prototype.cmd = 4;
 
         /**
-         * S_DELETE_CARD_GROUP scmd.
+         * S_DELETE_DECK scmd.
          * @member {number} scmd
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @memberof CardsPto.S_DELETE_DECK
          * @instance
          */
-        S_DELETE_CARD_GROUP.prototype.scmd = 10;
+        S_DELETE_DECK.prototype.scmd = 10;
 
         /**
-         * S_DELETE_CARD_GROUP groupId.
-         * @member {number} groupId
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * S_DELETE_DECK deckId.
+         * @member {number} deckId
+         * @memberof CardsPto.S_DELETE_DECK
          * @instance
          */
-        S_DELETE_CARD_GROUP.prototype.groupId = 0;
+        S_DELETE_DECK.prototype.deckId = 0;
 
         /**
-         * Encodes the specified S_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
+         * Encodes the specified S_DELETE_DECK message. Does not implicitly {@link CardsPto.S_DELETE_DECK.verify|verify} messages.
          * @function encode
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @memberof CardsPto.S_DELETE_DECK
          * @static
-         * @param {CardsPto.IS_DELETE_CARD_GROUP} message S_DELETE_CARD_GROUP message or plain object to encode
+         * @param {CardsPto.IS_DELETE_DECK} message S_DELETE_DECK message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_DELETE_CARD_GROUP.encode = function encode(message, writer) {
+        S_DELETE_DECK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.groupId != null && Object.hasOwnProperty.call(message, "groupId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.groupId);
+            if (message.deckId != null && Object.hasOwnProperty.call(message, "deckId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deckId);
             return writer;
         };
 
         /**
-         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a S_DELETE_DECK message from the specified reader or buffer.
          * @function decode
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @memberof CardsPto.S_DELETE_DECK
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {CardsPto.S_DELETE_CARD_GROUP} S_DELETE_CARD_GROUP
+         * @returns {CardsPto.S_DELETE_DECK} S_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_DELETE_CARD_GROUP.decode = function decode(reader, length) {
+        S_DELETE_DECK.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.CardsPto.S_DELETE_DECK();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -1686,7 +1686,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.groupId = reader.int32();
+                        message.deckId = reader.int32();
                         break;
                     }
                 default:
@@ -1698,21 +1698,21 @@ $root.CardsPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_DELETE_CARD_GROUP
+         * Gets the default type url for S_DELETE_DECK
          * @function getTypeUrl
-         * @memberof CardsPto.S_DELETE_CARD_GROUP
+         * @memberof CardsPto.S_DELETE_DECK
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.S_DELETE_CARD_GROUP";
+            return typeUrlPrefix + "/CardsPto.S_DELETE_DECK";
         };
 
-        return S_DELETE_CARD_GROUP;
+        return S_DELETE_DECK;
     })();
 
     return CardsPto;
@@ -3678,26 +3678,26 @@ $root.FriendlyMatchPto = (function() {
         return C_REQ_MATCH_RESULT;
     })();
 
-    FriendlyMatchPto.S_MATCH_CARD_GROUP = (function() {
+    FriendlyMatchPto.S_MATCH_DECK = (function() {
 
         /**
-         * Properties of a S_MATCH_CARD_GROUP.
+         * Properties of a S_MATCH_DECK.
          * @memberof FriendlyMatchPto
-         * @interface IS_MATCH_CARD_GROUP
-         * @property {number|null} [cmd] S_MATCH_CARD_GROUP cmd
-         * @property {number|null} [scmd] S_MATCH_CARD_GROUP scmd
-         * @property {number|Long|null} [endTime] S_MATCH_CARD_GROUP endTime
+         * @interface IS_MATCH_DECK
+         * @property {number|null} [cmd] S_MATCH_DECK cmd
+         * @property {number|null} [scmd] S_MATCH_DECK scmd
+         * @property {number|Long|null} [endTime] S_MATCH_DECK endTime
          */
 
         /**
-         * Constructs a new S_MATCH_CARD_GROUP.
+         * Constructs a new S_MATCH_DECK.
          * @memberof FriendlyMatchPto
-         * @classdesc Represents a S_MATCH_CARD_GROUP.
-         * @implements IS_MATCH_CARD_GROUP
+         * @classdesc Represents a S_MATCH_DECK.
+         * @implements IS_MATCH_DECK
          * @constructor
-         * @param {FriendlyMatchPto.IS_MATCH_CARD_GROUP=} [properties] Properties to set
+         * @param {FriendlyMatchPto.IS_MATCH_DECK=} [properties] Properties to set
          */
-        function S_MATCH_CARD_GROUP(properties) {
+        function S_MATCH_DECK(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3705,39 +3705,39 @@ $root.FriendlyMatchPto = (function() {
         }
 
         /**
-         * S_MATCH_CARD_GROUP cmd.
+         * S_MATCH_DECK cmd.
          * @member {number} cmd
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @instance
          */
-        S_MATCH_CARD_GROUP.prototype.cmd = 201;
+        S_MATCH_DECK.prototype.cmd = 201;
 
         /**
-         * S_MATCH_CARD_GROUP scmd.
+         * S_MATCH_DECK scmd.
          * @member {number} scmd
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @instance
          */
-        S_MATCH_CARD_GROUP.prototype.scmd = 7;
+        S_MATCH_DECK.prototype.scmd = 7;
 
         /**
-         * S_MATCH_CARD_GROUP endTime.
+         * S_MATCH_DECK endTime.
          * @member {number|Long} endTime
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @instance
          */
-        S_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        S_MATCH_DECK.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
-         * Encodes the specified S_MATCH_CARD_GROUP message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_CARD_GROUP.verify|verify} messages.
+         * Encodes the specified S_MATCH_DECK message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_DECK.verify|verify} messages.
          * @function encode
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @static
-         * @param {FriendlyMatchPto.IS_MATCH_CARD_GROUP} message S_MATCH_CARD_GROUP message or plain object to encode
+         * @param {FriendlyMatchPto.IS_MATCH_DECK} message S_MATCH_DECK message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_MATCH_CARD_GROUP.encode = function encode(message, writer) {
+        S_MATCH_DECK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
@@ -3750,20 +3750,20 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Decodes a S_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a S_MATCH_DECK message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendlyMatchPto.S_MATCH_CARD_GROUP} S_MATCH_CARD_GROUP
+         * @returns {FriendlyMatchPto.S_MATCH_DECK} S_MATCH_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_MATCH_CARD_GROUP.decode = function decode(reader, length) {
+        S_MATCH_DECK.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_MATCH_CARD_GROUP();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_MATCH_DECK();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3788,43 +3788,43 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_MATCH_CARD_GROUP
+         * Gets the default type url for S_MATCH_DECK
          * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_MATCH_CARD_GROUP
+         * @memberof FriendlyMatchPto.S_MATCH_DECK
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_MATCH_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_CARD_GROUP";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_DECK";
         };
 
-        return S_MATCH_CARD_GROUP;
+        return S_MATCH_DECK;
     })();
 
-    FriendlyMatchPto.C_GROUP_CHOOSE = (function() {
+    FriendlyMatchPto.C_DECK_CHOOSE = (function() {
 
         /**
-         * Properties of a C_GROUP_CHOOSE.
+         * Properties of a C_DECK_CHOOSE.
          * @memberof FriendlyMatchPto
-         * @interface IC_GROUP_CHOOSE
-         * @property {number|null} [cmd] C_GROUP_CHOOSE cmd
-         * @property {number|null} [scmd] C_GROUP_CHOOSE scmd
-         * @property {number|null} [cardGroupId] C_GROUP_CHOOSE cardGroupId
+         * @interface IC_DECK_CHOOSE
+         * @property {number|null} [cmd] C_DECK_CHOOSE cmd
+         * @property {number|null} [scmd] C_DECK_CHOOSE scmd
+         * @property {number|null} [deckId] C_DECK_CHOOSE deckId
          */
 
         /**
-         * Constructs a new C_GROUP_CHOOSE.
+         * Constructs a new C_DECK_CHOOSE.
          * @memberof FriendlyMatchPto
-         * @classdesc Represents a C_GROUP_CHOOSE.
-         * @implements IC_GROUP_CHOOSE
+         * @classdesc Represents a C_DECK_CHOOSE.
+         * @implements IC_DECK_CHOOSE
          * @constructor
-         * @param {FriendlyMatchPto.IC_GROUP_CHOOSE=} [properties] Properties to set
+         * @param {FriendlyMatchPto.IC_DECK_CHOOSE=} [properties] Properties to set
          */
-        function C_GROUP_CHOOSE(properties) {
+        function C_DECK_CHOOSE(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3832,65 +3832,65 @@ $root.FriendlyMatchPto = (function() {
         }
 
         /**
-         * C_GROUP_CHOOSE cmd.
+         * C_DECK_CHOOSE cmd.
          * @member {number} cmd
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @instance
          */
-        C_GROUP_CHOOSE.prototype.cmd = 201;
+        C_DECK_CHOOSE.prototype.cmd = 201;
 
         /**
-         * C_GROUP_CHOOSE scmd.
+         * C_DECK_CHOOSE scmd.
          * @member {number} scmd
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @instance
          */
-        C_GROUP_CHOOSE.prototype.scmd = 8;
+        C_DECK_CHOOSE.prototype.scmd = 8;
 
         /**
-         * C_GROUP_CHOOSE cardGroupId.
-         * @member {number} cardGroupId
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * C_DECK_CHOOSE deckId.
+         * @member {number} deckId
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @instance
          */
-        C_GROUP_CHOOSE.prototype.cardGroupId = 0;
+        C_DECK_CHOOSE.prototype.deckId = 0;
 
         /**
-         * Encodes the specified C_GROUP_CHOOSE message. Does not implicitly {@link FriendlyMatchPto.C_GROUP_CHOOSE.verify|verify} messages.
+         * Encodes the specified C_DECK_CHOOSE message. Does not implicitly {@link FriendlyMatchPto.C_DECK_CHOOSE.verify|verify} messages.
          * @function encode
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @static
-         * @param {FriendlyMatchPto.IC_GROUP_CHOOSE} message C_GROUP_CHOOSE message or plain object to encode
+         * @param {FriendlyMatchPto.IC_DECK_CHOOSE} message C_DECK_CHOOSE message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        C_GROUP_CHOOSE.encode = function encode(message, writer) {
+        C_DECK_CHOOSE.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.cmd);
             if (message.scmd != null && Object.hasOwnProperty.call(message, "scmd"))
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
-            if (message.cardGroupId != null && Object.hasOwnProperty.call(message, "cardGroupId"))
-                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.cardGroupId);
+            if (message.deckId != null && Object.hasOwnProperty.call(message, "deckId"))
+                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.deckId);
             return writer;
         };
 
         /**
-         * Decodes a C_GROUP_CHOOSE message from the specified reader or buffer.
+         * Decodes a C_DECK_CHOOSE message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendlyMatchPto.C_GROUP_CHOOSE} C_GROUP_CHOOSE
+         * @returns {FriendlyMatchPto.C_DECK_CHOOSE} C_DECK_CHOOSE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        C_GROUP_CHOOSE.decode = function decode(reader, length) {
+        C_DECK_CHOOSE.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.C_GROUP_CHOOSE();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.C_DECK_CHOOSE();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -3903,7 +3903,7 @@ $root.FriendlyMatchPto = (function() {
                         break;
                     }
                 case 3: {
-                        message.cardGroupId = reader.int32();
+                        message.deckId = reader.int32();
                         break;
                     }
                 default:
@@ -3915,42 +3915,42 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Gets the default type url for C_GROUP_CHOOSE
+         * Gets the default type url for C_DECK_CHOOSE
          * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_GROUP_CHOOSE
+         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        C_GROUP_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_DECK_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_GROUP_CHOOSE";
+            return typeUrlPrefix + "/FriendlyMatchPto.C_DECK_CHOOSE";
         };
 
-        return C_GROUP_CHOOSE;
+        return C_DECK_CHOOSE;
     })();
 
-    FriendlyMatchPto.C_MATCH_CANCEL_GROUP = (function() {
+    FriendlyMatchPto.C_MATCH_CANCEL_DECK = (function() {
 
         /**
-         * Properties of a C_MATCH_CANCEL_GROUP.
+         * Properties of a C_MATCH_CANCEL_DECK.
          * @memberof FriendlyMatchPto
-         * @interface IC_MATCH_CANCEL_GROUP
-         * @property {number|null} [cmd] C_MATCH_CANCEL_GROUP cmd
-         * @property {number|null} [scmd] C_MATCH_CANCEL_GROUP scmd
+         * @interface IC_MATCH_CANCEL_DECK
+         * @property {number|null} [cmd] C_MATCH_CANCEL_DECK cmd
+         * @property {number|null} [scmd] C_MATCH_CANCEL_DECK scmd
          */
 
         /**
-         * Constructs a new C_MATCH_CANCEL_GROUP.
+         * Constructs a new C_MATCH_CANCEL_DECK.
          * @memberof FriendlyMatchPto
-         * @classdesc Represents a C_MATCH_CANCEL_GROUP.
-         * @implements IC_MATCH_CANCEL_GROUP
+         * @classdesc Represents a C_MATCH_CANCEL_DECK.
+         * @implements IC_MATCH_CANCEL_DECK
          * @constructor
-         * @param {FriendlyMatchPto.IC_MATCH_CANCEL_GROUP=} [properties] Properties to set
+         * @param {FriendlyMatchPto.IC_MATCH_CANCEL_DECK=} [properties] Properties to set
          */
-        function C_MATCH_CANCEL_GROUP(properties) {
+        function C_MATCH_CANCEL_DECK(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -3958,31 +3958,31 @@ $root.FriendlyMatchPto = (function() {
         }
 
         /**
-         * C_MATCH_CANCEL_GROUP cmd.
+         * C_MATCH_CANCEL_DECK cmd.
          * @member {number} cmd
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_GROUP
+         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
          * @instance
          */
-        C_MATCH_CANCEL_GROUP.prototype.cmd = 201;
+        C_MATCH_CANCEL_DECK.prototype.cmd = 201;
 
         /**
-         * C_MATCH_CANCEL_GROUP scmd.
+         * C_MATCH_CANCEL_DECK scmd.
          * @member {number} scmd
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_GROUP
+         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
          * @instance
          */
-        C_MATCH_CANCEL_GROUP.prototype.scmd = 9;
+        C_MATCH_CANCEL_DECK.prototype.scmd = 9;
 
         /**
-         * Encodes the specified C_MATCH_CANCEL_GROUP message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_GROUP.verify|verify} messages.
+         * Encodes the specified C_MATCH_CANCEL_DECK message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_DECK.verify|verify} messages.
          * @function encode
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_GROUP
+         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
          * @static
-         * @param {FriendlyMatchPto.IC_MATCH_CANCEL_GROUP} message C_MATCH_CANCEL_GROUP message or plain object to encode
+         * @param {FriendlyMatchPto.IC_MATCH_CANCEL_DECK} message C_MATCH_CANCEL_DECK message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        C_MATCH_CANCEL_GROUP.encode = function encode(message, writer) {
+        C_MATCH_CANCEL_DECK.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
@@ -3993,20 +3993,20 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Decodes a C_MATCH_CANCEL_GROUP message from the specified reader or buffer.
+         * Decodes a C_MATCH_CANCEL_DECK message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_GROUP
+         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendlyMatchPto.C_MATCH_CANCEL_GROUP} C_MATCH_CANCEL_GROUP
+         * @returns {FriendlyMatchPto.C_MATCH_CANCEL_DECK} C_MATCH_CANCEL_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        C_MATCH_CANCEL_GROUP.decode = function decode(reader, length) {
+        C_MATCH_CANCEL_DECK.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.C_MATCH_CANCEL_DECK();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4027,21 +4027,21 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Gets the default type url for C_MATCH_CANCEL_GROUP
+         * Gets the default type url for C_MATCH_CANCEL_DECK
          * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_GROUP
+         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        C_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_MATCH_CANCEL_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_GROUP";
+            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_DECK";
         };
 
-        return C_MATCH_CANCEL_GROUP;
+        return C_MATCH_CANCEL_DECK;
     })();
 
     FriendlyMatchPto.C_MATCH_LEAVE = (function() {
@@ -4283,26 +4283,26 @@ $root.FriendlyMatchPto = (function() {
         return S_MATCH_STOP;
     })();
 
-    FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE = (function() {
+    FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE = (function() {
 
         /**
-         * Properties of a S_FRIEND_GROUP_STATUS_CHANGE.
+         * Properties of a S_FRIEND_DECK_STATUS_CHANGE.
          * @memberof FriendlyMatchPto
-         * @interface IS_FRIEND_GROUP_STATUS_CHANGE
-         * @property {number|null} [cmd] S_FRIEND_GROUP_STATUS_CHANGE cmd
-         * @property {number|null} [scmd] S_FRIEND_GROUP_STATUS_CHANGE scmd
-         * @property {boolean|null} [isChoose] S_FRIEND_GROUP_STATUS_CHANGE isChoose
+         * @interface IS_FRIEND_DECK_STATUS_CHANGE
+         * @property {number|null} [cmd] S_FRIEND_DECK_STATUS_CHANGE cmd
+         * @property {number|null} [scmd] S_FRIEND_DECK_STATUS_CHANGE scmd
+         * @property {boolean|null} [isChoose] S_FRIEND_DECK_STATUS_CHANGE isChoose
          */
 
         /**
-         * Constructs a new S_FRIEND_GROUP_STATUS_CHANGE.
+         * Constructs a new S_FRIEND_DECK_STATUS_CHANGE.
          * @memberof FriendlyMatchPto
-         * @classdesc Represents a S_FRIEND_GROUP_STATUS_CHANGE.
-         * @implements IS_FRIEND_GROUP_STATUS_CHANGE
+         * @classdesc Represents a S_FRIEND_DECK_STATUS_CHANGE.
+         * @implements IS_FRIEND_DECK_STATUS_CHANGE
          * @constructor
-         * @param {FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE=} [properties] Properties to set
+         * @param {FriendlyMatchPto.IS_FRIEND_DECK_STATUS_CHANGE=} [properties] Properties to set
          */
-        function S_FRIEND_GROUP_STATUS_CHANGE(properties) {
+        function S_FRIEND_DECK_STATUS_CHANGE(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4310,39 +4310,39 @@ $root.FriendlyMatchPto = (function() {
         }
 
         /**
-         * S_FRIEND_GROUP_STATUS_CHANGE cmd.
+         * S_FRIEND_DECK_STATUS_CHANGE cmd.
          * @member {number} cmd
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @instance
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.cmd = 201;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.cmd = 201;
 
         /**
-         * S_FRIEND_GROUP_STATUS_CHANGE scmd.
+         * S_FRIEND_DECK_STATUS_CHANGE scmd.
          * @member {number} scmd
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @instance
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.scmd = 12;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.scmd = 12;
 
         /**
-         * S_FRIEND_GROUP_STATUS_CHANGE isChoose.
+         * S_FRIEND_DECK_STATUS_CHANGE isChoose.
          * @member {boolean} isChoose
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @instance
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.isChoose = false;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.isChoose = false;
 
         /**
-         * Encodes the specified S_FRIEND_GROUP_STATUS_CHANGE message. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE.verify|verify} messages.
+         * Encodes the specified S_FRIEND_DECK_STATUS_CHANGE message. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE.verify|verify} messages.
          * @function encode
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @static
-         * @param {FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE} message S_FRIEND_GROUP_STATUS_CHANGE message or plain object to encode
+         * @param {FriendlyMatchPto.IS_FRIEND_DECK_STATUS_CHANGE} message S_FRIEND_DECK_STATUS_CHANGE message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.encode = function encode(message, writer) {
+        S_FRIEND_DECK_STATUS_CHANGE.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
@@ -4355,20 +4355,20 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Decodes a S_FRIEND_GROUP_STATUS_CHANGE message from the specified reader or buffer.
+         * Decodes a S_FRIEND_DECK_STATUS_CHANGE message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE} S_FRIEND_GROUP_STATUS_CHANGE
+         * @returns {FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE} S_FRIEND_DECK_STATUS_CHANGE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.decode = function decode(reader, length) {
+        S_FRIEND_DECK_STATUS_CHANGE.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4393,43 +4393,43 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_FRIEND_GROUP_STATUS_CHANGE
+         * Gets the default type url for S_FRIEND_DECK_STATUS_CHANGE
          * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE
+         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_FRIEND_GROUP_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_FRIEND_DECK_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE";
         };
 
-        return S_FRIEND_GROUP_STATUS_CHANGE;
+        return S_FRIEND_DECK_STATUS_CHANGE;
     })();
 
-    FriendlyMatchPto.S_GROUP_CHOOSE_RESULT = (function() {
+    FriendlyMatchPto.S_DECK_CHOOSE_RESULT = (function() {
 
         /**
-         * Properties of a S_GROUP_CHOOSE_RESULT.
+         * Properties of a S_DECK_CHOOSE_RESULT.
          * @memberof FriendlyMatchPto
-         * @interface IS_GROUP_CHOOSE_RESULT
-         * @property {number|null} [cmd] S_GROUP_CHOOSE_RESULT cmd
-         * @property {number|null} [scmd] S_GROUP_CHOOSE_RESULT scmd
-         * @property {number|null} [code] S_GROUP_CHOOSE_RESULT code
+         * @interface IS_DECK_CHOOSE_RESULT
+         * @property {number|null} [cmd] S_DECK_CHOOSE_RESULT cmd
+         * @property {number|null} [scmd] S_DECK_CHOOSE_RESULT scmd
+         * @property {number|null} [code] S_DECK_CHOOSE_RESULT code
          */
 
         /**
-         * Constructs a new S_GROUP_CHOOSE_RESULT.
+         * Constructs a new S_DECK_CHOOSE_RESULT.
          * @memberof FriendlyMatchPto
-         * @classdesc Represents a S_GROUP_CHOOSE_RESULT.
-         * @implements IS_GROUP_CHOOSE_RESULT
+         * @classdesc Represents a S_DECK_CHOOSE_RESULT.
+         * @implements IS_DECK_CHOOSE_RESULT
          * @constructor
-         * @param {FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT=} [properties] Properties to set
+         * @param {FriendlyMatchPto.IS_DECK_CHOOSE_RESULT=} [properties] Properties to set
          */
-        function S_GROUP_CHOOSE_RESULT(properties) {
+        function S_DECK_CHOOSE_RESULT(properties) {
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                     if (properties[keys[i]] != null)
@@ -4437,39 +4437,39 @@ $root.FriendlyMatchPto = (function() {
         }
 
         /**
-         * S_GROUP_CHOOSE_RESULT cmd.
+         * S_DECK_CHOOSE_RESULT cmd.
          * @member {number} cmd
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @instance
          */
-        S_GROUP_CHOOSE_RESULT.prototype.cmd = 201;
+        S_DECK_CHOOSE_RESULT.prototype.cmd = 201;
 
         /**
-         * S_GROUP_CHOOSE_RESULT scmd.
+         * S_DECK_CHOOSE_RESULT scmd.
          * @member {number} scmd
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @instance
          */
-        S_GROUP_CHOOSE_RESULT.prototype.scmd = 13;
+        S_DECK_CHOOSE_RESULT.prototype.scmd = 13;
 
         /**
-         * S_GROUP_CHOOSE_RESULT code.
+         * S_DECK_CHOOSE_RESULT code.
          * @member {number} code
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @instance
          */
-        S_GROUP_CHOOSE_RESULT.prototype.code = 0;
+        S_DECK_CHOOSE_RESULT.prototype.code = 0;
 
         /**
-         * Encodes the specified S_GROUP_CHOOSE_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_GROUP_CHOOSE_RESULT.verify|verify} messages.
+         * Encodes the specified S_DECK_CHOOSE_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_DECK_CHOOSE_RESULT.verify|verify} messages.
          * @function encode
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @static
-         * @param {FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT} message S_GROUP_CHOOSE_RESULT message or plain object to encode
+         * @param {FriendlyMatchPto.IS_DECK_CHOOSE_RESULT} message S_DECK_CHOOSE_RESULT message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_GROUP_CHOOSE_RESULT.encode = function encode(message, writer) {
+        S_DECK_CHOOSE_RESULT.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
@@ -4482,20 +4482,20 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Decodes a S_GROUP_CHOOSE_RESULT message from the specified reader or buffer.
+         * Decodes a S_DECK_CHOOSE_RESULT message from the specified reader or buffer.
          * @function decode
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {FriendlyMatchPto.S_GROUP_CHOOSE_RESULT} S_GROUP_CHOOSE_RESULT
+         * @returns {FriendlyMatchPto.S_DECK_CHOOSE_RESULT} S_DECK_CHOOSE_RESULT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_GROUP_CHOOSE_RESULT.decode = function decode(reader, length) {
+        S_DECK_CHOOSE_RESULT.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.FriendlyMatchPto.S_DECK_CHOOSE_RESULT();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -4520,21 +4520,21 @@ $root.FriendlyMatchPto = (function() {
         };
 
         /**
-         * Gets the default type url for S_GROUP_CHOOSE_RESULT
+         * Gets the default type url for S_DECK_CHOOSE_RESULT
          * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_GROUP_CHOOSE_RESULT
+         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
          * @static
          * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns {string} The default type url
          */
-        S_GROUP_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_DECK_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_GROUP_CHOOSE_RESULT";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_DECK_CHOOSE_RESULT";
         };
 
-        return S_GROUP_CHOOSE_RESULT;
+        return S_DECK_CHOOSE_RESULT;
     })();
 
     return FriendlyMatchPto;

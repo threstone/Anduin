@@ -31,7 +31,7 @@ interface CommonConfig {
     maxFeeFilter: number;
     cardMakeFee: number[];
     cardDisassembleReturnRatio: number;
-    maxGroupNum: number;
+    maxDeckNum: number;
     startHandCardNum: number;
     drawCardTime: number;
     maxHandCardNum: number;

@@ -6,17 +6,17 @@ import { RedisType } from '../../../common/ConstDefine';
 import { getLogger } from 'log4js';
 
 //禁止枚举值改为枚举name
-CardsPto.CardGroup.prototype.toJSON = null;
+CardsPto.Deck.prototype.toJSON = null;
 
-const GroupCardsNum = 40;
+const DeckCardsNum = 40;
 const logger = getLogger();
 export class CardsHandler extends BaseHandler {
     //请求卡牌收藏数据
     static async C_REQ_CARDS_INFO(clientName: string, uid: number) {
         const response = new CardsPto.S_CARDS_INFO();
-        const user = await UserModel.findOne({ attributes: ['cardsInfo', 'cardGroupInfo'], where: { uid } });
+        const user = await UserModel.findOne({ attributes: ['cardsInfo', 'decks'], where: { uid } });
         response.cardInfos = user.cardsInfo;
-        response.cardGroups = user.cardGroupInfo;
+        response.deckList = user.decks;
         this.sendMsg(clientName, uid, response);
     }
 
@@ -112,7 +112,7 @@ export class CardsHandler extends BaseHandler {
 
     //保存卡组
     static async C_SAVE_CARDS(clientName: string, uid: number, msg: CardsPto.C_SAVE_CARDS) {
-        if (this.checkCardGroup(msg.cardGroup) === false) {
+        if (this.checkDeck(msg.deck) === false) {
             GlobalVar.socketServer.sendTips(clientName, uid, '保存卡组失败,卡组非法!');
             return;
         }
@@ -124,39 +124,39 @@ export class CardsHandler extends BaseHandler {
             return;
         }
 
-        const user = await UserModel.findOne({ attributes: ['uid', 'cardGroupInfo'], where: { uid } });
+        const user = await UserModel.findOne({ attributes: ['uid', 'decks'], where: { uid } });
         //卡组可用性检测
-        await this.checkCardAccess(uid, msg.cardGroup);
-        const cardGroupInfo = user.cardGroupInfo;
+        await this.checkCardAccess(uid, msg.deck);
+        const decks = user.decks;
         //新卡组
-        if (msg.cardGroup.groupId === -1) {
-            cardGroupInfo.push(msg.cardGroup);
-            msg.cardGroup.groupId = this.getNewGroupId(cardGroupInfo);
+        if (msg.deck.deckId === -1) {
+            decks.push(msg.deck);
+            msg.deck.deckId = this.getNewDeckId(decks);
         }//卡组变更
         else {
-            for (let index = 0; index < cardGroupInfo.length; index++) {
-                const group = cardGroupInfo[index];
-                if (group.groupId === msg.cardGroup.groupId) {
-                    cardGroupInfo[index] = msg.cardGroup;
+            for (let index = 0; index < decks.length; index++) {
+                const deck = decks[index];
+                if (deck.deckId === msg.deck.deckId) {
+                    decks[index] = msg.deck;
                     break;
                 }
             }
         }
-        user.cardGroupInfo = cardGroupInfo;
+        user.decks = decks;
         await user.save();
         //同步对应数据到redis
         GlobalVar.dbHelper.syncUserInfoToMysql(uid, user);
         //解锁
         redis.unlock(lockId);
 
-        const replay = new CardsPto.S_SAVE_CARDS();
-        replay.cardGroup = msg.cardGroup;
+        const replay = new CardsPto.S_SAVE_DECK();
+        replay.deck = msg.deck;
         this.sendMsg(clientName, uid, replay);
     }
 
 
     /**请求删除卡组 */
-    static async C_DELETE_CARD_GROUP(clientName: string, uid: number, msg: CardsPto.C_DELETE_CARD_GROUP) {
+    static async C_DELETE_DECK(clientName: string, uid: number, msg: CardsPto.C_DELETE_DECK) {
         const redis = GlobalVar.redisMgr.getClient(RedisType.userInfo);
         const lockId = `lock${uid}`;
         //已经上锁了
@@ -165,18 +165,18 @@ export class CardsHandler extends BaseHandler {
             return;
         }
 
-        const reply = new CardsPto.S_DELETE_CARD_GROUP();
-        const user = await UserModel.findOne({ attributes: ['uid', 'cardGroupInfo'], where: { uid } });
-        const cardGroupInfo = user.cardGroupInfo;
-        for (let index = 0; index < cardGroupInfo.length; index++) {
-            const cardGroup = cardGroupInfo[index];
-            if (cardGroup.groupId === msg.groupId) {
-                cardGroupInfo.splice(index, 1);
-                reply.groupId = msg.groupId;
+        const reply = new CardsPto.S_DELETE_DECK();
+        const user = await UserModel.findOne({ attributes: ['uid', 'decks'], where: { uid } });
+        const decks = user.decks;
+        for (let index = 0; index < decks.length; index++) {
+            const deck = decks[index];
+            if (deck.deckId === msg.deckId) {
+                decks.splice(index, 1);
+                reply.deckId = msg.deckId;
                 break;
             }
         }
-        user.cardGroupInfo = cardGroupInfo;
+        user.decks = decks;
         await user.save();
         //同步对应数据到redis
         GlobalVar.dbHelper.syncUserInfoToMysql(uid, user);
@@ -200,12 +200,12 @@ export class CardsHandler extends BaseHandler {
         return cardMakeFee * returnRedio;
     }
 
-    /**获取一个还未使用的cardGroup id */
-    private static getNewGroupId(cardGroupInfo: CardsPto.ICardGroup[]) {
+    /**获取一个还未使用的deck id */
+    private static getNewDeckId(decks: CardsPto.IDeck[]) {
         let id = 1;
-        for (let index = 0; index < cardGroupInfo.length; index++) {
-            const info = cardGroupInfo[index];
-            if (info.groupId === id) {
+        for (let index = 0; index < decks.length; index++) {
+            const info = decks[index];
+            if (info.deckId === id) {
                 id++;
             }
         }
@@ -213,19 +213,19 @@ export class CardsHandler extends BaseHandler {
     }
 
     /**卡组合法检测 */
-    private static checkCardGroup(cardGroup: CardsPto.ICardGroup) {
+    private static checkDeck(deck: CardsPto.IDeck) {
         //没有卡牌的情况下
-        if (cardGroup.cards.length === 0) {
+        if (deck.cards.length === 0) {
             return true;
         }
 
         let sum = 0;
         const cardSet = new Set<number>();
-        for (let index = cardGroup.cards.length - 1; index >= 0; index--) {
-            const card = cardGroup.cards[index];
+        for (let index = deck.cards.length - 1; index >= 0; index--) {
+            const card = deck.cards[index];
             //如何卡牌数量是0,把这个信息删了
             if (card.count === 0) {
-                cardGroup.cards.splice(index, 1);
+                deck.cards.splice(index, 1);
                 continue;
             }
             //如果没合并，要么是客户端bug，要么是协议被修改
@@ -246,7 +246,7 @@ export class CardsHandler extends BaseHandler {
                 return false;
             }
             //只能携带本职业卡或中立卡
-            if (cardConfig.powerId !== cardGroup.powerId && cardConfig.powerId !== CardsPto.PowerType.Common) {
+            if (cardConfig.powerId !== deck.powerId && cardConfig.powerId !== CardsPto.PowerType.Common) {
                 return false;
             }
             //同一张卡最多携带3张
@@ -257,30 +257,30 @@ export class CardsHandler extends BaseHandler {
             cardSet.add(card.id);
         }
         //最多携带40张卡牌
-        if (sum > GroupCardsNum) {
+        if (sum > DeckCardsNum) {
             return false;
         }
         return true;
     }
 
     /**卡组可用性检测 */
-    private static async checkCardAccess(uid: number, cardGroup: CardsPto.ICardGroup) {
+    private static async checkCardAccess(uid: number, deck: CardsPto.IDeck) {
         const user = await GlobalVar.dbHelper.getUserInfoByKeys(uid, 'cardsInfo');
-        cardGroup.accessToUse = true;
+        deck.accessToUse = true;
         let sum = 0;
-        for (let index = 0; index < cardGroup.cards.length; index++) {
-            const cardInfo = cardGroup.cards[index];
+        for (let index = 0; index < deck.cards.length; index++) {
+            const cardInfo = deck.cards[index];
             //拥有的卡没有那么多
             if (this.getOwnerCardNumById(cardInfo.id, user) < cardInfo.count) {
-                cardGroup.accessToUse = false;
+                deck.accessToUse = false;
                 return;
             }
             sum += cardInfo.count;
         }
 
-        const heroInfo = GlobalVar.configMgr.getCardConfigById(cardGroup.heroId);
-        if (sum !== GroupCardsNum || heroInfo == null || heroInfo.powerId !== cardGroup.powerId || heroInfo.cardType !== CardsPto.CardType.Hero) {
-            cardGroup.accessToUse = false;
+        const heroInfo = GlobalVar.configMgr.getCardConfigById(deck.heroId);
+        if (sum !== DeckCardsNum || heroInfo == null || heroInfo.powerId !== deck.powerId || heroInfo.cardType !== CardsPto.CardType.Hero) {
+            deck.accessToUse = false;
         }
     }
 

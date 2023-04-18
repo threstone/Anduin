@@ -1,4 +1,4 @@
-class MatchGroupChooseView extends CardsGroupChooseView {
+class MatchDeckChooseView extends DeckChooseView {
 
     private intervalId: number;
     private timeoutId: number;
@@ -13,9 +13,9 @@ class MatchGroupChooseView extends CardsGroupChooseView {
     public open(evt: EventData): void {
         super.open();
 
-        this.observe('S_FRIEND_GROUP_STATUS_CHANGE', this.onFriendChooseStatusChange);
+        this.observe('S_FRIEND_DECK_STATUS_CHANGE', this.onFriendChooseStatusChange);
         this.observe('FriendlyMatchViewClose', this.close);
-        this.observe('FriendChooseGroupSuccess', this.chooseGroupSuccess);
+        this.observe('FriendChooseDeckSuccess', this.chooseDeckSuccess);
         this.observe('FriendUpdate', this.onFriendStatusUpdate);
 
         this.observe('S_INIT_GAME', () => {
@@ -54,17 +54,17 @@ class MatchGroupChooseView extends CardsGroupChooseView {
     }
 
     protected onChooseBtnClick() {
-        if (this.selectGroupId === -1) {
+        if (this.selectDeckId === -1) {
             TipsView.ins().showTips('挑选的卡组不合法!')
         } else {
-            FriendlyMatchModel.ins().C_GROUP_CHOOSE(this.selectGroupId);
+            FriendlyMatchModel.ins().C_DECK_CHOOSE(this.selectDeckId);
         }
     }
 
-    private chooseGroupSuccess() {
+    private chooseDeckSuccess() {
         TipsView.ins().open('选择成功,等待好友选择卡组', '取消').then((res) => {
             if(this.isOnStage()){
-                FriendlyMatchModel.ins().C_MATCH_CANCEL_GROUP();
+                FriendlyMatchModel.ins().C_MATCH_CANCEL_DECK();
             }
         })
     }

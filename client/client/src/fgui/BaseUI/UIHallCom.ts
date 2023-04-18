@@ -8,7 +8,7 @@ module BaseUI {
 		public friendCom:UIFriendCom;
 		public uidText:fairygui.GTextField;
 		public settingBtn:UIButton1;
-		public cardGroupBtn:UIButton1;
+		public deckBtn:UIButton1;
 		public fightBtn:UIButton1;
 		public pveBtn:UIButton1;
 		public miniChat:UIMiniChat;
@@ -26,7 +26,7 @@ module BaseUI {
 			this.friendCom = <UIFriendCom>(this.getChildAt(3));
 			this.uidText = <fairygui.GTextField>(this.getChildAt(4));
 			this.settingBtn = <UIButton1>(this.getChildAt(5));
-			this.cardGroupBtn = <UIButton1>(this.getChildAt(6));
+			this.deckBtn = <UIButton1>(this.getChildAt(6));
 			this.fightBtn = <UIButton1>(this.getChildAt(7));
 			this.pveBtn = <UIButton1>(this.getChildAt(8));
 			this.miniChat = <UIMiniChat>(this.getChildAt(9));

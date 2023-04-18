@@ -48,10 +48,10 @@ message Card{
 	int32 count = 1;
 }
 
-message CardGroup{
-	int32 groupId = 0;
+message Deck{
+	int32 deckId = 0;
 	repeated Card cards = 1;
-	string groupName = 2;
+	string deckName = 2;
 	PowerType powerId = 3;
 	bool accessToUse = 4;//是否拥有权限使用,如卡组中有未拥有的卡牌、卡组不满40张、卡组无英雄卡时则无权限使用
 	int32 heroId = 5;
@@ -68,7 +68,7 @@ message S_CARDS_INFO{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 2];
 	repeated Card cardInfos = 3;
-	repeated CardGroup cardGroups = 4;
+	repeated Deck deckList = 4;
 }
 
 //请求制作卡牌
@@ -105,26 +105,26 @@ message S_DISASSEMBLE_CARD{
 message C_SAVE_CARDS{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 7];
-	CardGroup cardGroup = 3;//如果是保存新卡组,那么id为空
+	Deck deck = 3;//如果是保存新卡组,那么id为空
 }
 
 //保存卡组返回
-message S_SAVE_CARDS{
+message S_SAVE_DECK{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 8];
-	CardGroup cardGroup = 3;
+	Deck deck = 3;
 }
 
 //请求删除卡组
-message C_DELETE_CARD_GROUP{
+message C_DELETE_DECK{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 9];
-	int32 groupId = 3;
+	int32 deckId = 3;
 }
 
 //删除卡组返回
-message S_DELETE_CARD_GROUP{
+message S_DELETE_DECK{
 	int32 cmd = 1[default = 4]; 
 	int32 scmd = 2[default = 10];
-	int32 groupId = 3;
+	int32 deckId = 3;
 }

@@ -1889,9 +1889,9 @@ $root.CardsPto = (function() {
         return Card;
     })();
 
-    CardsPto.CardGroup = (function() {
+    CardsPto.Deck = (function() {
 
-        function CardGroup(p) {
+        function Deck(p) {
             this.cards = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -1899,28 +1899,28 @@ $root.CardsPto = (function() {
                         this[ks[i]] = p[ks[i]];
         }
 
-        CardGroup.prototype.groupId = 0;
-        CardGroup.prototype.cards = $util.emptyArray;
-        CardGroup.prototype.groupName = "";
-        CardGroup.prototype.powerId = 0;
-        CardGroup.prototype.accessToUse = false;
-        CardGroup.prototype.heroId = 0;
+        Deck.prototype.deckId = 0;
+        Deck.prototype.cards = $util.emptyArray;
+        Deck.prototype.deckName = "";
+        Deck.prototype.powerId = 0;
+        Deck.prototype.accessToUse = false;
+        Deck.prototype.heroId = 0;
 
-        CardGroup.create = function create(properties) {
-            return new CardGroup(properties);
+        Deck.create = function create(properties) {
+            return new Deck(properties);
         };
 
-        CardGroup.encode = function encode(m, w) {
+        Deck.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
-            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
-                w.uint32(0).int32(m.groupId);
+            if (m.deckId != null && Object.hasOwnProperty.call(m, "deckId"))
+                w.uint32(0).int32(m.deckId);
             if (m.cards != null && m.cards.length) {
                 for (var i = 0; i < m.cards.length; ++i)
                     $root.CardsPto.Card.encode(m.cards[i], w.uint32(10).fork()).ldelim();
             }
-            if (m.groupName != null && Object.hasOwnProperty.call(m, "groupName"))
-                w.uint32(18).string(m.groupName);
+            if (m.deckName != null && Object.hasOwnProperty.call(m, "deckName"))
+                w.uint32(18).string(m.deckName);
             if (m.powerId != null && Object.hasOwnProperty.call(m, "powerId"))
                 w.uint32(24).int32(m.powerId);
             if (m.accessToUse != null && Object.hasOwnProperty.call(m, "accessToUse"))
@@ -1930,15 +1930,15 @@ $root.CardsPto = (function() {
             return w;
         };
 
-        CardGroup.decode = function decode(r, l) {
+        Deck.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.CardGroup();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.Deck();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
                 case 0: {
-                        m.groupId = r.int32();
+                        m.deckId = r.int32();
                         break;
                     }
                 case 1: {
@@ -1948,7 +1948,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 2: {
-                        m.groupName = r.string();
+                        m.deckName = r.string();
                         break;
                     }
                 case 3: {
@@ -1971,25 +1971,25 @@ $root.CardsPto = (function() {
             return m;
         };
 
-        CardGroup.fromObject = function fromObject(d) {
-            if (d instanceof $root.CardsPto.CardGroup)
+        Deck.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.Deck)
                 return d;
-            var m = new $root.CardsPto.CardGroup();
-            if (d.groupId != null) {
-                m.groupId = d.groupId | 0;
+            var m = new $root.CardsPto.Deck();
+            if (d.deckId != null) {
+                m.deckId = d.deckId | 0;
             }
             if (d.cards) {
                 if (!Array.isArray(d.cards))
-                    throw TypeError(".CardsPto.CardGroup.cards: array expected");
+                    throw TypeError(".CardsPto.Deck.cards: array expected");
                 m.cards = [];
                 for (var i = 0; i < d.cards.length; ++i) {
                     if (typeof d.cards[i] !== "object")
-                        throw TypeError(".CardsPto.CardGroup.cards: object expected");
+                        throw TypeError(".CardsPto.Deck.cards: object expected");
                     m.cards[i] = $root.CardsPto.Card.fromObject(d.cards[i]);
                 }
             }
-            if (d.groupName != null) {
-                m.groupName = String(d.groupName);
+            if (d.deckName != null) {
+                m.deckName = String(d.deckName);
             }
             switch (d.powerId) {
             default:
@@ -2036,7 +2036,7 @@ $root.CardsPto = (function() {
             return m;
         };
 
-        CardGroup.toObject = function toObject(m, o) {
+        Deck.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -2044,14 +2044,14 @@ $root.CardsPto = (function() {
                 d.cards = [];
             }
             if (o.defaults) {
-                d.groupId = 0;
-                d.groupName = "";
+                d.deckId = 0;
+                d.deckName = "";
                 d.powerId = o.enums === String ? "Common" : 0;
                 d.accessToUse = false;
                 d.heroId = 0;
             }
-            if (m.groupId != null && m.hasOwnProperty("groupId")) {
-                d.groupId = m.groupId;
+            if (m.deckId != null && m.hasOwnProperty("deckId")) {
+                d.deckId = m.deckId;
             }
             if (m.cards && m.cards.length) {
                 d.cards = [];
@@ -2059,8 +2059,8 @@ $root.CardsPto = (function() {
                     d.cards[j] = $root.CardsPto.Card.toObject(m.cards[j], o);
                 }
             }
-            if (m.groupName != null && m.hasOwnProperty("groupName")) {
-                d.groupName = m.groupName;
+            if (m.deckName != null && m.hasOwnProperty("deckName")) {
+                d.deckName = m.deckName;
             }
             if (m.powerId != null && m.hasOwnProperty("powerId")) {
                 d.powerId = o.enums === String ? $root.CardsPto.PowerType[m.powerId] === undefined ? m.powerId : $root.CardsPto.PowerType[m.powerId] : m.powerId;
@@ -2074,18 +2074,18 @@ $root.CardsPto = (function() {
             return d;
         };
 
-        CardGroup.prototype.toJSON = function toJSON() {
+        Deck.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        CardGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        Deck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.CardGroup";
+            return typeUrlPrefix + "/CardsPto.Deck";
         };
 
-        return CardGroup;
+        return Deck;
     })();
 
     CardsPto.C_REQ_CARDS_INFO = (function() {
@@ -2185,7 +2185,7 @@ $root.CardsPto = (function() {
 
         function S_CARDS_INFO(p) {
             this.cardInfos = [];
-            this.cardGroups = [];
+            this.deckList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
@@ -2195,7 +2195,7 @@ $root.CardsPto = (function() {
         S_CARDS_INFO.prototype.cmd = 4;
         S_CARDS_INFO.prototype.scmd = 2;
         S_CARDS_INFO.prototype.cardInfos = $util.emptyArray;
-        S_CARDS_INFO.prototype.cardGroups = $util.emptyArray;
+        S_CARDS_INFO.prototype.deckList = $util.emptyArray;
 
         S_CARDS_INFO.create = function create(properties) {
             return new S_CARDS_INFO(properties);
@@ -2212,9 +2212,9 @@ $root.CardsPto = (function() {
                 for (var i = 0; i < m.cardInfos.length; ++i)
                     $root.CardsPto.Card.encode(m.cardInfos[i], w.uint32(26).fork()).ldelim();
             }
-            if (m.cardGroups != null && m.cardGroups.length) {
-                for (var i = 0; i < m.cardGroups.length; ++i)
-                    $root.CardsPto.CardGroup.encode(m.cardGroups[i], w.uint32(34).fork()).ldelim();
+            if (m.deckList != null && m.deckList.length) {
+                for (var i = 0; i < m.deckList.length; ++i)
+                    $root.CardsPto.Deck.encode(m.deckList[i], w.uint32(34).fork()).ldelim();
             }
             return w;
         };
@@ -2241,9 +2241,9 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 4: {
-                        if (!(m.cardGroups && m.cardGroups.length))
-                            m.cardGroups = [];
-                        m.cardGroups.push($root.CardsPto.CardGroup.decode(r, r.uint32()));
+                        if (!(m.deckList && m.deckList.length))
+                            m.deckList = [];
+                        m.deckList.push($root.CardsPto.Deck.decode(r, r.uint32()));
                         break;
                     }
                 default:
@@ -2274,14 +2274,14 @@ $root.CardsPto = (function() {
                     m.cardInfos[i] = $root.CardsPto.Card.fromObject(d.cardInfos[i]);
                 }
             }
-            if (d.cardGroups) {
-                if (!Array.isArray(d.cardGroups))
-                    throw TypeError(".CardsPto.S_CARDS_INFO.cardGroups: array expected");
-                m.cardGroups = [];
-                for (var i = 0; i < d.cardGroups.length; ++i) {
-                    if (typeof d.cardGroups[i] !== "object")
-                        throw TypeError(".CardsPto.S_CARDS_INFO.cardGroups: object expected");
-                    m.cardGroups[i] = $root.CardsPto.CardGroup.fromObject(d.cardGroups[i]);
+            if (d.deckList) {
+                if (!Array.isArray(d.deckList))
+                    throw TypeError(".CardsPto.S_CARDS_INFO.deckList: array expected");
+                m.deckList = [];
+                for (var i = 0; i < d.deckList.length; ++i) {
+                    if (typeof d.deckList[i] !== "object")
+                        throw TypeError(".CardsPto.S_CARDS_INFO.deckList: object expected");
+                    m.deckList[i] = $root.CardsPto.Deck.fromObject(d.deckList[i]);
                 }
             }
             return m;
@@ -2293,7 +2293,7 @@ $root.CardsPto = (function() {
             var d = {};
             if (o.arrays || o.defaults) {
                 d.cardInfos = [];
-                d.cardGroups = [];
+                d.deckList = [];
             }
             if (o.defaults) {
                 d.cmd = 4;
@@ -2311,10 +2311,10 @@ $root.CardsPto = (function() {
                     d.cardInfos[j] = $root.CardsPto.Card.toObject(m.cardInfos[j], o);
                 }
             }
-            if (m.cardGroups && m.cardGroups.length) {
-                d.cardGroups = [];
-                for (var j = 0; j < m.cardGroups.length; ++j) {
-                    d.cardGroups[j] = $root.CardsPto.CardGroup.toObject(m.cardGroups[j], o);
+            if (m.deckList && m.deckList.length) {
+                d.deckList = [];
+                for (var j = 0; j < m.deckList.length; ++j) {
+                    d.deckList[j] = $root.CardsPto.Deck.toObject(m.deckList[j], o);
                 }
             }
             return d;
@@ -2801,7 +2801,7 @@ $root.CardsPto = (function() {
 
         C_SAVE_CARDS.prototype.cmd = 4;
         C_SAVE_CARDS.prototype.scmd = 7;
-        C_SAVE_CARDS.prototype.cardGroup = null;
+        C_SAVE_CARDS.prototype.deck = null;
 
         C_SAVE_CARDS.create = function create(properties) {
             return new C_SAVE_CARDS(properties);
@@ -2814,8 +2814,8 @@ $root.CardsPto = (function() {
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.cardGroup != null && Object.hasOwnProperty.call(m, "cardGroup"))
-                $root.CardsPto.CardGroup.encode(m.cardGroup, w.uint32(26).fork()).ldelim();
+            if (m.deck != null && Object.hasOwnProperty.call(m, "deck"))
+                $root.CardsPto.Deck.encode(m.deck, w.uint32(26).fork()).ldelim();
             return w;
         };
 
@@ -2835,7 +2835,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.cardGroup = $root.CardsPto.CardGroup.decode(r, r.uint32());
+                        m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
                         break;
                     }
                 default:
@@ -2856,10 +2856,10 @@ $root.CardsPto = (function() {
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.cardGroup != null) {
-                if (typeof d.cardGroup !== "object")
-                    throw TypeError(".CardsPto.C_SAVE_CARDS.cardGroup: object expected");
-                m.cardGroup = $root.CardsPto.CardGroup.fromObject(d.cardGroup);
+            if (d.deck != null) {
+                if (typeof d.deck !== "object")
+                    throw TypeError(".CardsPto.C_SAVE_CARDS.deck: object expected");
+                m.deck = $root.CardsPto.Deck.fromObject(d.deck);
             }
             return m;
         };
@@ -2871,7 +2871,7 @@ $root.CardsPto = (function() {
             if (o.defaults) {
                 d.cmd = 4;
                 d.scmd = 7;
-                d.cardGroup = null;
+                d.deck = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -2879,8 +2879,8 @@ $root.CardsPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.cardGroup != null && m.hasOwnProperty("cardGroup")) {
-                d.cardGroup = $root.CardsPto.CardGroup.toObject(m.cardGroup, o);
+            if (m.deck != null && m.hasOwnProperty("deck")) {
+                d.deck = $root.CardsPto.Deck.toObject(m.deck, o);
             }
             return d;
         };
@@ -2899,39 +2899,39 @@ $root.CardsPto = (function() {
         return C_SAVE_CARDS;
     })();
 
-    CardsPto.S_SAVE_CARDS = (function() {
+    CardsPto.S_SAVE_DECK = (function() {
 
-        function S_SAVE_CARDS(p) {
+        function S_SAVE_DECK(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_SAVE_CARDS.prototype.cmd = 4;
-        S_SAVE_CARDS.prototype.scmd = 8;
-        S_SAVE_CARDS.prototype.cardGroup = null;
+        S_SAVE_DECK.prototype.cmd = 4;
+        S_SAVE_DECK.prototype.scmd = 8;
+        S_SAVE_DECK.prototype.deck = null;
 
-        S_SAVE_CARDS.create = function create(properties) {
-            return new S_SAVE_CARDS(properties);
+        S_SAVE_DECK.create = function create(properties) {
+            return new S_SAVE_DECK(properties);
         };
 
-        S_SAVE_CARDS.encode = function encode(m, w) {
+        S_SAVE_DECK.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.cardGroup != null && Object.hasOwnProperty.call(m, "cardGroup"))
-                $root.CardsPto.CardGroup.encode(m.cardGroup, w.uint32(26).fork()).ldelim();
+            if (m.deck != null && Object.hasOwnProperty.call(m, "deck"))
+                $root.CardsPto.Deck.encode(m.deck, w.uint32(26).fork()).ldelim();
             return w;
         };
 
-        S_SAVE_CARDS.decode = function decode(r, l) {
+        S_SAVE_DECK.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_SAVE_CARDS();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_SAVE_DECK();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -2944,7 +2944,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.cardGroup = $root.CardsPto.CardGroup.decode(r, r.uint32());
+                        m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
                         break;
                     }
                 default:
@@ -2955,32 +2955,32 @@ $root.CardsPto = (function() {
             return m;
         };
 
-        S_SAVE_CARDS.fromObject = function fromObject(d) {
-            if (d instanceof $root.CardsPto.S_SAVE_CARDS)
+        S_SAVE_DECK.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_SAVE_DECK)
                 return d;
-            var m = new $root.CardsPto.S_SAVE_CARDS();
+            var m = new $root.CardsPto.S_SAVE_DECK();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.cardGroup != null) {
-                if (typeof d.cardGroup !== "object")
-                    throw TypeError(".CardsPto.S_SAVE_CARDS.cardGroup: object expected");
-                m.cardGroup = $root.CardsPto.CardGroup.fromObject(d.cardGroup);
+            if (d.deck != null) {
+                if (typeof d.deck !== "object")
+                    throw TypeError(".CardsPto.S_SAVE_DECK.deck: object expected");
+                m.deck = $root.CardsPto.Deck.fromObject(d.deck);
             }
             return m;
         };
 
-        S_SAVE_CARDS.toObject = function toObject(m, o) {
+        S_SAVE_DECK.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
             if (o.defaults) {
                 d.cmd = 4;
                 d.scmd = 8;
-                d.cardGroup = null;
+                d.deck = null;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -2988,59 +2988,59 @@ $root.CardsPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.cardGroup != null && m.hasOwnProperty("cardGroup")) {
-                d.cardGroup = $root.CardsPto.CardGroup.toObject(m.cardGroup, o);
+            if (m.deck != null && m.hasOwnProperty("deck")) {
+                d.deck = $root.CardsPto.Deck.toObject(m.deck, o);
             }
             return d;
         };
 
-        S_SAVE_CARDS.prototype.toJSON = function toJSON() {
+        S_SAVE_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_SAVE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.S_SAVE_CARDS";
+            return typeUrlPrefix + "/CardsPto.S_SAVE_DECK";
         };
 
-        return S_SAVE_CARDS;
+        return S_SAVE_DECK;
     })();
 
-    CardsPto.C_DELETE_CARD_GROUP = (function() {
+    CardsPto.C_DELETE_DECK = (function() {
 
-        function C_DELETE_CARD_GROUP(p) {
+        function C_DELETE_DECK(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        C_DELETE_CARD_GROUP.prototype.cmd = 4;
-        C_DELETE_CARD_GROUP.prototype.scmd = 9;
-        C_DELETE_CARD_GROUP.prototype.groupId = 0;
+        C_DELETE_DECK.prototype.cmd = 4;
+        C_DELETE_DECK.prototype.scmd = 9;
+        C_DELETE_DECK.prototype.deckId = 0;
 
-        C_DELETE_CARD_GROUP.create = function create(properties) {
-            return new C_DELETE_CARD_GROUP(properties);
+        C_DELETE_DECK.create = function create(properties) {
+            return new C_DELETE_DECK(properties);
         };
 
-        C_DELETE_CARD_GROUP.encode = function encode(m, w) {
+        C_DELETE_DECK.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
-                w.uint32(24).int32(m.groupId);
+            if (m.deckId != null && Object.hasOwnProperty.call(m, "deckId"))
+                w.uint32(24).int32(m.deckId);
             return w;
         };
 
-        C_DELETE_CARD_GROUP.decode = function decode(r, l) {
+        C_DELETE_DECK.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.C_DELETE_DECK();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -3053,7 +3053,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.groupId = r.int32();
+                        m.deckId = r.int32();
                         break;
                     }
                 default:
@@ -3064,30 +3064,30 @@ $root.CardsPto = (function() {
             return m;
         };
 
-        C_DELETE_CARD_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.CardsPto.C_DELETE_CARD_GROUP)
+        C_DELETE_DECK.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.C_DELETE_DECK)
                 return d;
-            var m = new $root.CardsPto.C_DELETE_CARD_GROUP();
+            var m = new $root.CardsPto.C_DELETE_DECK();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.groupId != null) {
-                m.groupId = d.groupId | 0;
+            if (d.deckId != null) {
+                m.deckId = d.deckId | 0;
             }
             return m;
         };
 
-        C_DELETE_CARD_GROUP.toObject = function toObject(m, o) {
+        C_DELETE_DECK.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
             if (o.defaults) {
                 d.cmd = 4;
                 d.scmd = 9;
-                d.groupId = 0;
+                d.deckId = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -3095,59 +3095,59 @@ $root.CardsPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.groupId != null && m.hasOwnProperty("groupId")) {
-                d.groupId = m.groupId;
+            if (m.deckId != null && m.hasOwnProperty("deckId")) {
+                d.deckId = m.deckId;
             }
             return d;
         };
 
-        C_DELETE_CARD_GROUP.prototype.toJSON = function toJSON() {
+        C_DELETE_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.C_DELETE_CARD_GROUP";
+            return typeUrlPrefix + "/CardsPto.C_DELETE_DECK";
         };
 
-        return C_DELETE_CARD_GROUP;
+        return C_DELETE_DECK;
     })();
 
-    CardsPto.S_DELETE_CARD_GROUP = (function() {
+    CardsPto.S_DELETE_DECK = (function() {
 
-        function S_DELETE_CARD_GROUP(p) {
+        function S_DELETE_DECK(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_DELETE_CARD_GROUP.prototype.cmd = 4;
-        S_DELETE_CARD_GROUP.prototype.scmd = 10;
-        S_DELETE_CARD_GROUP.prototype.groupId = 0;
+        S_DELETE_DECK.prototype.cmd = 4;
+        S_DELETE_DECK.prototype.scmd = 10;
+        S_DELETE_DECK.prototype.deckId = 0;
 
-        S_DELETE_CARD_GROUP.create = function create(properties) {
-            return new S_DELETE_CARD_GROUP(properties);
+        S_DELETE_DECK.create = function create(properties) {
+            return new S_DELETE_DECK(properties);
         };
 
-        S_DELETE_CARD_GROUP.encode = function encode(m, w) {
+        S_DELETE_DECK.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.groupId != null && Object.hasOwnProperty.call(m, "groupId"))
-                w.uint32(24).int32(m.groupId);
+            if (m.deckId != null && Object.hasOwnProperty.call(m, "deckId"))
+                w.uint32(24).int32(m.deckId);
             return w;
         };
 
-        S_DELETE_CARD_GROUP.decode = function decode(r, l) {
+        S_DELETE_DECK.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.CardsPto.S_DELETE_DECK();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -3160,7 +3160,7 @@ $root.CardsPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.groupId = r.int32();
+                        m.deckId = r.int32();
                         break;
                     }
                 default:
@@ -3171,30 +3171,30 @@ $root.CardsPto = (function() {
             return m;
         };
 
-        S_DELETE_CARD_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.CardsPto.S_DELETE_CARD_GROUP)
+        S_DELETE_DECK.fromObject = function fromObject(d) {
+            if (d instanceof $root.CardsPto.S_DELETE_DECK)
                 return d;
-            var m = new $root.CardsPto.S_DELETE_CARD_GROUP();
+            var m = new $root.CardsPto.S_DELETE_DECK();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.groupId != null) {
-                m.groupId = d.groupId | 0;
+            if (d.deckId != null) {
+                m.deckId = d.deckId | 0;
             }
             return m;
         };
 
-        S_DELETE_CARD_GROUP.toObject = function toObject(m, o) {
+        S_DELETE_DECK.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
             if (o.defaults) {
                 d.cmd = 4;
                 d.scmd = 10;
-                d.groupId = 0;
+                d.deckId = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -3202,24 +3202,24 @@ $root.CardsPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.groupId != null && m.hasOwnProperty("groupId")) {
-                d.groupId = m.groupId;
+            if (m.deckId != null && m.hasOwnProperty("deckId")) {
+                d.deckId = m.deckId;
             }
             return d;
         };
 
-        S_DELETE_CARD_GROUP.prototype.toJSON = function toJSON() {
+        S_DELETE_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_DELETE_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/CardsPto.S_DELETE_CARD_GROUP";
+            return typeUrlPrefix + "/CardsPto.S_DELETE_DECK";
         };
 
-        return S_DELETE_CARD_GROUP;
+        return S_DELETE_DECK;
     })();
 
     return CardsPto;
@@ -9566,24 +9566,24 @@ $root.FriendlyMatchPto = (function() {
         return C_REQ_MATCH_RESULT;
     })();
 
-    FriendlyMatchPto.S_MATCH_CARD_GROUP = (function() {
+    FriendlyMatchPto.S_MATCH_DECK = (function() {
 
-        function S_MATCH_CARD_GROUP(p) {
+        function S_MATCH_DECK(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_MATCH_CARD_GROUP.prototype.cmd = 201;
-        S_MATCH_CARD_GROUP.prototype.scmd = 7;
-        S_MATCH_CARD_GROUP.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        S_MATCH_DECK.prototype.cmd = 201;
+        S_MATCH_DECK.prototype.scmd = 7;
+        S_MATCH_DECK.prototype.endTime = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
-        S_MATCH_CARD_GROUP.create = function create(properties) {
-            return new S_MATCH_CARD_GROUP(properties);
+        S_MATCH_DECK.create = function create(properties) {
+            return new S_MATCH_DECK(properties);
         };
 
-        S_MATCH_CARD_GROUP.encode = function encode(m, w) {
+        S_MATCH_DECK.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -9595,10 +9595,10 @@ $root.FriendlyMatchPto = (function() {
             return w;
         };
 
-        S_MATCH_CARD_GROUP.decode = function decode(r, l) {
+        S_MATCH_DECK.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_MATCH_CARD_GROUP();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_MATCH_DECK();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -9622,10 +9622,10 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_MATCH_CARD_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendlyMatchPto.S_MATCH_CARD_GROUP)
+        S_MATCH_DECK.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_MATCH_DECK)
                 return d;
-            var m = new $root.FriendlyMatchPto.S_MATCH_CARD_GROUP();
+            var m = new $root.FriendlyMatchPto.S_MATCH_DECK();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -9645,7 +9645,7 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_MATCH_CARD_GROUP.toObject = function toObject(m, o) {
+        S_MATCH_DECK.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -9673,53 +9673,53 @@ $root.FriendlyMatchPto = (function() {
             return d;
         };
 
-        S_MATCH_CARD_GROUP.prototype.toJSON = function toJSON() {
+        S_MATCH_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MATCH_CARD_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_MATCH_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_CARD_GROUP";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_DECK";
         };
 
-        return S_MATCH_CARD_GROUP;
+        return S_MATCH_DECK;
     })();
 
-    FriendlyMatchPto.C_GROUP_CHOOSE = (function() {
+    FriendlyMatchPto.C_DECK_CHOOSE = (function() {
 
-        function C_GROUP_CHOOSE(p) {
+        function C_DECK_CHOOSE(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        C_GROUP_CHOOSE.prototype.cmd = 201;
-        C_GROUP_CHOOSE.prototype.scmd = 8;
-        C_GROUP_CHOOSE.prototype.cardGroupId = 0;
+        C_DECK_CHOOSE.prototype.cmd = 201;
+        C_DECK_CHOOSE.prototype.scmd = 8;
+        C_DECK_CHOOSE.prototype.deckId = 0;
 
-        C_GROUP_CHOOSE.create = function create(properties) {
-            return new C_GROUP_CHOOSE(properties);
+        C_DECK_CHOOSE.create = function create(properties) {
+            return new C_DECK_CHOOSE(properties);
         };
 
-        C_GROUP_CHOOSE.encode = function encode(m, w) {
+        C_DECK_CHOOSE.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
                 w.uint32(8).int32(m.cmd);
             if (m.scmd != null && Object.hasOwnProperty.call(m, "scmd"))
                 w.uint32(16).int32(m.scmd);
-            if (m.cardGroupId != null && Object.hasOwnProperty.call(m, "cardGroupId"))
-                w.uint32(24).int32(m.cardGroupId);
+            if (m.deckId != null && Object.hasOwnProperty.call(m, "deckId"))
+                w.uint32(24).int32(m.deckId);
             return w;
         };
 
-        C_GROUP_CHOOSE.decode = function decode(r, l) {
+        C_DECK_CHOOSE.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_GROUP_CHOOSE();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_DECK_CHOOSE();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -9732,7 +9732,7 @@ $root.FriendlyMatchPto = (function() {
                         break;
                     }
                 case 3: {
-                        m.cardGroupId = r.int32();
+                        m.deckId = r.int32();
                         break;
                     }
                 default:
@@ -9743,30 +9743,30 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        C_GROUP_CHOOSE.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendlyMatchPto.C_GROUP_CHOOSE)
+        C_DECK_CHOOSE.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_DECK_CHOOSE)
                 return d;
-            var m = new $root.FriendlyMatchPto.C_GROUP_CHOOSE();
+            var m = new $root.FriendlyMatchPto.C_DECK_CHOOSE();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
             if (d.scmd != null) {
                 m.scmd = d.scmd | 0;
             }
-            if (d.cardGroupId != null) {
-                m.cardGroupId = d.cardGroupId | 0;
+            if (d.deckId != null) {
+                m.deckId = d.deckId | 0;
             }
             return m;
         };
 
-        C_GROUP_CHOOSE.toObject = function toObject(m, o) {
+        C_DECK_CHOOSE.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
             if (o.defaults) {
                 d.cmd = 201;
                 d.scmd = 8;
-                d.cardGroupId = 0;
+                d.deckId = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -9774,43 +9774,43 @@ $root.FriendlyMatchPto = (function() {
             if (m.scmd != null && m.hasOwnProperty("scmd")) {
                 d.scmd = m.scmd;
             }
-            if (m.cardGroupId != null && m.hasOwnProperty("cardGroupId")) {
-                d.cardGroupId = m.cardGroupId;
+            if (m.deckId != null && m.hasOwnProperty("deckId")) {
+                d.deckId = m.deckId;
             }
             return d;
         };
 
-        C_GROUP_CHOOSE.prototype.toJSON = function toJSON() {
+        C_DECK_CHOOSE.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_GROUP_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_DECK_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_GROUP_CHOOSE";
+            return typeUrlPrefix + "/FriendlyMatchPto.C_DECK_CHOOSE";
         };
 
-        return C_GROUP_CHOOSE;
+        return C_DECK_CHOOSE;
     })();
 
-    FriendlyMatchPto.C_MATCH_CANCEL_GROUP = (function() {
+    FriendlyMatchPto.C_MATCH_CANCEL_DECK = (function() {
 
-        function C_MATCH_CANCEL_GROUP(p) {
+        function C_MATCH_CANCEL_DECK(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        C_MATCH_CANCEL_GROUP.prototype.cmd = 201;
-        C_MATCH_CANCEL_GROUP.prototype.scmd = 9;
+        C_MATCH_CANCEL_DECK.prototype.cmd = 201;
+        C_MATCH_CANCEL_DECK.prototype.scmd = 9;
 
-        C_MATCH_CANCEL_GROUP.create = function create(properties) {
-            return new C_MATCH_CANCEL_GROUP(properties);
+        C_MATCH_CANCEL_DECK.create = function create(properties) {
+            return new C_MATCH_CANCEL_DECK(properties);
         };
 
-        C_MATCH_CANCEL_GROUP.encode = function encode(m, w) {
+        C_MATCH_CANCEL_DECK.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -9820,10 +9820,10 @@ $root.FriendlyMatchPto = (function() {
             return w;
         };
 
-        C_MATCH_CANCEL_GROUP.decode = function decode(r, l) {
+        C_MATCH_CANCEL_DECK.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_DECK();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -9843,10 +9843,10 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        C_MATCH_CANCEL_GROUP.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP)
+        C_MATCH_CANCEL_DECK.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.C_MATCH_CANCEL_DECK)
                 return d;
-            var m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+            var m = new $root.FriendlyMatchPto.C_MATCH_CANCEL_DECK();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -9856,7 +9856,7 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        C_MATCH_CANCEL_GROUP.toObject = function toObject(m, o) {
+        C_MATCH_CANCEL_DECK.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -9873,18 +9873,18 @@ $root.FriendlyMatchPto = (function() {
             return d;
         };
 
-        C_MATCH_CANCEL_GROUP.prototype.toJSON = function toJSON() {
+        C_MATCH_CANCEL_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_MATCH_CANCEL_GROUP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        C_MATCH_CANCEL_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_GROUP";
+            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_DECK";
         };
 
-        return C_MATCH_CANCEL_GROUP;
+        return C_MATCH_CANCEL_DECK;
     })();
 
     FriendlyMatchPto.C_MATCH_LEAVE = (function() {
@@ -10087,24 +10087,24 @@ $root.FriendlyMatchPto = (function() {
         return S_MATCH_STOP;
     })();
 
-    FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE = (function() {
+    FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE = (function() {
 
-        function S_FRIEND_GROUP_STATUS_CHANGE(p) {
+        function S_FRIEND_DECK_STATUS_CHANGE(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.cmd = 201;
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.scmd = 12;
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.isChoose = false;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.cmd = 201;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.scmd = 12;
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.isChoose = false;
 
-        S_FRIEND_GROUP_STATUS_CHANGE.create = function create(properties) {
-            return new S_FRIEND_GROUP_STATUS_CHANGE(properties);
+        S_FRIEND_DECK_STATUS_CHANGE.create = function create(properties) {
+            return new S_FRIEND_DECK_STATUS_CHANGE(properties);
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.encode = function encode(m, w) {
+        S_FRIEND_DECK_STATUS_CHANGE.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -10116,10 +10116,10 @@ $root.FriendlyMatchPto = (function() {
             return w;
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.decode = function decode(r, l) {
+        S_FRIEND_DECK_STATUS_CHANGE.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -10143,10 +10143,10 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE)
+        S_FRIEND_DECK_STATUS_CHANGE.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE)
                 return d;
-            var m = new $root.FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE();
+            var m = new $root.FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -10159,7 +10159,7 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.toObject = function toObject(m, o) {
+        S_FRIEND_DECK_STATUS_CHANGE.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -10180,38 +10180,38 @@ $root.FriendlyMatchPto = (function() {
             return d;
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.prototype.toJSON = function toJSON() {
+        S_FRIEND_DECK_STATUS_CHANGE.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_FRIEND_GROUP_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_FRIEND_DECK_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE";
         };
 
-        return S_FRIEND_GROUP_STATUS_CHANGE;
+        return S_FRIEND_DECK_STATUS_CHANGE;
     })();
 
-    FriendlyMatchPto.S_GROUP_CHOOSE_RESULT = (function() {
+    FriendlyMatchPto.S_DECK_CHOOSE_RESULT = (function() {
 
-        function S_GROUP_CHOOSE_RESULT(p) {
+        function S_DECK_CHOOSE_RESULT(p) {
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
                     if (p[ks[i]] != null)
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_GROUP_CHOOSE_RESULT.prototype.cmd = 201;
-        S_GROUP_CHOOSE_RESULT.prototype.scmd = 13;
-        S_GROUP_CHOOSE_RESULT.prototype.code = 0;
+        S_DECK_CHOOSE_RESULT.prototype.cmd = 201;
+        S_DECK_CHOOSE_RESULT.prototype.scmd = 13;
+        S_DECK_CHOOSE_RESULT.prototype.code = 0;
 
-        S_GROUP_CHOOSE_RESULT.create = function create(properties) {
-            return new S_GROUP_CHOOSE_RESULT(properties);
+        S_DECK_CHOOSE_RESULT.create = function create(properties) {
+            return new S_DECK_CHOOSE_RESULT(properties);
         };
 
-        S_GROUP_CHOOSE_RESULT.encode = function encode(m, w) {
+        S_DECK_CHOOSE_RESULT.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -10223,10 +10223,10 @@ $root.FriendlyMatchPto = (function() {
             return w;
         };
 
-        S_GROUP_CHOOSE_RESULT.decode = function decode(r, l) {
+        S_DECK_CHOOSE_RESULT.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.FriendlyMatchPto.S_DECK_CHOOSE_RESULT();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -10250,10 +10250,10 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_GROUP_CHOOSE_RESULT.fromObject = function fromObject(d) {
-            if (d instanceof $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT)
+        S_DECK_CHOOSE_RESULT.fromObject = function fromObject(d) {
+            if (d instanceof $root.FriendlyMatchPto.S_DECK_CHOOSE_RESULT)
                 return d;
-            var m = new $root.FriendlyMatchPto.S_GROUP_CHOOSE_RESULT();
+            var m = new $root.FriendlyMatchPto.S_DECK_CHOOSE_RESULT();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -10266,7 +10266,7 @@ $root.FriendlyMatchPto = (function() {
             return m;
         };
 
-        S_GROUP_CHOOSE_RESULT.toObject = function toObject(m, o) {
+        S_DECK_CHOOSE_RESULT.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -10287,18 +10287,18 @@ $root.FriendlyMatchPto = (function() {
             return d;
         };
 
-        S_GROUP_CHOOSE_RESULT.prototype.toJSON = function toJSON() {
+        S_DECK_CHOOSE_RESULT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_GROUP_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+        S_DECK_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
             if (typeUrlPrefix === undefined) {
                 typeUrlPrefix = "type.googleapis.com";
             }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_GROUP_CHOOSE_RESULT";
+            return typeUrlPrefix + "/FriendlyMatchPto.S_DECK_CHOOSE_RESULT";
         };
 
-        return S_GROUP_CHOOSE_RESULT;
+        return S_DECK_CHOOSE_RESULT;
     })();
 
     return FriendlyMatchPto;

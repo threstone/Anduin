@@ -20,8 +20,8 @@ export class GameUser {
     private _table: GameTable;
     get table() { return this._table; }
 
-    private _cardGroup: CardsPto.CardGroup;
-    get powerId() { return this._cardGroup.powerId }
+    private _deck: CardsPto.Deck;
+    get powerId() { return this._deck.powerId }
 
     /**卡池 */
     private _cardPool: BaseCard[];
@@ -107,7 +107,7 @@ export class GameUser {
         this._table = table;
         this.isOnline = true;
 
-        this._cardGroup = matchUser.cardGroup;
+        this._deck = matchUser.deck;
     }
 
     /**回合开始 */
@@ -124,8 +124,8 @@ export class GameUser {
         this.isReplace = false;
         this.isFirst = false;
         this._cardPool = [];
-        for (let index = 0; index < this._cardGroup.cards.length; index++) {
-            const cardInfo = this._cardGroup.cards[index];
+        for (let index = 0; index < this._deck.cards.length; index++) {
+            const cardInfo = this._deck.cards[index];
             for (let z = 0; z < cardInfo.count; z++) {
                 const card = GlobalVar.cardMgr.getCardInstance(cardInfo.id, this.uid, this.table);
                 this.addToCardPool(card);
@@ -151,13 +151,13 @@ export class GameUser {
      */
     private initStartEntity() {
         /**设置英雄到战场 */
-        const heroCard = GlobalVar.cardMgr.getCardInstance(this._cardGroup.heroId, this.uid, this.table) as UnitCard;
+        const heroCard = GlobalVar.cardMgr.getCardInstance(this._deck.heroId, this.uid, this.table) as UnitCard;
         heroCard.blockX = 3;
         //如果自己是先手玩家,那么自己的英雄的位置在下方
         heroCard.blockY = this === this.table.users[this.table.roundUserIndex] ? 7 : 0;
         this.setEntityToMap(heroCard);
 
-        const baseCampCardId = GlobalVar.cardMgr.getBaseCampCardId(this._cardGroup.powerId);
+        const baseCampCardId = GlobalVar.cardMgr.getBaseCampCardId(this._deck.powerId);
         const baseCamp = GlobalVar.cardMgr.getCardInstance(baseCampCardId, this.uid, this.table) as UnitCard;
         baseCamp.blockY = heroCard.blockY;
         baseCamp.blockX = baseCamp.blockY !== 0 ? 4 : 2;

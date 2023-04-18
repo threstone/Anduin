@@ -42,8 +42,8 @@ export class UserModel extends Model {
         },
         set(obj: any) {
             if (typeof (obj) === 'string') {
-                this.setDataValue('cardsInfo',obj);
-            }else{
+                this.setDataValue('cardsInfo', obj);
+            } else {
                 this.setDataValue('cardsInfo', JSON.stringify(obj));
             }
         }
@@ -52,20 +52,20 @@ export class UserModel extends Model {
     cardsInfo: CardsPto.ICard[]
 
     @Column({
-        type: DataType.TEXT, comment: '卡牌信息', field: 'card_group_info',
+        type: DataType.TEXT, comment: '卡组信息', field: 'decks',
         get() {
-            return JSON.parse(this.getDataValue('cardGroupInfo'))
+            return JSON.parse(this.getDataValue('decks'))
         },
         set(obj: any) {
             if (typeof (obj) === 'string') {
-                this.setDataValue('cardGroupInfo',obj);
-            }else{
-                this.setDataValue('cardGroupInfo', JSON.stringify(obj));
+                this.setDataValue('decks', obj);
+            } else {
+                this.setDataValue('decks', JSON.stringify(obj));
             }
         }
         , defaultValue: '[]'
     })
-    cardGroupInfo: CardsPto.ICardGroup[]
+    decks: CardsPto.IDeck[]
 
     static async isExist(account: string): Promise<boolean> {
         const count = await UserModel.count({ where: { account } });

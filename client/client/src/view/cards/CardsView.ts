@@ -2,8 +2,8 @@ const PageCardNum = 10;
 class CardsView extends BaseView<BaseUI.UICardsCom> {
 
     /**创建卡组数据缓存 */
-    private _cacheCreateGroupInfo: CardGroupInfo;
-    get cacheCreateGroupInfo() { return this._cacheCreateGroupInfo }
+    private _cacheCreateDeckInfo: DeckInfo;
+    get cacheCreateDeckInfo() { return this._cacheCreateDeckInfo }
 
     /**是否正在创建卡组中 */
     private _isCreating: boolean;
@@ -15,7 +15,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     protected init() {
         this.view = BaseUI.UICardsCom.createInstance();
 
-        this._cacheCreateGroupInfo = new CardGroupInfo();
+        this._cacheCreateDeckInfo = new DeckInfo();
         this._isCreating = false;
 
         this.view.functionBtn.describe.text = '保存';
@@ -31,7 +31,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     }
 
     public open(): void {
-        if (!CardsModel.ins().cardGroups) {
+        if (!CardsModel.ins().deckList) {
             TipsView.ins().showTips('loading...', 5000);
             return;
         }
@@ -42,45 +42,45 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     }
 
     private initView() {
-        this.observe('CardsGroupUpdate', this.updateGroupList);
-        this.observe('CardChange', this.refreshCreateGroupList);
+        this.observe('DeckUpdate', this.updateGroupList);
+        this.observe('CardChange', this.refreshCreateDeckList);
         this.initRightGroup();
     }
 
     /**更新卡组list */
     private updateGroupList() {
-        const list = this.view.cardGroupList;
+        const list = this.view.deckList;
         this.removeChildrenEvents(list, ['clickLoader', 'delete']);
         list.removeChildren();
 
         //将卡组加入list
-        const cardGroups = CardsModel.ins().cardGroups;
-        for (let index = 0; index < cardGroups.length; index++) {
-            const cardGourpInfo = cardGroups[index];
+        const deckList = CardsModel.ins().deckList;
+        for (let index = 0; index < deckList.length; index++) {
+            const deckInfo = deckList[index];
             const cardsBtn = BaseUI.UICardsBtn.createInstance();
-            cardsBtn.describe.text = `${cardGourpInfo.groupName}[${ConfigMgr.ins().powerConfig[cardGourpInfo.powerId].powerName}]` +
-                `\n${CardsModel.ins().getGroupCardNum(cardGourpInfo)}/${GroupCardsNum}`;
+            cardsBtn.describe.text = `${deckInfo.deckName}[${ConfigMgr.ins().powerConfig[deckInfo.powerId].powerName}]` +
+                `\n${CardsModel.ins().getDeckCardNum(deckInfo)}/${DeckCardsNum}`;
             list.addChild(cardsBtn);
             this.AddClick(cardsBtn.clickLoader, () => {
-                this.doCreateCardGroup(cardGourpInfo.powerId, cardGourpInfo.groupName, cardGourpInfo);
+                this.doCreateDeck(deckInfo.powerId, deckInfo.deckName, deckInfo);
             });
             this.AddClick(cardsBtn.delete, async () => {
                 if (await TipsView.ins().open('确定要删除此卡组吗?')) {
-                    CardsModel.ins().C_DELETE_CARD_GROUP(cardGourpInfo.groupId);
+                    CardsModel.ins().C_DELETE_DECK(deckInfo.deckId);
                 }
             });
         }
 
-        if (CardsModel.ins().cardGroups.length < ConfigMgr.ins().common.maxGroupNum) {
+        if (CardsModel.ins().deckList.length < ConfigMgr.ins().common.maxDeckNum) {
             //在套牌最后加入创建新套牌的btn
             const cardsBtn = BaseUI.UICardsBtn.createInstance();
             cardsBtn.describe.text = '新套牌';
             cardsBtn.describe.fontSize = 44;
             cardsBtn.delete.visible = false;
-            this.AddClick(cardsBtn.clickLoader, CreateCardGroup.ins().open.bind(CreateCardGroup.ins()));
+            this.AddClick(cardsBtn.clickLoader, CreateDeckCom.ins().open.bind(CreateDeckCom.ins()));
             list.addChild(cardsBtn);
         }
-        this.changeRightGroupFunction(false, `${CardsModel.ins().cardGroups.length}/${ConfigMgr.ins().common.maxGroupNum}`);
+        this.changeRightGroupFunction(false, `${CardsModel.ins().deckList.length}/${ConfigMgr.ins().common.maxDeckNum}`);
     }
 
     /**初始化右侧 */
@@ -93,10 +93,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             } else {
                 //保存卡组
                 this._isCreating = false;
-                this._cacheCreateGroupInfo.groupName = this.view.groupName.text;
-                CardsModel.ins().C_SAVE_CARDS(this._cacheCreateGroupInfo);
-                this._cacheCreateGroupInfo.clear();
-                this.changeRightGroupFunction(false, `${CardsModel.ins().cardGroups.length}/${ConfigMgr.ins().common.maxGroupNum}`);
+                this._cacheCreateDeckInfo.deckName = this.view.deckName.text;
+                CardsModel.ins().C_SAVE_CARDS(this._cacheCreateDeckInfo);
+                this._cacheCreateDeckInfo.clear();
+                this.changeRightGroupFunction(false, `${CardsModel.ins().deckList.length}/${ConfigMgr.ins().common.maxDeckNum}`);
                 ShowCardsCom.ins().showPowerPannel(ConfigMgr.ins().powerConfig);
                 ShowCardsCom.ins().changePowerChannel(0, 0);
             }
@@ -105,15 +105,15 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
 
 
     /**开始创建卡组流程 */
-    public doCreateCardGroup(powerId: CardsPto.PowerType, groupName: string, groupInfo?: CardsPto.ICardGroup) {
-        if (!groupInfo) {
+    public doCreateDeck(powerId: CardsPto.PowerType, deckName: string, deckInfo?: CardsPto.IDeck) {
+        if (!deckInfo) {
             TipsView.ins().showTips('将卡牌拖动至右侧来组建卡组吧!', 6000)
         }
         this._isCreating = true;
-        this.changeRightGroupFunction(true, `0/${GroupCardsNum}`);
-        this.view.groupName.text = groupName;
-        this._cacheCreateGroupInfo.startGroupEdit(powerId, groupName, groupInfo);
-        this.refreshCreateGroupList();
+        this.changeRightGroupFunction(true, `0/${DeckCardsNum}`);
+        this.view.deckName.text = deckName;
+        this._cacheCreateDeckInfo.startDeckEdit(powerId, deckName, deckInfo);
+        this.refreshCreateDeckList();
         ShowCardsCom.ins().showPowerPannel([ConfigMgr.ins().powerConfig[CardsPto.PowerType.Common], ConfigMgr.ins().powerConfig[powerId]]);
         ShowCardsCom.ins().changePowerChannel(0, 0);
     }
@@ -123,10 +123,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
      * 根据isSave的值决定右侧组件的功能
      */
     private changeRightGroupFunction(isSave: boolean, text: string) {
-        this.view.cardGroupGroup.visible = isSave;
+        this.view.deckGroup.visible = isSave;
 
-        this.view.cardGroupList.visible = !isSave;
-        this.view.cardGroupList.touchable = !isSave;
+        this.view.deckList.visible = !isSave;
+        this.view.deckList.touchable = !isSave;
 
         this.view.functionTips.text = text;
         this.view.functionBtn.backImg.visible = !isSave;
@@ -134,30 +134,30 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     }
 
     /**根据数据渲染出卡牌 */
-    public refreshCreateGroupList() {
+    public refreshCreateDeckList() {
         if (!this._isCreating) {
             return;
         }
 
-        const heroId = this._cacheCreateGroupInfo.heroId;
+        const heroId = this._cacheCreateDeckInfo.heroId;
         if (heroId !== -1) {
             this.removeTargetEvents(this.view.heroCard);
             this.view.removeChild(this.view.heroCard);
 
-            this.view.heroCard = MiniCard.getMiniCard(this._cacheCreateGroupInfo.heroCard, 1);
-            this.view.heroCard.group = this.view.cardGroupGroup;
+            this.view.heroCard = MiniCard.getMiniCard(this._cacheCreateDeckInfo.heroCard, 1);
+            this.view.heroCard.group = this.view.deckGroup;
             this.view.heroCard.x = 1320;
             this.view.heroCard.y = 93;
             this.view.addChild(this.view.heroCard);
-            this.addMiniCardEvent(this.view.heroCard, -1, { count: 1, cardInfo: this._cacheCreateGroupInfo.heroCard });
+            this.addMiniCardEvent(this.view.heroCard, -1, { count: 1, cardInfo: this._cacheCreateDeckInfo.heroCard });
         }
 
-        const list = this.view.createGroupList;
+        const list = this.view.createDeckList;
 
         this.removeChildrenEvents(list, ['dragLoader']);
         list.removeChildren();
         let sum = 0;
-        const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+        const cardsInfo = this._cacheCreateDeckInfo.cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];
             const showItemNum = Math.min(info.cardInfo.count, info.count);
@@ -175,12 +175,12 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             }
             sum += info.count;
         }
-        this.view.functionTips.text = `${sum}/${GroupCardsNum}`;
+        this.view.functionTips.text = `${sum}/${DeckCardsNum}`;
     }
 
     private addMiniCardEvent(miniCard: BaseUI.UIMiniCard, index: number, info: { count: number, cardInfo: CardInterface }) {
-        const list = this.view.createGroupList;
-        const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+        const list = this.view.createDeckList;
+        const cardsInfo = this._cacheCreateDeckInfo.cardsInfo;
         let isDrag = false;
         const onClick = (index: number, info: { count: number, cardInfo: CardInterface }) => {
             if (isDrag === true) {
@@ -188,8 +188,8 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
                 return;
             }
             if (info.cardInfo.cardType === CardsPto.CardType.Hero) {
-                this._cacheCreateGroupInfo.heroId = -1;
-                this._cacheCreateGroupInfo.heroCard = null;
+                this._cacheCreateDeckInfo.heroId = -1;
+                this._cacheCreateDeckInfo.heroCard = null;
                 this.removeTargetEvents(this.view.heroCard);
                 this.view.removeChild(this.view.heroCard);
             } else {
@@ -200,7 +200,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             }
 
             fairygui.GRoot.inst.removeChild(this._hoverItem);
-            this.refreshCreateGroupList();
+            this.refreshCreateDeckList();
             ShowCardsCom.ins().changePowerChannel();
         }
 
@@ -236,10 +236,10 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
     /**获取剩余卡牌的数量 */
     public getLeftCardNum(cardInfo: CardInterface) {
         if (cardInfo.cardType === CardsPto.CardType.Hero) {
-            return this._cacheCreateGroupInfo.heroId === -1 ? cardInfo.count : cardInfo.count - 1;
+            return this._cacheCreateDeckInfo.heroId === -1 ? cardInfo.count : cardInfo.count - 1;
         }
 
-        const cardsInfo = this._cacheCreateGroupInfo.cardsInfo;
+        const cardsInfo = this._cacheCreateDeckInfo.cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];
             if (info.cardInfo === cardInfo) {

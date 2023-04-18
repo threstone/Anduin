@@ -11,7 +11,7 @@
     </component>
     <text id="n7_ta2r" name="uidText" xy="28,79" size="247,48" fontSize="35" color="#669966" align="center" autoSize="shrink" strokeColor="#000000" text="ID:1"/>
     <component id="n8_fjki" name="settingBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1349,18"/>
-    <component id="n9_fjki" name="cardGroupBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="371,16"/>
+    <component id="n9_fjki" name="deckBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="371,16"/>
     <component id="n10_fjki" name="fightBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="664,17"/>
     <component id="n11_fjki" name="pveBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1024,19"/>
     <component id="n16_fjki" name="miniChat" src="fjki1d" fileName="chat/MiniChat.xml" xy="17,1080">

@@ -7,7 +7,7 @@
     <component id="n1_pqjx" name="chooseBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1364,1083">
       <relation target="" sidePair="right-right%,bottom-bottom%"/>
     </component>
-    <list id="n2_pqjx" name="cardGroupList" xy="154,124" size="1021,886" layout="flow_hz" overflow="scroll" margin="20,20,40,20" lineGap="55" colGap="55" autoClearItems="true">
+    <list id="n2_pqjx" name="deckList" xy="154,124" size="1021,886" layout="flow_hz" overflow="scroll" margin="20,20,40,20" lineGap="55" colGap="55" autoClearItems="true">
       <relation target="" sidePair="center-center,middle-middle"/>
       <item url="ui://yaux2xpoz43k1r"/>
       <item url="ui://yaux2xpoz43k1r"/>
@@ -43,7 +43,7 @@
     <text id="n9_pqjx" name="tips" xy="377,4" size="571,45" fontSize="33" color="#4c71c0" align="center" autoSize="none" text="对方已经挑选好了,倒计时00:00:00">
       <relation target="" sidePair="center-center"/>
     </text>
-    <text id="n10_pg48" name="selectGroupName" xy="1312,368" size="280,59" fontSize="44" color="#993333" align="center" autoSize="none" strokeColor="#000000" text="卡组名称">
+    <text id="n10_pg48" name="selectDeckName" xy="1312,368" size="280,59" fontSize="44" color="#993333" align="center" autoSize="none" strokeColor="#000000" text="卡组名称">
       <relation target="" sidePair="right-right%,top-top%"/>
     </text>
   </displayList>

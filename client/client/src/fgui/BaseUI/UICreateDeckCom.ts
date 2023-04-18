@@ -2,19 +2,19 @@
 
 module BaseUI {
 
-	export class UICreateCardGroup extends fairygui.GComponent {
+	export class UICreateDeckCom extends fairygui.GComponent {
 		public bg:fairygui.GImage;
 		public desc:fairygui.GTextField;
 		public powerList:fairygui.GList;
 		public selectBtn:UIButton1;
 		public close:fairygui.GLoader;
 		public nameBg:fairygui.GImage;
-		public groupName:fairygui.GTextInput;
-		public cardNameGroup:fairygui.GGroup;
+		public deckName:fairygui.GTextInput;
+		public deckNameGroup:fairygui.GGroup;
 		public static URL:string = "ui://yaux2xpooo9525";
 
-		public static createInstance():UICreateCardGroup {
-			return <UICreateCardGroup>(fairygui.UIPackage.createObject("BaseUI", "CreateCardGroup"));
+		public static createInstance():UICreateDeckCom {
+			return <UICreateDeckCom>(fairygui.UIPackage.createObject("BaseUI", "CreateDeckCom"));
 		}
 
 		protected constructFromXML(xml:any):void {
@@ -26,8 +26,8 @@ module BaseUI {
 			this.selectBtn = <UIButton1>(this.getChildAt(3));
 			this.close = <fairygui.GLoader>(this.getChildAt(4));
 			this.nameBg = <fairygui.GImage>(this.getChildAt(5));
-			this.groupName = <fairygui.GTextInput>(this.getChildAt(6));
-			this.cardNameGroup = <fairygui.GGroup>(this.getChildAt(7));
+			this.deckName = <fairygui.GTextInput>(this.getChildAt(6));
+			this.deckNameGroup = <fairygui.GGroup>(this.getChildAt(7));
 		}
 	}
 }

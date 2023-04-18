@@ -1595,120 +1595,120 @@ export namespace CardsPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a CardGroup. */
-    interface ICardGroup {
+    /** Properties of a Deck. */
+    interface IDeck {
 
-        /** CardGroup groupId */
-        groupId?: (number|null);
+        /** Deck deckId */
+        deckId?: (number|null);
 
-        /** CardGroup cards */
+        /** Deck cards */
         cards?: (CardsPto.ICard[]|null);
 
-        /** CardGroup groupName */
-        groupName?: (string|null);
+        /** Deck deckName */
+        deckName?: (string|null);
 
-        /** CardGroup powerId */
+        /** Deck powerId */
         powerId?: (CardsPto.PowerType|null);
 
-        /** CardGroup accessToUse */
+        /** Deck accessToUse */
         accessToUse?: (boolean|null);
 
-        /** CardGroup heroId */
+        /** Deck heroId */
         heroId?: (number|null);
     }
 
-    /** Represents a CardGroup. */
-    class CardGroup implements ICardGroup {
+    /** Represents a Deck. */
+    class Deck implements IDeck {
 
         /**
-         * Constructs a new CardGroup.
+         * Constructs a new Deck.
          * @param [properties] Properties to set
          */
-        constructor(properties?: CardsPto.ICardGroup);
+        constructor(properties?: CardsPto.IDeck);
 
-        /** CardGroup groupId. */
-        public groupId: number;
+        /** Deck deckId. */
+        public deckId: number;
 
-        /** CardGroup cards. */
+        /** Deck cards. */
         public cards: CardsPto.ICard[];
 
-        /** CardGroup groupName. */
-        public groupName: string;
+        /** Deck deckName. */
+        public deckName: string;
 
-        /** CardGroup powerId. */
+        /** Deck powerId. */
         public powerId: CardsPto.PowerType;
 
-        /** CardGroup accessToUse. */
+        /** Deck accessToUse. */
         public accessToUse: boolean;
 
-        /** CardGroup heroId. */
+        /** Deck heroId. */
         public heroId: number;
 
         /**
-         * Encodes the specified CardGroup message. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
-         * @param message CardGroup message or plain object to encode
+         * Encodes the specified Deck message. Does not implicitly {@link CardsPto.Deck.verify|verify} messages.
+         * @param message Deck message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: CardsPto.ICardGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: CardsPto.IDeck, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified CardGroup message, length delimited. Does not implicitly {@link CardsPto.CardGroup.verify|verify} messages.
-         * @param message CardGroup message or plain object to encode
+         * Encodes the specified Deck message, length delimited. Does not implicitly {@link CardsPto.Deck.verify|verify} messages.
+         * @param message Deck message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: CardsPto.ICardGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: CardsPto.IDeck, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a CardGroup message from the specified reader or buffer.
+         * Decodes a Deck message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns CardGroup
+         * @returns Deck
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.CardGroup;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.Deck;
 
         /**
-         * Decodes a CardGroup message from the specified reader or buffer, length delimited.
+         * Decodes a Deck message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns CardGroup
+         * @returns Deck
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.CardGroup;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.Deck;
 
         /**
-         * Verifies a CardGroup message.
+         * Verifies a Deck message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a CardGroup message from a plain object. Also converts values to their respective internal types.
+         * Creates a Deck message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns CardGroup
+         * @returns Deck
          */
-        public static fromObject(object: { [k: string]: any }): CardsPto.CardGroup;
+        public static fromObject(object: { [k: string]: any }): CardsPto.Deck;
 
         /**
-         * Creates a plain object from a CardGroup message. Also converts values to other types if specified.
-         * @param message CardGroup
+         * Creates a plain object from a Deck message. Also converts values to other types if specified.
+         * @param message Deck
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: CardsPto.CardGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: CardsPto.Deck, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this CardGroup to JSON.
+         * Converts this Deck to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for CardGroup
+         * Gets the default type url for Deck
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -1823,8 +1823,8 @@ export namespace CardsPto {
         /** S_CARDS_INFO cardInfos */
         cardInfos?: (CardsPto.ICard[]|null);
 
-        /** S_CARDS_INFO cardGroups */
-        cardGroups?: (CardsPto.ICardGroup[]|null);
+        /** S_CARDS_INFO deckList */
+        deckList?: (CardsPto.IDeck[]|null);
     }
 
     /** Represents a S_CARDS_INFO. */
@@ -1845,8 +1845,8 @@ export namespace CardsPto {
         /** S_CARDS_INFO cardInfos. */
         public cardInfos: CardsPto.ICard[];
 
-        /** S_CARDS_INFO cardGroups. */
-        public cardGroups: CardsPto.ICardGroup[];
+        /** S_CARDS_INFO deckList. */
+        public deckList: CardsPto.IDeck[];
 
         /**
          * Encodes the specified S_CARDS_INFO message. Does not implicitly {@link CardsPto.S_CARDS_INFO.verify|verify} messages.
@@ -2348,8 +2348,8 @@ export namespace CardsPto {
         /** C_SAVE_CARDS scmd */
         scmd?: (number|null);
 
-        /** C_SAVE_CARDS cardGroup */
-        cardGroup?: (CardsPto.ICardGroup|null);
+        /** C_SAVE_CARDS deck */
+        deck?: (CardsPto.IDeck|null);
     }
 
     /** Represents a C_SAVE_CARDS. */
@@ -2367,8 +2367,8 @@ export namespace CardsPto {
         /** C_SAVE_CARDS scmd. */
         public scmd: number;
 
-        /** C_SAVE_CARDS cardGroup. */
-        public cardGroup?: (CardsPto.ICardGroup|null);
+        /** C_SAVE_CARDS deck. */
+        public deck?: (CardsPto.IDeck|null);
 
         /**
          * Encodes the specified C_SAVE_CARDS message. Does not implicitly {@link CardsPto.C_SAVE_CARDS.verify|verify} messages.
@@ -2441,306 +2441,306 @@ export namespace CardsPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_SAVE_CARDS. */
-    interface IS_SAVE_CARDS {
+    /** Properties of a S_SAVE_DECK. */
+    interface IS_SAVE_DECK {
 
-        /** S_SAVE_CARDS cmd */
+        /** S_SAVE_DECK cmd */
         cmd?: (number|null);
 
-        /** S_SAVE_CARDS scmd */
+        /** S_SAVE_DECK scmd */
         scmd?: (number|null);
 
-        /** S_SAVE_CARDS cardGroup */
-        cardGroup?: (CardsPto.ICardGroup|null);
+        /** S_SAVE_DECK deck */
+        deck?: (CardsPto.IDeck|null);
     }
 
-    /** Represents a S_SAVE_CARDS. */
-    class S_SAVE_CARDS implements IS_SAVE_CARDS {
+    /** Represents a S_SAVE_DECK. */
+    class S_SAVE_DECK implements IS_SAVE_DECK {
 
         /**
-         * Constructs a new S_SAVE_CARDS.
+         * Constructs a new S_SAVE_DECK.
          * @param [properties] Properties to set
          */
-        constructor(properties?: CardsPto.IS_SAVE_CARDS);
+        constructor(properties?: CardsPto.IS_SAVE_DECK);
 
-        /** S_SAVE_CARDS cmd. */
+        /** S_SAVE_DECK cmd. */
         public cmd: number;
 
-        /** S_SAVE_CARDS scmd. */
+        /** S_SAVE_DECK scmd. */
         public scmd: number;
 
-        /** S_SAVE_CARDS cardGroup. */
-        public cardGroup?: (CardsPto.ICardGroup|null);
+        /** S_SAVE_DECK deck. */
+        public deck?: (CardsPto.IDeck|null);
 
         /**
-         * Encodes the specified S_SAVE_CARDS message. Does not implicitly {@link CardsPto.S_SAVE_CARDS.verify|verify} messages.
-         * @param message S_SAVE_CARDS message or plain object to encode
+         * Encodes the specified S_SAVE_DECK message. Does not implicitly {@link CardsPto.S_SAVE_DECK.verify|verify} messages.
+         * @param message S_SAVE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: CardsPto.IS_SAVE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: CardsPto.IS_SAVE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_SAVE_CARDS message, length delimited. Does not implicitly {@link CardsPto.S_SAVE_CARDS.verify|verify} messages.
-         * @param message S_SAVE_CARDS message or plain object to encode
+         * Encodes the specified S_SAVE_DECK message, length delimited. Does not implicitly {@link CardsPto.S_SAVE_DECK.verify|verify} messages.
+         * @param message S_SAVE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: CardsPto.IS_SAVE_CARDS, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: CardsPto.IS_SAVE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_SAVE_CARDS message from the specified reader or buffer.
+         * Decodes a S_SAVE_DECK message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_SAVE_CARDS
+         * @returns S_SAVE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_SAVE_CARDS;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_SAVE_DECK;
 
         /**
-         * Decodes a S_SAVE_CARDS message from the specified reader or buffer, length delimited.
+         * Decodes a S_SAVE_DECK message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_SAVE_CARDS
+         * @returns S_SAVE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_SAVE_CARDS;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_SAVE_DECK;
 
         /**
-         * Verifies a S_SAVE_CARDS message.
+         * Verifies a S_SAVE_DECK message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_SAVE_CARDS message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_SAVE_DECK message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_SAVE_CARDS
+         * @returns S_SAVE_DECK
          */
-        public static fromObject(object: { [k: string]: any }): CardsPto.S_SAVE_CARDS;
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_SAVE_DECK;
 
         /**
-         * Creates a plain object from a S_SAVE_CARDS message. Also converts values to other types if specified.
-         * @param message S_SAVE_CARDS
+         * Creates a plain object from a S_SAVE_DECK message. Also converts values to other types if specified.
+         * @param message S_SAVE_DECK
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: CardsPto.S_SAVE_CARDS, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: CardsPto.S_SAVE_DECK, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_SAVE_CARDS to JSON.
+         * Converts this S_SAVE_DECK to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_SAVE_CARDS
+         * Gets the default type url for S_SAVE_DECK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a C_DELETE_CARD_GROUP. */
-    interface IC_DELETE_CARD_GROUP {
+    /** Properties of a C_DELETE_DECK. */
+    interface IC_DELETE_DECK {
 
-        /** C_DELETE_CARD_GROUP cmd */
+        /** C_DELETE_DECK cmd */
         cmd?: (number|null);
 
-        /** C_DELETE_CARD_GROUP scmd */
+        /** C_DELETE_DECK scmd */
         scmd?: (number|null);
 
-        /** C_DELETE_CARD_GROUP groupId */
-        groupId?: (number|null);
+        /** C_DELETE_DECK deckId */
+        deckId?: (number|null);
     }
 
-    /** Represents a C_DELETE_CARD_GROUP. */
-    class C_DELETE_CARD_GROUP implements IC_DELETE_CARD_GROUP {
+    /** Represents a C_DELETE_DECK. */
+    class C_DELETE_DECK implements IC_DELETE_DECK {
 
         /**
-         * Constructs a new C_DELETE_CARD_GROUP.
+         * Constructs a new C_DELETE_DECK.
          * @param [properties] Properties to set
          */
-        constructor(properties?: CardsPto.IC_DELETE_CARD_GROUP);
+        constructor(properties?: CardsPto.IC_DELETE_DECK);
 
-        /** C_DELETE_CARD_GROUP cmd. */
+        /** C_DELETE_DECK cmd. */
         public cmd: number;
 
-        /** C_DELETE_CARD_GROUP scmd. */
+        /** C_DELETE_DECK scmd. */
         public scmd: number;
 
-        /** C_DELETE_CARD_GROUP groupId. */
-        public groupId: number;
+        /** C_DELETE_DECK deckId. */
+        public deckId: number;
 
         /**
-         * Encodes the specified C_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
-         * @param message C_DELETE_CARD_GROUP message or plain object to encode
+         * Encodes the specified C_DELETE_DECK message. Does not implicitly {@link CardsPto.C_DELETE_DECK.verify|verify} messages.
+         * @param message C_DELETE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: CardsPto.IC_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: CardsPto.IC_DELETE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified C_DELETE_CARD_GROUP message, length delimited. Does not implicitly {@link CardsPto.C_DELETE_CARD_GROUP.verify|verify} messages.
-         * @param message C_DELETE_CARD_GROUP message or plain object to encode
+         * Encodes the specified C_DELETE_DECK message, length delimited. Does not implicitly {@link CardsPto.C_DELETE_DECK.verify|verify} messages.
+         * @param message C_DELETE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: CardsPto.IC_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: CardsPto.IC_DELETE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a C_DELETE_DECK message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns C_DELETE_CARD_GROUP
+         * @returns C_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DELETE_CARD_GROUP;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DELETE_DECK;
 
         /**
-         * Decodes a C_DELETE_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * Decodes a C_DELETE_DECK message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns C_DELETE_CARD_GROUP
+         * @returns C_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_DELETE_CARD_GROUP;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.C_DELETE_DECK;
 
         /**
-         * Verifies a C_DELETE_CARD_GROUP message.
+         * Verifies a C_DELETE_DECK message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a C_DELETE_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * Creates a C_DELETE_DECK message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns C_DELETE_CARD_GROUP
+         * @returns C_DELETE_DECK
          */
-        public static fromObject(object: { [k: string]: any }): CardsPto.C_DELETE_CARD_GROUP;
+        public static fromObject(object: { [k: string]: any }): CardsPto.C_DELETE_DECK;
 
         /**
-         * Creates a plain object from a C_DELETE_CARD_GROUP message. Also converts values to other types if specified.
-         * @param message C_DELETE_CARD_GROUP
+         * Creates a plain object from a C_DELETE_DECK message. Also converts values to other types if specified.
+         * @param message C_DELETE_DECK
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: CardsPto.C_DELETE_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: CardsPto.C_DELETE_DECK, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this C_DELETE_CARD_GROUP to JSON.
+         * Converts this C_DELETE_DECK to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for C_DELETE_CARD_GROUP
+         * Gets the default type url for C_DELETE_DECK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_DELETE_CARD_GROUP. */
-    interface IS_DELETE_CARD_GROUP {
+    /** Properties of a S_DELETE_DECK. */
+    interface IS_DELETE_DECK {
 
-        /** S_DELETE_CARD_GROUP cmd */
+        /** S_DELETE_DECK cmd */
         cmd?: (number|null);
 
-        /** S_DELETE_CARD_GROUP scmd */
+        /** S_DELETE_DECK scmd */
         scmd?: (number|null);
 
-        /** S_DELETE_CARD_GROUP groupId */
-        groupId?: (number|null);
+        /** S_DELETE_DECK deckId */
+        deckId?: (number|null);
     }
 
-    /** Represents a S_DELETE_CARD_GROUP. */
-    class S_DELETE_CARD_GROUP implements IS_DELETE_CARD_GROUP {
+    /** Represents a S_DELETE_DECK. */
+    class S_DELETE_DECK implements IS_DELETE_DECK {
 
         /**
-         * Constructs a new S_DELETE_CARD_GROUP.
+         * Constructs a new S_DELETE_DECK.
          * @param [properties] Properties to set
          */
-        constructor(properties?: CardsPto.IS_DELETE_CARD_GROUP);
+        constructor(properties?: CardsPto.IS_DELETE_DECK);
 
-        /** S_DELETE_CARD_GROUP cmd. */
+        /** S_DELETE_DECK cmd. */
         public cmd: number;
 
-        /** S_DELETE_CARD_GROUP scmd. */
+        /** S_DELETE_DECK scmd. */
         public scmd: number;
 
-        /** S_DELETE_CARD_GROUP groupId. */
-        public groupId: number;
+        /** S_DELETE_DECK deckId. */
+        public deckId: number;
 
         /**
-         * Encodes the specified S_DELETE_CARD_GROUP message. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
-         * @param message S_DELETE_CARD_GROUP message or plain object to encode
+         * Encodes the specified S_DELETE_DECK message. Does not implicitly {@link CardsPto.S_DELETE_DECK.verify|verify} messages.
+         * @param message S_DELETE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: CardsPto.IS_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: CardsPto.IS_DELETE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_DELETE_CARD_GROUP message, length delimited. Does not implicitly {@link CardsPto.S_DELETE_CARD_GROUP.verify|verify} messages.
-         * @param message S_DELETE_CARD_GROUP message or plain object to encode
+         * Encodes the specified S_DELETE_DECK message, length delimited. Does not implicitly {@link CardsPto.S_DELETE_DECK.verify|verify} messages.
+         * @param message S_DELETE_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: CardsPto.IS_DELETE_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: CardsPto.IS_DELETE_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a S_DELETE_DECK message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_DELETE_CARD_GROUP
+         * @returns S_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DELETE_CARD_GROUP;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DELETE_DECK;
 
         /**
-         * Decodes a S_DELETE_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * Decodes a S_DELETE_DECK message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_DELETE_CARD_GROUP
+         * @returns S_DELETE_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_DELETE_CARD_GROUP;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): CardsPto.S_DELETE_DECK;
 
         /**
-         * Verifies a S_DELETE_CARD_GROUP message.
+         * Verifies a S_DELETE_DECK message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_DELETE_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_DELETE_DECK message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_DELETE_CARD_GROUP
+         * @returns S_DELETE_DECK
          */
-        public static fromObject(object: { [k: string]: any }): CardsPto.S_DELETE_CARD_GROUP;
+        public static fromObject(object: { [k: string]: any }): CardsPto.S_DELETE_DECK;
 
         /**
-         * Creates a plain object from a S_DELETE_CARD_GROUP message. Also converts values to other types if specified.
-         * @param message S_DELETE_CARD_GROUP
+         * Creates a plain object from a S_DELETE_DECK message. Also converts values to other types if specified.
+         * @param message S_DELETE_DECK
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: CardsPto.S_DELETE_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: CardsPto.S_DELETE_DECK, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_DELETE_CARD_GROUP to JSON.
+         * Converts this S_DELETE_DECK to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_DELETE_CARD_GROUP
+         * Gets the default type url for S_DELETE_DECK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -7728,300 +7728,300 @@ export namespace FriendlyMatchPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_MATCH_CARD_GROUP. */
-    interface IS_MATCH_CARD_GROUP {
+    /** Properties of a S_MATCH_DECK. */
+    interface IS_MATCH_DECK {
 
-        /** S_MATCH_CARD_GROUP cmd */
+        /** S_MATCH_DECK cmd */
         cmd?: (number|null);
 
-        /** S_MATCH_CARD_GROUP scmd */
+        /** S_MATCH_DECK scmd */
         scmd?: (number|null);
 
-        /** S_MATCH_CARD_GROUP endTime */
+        /** S_MATCH_DECK endTime */
         endTime?: (number|null);
     }
 
-    /** Represents a S_MATCH_CARD_GROUP. */
-    class S_MATCH_CARD_GROUP implements IS_MATCH_CARD_GROUP {
+    /** Represents a S_MATCH_DECK. */
+    class S_MATCH_DECK implements IS_MATCH_DECK {
 
         /**
-         * Constructs a new S_MATCH_CARD_GROUP.
+         * Constructs a new S_MATCH_DECK.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendlyMatchPto.IS_MATCH_CARD_GROUP);
+        constructor(properties?: FriendlyMatchPto.IS_MATCH_DECK);
 
-        /** S_MATCH_CARD_GROUP cmd. */
+        /** S_MATCH_DECK cmd. */
         public cmd: number;
 
-        /** S_MATCH_CARD_GROUP scmd. */
+        /** S_MATCH_DECK scmd. */
         public scmd: number;
 
-        /** S_MATCH_CARD_GROUP endTime. */
+        /** S_MATCH_DECK endTime. */
         public endTime: number;
 
         /**
-         * Encodes the specified S_MATCH_CARD_GROUP message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message S_MATCH_CARD_GROUP message or plain object to encode
+         * Encodes the specified S_MATCH_DECK message. Does not implicitly {@link FriendlyMatchPto.S_MATCH_DECK.verify|verify} messages.
+         * @param message S_MATCH_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendlyMatchPto.IS_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: FriendlyMatchPto.IS_MATCH_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_MATCH_CARD_GROUP message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_MATCH_CARD_GROUP.verify|verify} messages.
-         * @param message S_MATCH_CARD_GROUP message or plain object to encode
+         * Encodes the specified S_MATCH_DECK message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_MATCH_DECK.verify|verify} messages.
+         * @param message S_MATCH_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: FriendlyMatchPto.IS_MATCH_CARD_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: FriendlyMatchPto.IS_MATCH_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_MATCH_CARD_GROUP message from the specified reader or buffer.
+         * Decodes a S_MATCH_DECK message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_MATCH_CARD_GROUP
+         * @returns S_MATCH_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_DECK;
 
         /**
-         * Decodes a S_MATCH_CARD_GROUP message from the specified reader or buffer, length delimited.
+         * Decodes a S_MATCH_DECK message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_MATCH_CARD_GROUP
+         * @returns S_MATCH_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_MATCH_DECK;
 
         /**
-         * Verifies a S_MATCH_CARD_GROUP message.
+         * Verifies a S_MATCH_DECK message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_MATCH_CARD_GROUP message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_MATCH_DECK message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_MATCH_CARD_GROUP
+         * @returns S_MATCH_DECK
          */
-        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_MATCH_CARD_GROUP;
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_MATCH_DECK;
 
         /**
-         * Creates a plain object from a S_MATCH_CARD_GROUP message. Also converts values to other types if specified.
-         * @param message S_MATCH_CARD_GROUP
+         * Creates a plain object from a S_MATCH_DECK message. Also converts values to other types if specified.
+         * @param message S_MATCH_DECK
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: FriendlyMatchPto.S_MATCH_CARD_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: FriendlyMatchPto.S_MATCH_DECK, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_MATCH_CARD_GROUP to JSON.
+         * Converts this S_MATCH_DECK to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_MATCH_CARD_GROUP
+         * Gets the default type url for S_MATCH_DECK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a C_GROUP_CHOOSE. */
-    interface IC_GROUP_CHOOSE {
+    /** Properties of a C_DECK_CHOOSE. */
+    interface IC_DECK_CHOOSE {
 
-        /** C_GROUP_CHOOSE cmd */
+        /** C_DECK_CHOOSE cmd */
         cmd?: (number|null);
 
-        /** C_GROUP_CHOOSE scmd */
+        /** C_DECK_CHOOSE scmd */
         scmd?: (number|null);
 
-        /** C_GROUP_CHOOSE cardGroupId */
-        cardGroupId?: (number|null);
+        /** C_DECK_CHOOSE deckId */
+        deckId?: (number|null);
     }
 
-    /** Represents a C_GROUP_CHOOSE. */
-    class C_GROUP_CHOOSE implements IC_GROUP_CHOOSE {
+    /** Represents a C_DECK_CHOOSE. */
+    class C_DECK_CHOOSE implements IC_DECK_CHOOSE {
 
         /**
-         * Constructs a new C_GROUP_CHOOSE.
+         * Constructs a new C_DECK_CHOOSE.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendlyMatchPto.IC_GROUP_CHOOSE);
+        constructor(properties?: FriendlyMatchPto.IC_DECK_CHOOSE);
 
-        /** C_GROUP_CHOOSE cmd. */
+        /** C_DECK_CHOOSE cmd. */
         public cmd: number;
 
-        /** C_GROUP_CHOOSE scmd. */
+        /** C_DECK_CHOOSE scmd. */
         public scmd: number;
 
-        /** C_GROUP_CHOOSE cardGroupId. */
-        public cardGroupId: number;
+        /** C_DECK_CHOOSE deckId. */
+        public deckId: number;
 
         /**
-         * Encodes the specified C_GROUP_CHOOSE message. Does not implicitly {@link FriendlyMatchPto.C_GROUP_CHOOSE.verify|verify} messages.
-         * @param message C_GROUP_CHOOSE message or plain object to encode
+         * Encodes the specified C_DECK_CHOOSE message. Does not implicitly {@link FriendlyMatchPto.C_DECK_CHOOSE.verify|verify} messages.
+         * @param message C_DECK_CHOOSE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendlyMatchPto.IC_GROUP_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: FriendlyMatchPto.IC_DECK_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified C_GROUP_CHOOSE message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_GROUP_CHOOSE.verify|verify} messages.
-         * @param message C_GROUP_CHOOSE message or plain object to encode
+         * Encodes the specified C_DECK_CHOOSE message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_DECK_CHOOSE.verify|verify} messages.
+         * @param message C_DECK_CHOOSE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: FriendlyMatchPto.IC_GROUP_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: FriendlyMatchPto.IC_DECK_CHOOSE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a C_GROUP_CHOOSE message from the specified reader or buffer.
+         * Decodes a C_DECK_CHOOSE message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns C_GROUP_CHOOSE
+         * @returns C_DECK_CHOOSE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_GROUP_CHOOSE;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_DECK_CHOOSE;
 
         /**
-         * Decodes a C_GROUP_CHOOSE message from the specified reader or buffer, length delimited.
+         * Decodes a C_DECK_CHOOSE message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns C_GROUP_CHOOSE
+         * @returns C_DECK_CHOOSE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_GROUP_CHOOSE;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_DECK_CHOOSE;
 
         /**
-         * Verifies a C_GROUP_CHOOSE message.
+         * Verifies a C_DECK_CHOOSE message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a C_GROUP_CHOOSE message from a plain object. Also converts values to their respective internal types.
+         * Creates a C_DECK_CHOOSE message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns C_GROUP_CHOOSE
+         * @returns C_DECK_CHOOSE
          */
-        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_GROUP_CHOOSE;
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_DECK_CHOOSE;
 
         /**
-         * Creates a plain object from a C_GROUP_CHOOSE message. Also converts values to other types if specified.
-         * @param message C_GROUP_CHOOSE
+         * Creates a plain object from a C_DECK_CHOOSE message. Also converts values to other types if specified.
+         * @param message C_DECK_CHOOSE
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: FriendlyMatchPto.C_GROUP_CHOOSE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: FriendlyMatchPto.C_DECK_CHOOSE, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this C_GROUP_CHOOSE to JSON.
+         * Converts this C_DECK_CHOOSE to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for C_GROUP_CHOOSE
+         * Gets the default type url for C_DECK_CHOOSE
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a C_MATCH_CANCEL_GROUP. */
-    interface IC_MATCH_CANCEL_GROUP {
+    /** Properties of a C_MATCH_CANCEL_DECK. */
+    interface IC_MATCH_CANCEL_DECK {
 
-        /** C_MATCH_CANCEL_GROUP cmd */
+        /** C_MATCH_CANCEL_DECK cmd */
         cmd?: (number|null);
 
-        /** C_MATCH_CANCEL_GROUP scmd */
+        /** C_MATCH_CANCEL_DECK scmd */
         scmd?: (number|null);
     }
 
-    /** Represents a C_MATCH_CANCEL_GROUP. */
-    class C_MATCH_CANCEL_GROUP implements IC_MATCH_CANCEL_GROUP {
+    /** Represents a C_MATCH_CANCEL_DECK. */
+    class C_MATCH_CANCEL_DECK implements IC_MATCH_CANCEL_DECK {
 
         /**
-         * Constructs a new C_MATCH_CANCEL_GROUP.
+         * Constructs a new C_MATCH_CANCEL_DECK.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP);
+        constructor(properties?: FriendlyMatchPto.IC_MATCH_CANCEL_DECK);
 
-        /** C_MATCH_CANCEL_GROUP cmd. */
+        /** C_MATCH_CANCEL_DECK cmd. */
         public cmd: number;
 
-        /** C_MATCH_CANCEL_GROUP scmd. */
+        /** C_MATCH_CANCEL_DECK scmd. */
         public scmd: number;
 
         /**
-         * Encodes the specified C_MATCH_CANCEL_GROUP message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_GROUP.verify|verify} messages.
-         * @param message C_MATCH_CANCEL_GROUP message or plain object to encode
+         * Encodes the specified C_MATCH_CANCEL_DECK message. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_DECK.verify|verify} messages.
+         * @param message C_MATCH_CANCEL_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: FriendlyMatchPto.IC_MATCH_CANCEL_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified C_MATCH_CANCEL_GROUP message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_GROUP.verify|verify} messages.
-         * @param message C_MATCH_CANCEL_GROUP message or plain object to encode
+         * Encodes the specified C_MATCH_CANCEL_DECK message, length delimited. Does not implicitly {@link FriendlyMatchPto.C_MATCH_CANCEL_DECK.verify|verify} messages.
+         * @param message C_MATCH_CANCEL_DECK message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: FriendlyMatchPto.IC_MATCH_CANCEL_GROUP, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: FriendlyMatchPto.IC_MATCH_CANCEL_DECK, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a C_MATCH_CANCEL_GROUP message from the specified reader or buffer.
+         * Decodes a C_MATCH_CANCEL_DECK message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns C_MATCH_CANCEL_GROUP
+         * @returns C_MATCH_CANCEL_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_CANCEL_DECK;
 
         /**
-         * Decodes a C_MATCH_CANCEL_GROUP message from the specified reader or buffer, length delimited.
+         * Decodes a C_MATCH_CANCEL_DECK message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns C_MATCH_CANCEL_GROUP
+         * @returns C_MATCH_CANCEL_DECK
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.C_MATCH_CANCEL_DECK;
 
         /**
-         * Verifies a C_MATCH_CANCEL_GROUP message.
+         * Verifies a C_MATCH_CANCEL_DECK message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a C_MATCH_CANCEL_GROUP message from a plain object. Also converts values to their respective internal types.
+         * Creates a C_MATCH_CANCEL_DECK message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns C_MATCH_CANCEL_GROUP
+         * @returns C_MATCH_CANCEL_DECK
          */
-        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_MATCH_CANCEL_GROUP;
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.C_MATCH_CANCEL_DECK;
 
         /**
-         * Creates a plain object from a C_MATCH_CANCEL_GROUP message. Also converts values to other types if specified.
-         * @param message C_MATCH_CANCEL_GROUP
+         * Creates a plain object from a C_MATCH_CANCEL_DECK message. Also converts values to other types if specified.
+         * @param message C_MATCH_CANCEL_DECK
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: FriendlyMatchPto.C_MATCH_CANCEL_GROUP, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: FriendlyMatchPto.C_MATCH_CANCEL_DECK, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this C_MATCH_CANCEL_GROUP to JSON.
+         * Converts this C_MATCH_CANCEL_DECK to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for C_MATCH_CANCEL_GROUP
+         * Gets the default type url for C_MATCH_CANCEL_DECK
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
@@ -8226,204 +8226,204 @@ export namespace FriendlyMatchPto {
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_FRIEND_GROUP_STATUS_CHANGE. */
-    interface IS_FRIEND_GROUP_STATUS_CHANGE {
+    /** Properties of a S_FRIEND_DECK_STATUS_CHANGE. */
+    interface IS_FRIEND_DECK_STATUS_CHANGE {
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE cmd */
+        /** S_FRIEND_DECK_STATUS_CHANGE cmd */
         cmd?: (number|null);
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE scmd */
+        /** S_FRIEND_DECK_STATUS_CHANGE scmd */
         scmd?: (number|null);
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE isChoose */
+        /** S_FRIEND_DECK_STATUS_CHANGE isChoose */
         isChoose?: (boolean|null);
     }
 
-    /** Represents a S_FRIEND_GROUP_STATUS_CHANGE. */
-    class S_FRIEND_GROUP_STATUS_CHANGE implements IS_FRIEND_GROUP_STATUS_CHANGE {
+    /** Represents a S_FRIEND_DECK_STATUS_CHANGE. */
+    class S_FRIEND_DECK_STATUS_CHANGE implements IS_FRIEND_DECK_STATUS_CHANGE {
 
         /**
-         * Constructs a new S_FRIEND_GROUP_STATUS_CHANGE.
+         * Constructs a new S_FRIEND_DECK_STATUS_CHANGE.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE);
+        constructor(properties?: FriendlyMatchPto.IS_FRIEND_DECK_STATUS_CHANGE);
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE cmd. */
+        /** S_FRIEND_DECK_STATUS_CHANGE cmd. */
         public cmd: number;
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE scmd. */
+        /** S_FRIEND_DECK_STATUS_CHANGE scmd. */
         public scmd: number;
 
-        /** S_FRIEND_GROUP_STATUS_CHANGE isChoose. */
+        /** S_FRIEND_DECK_STATUS_CHANGE isChoose. */
         public isChoose: boolean;
 
         /**
-         * Encodes the specified S_FRIEND_GROUP_STATUS_CHANGE message. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE.verify|verify} messages.
-         * @param message S_FRIEND_GROUP_STATUS_CHANGE message or plain object to encode
+         * Encodes the specified S_FRIEND_DECK_STATUS_CHANGE message. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE.verify|verify} messages.
+         * @param message S_FRIEND_DECK_STATUS_CHANGE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: FriendlyMatchPto.IS_FRIEND_DECK_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_FRIEND_GROUP_STATUS_CHANGE message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE.verify|verify} messages.
-         * @param message S_FRIEND_GROUP_STATUS_CHANGE message or plain object to encode
+         * Encodes the specified S_FRIEND_DECK_STATUS_CHANGE message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE.verify|verify} messages.
+         * @param message S_FRIEND_DECK_STATUS_CHANGE message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: FriendlyMatchPto.IS_FRIEND_GROUP_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: FriendlyMatchPto.IS_FRIEND_DECK_STATUS_CHANGE, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_FRIEND_GROUP_STATUS_CHANGE message from the specified reader or buffer.
+         * Decodes a S_FRIEND_DECK_STATUS_CHANGE message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         * @returns S_FRIEND_DECK_STATUS_CHANGE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE;
 
         /**
-         * Decodes a S_FRIEND_GROUP_STATUS_CHANGE message from the specified reader or buffer, length delimited.
+         * Decodes a S_FRIEND_DECK_STATUS_CHANGE message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         * @returns S_FRIEND_DECK_STATUS_CHANGE
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE;
 
         /**
-         * Verifies a S_FRIEND_GROUP_STATUS_CHANGE message.
+         * Verifies a S_FRIEND_DECK_STATUS_CHANGE message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_FRIEND_GROUP_STATUS_CHANGE message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_FRIEND_DECK_STATUS_CHANGE message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_FRIEND_GROUP_STATUS_CHANGE
+         * @returns S_FRIEND_DECK_STATUS_CHANGE
          */
-        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE;
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE;
 
         /**
-         * Creates a plain object from a S_FRIEND_GROUP_STATUS_CHANGE message. Also converts values to other types if specified.
-         * @param message S_FRIEND_GROUP_STATUS_CHANGE
+         * Creates a plain object from a S_FRIEND_DECK_STATUS_CHANGE message. Also converts values to other types if specified.
+         * @param message S_FRIEND_DECK_STATUS_CHANGE
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_FRIEND_GROUP_STATUS_CHANGE to JSON.
+         * Converts this S_FRIEND_DECK_STATUS_CHANGE to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_FRIEND_GROUP_STATUS_CHANGE
+         * Gets the default type url for S_FRIEND_DECK_STATUS_CHANGE
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */
         public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
-    /** Properties of a S_GROUP_CHOOSE_RESULT. */
-    interface IS_GROUP_CHOOSE_RESULT {
+    /** Properties of a S_DECK_CHOOSE_RESULT. */
+    interface IS_DECK_CHOOSE_RESULT {
 
-        /** S_GROUP_CHOOSE_RESULT cmd */
+        /** S_DECK_CHOOSE_RESULT cmd */
         cmd?: (number|null);
 
-        /** S_GROUP_CHOOSE_RESULT scmd */
+        /** S_DECK_CHOOSE_RESULT scmd */
         scmd?: (number|null);
 
-        /** S_GROUP_CHOOSE_RESULT code */
+        /** S_DECK_CHOOSE_RESULT code */
         code?: (number|null);
     }
 
-    /** Represents a S_GROUP_CHOOSE_RESULT. */
-    class S_GROUP_CHOOSE_RESULT implements IS_GROUP_CHOOSE_RESULT {
+    /** Represents a S_DECK_CHOOSE_RESULT. */
+    class S_DECK_CHOOSE_RESULT implements IS_DECK_CHOOSE_RESULT {
 
         /**
-         * Constructs a new S_GROUP_CHOOSE_RESULT.
+         * Constructs a new S_DECK_CHOOSE_RESULT.
          * @param [properties] Properties to set
          */
-        constructor(properties?: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT);
+        constructor(properties?: FriendlyMatchPto.IS_DECK_CHOOSE_RESULT);
 
-        /** S_GROUP_CHOOSE_RESULT cmd. */
+        /** S_DECK_CHOOSE_RESULT cmd. */
         public cmd: number;
 
-        /** S_GROUP_CHOOSE_RESULT scmd. */
+        /** S_DECK_CHOOSE_RESULT scmd. */
         public scmd: number;
 
-        /** S_GROUP_CHOOSE_RESULT code. */
+        /** S_DECK_CHOOSE_RESULT code. */
         public code: number;
 
         /**
-         * Encodes the specified S_GROUP_CHOOSE_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_GROUP_CHOOSE_RESULT.verify|verify} messages.
-         * @param message S_GROUP_CHOOSE_RESULT message or plain object to encode
+         * Encodes the specified S_DECK_CHOOSE_RESULT message. Does not implicitly {@link FriendlyMatchPto.S_DECK_CHOOSE_RESULT.verify|verify} messages.
+         * @param message S_DECK_CHOOSE_RESULT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: FriendlyMatchPto.IS_DECK_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_GROUP_CHOOSE_RESULT message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_GROUP_CHOOSE_RESULT.verify|verify} messages.
-         * @param message S_GROUP_CHOOSE_RESULT message or plain object to encode
+         * Encodes the specified S_DECK_CHOOSE_RESULT message, length delimited. Does not implicitly {@link FriendlyMatchPto.S_DECK_CHOOSE_RESULT.verify|verify} messages.
+         * @param message S_DECK_CHOOSE_RESULT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: FriendlyMatchPto.IS_GROUP_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: FriendlyMatchPto.IS_DECK_CHOOSE_RESULT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_GROUP_CHOOSE_RESULT message from the specified reader or buffer.
+         * Decodes a S_DECK_CHOOSE_RESULT message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_GROUP_CHOOSE_RESULT
+         * @returns S_DECK_CHOOSE_RESULT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_DECK_CHOOSE_RESULT;
 
         /**
-         * Decodes a S_GROUP_CHOOSE_RESULT message from the specified reader or buffer, length delimited.
+         * Decodes a S_DECK_CHOOSE_RESULT message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_GROUP_CHOOSE_RESULT
+         * @returns S_DECK_CHOOSE_RESULT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): FriendlyMatchPto.S_DECK_CHOOSE_RESULT;
 
         /**
-         * Verifies a S_GROUP_CHOOSE_RESULT message.
+         * Verifies a S_DECK_CHOOSE_RESULT message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_GROUP_CHOOSE_RESULT message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_DECK_CHOOSE_RESULT message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_GROUP_CHOOSE_RESULT
+         * @returns S_DECK_CHOOSE_RESULT
          */
-        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_GROUP_CHOOSE_RESULT;
+        public static fromObject(object: { [k: string]: any }): FriendlyMatchPto.S_DECK_CHOOSE_RESULT;
 
         /**
-         * Creates a plain object from a S_GROUP_CHOOSE_RESULT message. Also converts values to other types if specified.
-         * @param message S_GROUP_CHOOSE_RESULT
+         * Creates a plain object from a S_DECK_CHOOSE_RESULT message. Also converts values to other types if specified.
+         * @param message S_DECK_CHOOSE_RESULT
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: FriendlyMatchPto.S_GROUP_CHOOSE_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: FriendlyMatchPto.S_DECK_CHOOSE_RESULT, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_GROUP_CHOOSE_RESULT to JSON.
+         * Converts this S_DECK_CHOOSE_RESULT to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
 
         /**
-         * Gets the default type url for S_GROUP_CHOOSE_RESULT
+         * Gets the default type url for S_DECK_CHOOSE_RESULT
          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
          * @returns The default type url
          */

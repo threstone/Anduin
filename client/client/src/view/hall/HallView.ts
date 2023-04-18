@@ -13,11 +13,11 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
     private initView() {
         this.view.nickText.text = UserModel.ins().nick;
         this.view.uidText.text = `ID:${UserModel.ins().uid}`
-        this.view.cardGroupBtn.describe.text = '收藏';
-        this.AddClick(this.view.cardGroupBtn, CardsView.ins().open.bind(CardsView.ins()));
+        this.view.deckBtn.describe.text = '收藏';
+        this.AddClick(this.view.deckBtn, CardsView.ins().open.bind(CardsView.ins()));
 
         this.view.fightBtn.describe.text = '对战';
-        this.AddClick(this.view.fightBtn, CardsGroupChooseView.ins().open.bind(CardsGroupChooseView.ins()));
+        this.AddClick(this.view.fightBtn, DeckChooseView.ins().open.bind(DeckChooseView.ins()));
 
         this.view.pveBtn.describe.text = '冒险';
         this.AddClick(this.view.pveBtn, () => {
@@ -35,7 +35,7 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.observe('S_MATCH', (evt: EventData) => {
             FriendlyMatchView.ins().openByResponse(evt.data);
         });
-        this.observe('S_MATCH_CARD_GROUP', MatchGroupChooseView.ins().open.bind(MatchGroupChooseView.ins()));
+        this.observe('S_MATCH_DECK', MatchDeckChooseView.ins().open.bind(MatchDeckChooseView.ins()));
         this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
     }
 

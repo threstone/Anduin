@@ -7,10 +7,10 @@ class CardsModel extends BaseModel {
     private _ownerCardsMap: Map<CardsPto.PowerType, CardInterface[]>;
 
     /**卡组数据 */
-    private _cardGroups: CardsPto.ICardGroup[];
+    private _deckList: CardsPto.IDeck[];
 
-    get cardGroups() {
-        return this._cardGroups;
+    get deckList() {
+        return this._deckList;
     }
 
     constructor() {
@@ -33,12 +33,12 @@ class CardsModel extends BaseModel {
     }
 
     /**用于用户创建卡组没有设置卡组名时的逻辑 */
-    public getCardGroupName(powerId: CardsPto.PowerType) {
+    public getDeckName(powerId: CardsPto.PowerType) {
         const arr = [];
-        for (let index = 0; index < this._cardGroups.length; index++) {
-            const cardGroup = this._cardGroups[index];
-            if (cardGroup.powerId === powerId) {
-                arr.push(cardGroup.groupName)
+        for (let index = 0; index < this._deckList.length; index++) {
+            const deck = this._deckList[index];
+            if (deck.powerId === powerId) {
+                arr.push(deck.deckName)
             }
         }
         let nameIndex = 0;
@@ -51,10 +51,10 @@ class CardsModel extends BaseModel {
     }
 
     /**获取卡组中的卡牌数量 */
-    public getGroupCardNum(cardGroup: CardsPto.ICardGroup) {
+    public getDeckCardNum(deck: CardsPto.IDeck) {
         let sum = 0;
-        for (let index = 0; index < cardGroup.cards.length; index++) {
-            const cardInfo = cardGroup.cards[index];
+        for (let index = 0; index < deck.cards.length; index++) {
+            const cardInfo = deck.cards[index];
             sum += cardInfo.count;
         }
         return sum
@@ -176,7 +176,7 @@ class CardsModel extends BaseModel {
             const cardArr = this.getOwnerCardsArrByPowerId(cardInfo.powerId);
             cardArr.push(cardInfo);
         }
-        this._cardGroups = msg.cardGroups;
+        this._deckList = msg.deckList;
         this.sortCardsByFee(this._ownerCardsMap);
         this.emit('S_CARDS_INFO');
     }
@@ -234,26 +234,26 @@ class CardsModel extends BaseModel {
         }
     }
     /**保存卡组返回 */
-    private S_SAVE_CARDS(msg: CardsPto.S_SAVE_CARDS) {
-        for (let index = 0; index < this._cardGroups.length; index++) {
-            const info = this._cardGroups[index];
-            if (info.groupId === msg.cardGroup.groupId) {
-                this._cardGroups[index] = msg.cardGroup;
-                this.emit('CardsGroupUpdate');
+    private S_SAVE_DECK(msg: CardsPto.S_SAVE_DECK) {
+        for (let index = 0; index < this._deckList.length; index++) {
+            const info = this._deckList[index];
+            if (info.deckId === msg.deck.deckId) {
+                this._deckList[index] = msg.deck;
+                this.emit('DeckUpdate');
                 return;
             }
         }
-        this._cardGroups.push(msg.cardGroup);
-        this.emit('CardsGroupUpdate');
+        this._deckList.push(msg.deck);
+        this.emit('DeckUpdate');
     }
 
     /**删除卡组返回 */
-    private S_DELETE_CARD_GROUP(msg: CardsPto.S_DELETE_CARD_GROUP) {
-        for (let index = 0; index < this._cardGroups.length; index++) {
-            const info = this._cardGroups[index];
-            if (info.groupId === msg.groupId) {
-                this._cardGroups.splice(index, 1);
-                this.emit('CardsGroupUpdate');
+    private S_DELETE_DECK(msg: CardsPto.S_DELETE_DECK) {
+        for (let index = 0; index < this._deckList.length; index++) {
+            const info = this._deckList[index];
+            if (info.deckId === msg.deckId) {
+                this._deckList.splice(index, 1);
+                this.emit('DeckUpdate');
                 return;
             }
         }
@@ -280,25 +280,25 @@ class CardsModel extends BaseModel {
     }
 
     /**保存卡牌数据 */
-    public C_SAVE_CARDS(cardGroupInfo: CardGroupInfo) {
+    public C_SAVE_CARDS(deckInfo: DeckInfo) {
         const msg = new CardsPto.C_SAVE_CARDS();
-        msg.cardGroup = new CardsPto.CardGroup();
-        msg.cardGroup.groupId = cardGroupInfo.groupId;
-        msg.cardGroup.powerId = cardGroupInfo.powerId;
-        msg.cardGroup.groupName = cardGroupInfo.groupName;
-        msg.cardGroup.heroId = cardGroupInfo.heroId;
-        const cardsInfo = cardGroupInfo.cardsInfo;
+        msg.deck = new CardsPto.Deck();
+        msg.deck.deckId = deckInfo.deckId;
+        msg.deck.powerId = deckInfo.powerId;
+        msg.deck.deckName = deckInfo.deckName;
+        msg.deck.heroId = deckInfo.heroId;
+        const cardsInfo = deckInfo.cardsInfo;
         for (let index = 0; index < cardsInfo.length; index++) {
             const info = cardsInfo[index];
-            msg.cardGroup.cards.push({ id: info.cardInfo.cardId, count: info.count });
+            msg.deck.cards.push({ id: info.cardInfo.cardId, count: info.count });
         }
         this.sendMsg(msg);
     }
 
     /**请求删除卡组 */
-    public C_DELETE_CARD_GROUP(cardGroupId: number) {
-        const msg = new CardsPto.C_DELETE_CARD_GROUP();
-        msg.groupId = cardGroupId;
+    public C_DELETE_DECK(deckId: number) {
+        const msg = new CardsPto.C_DELETE_DECK();
+        msg.deckId = deckId;
         this.sendMsg(msg);
     }
 }

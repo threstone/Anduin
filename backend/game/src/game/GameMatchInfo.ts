@@ -9,19 +9,19 @@ export class GameMatchInfo {
         this.targetUser = new MatchUser(targetClient, targetUid);
     }
 
-    public setCardGroup(uid: number, cardGroup: CardsPto.CardGroup) {
+    public setDeck(uid: number, deck: CardsPto.Deck) {
         if (uid === this.souceUser.uid) {
-            this.souceUser.cardGroup = cardGroup;
+            this.souceUser.deck = deck;
         } else {
-            this.targetUser.cardGroup = cardGroup;
+            this.targetUser.deck = deck;
         }
     }
 
-    public clearCardGroup(uid: number) {
+    public clearDeck(uid: number) {
         if (uid === this.souceUser.uid) {
-            this.souceUser.cardGroup = undefined;
+            this.souceUser.deck = undefined;
         } else {
-            this.targetUser.cardGroup = undefined;
+            this.targetUser.deck = undefined;
         }
     }
 
@@ -37,7 +37,7 @@ export class MatchUser {
     uid: number
     clientName: string
     nick: string
-    cardGroup: CardsPto.CardGroup
+    deck: CardsPto.Deck
 
     constructor(clientName: string, uid: number) {
         this.uid = uid;

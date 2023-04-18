@@ -25,15 +25,15 @@ class FriendlyMatchModel extends BaseModel {
     }
 
     /**玩家挑选卡组*/
-    public C_GROUP_CHOOSE(cardGroupId: number) {
-        const msg = new FriendlyMatchPto.C_GROUP_CHOOSE();
-        msg.cardGroupId = cardGroupId;
+    public C_DECK_CHOOSE(deckId: number) {
+        const msg = new FriendlyMatchPto.C_DECK_CHOOSE();
+        msg.deckId = deckId;
         this.sendMsg(msg);
     }
 
     /**友谊赛取消挑选卡组*/
-    public C_MATCH_CANCEL_GROUP() {
-        const msg = new FriendlyMatchPto.C_MATCH_CANCEL_GROUP();
+    public C_MATCH_CANCEL_DECK() {
+        const msg = new FriendlyMatchPto.C_MATCH_CANCEL_DECK();
         this.sendMsg(msg);
     }
 
@@ -82,8 +82,8 @@ class FriendlyMatchModel extends BaseModel {
 
 
     //通知友谊赛挑选卡组
-    private S_MATCH_CARD_GROUP(msg: FriendlyMatchPto.S_MATCH_CARD_GROUP) {
-        this.emit('S_MATCH_CARD_GROUP', msg.endTime);
+    private S_MATCH_DECK(msg: FriendlyMatchPto.S_MATCH_DECK) {
+        this.emit('S_MATCH_DECK', msg.endTime);
     }
 
     //友谊赛中断
@@ -101,16 +101,16 @@ class FriendlyMatchModel extends BaseModel {
     }
 
     //好友选择卡组状态改变
-    private S_FRIEND_GROUP_STATUS_CHANGE(msg: FriendlyMatchPto.S_FRIEND_GROUP_STATUS_CHANGE) {
-        this.emit('S_FRIEND_GROUP_STATUS_CHANGE', msg.isChoose);
+    private S_FRIEND_DECK_STATUS_CHANGE(msg: FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE) {
+        this.emit('S_FRIEND_DECK_STATUS_CHANGE', msg.isChoose);
     }
 
     //选择卡组结果
-    private S_GROUP_CHOOSE_RESULT(msg: FriendlyMatchPto.S_GROUP_CHOOSE_RESULT) {
+    private S_DECK_CHOOSE_RESULT(msg: FriendlyMatchPto.S_DECK_CHOOSE_RESULT) {
         if (msg.code === 1) {
             SystemModel.ins().showTips('选择的卡组非法!');
             return;
         }
-        this.emit('FriendChooseGroupSuccess');
+        this.emit('FriendChooseDeckSuccess');
     }
 }

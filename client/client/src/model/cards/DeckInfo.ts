@@ -1,5 +1,5 @@
-const GroupCardsNum = 40;
-class CardGroupInfo {
+const DeckCardsNum = 40;
+class DeckInfo {
     /**创建卡组数据缓存 */
     private _cardsInfo: { count: number, cardInfo: CardInterface }[];
     /**当前卡牌数量 */
@@ -9,11 +9,8 @@ class CardGroupInfo {
     public heroCard: CardInterface;
 
     public powerId: CardsPto.PowerType;
-    public groupName: string;
-    public groupId: number
-
-    /**卡组名称 */
-    public cardGroupName: string
+    public deckName: string;
+    public deckId: number
 
     constructor() {
         this.clear();
@@ -21,19 +18,19 @@ class CardGroupInfo {
 
     get cardsInfo() { return this._cardsInfo }
 
-    public startGroupEdit(powerId: CardsPto.PowerType, grouName: string, groupInfo: CardsPto.ICardGroup) {
+    public startDeckEdit(powerId: CardsPto.PowerType, deckName: string, deckInfo: CardsPto.IDeck) {
         this.powerId = powerId;
-        this.groupName = grouName;
-        this.groupId = -1;
+        this.deckName = deckName;
+        this.deckId = -1;
         this.heroId = -1;
         //修改已有的卡组
-        if (groupInfo !== null) {
-            this.groupId = groupInfo.groupId || -1;
+        if (deckInfo !== null) {
+            this.deckId = deckInfo.deckId || -1;
             this._cardCount = 0;
-            this.heroId = groupInfo.heroId || -1;
+            this.heroId = deckInfo.heroId || -1;
             this.heroCard = CardsModel.ins().getCardConfigById(this.heroId);
-            for (let index = 0; index < groupInfo.cards.length; index++) {
-                const info = groupInfo.cards[index];
+            for (let index = 0; index < deckInfo.cards.length; index++) {
+                const info = deckInfo.cards[index];
                 const cardInfo = CardsModel.ins().getCardConfigById(info.id);
                 this._cardsInfo.push({ count: info.count, cardInfo })
                 this._cardCount += info.count;
@@ -47,16 +44,16 @@ class CardGroupInfo {
         this.heroCard = null;
         this._cardCount = 0;
         this.powerId = CardsPto.PowerType.Common;
-        this.groupName = '';
-        this.groupId = -1;
+        this.deckName = '';
+        this.deckId = -1;
     }
 
     /**
      * 检查将要加入的卡牌是否可以加入
      */
     private addCardCheck(cardInfo: CardInterface) {
-        if (cardInfo.cardType !== CardsPto.CardType.Hero && this._cardCount >= GroupCardsNum) {
-            SystemModel.ins().showTips(`最多携带${GroupCardsNum}张卡牌`);
+        if (cardInfo.cardType !== CardsPto.CardType.Hero && this._cardCount >= DeckCardsNum) {
+            SystemModel.ins().showTips(`最多携带${DeckCardsNum}张卡牌`);
             return false;
         }
         if (this.heroId !== -1 && cardInfo.cardType === CardsPto.CardType.Hero) {

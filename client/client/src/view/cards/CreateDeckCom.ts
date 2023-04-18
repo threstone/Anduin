@@ -1,10 +1,10 @@
-class CreateCardGroup extends BaseView<BaseUI.UICreateCardGroup> {
+class CreateDeckCom extends BaseView<BaseUI.UICreateDeckCom> {
 
     private selectPowerId: CardsPto.PowerType;
 
     protected init() {
         this.selectPowerId = CardsPto.PowerType.ShengTang;
-        this.view = BaseUI.UICreateCardGroup.createInstance();
+        this.view = BaseUI.UICreateDeckCom.createInstance();
         this.view.selectBtn.describe.text = '选择';
 
         const list = this.view.powerList;
@@ -45,11 +45,11 @@ class CreateCardGroup extends BaseView<BaseUI.UICreateCardGroup> {
 
     private onSelectBtnClick() {
         this.close();
-        if (this.view.groupName.text.length === 0) {
-            this.view.groupName.text = CardsModel.ins().getCardGroupName(this.selectPowerId);
+        if (this.view.deckName.text.length === 0) {
+            this.view.deckName.text = CardsModel.ins().getDeckName(this.selectPowerId);
         }
-        CardsView.ins().doCreateCardGroup(this.selectPowerId, this.view.groupName.text, null);
-        this.view.groupName.text = '';
+        CardsView.ins().doCreateDeck(this.selectPowerId, this.view.deckName.text, null);
+        this.view.deckName.text = '';
     }
 
     private disGrayAllBtn() {

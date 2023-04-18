@@ -31,6 +31,6 @@ export class FriendlyMatchInfo extends GameMatchInfo {
     }
 
     isComplete() {
-        return this.souceUser.cardGroup && this.targetUser.cardGroup;
+        return this.souceUser.deck && this.targetUser.deck;
     }
 }
