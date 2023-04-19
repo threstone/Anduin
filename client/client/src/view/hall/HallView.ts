@@ -5,9 +5,15 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
     }
 
     public open(): void {
+        SoundMgr.ins().hallBgm.play(0, -1);
         super.open();
         this.initView();
         FriendView.ins();
+    }
+
+    public close(): void {
+        super.close();
+        SoundMgr.ins().hallBgm.stop();
     }
 
     private initView() {
@@ -54,7 +60,7 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         this.clearMiniChatTips();
     }
 
-    clearMiniChatTips() {
+    public clearMiniChatTips() {
         this.view.miniChat.tipsGroup.visible = false;
         this.unReadNum = 0;
     }

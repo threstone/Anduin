@@ -125,6 +125,7 @@
     <component id="93bw4q" name="ActionRecordDetail.xml" path="/game/record/" exported="true"/>
     <image id="93bw4t" name="damageBg.png" path="/game/res/"/>
     <component id="93bw4u" name="DamageTips.xml" path="/game/map/" exported="true"/>
+    <image id="s8no4w" name="handbook_icon_b.png" path="/game/res/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

@@ -26,7 +26,7 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
     private addRecord(item: BaseUI.UIActionRecordItem, msg: IMessage) {
         const list = this.view.list;
         list.touchable = true;
-        if (list.numChildren >= 15) {
+        if (list.numChildren >= 12) {
             const delItem = list.removeChildAt(0);
             this.removeTargetEvents(delItem);
             this._msgPool.shift();

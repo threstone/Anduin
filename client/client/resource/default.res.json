@@ -22,9 +22,9 @@
 			"name": "server_json"
 		},
 		{
-			"name": "config_json",
+			"url": "configs/config.json",
 			"type": "json",
-			"url": "configs/config.json"
+			"name": "config_json"
 		}
 	]
 }

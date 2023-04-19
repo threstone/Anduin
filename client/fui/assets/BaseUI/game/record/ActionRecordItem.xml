@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="64,64">
+<component size="78,78">
   <displayList>
-    <graph id="n1_ncgh" name="selfBg" xy="-2,-2" size="68,68" visible="false" type="rect" lineSize="0" fillColor="#ff66ff00">
+    <image id="n13_s8no" name="n13" src="s8no4w" fileName="game/record/handbook_icon_b.png" xy="0,0" size="78,78"/>
+    <graph id="n1_ncgh" name="selfBg" xy="7,7" size="64,64" visible="false" type="rect" lineSize="0" fillColor="#ff66ff00">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <graph id="n2_ncgh" name="enemyBg" xy="-2,-2" size="68,68" visible="false" type="rect" lineSize="0" fillColor="#ffcc3300">
+    <graph id="n2_ncgh" name="enemyBg" xy="7,7" size="64,64" visible="false" type="rect" lineSize="0" fillColor="#ffcc3300">
       <relation target="" sidePair="width-width,height-height"/>
     </graph>
-    <loader id="n0_ncgh" name="cardImg" xy="2,2" size="60,60" url="ui://yaux2xponcgh4j" fill="scaleFree">
+    <loader id="n0_ncgh" name="cardImg" xy="9,9" size="60,60" url="ui://yaux2xponcgh4j" fill="scaleFree">
       <relation target="" sidePair="center-center,middle-middle%"/>
     </loader>
-    <image id="n3_ncgh" name="atkImg" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="28,31" visible="false"/>
-    <image id="n4_ncgh" name="effectImg" src="ncgh4g" fileName="game/res/2.png" xy="40,28" size="26,38" visible="false"/>
-    <image id="n8_ncgh" name="denyImg" src="ncgh4k" fileName="game/res/ic_com_sina_weibo_sdk_close.png" xy="29,29" visible="false"/>
-    <image id="n11_ncgh" name="deadImg" src="ncgh4n" fileName="game/res/dead.png" xy="26,26" visible="false"/>
-    <image id="n12_ncgh" name="moveImg" src="ncgh4p" fileName="game/res/move.png" xy="26,26" visible="false"/>
+    <image id="n3_ncgh" name="atkImg" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="40,43" visible="false"/>
+    <image id="n4_ncgh" name="effectImg" src="ncgh4g" fileName="game/res/2.png" xy="52,40" size="26,38" visible="false"/>
+    <image id="n8_ncgh" name="denyImg" src="ncgh4k" fileName="game/res/ic_com_sina_weibo_sdk_close.png" xy="41,41" visible="false"/>
+    <image id="n11_ncgh" name="deadImg" src="ncgh4n" fileName="game/res/dead.png" xy="38,38" visible="false"/>
+    <image id="n12_ncgh" name="moveImg" src="ncgh4p" fileName="game/res/move.png" xy="38,38" visible="false"/>
   </displayList>
 </component>

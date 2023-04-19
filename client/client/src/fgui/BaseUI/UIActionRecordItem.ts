@@ -20,14 +20,14 @@ module BaseUI {
 		protected constructFromXML(xml:any):void {
 			super.constructFromXML(xml);
 
-			this.selfBg = <fairygui.GGraph>(this.getChildAt(0));
-			this.enemyBg = <fairygui.GGraph>(this.getChildAt(1));
-			this.cardImg = <fairygui.GLoader>(this.getChildAt(2));
-			this.atkImg = <fairygui.GImage>(this.getChildAt(3));
-			this.effectImg = <fairygui.GImage>(this.getChildAt(4));
-			this.denyImg = <fairygui.GImage>(this.getChildAt(5));
-			this.deadImg = <fairygui.GImage>(this.getChildAt(6));
-			this.moveImg = <fairygui.GImage>(this.getChildAt(7));
+			this.selfBg = <fairygui.GGraph>(this.getChildAt(1));
+			this.enemyBg = <fairygui.GGraph>(this.getChildAt(2));
+			this.cardImg = <fairygui.GLoader>(this.getChildAt(3));
+			this.atkImg = <fairygui.GImage>(this.getChildAt(4));
+			this.effectImg = <fairygui.GImage>(this.getChildAt(5));
+			this.denyImg = <fairygui.GImage>(this.getChildAt(6));
+			this.deadImg = <fairygui.GImage>(this.getChildAt(7));
+			this.moveImg = <fairygui.GImage>(this.getChildAt(8));
 		}
 	}
 }
