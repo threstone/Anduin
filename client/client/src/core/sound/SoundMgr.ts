@@ -1,11 +1,14 @@
 class SoundMgr extends BaseClass {
-    public hallBgm: Sound;
-    public battleBgm: Sound;
+
+    public winSound: Sound;
+    public lostSound: Sound;
+    public clickSound: Sound;
 
     constructor() {
-        console.log(123);
         super();
-        this.hallBgm = new Sound("./resource/sound/bgm/bgm.mp3");
-        this.battleBgm = new Sound("./resource/sound/bgm/battle_bgm.mp3");
+
+        this.winSound = new Sound("./resource/sound/battle_win.mp3");
+        this.lostSound = new Sound("./resource/sound/battle_lose.mp3");
+        this.clickSound = new Sound("./resource/sound/click.mp3");
     }
 }

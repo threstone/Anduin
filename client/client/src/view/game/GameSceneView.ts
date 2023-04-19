@@ -36,14 +36,10 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.initView();
 
         super.open();
-        SoundMgr.ins().hallBgm.stop();
-        SoundMgr.ins().battleBgm.play(0, -1);
     }
 
     public close(): void {
         super.close();
-        SoundMgr.ins().battleBgm.stop();
-        SoundMgr.ins().hallBgm.play(0, -1);
     }
 
     private initView() {

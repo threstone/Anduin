@@ -12,6 +12,10 @@ class GameOverView extends BaseView<BaseUI.UIGameOverCom>{
             this.view.res.text = winnerUid === UserModel.ins().uid ? '胜利' : '失败';
         }
         this.AddClick(this.view.click, this.onClick);
+
+        //播放音效
+        const sound = winnerUid === UserModel.ins().uid ? SoundMgr.ins().winSound : SoundMgr.ins().lostSound;
+        sound.play(0, 1);
     }
 
     private onClick() {

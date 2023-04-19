@@ -7,6 +7,10 @@ class Sound {
         this._url = url;
     }
 
+    /*
+     * @param startTime 应开始播放的初始位置（以秒为单位），默认值是 0
+     * @param loops 播放次数，默认值是 0，循环播放。 大于 0 为播放次数，如 1 为播放 1 次；小于等于 0，为循环播放。
+     */
     public play(startTime?: number, loops?: number) {
         if (!this._sound) {
             this._sound = new egret.Sound();
