@@ -18,6 +18,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         this.view.unknowCard.x = 0;
         this.view.unknowCard.visible = false;
         this.view.arrow.visible = true;
+        this.view.tips.visible = true;
         this.view.removeChild(this.tempCard);
         this.view.list.removeChildren();
     }

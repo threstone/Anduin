@@ -131,7 +131,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const mapBlock = new egret.Point();
         this.isInMap(evt.stageX, evt.stageY, mapBlock);
         const cardInfo = MapModel.ins().getEntityCard(mapBlock.x, mapBlock.y);
-        if (!cardInfo || cardInfo.cardType === CardsPto.CardType.Building) {
+        if (!cardInfo || cardInfo.uid !== UserModel.ins().uid || cardInfo.cardType === CardsPto.CardType.Building) {
             return;
         }
         return cardInfo;
@@ -173,7 +173,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
 
 
-        this.view.removeChild(this._detailCard);
         this._detailCard = CardItem.getCardDetail(cardInfo);
         this.view.addChild(this._detailCard);
 
@@ -197,12 +196,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         MapTipsView.ins().close();
     }
 
-    /**endItemDrag */
-    private endItemDrag(evt: egret.TouchEvent) {
+    /**中途停止拖动 */
+    private stopItemDrag(evt: egret.TouchEvent) {
         evt.preventDefault();
-        evt.currentTarget.x = 0;
-        evt.currentTarget.y = 0;
-        evt.currentTarget.texture = null;
+        const loader = evt.currentTarget as fairygui.GLoader;
+        loader.dispatchEvent(new egret.Event(fairygui.DragEvent.DRAG_END));
     }
 
     /**当地图场景被拖动 */
@@ -211,7 +209,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         const cardInfo = this.operateAccessCheck(evt);
         if (!cardInfo) {
-            this.endItemDrag(evt);
+            this.stopItemDrag(evt);
             return;
         }
 
@@ -235,7 +233,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         //没有操作就结束拖动
         if (MapTipsView.ins().hasTips() === false) {
-            this.endItemDrag(evt);
+            this.stopItemDrag(evt);
             return;
         }
 
