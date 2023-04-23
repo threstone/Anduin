@@ -59,14 +59,12 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
         fairygui.GRoot.inst.grayed = true;
         this.view.grayed = false;
         const index = this.view.list.getChildIndex(item);
-        console.log(index);
         const msg = this._msgPool[index];
         ActionRecordDetailView.ins().open(msg);
     }
 
     private onRecordItemHoverEnd() {
         ActionRecordDetailView.ins().close();
-        console.log('out');
         fairygui.GRoot.inst.grayed = false;
     }
 

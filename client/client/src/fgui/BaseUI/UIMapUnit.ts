@@ -16,6 +16,7 @@ module BaseUI {
 		public healthText:fairygui.GTextField;
 		public healthGroup:fairygui.GGroup;
 		public heroFlag:fairygui.GTextField;
+		public dragLoader:fairygui.GLoader;
 		public static URL:string = "ui://yaux2xpohzsg2n";
 
 		public static createInstance():UIMapUnit {
@@ -38,6 +39,7 @@ module BaseUI {
 			this.healthText = <fairygui.GTextField>(this.getChildAt(10));
 			this.healthGroup = <fairygui.GGroup>(this.getChildAt(11));
 			this.heroFlag = <fairygui.GTextField>(this.getChildAt(12));
+			this.dragLoader = <fairygui.GLoader>(this.getChildAt(13));
 		}
 	}
 }

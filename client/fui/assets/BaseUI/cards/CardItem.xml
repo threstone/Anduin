@@ -31,6 +31,6 @@
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368"/>
-    <list id="n32_sgbw" name="buffDesc" xy="223,0" size="168,368" visible="false" overflow="scroll"/>
+    <list id="n32_sgbw" name="buffDesc" xy="223,10" size="168,358" visible="false" overflow="scroll"/>
   </displayList>
 </component>

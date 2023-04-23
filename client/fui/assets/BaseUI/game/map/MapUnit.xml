@@ -18,5 +18,8 @@
     <text id="n11_hzsg" name="healthText" xy="107,63" size="25,27" group="n12_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="1"/>
     <group id="n12_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true"/>
     <text id="n21_hzsg" name="heroFlag" xy="52,3" size="40,27" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄"/>
+    <loader id="n23_lijd" name="dragLoader" xy="0,0" size="138,93">
+      <relation target="" sidePair="width-width,height-height"/>
+    </loader>
   </displayList>
 </component>

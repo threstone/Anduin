@@ -21,13 +21,19 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.entityMap = new Map<number, BaseUI.UIMapUnit | BaseUI.UIMapBuilding>();
 
         this.addEffectListener('S_MAP_DATA', this.updateMap);
-        this.addEffectListener('S_ROUND_END_EVENT', this.updateMap);
+        this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
         this.addEffectListener('S_MOVE', this.moveUnit);
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('S_ENTITY_DEAD', this.entityDead);
         this.addEffectListener('S_UPDATE_ENTITYS', this.entitysUpdate);
         this.addEffectListener('S_SELF_EFFECT', this.entitysSelfEffect);
         this.addEffectListener('S_FLY_EFFECT', this.flyEffect);
+    }
+
+    private onRoundEnd(msg: GamePto.S_ROUND_END_EVENT) {
+        if (msg.uid === UserModel.ins().uid) {
+            this.updateMap();
+        }
     }
 
     public close(): void {
@@ -40,15 +46,22 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     public addMapItem(cardInfo: GamePto.ICard) {
         const cardItem = MapItem.getItem(cardInfo);
         this.entityMap.set(cardInfo.id, cardItem);
+
         this.view.addChild(cardItem);
 
         //增加悬浮事件
         this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, this.onEntityHover, this);
         this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
             this.view.removeChild(this._detailCard);
+            this._detailCard = null;
         }, this);
 
         this.AddClick(cardItem, this.onEntityClick);
+        //非建筑增加拖动操作
+        if (cardInfo.cardType !== CardsPto.CardType.Building) {
+            const unitItem = cardItem as BaseUI.UIMapUnit;
+            this.addDragEvent(unitItem, unitItem.dragLoader, this.onEntityDragStart, this.onEntityDragEnd)
+        }
 
         const mapPoint = this.getMapPoint(cardInfo.blockX, cardInfo.blockY);
         cardItem.x = mapPoint.x;
@@ -106,33 +119,46 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
     }
 
-    /**当地图元素被点击 */
-    private onEntityClick(evt: egret.TouchEvent) {
+    /**
+     * 操作合法性检测
+     * @returns 返回被操作卡牌的信息
+     */
+    private operateAccessCheck(evt: egret.TouchEvent) {
+        if (!GameSceneView.ins().allowToOprate) {
+            return;
+        }
+
         const mapBlock = new egret.Point();
         this.isInMap(evt.stageX, evt.stageY, mapBlock);
         const cardInfo = MapModel.ins().getEntityCard(mapBlock.x, mapBlock.y);
+        if (!cardInfo || cardInfo.cardType === CardsPto.CardType.Building) {
+            return;
+        }
+        return cardInfo;
+    }
+
+    /**当地图元素被点击 */
+    private onEntityClick(evt: egret.TouchEvent) {
+        const cardInfo = this.operateAccessCheck(evt);
         if (!cardInfo) {
             return;
         }
 
-        //自己的卡牌被点击
-        if (GameSceneView.ins().allowToOprate && cardInfo.cardType !== CardsPto.CardType.Building) {
-            const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
-            // 显示所有可移动路径
-            const movePointSet = new Set<number>();
-            movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
-            //检查是否允许移动
-            if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
-                MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
-                MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
-            }
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        // 显示所有可移动路径
+        const movePointSet = new Set<number>();
+        movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
+        //检查是否允许移动
+        if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
+            MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
+            MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
+        }
 
-            //显示可攻击
-            if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
-                const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
-                if (atkPointMap.size !== 0) {
-                    MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
-                }
+        //显示可攻击
+        if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+            const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
+            if (atkPointMap.size !== 0) {
+                MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
             }
         }
     }
@@ -145,6 +171,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (!cardInfo) {
             return;
         }
+
+
+        this.view.removeChild(this._detailCard);
         this._detailCard = CardItem.getCardDetail(cardInfo);
         this.view.addChild(this._detailCard);
 
@@ -154,6 +183,65 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         if (this._detailCard.y + this._detailCard.height > this.view.height) {
             this._detailCard.y = this.view.height - this._detailCard.height;
         }
+    }
+
+    /**当地图场景被拖动 */
+    private onEntityDragEnd(evt: egret.TouchEvent) {
+        console.log('end');
+
+        const point = new egret.Point();
+        if (!this.isInMap(evt.stageX, evt.stageY, point)) {
+            return;
+        }
+        MapTipsView.ins().dispatchTipsEvent(point.x, point.y);
+        MapTipsView.ins().close();
+    }
+
+    /**endItemDrag */
+    private endItemDrag(evt: egret.TouchEvent) {
+        evt.preventDefault();
+        evt.currentTarget.x = 0;
+        evt.currentTarget.y = 0;
+        evt.currentTarget.texture = null;
+    }
+
+    /**当地图场景被拖动 */
+    private onEntityDragStart(evt: egret.TouchEvent) {
+        console.log('start');
+
+        const cardInfo = this.operateAccessCheck(evt);
+        if (!cardInfo) {
+            this.endItemDrag(evt);
+            return;
+        }
+
+        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        // 显示所有可移动路径
+        const movePointSet = new Set<number>();
+        movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
+        //检查是否允许移动
+        if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
+            MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
+            MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
+        }
+
+        //显示可攻击
+        if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+            const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
+            if (atkPointMap.size !== 0) {
+                MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
+            }
+        }
+
+        //没有操作就结束拖动
+        if (MapTipsView.ins().hasTips() === false) {
+            this.endItemDrag(evt);
+            return;
+        }
+
+        //走到这里说明使有操作的
+        this.view.removeChild(this._detailCard);
+        this._detailCard = null;
     }
 
     /**移动单位 */

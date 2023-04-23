@@ -49,7 +49,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
             dragLoader.y = evt.stageY - dragLoader.height / 2;
             fairygui.GRoot.inst.addChild(dragLoader);
             if (dragStartFun) {
-                dragStartFun(evt);
+                dragStartFun.call(this, evt);
             }
         }, this);
         this.addEvent(dragLoader, fairygui.DragEvent.DRAG_END, (evt: fairygui.DragEvent) => {
@@ -58,7 +58,7 @@ abstract class BaseView<T extends fairygui.GComponent> {
             dragLoader.texture = null;
             base.addChild(dragLoader);
             if (dragStartEnd) {
-                dragStartEnd(evt);
+                dragStartEnd.call(this, evt);
             }
         }, this);
     }

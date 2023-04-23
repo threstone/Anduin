@@ -9,6 +9,8 @@ class GlobalView {
         
         fairygui.GRoot.inst.width = stage.stageWidth;
         fairygui.GRoot.inst.height = stage.stageHeight;
+
+        //设置全局默认字体
         fairygui.UIConfig.defaultFont = 'Arial';
         egret.TextField.default_fontFamily = "Arial";
 

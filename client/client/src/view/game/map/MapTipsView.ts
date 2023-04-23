@@ -19,11 +19,15 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
     }
 
     private clearTips() {
-        for (let index = 0; index < this._tipsArr.length; index++) {
-            const tips = this._tipsArr[index];
+        this._tipsArr.forEach(tips => {
             this.removeTargetEvents(tips);
             this.view.removeChild(tips);
-        }
+        });
+        this._tipsArr = [];
+    }
+
+    public hasTips() {
+        return this._tipsArr.length > 0;
     }
 
     public showAtkTips(baseCard: GamePto.ICard, atkPointMap: Map<number, number>) {
@@ -38,7 +42,7 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
             const tips = BaseUI.UIAtkTips.createInstance();
             tips.x = position.x;
             tips.y = position.y;
-            this._tipsArr.push(tips);
+            this._tipsArr[atkPoint] = tips;
             this.view.addChild(tips);
             this.AddClick(tips, () => {
                 const atkSourceX = basePoint % MapWidth;
@@ -66,7 +70,7 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
             const tips = BaseUI.UIMoveTips.createInstance();
             tips.x = position.x;
             tips.y = position.y;
-            this._tipsArr.push(tips);
+            this._tipsArr[point] = tips;
             this.view.addChild(tips);
             this.AddClick(tips, () => {
                 MapModel.ins().C_MOVE(baseCard.blockX, baseCard.blockY, x, y);
@@ -74,9 +78,10 @@ class MapTipsView extends BaseView<BaseUI.UIMapTipsView>{
         });
     }
 
-    /**展示可以放置的位置 */
-    public showUseTips(baseCard: GamePto.ICard) {
-        // 建筑后三排以及英雄旁边
-
+    public dispatchTipsEvent(x: number, y: number) {
+        const tips = this._tipsArr[y * MapWidth + x];
+        if (tips) {
+            tips.dispatchEvent(new egret.Event(egret.TouchEvent.TOUCH_TAP));
+        }
     }
 }
