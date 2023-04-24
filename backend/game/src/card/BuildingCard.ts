@@ -36,12 +36,27 @@ export class BuildingCard extends EventCard {
             return null;
         }
         const res: number[] = [];
-        this._buffMap.forEach((value) => {
-            if (!value.ignore) {
-                res.push(value.buffId);
+        this._buffMap.forEach((buff) => {
+            if (this.isBuffShow(buff)) {
+                res.push(buff.buffId);
             }
         });
         return res;
+    }
+
+    /**是否下发到客户端以显示 */
+    public isBuffShow(buff: BuffData) {
+        //如果buff不需要被忽略就显示
+        if (buff.ignore === false) {
+            return true;
+        }
+
+        //是全局或位置buff的情况下又不是buff源,则需要展示出Buff
+        if (buff.sourceUniqueId && buff.sourceUniqueId !== this.id) {
+            return true;
+        }
+
+        return false;
     }
 
     /**添加指定的buff */
@@ -98,6 +113,11 @@ export class BuildingCard extends EventCard {
             const buff = this.buffs[index];
             GlobalVar.buffMgr.addBuff(this, buff);
         }
+
+        //自身初始的buff需要被忽略
+        this._buffMap.forEach((buff) => {
+            buff.ignore = true;
+        })
     }
 
     public useCardCheck(blockX: number, blockY: number, ...params: number[]) {

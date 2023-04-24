@@ -272,6 +272,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         msg.targetList.forEach((target) => {
             const entity = this.entityMap.get(target.id);
             this.entityShowTips(entity, `-${msg.damage}`);
+            this.updateMapItem(target);
         });
 
         this.updateMapItem(sourceCardInfo);

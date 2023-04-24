@@ -178,7 +178,7 @@
  "health":5,
  "fee":1,
  "quality":0,
- "desc":"",
+ "desc":"出兵建筑:单位必须放置于出兵建筑附近",
  "buffs":[],
  "isDerivation":0,
  "useCondition":[1,1],
