@@ -7,7 +7,7 @@ check() {
 start() {
         check
         if [ -z $pid ]; then
-           nohup node --title=${log_client} ./src/bin/main.js socketListenPort=9001 nodeId=Relation1 > logfile.log 2>&1 &
+           nohup node --title=${log_client} ./src/bin/main.js socketListenPort=9001 nodeId=Relation1> logfile.log 2>&1 &
                 sleep 3
                 check
                 echo -e "${log_client} pid is:\033[31m$pid\033[0m"
