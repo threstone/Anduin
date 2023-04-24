@@ -186,8 +186,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**当地图场景被拖动 */
     private onEntityDragEnd(evt: egret.TouchEvent) {
-        console.log('end');
-
         const point = new egret.Point();
         if (!this.isInMap(evt.stageX, evt.stageY, point)) {
             return;
@@ -205,8 +203,6 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**当地图场景被拖动 */
     private onEntityDragStart(evt: egret.TouchEvent) {
-        console.log('start');
-
         const cardInfo = this.operateAccessCheck(evt);
         if (!cardInfo) {
             this.stopItemDrag(evt);

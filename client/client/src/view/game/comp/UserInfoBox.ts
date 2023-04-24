@@ -10,6 +10,13 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
     protected init() {
         //全局监听,不会应为界面close而中止监听
         GameDispatcher.getInstance().addEventListener('S_INIT_GAME', this.initUserInfo, this);
+
+        //隐藏所有费用描述
+        const feeList = this.view.feeList;
+        for (let index = 0; index < feeList.numChildren; index++) {
+            const child = feeList.getChildAt(index) as BaseUI.UIFeeBtn;
+            child.feeText.visible = false;
+        }
     }
 
     public open(): void {
@@ -89,25 +96,18 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.setCardPoolNum(DeckCardsNum - ConfigMgr.ins().common.startHandCardNum - 1);
     }
 
-    /**设置费用 */
+    /**
+     * 设置费用
+     * TODO 暂时没有写支持超出10费上限的逻辑
+     */
     public feeSet(fee: number, maxFee: number) {
         if (maxFee < fee) {
             maxFee = fee;
         }
         const feeList = this.view.feeList;
-        if (feeList.numChildren !== maxFee) {
-            feeList.removeChildren();
-            for (let index = 0; index < maxFee; index++) {
-                const feeBtn = BaseUI.UIFeeBtn.createInstance();
-                feeBtn.touchable = false;
-                feeBtn.feeText.visible = false;
-                feeBtn.grayed = true;
-                feeList.addChild(feeBtn);
-            }
-        }
         for (let index = feeList.numChildren - 1; index >= 0; index--) {
             const feeBtn = feeList.getChildAt(index) as BaseUI.UIFeeBtn;
-            feeBtn.grayed = index >= fee;
+            feeBtn.visible = index < fee;
         }
         this.view.feeDesc.text = `能量 : ${fee}`;
     }
@@ -142,9 +142,9 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
 
 class SelfInfoBox extends UserInfoBox {
     protected init() {
-        super.init();
         this.view = GameSceneView.ins().getView().selfInfoBox;
         this.isSelf = true;
+        super.init();
     }
 
     public isInDeadPool(x: number, y: number) {
@@ -158,8 +158,8 @@ class SelfInfoBox extends UserInfoBox {
 
 class TargetInfoBox extends UserInfoBox {
     protected init() {
-        super.init();
         this.view = GameSceneView.ins().getView().targetInfoBox;
         this.isSelf = false;
+        super.init();
     }
 }
