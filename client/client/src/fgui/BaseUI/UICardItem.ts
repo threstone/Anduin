@@ -12,7 +12,7 @@ module BaseUI {
 		public feeGroup:fairygui.GGroup;
 		public buttonBg:fairygui.GImage;
 		public powerText:fairygui.GTextField;
-		public quality:fairygui.GGraph;
+		public quality:fairygui.GLoader;
 		public cardName:fairygui.GTextField;
 		public desc:fairygui.GTextField;
 		public closeRange:fairygui.GImage;
@@ -47,7 +47,7 @@ module BaseUI {
 			this.feeGroup = <fairygui.GGroup>(this.getChildAt(6));
 			this.buttonBg = <fairygui.GImage>(this.getChildAt(7));
 			this.powerText = <fairygui.GTextField>(this.getChildAt(8));
-			this.quality = <fairygui.GGraph>(this.getChildAt(9));
+			this.quality = <fairygui.GLoader>(this.getChildAt(9));
 			this.cardName = <fairygui.GTextField>(this.getChildAt(10));
 			this.desc = <fairygui.GTextField>(this.getChildAt(12));
 			this.closeRange = <fairygui.GImage>(this.getChildAt(13));

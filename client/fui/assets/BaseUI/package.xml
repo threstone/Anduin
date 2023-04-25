@@ -127,6 +127,10 @@
     <image id="s8no4w" name="handbook_icon_b.png" path="/game/res/"/>
     <image id="682o4y" name="youRound.png" path="/game/"/>
     <image id="682o4z" name="damageBg.png" path="/game/res/"/>
+    <image id="682o5e" name="normal.png" path="/cards/res/" exported="true"/>
+    <image id="682o5f" name="premium.png" path="/cards/res/" exported="true"/>
+    <image id="682o5g" name="rare.png" path="/cards/res/" exported="true"/>
+    <image id="682o5h" name="precious.png" path="/cards/res/" exported="true"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

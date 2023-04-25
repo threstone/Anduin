@@ -58,7 +58,7 @@ class CardItem {
         }
         card.atkText.text = `${cardInfo.attack}`;
         card.healthText.text = `${cardInfo.health}`;
-        card.quality.color = CardItem.qualityColors[cardInfo.quality];
+        card.quality.url = this.getQualityUrl(cardInfo.quality);
         CardItem.updateNum(card, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
@@ -77,6 +77,19 @@ class CardItem {
                 card.healthBg.visible = false;
                 card.times.visible = true;
                 break;
+        }
+    }
+
+    private static getQualityUrl(quality: CardsPto.QualityType) {
+        switch (quality) {
+            case CardsPto.QualityType.Normal:
+                return fairygui.UIPackage.getItemURL('BaseUI', 'normal');
+            case CardsPto.QualityType.Rare:
+                return fairygui.UIPackage.getItemURL('BaseUI', 'rare');
+            case CardsPto.QualityType.Precious:
+                return fairygui.UIPackage.getItemURL('BaseUI', 'precious');
+            case CardsPto.QualityType.Premium:
+                return fairygui.UIPackage.getItemURL('BaseUI', 'premium');
         }
     }
 

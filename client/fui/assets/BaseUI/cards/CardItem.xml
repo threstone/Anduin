@@ -13,7 +13,7 @@
     <group id="n18_tb7e" name="feeGroup" xy="6,-6" size="44,49" advanced="true"/>
     <image id="n6_tb7e" name="buttonBg" src="ru1k6" fileName="common/res/comp_120_164_1.png" xy="11,175" size="200,185" group="n14_tb7e"/>
     <text id="n4_tb7e" name="powerText" xy="49,183" size="124,17" group="n14_tb7e" fontSize="10" color="#006666" align="center" autoSize="none" text="圣堂.单位.人类"/>
-    <graph id="n5_tb7e" name="quality" xy="96,324" pivot="0.5,0.5" size="25,25" group="n14_tb7e" rotation="45" type="rect" lineSize="0" lineColor="#ffffffff" fillColor="#ffff6600"/>
+    <loader id="n36_682o" name="quality" xy="98,322" size="21,30" group="n14_tb7e" aspect="true" url="ui://yaux2xpo682o5h" fill="scale"/>
     <text id="n7_tb7e" name="cardName" xy="49,200" size="124,26" group="n14_tb7e" fontSize="18" color="#006666" align="center" autoSize="none" text="民兵"/>
     <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="common/res/line.png" xy="19,225" size="184,2" group="n14_tb7e" color="#cccccc"/>
     <text id="n9_tb7e" name="desc" xy="22,231" size="180,84" group="n14_tb7e" fontSize="13" autoSize="none" strokeColor="#ffffff" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
@@ -30,7 +30,7 @@
     <group id="n14_tb7e" name="buttonGroup" xy="2,175" size="224,208"/>
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
-    <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368"/>
+    <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368" fill="scaleFree"/>
     <list id="n32_sgbw" name="buffDesc" xy="223,10" size="168,358" visible="false" overflow="scroll"/>
   </displayList>
 </component>
