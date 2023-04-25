@@ -8,8 +8,8 @@ import { GameUser } from './GameUser';
 import { RedisType } from '../../../common/ConstDefine';
 
 export class BaseTable {
-    randSeed_: number;
-    mtrand_: () => number;
+    _randSeed: number;
+    _mtrand: () => number;
 
     tableId: number;
     talbeIndex: number;
@@ -25,12 +25,11 @@ export class BaseTable {
         this.tableId = tableId;
         this.talbeIndex = talbeIndex;
         this._users = [];
-
     }
 
     public setRandSeed(seed: number) {
-        this.randSeed_ = seed;
-        this.mtrand_ = MT19937.factory({
+        this._randSeed = seed;
+        this._mtrand = MT19937.factory({
             'seed': seed
         });
     }
@@ -42,7 +41,7 @@ export class BaseTable {
      */
     public random(value: number) {
         value = value || 1;
-        return this.mtrand_() % value;
+        return this._mtrand() % value;
     }
 
 

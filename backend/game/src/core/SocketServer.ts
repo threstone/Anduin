@@ -33,6 +33,9 @@ export class SocketServer extends RpcCommon.GameRPCServer {
             }
             return await fun(clientName, uid, msg);
         } catch (error) {
+            if(user.table){
+                user.table.destroy(true);
+            }
             logger.error(`handler 处理函数出错 :${error.message} stack:${error.stack}`);
         }
     }

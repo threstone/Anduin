@@ -115,7 +115,7 @@ export class BuildingCard extends EventCard {
         }
 
         //自身初始的buff需要被忽略
-        this._buffMap.forEach((buff) => {
+        this._buffMap?.forEach((buff) => {
             buff.ignore = true;
         })
     }
