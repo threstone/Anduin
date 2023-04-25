@@ -15,6 +15,7 @@ module BaseUI {
 		public targetLeftInfoBox:UILeftInfoBox;
 		public surrender:UIButton3;
 		public record:UIActionRecordCom;
+		public roundStartImg:fairygui.GImage;
 		public static URL:string = "ui://yaux2xpojig14";
 
 		public static createInstance():UIGameSceneCom {
@@ -36,6 +37,7 @@ module BaseUI {
 			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
 			this.surrender = <UIButton3>(this.getChildAt(10));
 			this.record = <UIActionRecordCom>(this.getChildAt(11));
+			this.roundStartImg = <fairygui.GImage>(this.getChildAt(12));
 		}
 	}
 }

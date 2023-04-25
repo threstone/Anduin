@@ -26,6 +26,9 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
 
         this.view.close.describe.text = 'tempCloseBtn';
         this.view.surrender.describe.text = '投降';
+
+        this.view.roundStartImg.scaleX = 0.5;
+        this.view.roundStartImg.scaleY = 0.5;
     }
 
     public open(): void {
@@ -80,6 +83,16 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         if (msg.uid === UserModel.ins().uid) {
             TipsView.ins().showTips('轮到你的回合了!')
             this._allowToOprate = true;
+
+            SoundMgr.ins().playSoundEffect('round_start', 0, 1);
+            //回合开始动画
+            egret.Tween.get(this.view.roundStartImg).to({ x: (this.view.width - this.view.roundStartImg.width / 2) * this.view.roundStartImg.scaleX }, 500, egret.Ease.quintInOut).
+                to({}, 1000).call(() => {
+                    SoundMgr.ins().playSoundEffect('round_start1', 0, 1);
+                }).
+                to({ x: this.view.width }, 500, egret.Ease.quintInOut).call(() => {
+                    this.view.roundStartImg.x = - this.view.roundStartImg.width * this.view.roundStartImg.scaleX;
+                });
         }
     }
 

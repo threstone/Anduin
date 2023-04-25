@@ -123,9 +123,10 @@
     <image id="ncgh4n" name="dead.png" path="/game/res/"/>
     <image id="ncgh4p" name="move.png" path="/game/res/"/>
     <component id="93bw4q" name="ActionRecordDetail.xml" path="/game/record/" exported="true"/>
-    <image id="93bw4t" name="damageBg.png" path="/game/res/"/>
     <component id="93bw4u" name="DamageTips.xml" path="/game/map/" exported="true"/>
     <image id="s8no4w" name="handbook_icon_b.png" path="/game/res/"/>
+    <image id="682o4y" name="youRound.png" path="/game/"/>
+    <image id="682o4z" name="damageBg.png" path="/game/res/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

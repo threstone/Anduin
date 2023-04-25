@@ -508,7 +508,12 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     /**单位头上飘提示 */
     public entityShowTips(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string, color: number = 0xFF0000) {
-        let tips = new fairygui.GTextField();
+        //减号开始的是伤害
+        if (text.startsWith('-')) {
+            this.showEntityDamageTips(entity, text);
+            return;
+        }
+        const tips = new fairygui.GTextField();
         tips.fontSize = 26;
         tips.color = color;
         tips.bold = true;
@@ -519,6 +524,22 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         fairygui.GRoot.inst.addChild(tips)
         egret.Tween.get(tips).to({ y: tips.y - entity.height }, 2500).call(() => {
             fairygui.GRoot.inst.removeChild(tips)
+        })
+    }
+
+    /**伤害提示 */
+    public showEntityDamageTips(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string) {
+        const atkTips = BaseUI.UIDamageTips.createInstance();
+        atkTips.setPivot(0.5, 0.5, true);
+        atkTips.damageDetail.text = text;
+        atkTips.scaleX = 0.2;
+        atkTips.scaleY = 0.2;
+        const point = entity.localToRoot((entity.width) / 2, (entity.height) / 2);
+        atkTips.x = point.x;
+        atkTips.y = point.y;
+        fairygui.GRoot.inst.addChild(atkTips);
+        egret.Tween.get(atkTips).to({ scaleX: 0.7, scaleY: 0.7 }, 400, egret.Ease.quintOut).to({}, 1000).call(() => {
+            fairygui.GRoot.inst.removeChild(atkTips)
         })
     }
 

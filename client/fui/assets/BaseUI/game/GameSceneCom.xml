@@ -29,9 +29,10 @@
       <relation target="n33_pg48" sidePair="right-left,top-top"/>
     </component>
     <component id="n41_ncgh" name="surrender" src="fjkiy" fileName="common/btn/Button3.xml" xy="1433,259"/>
-    <component id="n42_ncgh" name="record" src="ncgh4e" fileName="game/record/RecordCom.xml" xy="-1,400">
+    <component id="n42_ncgh" name="record" src="ncgh4e" fileName="game/record/ActionRecordCom.xml" xy="-1,400">
       <relation target="" sidePair="middle-middle"/>
       <relation target="n37_hzsg" sidePair="right-left"/>
     </component>
+    <image id="n46_682o" name="roundStartImg" src="682o4y" fileName="game/youRound.png" xy="-507,519" aspect="true"/>
   </displayList>
 </component>
