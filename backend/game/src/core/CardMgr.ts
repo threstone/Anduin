@@ -49,9 +49,7 @@ export class CardMgr {
          */
         const cardConfigs = GlobalVar.configMgr.getCards();
         this._baseCampCards = [];
-        for (let index = 0; index < cardConfigs.length; index++) {
-            const cardConfig = cardConfigs[index];
-
+        cardConfigs.forEach((cardConfig) => {
             // 设置基础兵营建筑
             if (cardConfig.cardType === CardsPto.CardType.Building && cardConfig.detailType === CardsPto.BuilingType.Base) {
                 this._baseCampCards[cardConfig.powerId] = cardConfig.cardId
@@ -76,7 +74,7 @@ export class CardMgr {
                         break;
                 }
             }
-        }
+        });
         logger.info(`结束卡片初始化,耗时:${Date.now() - makeTime}ms`);
     }
 

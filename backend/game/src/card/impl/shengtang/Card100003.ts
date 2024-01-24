@@ -5,7 +5,7 @@ import { BuildingCard } from "../../BuildingCard";
 import { UnitCard } from "../../UnitCard";
 
 /**巫师学徒 */
-export class Card8 extends UnitCard {
+export class Card100003 extends UnitCard {
 
     private _cacheEntity: BuildingCard;
     private _cacheDamage: number;

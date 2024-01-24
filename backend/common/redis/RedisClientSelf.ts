@@ -31,11 +31,11 @@ export class RedisClientSelf {
         }
         this.redis_client = Redis.createClient(redisConfig);
 
-        this.redis_client.on('error', (err) => {
+        this.redis_client.on('error', (err: Error) => {
             logger.error(`redis${db} error: `, err);
         });
 
-        this.redis_client.on('ready', (err) => {
+        this.redis_client.on('ready', (err: Error) => {
             if (this.onReady) {
                 this.onReady();
             }

@@ -6,7 +6,7 @@ import { BaseCard } from "../../BaseCard";
 import { EventCard } from "../../EventCard";
 
 /**单位反制 */
-export class Card7 extends EventCard {
+export class Card4 extends EventCard {
 
     constructor(cardId: number, uid: number, table: GameTable) {
         super(cardId, uid, table);
