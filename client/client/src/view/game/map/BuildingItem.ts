@@ -4,7 +4,7 @@ class BuildingItem {
         Utils.defineTextFieldSet(building.healthText, cardConfig.health);
         building.setPivot(0.5, 0.5, true);
 
-        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
+        RES.getResByUrl(`./resource/card/${cardConfig.powerId}/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
             if (!data) {
                 return
             }

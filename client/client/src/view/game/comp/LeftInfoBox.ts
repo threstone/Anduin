@@ -150,7 +150,7 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
         const card: GamePto.ICard = evt.data;
         const cardConfig = CardsModel.ins().getCardConfigById(card.cardId);
         if (this.isHandler(card.uid)) {
-            RES.getResByUrl(`./resource/card/${card.cardId}.jpg`, (data: egret.Texture) => {
+            RES.getResByUrl(`./resource/card/${cardConfig.powerId}/${card.cardId}.jpg`, (data: egret.Texture) => {
                 if (!data) {
                     return
                 }

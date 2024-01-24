@@ -63,8 +63,6 @@ class ShowCardsCom extends BaseView<BaseUI.UIShowCardsCom>{
         this.initFeeFilterEvent();
     }
 
-
-
     /**根据当前筛选项整理展示的卡牌 */
     private showCards() {
         const list = this.view.cardList;

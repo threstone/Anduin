@@ -95,16 +95,15 @@ class CardsModel extends BaseModel {
     //整理卡牌到powerCardMap
     private initCards() {
         this._allCardMap = new Map<CardsPto.PowerType, CardInterface[]>();
-        const cards = ConfigMgr.ins().allCardsInfo;
-        for (let index = 0; index < cards.length; index++) {
-            const card = cards[index];
+        const cardMap = ConfigMgr.ins().allCardsMap;
+        cardMap.forEach((card) => {
             let cardArr = this._allCardMap.get(card.powerId);
             if (!cardArr) {
                 cardArr = [];
                 this._allCardMap.set(card.powerId, cardArr);
             }
             cardArr.push(card);
-        }
+        })
         this.sortCardsByFee(this._allCardMap);
     }
 
@@ -119,13 +118,7 @@ class CardsModel extends BaseModel {
 
     /**通过卡牌信息获取卡牌 */
     public getCardConfigById(cardId: number) {
-        const cards = ConfigMgr.ins().allCardsInfo;
-        for (let index = 0; index < cards.length; index++) {
-            const cardInfo = cards[index];
-            if (cardId === cardInfo.cardId) {
-                return cardInfo;
-            }
-        }
+        return ConfigMgr.ins().allCardsMap.get(cardId);
     }
 
     /**根据势力获取自身拥有的卡牌 */

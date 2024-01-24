@@ -45,7 +45,7 @@ class ActionRecordView extends BaseView<BaseUI.UIActionRecordCom> {
         item.selfBg.visible = uid === UserModel.ins().uid;
         item.enemyBg.visible = uid !== UserModel.ins().uid;
         if (cardId !== -1) {
-            RES.getResByUrl(`./resource/card/${cardId}.jpg`, (data: egret.Texture) => {
+            RES.getResByUrl(`./resource/card/${Math.floor(cardId / 100000)}/${cardId}.jpg`, (data: egret.Texture) => {
                 if (!data) {
                     return
                 }

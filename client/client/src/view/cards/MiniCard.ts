@@ -3,7 +3,7 @@ class MiniCard {
 
     static getMiniCard(cardInfo: CardInterface, count: number) {
         const miniCard = BaseUI.UIMiniCard.createInstance();
-        RES.getResByUrl(`./resource/card/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
+        RES.getResByUrl(`./resource/card/${cardInfo.powerId}/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
             if (!data) {
                 return
             }

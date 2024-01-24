@@ -194,6 +194,7 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
                 this.view.removeChild(this.view.heroCard);
             } else {
                 info.count--;
+                this._cacheCreateDeckInfo.cardCount--;
                 if (info.count <= 0) {
                     cardsInfo.splice(index, 1);
                 }

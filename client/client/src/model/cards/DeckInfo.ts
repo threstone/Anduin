@@ -3,7 +3,7 @@ class DeckInfo {
     /**创建卡组数据缓存 */
     private _cardsInfo: { count: number, cardInfo: CardInterface }[];
     /**当前卡牌数量 */
-    private _cardCount: number;
+    public cardCount: number;
     /**英雄卡Id */
     public heroId: number;
     public heroCard: CardInterface;
@@ -26,14 +26,14 @@ class DeckInfo {
         //修改已有的卡组
         if (deckInfo !== null) {
             this.deckId = deckInfo.deckId || -1;
-            this._cardCount = 0;
+            this.cardCount = 0;
             this.heroId = deckInfo.heroId || -1;
             this.heroCard = CardsModel.ins().getCardConfigById(this.heroId);
             for (let index = 0; index < deckInfo.cards.length; index++) {
                 const info = deckInfo.cards[index];
                 const cardInfo = CardsModel.ins().getCardConfigById(info.id);
                 this._cardsInfo.push({ count: info.count, cardInfo })
-                this._cardCount += info.count;
+                this.cardCount += info.count;
             }
         }
     }
@@ -42,7 +42,7 @@ class DeckInfo {
         this._cardsInfo = [];
         this.heroId = -1;
         this.heroCard = null;
-        this._cardCount = 0;
+        this.cardCount = 0;
         this.powerId = CardsPto.PowerType.Common;
         this.deckName = '';
         this.deckId = -1;
@@ -52,7 +52,7 @@ class DeckInfo {
      * 检查将要加入的卡牌是否可以加入
      */
     private addCardCheck(cardInfo: CardInterface) {
-        if (cardInfo.cardType !== CardsPto.CardType.Hero && this._cardCount >= DeckCardsNum) {
+        if (cardInfo.cardType !== CardsPto.CardType.Hero && this.cardCount >= DeckCardsNum) {
             SystemModel.ins().showTips(`最多携带${DeckCardsNum}张卡牌`);
             return false;
         }
@@ -88,7 +88,7 @@ class DeckInfo {
                     return false;
                 }
                 info.count++;
-                this._cardCount++;
+                this.cardCount++;
                 return true;
             }
         }
@@ -98,7 +98,7 @@ class DeckInfo {
             this.heroCard = cardInfo;
             return true;
         }
-        this._cardCount++;
+        this.cardCount++;
         cardsInfo.push({ cardInfo, count: 1 });
         cardsInfo.sort((a, b) => {
             if (a.cardInfo.fee === b.cardInfo.fee) {
