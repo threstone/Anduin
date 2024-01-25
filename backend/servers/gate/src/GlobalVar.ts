@@ -1,4 +1,5 @@
 import * as loggerConfig from '../config/log4js.json';
+import * as servers from '../../../common/config/servers.json';
 import { configure, getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { SocketServer } from './SocketServer';
@@ -6,7 +7,6 @@ import { RelationConnector } from './connector/RelationConnector';
 import { ConnectorMgr } from '../../../common/rpc/ConntctorMgr';
 import { HallConnector } from './connector/HallConnector';
 import { GameConnector } from './connector/GameConnector';
-import * as servers from '../../../common/config/servers.json';
 import { LauncherOption } from '../../../common/LauncherOption';
 
 const logger = getLogger();
