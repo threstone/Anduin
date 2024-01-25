@@ -6,7 +6,7 @@
         },
         "debug": {
             "type": "dateFile",
-            "filename": "./logs/gameServer",
+            "filename": "./logs/game",
             "alwaysIncludePattern": true,
             "pattern": "yyyy-MM-dd.log"
         }

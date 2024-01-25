@@ -5,24 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "node",
-            "request": "launch",
-            "name": "光启动不编译",
-            "program": "${workspaceFolder}\\servers\\master\\dist\\servers\\master\\src\\bin\\main.js",
-            "args": [
-                "env=dev"
-            ]
-        },
-        {
             "command": "npm test",
             "name": "npm test",
             "request": "launch",
             "type": "node-terminal"
         },
         {
+            "command": "npm run start_dev",
+            "name": "npm run start_dev",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "type": "node",
             "request": "launch",
-            "name": "光启动不编译1",
+            "name": "光启动不编译",
             "program": "${workspaceFolder}\\dist\\servers\\master\\src\\bin\\main.js",
             "args": [
                 "env=dev"

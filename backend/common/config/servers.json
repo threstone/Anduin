@@ -5,7 +5,7 @@
                 "nodeId": "Gate1",
                 "ip": "127.0.0.1",
                 "port": 1001,
-                "autuResume": false,
+                "autuResume": true,
                 "maxUser": 1000
             }
         ],
@@ -14,7 +14,7 @@
                 "nodeId": "Hall1",
                 "ip": "127.0.0.1",
                 "port": 2001,
-                "autuResume": false
+                "autuResume": true
             }
         ],
         "game": [
@@ -22,7 +22,7 @@
                 "nodeId": "Game1",
                 "ip": "127.0.0.1",
                 "port": 3001,
-                "autuResume": false
+                "autuResume": true
             }
         ],
         "relation": [
@@ -30,7 +30,7 @@
                 "nodeId": "Relation",
                 "ip": "127.0.0.1",
                 "port": 9001,
-                "autuResume": false
+                "autuResume": true
             }
         ]
     }

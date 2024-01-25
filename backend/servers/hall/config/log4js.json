@@ -6,7 +6,7 @@
         },
         "debug": {
             "type": "dateFile",
-            "filename": "./logs/hallServer",
+            "filename": "./logs/hall",
             "alwaysIncludePattern": true,
             "pattern": "yyyy-MM-dd.log"
         }

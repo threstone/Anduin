@@ -6,7 +6,7 @@
         },
         "debug": {
             "type": "dateFile",
-            "filename": "./logs/serverTemplate",
+            "filename": "./logs/master",
             "alwaysIncludePattern": true,
             "pattern": "yyyy-MM-dd.log"
         }
