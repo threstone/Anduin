@@ -1,2 +1,2 @@
 title game
-node .\dist\relation\src\bin\main.js socketListenPort=3001
+node .\dist\servers\game\src\bin\main.js socketListenPort=3001
