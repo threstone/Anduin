@@ -34,7 +34,7 @@ export class GlobalVar {
         //initMsgHandler
         this.initMsgHandler();
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.socketListenPort || 2001, logger);
+        this.socketServer = new SocketServer(this.startupParam.port || 2001, logger);
         //init db register
         this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr

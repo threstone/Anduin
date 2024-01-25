@@ -25,7 +25,7 @@ export class GlobalVar {
         //initMsgHandler
         this.initMsgHandler();
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.socketListenPort || 9001, logger);
+        this.socketServer = new SocketServer(this.startupParam.port || 9001, logger);
 
         //init redisMgr
         this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userRelation]);

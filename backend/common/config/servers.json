@@ -4,28 +4,33 @@
             {
                 "nodeId": "Gate1",
                 "ip": "127.0.0.1",
-                "port": 1001
+                "port": 1001,
+                "autuResume": false,
+                "maxUser": 1000
             }
         ],
         "hall": [
             {
                 "nodeId": "Hall1",
                 "ip": "127.0.0.1",
-                "port": 2001
+                "port": 2001,
+                "autuResume": false
             }
         ],
         "game": [
             {
                 "nodeId": "Game1",
                 "ip": "127.0.0.1",
-                "port": 3001
+                "port": 3001,
+                "autuResume": false
             }
         ],
         "relation": [
             {
                 "nodeId": "Relation",
                 "ip": "127.0.0.1",
-                "port": 9001
+                "port": 9001,
+                "autuResume": false
             }
         ]
     }

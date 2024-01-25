@@ -3,8 +3,8 @@ import { ILauncherOption } from "./I";
 export class LauncherOption implements ILauncherOption {
     
     private _socketListenPort: number;
-    get socketListenPort() { return this._socketListenPort; }
-    set socketListenPort(value: number) { this._socketListenPort = parseInt(value as any); }
+    get port() { return this._socketListenPort; }
+    set port(value: number) { this._socketListenPort = parseInt(value as any); }
 
     private _maxUser: number;
     get maxUser() { return this._maxUser; }

@@ -47,7 +47,7 @@ export class GlobalVar {
         this.tableMgr.startLogic();
 
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.socketListenPort || 3001, logger);
+        this.socketServer = new SocketServer(this.startupParam.port || 3001, logger);
     }
 
     /**

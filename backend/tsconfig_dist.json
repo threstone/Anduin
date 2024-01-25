@@ -11,16 +11,17 @@
       "types": [
          "node"
       ],
-      "outDir": "../../publish/",
+      "outDir": "./publish/",
       "resolveJsonModule": true
    },
    "include": [
-      "./src",
-      "../../common"
+      "./servers",
+      "./common"
    ],
    "exclude": [
-      "./node_modules/",
-      "./dist/",
-      "./src/test/"
+      "**/node_modules/",
+      "**/dist/",
+      "./servers/server_template",
+      "**/test"
    ]
 }

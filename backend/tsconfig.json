@@ -16,11 +16,12 @@
     "resolveJsonModule": true
   },
   "include": [
-    "./src",
-    "../../common/"
+    "./servers",
+    "./common"
   ],
   "exclude": [
     "./node_modules/",
-    "./dist/"
+    "**/dist",
+    "./servers/server_template"
   ]
 }

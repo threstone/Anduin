@@ -24,7 +24,7 @@ export interface IRedisOption {
 
 //启动参数
 export interface ILauncherOption {
-    socketListenPort: number
+    port: number
     maxUser: number
     nodeId: string
     env: string
@@ -32,6 +32,14 @@ export interface ILauncherOption {
     // redisPass: string
     // saveRecordHost: String
     // processName: string //进程名称 影响日志命名
+}
+
+export interface ServerConfig {
+    nodeId: string
+    ip: string
+    port: number
+    env: string
+    autuResume:boolean
 }
 
 //日志记录对象
