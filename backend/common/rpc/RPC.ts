@@ -2,7 +2,7 @@
 //@ts-ignore
 import * as WS from "ws"
 import { ILog } from "../I";
-import { RpcPoolTemp } from './RpcSession'
+import { RpcPoolTemp } from './RPCSession'
 
 const TypeNumber = 0;
 const TypeString = 1;
@@ -170,11 +170,14 @@ class RPC_BASE {
                     const tempClientName = args[1];
                     (this as any as RPC_SERVER).socketMap.set(tempClientName, ws);
                     (ws as any).clientName = tempClientName;
-                    return
+                } else {
+                    logger.error('client wrong version   , close this connected!');
+                    ws.close();
                 }
+                return;
             }
-            logger.error('client wrong version   , close this connected!');
-            ws.close()
+            logger.error(`handshake error, methodName is not handshake ,methodName:${methodName}`);
+            ws.close();
             return
         }
         if (!this._handlers.has(methodName)) {
@@ -466,33 +469,33 @@ export class RPC_CLIENT extends RPC_BASE {
      */
     private connectRpcServer() {
         this._sessionId = 1;
-        let url = "ws://" + this._host + ":" + this._port
-        let ws_client: WS = new WS(url)
+        let url = "ws://" + this._host + ":" + this._port;
+        let ws_client: WS = new WS(url);
         this._socket = ws_client;
 
         ws_client.on("open", async () => {
             this.isClose = false;
-            logger.log("connect to rpc server success! ", this._serverName)
-            let res = await this.call('handshake', [this._version, this._myName])
-            this.onOpen()
+            logger.log("connect to rpc server success! ", this._serverName);
+            let res = await this.call('handshake', [this._version, this._myName]);
+            this.onOpen();
         })
 
         ws_client.on('message', (msg: Buffer) => {
-            super.onMessage(undefined, msg, ws_client)
+            super.onMessage(undefined, msg, ws_client);
         });
 
         //断线重连
         ws_client.on("close", () => {
-            logger.log("rpc server close! ")
+            logger.log("rpc server close! ");
             if (this._sessionId == 2) {
                 logger.error("maybe rpc version wrong , please cheack rpc version! ", this.host, this.port, this._serverName)
             }
             this.isClose = true;
-            this.onClose()
+            this.onClose();
         })
         //失败重连
         ws_client.on("error", (err) => {
-            logger.error('rpc client error! ', err)
+            logger.error('rpc client error! ', err);
             this.isClose = true;
         })
     }

@@ -11,6 +11,7 @@ export class LauncherOption implements ILauncherOption {
     set maxUser(value: number) { this._maxUser = parseInt(value as any); }
 
     nodeId: string;
+    env: string;
 
     constructor() {
         const args = process.argv.splice(2);

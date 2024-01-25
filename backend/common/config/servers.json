@@ -1,0 +1,32 @@
+{
+    "dev": {
+        "gate": [
+            {
+                "nodeId": "Gate1",
+                "ip": "127.0.0.1",
+                "port": 1001
+            }
+        ],
+        "hall": [
+            {
+                "nodeId": "Hall1",
+                "ip": "127.0.0.1",
+                "port": 2001
+            }
+        ],
+        "game": [
+            {
+                "nodeId": "Game1",
+                "ip": "127.0.0.1",
+                "port": 3001
+            }
+        ],
+        "relation": [
+            {
+                "nodeId": "Relation",
+                "ip": "127.0.0.1",
+                "port": 9001
+            }
+        ]
+    }
+}

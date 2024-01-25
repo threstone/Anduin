@@ -6,9 +6,7 @@ import { RelationConnector } from './connector/RelationConnector';
 import { ConnectorMgr } from '../../common/rpc/ConntctorMgr';
 import { HallConnector } from './connector/HallConnector';
 import { GameConnector } from './connector/GameConnector';
-import * as relationConn from '../../common/config/relation_node.json';
-import * as hallConn from '../../common/config/hall_node.json';
-import * as gamesConn from '../../common/config/game_node.json';
+import * as servers from '../../common/config/servers.json';
 import { LauncherOption } from '../../common/LauncherOption';
 
 const logger = getLogger();
@@ -20,7 +18,7 @@ export class GlobalVar {
 
     public static hallConnectorMgr: ConnectorMgr<HallConnector>;
     public static gameConnectorMgr: ConnectorMgr<GameConnector>;
-    public static relationConnector: RelationConnector
+    public static relationConnectorMgr: ConnectorMgr<RelationConnector>;
 
     public static init() {
         this.startupParam = new LauncherOption();
@@ -35,8 +33,13 @@ export class GlobalVar {
     }
 
     private static initConnector() {
-        this.hallConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, hallConn, HallConnector);
-        this.gameConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, gamesConn, GameConnector);
-        this.relationConnector = new RelationConnector(relationConn.ip, relationConn.port, relationConn.nodeId, this.startupParam.nodeId, logger);
+        const serversConfig = servers[this.startupParam.env];
+        if (!serversConfig) {
+            return;
+        }
+
+        this.hallConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.hall, HallConnector);
+        this.gameConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.game, GameConnector);
+        this.relationConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.relation, RelationConnector);
     }
 }

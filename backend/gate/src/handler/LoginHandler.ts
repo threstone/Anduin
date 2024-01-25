@@ -20,7 +20,7 @@ export class LoginHandler {
                     socket.isAuthorized = true;
                     socket.uid = msg.uid;
                     GlobalVar.socketServer.addSocketToMap(msg.uid, socket);
-                    GlobalVar.relationConnector.sendUserOnline(socket.uid, msg.nick);
+                    GlobalVar.relationConnectorMgr.getAliveConnector().sendUserOnline(socket.uid, msg.nick);
                 }
                 socket.send(buffer);
             });

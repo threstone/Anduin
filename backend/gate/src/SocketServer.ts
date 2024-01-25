@@ -103,7 +103,7 @@ export class SocketServer {
         /**授权用户 */
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
-            GlobalVar.relationConnector.sendUserOffline(socket.uid);
+            GlobalVar.relationConnectorMgr.getAliveConnector().sendUserOffline(socket.uid);
             if (socket.gameNodeId) {
                 GlobalVar.gameConnectorMgr.getConnectorByName(socket.gameNodeId).sendUserOffline(socket.uid);
             }
@@ -138,12 +138,14 @@ export class SocketServer {
         if (socket.isAuthorized !== true) {
             return;
         }
+
+        // TODO 改成可配置路由目标,需配置是否需要登录才路由消息(isAuthorized)
         //routing to hall server 
         if (cmd >= 0 && cmd <= 99) {
             GlobalVar.hallConnectorMgr.getAliveConnector()?.sendTransferToHall(socket.uid, buffer);
         }//routing to relation server 
         else if (cmd === 100) {
-            GlobalVar.relationConnector.sendTransferToRelation(socket.uid, buffer);
+            GlobalVar.relationConnectorMgr.getAliveConnector().sendTransferToRelation(socket.uid, buffer);
         }//routing to game server 
         else if (cmd >= 200) {
             if (!socket.gameNodeId) {

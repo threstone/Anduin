@@ -27,6 +27,7 @@ export interface ILauncherOption {
     socketListenPort: number
     maxUser: number
     nodeId: string
+    env: string
     // redisServer: string
     // redisPass: string
     // saveRecordHost: String
