@@ -20,8 +20,9 @@
             "type": "node",
             "request": "launch",
             "name": "光启动不编译",
-            "program": "${workspaceFolder}\\dist\\servers\\master\\src\\bin\\main.js",
             "args": [
+                "--enable-source-maps",
+                ".\\dist\\servers\\master\\src\\bin\\main.js",
                 "env=dev",
                 "nodeId=master"
             ]

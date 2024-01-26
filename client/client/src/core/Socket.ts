@@ -64,11 +64,11 @@ class Socket extends BaseClass {
         MessageManager.rcvMsgHandler(sysId, cmdId, msg);
     }
 
-    private onClose() {
-        console.error("主动输出:" + "连接断开");
+    private onClose(code: number) {
+        console.error("主动输出:连接断开 code:", code);
     }
 
-    private onError(err) {
+    private onError(err: Error) {
         console.error("主动输出:" + err);
         console.error(err);
     }
