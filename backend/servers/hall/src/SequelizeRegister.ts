@@ -2,7 +2,6 @@ import { BaseSequelize } from '../../../common/sequelize/BaseSequelize';
 import { UserModel } from '../../../common/sequelize/model/UserModel';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
-import { IMysqlOption } from '../../../common/I';
 import { getLogger } from 'log4js';
 
 const logger = getLogger('hall');

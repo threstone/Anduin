@@ -1,6 +1,5 @@
 
 import * as protobuf from "protobufjs"
-import { IGameMessage, ILog } from "./I"
 import * as fs from 'fs';
 
 let logger: ILog | Console = console;

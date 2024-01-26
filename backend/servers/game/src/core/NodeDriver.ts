@@ -1,5 +1,4 @@
 import { getLogger } from 'log4js';
-import { IGameMessage } from '../../../../common/I';
 import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
 import { BaseNode } from '../game/node/BaseNode';

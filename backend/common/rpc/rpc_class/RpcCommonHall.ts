@@ -1,6 +1,5 @@
 //此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts
 
-import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 

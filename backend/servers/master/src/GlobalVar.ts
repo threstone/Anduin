@@ -7,12 +7,11 @@ export class GlobalVar {
 
     public static startupParam: LauncherOption;
     public static nodeMgr: NodeMgr;
-    
+
     static init() {
         this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
-
         logger.info('init ...');
         this.nodeMgr = new NodeMgr();
         this.nodeMgr.startServers(this.startupParam);

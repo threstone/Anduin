@@ -1,4 +1,3 @@
-import { IGameMessage } from '../../../../common/I';
 import { ProtoBufEncoder } from '../../../../common/ProtoBufEncoder';
 import { GlobalVar } from '../GlobalVar';
 

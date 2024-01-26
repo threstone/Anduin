@@ -2,7 +2,6 @@ import { LauncherOption } from '../../../common/LauncherOption';
 import * as servers from '../../../common/config/servers.json';
 import { getLogger } from 'log4js';
 import { NodeWorker } from './NodeWorker';
-import { ServerConfig } from '../../../common/I';
 const logger = getLogger('master');
 export class NodeMgr {
 

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./dist/servers/*/src/test/*.test.js",
-    "start_dev": "node ./dist/servers/master/src/bin/main.js env=dev"
+    "start_dev": "node ./dist/servers/master/src/bin/main.js env=dev nodeId=master"
   },
   "author": "",
   "license": "ISC",

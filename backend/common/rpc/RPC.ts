@@ -1,7 +1,6 @@
 
 //@ts-ignore
 import * as WS from "ws"
-import { ILog } from "../I";
 import { RpcPoolTemp } from './RPCSession'
 
 const TypeNumber = 0;

@@ -1,4 +1,3 @@
-import { IGameMessage } from '../../../../common/I';
 import { GlobalVar } from '../GlobalVar';
 
 export class BaseHandler {

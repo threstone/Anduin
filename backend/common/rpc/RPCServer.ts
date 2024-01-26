@@ -1,4 +1,3 @@
-import { ILog } from "../I"
 import * as RPC from "./RPC"
 export abstract class RPCServer {
     private rpcServer: RPC.RPC_SERVER = new RPC.RPC_SERVER();

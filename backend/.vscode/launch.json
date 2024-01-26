@@ -22,7 +22,8 @@
             "name": "光启动不编译",
             "program": "${workspaceFolder}\\dist\\servers\\master\\src\\bin\\main.js",
             "args": [
-                "env=dev"
+                "env=dev",
+                "nodeId=master"
             ]
         }
     ]

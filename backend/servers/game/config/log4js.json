@@ -2,13 +2,21 @@
     "appenders": {
         "console": {
             "type": "console",
-            "category": "console"
+            "category": "console",
+            "layout": {
+                "type": "pattern",
+                "pattern": "%[[%f:%l:%o] [%d] [%p] [%c]%] %m"
+            }
         },
         "debug": {
             "type": "dateFile",
             "filename": "./logs/game",
             "alwaysIncludePattern": true,
-            "pattern": "yyyy-MM-dd.log"
+            "pattern": "yyyy-MM-dd.log",
+            "layout": {
+                "type": "pattern",
+                "pattern": "[%f:%l:%o] [%F] [%d] [%p] [%c] %m"
+            }
         }
     },
     "replaceConsole": true,
@@ -18,7 +26,8 @@
                 "console",
                 "debug"
             ],
-            "level": "ALL"
+            "level": "ALL",
+            "enableCallStack": true
         }
     }
 }

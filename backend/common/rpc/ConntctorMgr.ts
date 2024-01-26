@@ -1,4 +1,3 @@
-import { ILog } from '../I';
 import { RPCClient } from './RPCClient';
 
 export class ConnectorMgr<T extends RPCClient>{

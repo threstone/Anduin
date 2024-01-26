@@ -1,6 +1,5 @@
 import * as WS from 'ws';
 import * as http from 'http';
-import { ILog } from '../../../common/I';
 import { GlobalVar } from './GlobalVar';
 import { LoginHandler } from './handler/LoginHandler';
 import { GateSocket } from './GateSocket';

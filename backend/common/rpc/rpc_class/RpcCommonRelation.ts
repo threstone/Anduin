@@ -1,6 +1,5 @@
 //此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts
 
-import { ILog } from "../../I"
 import { RPCServer } from "../RPCServer";
 import { RPCClient } from "../RPCClient";
 
@@ -25,7 +24,8 @@ export abstract class RelationRPCServer extends RPCServer {
 
     //s2c
     //主动告知网关转发消息
-    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void>    {
+    callTransferToGate(clientName:string,uid:number,buffer:Buffer): Promise<void
+>    {
         let args = [uid,buffer]
         return this.rpc.call(clientName,"transferToGate", args)
     }
@@ -36,7 +36,8 @@ export abstract class RelationRPCServer extends RPCServer {
     }
 
     //广播消息
-    callBroadcast(clientName:string,buffer:Buffer): Promise<void>    {
+    callBroadcast(clientName:string,buffer:Buffer): Promise<void
+>    {
         let args = [buffer]
         return this.rpc.call(clientName,"broadcast", args)
     }
@@ -57,7 +58,8 @@ export abstract class RelationRPCClient extends RPCClient{
         this.init();
     }
     //用户上线
-    async callUserOnline(uid:number,nick:string): Promise<void>    {
+    async callUserOnline(uid:number,nick:string): Promise<void
+>    {
         let args = [uid,nick]
         let res: any = await this.rpc.call("userOnline",args)
         return res
@@ -69,7 +71,8 @@ export abstract class RelationRPCClient extends RPCClient{
     }
 
     //用户离线
-    async callUserOffline(uid:number): Promise<void>    {
+    async callUserOffline(uid:number): Promise<void
+>    {
         let args = [uid]
         let res: any = await this.rpc.call("userOffline",args)
         return res
@@ -81,7 +84,8 @@ export abstract class RelationRPCClient extends RPCClient{
     }
 
     //转发
-    async callTransferToRelation(uid:number,buff:Buffer):Promise<Buffer>    {
+    async callTransferToRelation(uid:number,buff:Buffer):Promise<Buffer>
+    {
         let args = [uid,buff]
         let res: any = await this.rpc.call("transferToRelation",args)
         return res

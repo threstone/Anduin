@@ -1,6 +1,5 @@
 import { CardsPto, GamePto } from '../../../../common/CommonProto';
 import { RedisType } from '../../../../common/ConstDefine';
-import { IGameMessage } from '../../../../common/I';
 import { BaseCard } from '../card/BaseCard';
 import { BuildingCard } from '../card/BuildingCard';
 import { EventCard } from '../card/EventCard';

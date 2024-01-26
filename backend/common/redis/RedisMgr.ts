@@ -1,6 +1,5 @@
 import { RedisClientSelf } from './RedisClientSelf';
 import { RedisType } from "../ConstDefine";
-import { IRedisOption } from "../I";
 
 export class RedisMgr {
     private clientMap: Map<RedisType, RedisClientSelf>;

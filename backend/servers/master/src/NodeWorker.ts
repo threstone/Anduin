@@ -1,6 +1,5 @@
 import { Logger, getLogger } from 'log4js';
 import * as ChildProcess from 'child_process';
-import { ServerConfig } from '../../../common/I';
 import * as Path from 'path';
 export class NodeWorker {
 

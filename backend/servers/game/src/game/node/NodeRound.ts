@@ -4,7 +4,6 @@ import { NodeDriver } from '../../core/NodeDriver';
 import { GameTable } from '../GameTable';
 import { GameUser } from '../GameUser';
 import { BaseNode } from './BaseNode';
-import { IGameMessage } from '../../../../../common/I';
 import { GamePto } from '../../../../../common/CommonProto';
 
 //回合中,负责处理玩家操作,执行某些操作后要判断玩家英雄是否死亡

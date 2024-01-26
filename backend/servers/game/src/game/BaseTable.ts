@@ -1,6 +1,5 @@
 import * as MT19937 from '@stdlib/random-base-mt19937';
 import { GamePto } from '../../../../common/CommonProto';
-import { IGameMessage } from '../../../../common/I';
 import { ProtoBufEncoder } from '../../../../common/ProtoBufEncoder';
 import { GlobalVar } from '../GlobalVar';
 import { NodeDriver } from '../core/NodeDriver';

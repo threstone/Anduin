@@ -1,7 +1,5 @@
-import { ILauncherOption } from "./I";
-
 export class LauncherOption implements ILauncherOption {
-    
+
     private _socketListenPort: number;
     get port() { return this._socketListenPort; }
     set port(value: number) { this._socketListenPort = parseInt(value as any); }
@@ -22,5 +20,7 @@ export class LauncherOption implements ILauncherOption {
             let value: string | number = kvInfo[1];
             this[key] = value;
         }
+        global.nodeId = this.nodeId;
+        global.env = this.env;
     }
 }
