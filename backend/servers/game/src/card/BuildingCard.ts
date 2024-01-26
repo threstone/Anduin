@@ -10,7 +10,7 @@ import { GlobalVar } from "../GlobalVar";
 import { BaseCard } from "./BaseCard";
 import { EventCard } from "./EventCard";
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class BuildingCard extends EventCard {
 
     /**上一次在的位置 */

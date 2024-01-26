@@ -5,7 +5,7 @@ import { GameUser } from '../game/GameUser';
 import { BaseNode } from '../game/node/BaseNode';
 import { NodeDriverResult } from '../game/GameDefine';
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class NodeDriver {
 
     private _nodeIndex: number

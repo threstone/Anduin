@@ -13,7 +13,7 @@ import * as redisConfig from '../../../common/config/redis.json';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
 import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger();
+const logger = getLogger('hall');
 export class GlobalVar {
 
     public static startupParam: LauncherOption;

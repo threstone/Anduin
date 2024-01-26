@@ -14,7 +14,7 @@ import { ConfigMgr } from '../../../common/config/ConfigMgr';
 import { CardMgr } from './core/CardMgr';
 import { BuffMgr } from './core/BuffMgr';
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class GlobalVar {
 
     public static startupParam: LauncherOption;

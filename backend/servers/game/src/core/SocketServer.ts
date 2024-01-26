@@ -4,7 +4,7 @@ import { ProtoBufEncoder } from '../../../../common/ProtoBufEncoder';
 import * as RpcCommon from '../../../../common/rpc/rpc_class/RpcCommonGame';
 import { GlobalVar } from '../GlobalVar';
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class SocketServer extends RpcCommon.GameRPCServer {
 
     userOffline(clientName: string, uid: number): void {

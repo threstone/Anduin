@@ -1,7 +1,7 @@
 import { getLogger } from 'log4js';
 import { GameTable } from '../game/GameTable';
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class TableMgr {
     private _tableId: number = 100000;
     private _logicIndex = 0;

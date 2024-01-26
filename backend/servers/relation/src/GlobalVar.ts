@@ -10,7 +10,7 @@ import * as redisConfig from '../../../common/config/redis.json';
 import { UserMgr } from './UserMgr';
 import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger();
+const logger = getLogger('relation');
 export class GlobalVar {
 
     public static startupParam: LauncherOption;

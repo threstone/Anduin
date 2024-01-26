@@ -7,7 +7,7 @@ import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class BaseCard implements CardInterface {
 
     uid: number;

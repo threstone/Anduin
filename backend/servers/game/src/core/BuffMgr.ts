@@ -9,7 +9,7 @@ import * as path from "path";
 import { CommonUtils } from "../../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
 
-const logger = getLogger();
+const logger = getLogger('game');
 export class BuffMgr {
 
     private _buffMap: Map<number, GameBuff>;

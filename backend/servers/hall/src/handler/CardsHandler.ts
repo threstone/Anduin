@@ -9,7 +9,7 @@ import { getLogger } from 'log4js';
 CardsPto.Deck.prototype.toJSON = null;
 
 const DeckCardsNum = 40;
-const logger = getLogger();
+const logger = getLogger('hall');
 export class CardsHandler extends BaseHandler {
     //请求卡牌收藏数据
     static async C_REQ_CARDS_INFO(clientName: string, uid: number) {

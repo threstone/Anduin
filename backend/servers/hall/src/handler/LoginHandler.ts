@@ -8,7 +8,7 @@ import { FriendPto, LoginPto } from '../../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
-const logger = getLogger();
+const logger = getLogger('hall');
 export class LoginHandler extends BaseHandler {
 
     static async C_LOGIN(clientName: string, uid: number, msg: LoginPto.C_LOGIN) {

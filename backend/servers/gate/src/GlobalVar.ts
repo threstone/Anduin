@@ -9,7 +9,7 @@ import { HallConnector } from './connector/HallConnector';
 import { GameConnector } from './connector/GameConnector';
 import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger();
+const logger = getLogger('gate');
 
 export class GlobalVar {
 
