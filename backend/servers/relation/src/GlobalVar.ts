@@ -8,24 +8,21 @@ import * as allProto from '../../../common/CommonProto';
 import * as path from 'path';
 import * as redisConfig from '../../../common/config/redis.json';
 import { UserMgr } from './UserMgr';
-import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger('relation');
+const logger = getLogger(startupParam.nodeId);
 export class GlobalVar {
 
-    public static startupParam: LauncherOption;
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     public static userMgr: UserMgr
 
     public static init() {
-        this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
         //initMsgHandler
         this.initMsgHandler();
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.port || 9001, logger);
+        this.socketServer = new SocketServer(startupParam.port || 9001, logger);
 
         //init redisMgr
         this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userRelation]);

@@ -11,12 +11,10 @@ import * as path from 'path';
 import * as mysqlConfig from '../../../common/config/mysql.json';
 import * as redisConfig from '../../../common/config/redis.json';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
-import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger('hall');
+const logger = getLogger(startupParam.nodeId);
 export class GlobalVar {
 
-    public static startupParam: LauncherOption;
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     private static sequelizeRegister: SequelizeRegister;
@@ -24,8 +22,6 @@ export class GlobalVar {
     public static configMgr: ConfigMgr;
 
     public static init() {
-        this.startupParam = new LauncherOption();
-
         // init logger configuration
         configure(loggerConfig);
         // init config manager
@@ -34,7 +30,7 @@ export class GlobalVar {
         //initMsgHandler
         this.initMsgHandler();
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.port || 2001, logger);
+        this.socketServer = new SocketServer(startupParam.port || 2001, logger);
         //init db register
         this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
         //init redisMgr

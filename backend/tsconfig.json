@@ -21,7 +21,6 @@
 , "index.ts"  ],
   "exclude": [
     "./node_modules/",
-    "**/dist",
-    "./servers/server_template"
+    "**/dist"
   ]
 }

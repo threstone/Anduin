@@ -1,10 +1,9 @@
-// import { getLogger } from 'log4js';
 import * as Redis from 'redis';
 import { getLogger } from 'log4js';
 import { RedisType } from '../ConstDefine';
 //默认redis请求超时时间，单位：毫秒
 const DEFAULT_REDIS_TIMEOUT = 5 * 1000;
-let logger = getLogger();
+let logger = getLogger(startupParam.nodeId);
 export class RedisClientSelf {
     private redis_client: Redis.RedisClient
 

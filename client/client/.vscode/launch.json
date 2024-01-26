@@ -4,7 +4,7 @@
             "type": "Egret",
             "request": "launch",
             "name": "Egret WebpackDevServer Debugger",
-            "url": "http://192.168.2.16:49548/index.html",
+            "url": "http://192.168.20.61:63974/index.html",
             "webRoot": "${workspaceFolder}",
             // "preLaunchTask": "egret: build"
         }

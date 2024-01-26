@@ -9,15 +9,13 @@ import * as path from 'path';
 import * as redisConfig from '../../../common/config/redis.json';
 import { TableMgr } from './core/TableMgr';
 import { UserMgr } from './core/UserMgr';
-import { LauncherOption } from '../../../common/LauncherOption';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
 import { CardMgr } from './core/CardMgr';
 import { BuffMgr } from './core/BuffMgr';
 
-const logger = getLogger('game');
+const logger = getLogger(startupParam.nodeId);
 export class GlobalVar {
 
-    public static startupParam: LauncherOption;
     public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     public static tableMgr: TableMgr;
@@ -27,7 +25,6 @@ export class GlobalVar {
     public static buffMgr: BuffMgr;
 
     public static init() {
-        this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
         // init config manager
@@ -47,7 +44,7 @@ export class GlobalVar {
         this.tableMgr.startLogic();
 
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.port || 3001, logger);
+        this.socketServer = new SocketServer(startupParam.port || 3001, logger);
     }
 
     /**

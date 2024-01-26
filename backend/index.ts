@@ -1,5 +1,6 @@
 declare var nodeId: string;
 declare var env: string;
+declare var startupParam:ILauncherOption
 
 //游戏封包的结构
 declare interface IGameMessage {

@@ -3,7 +3,7 @@ import { SystemPto } from '../../../common/CommonProto';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonHall';
 
-const logger = getLogger('hall');
+const logger = getLogger(startupParam.nodeId);
 export class SocketServer extends RpcCommon.HallRPCServer {
     async reqRegister(clientName: string, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientName, null, buff);

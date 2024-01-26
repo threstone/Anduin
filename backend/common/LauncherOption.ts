@@ -1,4 +1,4 @@
-export class LauncherOption implements ILauncherOption {
+class LauncherOption implements ILauncherOption {
 
     private _socketListenPort: number;
     get port() { return this._socketListenPort; }
@@ -24,3 +24,5 @@ export class LauncherOption implements ILauncherOption {
         global.env = this.env;
     }
 }
+
+export let launcherOption = new LauncherOption();

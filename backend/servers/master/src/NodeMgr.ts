@@ -1,8 +1,7 @@
-import { LauncherOption } from '../../../common/LauncherOption';
 import * as servers from '../../../common/config/servers.json';
 import { getLogger } from 'log4js';
 import { NodeWorker } from './NodeWorker';
-const logger = getLogger('master');
+const logger = getLogger(startupParam.nodeId);
 export class NodeMgr {
 
     serverMap: Map<string, NodeWorker>;
@@ -11,7 +10,7 @@ export class NodeMgr {
         this.serverMap = new Map<string, NodeWorker>();
     }
 
-    startServers(startupParam: LauncherOption) {
+    startServers( ) {
         const env = startupParam.env;
         const serversConfigs = servers[startupParam.env];
         if (!serversConfigs) {

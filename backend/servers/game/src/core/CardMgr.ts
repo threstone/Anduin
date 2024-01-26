@@ -11,7 +11,7 @@ import { MagicCard } from '../card/MagicCard';
 import { HeroCard } from '../card/HeroCard';
 import { GameTable } from '../game/GameTable';
 
-const logger = getLogger('game');
+const logger = getLogger(startupParam.nodeId);
 export class CardMgr {
 
     private _cardClassMap: Map<number, typeof BaseCard>;

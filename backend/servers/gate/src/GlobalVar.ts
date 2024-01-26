@@ -7,13 +7,11 @@ import { RelationConnector } from './connector/RelationConnector';
 import { ConnectorMgr } from '../../../common/rpc/ConntctorMgr';
 import { HallConnector } from './connector/HallConnector';
 import { GameConnector } from './connector/GameConnector';
-import { LauncherOption } from '../../../common/LauncherOption';
 
-const logger = getLogger('gate');
+const logger = getLogger(startupParam.nodeId);
 
 export class GlobalVar {
 
-    public static startupParam: LauncherOption;
     public static socketServer: SocketServer;
 
     public static hallConnectorMgr: ConnectorMgr<HallConnector>;
@@ -21,25 +19,24 @@ export class GlobalVar {
     public static relationConnectorMgr: ConnectorMgr<RelationConnector>;
 
     public static init() {
-        this.startupParam = new LauncherOption();
         // init logger configuration
         configure(loggerConfig);
         ProtoBufEncoder.init(logger);
         //init socket server
-        this.socketServer = new SocketServer(this.startupParam.port || 1001, this.startupParam.maxUser, logger);
+        this.socketServer = new SocketServer(startupParam.port || 1001, startupParam.maxUser, logger);
 
         logger.info('init connector');
         this.initConnector();
     }
 
     private static initConnector() {
-        const serversConfig = servers[this.startupParam.env];
+        const serversConfig = servers[startupParam.env];
         if (!serversConfig) {
             return;
         }
 
-        this.hallConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.hall, HallConnector);
-        this.gameConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.game, GameConnector);
-        this.relationConnectorMgr = new ConnectorMgr(logger, this.startupParam.nodeId, serversConfig.relation, RelationConnector);
+        this.hallConnectorMgr = new ConnectorMgr(logger, startupParam.nodeId, serversConfig.hall, HallConnector);
+        this.gameConnectorMgr = new ConnectorMgr(logger, startupParam.nodeId, serversConfig.game, GameConnector);
+        this.relationConnectorMgr = new ConnectorMgr(logger, startupParam.nodeId, serversConfig.relation, RelationConnector);
     }
 }
