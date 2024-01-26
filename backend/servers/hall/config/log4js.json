@@ -15,7 +15,7 @@
             "pattern": "yyyy-MM-dd.log",
             "layout": {
                 "type": "pattern",
-                "pattern": "[%f:%l:%o] [%F] [%d] [%p] [%c] %m"
+                "pattern": "[%f:%l:%o] [%d] [%p] [%c] %m"
             }
         }
     },
