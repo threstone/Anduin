@@ -25,4 +25,4 @@ class LauncherOption implements ILauncherOption {
     }
 }
 
-export let launcherOption = new LauncherOption();
+export const launcherOption = new LauncherOption();

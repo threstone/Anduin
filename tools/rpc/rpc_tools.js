@@ -29,7 +29,6 @@ function readFile(rpc_funPath, outputPath) {
     }
     let funs = createFunLists(1, lineArr, server2clientPos)
     let serverClass = '//此文件自动生成，请勿修改，如需修改，修改对应的rpc_interface_*.ts\n\n' +
-        'import { ILog } from "../../I"\n' +
         'import { RPCServer } from "../RPCServer";\n' +
         'import { RPCClient } from "../RPCClient";\n\n' +
         `let uuid = "${uuid}"\n\n` +
