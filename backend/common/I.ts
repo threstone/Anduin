@@ -46,5 +46,5 @@ export class CardInterface {
     /**
     * 射程
     */
-    atkRange: number
+    atkRange: number;
 }
