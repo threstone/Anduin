@@ -47,8 +47,8 @@ export class BuildingCard extends EventCard {
     /**是否下发到客户端以显示 */
     public isBuffShow(buff: BuffData) {
         //如果buff不需要被忽略就显示
-        if (buff.ignore === false) {
-            return true;
+        if (buff.ignore === true) {
+            return false;
         }
 
         //是全局或位置buff的情况下又不是buff源,则需要展示出Buff
@@ -100,9 +100,6 @@ export class BuildingCard extends EventCard {
             notice.card = this;
             notice.cardIndex = cardIndex;
             this.table.broadcast(notice);
-
-            //通知用户费用信息
-            this.table.noticeUserFeeInfo(user);
         }
     }
 

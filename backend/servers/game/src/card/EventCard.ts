@@ -90,9 +90,6 @@ export class EventCard extends BaseCard {
                 notice.card = this.getCardData();
                 this.table.getOtherUser(user.uid).sendMsg(notice);
             }
-
-            //通知用户费用信息
-            this.table.noticeUserFeeInfo(user);
         }
     }
 

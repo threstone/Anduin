@@ -135,7 +135,7 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
         }
     }
 
-    public async doUseCard(event: fairygui.DragEvent) {
+    public doUseCard(event: fairygui.DragEvent) {
         return new Promise((resolve) => {
             this._resolve = resolve;
             //弃牌

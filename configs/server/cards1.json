@@ -93,7 +93,7 @@
  "quality":0,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -107,7 +107,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -121,7 +121,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -135,7 +135,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -149,7 +149,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -163,7 +163,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -177,7 +177,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   },
 {
@@ -191,7 +191,7 @@
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "movement":2
   }
 ]

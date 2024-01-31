@@ -16,8 +16,5 @@ export class MagicCard extends BaseCard {
         notice.card = this;
         notice.cardIndex = cardIndex;
         this.table.broadcast(notice);
-
-        //通知用户费用信息
-        this.table.noticeUserFeeInfo(user);
     }
 }

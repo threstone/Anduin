@@ -55,6 +55,8 @@ export class BaseCard implements CardInterface {
             //减去费用,删除手牌
             user.reduceFee(this.cardFee);
             user.deleteHandCard(cardIndex, 1);
+            //通知用户费用信息
+            this.table.noticeUserFeeInfo(user);
         }
     }
 

@@ -99,7 +99,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
  "movement":2
@@ -117,7 +117,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
  "movement":2
@@ -135,7 +135,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":0,
  "soundId":-1,
  "movement":2
@@ -153,7 +153,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":3,
  "soundId":-1,
  "movement":2
@@ -171,7 +171,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
  "movement":2
@@ -189,7 +189,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":4,
  "soundId":-1,
  "movement":2
@@ -207,7 +207,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
  "movement":2
@@ -225,7 +225,7 @@
  "desc":"",
  "buffs":[],
  "isDerivation":0,
- "useCondition":[0,0],
+ "useCondition":[2,1],
  "effectId":5,
  "soundId":-1,
  "movement":2

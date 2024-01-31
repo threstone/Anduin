@@ -44,9 +44,8 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
             const cardItem = CardItem.getCardByServerCard(msg.target);
 
             const cardBg = this._cards[msg.targetCardIndex];
-            const root = cardBg.localToRoot();
-            cardItem.x = cardItem.x;
-            cardItem.y = cardItem.y;
+            cardItem.x = cardBg.x;
+            cardItem.y = cardBg.y;
             cardItem.scaleX = 0.5;
             cardItem.scaleY = 0.5;
 

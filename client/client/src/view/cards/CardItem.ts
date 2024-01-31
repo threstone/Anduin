@@ -106,12 +106,12 @@ class CardItem {
     static showBuffDesc(cardItem: BaseUI.UICardItem, cardInfo: GamePto.ICard) {
         cardInfo.buffList.sort();
         //显示buff
-        let buffTImes = 1;
+        let buffTimes = 1;
         for (let index = 0; index < cardInfo.buffList.length; index++) {
             const buffId = cardInfo.buffList[index];
             //堆叠次数
             if (buffId === cardInfo.buffList[index + 1]) {
-                buffTImes++;
+                buffTimes++;
                 continue;
             } else {
                 cardItem.buffDesc.visible = true;
@@ -124,9 +124,9 @@ class CardItem {
                 textField.width = cardItem.buffDesc.width;
                 textField.autoSize = fairygui.AutoSizeType.Height;
                 textField.fontSize = 22;
-                textField.text = `${buffData.buffName}${buffTImes > 1 ? `X${buffTImes}` : ''}:${buffData.desc}`;
+                textField.text = `${buffData.buffName}${buffTimes > 1 ? `X${buffTimes}` : ''}:${buffData.desc}`;
                 cardItem.buffDesc.addChild(textField);
-                buffTImes = 1;
+                buffTimes = 1;
             }
         }
     }

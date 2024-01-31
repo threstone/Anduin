@@ -15,7 +15,7 @@ class Main extends egret.DisplayObjectContainer {
 
 
         const frameRate = egret.ticker.$frameRate;
-        const slowFrameRate = 10;
+        const slowFrameRate = 60;
         egret.lifecycle.onPause = () => {
             // egret.ticker.pause();
             egret.ticker.$setFrameRate(slowFrameRate)

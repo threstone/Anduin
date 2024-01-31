@@ -18,7 +18,7 @@ export class SocketServer extends RpcCommon.GameRPCServer {
         }
     }
 
-    async transferToGame(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
+    transferToGame(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
         const msg = ProtoBufEncoder.decode(buff, 0);
         const fun = ProtoBufEncoder.getHandlerFunction(msg.cmd, msg.scmd);
         if (!fun) {
@@ -28,11 +28,11 @@ export class SocketServer extends RpcCommon.GameRPCServer {
         const user = GlobalVar.userMgr.getUser(uid);
         try {
             if (user) {
-                return await fun(user, user.table, msg);
+                return fun(user, user.table, msg);
             }
-            return await fun(clientName, uid, msg);
+            return fun(clientName, uid, msg);
         } catch (error) {
-            if(user.table){
+            if (user?.table) {
                 user.table.destroy(true);
             }
             logger.error(`handler 处理函数出错 :${error.message} stack:${error.stack}`);
