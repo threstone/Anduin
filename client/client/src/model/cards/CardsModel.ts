@@ -28,7 +28,7 @@ class CardsModel extends BaseModel {
         if (CardsPto.AtkType.CloseRange === cardInfo.detailType) {
             return 1;
         } else {
-            return 3;
+            return cardInfo.atkRange;
         }
     }
 

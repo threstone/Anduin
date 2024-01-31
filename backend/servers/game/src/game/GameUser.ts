@@ -1,5 +1,6 @@
 import { CardsPto, GamePto } from '../../../../common/CommonProto';
 import { RedisType } from '../../../../common/ConstDefine';
+import { ProtoBufEncoder } from '../../../../common/ProtoBufEncoder';
 import { BaseCard } from '../card/BaseCard';
 import { BuildingCard } from '../card/BuildingCard';
 import { EventCard } from '../card/EventCard';
@@ -94,7 +95,7 @@ export class GameUser {
     }
 
     set fee(v: number) {
-        this._fee = Math.max(0, v);
+        this._fee = Math.min(Math.max(0, v), this.feeUpperLimit);
     }
 
     /** 替换的卡牌，用于首轮游戏给对方看换了哪些*/
@@ -139,8 +140,8 @@ export class GameUser {
         this._fatigue = 1;
 
         this.feeUpperLimit = 10;
-        this.feeMax = 10;
-        this.fee = 1;
+        this.feeMax = 0;
+        this.fee = 0;
 
         this.initStartEntity();
     }
@@ -225,6 +226,7 @@ export class GameUser {
         if (this.isOnline === false) {
             return;
         }
+        console.log(`send message [${(ProtoBufEncoder as any).protoBufClass.get(message.cmd + "_" + message.scmd).name}] : ${JSON.stringify(message)}`);
         GlobalVar.socketServer.sendMsg(this.clientName, this.uid, message);
     }
 

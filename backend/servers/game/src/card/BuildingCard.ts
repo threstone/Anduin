@@ -181,7 +181,7 @@ export class BuildingCard extends EventCard {
             if (targetUser.fee < targetUser.feeMax) {
                 targetUser.fee += 1;
                 //通知用户费用信息
-                this.table.noticeUserFeeInfo(targetUser);
+                targetUser.broadcastFeeInfo();
             }
         }
     }

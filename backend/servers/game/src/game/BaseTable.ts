@@ -58,6 +58,7 @@ export class BaseTable {
 
     /**广播消息 */
     public broadcast(message: IGameMessage, excludeUid: number = -1) {
+        console.log(`broadcast message [${(ProtoBufEncoder as any).protoBufClass.get(message.cmd + "_" + message.scmd).name}] : ${JSON.stringify(message)}`)
         const messageBuffer = ProtoBufEncoder.encode(message);
         const users = this._users;
         for (let index = 0; index < users.length; index++) {

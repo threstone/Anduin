@@ -38,6 +38,11 @@ export class NodeRoundStart extends BaseNode {
         table.broadcast(roundStartMsg);
 
         console.log("派发回合开始协议");
+        user.feeMax = Math.min(user.feeMax + 1, user.feeUpperLimit)
+        user.fee = user.feeMax;
+        user.broadcastFeeInfo();
+        //发牌
+        user.drawCardsFromPool(1);
 
         //执行场上所有乙方事件卡的回合开始事件
         for (let index = 0; index < user.eventPool.length; index++) {

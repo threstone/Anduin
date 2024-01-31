@@ -69,11 +69,11 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
     }
 
     /**更新墓地卡牌数量 */
-    private updateDeadCardNum() {
+    private updateDeadCardNum(msg: { selfDeadPoolNum: number, targetDeadPoolNum: number }) {
         if (this.isSelf) {
-            this.view.deadCardNum.text = `墓地卡牌\n${GameModel.ins().deadPool.length}`
+            this.view.deadCardNum.text = `墓地卡牌\n${msg.selfDeadPoolNum}`
         } else {
-            this.view.deadCardNum.text = `墓地卡牌\n${GameModel.ins().targetDeadPoolNum}`
+            this.view.deadCardNum.text = `墓地卡牌\n${msg.targetDeadPoolNum}`
         }
     }
 

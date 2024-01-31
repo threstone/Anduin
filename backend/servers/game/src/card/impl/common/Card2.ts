@@ -6,7 +6,7 @@ import { BaseCard } from "../../BaseCard";
 import { EventCard } from "../../EventCard";
 
 /**单位反制 */
-export class Card4 extends EventCard {
+export class Card2 extends EventCard {
 
     constructor(cardId: number, uid: number, table: GameTable) {
         super(cardId, uid, table);
@@ -35,7 +35,7 @@ export class Card4 extends EventCard {
             this.table.broadcast(notice);
 
             //通知用户费用信息
-            this.table.noticeUserFeeInfo(targetUser);
+            targetUser.broadcastFeeInfo();
 
             // 事件生效时必须调用此方法
             this.forceEvent();

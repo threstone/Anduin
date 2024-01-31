@@ -20,4 +20,8 @@ interface CardInterface {
      * 移动力(负值代表飞行)
      */
     movement?: number;
+    /**
+     * 射程
+     */
+    atkRange: number;
 }

@@ -105,6 +105,7 @@ export class NodeStartGame extends BaseNode {
             }
             //后手多一费
             if (table.roundUserIndex !== index) {
+                user.feeMax += 1;
                 user.fee += 1;
             }
 

@@ -8,8 +8,8 @@
 "roundOptTime":90000,
 "startHandCardNum":5,
 "drawCardTime":400,
-"roundAtkTimes":3,
-"roundAtkTimesLimit":5,
-"roundMoveTimes":3,
-"roundMoveTimesLimit":5
+"roundAtkTimes":99,
+"roundAtkTimesLimit":99,
+"roundMoveTimes":99,
+"roundMoveTimesLimit":99
 }

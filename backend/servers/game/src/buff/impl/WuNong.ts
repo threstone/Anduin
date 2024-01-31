@@ -37,7 +37,7 @@ export class WuNong extends GameBuff {
             card.table.broadcast(effectMsg);
 
             //派发费用协议
-            user.table.noticeUserFeeInfo(user);
+            user.broadcastFeeInfo();
         }
         next();
     }

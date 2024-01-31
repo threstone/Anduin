@@ -43,10 +43,10 @@ export class GameHandler extends BaseHandler {
             user.addToDeadPool(card);
             replay.cardIndex = msg.cardIndex;
             //加费用
-            if (user.fee < user.feeMax) {
+            if (user.fee < user.feeUpperLimit) {
                 user.fee += 1;
                 //通知用户费用信息
-                table.noticeUserFeeInfo(user);
+                user.broadcastFeeInfo();
             }
         }
 
@@ -135,6 +135,11 @@ export class GameHandler extends BaseHandler {
         const sourceCard = table.mapData.getCard(msg.sourceX, msg.sourceY) as UnitCard;
         const targetCard = table.mapData.getCard(msg.targetX, msg.targetY);
         if (!sourceCard || !targetCard || sourceCard.allowAtk === false || user.atkTimes <= 0) {
+            return;
+        }
+
+        // 是否可攻击检验
+        if (AttackUtils.allowAtk(sourceCard, targetCard) === false) {
             return;
         }
 

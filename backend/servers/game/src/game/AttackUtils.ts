@@ -1,13 +1,12 @@
 import { CardsPto } from "../../../../common/CommonProto";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
-import { GameMap } from "./map/GameMap";
 
 export class AttackUtils {
 
     /**判断是否可以攻击 */
     public static allowAtk(sourceCard: UnitCard, targetCard: BuildingCard) {
-        const atkRange = sourceCard.detailType === CardsPto.AtkType.CloseRange ? 1 : 3;
+        const atkRange = sourceCard.detailType === CardsPto.AtkType.CloseRange ? 1 : sourceCard.atkRange;
         if (sourceCard.blockX === targetCard.blockX) {
             return atkRange >= Math.abs(sourceCard.blockY - targetCard.blockY);
         } else if (sourceCard.blockY === targetCard.blockY) {

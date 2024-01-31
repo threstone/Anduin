@@ -32,6 +32,7 @@ export class BaseCard implements CardInterface {
     isDerivation: number;
     useCondition: number[];
     movement: number;
+    atkRange: number;
 
     public static create(cardId: number, uid: number, table: GameTable) {
         return new (this as any)(cardId, uid, table);
@@ -56,7 +57,7 @@ export class BaseCard implements CardInterface {
             user.reduceFee(this.cardFee);
             user.deleteHandCard(cardIndex, 1);
             //通知用户费用信息
-            this.table.noticeUserFeeInfo(user);
+            user.broadcastFeeInfo();
         }
     }
 

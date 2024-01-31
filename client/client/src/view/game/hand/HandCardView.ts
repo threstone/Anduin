@@ -76,8 +76,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
     }
 
     /**更新手牌信息 */
-    private updateHandCards() {
-        const handCard = GameModel.ins().handCards;
+    private updateHandCards(handCard: GamePto.ICard[]) {
         if (handCard.length !== this._cards.length) {
             console.error('卡牌数量与更新数据数量不一致!');
             TipsView.ins().showTips('卡牌数量与更新数据数量不一致!', 55555)
@@ -89,7 +88,7 @@ class HandCardView extends BaseView<BaseUI.UIHandCardsCom> {
         }
     }
 
-    /**检查是否可以使用次卡牌 */
+    /**检查是否可以使用此卡牌 */
     private checkUseStatus(card: GameCard) {
         /**费用和可操作性检查 */
         if (GameSceneView.ins().allowToOprate && GameModel.ins().fee >= card.cardInfo.cardFee) {

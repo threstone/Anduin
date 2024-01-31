@@ -10,10 +10,9 @@ import { NodeRoundEnd } from './node/NodeRoundEnd';
 import { NodeRoundStart } from './node/NodeRoundStart';
 import { NodeStartGame } from './node/NodeStartGame';
 import { GameMap } from './map/GameMap';
-import { DiceValueDefine, NodeDefine } from './GameDefine';
+import { DiceValueDefine, NodeDefine } from './GameDefine'; 
 
 export class GameTable extends BaseTable {
-
     /**执行回合操作的玩家 */
     roundUserIndex: number;
 
@@ -129,8 +128,8 @@ export class GameTable extends BaseTable {
             gameStartMsg.cards = user.handCards;
             gameStartMsg.isReplace = user.isReplace;
             user.sendMsg(gameStartMsg);
-            this.noticeUserFeeInfo(user);
-            this.noticeUserFeeInfo(otherUser);
+            user.broadcastFeeInfo();
+            otherUser.broadcastFeeInfo();
         } else {
             const msg = new GamePto.S_RECONNECT();
             msg.mapData = this.getMapData();
@@ -241,14 +240,5 @@ export class GameTable extends BaseTable {
         }
         this.broadcast(msg);
         this.destroy(false);
-    }
-
-    /**广播指定用户的费用信息 */
-    public noticeUserFeeInfo(user: GameUser) {
-        const feeNotice = new GamePto.S_FEE_INFO();
-        feeNotice.uid = user.uid
-        feeNotice.fee = user.fee;
-        feeNotice.maxFee = user.feeMax;
-        this.broadcast(feeNotice);
     }
 }

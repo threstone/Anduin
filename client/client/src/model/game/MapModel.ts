@@ -287,7 +287,7 @@ class MapModel extends BaseModel {
         } else {
             GameModel.ins().targetDeadPoolNum++;
         }
-        this.emit('UpdateDeadCardNum');
+        this.emit('UpdateDeadCardNum', { selfDeadPoolNum: GameModel.ins().deadPool.length, targetDeadPoolNum: GameModel.ins().targetDeadPoolNum });
         this.emit('S_ENTITY_DEAD', msg);
     }
 
@@ -303,7 +303,7 @@ class MapModel extends BaseModel {
                     } else {
                         GameModel.ins().targetDeadPoolNum++;
                     }
-                    this.emit('UpdateDeadCardNum');
+                    this.emit('UpdateDeadCardNum', { selfDeadPoolNum: GameModel.ins().deadPool.length, targetDeadPoolNum: GameModel.ins().targetDeadPoolNum });
                     this._serverData.eventCards.splice(index, 1);
                 }
 
@@ -351,6 +351,6 @@ class MapModel extends BaseModel {
             gameModel.targetDeadPoolNum++;
         }
         this.emit('S_CARD_DENY', msg);
-        this.emit('UpdateDeadCardNum');
+        this.emit('UpdateDeadCardNum', { selfDeadPoolNum: GameModel.ins().deadPool.length, targetDeadPoolNum: GameModel.ins().targetDeadPoolNum });
     }
 }

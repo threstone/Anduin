@@ -7,7 +7,7 @@
     <loader id="n13_tb7e" name="cardImg" xy="12,10" size="198,173" group="n25_pg48" fill="scaleMatchWidth" shrinkOnly="true"/>
     <group id="n25_pg48" name="cardImgGroup" xy="12,10" size="198,173"/>
     <image id="n33_h89h" name="feeBg" src="tb7e1u" fileName="common/res/herodetail_soulstone_ico.png" xy="8,-6" group="n18_tb7e" rotation="26"/>
-    <text id="n17_tb7e" name="feeText" xy="6,14" size="24,27" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" strokeColor="#000000" singleLine="true" text="12">
+    <text id="n17_tb7e" name="feeText" xy="6,14" size="24,26" group="n18_tb7e" fontSize="18" color="#ffffff" bold="true" strokeColor="#000000" singleLine="true" text="12">
       <relation target="n18_tb7e" sidePair="center-center,middle-middle"/>
     </text>
     <group id="n18_tb7e" name="feeGroup" xy="6,-6" size="44,49" advanced="true"/>
@@ -28,8 +28,9 @@
     <text id="n12_tb7e" name="healthText" xy="180,333" size="38,27" group="n20_tb7e" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="12"/>
     <group id="n20_tb7e" name="healthGroup" xy="179,325" size="47,58" group="n14_tb7e" advanced="true"/>
     <group id="n14_tb7e" name="buttonGroup" xy="2,175" size="224,208"/>
-    <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,21" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
+    <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,22" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
+    <text id="n37_ocey" name="atkRange" xy="168,146" size="50,32" fontSize="16" color="#ffff00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="射程:4"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368" fill="scaleFree"/>
     <list id="n32_sgbw" name="buffDesc" xy="223,10" size="168,358" visible="false" overflow="scroll"/>
   </displayList>

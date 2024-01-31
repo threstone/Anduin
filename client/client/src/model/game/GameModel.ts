@@ -145,7 +145,7 @@ class GameModel extends BaseModel {
             this.targetDeadPoolNum = msg.deadPoolNum;
         }
         this.emit('S_DRAW_CARDS', msg);
-        this.emit('UpdateDeadCardNum');
+        this.emit('UpdateDeadCardNum', { selfDeadPoolNum: this.deadPool.length, targetDeadPoolNum: msg.deadPoolNum });
     }
 
     //费用协议
@@ -165,7 +165,7 @@ class GameModel extends BaseModel {
             this.targetDeadPoolNum++;
         }
         this.emit('S_DISCARD', msg);
-        this.emit('UpdateDeadCardNum');
+        this.emit('UpdateDeadCardNum', { selfDeadPoolNum: this.deadPool.length, targetDeadPoolNum: this.targetDeadPoolNum });
     }
 
     //使用卡牌
@@ -200,6 +200,7 @@ class GameModel extends BaseModel {
         this.initGameInfo();
 
         this.handCards = msg.selfCards;
+        this.deadPool = msg.deadPool;
         this.targetDeadPoolNum = msg.targetHandCardNum;
         this.isFirst = msg.isFirst;
 
@@ -214,13 +215,13 @@ class GameModel extends BaseModel {
 
         this.emit('S_RECONNECT', msg);
         this.emit('S_MAP_DATA', msg);
-        this.emit('UpdateDeadCardNum');
+        this.emit('UpdateDeadCardNum', { selfDeadPoolNum: this.deadPool.length, targetDeadPoolNum: this.targetDeadPoolNum });
     }
 
     //更新手牌信息
     private S_HANDCARDS_UPDATE(msg: GamePto.S_HANDCARDS_UPDATE) {
         this.handCards = msg.cards;
-        this.emit('S_HANDCARDS_UPDATE');
+        this.emit('S_HANDCARDS_UPDATE', msg.cards.slice());
     }
 
     private S_ACTION_RECORD(msg: GamePto.S_ACTION_RECORD) {
