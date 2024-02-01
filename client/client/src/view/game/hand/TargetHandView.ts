@@ -83,7 +83,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
 
     /** 抽起始手牌*/
     public drawStartHandCards() {
-        this.drawCardsToHand(ConfigMgr.ins().common.startHandCardNum, 0, 1000);
+        this.drawCardsToHand(ConfigMgr.ins().common.startHandCardNum + (GameModel.ins().isFirst ? 2 : 0), 0, 1000);
     }
 
     /**换牌 */
@@ -255,7 +255,7 @@ class TargetHandView extends BaseView<BaseUI.UIHandCardsCom>{
             return GameSceneView.ins().useCardShow(gameCard);
         }
     }
-    
+
     private reconnect(msg: GamePto.S_RECONNECT) {
         this.drawCardsToHand(msg.targetHandCardNum, 0, 0);
     }

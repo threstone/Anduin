@@ -2,13 +2,13 @@
 
 module BaseUI {
 
-	export class UIChooseCards extends fairygui.GComponent {
+	export class UIReplaceCardsCom extends fairygui.GComponent {
 		public chooseBtn:UIButton1;
 		public tips:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpopg482g";
 
-		public static createInstance():UIChooseCards {
-			return <UIChooseCards>(fairygui.UIPackage.createObject("BaseUI", "ChooseCards"));
+		public static createInstance():UIReplaceCardsCom {
+			return <UIReplaceCardsCom>(fairygui.UIPackage.createObject("BaseUI", "ReplaceCardsCom"));
 		}
 
 		protected constructFromXML(xml:any):void {

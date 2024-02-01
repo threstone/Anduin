@@ -33,7 +33,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardsCom.URL, UIShowCardsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIUserInfoBox.URL, UIUserInfoBox);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIHandCardsCom.URL, UIHandCardsCom);
-			fairygui.UIObjectFactory.setPackageItemExtension(UIChooseCards.URL, UIChooseCards);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIReplaceCardsCom.URL, UIReplaceCardsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardBackItem.URL, UICardBackItem);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIDeckChooseCom.URL, UIDeckChooseCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UISelectTargetCom.URL, UISelectTargetCom);

@@ -69,7 +69,7 @@
     <component id="pg482d" name="UserInfoBox.xml" path="/game/info/"/>
     <component id="pg482e" name="HandCardsCom.xml" path="/game/"/>
     <image id="pg482f" name="map.png" path="/game/res/"/>
-    <component id="pg482g" name="ChooseCards.xml" path="/game/" exported="true"/>
+    <component id="pg482g" name="ReplaceCardsCom.xml" path="/game/" exported="true"/>
     <component id="pg482h" name="CardBackItem.xml" path="/cards/" exported="true"/>
     <component id="uym42i" name="RightCtrlCom.xml" path="/game/rightCom/"/>
     <component id="hzsg2j" name="MapView.xml" path="/game/map/"/>

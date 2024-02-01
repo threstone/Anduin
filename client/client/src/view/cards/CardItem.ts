@@ -59,6 +59,8 @@ class CardItem {
         card.atkText.text = `${cardInfo.attack}`;
         card.healthText.text = `${cardInfo.health}`;
         card.quality.url = this.getQualityUrl(cardInfo.quality);
+        card.atkRange.visible = !!cardInfo.atkRange;
+        card.atkRange.text = `射程:${cardInfo.atkRange}`
         CardItem.updateNum(card, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:

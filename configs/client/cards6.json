@@ -14,7 +14,8 @@
  "isDerivation":0,
  "useCondition":[1,1],
  "effectId":-1,
- "soundId":-1
+ "soundId":-1,
+ "atkRange":0
   },
 {
  "cardId":600001,
@@ -32,7 +33,8 @@
  "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":600002,
@@ -50,7 +52,8 @@
  "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":600003,
@@ -68,7 +71,8 @@
  "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":600004,
@@ -86,7 +90,8 @@
  "useCondition":[2,1],
  "effectId":0,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":600005,
@@ -104,7 +109,8 @@
  "useCondition":[2,1],
  "effectId":3,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":600006,
@@ -122,7 +128,8 @@
  "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":600007,
@@ -140,7 +147,8 @@
  "useCondition":[2,1],
  "effectId":4,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":600008,
@@ -158,7 +166,8 @@
  "useCondition":[2,1],
  "effectId":-1,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":600009,
@@ -176,6 +185,7 @@
  "useCondition":[2,1],
  "effectId":5,
  "soundId":-1,
- "movement":2
+ "movement":2,
+ "atkRange":3
   }
 ]

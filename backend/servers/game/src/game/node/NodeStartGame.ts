@@ -101,12 +101,12 @@ export class NodeStartGame extends BaseNode {
             table.shuffle(user.cardPool);
             //抽n张
             for (let cardNum = 0; cardNum < GlobalVar.configMgr.common.startHandCardNum; cardNum++) {
-                user.addToHand(user.cardPool.pop())
+                user.addToHand(user.cardPool.pop());
             }
-            //后手多一费
+            //后手多硬币,多一卡
             if (table.roundUserIndex !== index) {
-                user.feeMax += 1;
-                user.fee += 1;
+                user.addToHand(user.cardPool.pop());
+                user.addToHand(GlobalVar.cardMgr.getCardInstance(0, user.uid, table));
             }
 
             //发送游戏开始协议

@@ -1,4 +1,4 @@
-class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
+class ReplaceCardsView extends BaseView<BaseUI.UIReplaceCardsCom>{
 
     private _replaceIndexes: number[];
     private _cards: GameCard[];
@@ -8,7 +8,7 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
     private reqEndTime: number;
 
     protected init() {
-        this.view = BaseUI.UIChooseCards.createInstance();
+        this.view = BaseUI.UIReplaceCardsCom.createInstance();
         this.view.chooseBtn.describe.text = '确定';
     }
 
@@ -37,6 +37,11 @@ class ChooseCards extends BaseView<BaseUI.UIChooseCards>{
             this.cardAddTween(handCards.length, index);
             if (!isReplace) {
                 this.AddClick(gameCard.cardItem, () => {
+                    // 硬币不能换掉
+                    if (cardInfo.cardId === 0) {
+                        TipsView.ins().showTips('硬币不可以替换哦', 5000);
+                        return
+                    }
                     gameCard.cardItem.grayed = !gameCard.cardItem.grayed;
                     if (gameCard.cardItem.grayed) {
                         this._replaceIndexes.push(index);

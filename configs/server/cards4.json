@@ -10,7 +10,8 @@
  "quality":0,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[1,1]
+ "useCondition":[1,1],
+ "atkRange":0
   },
 {
  "cardId":400001,
@@ -24,7 +25,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":400002,
@@ -38,7 +40,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":400003,
@@ -52,7 +55,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":400004,
@@ -66,7 +70,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":400005,
@@ -80,7 +85,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":400006,
@@ -94,7 +100,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":400007,
@@ -108,7 +115,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":3
   },
 {
  "cardId":400008,
@@ -122,7 +130,8 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":0
   },
 {
  "cardId":400009,
@@ -136,6 +145,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "movement":2
+ "movement":2,
+ "atkRange":3
   }
 ]

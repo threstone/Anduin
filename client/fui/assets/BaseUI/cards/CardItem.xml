@@ -30,7 +30,7 @@
     <group id="n14_tb7e" name="buttonGroup" xy="2,175" size="224,208"/>
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,22" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
-    <text id="n37_ocey" name="atkRange" xy="168,146" size="50,32" fontSize="16" color="#ffff00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="射程:4"/>
+    <text id="n37_ocey" name="atkRange" xy="160,146" size="50,32" fontSize="16" color="#ffff00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="射程:4"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368" fill="scaleFree"/>
     <list id="n32_sgbw" name="buffDesc" xy="223,10" size="168,358" visible="false" overflow="scroll"/>
   </displayList>
