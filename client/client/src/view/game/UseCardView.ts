@@ -263,6 +263,15 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             case GamePto.UseConditionEnum.AllEntity:
                 isMatch = entity != null;
                 break;
+            //友方非英雄实体
+            case GamePto.UseConditionEnum.FriendEntityNotHero:
+                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid === UserModel.ins().uid;
+            //敌方非英雄实体
+            case GamePto.UseConditionEnum.EnemyEntityNotHero:
+                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid !== UserModel.ins().uid;
+            //所有非英雄实体
+            case GamePto.UseConditionEnum.AllEntityNotHero:
+                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero;
             default:
                 return false;
         }

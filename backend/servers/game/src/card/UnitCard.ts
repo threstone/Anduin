@@ -2,7 +2,6 @@ import { CardsPto, GamePto } from "../../../../common/CommonProto";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
-import { GameMap } from "../game/map/GameMap";
 import { BuildingCard } from "./BuildingCard";
 
 export class UnitCard extends BuildingCard {

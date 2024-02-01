@@ -1,13 +1,12 @@
 import { GameUser } from "../../../game/GameUser";
 import { MagicCard } from "../../MagicCard";
 
-/**硬币 */
-export class Card0 extends MagicCard {
+/** 广积粮 */
+export class Card25 extends MagicCard {
 
     public onUse(user: GameUser, cardIndex: number): void {
         super.onUse(user, cardIndex);
-        user.fee++;
-        //派发费用协议
-        user.broadcastFeeInfo();
+        // 抽2张卡
+        user.drawCardsFromPool(2);
     }
 }

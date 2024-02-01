@@ -40,6 +40,12 @@ enum UseConditionEnum{
     EnemyEntity = 11;
     //所有地图实体
     AllEntity = 12;
+	//友方非英雄实体
+    FriendEntityNotHero = 13;
+    //敌方非英雄实体
+    EnemyEntityNotHero = 14;
+    //所有非英雄实体
+    AllEntityNotHero = 15;
 }
 
 enum AffectedEnum{
