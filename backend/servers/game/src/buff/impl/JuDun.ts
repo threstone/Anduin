@@ -13,10 +13,10 @@ import { PositionBuff } from "../PositionBuff";
 export class JuDun extends PositionBuff {
 
     protected effectiveDistance: number = 1;
-    public buffId: number = 1;
+    public static buffId: number = 1;
 
     public addPositionBuff(card: BuildingCard, buff: BuffData): void {
-        card.on(EventType.Damage, { id: buff.id, fun: this.onDamage });
+        card.on(EventType.Damage, { id: buff.id, fun: this.onDamage, canSilent: false });
         card.addBuff(buff);
     }
 

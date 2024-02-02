@@ -23,6 +23,11 @@ export class BuildingCard extends EventCard {
     /**自身的所有buff,包括全局buff、位置buff、普通buff */
     private _buffMap: Map<number, BuffData>;
 
+    /** 由各种buff效果改变的攻击属性值,可被沉默影响 */
+    public buffModifyAtk: number = 0;
+    /** 由各种buff效果改变的生命属性值,可被沉默影响 */
+    public buffModifyHealth: number = 0;
+
     constructor(cardId: number, uid: number, table: GameTable) {
         super(cardId, uid, table);
         this.on(EventType.Damage, { id: this.id, fun: this.onDamage, canSilent: false });
@@ -46,17 +51,12 @@ export class BuildingCard extends EventCard {
 
     /**是否下发到客户端以显示 */
     public isBuffShow(buff: BuffData) {
-        //如果buff不需要被忽略就显示
-        if (buff.ignore === true) {
-            return false;
-        }
-
         //是全局或位置buff的情况下又不是buff源,则需要展示出Buff
         if (buff.sourceUniqueId && buff.sourceUniqueId !== this.id) {
             return true;
         }
 
-        return false;
+        return buff.ignore === true;
     }
 
     /**添加指定的buff */
@@ -134,7 +134,7 @@ export class BuildingCard extends EventCard {
     public onDamage(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         next();
         eventData.data = Math.max(0, eventData.data);
-        this.health -= eventData.data;
+        this.incrHealth(- eventData.data)
     }
 
     /**
@@ -144,7 +144,7 @@ export class BuildingCard extends EventCard {
     public onDamageAfter(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         next();
         //死亡了
-        if (this.health <= 0) {
+        if (this.getHealth() <= 0) {
             this.emit(EventType.Dead, damageTarget, damageSource)
         }
     }

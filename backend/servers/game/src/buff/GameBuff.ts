@@ -6,7 +6,7 @@ import { BuffData } from "./BuffData";
 
 export abstract class GameBuff implements BaseEvent {
 
-    public abstract buffId: number;
+    public buffId: number;
     /**给卡牌添加buff */
     public abstract addBuff(card: BuildingCard, buff?: BuffData): void;
     /**移除卡牌上的指定buff */

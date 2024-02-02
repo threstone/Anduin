@@ -95,7 +95,7 @@ export class EventCard extends BaseCard {
 
     /**检查事件是否结束 */
     private checkEventClose() {
-        if (this.cardType === CardsPto.CardType.Event && this.health <= 0) {
+        if (this.cardType === CardsPto.CardType.Event && this.getHealth() <= 0) {
             const user = this.table.getUser(this.uid);
             const index = user.eventPool.indexOf(this);
             if (index === -1) {
@@ -121,7 +121,7 @@ export class EventCard extends BaseCard {
      */
     protected forceEvent() {
         if (this.cardType === CardsPto.CardType.Event) {
-            this.health--;
+            this.incrHealth(- 1);
             this.checkEventClose();
         }
     }
@@ -134,7 +134,7 @@ export class EventCard extends BaseCard {
             res.cardType = this.cardType;
             res.uid = this.uid;
             res.cardId = -1;
-            res.health = this.health;
+            res.health = this.getHealth();
             return res;
         }
         return this;

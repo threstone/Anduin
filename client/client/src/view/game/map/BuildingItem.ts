@@ -1,7 +1,7 @@
 class BuildingItem {
     static getItem(cardInfo: GamePto.ICard, cardConfig: CardInterface) {
         const building = BaseUI.UIMapBuilding.createInstance();
-        Utils.defineTextFieldSet(building.healthText, cardConfig.health);
+        Utils.defineTextFieldSet(building.healthText, cardInfo.healthUpperLimit);
         building.setPivot(0.5, 0.5, true);
 
         RES.getResByUrl(`./resource/card/${cardConfig.powerId}/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {

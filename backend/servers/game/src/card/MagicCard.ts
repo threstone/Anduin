@@ -1,6 +1,7 @@
 import { GamePto } from "../../../../common/CommonProto";
 import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
+import { BuildingCard } from "./BuildingCard";
 
 export class MagicCard extends BaseCard {
     public onUse(user: GameUser, cardIndex: number, ...params: number[]) {

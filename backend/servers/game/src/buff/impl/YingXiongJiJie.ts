@@ -9,7 +9,7 @@ import { GlobalBuff } from "../GlobalBuff";
  */
 export class YingXiongJiJie extends GlobalBuff {
 
-    public buffId: number = 4;
+    public static buffId: number = 4;
 
     public addBuff(card: BuildingCard): void {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);

@@ -4024,11 +4024,13 @@ $root.GamePto = (function() {
      * @enum {number}
      * @property {number} Show=0 Show value
      * @property {number} HealthReduce=1 HealthReduce value
+     * @property {number} HPAdd=2 HPAdd value
      */
     GamePto.AffectedEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Show"] = 0;
         values[valuesById[1] = "HealthReduce"] = 1;
+        values[valuesById[2] = "HPAdd"] = 2;
         return values;
     })();
 
@@ -4174,6 +4176,7 @@ $root.GamePto = (function() {
          * @property {number|null} [cardType] Card cardType
          * @property {number|null} [attack] Card attack
          * @property {number|null} [health] Card health
+         * @property {number|null} [healthUpperLimit] Card healthUpperLimit
          * @property {number|null} [cardFee] Card cardFee
          * @property {number|null} [uid] Card uid
          * @property {number|null} [blockX] Card blockX
@@ -4238,6 +4241,14 @@ $root.GamePto = (function() {
          * @instance
          */
         Card.prototype.health = 0;
+
+        /**
+         * Card healthUpperLimit.
+         * @member {number} healthUpperLimit
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.healthUpperLimit = 0;
 
         /**
          * Card cardFee.
@@ -4317,20 +4328,22 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.attack);
             if (message.health != null && Object.hasOwnProperty.call(message, "health"))
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.health);
+            if (message.healthUpperLimit != null && Object.hasOwnProperty.call(message, "healthUpperLimit"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.healthUpperLimit);
             if (message.cardFee != null && Object.hasOwnProperty.call(message, "cardFee"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.cardFee);
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cardFee);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.uid);
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.uid);
             if (message.blockX != null && Object.hasOwnProperty.call(message, "blockX"))
-                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.blockX);
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.blockX);
             if (message.blockY != null && Object.hasOwnProperty.call(message, "blockY"))
-                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.blockY);
+                writer.uint32(/* id 9, wireType 0 =*/72).int32(message.blockY);
             if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
-                writer.uint32(/* id 9, wireType 0 =*/72).bool(message.allowAtk);
+                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.allowAtk);
             if (message.allowMove != null && Object.hasOwnProperty.call(message, "allowMove"))
-                writer.uint32(/* id 10, wireType 0 =*/80).bool(message.allowMove);
+                writer.uint32(/* id 11, wireType 0 =*/88).bool(message.allowMove);
             if (message.buffList != null && message.buffList.length) {
-                writer.uint32(/* id 11, wireType 2 =*/90).fork();
+                writer.uint32(/* id 12, wireType 2 =*/98).fork();
                 for (var i = 0; i < message.buffList.length; ++i)
                     writer.int32(message.buffList[i]);
                 writer.ldelim();
@@ -4372,24 +4385,27 @@ $root.GamePto = (function() {
                     message.health = reader.int32();
                     break;
                 case 5:
-                    message.cardFee = reader.int32();
+                    message.healthUpperLimit = reader.int32();
                     break;
                 case 6:
-                    message.uid = reader.int32();
+                    message.cardFee = reader.int32();
                     break;
                 case 7:
-                    message.blockX = reader.int32();
+                    message.uid = reader.int32();
                     break;
                 case 8:
-                    message.blockY = reader.int32();
+                    message.blockX = reader.int32();
                     break;
                 case 9:
-                    message.allowAtk = reader.bool();
+                    message.blockY = reader.int32();
                     break;
                 case 10:
-                    message.allowMove = reader.bool();
+                    message.allowAtk = reader.bool();
                     break;
                 case 11:
+                    message.allowMove = reader.bool();
+                    break;
+                case 12:
                     if (!(message.buffList && message.buffList.length))
                         message.buffList = [];
                     if ((tag & 7) === 2) {

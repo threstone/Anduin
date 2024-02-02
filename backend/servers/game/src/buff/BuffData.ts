@@ -22,5 +22,6 @@ export class BuffData {
         this.duration = duration;
         this.buffId = buffId;
         this.effectiveType = effectiveType;
+        this.ignore = false;
     }
 }

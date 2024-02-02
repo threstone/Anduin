@@ -2612,7 +2612,8 @@ export namespace GamePto {
     /** AffectedEnum enum. */
     enum AffectedEnum {
         Show = 0,
-        HealthReduce = 1
+        HealthReduce = 1,
+        HPAdd = 2
     }
 
     /** RecordType enum. */
@@ -2738,6 +2739,9 @@ export namespace GamePto {
         /** Card health */
         health?: (number|null);
 
+        /** Card healthUpperLimit */
+        healthUpperLimit?: (number|null);
+
         /** Card cardFee */
         cardFee?: (number|null);
 
@@ -2783,6 +2787,9 @@ export namespace GamePto {
 
         /** Card health. */
         public health: number;
+
+        /** Card healthUpperLimit. */
+        public healthUpperLimit: number;
 
         /** Card cardFee. */
         public cardFee: number;

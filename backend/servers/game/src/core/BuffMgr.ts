@@ -31,6 +31,7 @@ export class BuffMgr {
             }
             const buffClass = require(filePath)
             const className = Object.keys(buffClass)[0];
+            buffClass[className].prototype.buffId = buffClass[className].buffId
             const buffObject: GameBuff = new buffClass[className]();
             this._buffMap.set(buffObject.buffId, buffObject);
         }

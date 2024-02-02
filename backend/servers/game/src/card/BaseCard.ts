@@ -6,6 +6,7 @@ import { CardStatus } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
+import { BuildingCard } from "./BuildingCard";
 
 const logger = getLogger(startupParam.nodeId);
 export class BaseCard implements CardInterface {
@@ -23,6 +24,10 @@ export class BaseCard implements CardInterface {
     detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
     attack: number;
     health: number;
+    getHealth() { return this.health; }
+    setHealth(v: number) { this.health = Math.min(this.healthUpperLimit, v); }
+    incrHealth(v: number) { this.health = Math.min(this.healthUpperLimit, this.health + v); }
+
     /** 生命上限 */
     healthUpperLimit: number;
     fee: number;
@@ -47,7 +52,7 @@ export class BaseCard implements CardInterface {
         this.id = table.uniqueId;
         this.uid = uid;
         this.table = table;
-        this.healthUpperLimit = this.health;
+        this.healthUpperLimit = this.getHealth();
         this.cardFee = this.fee;
     }
 
@@ -172,5 +177,18 @@ export class BaseCard implements CardInterface {
         const notice = new GamePto.S_ACTION_RECORD();
         notice.source = this;
         this.table.broadcast(notice);
+    }
+
+    /** 通过buff增加属性 */
+    public buffModify(targetEntity: BuildingCard, modifyAtk = this.attack, modifyHealth = this.getHealth()) {
+        // 增加攻击、血量
+        targetEntity.attack += modifyAtk;
+        targetEntity.buffModifyAtk += modifyAtk;
+        targetEntity.buffModifyAtk += modifyAtk;
+
+        targetEntity.healthUpperLimit += modifyHealth;
+        targetEntity.health += modifyHealth;
+        targetEntity.incrHealth(modifyHealth);
+        targetEntity.buffModifyHealth += modifyHealth;
     }
 }

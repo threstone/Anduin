@@ -2981,6 +2981,7 @@ $root.GamePto = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Show"] = 0;
         values[valuesById[1] = "HealthReduce"] = 1;
+        values[valuesById[2] = "HPAdd"] = 2;
         return values;
     })();
 
@@ -3107,6 +3108,7 @@ $root.GamePto = (function() {
         Card.prototype.cardType = 0;
         Card.prototype.attack = 0;
         Card.prototype.health = 0;
+        Card.prototype.healthUpperLimit = 0;
         Card.prototype.cardFee = 0;
         Card.prototype.uid = 0;
         Card.prototype.blockX = 0;
@@ -3132,20 +3134,22 @@ $root.GamePto = (function() {
                 w.uint32(24).int32(m.attack);
             if (m.health != null && Object.hasOwnProperty.call(m, "health"))
                 w.uint32(32).int32(m.health);
+            if (m.healthUpperLimit != null && Object.hasOwnProperty.call(m, "healthUpperLimit"))
+                w.uint32(40).int32(m.healthUpperLimit);
             if (m.cardFee != null && Object.hasOwnProperty.call(m, "cardFee"))
-                w.uint32(40).int32(m.cardFee);
+                w.uint32(48).int32(m.cardFee);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
-                w.uint32(48).int32(m.uid);
+                w.uint32(56).int32(m.uid);
             if (m.blockX != null && Object.hasOwnProperty.call(m, "blockX"))
-                w.uint32(56).int32(m.blockX);
+                w.uint32(64).int32(m.blockX);
             if (m.blockY != null && Object.hasOwnProperty.call(m, "blockY"))
-                w.uint32(64).int32(m.blockY);
+                w.uint32(72).int32(m.blockY);
             if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
-                w.uint32(72).bool(m.allowAtk);
+                w.uint32(80).bool(m.allowAtk);
             if (m.allowMove != null && Object.hasOwnProperty.call(m, "allowMove"))
-                w.uint32(80).bool(m.allowMove);
+                w.uint32(88).bool(m.allowMove);
             if (m.buffList != null && m.buffList.length) {
-                w.uint32(90).fork();
+                w.uint32(98).fork();
                 for (var i = 0; i < m.buffList.length; ++i)
                     w.int32(m.buffList[i]);
                 w.ldelim();
@@ -3176,24 +3180,27 @@ $root.GamePto = (function() {
                     m.health = r.int32();
                     break;
                 case 5:
-                    m.cardFee = r.int32();
+                    m.healthUpperLimit = r.int32();
                     break;
                 case 6:
-                    m.uid = r.int32();
+                    m.cardFee = r.int32();
                     break;
                 case 7:
-                    m.blockX = r.int32();
+                    m.uid = r.int32();
                     break;
                 case 8:
-                    m.blockY = r.int32();
+                    m.blockX = r.int32();
                     break;
                 case 9:
-                    m.allowAtk = r.bool();
+                    m.blockY = r.int32();
                     break;
                 case 10:
-                    m.allowMove = r.bool();
+                    m.allowAtk = r.bool();
                     break;
                 case 11:
+                    m.allowMove = r.bool();
+                    break;
+                case 12:
                     if (!(m.buffList && m.buffList.length))
                         m.buffList = [];
                     if ((t & 7) === 2) {
@@ -3229,6 +3236,9 @@ $root.GamePto = (function() {
             }
             if (d.health != null) {
                 m.health = d.health | 0;
+            }
+            if (d.healthUpperLimit != null) {
+                m.healthUpperLimit = d.healthUpperLimit | 0;
             }
             if (d.cardFee != null) {
                 m.cardFee = d.cardFee | 0;
@@ -3272,6 +3282,7 @@ $root.GamePto = (function() {
                 d.cardType = 0;
                 d.attack = 0;
                 d.health = 0;
+                d.healthUpperLimit = 0;
                 d.cardFee = 0;
                 d.uid = 0;
                 d.blockX = 0;
@@ -3293,6 +3304,9 @@ $root.GamePto = (function() {
             }
             if (m.health != null && m.hasOwnProperty("health")) {
                 d.health = m.health;
+            }
+            if (m.healthUpperLimit != null && m.hasOwnProperty("healthUpperLimit")) {
+                d.healthUpperLimit = m.healthUpperLimit;
             }
             if (m.cardFee != null && m.hasOwnProperty("cardFee")) {
                 d.cardFee = m.cardFee;
@@ -3661,6 +3675,10 @@ $root.GamePto = (function() {
             case "HealthReduce":
             case 1:
                 m.type = 1;
+                break;
+            case "HPAdd":
+            case 2:
+                m.type = 2;
                 break;
             }
             if (d.value != null) {

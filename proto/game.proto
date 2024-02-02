@@ -51,6 +51,7 @@ enum UseConditionEnum{
 enum AffectedEnum{
 	Show = 0;
 	HealthReduce = 1;
+	HPAdd = 2;
 }
 
 enum RecordType{
@@ -74,13 +75,14 @@ message Card{
 	int32 cardType = 2;
 	int32 attack = 3;
 	int32 health = 4;
-	int32 cardFee = 5;
-	int32 uid = 6;
-	int32 blockX = 7;
-	int32 blockY = 8;
-	bool allowAtk = 9;
-	bool allowMove = 10;
-	repeated int32 buffList = 11;
+	int32 healthUpperLimit = 5;
+	int32 cardFee = 6;
+	int32 uid = 7;
+	int32 blockX = 8;
+	int32 blockY = 9;
+	bool allowAtk = 10;
+	bool allowMove = 11;
+	repeated int32 buffList = 12;
 }
 
 message MapData{

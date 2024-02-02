@@ -10,7 +10,7 @@ import { GameBuff } from "../GameBuff";
  */
 export class WuNong extends GameBuff {
 
-    public buffId: number = 0;
+    public static buffId: number = 0;
 
     public addBuff(card: BuildingCard): void {
         const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);

@@ -176,10 +176,10 @@ export class GameUser {
         for (let index = 0; index < num; index++) {
             if (this._cardPool.length === 0) {
                 message.damages.push(this._fatigue);
-                this.hero.health -= this._fatigue;
+                this.hero.incrHealth(- this._fatigue);
                 this._fatigue++;
 
-                if (this.hero.health <= 0) {
+                if (this.hero.getHealth() <= 0) {
                     this.table.doGameOver();
                 }
                 continue;

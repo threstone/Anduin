@@ -38,8 +38,9 @@ export class CardMgr {
             }
             const cardClass = require(filePath)
             const className = Object.keys(cardClass)[0];
+            const cardObject = cardClass[className];
             const cardId = parseInt(className.substring(4));
-            this._cardClassMap.set(cardId, cardClass[className])
+            this._cardClassMap.set(cardId, cardObject)
         }
 
         /**
