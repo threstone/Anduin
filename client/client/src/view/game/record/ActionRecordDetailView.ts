@@ -136,7 +136,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
 
     private showCardEffect(cardItem: BaseUI.UICardItem, affectInfo: GamePto.IAffectedCard) {
         switch (affectInfo.type) {
-            case GamePto.AffectedEnum.HealthReduce:
+            case GamePto.AffectedEnum.HpReduce:
                 this.showHealthReduceEffect(cardItem, affectInfo.value);
                 break;
         }
@@ -166,7 +166,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
         this.showSourceCard(msg.from);
         const affectedList: GamePto.IAffectedCard[] = [];
         msg.targetList.forEach((targetCard) => {
-            affectedList.push({ card: targetCard, type: GamePto.AffectedEnum.HealthReduce, value: msg.damage })
+            affectedList.push({ card: targetCard, type: GamePto.AffectedEnum.HpReduce, value: msg.damage })
         });
         const target = msg.targetList[0];
         const sName = CardsModel.ins().getCardNameByCardId(msg.from.cardId);

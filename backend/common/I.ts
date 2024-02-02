@@ -19,7 +19,7 @@ export class CardInterface {
     attack: number;
 
     /**生命值 */
-    health: number;
+    hp: number;
 
     /**费用 */
     fee: number;

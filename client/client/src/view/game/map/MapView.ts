@@ -502,7 +502,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     /**单位扣血 */
     public entityReduceHeath(entityCard: GamePto.ICard, damage: number) {
         const entity = this.entityMap.get(entityCard.id);;
-        entity.healthText.text = `${entityCard.health}`;
+        entity.healthText.text = `${entityCard.hp}`;
         this.entityShowTips(entity, `${-damage}`);
     }
 

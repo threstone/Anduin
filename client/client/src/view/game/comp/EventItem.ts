@@ -8,7 +8,7 @@ class EventItem {
         } else {
             const cardConfig = CardsModel.ins().getCardConfigById(card.cardId);
             cardConfig.detailType === CardsPto.EventType.Common ? item.secret.visible = false : item.display.visible = false;
-            item.times.text = `${card.health}`;
+            item.times.text = `${card.hp}`;
             item.eventName.text = cardConfig.cardName;
         }
         return item;

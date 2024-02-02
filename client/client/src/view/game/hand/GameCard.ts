@@ -34,6 +34,6 @@ class GameCard {
         this.cardInfo = cardInfo;
         this.cardItem.feeText.text = `${Math.max(0,cardInfo.cardFee)}`;
         this.cardItem.atkText.text = `${cardInfo.attack}`;
-        this.cardItem.healthText.text = `${cardInfo.health}`;
+        this.cardItem.healthText.text = `${cardInfo.hp}`;
     }
 }

@@ -14,10 +14,10 @@ class MapItem {
     }
 
     public static updateEntityDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, cardInfo: GamePto.ICard) {
-        // 因为新的值变色
-        Utils.defineTextFieldSet(entity.healthText, cardInfo.healthUpperLimit);
+        // // 因为新的值变色
+        // Utils.defineTextFieldSet(entity.healthText, cardInfo.hpUpperLimit);
         if (entity.healthText) {
-            entity.healthText.text = `${cardInfo.health}`;
+            entity.healthText.text = `${cardInfo.hp}`;
         }
 
         const unit = entity as BaseUI.UIMapUnit;

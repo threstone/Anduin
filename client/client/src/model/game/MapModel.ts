@@ -297,7 +297,7 @@ class MapModel extends BaseModel {
             const eventCard = this._serverData.eventCards[index];
             if (eventCard.id === msg.card.id) {
                 //事件卡结束了
-                if (msg.card.health <= 0) {
+                if (msg.card.hp <= 0) {
                     if (msg.card.uid === UserModel.ins().uid) {
                         GameModel.ins().deadPool.push(msg.card);
                     } else {

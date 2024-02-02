@@ -26,7 +26,7 @@ export class BuildingCard extends EventCard {
     /** 由各种buff效果改变的攻击属性值,可被沉默影响 */
     public buffModifyAtk: number = 0;
     /** 由各种buff效果改变的生命属性值,可被沉默影响 */
-    public buffModifyHealth: number = 0;
+    public buffModifyHp: number = 0;
 
     constructor(cardId: number, uid: number, table: GameTable) {
         super(cardId, uid, table);
@@ -56,7 +56,7 @@ export class BuildingCard extends EventCard {
             return true;
         }
 
-        return buff.ignore === true;
+        return buff.ignore !== true;
     }
 
     /**添加指定的buff */
@@ -134,7 +134,7 @@ export class BuildingCard extends EventCard {
     public onDamage(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         next();
         eventData.data = Math.max(0, eventData.data);
-        this.incrHealth(- eventData.data)
+        this.incrHp(- eventData.data)
     }
 
     /**
@@ -144,7 +144,7 @@ export class BuildingCard extends EventCard {
     public onDamageAfter(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         next();
         //死亡了
-        if (this.getHealth() <= 0) {
+        if (this.getHp() <= 0) {
             this.emit(EventType.Dead, damageTarget, damageSource)
         }
     }

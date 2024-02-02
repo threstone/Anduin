@@ -14,7 +14,7 @@ export class Card26 extends UnitCard {
  
         // 增加血量
         const targetEntity = this.table.mapData.getCard(targetX, targetY);
-        targetEntity.incrHealth(AddNum);
+        targetEntity.incrHp(AddNum);
 
         // 通知
         const updateMsg = new GamePto.S_UPDATE_ENTITYS();
@@ -29,7 +29,7 @@ export class Card26 extends UnitCard {
     public noticeUseActionRecord() {
         const notice = new GamePto.S_ACTION_RECORD();
         notice.source = this;
-        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.HPAdd, value: AddNum })
+        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.HpAdd, value: AddNum })
         this.table.broadcast(notice);
         this._cacheEntity = null;
     }

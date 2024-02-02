@@ -36,7 +36,7 @@ export class Card1 extends MagicCard {
     public noticeUseActionRecord() {
         const notice = new GamePto.S_ACTION_RECORD();
         notice.source = this;
-        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.HealthReduce, value: this._cacheDamage })
+        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.HpReduce, value: this._cacheDamage })
         this.table.broadcast(notice);
         this._cacheEntity = null;
         this._cacheDamage = undefined;

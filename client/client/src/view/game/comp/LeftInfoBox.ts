@@ -97,10 +97,10 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
         }
 
         const eventItem = this._eventMap.get(card.id);
-        if (card.health <= 0) {
+        if (card.hp <= 0) {
             this.removeEventItem(card.id, eventItem);
         } else {
-            eventItem.times.text = `${card.health}`;
+            eventItem.times.text = `${card.hp}`;
         }
     }
 
@@ -166,10 +166,10 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
                 this.view.closeRange.visible = false;
             }
 
-            Utils.defineTextFieldSet(this.view.healthText, cardConfig.health);
+            Utils.defineTextFieldSet(this.view.healthText, cardConfig.hp);
             Utils.defineTextFieldSet(this.view.atkText, cardConfig.attack);
             this.view.atkText.text = `${card.attack}`;
-            this.view.healthText.text = `${card.health}`;
+            this.view.healthText.text = `${card.hp}`;
         }
     }
 
@@ -178,7 +178,7 @@ abstract class LeftInfoBox extends BaseView<BaseUI.UILeftInfoBox>{
         const card: GamePto.ICard = evt.data;
         if (this.isHandler(card.uid)) {
             this.view.atkText.text = `${card.attack}`;
-            this.view.healthText.text = `${card.health}`;
+            this.view.healthText.text = `${card.hp}`;
         }
     }
 

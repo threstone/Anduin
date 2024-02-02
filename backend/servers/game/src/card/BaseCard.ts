@@ -23,13 +23,13 @@ export class BaseCard implements CardInterface {
     cardType: CardsPto.CardType;
     detailType: CardsPto.AtkType | CardsPto.EventType | CardsPto.BuilingType;
     attack: number;
-    health: number;
-    getHealth() { return this.health; }
-    setHealth(v: number) { this.health = Math.min(this.healthUpperLimit, v); }
-    incrHealth(v: number) { this.health = Math.min(this.healthUpperLimit, this.health + v); }
+    hp: number;
+    getHp() { return this.hp; }
+    setHp(v: number) { this.hp = Math.min(this.hpUpperLimit, v); }
+    incrHp(v: number) { this.hp = Math.min(this.hpUpperLimit, this.hp + v); }
 
     /** 生命上限 */
-    healthUpperLimit: number;
+    hpUpperLimit: number;
     fee: number;
     /**最终使用的费用,初始时和fee相同,但是可能收到一些减费效果的影响 */
     cardFee: number;
@@ -52,7 +52,7 @@ export class BaseCard implements CardInterface {
         this.id = table.uniqueId;
         this.uid = uid;
         this.table = table;
-        this.healthUpperLimit = this.getHealth();
+        this.hpUpperLimit = this.getHp();
         this.cardFee = this.fee;
     }
 
@@ -180,15 +180,15 @@ export class BaseCard implements CardInterface {
     }
 
     /** 通过buff增加属性 */
-    public buffModify(targetEntity: BuildingCard, modifyAtk = this.attack, modifyHealth = this.getHealth()) {
+    public buffModify(targetEntity: BuildingCard, modifyAtk = this.attack, modifyHp = this.getHp()) {
         // 增加攻击、血量
         targetEntity.attack += modifyAtk;
         targetEntity.buffModifyAtk += modifyAtk;
         targetEntity.buffModifyAtk += modifyAtk;
 
-        targetEntity.healthUpperLimit += modifyHealth;
-        targetEntity.health += modifyHealth;
-        targetEntity.incrHealth(modifyHealth);
-        targetEntity.buffModifyHealth += modifyHealth;
+        targetEntity.hpUpperLimit += modifyHp;
+        targetEntity.hp += modifyHp;
+        targetEntity.incrHp(modifyHp);
+        targetEntity.buffModifyHp += modifyHp;
     }
 }

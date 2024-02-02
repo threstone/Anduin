@@ -22,7 +22,7 @@ class CardItem {
     static getItem(cardInfo: CardInterface) {
         const cardItem = BaseUI.UICardItem.createInstance();
         //血量设置会变色
-        Utils.defineTextFieldSet(cardItem.healthText, cardInfo.health);
+        Utils.defineTextFieldSet(cardItem.healthText, cardInfo.hp);
         //攻击设置会变色
         Utils.defineTextFieldSet(cardItem.atkText, cardInfo.attack);
         //费用设置会变色
@@ -35,7 +35,7 @@ class CardItem {
         const cardItem = CardItem.getItem(CardsModel.ins().getCardConfigById(cardInfo.cardId));
         cardItem.feeText.text = `${Math.max(0, cardInfo.cardFee)}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
-        cardItem.healthText.text = `${cardInfo.health}`;
+        cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.cardNum.visible = false;
         return cardItem;
     }
@@ -57,7 +57,7 @@ class CardItem {
             card.closeRange.visible = false;
         }
         card.atkText.text = `${cardInfo.attack}`;
-        card.healthText.text = `${cardInfo.health}`;
+        card.healthText.text = `${cardInfo.hp}`;
         card.quality.url = this.getQualityUrl(cardInfo.quality);
         card.atkRange.visible = !!cardInfo.atkRange;
         card.atkRange.text = `射程:${cardInfo.atkRange}`
@@ -99,7 +99,7 @@ class CardItem {
         const cardConfig = CardsModel.ins().getCardConfigById(cardInfo.cardId)
         const cardItem = this.getItem(cardConfig);
         cardItem.cardNum.visible = false;
-        cardItem.healthText.text = `${cardInfo.health}`;
+        cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
         this.showBuffDesc(cardItem, cardInfo);
         return cardItem;

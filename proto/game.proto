@@ -50,8 +50,8 @@ enum UseConditionEnum{
 
 enum AffectedEnum{
 	Show = 0;
-	HealthReduce = 1;
-	HPAdd = 2;
+	HpReduce = 1;
+	HpAdd = 2;
 }
 
 enum RecordType{
@@ -74,8 +74,8 @@ message Card{
 	int32 cardId = 1;
 	int32 cardType = 2;
 	int32 attack = 3;
-	int32 health = 4;
-	int32 healthUpperLimit = 5;
+	int32 hp = 4;
+	int32 hpUpperLimit = 5;
 	int32 cardFee = 6;
 	int32 uid = 7;
 	int32 blockX = 8;

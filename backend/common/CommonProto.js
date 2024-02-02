@@ -2980,8 +2980,8 @@ $root.GamePto = (function() {
     GamePto.AffectedEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Show"] = 0;
-        values[valuesById[1] = "HealthReduce"] = 1;
-        values[valuesById[2] = "HPAdd"] = 2;
+        values[valuesById[1] = "HpReduce"] = 1;
+        values[valuesById[2] = "HpAdd"] = 2;
         return values;
     })();
 
@@ -3107,8 +3107,8 @@ $root.GamePto = (function() {
         Card.prototype.cardId = 0;
         Card.prototype.cardType = 0;
         Card.prototype.attack = 0;
-        Card.prototype.health = 0;
-        Card.prototype.healthUpperLimit = 0;
+        Card.prototype.hp = 0;
+        Card.prototype.hpUpperLimit = 0;
         Card.prototype.cardFee = 0;
         Card.prototype.uid = 0;
         Card.prototype.blockX = 0;
@@ -3132,10 +3132,10 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.cardType);
             if (m.attack != null && Object.hasOwnProperty.call(m, "attack"))
                 w.uint32(24).int32(m.attack);
-            if (m.health != null && Object.hasOwnProperty.call(m, "health"))
-                w.uint32(32).int32(m.health);
-            if (m.healthUpperLimit != null && Object.hasOwnProperty.call(m, "healthUpperLimit"))
-                w.uint32(40).int32(m.healthUpperLimit);
+            if (m.hp != null && Object.hasOwnProperty.call(m, "hp"))
+                w.uint32(32).int32(m.hp);
+            if (m.hpUpperLimit != null && Object.hasOwnProperty.call(m, "hpUpperLimit"))
+                w.uint32(40).int32(m.hpUpperLimit);
             if (m.cardFee != null && Object.hasOwnProperty.call(m, "cardFee"))
                 w.uint32(48).int32(m.cardFee);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
@@ -3177,10 +3177,10 @@ $root.GamePto = (function() {
                     m.attack = r.int32();
                     break;
                 case 4:
-                    m.health = r.int32();
+                    m.hp = r.int32();
                     break;
                 case 5:
-                    m.healthUpperLimit = r.int32();
+                    m.hpUpperLimit = r.int32();
                     break;
                 case 6:
                     m.cardFee = r.int32();
@@ -3234,11 +3234,11 @@ $root.GamePto = (function() {
             if (d.attack != null) {
                 m.attack = d.attack | 0;
             }
-            if (d.health != null) {
-                m.health = d.health | 0;
+            if (d.hp != null) {
+                m.hp = d.hp | 0;
             }
-            if (d.healthUpperLimit != null) {
-                m.healthUpperLimit = d.healthUpperLimit | 0;
+            if (d.hpUpperLimit != null) {
+                m.hpUpperLimit = d.hpUpperLimit | 0;
             }
             if (d.cardFee != null) {
                 m.cardFee = d.cardFee | 0;
@@ -3281,8 +3281,8 @@ $root.GamePto = (function() {
                 d.cardId = 0;
                 d.cardType = 0;
                 d.attack = 0;
-                d.health = 0;
-                d.healthUpperLimit = 0;
+                d.hp = 0;
+                d.hpUpperLimit = 0;
                 d.cardFee = 0;
                 d.uid = 0;
                 d.blockX = 0;
@@ -3302,11 +3302,11 @@ $root.GamePto = (function() {
             if (m.attack != null && m.hasOwnProperty("attack")) {
                 d.attack = m.attack;
             }
-            if (m.health != null && m.hasOwnProperty("health")) {
-                d.health = m.health;
+            if (m.hp != null && m.hasOwnProperty("hp")) {
+                d.hp = m.hp;
             }
-            if (m.healthUpperLimit != null && m.hasOwnProperty("healthUpperLimit")) {
-                d.healthUpperLimit = m.healthUpperLimit;
+            if (m.hpUpperLimit != null && m.hasOwnProperty("hpUpperLimit")) {
+                d.hpUpperLimit = m.hpUpperLimit;
             }
             if (m.cardFee != null && m.hasOwnProperty("cardFee")) {
                 d.cardFee = m.cardFee;
@@ -3672,11 +3672,11 @@ $root.GamePto = (function() {
             case 0:
                 m.type = 0;
                 break;
-            case "HealthReduce":
+            case "HpReduce":
             case 1:
                 m.type = 1;
                 break;
-            case "HPAdd":
+            case "HpAdd":
             case 2:
                 m.type = 2;
                 break;

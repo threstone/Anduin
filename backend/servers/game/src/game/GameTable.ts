@@ -231,10 +231,10 @@ export class GameTable extends BaseTable {
             msg.winnerUid = winnerUid;
         } else {//不传入胜利者就要通过血量进行判断
             //平局判断
-            if (this.users[0].hero.getHealth() <= 0 && this.users[1].hero.getHealth() <= 0) {
+            if (this.users[0].hero.getHp() <= 0 && this.users[1].hero.getHp() <= 0) {
                 msg.winnerUid = -1;
             } else {
-                const winner = this.users[0].hero.getHealth() > 0 ? this.users[0] : this.users[1];
+                const winner = this.users[0].hero.getHp() > 0 ? this.users[0] : this.users[1];
                 msg.winnerUid = winner.uid;
             }
         }

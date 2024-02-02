@@ -83,7 +83,7 @@ export class UnitCard extends BuildingCard {
         //其他单位扣血
         for (let index = 1; index < damageCards.length; index++) {
             const tempCard = damageCards[index];
-            tempCard.incrHealth(- damage);
+            tempCard.incrHp(- damage);
         }
 
         //广播卡牌攻击协议

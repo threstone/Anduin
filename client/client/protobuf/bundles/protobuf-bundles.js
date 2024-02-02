@@ -4023,14 +4023,14 @@ $root.GamePto = (function() {
      * @name GamePto.AffectedEnum
      * @enum {number}
      * @property {number} Show=0 Show value
-     * @property {number} HealthReduce=1 HealthReduce value
-     * @property {number} HPAdd=2 HPAdd value
+     * @property {number} HpReduce=1 HpReduce value
+     * @property {number} HpAdd=2 HpAdd value
      */
     GamePto.AffectedEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
         values[valuesById[0] = "Show"] = 0;
-        values[valuesById[1] = "HealthReduce"] = 1;
-        values[valuesById[2] = "HPAdd"] = 2;
+        values[valuesById[1] = "HpReduce"] = 1;
+        values[valuesById[2] = "HpAdd"] = 2;
         return values;
     })();
 
@@ -4175,8 +4175,8 @@ $root.GamePto = (function() {
          * @property {number|null} [cardId] Card cardId
          * @property {number|null} [cardType] Card cardType
          * @property {number|null} [attack] Card attack
-         * @property {number|null} [health] Card health
-         * @property {number|null} [healthUpperLimit] Card healthUpperLimit
+         * @property {number|null} [hp] Card hp
+         * @property {number|null} [hpUpperLimit] Card hpUpperLimit
          * @property {number|null} [cardFee] Card cardFee
          * @property {number|null} [uid] Card uid
          * @property {number|null} [blockX] Card blockX
@@ -4235,20 +4235,20 @@ $root.GamePto = (function() {
         Card.prototype.attack = 0;
 
         /**
-         * Card health.
-         * @member {number} health
+         * Card hp.
+         * @member {number} hp
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.health = 0;
+        Card.prototype.hp = 0;
 
         /**
-         * Card healthUpperLimit.
-         * @member {number} healthUpperLimit
+         * Card hpUpperLimit.
+         * @member {number} hpUpperLimit
          * @memberof GamePto.Card
          * @instance
          */
-        Card.prototype.healthUpperLimit = 0;
+        Card.prototype.hpUpperLimit = 0;
 
         /**
          * Card cardFee.
@@ -4326,10 +4326,10 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.cardType);
             if (message.attack != null && Object.hasOwnProperty.call(message, "attack"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.attack);
-            if (message.health != null && Object.hasOwnProperty.call(message, "health"))
-                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.health);
-            if (message.healthUpperLimit != null && Object.hasOwnProperty.call(message, "healthUpperLimit"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.healthUpperLimit);
+            if (message.hp != null && Object.hasOwnProperty.call(message, "hp"))
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hp);
+            if (message.hpUpperLimit != null && Object.hasOwnProperty.call(message, "hpUpperLimit"))
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.hpUpperLimit);
             if (message.cardFee != null && Object.hasOwnProperty.call(message, "cardFee"))
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.cardFee);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
@@ -4382,10 +4382,10 @@ $root.GamePto = (function() {
                     message.attack = reader.int32();
                     break;
                 case 4:
-                    message.health = reader.int32();
+                    message.hp = reader.int32();
                     break;
                 case 5:
-                    message.healthUpperLimit = reader.int32();
+                    message.hpUpperLimit = reader.int32();
                     break;
                 case 6:
                     message.cardFee = reader.int32();
