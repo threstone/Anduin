@@ -400,5 +400,20 @@
  "useCondition":[2,1,12,1],
  "movement":2,
  "atkRange":0
+  },
+{
+ "cardId":27,
+ "cardType":1,
+ "type2":1,
+ "detailType":1,
+ "fee":2,
+ "attack":2,
+ "health":1,
+ "quality":1,
+ "buffs":[],
+ "isDerivation":0,
+ "useCondition":[2,1,12,1],
+ "movement":2,
+ "atkRange":0
   }
 ]

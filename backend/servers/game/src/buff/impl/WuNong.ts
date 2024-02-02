@@ -27,7 +27,7 @@ export class WuNong extends GameBuff {
     public onRoundStart(eventData: EventData, next: Function, card: BuildingCard) {
         const user = card.table.getUser(card.uid);
         //加费用
-        if (user.fee < user.feeMax) {
+        if (user.fee < user.feeUpperLimit) {
             user.fee++;
             //派发效果协议
             const effectMsg = new GamePto.S_SELF_EFFECT();

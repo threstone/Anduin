@@ -516,6 +516,10 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         const tips = new fairygui.GTextField();
         tips.fontSize = 26;
         tips.color = color;
+        //加号开始的是恢复
+        if (text.startsWith('+')) {
+            tips.color = 0x00FF00;
+        }
         tips.bold = true;
         tips.text = text;
         const point = entity.localToRoot((entity.width - tips.width) / 2, (entity.height - tips.height) / 2);

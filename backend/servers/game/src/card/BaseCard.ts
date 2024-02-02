@@ -60,7 +60,7 @@ export class BaseCard implements CardInterface {
     public onUse(user: GameUser, cardIndex: number, ...params: number[]) {
         if (this.cardType !== CardsPto.CardType.Hero) {
             //减去费用,删除手牌
-            user.reduceFee(this.cardFee);
+            user.incrFee(-this.cardFee);
             user.deleteHandCard(cardIndex, 1);
             //通知用户费用信息
             user.broadcastFeeInfo();

@@ -90,8 +90,8 @@ export class GameUser {
     get fee() {
         return this._fee;
     }
-    public reduceFee(fee: number) {
-        this._fee -= Math.max(fee, 0);
+    public incrFee(fee: number) {
+        this.fee = this.fee + fee;
     }
 
     set fee(v: number) {

@@ -178,7 +178,7 @@ export class BuildingCard extends EventCard {
         if (damageSource.uid !== this.uid) {
             const targetUser = this.table.getOtherUser(this.uid);
             //加费用
-            if (targetUser.fee < targetUser.feeMax) {
+            if (targetUser.fee < targetUser.feeUpperLimit) {
                 targetUser.fee += 1;
                 //通知用户费用信息
                 targetUser.broadcastFeeInfo();

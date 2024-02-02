@@ -508,5 +508,24 @@
  "soundId":-1,
  "movement":2,
  "atkRange":0
+  },
+{
+ "cardId":27,
+ "cardName":"猫头鹰",
+ "cardType":1,
+ "type2":1,
+ "detailType":1,
+ "fee":2,
+ "attack":2,
+ "health":1,
+ "quality":1,
+ "desc":"部署:选择一个单位，将其沉默",
+ "buffs":[],
+ "isDerivation":0,
+ "useCondition":[2,1,12,1],
+ "effectId":-1,
+ "soundId":-1,
+ "movement":2,
+ "atkRange":0
   }
 ]

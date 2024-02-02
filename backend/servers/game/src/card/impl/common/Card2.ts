@@ -23,7 +23,7 @@ export class Card2 extends EventCard {
         if (card.cardType === CardsPto.CardType.Building || card.cardType === CardsPto.CardType.Unit) {
             //对方这张卡没了,减费用
             const targetUser = this.table.getUser(card.uid);
-            targetUser.reduceFee(card.cardFee);
+            targetUser.incrFee(-card.cardFee);
             const targetCardIndex = targetUser.handCards.indexOf(card);
             targetUser.deleteHandCard(targetCardIndex, 1);
 
