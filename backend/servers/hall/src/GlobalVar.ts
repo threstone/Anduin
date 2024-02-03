@@ -12,7 +12,7 @@ import * as mysqlConfig from '../../../common/config/mysql.json';
 import * as redisConfig from '../../../common/config/redis.json';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
     public static socketServer: SocketServer;

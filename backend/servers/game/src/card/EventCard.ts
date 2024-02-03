@@ -7,7 +7,7 @@ import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 /**event card用hp来决定持续回合数 */
 export class EventCard extends BaseCard {
 

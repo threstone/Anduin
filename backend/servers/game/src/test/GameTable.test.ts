@@ -1,3 +1,4 @@
+global.startupParam = null;
 import { GameTable } from '../game/GameTable';
 import * as assert from 'assert';
 describe('GameTable Test', () => {

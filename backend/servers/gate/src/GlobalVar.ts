@@ -8,7 +8,7 @@ import { ConnectorMgr } from '../../../common/rpc/ConntctorMgr';
 import { HallConnector } from './connector/HallConnector';
 import { GameConnector } from './connector/GameConnector';
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 
 export class GlobalVar {
 

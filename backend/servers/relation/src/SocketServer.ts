@@ -3,7 +3,7 @@ import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonRelation';
 import { GlobalVar } from './GlobalVar';
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 export class SocketServer extends RpcCommon.RelationRPCServer {
     userOnline(clientName: string, uid: number, nick: string): void {
         //玩家上线

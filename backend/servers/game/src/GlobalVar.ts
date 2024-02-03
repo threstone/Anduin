@@ -13,7 +13,7 @@ import { ConfigMgr } from '../../../common/config/ConfigMgr';
 import { CardMgr } from './core/CardMgr';
 import { BuffMgr } from './core/BuffMgr';
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
     public static socketServer: SocketServer;

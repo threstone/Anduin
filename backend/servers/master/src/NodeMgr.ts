@@ -1,7 +1,7 @@
 import * as servers from '../../../common/config/servers.json';
 import { getLogger } from 'log4js';
 import { NodeWorker } from './NodeWorker';
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 export class NodeMgr {
 
     serverMap: Map<string, NodeWorker>;

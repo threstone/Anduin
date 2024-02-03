@@ -9,7 +9,7 @@ import * as path from 'path';
 import * as redisConfig from '../../../common/config/redis.json';
 import { UserMgr } from './UserMgr';
 
-const logger = getLogger(startupParam.nodeId);
+const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
     public static socketServer: SocketServer;
