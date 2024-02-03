@@ -1,5 +1,7 @@
 class ShowCardDetail extends BaseView<BaseUI.UIShowCardDetail> {
 
+    private mapItem: BaseUI.UIMapBuilding | BaseUI.UIMapUnit;
+
     protected init() {
         this.view = BaseUI.UIShowCardDetail.createInstance();
         this.view.make.describe.text = '制作';
@@ -44,5 +46,11 @@ class ShowCardDetail extends BaseView<BaseUI.UIShowCardDetail> {
         this.view.addChild(newCard)
         this.view.removeChild(this.view.card);
         this.view.card = newCard;
+
+        !!this.mapItem && this.view.removeChild(this.mapItem);
+        this.mapItem = MapItem.getDisplayItem(cardInfo);
+        this.mapItem.x = this.view.width / 4;
+        this.mapItem.y = this.view.height / 2;
+        !!this.mapItem && this.view.addChild(this.mapItem);
     }
 }

@@ -4,8 +4,10 @@
     <image id="n5_hzsg" name="tempBg" src="ta2rk" fileName="common/res/comp_120_164_6.png" xy="0,0" size="138,93">
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <text id="n3_hzsg" name="tempCardName" xy="9,30" size="120,32" fontSize="22" align="center" vAlign="middle" leading="2" autoSize="none" strokeColor="#ff0000" text="农夫"/>
-    <loader id="n2_hzsg" name="cardImg" xy="0,0" size="138,93" fill="scaleMatchWidth">
+    <text id="n3_hzsg" name="tempCardName" xy="0,30" size="138,32" fontSize="22" align="center" vAlign="middle" leading="2" autoSize="none" strokeColor="#ff0000" text="农夫">
+      <relation target="" sidePair="width-width"/>
+    </text>
+    <loader id="n2_hzsg" name="cardImg" xy="0,-23" size="138,138" fill="scaleMatchWidth">
       <relation target="" sidePair="width-width,height-height"/>
     </loader>
     <graph id="n0_hzsg" name="zhezhao" xy="0,0" size="138,93" type="eclipse">

@@ -13,7 +13,9 @@ class UnitItem {
         } else {
             unit.closeRange.visible = false;
         }
-
+        if (CardsPto.CardType.Hero === cardConfig.cardType) {
+            unit.heroFlag.visible = true;
+        }
         unit.info.tempCardName.text = `${cardConfig.cardName}`;
         RES.getResByUrl(`./resource/card/${cardConfig.powerId}/${cardInfo.cardId}.jpg`, (data: egret.Texture) => {
             if (!data) {
@@ -25,6 +27,33 @@ class UnitItem {
             unit.info.tempCardName.strokeColor = 0x00FF00;
             unit.enemyTips.visible = false;
         }
+        return unit;
+    }
+
+    static getDisplayItem(cardConfig: CardInterface) {
+        const unit = BaseUI.UIMapUnit.createInstance();
+        unit.setPivot(0.5, 0.5, true);
+
+        unit.healthText.text = `${cardConfig.hp}`;
+        unit.atkText.text = `${cardConfig.attack}`;
+
+        if (cardConfig.detailType === CardsPto.AtkType.CloseRange) {
+            unit.longRange.visible = false;
+        } else {
+            unit.closeRange.visible = false;
+        }
+        if (CardsPto.CardType.Hero === cardConfig.cardType) {
+            unit.heroFlag.visible = true;
+        }
+        unit.info.tempCardName.text = `${cardConfig.cardName}`;
+        RES.getResByUrl(`./resource/card/${cardConfig.powerId}/${cardConfig.cardId}.jpg`, (data: egret.Texture) => {
+            if (!data) {
+                return
+            }
+            unit.info.cardImg.texture = data;
+        });
+        unit.info.tempCardName.strokeColor = 0x00FF00;
+        unit.enemyTips.visible = false;
         return unit;
     }
 }

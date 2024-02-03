@@ -21,7 +21,8 @@
             "request": "launch",
             "name": "光启动不编译",
             "args": [
-                "--enable-source-maps",
+                "-r",
+                "source-map-support/register",
                 ".\\dist\\servers\\master\\src\\bin\\main.js",
                 "env=dev",
                 "nodeId=master"

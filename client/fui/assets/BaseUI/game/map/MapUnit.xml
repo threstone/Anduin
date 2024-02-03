@@ -16,8 +16,12 @@
     <group id="n19_hzsg" name="atkGroup" xy="0,58" size="88,45" advanced="true"/>
     <image id="n10_hzsg" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="100,61" size="38,32" group="n12_hzsg" aspect="true"/>
     <text id="n11_hzsg" name="healthText" xy="107,63" size="25,27" group="n12_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="1"/>
-    <group id="n12_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true"/>
-    <text id="n21_hzsg" name="heroFlag" xy="52,3" size="40,27" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄"/>
+    <group id="n12_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true">
+      <relation target="" sidePair="right-right"/>
+    </group>
+    <text id="n21_hzsg" name="heroFlag" xy="52,3" size="39,26" visible="false" fontSize="18" strokeColor="#ffffff" text="英雄">
+      <relation target="" sidePair="center-center"/>
+    </text>
     <loader id="n23_lijd" name="dragLoader" xy="0,0" size="138,93">
       <relation target="" sidePair="width-width,height-height"/>
     </loader>

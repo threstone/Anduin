@@ -7,15 +7,11 @@ class MapItem {
             case CardsPto.CardType.Unit:
                 return UnitItem.getItem(cardInfo, config);
             case CardsPto.CardType.Hero:
-                const hero = UnitItem.getItem(cardInfo, config);
-                hero.heroFlag.visible = true;
-                return hero;
+                return UnitItem.getItem(cardInfo, config);
         }
     }
 
     public static updateEntityDesc(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, cardInfo: GamePto.ICard) {
-        // // 因为新的值变色
-        // Utils.defineTextFieldSet(entity.healthText, cardInfo.hpUpperLimit);
         if (entity.healthText) {
             entity.healthText.text = `${cardInfo.hp}`;
         }
@@ -24,5 +20,21 @@ class MapItem {
         if (unit.atkText) {
             unit.atkText.text = `${cardInfo.attack}`;
         }
+    }
+
+    public static getDisplayItem(cardInfo: CardInterface) {
+        let item: BaseUI.UIMapBuilding | BaseUI.UIMapUnit;
+        switch (cardInfo.cardType) {
+            case CardsPto.CardType.Building:
+                item = BuildingItem.getDisplayItem(cardInfo);
+                break;
+            case CardsPto.CardType.Unit:
+                item = UnitItem.getDisplayItem(cardInfo);
+                break;
+            case CardsPto.CardType.Hero:
+                item = UnitItem.getDisplayItem(cardInfo);
+                break;
+        }
+        return item;
     }
 }
