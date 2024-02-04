@@ -16,6 +16,9 @@
     <text id="n7_tb7e" name="cardName" xy="45,208" size="130,26" group="n14_tb7e" fontSize="18" color="#006666" align="center" vAlign="middle" autoSize="height" text="民兵"/>
     <image id="n8_tb7e" name="n8" src="tb7e1x" fileName="common/res/line.png" xy="19,230" size="184,2" group="n14_tb7e" color="#cccccc"/>
     <text id="n9_tb7e" name="desc" xy="22,236" size="180,84" group="n14_tb7e" fontSize="13" autoSize="none" strokeColor="#ffffff" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
+    <graph id="n39_fum2" name="n39" xy="113,278" pivot="0.5,0.5" anchor="true" size="6,100" group="n41_fum2" rotation="45" type="rect" lineSize="0" fillColor="#ffff0000"/>
+    <graph id="n40_fum2" name="n40" xy="113,278" pivot="0.5,0.5" anchor="true" size="6,100" group="n41_fum2" rotation="-45" type="rect" lineSize="0" fillColor="#ffff0000"/>
+    <group id="n41_fum2" name="slicencedGroup" xy="110,228" size="6,100" group="n14_tb7e" visible="false" advanced="true"/>
     <image id="n2_tb7e" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="4,329" group="n19_tb7e"/>
     <image id="n28_hzsg" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="40,366" group="n30_hzsg" rotation="-135"/>
     <image id="n29_hzsg" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="2,360" group="n30_hzsg" rotation="-45"/>

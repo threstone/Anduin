@@ -1,7 +1,7 @@
 import { getLogger } from "log4js";
 import { CardsPto } from "../../../../common/CommonProto";
 import { GamePto } from "../../../../common/CommonProto";
-import { BuffData, BuffTypeEnum } from "../buff/BuffData";
+import { BuffData, BuffTypeEnum } from "../buff/BuffDataClass";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
@@ -130,12 +130,12 @@ export class BuildingCard extends EventCard {
                     break;
                 case BuffTypeEnum.Position:
                     if (buff.sourceCardUid === this.id) {
-                        GlobalVar.buffMgr.deletePositionBuff(this, buff);
+                        GlobalVar.buffMgr.deleteBuff(this, buff);
                     }
                     break;
                 case BuffTypeEnum.Global:
                     if (buff.sourceCardUid === this.id) {
-                        GlobalVar.buffMgr.deleteGlobalBuff(this, buff);
+                        GlobalVar.buffMgr.deleteBuff(this, buff);
                     }
                     break;
             }
@@ -220,7 +220,6 @@ export class BuildingCard extends EventCard {
     public buffModify(modifyAtk: number, modifyHp: number) {
         // 增加攻击、血量
         this.attack += modifyAtk;
-        this.buffModifyAtk += modifyAtk;
         this.buffModifyAtk += modifyAtk;
 
         this.hpUpperLimit += modifyHp;

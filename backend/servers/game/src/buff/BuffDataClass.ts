@@ -29,5 +29,20 @@ export class BuffData {
         this.buffId = buffId;
         this.effectiveType = effectiveType;
         this.ignore = false;
+        this.buffType = BuffTypeEnum.Normal;
+    }
+}
+
+export class PositionBuffData extends BuffData {
+    constructor(id: number, uid: number, duration: number, buffId: number, effectiveType: BuffEffectiveDefine) {
+        super(id, uid, duration, buffId, effectiveType);
+        this.buffType = BuffTypeEnum.Position;
+    }
+}
+
+export class GlobalBuffData extends BuffData {
+    constructor(id: number, uid: number, duration: number, buffId: number, effectiveType: BuffEffectiveDefine) {
+        super(id, uid, duration, buffId, effectiveType);
+        this.buffType = BuffTypeEnum.Global;
     }
 }

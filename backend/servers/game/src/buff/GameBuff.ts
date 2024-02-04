@@ -2,7 +2,7 @@ import { BaseCard } from "../card/BaseCard";
 import { BuildingCard } from "../card/BuildingCard";
 import { UnitCard } from "../card/UnitCard";
 import { BaseEvent, EventData } from "../game/EventDefine";
-import { BuffData } from "./BuffData";
+import { BuffData } from "./BuffDataClass";
 
 export abstract class GameBuff implements BaseEvent {
 

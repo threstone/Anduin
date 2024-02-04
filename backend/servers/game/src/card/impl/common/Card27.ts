@@ -16,6 +16,10 @@ export class Card27 extends UnitCard {
         const targetEntity = this.table.mapData.getCard(targetX, targetY);
         targetEntity.handleSilence();
 
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        notice.entityCards.push(targetEntity);
+        targetEntity.table.broadcast(notice);
+
         this._cacheEntity = targetEntity;
     }
 

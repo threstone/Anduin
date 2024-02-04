@@ -37,6 +37,7 @@ class CardItem {
         cardItem.atkText.text = `${cardInfo.attack}`;
         cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.cardNum.visible = false;
+        cardItem.slicencedGroup.visible = !!cardInfo.silenced;
         return cardItem;
     }
 
@@ -60,7 +61,7 @@ class CardItem {
         card.healthText.text = `${cardInfo.hp}`;
         card.quality.url = this.getQualityUrl(cardInfo.quality);
         card.atkRange.visible = !!cardInfo.atkRange && cardInfo.detailType === CardsPto.AtkType.LongRange;
-        card.atkRange.text = `射程:${cardInfo.atkRange}`
+        card.atkRange.text = `射程:${cardInfo.atkRange}`;
         CardItem.updateNum(card, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
@@ -101,6 +102,7 @@ class CardItem {
         cardItem.cardNum.visible = false;
         cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
+        cardItem.slicencedGroup.visible = !!cardInfo.silenced;
         this.showBuffDesc(cardItem, cardInfo);
         return cardItem;
     }

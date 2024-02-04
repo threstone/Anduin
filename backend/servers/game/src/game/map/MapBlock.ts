@@ -1,5 +1,4 @@
-import { GamePto } from "../../../../../common/CommonProto";
-import { BuffData } from "../../buff/BuffData";
+import { PositionBuffData } from "../../buff/BuffDataClass";
 import { BuildingCard } from "../../card/BuildingCard";
 import { UnitCard } from "../../card/UnitCard";
 import { GlobalVar } from "../../GlobalVar";
@@ -10,7 +9,7 @@ export class MapBlock {
         return this._card;
     }
 
-    private _positionBuff: BuffData[];
+    private _positionBuff: PositionBuffData[];
 
     constructor() {
         this._positionBuff = [];
@@ -35,7 +34,7 @@ export class MapBlock {
     }
 
     /**向位置添加buff */
-    public addBuff(buff: BuffData) {
+    public addBuff(buff: PositionBuffData) {
         if (this._positionBuff.indexOf(buff) !== -1) {
             return;
         }
@@ -46,7 +45,7 @@ export class MapBlock {
     }
 
     /**移除指定buff */
-    public deleteBuff(buff: BuffData) {
+    public deleteBuff(buff: PositionBuffData) {
         const index = this._positionBuff.indexOf(buff);
         if (index !== -1) {
             this._positionBuff.splice(index, 1);

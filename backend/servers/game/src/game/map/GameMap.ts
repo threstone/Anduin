@@ -1,7 +1,7 @@
 
 import { GamePto } from "../../../../../common/CommonProto";
 import { CardsPto } from "../../../../../common/CommonProto";
-import { BuffData } from "../../buff/BuffData";
+import { GlobalBuffData, PositionBuffData } from "../../buff/BuffDataClass";
 import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
 import { EventCard } from "../../card/EventCard";
@@ -28,7 +28,7 @@ export class GameMap {
     private _mapData: MapBlock[][];
 
     /**全局buff */
-    private _globalBuff: BuffData[];
+    private _globalBuff: GlobalBuffData[];
 
     constructor(width: number, height: number, table: GameTable) {
         this._width = width;
@@ -57,7 +57,7 @@ export class GameMap {
     }
 
     /**向战场添加全局buff*/
-    public addGlobalBuff(buff: BuffData) {
+    public addGlobalBuff(buff: GlobalBuffData) {
         const notice = new GamePto.S_UPDATE_ENTITYS();
         this._globalBuff.push(buff);
         //给战场上的单位增加buff
@@ -83,7 +83,7 @@ export class GameMap {
     }
 
     /**移除战场指定全局buff*/
-    public deleteGlobalBuff(buff: BuffData) {
+    public deleteGlobalBuff(buff: GlobalBuffData) {
         const index = this._globalBuff.indexOf(buff);
         if (index === -1) {
             return;
@@ -114,7 +114,7 @@ export class GameMap {
     }
 
     /**增加位置buff */
-    public addPositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
+    public addPositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: PositionBuffData) {
         const notice = new GamePto.S_UPDATE_ENTITYS();
         const pointArr = this.getAroundByDistance(baseX, baseY, effectiveDistance);
         for (let index = 0; index < pointArr.length; index++) {
@@ -131,7 +131,7 @@ export class GameMap {
     }
 
     /**删除位置buff */
-    public deletePositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: BuffData) {
+    public deletePositionBuff(baseX: number, baseY: number, effectiveDistance: number, buff: PositionBuffData) {
         const notice = new GamePto.S_UPDATE_ENTITYS();
         const pointArr = this.getAroundByDistance(baseX, baseY, effectiveDistance);
         for (let index = 0; index < pointArr.length; index++) {

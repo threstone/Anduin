@@ -3037,11 +3037,6 @@ var egret;
                     return;
                 }
                 this.$smoothing = value;
-                if (egret.nativeRender) {
-                    if (this.$nativeDisplayObject.setSmoothing) {
-                        this.$nativeDisplayObject.setSmoothing(value);
-                    }
-                }
             },
             enumerable: true,
             configurable: true

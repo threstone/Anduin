@@ -2,7 +2,7 @@ import { GamePto } from "../../../../../common/CommonProto";
 import { BuildingCard } from "../../card/BuildingCard";
 import { EventData, EventType } from "../../game/EventDefine";
 import { BuffEffectiveDefine } from "../../game/GameDefine";
-import { BuffData } from "../BuffData";
+import { BuffData } from "../BuffDataClass";
 import { GameBuff } from "../GameBuff";
 
 /**

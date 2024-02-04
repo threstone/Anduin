@@ -1,7 +1,7 @@
 import { BaseCard } from "../../card/BaseCard";
 import { BuildingCard } from "../../card/BuildingCard";
 import { BuffEffectiveDefine, CardStatus } from "../../game/GameDefine";
-import { BuffData } from "../BuffData";
+import { GlobalBuffData } from "../BuffDataClass";
 import { GlobalBuff } from "../GlobalBuff";
 
 /**
@@ -12,18 +12,18 @@ export class YingXiongJiJie extends GlobalBuff {
     public static buffId: number = 4;
 
     public addBuff(card: BuildingCard): void {
-        const buff = new BuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
+        const buff = new GlobalBuffData(card.table.uniqueId, card.uid, -1, this.buffId, BuffEffectiveDefine.Friend);
         super.addBuff(card, buff);
     }
 
-    public addGlobalBuff(card: BaseCard, buff: BuffData): void {
+    public addGlobalBuff(card: BaseCard, buff: GlobalBuffData): void {
         /**手牌中,费用大于5,属于自己 */
         if (card.cardStatus === CardStatus.Hand && card.fee >= 5 && card.uid === buff.uid) {
             card.cardFee--;
         }
     }
 
-    public deleteGlobalBuff(card: BaseCard, buff: BuffData): void {
+    public deleteGlobalBuff(card: BaseCard, buff: GlobalBuffData): void {
         /**手牌中,费用大于5,属于自己 */
         if (card.cardStatus === CardStatus.Hand && card.fee >= 5 && card.uid === buff.uid) {
             card.cardFee++;

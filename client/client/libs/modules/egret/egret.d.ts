@@ -4010,7 +4010,6 @@ declare namespace egret_native {
         sortChildren(): void;
         setSortableChildren(value: boolean): void;
         setTint(value: number): void;
-        setSmoothing(value: boolean): void;
     }
 }
 /**
