@@ -157,15 +157,24 @@ export class BaseCard implements CardInterface {
             //所有地图实体
             case GamePto.UseConditionEnum.AllEntity:
                 return entity != null;
-            //友方非英雄实体
-            case GamePto.UseConditionEnum.FriendEntityNotHero:
-                return entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid === this.uid;
-            //敌方非英雄实体
-            case GamePto.UseConditionEnum.EnemyEntityNotHero:
-                return entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid !== this.uid;
-            //所有非英雄实体
-            case GamePto.UseConditionEnum.AllEntityNotHero:
-                return entity != null && entity.cardType !== CardsPto.CardType.Hero;
+            //友方单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.FriendUnitOrBuilding:
+                return entity != null && entity.uid === this.uid && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+            //敌方单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.EnemyUnitOrBuilding:
+                return entity != null && entity.uid !== this.uid && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+            //所有单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.AllUnitOrBuilding:
+                return entity != null && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+            //友方英雄
+            case GamePto.UseConditionEnum.FriendHero:
+                return entity != null && entity.uid === this.uid && entity.cardType === CardsPto.CardType.Hero;
+            //敌方英雄
+            case GamePto.UseConditionEnum.EnemyHero:
+                return entity != null && entity.uid !== this.uid && entity.cardType === CardsPto.CardType.Hero;
+            //任意英雄
+            case GamePto.UseConditionEnum.AllHero:
+                return entity != null && entity.cardType === CardsPto.CardType.Hero;
             default:
                 logger.error(`BaseCard checkCondition : unkonw conditionType${conditionType}`);
                 return false;

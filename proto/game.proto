@@ -40,12 +40,18 @@ enum UseConditionEnum{
     EnemyEntity = 11;
     //所有地图实体
     AllEntity = 12;
-	//友方非英雄实体
-    FriendEntityNotHero = 13;
-    //敌方非英雄实体
-    EnemyEntityNotHero = 14;
-    //所有非英雄实体
-    AllEntityNotHero = 15;
+	//友方单位或建筑(非英雄)
+    FriendUnitOrBuilding = 13;
+    //敌方单位或建筑(非英雄)
+    EnemyUnitOrBuilding = 14;
+    //所有单位或建筑(非英雄)
+    AllUnitOrBuilding = 15;
+	//友方英雄
+	FriendHero = 16;
+	//敌方英雄
+	EnemyHero = 17;
+	//任意英雄
+	AllHero = 18;
 }
 
 enum AffectedEnum{

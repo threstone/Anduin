@@ -3993,9 +3993,12 @@ $root.GamePto = (function() {
      * @property {number} FriendEntity=10 FriendEntity value
      * @property {number} EnemyEntity=11 EnemyEntity value
      * @property {number} AllEntity=12 AllEntity value
-     * @property {number} FriendEntityNotHero=13 FriendEntityNotHero value
-     * @property {number} EnemyEntityNotHero=14 EnemyEntityNotHero value
-     * @property {number} AllEntityNotHero=15 AllEntityNotHero value
+     * @property {number} FriendUnitOrBuilding=13 FriendUnitOrBuilding value
+     * @property {number} EnemyUnitOrBuilding=14 EnemyUnitOrBuilding value
+     * @property {number} AllUnitOrBuilding=15 AllUnitOrBuilding value
+     * @property {number} FriendHero=16 FriendHero value
+     * @property {number} EnemyHero=17 EnemyHero value
+     * @property {number} AllHero=18 AllHero value
      */
     GamePto.UseConditionEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -4012,9 +4015,12 @@ $root.GamePto = (function() {
         values[valuesById[10] = "FriendEntity"] = 10;
         values[valuesById[11] = "EnemyEntity"] = 11;
         values[valuesById[12] = "AllEntity"] = 12;
-        values[valuesById[13] = "FriendEntityNotHero"] = 13;
-        values[valuesById[14] = "EnemyEntityNotHero"] = 14;
-        values[valuesById[15] = "AllEntityNotHero"] = 15;
+        values[valuesById[13] = "FriendUnitOrBuilding"] = 13;
+        values[valuesById[14] = "EnemyUnitOrBuilding"] = 14;
+        values[valuesById[15] = "AllUnitOrBuilding"] = 15;
+        values[valuesById[16] = "FriendHero"] = 16;
+        values[valuesById[17] = "EnemyHero"] = 17;
+        values[valuesById[18] = "AllHero"] = 18;
         return values;
     })();
 

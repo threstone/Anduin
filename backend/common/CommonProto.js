@@ -2971,9 +2971,12 @@ $root.GamePto = (function() {
         values[valuesById[10] = "FriendEntity"] = 10;
         values[valuesById[11] = "EnemyEntity"] = 11;
         values[valuesById[12] = "AllEntity"] = 12;
-        values[valuesById[13] = "FriendEntityNotHero"] = 13;
-        values[valuesById[14] = "EnemyEntityNotHero"] = 14;
-        values[valuesById[15] = "AllEntityNotHero"] = 15;
+        values[valuesById[13] = "FriendUnitOrBuilding"] = 13;
+        values[valuesById[14] = "EnemyUnitOrBuilding"] = 14;
+        values[valuesById[15] = "AllUnitOrBuilding"] = 15;
+        values[valuesById[16] = "FriendHero"] = 16;
+        values[valuesById[17] = "EnemyHero"] = 17;
+        values[valuesById[18] = "AllHero"] = 18;
         return values;
     })();
 

@@ -1,9 +1,25 @@
-const AnyOwner = 0;
-const SelfOwner = 1;
-const EnemyOwner = 2;
-const AnyEntity = 0;
-const BuildingEntity = 1;
-const UnitEntity = 2;
+/** 所有者枚举 */
+enum OwnerEnum {
+    /** 任意所有者 */
+    AnyOwner,
+    /** 己方所有者 */
+    SelfOwner,
+    /** 敌方所有者 */
+    EnemyOwner
+}
+
+enum EntityTypeEnum {
+    /** 所有地图实体 */
+    AnyEntity,
+    /** 建筑 */
+    BuildingEntity,
+    /** 单位 */
+    UnitEntity,
+    /** 英雄 */
+    HeroEntity,
+    /** 单位或建筑 */
+    UnitOrBuilding,
+}
 
 class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
 
@@ -264,14 +280,29 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
                 isMatch = entity != null;
                 break;
             //友方非英雄实体
-            case GamePto.UseConditionEnum.FriendEntityNotHero:
-                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid === UserModel.ins().uid;
+            case GamePto.UseConditionEnum.FriendUnitOrBuilding:
+                isMatch = entity != null && entity.uid === UserModel.ins().uid && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+                break;
             //敌方非英雄实体
-            case GamePto.UseConditionEnum.EnemyEntityNotHero:
-                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero && entity.uid !== UserModel.ins().uid;
+            case GamePto.UseConditionEnum.EnemyUnitOrBuilding:
+                isMatch = entity != null && entity.uid !== UserModel.ins().uid && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+                break;
             //所有非英雄实体
-            case GamePto.UseConditionEnum.AllEntityNotHero:
-                isMatch = entity != null && entity.cardType !== CardsPto.CardType.Hero;
+            case GamePto.UseConditionEnum.AllUnitOrBuilding:
+                isMatch = entity != null && (entity.cardType === CardsPto.CardType.Unit || entity.cardType === CardsPto.CardType.Building);
+                break;
+            //友方英雄
+            case GamePto.UseConditionEnum.FriendHero:
+                isMatch = entity != null && entity.cardType === CardsPto.CardType.Hero && entity.uid === UserModel.ins().uid;
+                break;
+            //敌方英雄
+            case GamePto.UseConditionEnum.EnemyHero:
+                isMatch = entity != null && entity.cardType === CardsPto.CardType.Hero && entity.uid !== UserModel.ins().uid;
+                break;
+            //任意英雄
+            case GamePto.UseConditionEnum.AllHero:
+                isMatch = entity != null && entity.cardType === CardsPto.CardType.Hero;
+                break;
             default:
                 return false;
         }
@@ -391,47 +422,78 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             //友方单位
             case GamePto.UseConditionEnum.FriendlyUnit:
                 this._tips = '请选择友方单位';
-                this.highLightEntity(SelfOwner, UnitEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.SelfOwner, EntityTypeEnum.UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //友方建筑
             case GamePto.UseConditionEnum.FriendlyBuilding:
                 this._tips = '请选择友方建筑';
-                this.highLightEntity(SelfOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.SelfOwner, EntityTypeEnum.BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方单位
             case GamePto.UseConditionEnum.EnemyUnit:
                 this._tips = '请选择敌方单位';
-                this.highLightEntity(EnemyOwner, UnitEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.EnemyOwner, EntityTypeEnum.UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方建筑
             case GamePto.UseConditionEnum.EnemyBuilding:
                 this._tips = '请选择敌方建筑';
-                this.highLightEntity(EnemyOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.EnemyOwner, EntityTypeEnum.BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有单位
             case GamePto.UseConditionEnum.AllUnit:
                 this._tips = '请选择单位';
-                this.highLightEntity(AnyOwner, UnitEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.UnitEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有建筑
             case GamePto.UseConditionEnum.AllBuilding:
                 this._tips = '请选择建筑';
-                this.highLightEntity(AnyOwner, BuildingEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.BuildingEntity, conditionType, selectNum, allowRepeat);
                 break;
             //友方地图实体
             case GamePto.UseConditionEnum.FriendEntity:
                 this._tips = '请选择友方单位或建筑';
-                this.highLightEntity(SelfOwner, AnyEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.SelfOwner, EntityTypeEnum.AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             //敌方地图实体
             case GamePto.UseConditionEnum.EnemyEntity:
-                this._tips = '请选择敌方单位或建筑';
-                this.highLightEntity(EnemyOwner, AnyEntity, conditionType, selectNum, allowRepeat);
+                this._tips = '请选择敌方单位建筑';
+                this.highLightEntity(OwnerEnum.EnemyOwner, EntityTypeEnum.AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             //所有地图实体
             case GamePto.UseConditionEnum.AllEntity:
                 this._tips = '请选择单位或建筑';
-                this.highLightEntity(AnyOwner, AnyEntity, conditionType, selectNum, allowRepeat);
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.AnyEntity, conditionType, selectNum, allowRepeat);
+                break;
+            //友方单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.FriendUnitOrBuilding:
+                this._tips = '请选择友方非英雄单位或建筑';
+                this.highLightEntity(OwnerEnum.SelfOwner, EntityTypeEnum.UnitOrBuilding, conditionType, selectNum, allowRepeat);
+                break;
+            //敌方单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.EnemyUnitOrBuilding:
+                this._tips = '请选择敌方非英雄单位或建筑';
+                this.highLightEntity(OwnerEnum.EnemyOwner, EntityTypeEnum.UnitOrBuilding, conditionType, selectNum, allowRepeat);
+                break;
+            //所有单位或建筑(非英雄)
+            case GamePto.UseConditionEnum.AllUnitOrBuilding:
+                this._tips = '请选择非英雄单位或建筑';
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.UnitOrBuilding, conditionType, selectNum, allowRepeat);
+                break;
+
+            //友方英雄
+            case GamePto.UseConditionEnum.FriendHero:
+                this._tips = '请选择友方英雄';
+                this.highLightEntity(OwnerEnum.SelfOwner, EntityTypeEnum.HeroEntity, conditionType, selectNum, allowRepeat);
+                break;
+            //敌方英雄
+            case GamePto.UseConditionEnum.EnemyHero:
+                this._tips = '请选择敌方英雄';
+                this.highLightEntity(OwnerEnum.EnemyOwner, EntityTypeEnum.HeroEntity, conditionType, selectNum, allowRepeat);
+                break;
+            //任意英雄
+            case GamePto.UseConditionEnum.AllHero:
+                this._tips = '请选择任意英雄';
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.HeroEntity, conditionType, selectNum, allowRepeat);
                 break;
             default:
                 console.error("未知的使用条件类型:", conditionType);
@@ -446,7 +508,13 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
     }
 
     /**高亮地图指定元素 */
-    private highLightEntity(filterOwner: number, filterEntity: number, conditionType: number, selectNum: number, allowRepeat: boolean) {
+    private highLightEntity(
+        filterOwner: OwnerEnum,
+        filterEntity: EntityTypeEnum,
+        conditionType: GamePto.UseConditionEnum,
+        selectNum: number,
+        allowRepeat: boolean
+    ) {
         const entitys = MapModel.ins().entityCards;
         for (let index = 0; index < entitys.length; index++) {
             const entityCard = entitys[index];
@@ -464,12 +532,35 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             }
 
             //所有者筛选
-            if (filterOwner !== AnyOwner && (entityCard.uid === UserModel.ins().uid) !== (filterOwner === SelfOwner)) {
+            if (filterOwner !== OwnerEnum.AnyOwner && (entityCard.uid === UserModel.ins().uid) !== (filterOwner === OwnerEnum.SelfOwner)) {
                 continue;
             }
 
             //类型筛选
-            if (filterEntity !== AnyEntity && (entityCard.cardType === CardsPto.CardType.Building) !== (filterEntity === BuildingEntity)) {
+            let isMatch = false;
+            switch (filterEntity) {
+                /** 所有地图实体 */
+                case EntityTypeEnum.AnyEntity:
+                    isMatch = true;
+                    break;
+                /** 建筑 */
+                case EntityTypeEnum.BuildingEntity:
+                    isMatch = entityCard.cardType === CardsPto.CardType.Building;
+                    break;
+                /** 单位 */
+                case EntityTypeEnum.UnitEntity:
+                    isMatch = entityCard.cardType === CardsPto.CardType.Unit;
+                    break;
+                /** 英雄 */
+                case EntityTypeEnum.HeroEntity:
+                    isMatch = entityCard.cardType === CardsPto.CardType.Hero;
+                    break;
+                /** 单位或建筑 */
+                case EntityTypeEnum.UnitOrBuilding:
+                    isMatch = entityCard.cardType === CardsPto.CardType.Unit || entityCard.cardType === CardsPto.CardType.Building;
+                    break;
+            }
+            if (!isMatch) {
                 continue;
             }
 

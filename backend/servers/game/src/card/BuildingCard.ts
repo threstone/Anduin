@@ -134,7 +134,7 @@ export class BuildingCard extends EventCard {
     public onDamage(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
         next();
         eventData.data = Math.max(0, eventData.data);
-        this.incrHp(- eventData.data)
+        this.incrHp(-eventData.data)
     }
 
     /**
@@ -149,7 +149,7 @@ export class BuildingCard extends EventCard {
         }
     }
 
-    public onDead(eventData: EventData, next: Function, damageTarget: BuildingCard, damageSource: BaseCard) {
+    public onDead(eventData: EventData, next: Function, deadEntity: BuildingCard, damageSource: BaseCard) {
         const user = this.table.getUser(this.uid);
         const index = user.entityPool.indexOf(this);
         if (index === -1) {
@@ -176,12 +176,12 @@ export class BuildingCard extends EventCard {
 
         //如果造成伤害方式对方,则对方增加一点费用
         if (damageSource.uid !== this.uid) {
-            const targetUser = this.table.getOtherUser(this.uid);
+            const enemyUser = this.table.getOtherUser(damageSource.uid);
             //加费用
-            if (targetUser.fee < targetUser.feeUpperLimit) {
-                targetUser.fee += 1;
+            if (enemyUser.fee < enemyUser.feeUpperLimit) {
+                enemyUser.fee += 1;
                 //通知用户费用信息
-                targetUser.broadcastFeeInfo();
+                enemyUser.broadcastFeeInfo();
             }
         }
     }

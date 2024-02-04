@@ -2604,9 +2604,12 @@ export namespace GamePto {
         FriendEntity = 10,
         EnemyEntity = 11,
         AllEntity = 12,
-        FriendEntityNotHero = 13,
-        EnemyEntityNotHero = 14,
-        AllEntityNotHero = 15
+        FriendUnitOrBuilding = 13,
+        EnemyUnitOrBuilding = 14,
+        AllUnitOrBuilding = 15,
+        FriendHero = 16,
+        EnemyHero = 17,
+        AllHero = 18
     }
 
     /** AffectedEnum enum. */

@@ -1,1 +1,1 @@
-node merge.js ../../configs/
+node merge.js ../../../configs/

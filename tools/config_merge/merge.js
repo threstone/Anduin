@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 
-// const dirPath = '../../configs/';
 const configsPath = process.argv[2];
 
 doMerge(configsPath + 'client/')
 doMerge(configsPath + 'server/')
 
 function doMerge(dirPath) {
+    dirPath = path.join(__filename, dirPath);
     const dirInfo = fs.readdirSync(dirPath);
 
     const mergeConfig = {};
