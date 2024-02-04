@@ -513,13 +513,14 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             this.showEntityDamageTips(entity, text);
             return;
         }
+        //加号开始的是恢复
+        if (text.startsWith('+')) {
+            this.showEntityRecoveryTips(entity, text);
+            return;
+        }
         const tips = new fairygui.GTextField();
         tips.fontSize = 26;
         tips.color = color;
-        //加号开始的是恢复
-        if (text.startsWith('+')) {
-            tips.color = 0x00FF00;
-        }
         tips.bold = true;
         tips.text = text;
         const point = entity.localToRoot((entity.width - tips.width) / 2, (entity.height - tips.height) / 2);
@@ -528,6 +529,20 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         fairygui.GRoot.inst.addChild(tips)
         egret.Tween.get(tips).to({ y: tips.y - entity.height }, 2500).call(() => {
             fairygui.GRoot.inst.removeChild(tips)
+        })
+    }
+
+    /** 恢复提示 */
+    public showEntityRecoveryTips(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string) {
+        const atkTips = BaseUI.UIRecoveryTips.createInstance();
+        atkTips.setPivot(0.5, 0.5, true);
+        atkTips.countText.text = text;
+        const point = entity.localToRoot((entity.width) / 2, (entity.height) / 2);
+        atkTips.x = point.x;
+        atkTips.y = point.y;
+        fairygui.GRoot.inst.addChild(atkTips);
+        egret.Tween.get(atkTips).to({ scaleX: 0.7, scaleY: 0.7 }, 400, egret.Ease.quintOut).to({}, 1000).call(() => {
+            fairygui.GRoot.inst.removeChild(atkTips)
         })
     }
 

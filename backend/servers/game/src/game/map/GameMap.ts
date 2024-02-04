@@ -249,7 +249,47 @@ export class GameMap {
         return resultSet;
     }
 
-    /**获取根据距离附近的坐标 */
+    /** 根据距离和基准获取附近的地图实体(含基准坐标) */
+    public getEffectCardsByDistance(baseX: number, baseY: number, distance: number) {
+        const cards: BuildingCard[] = [];
+        this.getEffectPointsByDistance(baseX, baseY, distance).forEach((p) => {
+            const card = this.getCard(p.x, p.y);
+            if (card) {
+                cards.push(card);
+            }
+        });
+        return cards;
+    }
+
+    /** 根据距离和基准获取附近的坐标数组(含基准坐标) */
+    public getEffectPointsByDistance(baseX: number, baseY: number, distance: number) {
+        const result: { x: number, y: number }[] = [];
+        for (let x = baseX - distance; x <= baseX + distance; x++) {
+            for (let y = baseY - distance; y <= baseY + distance; y++) {
+                if (x >= 0 && x < this._width && y >= 0 && y < this._height) {
+                    const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
+                    if (tempDistance <= distance) {
+                        result.push({ x, y });
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    /** 根据距离和基准获取附近的地图实体(不包含基准坐标) */
+    public getAroundEntityByDistance(baseX: number, baseY: number, distance: number) {
+        const cards: BuildingCard[] = [];
+        this.getAroundByDistance(baseX, baseY, distance).forEach((p) => {
+            const card = this.getCard(p.x, p.y);
+            if (card) {
+                cards.push(card);
+            }
+        });
+        return cards;
+    }
+
+    /** 根据距离和基准获取附近的坐标数组(不包含基准坐标) */
     public getAroundByDistance(baseX: number, baseY: number, distance: number) {
         const result: { x: number, y: number }[] = [];
         for (let x = baseX - distance; x <= baseX + distance; x++) {

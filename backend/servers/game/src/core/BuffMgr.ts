@@ -44,12 +44,12 @@ export class BuffMgr {
 
     public addBuff(card: BuildingCard, buffId: number) {
         const buffClass = this.getBuffByBuffId(buffId);
-        buffClass.addBuff(card);
+        return buffClass.addBuff(card);
     }
 
     public deleteBuff(card: BuildingCard, buff: BuffData) {
         const buffClass = this.getBuffByBuffId(buff.buffId);
-        buffClass.deleteBuff(card, buff);
+        return buffClass.deleteBuff(card, buff);
     }
 
     public addPositionBuff(card: BuildingCard, buff: BuffData) {

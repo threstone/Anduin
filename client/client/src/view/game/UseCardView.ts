@@ -303,6 +303,10 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             case GamePto.UseConditionEnum.AllHero:
                 isMatch = entity != null && entity.cardType === CardsPto.CardType.Hero;
                 break;
+            //任意格子
+            case GamePto.UseConditionEnum.AnyBlock:
+                isMatch = true;
+                break;
             default:
                 return false;
         }
@@ -494,6 +498,11 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             case GamePto.UseConditionEnum.AllHero:
                 this._tips = '请选择任意英雄';
                 this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.HeroEntity, conditionType, selectNum, allowRepeat);
+                break;
+            //任意英雄
+            case GamePto.UseConditionEnum.AnyBlock:
+                this._tips = '请选择任意格子';
+                this.highLightEntity(OwnerEnum.AnyOwner, EntityTypeEnum.AnyEntity, conditionType, selectNum, allowRepeat);
                 break;
             default:
                 console.error("未知的使用条件类型:", conditionType);

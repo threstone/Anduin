@@ -6,7 +6,6 @@ import { CardStatus } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
-import { BuildingCard } from "./BuildingCard";
 
 const logger = getLogger(startupParam?.nodeId);
 export class BaseCard implements CardInterface {
@@ -175,6 +174,9 @@ export class BaseCard implements CardInterface {
             //任意英雄
             case GamePto.UseConditionEnum.AllHero:
                 return entity != null && entity.cardType === CardsPto.CardType.Hero;
+            //任意英雄
+            case GamePto.UseConditionEnum.AnyBlock:
+                return true;
             default:
                 logger.error(`BaseCard checkCondition : unkonw conditionType${conditionType}`);
                 return false;
@@ -186,18 +188,5 @@ export class BaseCard implements CardInterface {
         const notice = new GamePto.S_ACTION_RECORD();
         notice.source = this;
         this.table.broadcast(notice);
-    }
-
-    /** 通过buff增加属性 */
-    public buffModify(targetEntity: BuildingCard, modifyAtk = this.attack, modifyHp = this.getHp()) {
-        // 增加攻击、血量
-        targetEntity.attack += modifyAtk;
-        targetEntity.buffModifyAtk += modifyAtk;
-        targetEntity.buffModifyAtk += modifyAtk;
-
-        targetEntity.hpUpperLimit += modifyHp;
-        targetEntity.hp += modifyHp;
-        targetEntity.incrHp(modifyHp);
-        targetEntity.buffModifyHp += modifyHp;
     }
 }

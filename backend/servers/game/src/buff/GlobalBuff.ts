@@ -10,7 +10,7 @@ export abstract class GlobalBuff extends GameBuff {
 
     public addBuff(card: BuildingCard, buff: BuffData) {
         card.addBuff(buff);
-        buff.sourceUniqueId = card.id;
+        buff.sourceCardUid = card.id;
         card.table.mapData.addGlobalBuff(buff);
     }
 

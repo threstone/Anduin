@@ -1822,7 +1822,8 @@ declare namespace GamePto {
         AllUnitOrBuilding = 15,
         FriendHero = 16,
         EnemyHero = 17,
-        AllHero = 18
+        AllHero = 18,
+        AnyBlock = 19
     }
 
     /** AffectedEnum enum. */

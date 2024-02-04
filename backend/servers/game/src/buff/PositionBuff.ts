@@ -14,7 +14,7 @@ export abstract class PositionBuff extends GameBuff {
 
     public addBuff(card: BuildingCard, buff: BuffData) {
         card.addBuff(buff);
-        buff.sourceUniqueId = card.id;
+        buff.sourceCardUid = card.id;
         //给周围位置绑定buff
         card.table.mapData.addPositionBuff(card.blockX, card.blockY, this.effectiveDistance, buff);
         //增加移动事件

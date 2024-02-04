@@ -1,7 +1,7 @@
 import { getLogger } from "log4js";
 import { CardsPto } from "../../../../common/CommonProto";
 import { GamePto } from "../../../../common/CommonProto";
-import { BuffData } from "../buff/BuffData";
+import { BuffData, BuffTypeEnum } from "../buff/BuffData";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
@@ -28,6 +28,9 @@ export class BuildingCard extends EventCard {
     /** 由各种buff效果改变的生命属性值,可被沉默影响 */
     public buffModifyHp: number = 0;
 
+    /** 是否被沉默 */
+    public silenced: boolean = false;
+
     constructor(cardId: number, uid: number, table: GameTable) {
         super(cardId, uid, table);
         this.on(EventType.Damage, { id: this.id, fun: this.onDamage, canSilent: false });
@@ -52,7 +55,7 @@ export class BuildingCard extends EventCard {
     /**是否下发到客户端以显示 */
     public isBuffShow(buff: BuffData) {
         //是全局或位置buff的情况下又不是buff源,则需要展示出Buff
-        if (buff.sourceUniqueId && buff.sourceUniqueId !== this.id) {
+        if (buff.sourceCardUid && buff.sourceCardUid !== this.id) {
             return true;
         }
 
@@ -115,6 +118,33 @@ export class BuildingCard extends EventCard {
         this._buffMap?.forEach((buff) => {
             buff.ignore = true;
         })
+    }
+
+    /** 沉默 */
+    public handleSilence() {
+        this.silenced = true;
+        this._buffMap.forEach((buff) => {
+            switch (buff.buffType) {
+                case BuffTypeEnum.Normal:
+                    GlobalVar.buffMgr.deleteBuff(this, buff);
+                    break;
+                case BuffTypeEnum.Position:
+                    if (buff.sourceCardUid === this.id) {
+                        GlobalVar.buffMgr.deletePositionBuff(this, buff);
+                    }
+                    break;
+                case BuffTypeEnum.Global:
+                    if (buff.sourceCardUid === this.id) {
+                        GlobalVar.buffMgr.deleteGlobalBuff(this, buff);
+                    }
+                    break;
+            }
+        });
+
+        this.attack -= this.buffModifyAtk;
+        this.buffModifyAtk = 0;
+        this.hpUpperLimit -= this.buffModifyHp;
+        this.setHp(this.hp);
     }
 
     public useCardCheck(blockX: number, blockY: number, ...params: number[]) {
@@ -184,5 +214,18 @@ export class BuildingCard extends EventCard {
                 enemyUser.broadcastFeeInfo();
             }
         }
+    }
+
+    /** 通过buff增加属性 */
+    public buffModify(modifyAtk: number, modifyHp: number) {
+        // 增加攻击、血量
+        this.attack += modifyAtk;
+        this.buffModifyAtk += modifyAtk;
+        this.buffModifyAtk += modifyAtk;
+
+        this.hpUpperLimit += modifyHp;
+        this.hp += modifyHp;
+        this.incrHp(modifyHp);
+        this.buffModifyHp += modifyHp;
     }
 }

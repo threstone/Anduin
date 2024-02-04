@@ -1,11 +1,12 @@
 import { GamePto } from "../../../../../../common/CommonProto";
 import { EventType } from "../../../game/EventDefine";
 import { GameUser } from "../../../game/GameUser";
+import { BuildingCard } from "../../BuildingCard";
 import { MagicCard } from "../../MagicCard";
 
 /** 刺杀 */
 export class Card100008 extends MagicCard {
-    private _cacheEntity: import("d:/Project/Anduin/backend/servers/game/src/card/BuildingCard").BuildingCard;
+    private _cacheEntity: BuildingCard;
 
     public onUse(user: GameUser, cardIndex: number, x: number, y: number): void {
         super.onUse(user, cardIndex);

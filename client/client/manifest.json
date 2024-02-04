@@ -75,6 +75,7 @@
 		"bin-debug/fgui/BaseUI/UIMiniImg.js",
 		"bin-debug/fgui/BaseUI/UIMoveTips.js",
 		"bin-debug/fgui/BaseUI/UIPowerBtn.js",
+		"bin-debug/fgui/BaseUI/UIRecoveryTips.js",
 		"bin-debug/fgui/BaseUI/UIRegisterCom.js",
 		"bin-debug/Main.js",
 		"bin-debug/fgui/BaseUI/UIRightCtrlCom.js",

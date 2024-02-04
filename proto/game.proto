@@ -52,6 +52,8 @@ enum UseConditionEnum{
 	EnemyHero = 17;
 	//任意英雄
 	AllHero = 18;
+	//任意格子
+	AnyBlock = 19;
 }
 
 enum AffectedEnum{
@@ -89,6 +91,7 @@ message Card{
 	bool allowAtk = 10;
 	bool allowMove = 11;
 	repeated int32 buffList = 12;
+	bool silenced = 13;
 }
 
 message MapData{

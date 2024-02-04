@@ -137,12 +137,26 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
     private showCardEffect(cardItem: BaseUI.UICardItem, affectInfo: GamePto.IAffectedCard) {
         switch (affectInfo.type) {
             case GamePto.AffectedEnum.HpReduce:
-                this.showHealthReduceEffect(cardItem, affectInfo.value);
+                this.showHpReduceEffect(cardItem, affectInfo.value);
+                break;
+            case GamePto.AffectedEnum.HpAdd:
+                this.showHpRecoveryEffect(cardItem, affectInfo.value);
                 break;
         }
     }
 
-    private showHealthReduceEffect(cardItem: BaseUI.UICardItem, damage: number) {
+    private showHpRecoveryEffect(cardItem: BaseUI.UICardItem, add: number) {
+        const tips = BaseUI.UIRecoveryTips.createInstance();
+        tips.countText.text = `+${add}`;
+        cardItem.addChild(tips);
+        tips.x = (cardItem.width - tips.width) / 2;
+        tips.y = (cardItem.height - tips.height) / 2;
+        egret.Tween.get(tips).to({ alpha: 0 }, 3000, egret.Ease.backInOut).call(() => {
+            cardItem.removeChild(tips);
+        });
+    }
+
+    private showHpReduceEffect(cardItem: BaseUI.UICardItem, damage: number) {
         const tips = BaseUI.UIDamageTips.createInstance();
         tips.damageDetail.text = `-${damage}`;
         cardItem.addChild(tips);

@@ -132,18 +132,17 @@
   },
 {
  "cardId":100009,
- "cardType":1,
+ "cardType":2,
  "type2":1,
- "detailType":1,
- "fee":1,
- "attack":3,
+ "detailType":0,
+ "fee":3,
+ "attack":1,
  "hp":1,
  "quality":1,
  "buffs":[],
  "isDerivation":0,
- "useCondition":[2,1],
- "movement":2,
- "atkRange":3
+ "useCondition":[19,1],
+ "atkRange":0
   },
 {
  "cardId":100010,

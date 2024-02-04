@@ -131,6 +131,8 @@
     <image id="682o5f" name="premium.png" path="/cards/res/" exported="true"/>
     <image id="682o5g" name="rare.png" path="/cards/res/" exported="true"/>
     <image id="682o5h" name="precious.png" path="/cards/res/" exported="true"/>
+    <component id="dja35i" name="RecoveryTips.xml" path="/game/map/" exported="true"/>
+    <image id="dja35k" name="recovery.png" path="/game/res/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>

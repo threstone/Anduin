@@ -10,8 +10,7 @@ export class Card100007 extends MagicCard {
     public onUse(user: GameUser, cardIndex: number, x: number, y: number): void {
         super.onUse(user, cardIndex);
         const targetEntity = this.table.mapData.getCard(x, y);
-        super.buffModify(targetEntity);
-
+        targetEntity.buffModify(this.attack, this.getHp());
         GlobalVar.buffMgr.addBuff(targetEntity, ChuanTouGongJi.buffId);
 
         const notice = new GamePto.S_UPDATE_ENTITYS();

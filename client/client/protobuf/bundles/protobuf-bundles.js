@@ -3999,6 +3999,7 @@ $root.GamePto = (function() {
      * @property {number} FriendHero=16 FriendHero value
      * @property {number} EnemyHero=17 EnemyHero value
      * @property {number} AllHero=18 AllHero value
+     * @property {number} AnyBlock=19 AnyBlock value
      */
     GamePto.UseConditionEnum = (function() {
         var valuesById = {}, values = Object.create(valuesById);
@@ -4021,6 +4022,7 @@ $root.GamePto = (function() {
         values[valuesById[16] = "FriendHero"] = 16;
         values[valuesById[17] = "EnemyHero"] = 17;
         values[valuesById[18] = "AllHero"] = 18;
+        values[valuesById[19] = "AnyBlock"] = 19;
         return values;
     })();
 
