@@ -223,8 +223,17 @@ export class BuildingCard extends EventCard {
         this.buffModifyAtk += modifyAtk;
 
         this.hpUpperLimit += modifyHp;
-        this.hp += modifyHp;
         this.incrHp(modifyHp);
         this.buffModifyHp += modifyHp;
+    }
+
+    /** 更新客户端卡牌实体数据 */
+    public updateClientEntity(tips?: string) {
+        const notice = new GamePto.S_UPDATE_ENTITYS();
+        notice.entityCards.push(this);
+        if (tips) {
+            notice.tipsList.push(tips);
+        }
+        this.table.broadcast(notice);
     }
 }

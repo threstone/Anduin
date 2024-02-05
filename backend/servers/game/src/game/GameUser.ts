@@ -72,14 +72,17 @@ export class GameUser {
     private _fatigue: number;
 
     /**可攻击次数 */
-    atkTimes: number
+    atkTimes: number;
     /* 可攻击次数上限 */
-    atkTimesLimit: number
+    atkTimesLimit: number;
 
     /**可移动次数 */
-    moveTimes: number
+    moveTimes: number;
     /* 可移动次数上限 */
-    moveTimesLimit: number
+    moveTimesLimit: number;
+
+    /** 可弃牌次数 */
+    discardTimes: number;
 
     /**费用增长上限*/
     feeUpperLimit: number;
@@ -112,11 +115,12 @@ export class GameUser {
 
     /**回合开始 */
     public onRoundStart() {
-        //重置移动、攻击次数
+        //重置移动、攻击次数、可弃牌次数
         this.atkTimes = GlobalVar.configMgr.common.roundAtkTimes;
         this.atkTimesLimit = GlobalVar.configMgr.common.roundAtkTimesLimit;
         this.moveTimes = GlobalVar.configMgr.common.roundMoveTimes;
         this.moveTimesLimit = GlobalVar.configMgr.common.roundMoveTimesLimit;
+        this.discardTimes = GlobalVar.configMgr.common.discardLimit;
     }
 
     /**重置用户游戏数据 */

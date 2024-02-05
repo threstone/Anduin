@@ -16,11 +16,8 @@ export class Card26 extends UnitCard {
         targetEntity.incrHp(this.hp);
 
         // 通知
-        const updateMsg = new GamePto.S_UPDATE_ENTITYS();
-        updateMsg.entityCards.push(targetEntity);
-        updateMsg.tipsList.push(`+${this.hp}`);
-        user.table.broadcast(updateMsg);
-
+        // 更新客户端卡牌实体数据
+        targetEntity.updateClientEntity(`+${this.hp}`);
         this._cacheEntity = targetEntity;
     }
 

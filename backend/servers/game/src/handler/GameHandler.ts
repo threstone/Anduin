@@ -32,11 +32,16 @@ export class GameHandler extends BaseHandler {
             return;
         }
 
+        if (user.discardTimes <= 0) {
+            return;
+        }
+
         const replay = new GamePto.S_DISCARD();
         replay.isSuccess = false;
         replay.uid = user.uid;
         const card = user.handCards[msg.cardIndex];
         if (card) {
+            user.discardTimes--;
             //入墓地
             replay.isSuccess = true;
             user.deleteHandCard(msg.cardIndex, 1);
@@ -49,7 +54,7 @@ export class GameHandler extends BaseHandler {
                 user.broadcastFeeInfo();
             }
         }
-
+        replay.discardTimes = user.discardTimes;
         table.broadcast(replay);
     }
 
@@ -146,28 +151,26 @@ export class GameHandler extends BaseHandler {
         //获取到真正会受到伤害的卡牌例如远程攻击会被挡住、一些贯穿伤害逻辑要重写此方法
         const damageCards = sourceCard.getBeAttackCard(targetCard, sourceCard);
 
+        // 攻击次数减少
         user.atkTimes--;
+        // 卡牌本回合禁止攻击
         sourceCard.allowAtk = false;
 
-        //根据自身的攻击力决定投掷的骰子数量并且获得投掷的结果
-        const dices = table.getDices(sourceCard.attack);
-        //实际扣除的血量
-        const damage = table.getTargetDiceValueNum(dices, sourceCard.detailType === CardsPto.AtkType.CloseRange ? GamePto.DiceValueEnum.Sword : GamePto.DiceValueEnum.Bow);
-
+        const damage = sourceCard.attack;
         const atkEvent = new EventData(EventType.UnitPreAtk);
         atkEvent.data = damage;
 
         //执行攻击前事件,可能会导致伤害变化
-        table.mapData.emit(atkEvent, sourceCard, targetCard, damageCards, dices);
+        table.mapData.emit(atkEvent, sourceCard, targetCard, damageCards);
         //攻击被禁止了
         if (atkEvent.isContinue === false) {
             return;
         }
 
-        sourceCard.doAttack(atkEvent, targetCard, damageCards, dices);
+        sourceCard.doAttack(atkEvent, targetCard, damageCards);
 
         //执行战场攻击后事件
-        table.mapData.emit(atkEvent.changeType(EventType.UnitAtkAfter), sourceCard, targetCard, damageCards, dices);
+        table.mapData.emit(atkEvent.changeType(EventType.UnitAtkAfter), sourceCard, targetCard, damageCards);
     }
 
     //请求重连

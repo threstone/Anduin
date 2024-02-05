@@ -178,6 +178,7 @@ class ActionRecordDetailView extends BaseView<BaseUI.UIActionRecordDetail>{
     /**攻击 */
     private onAtk(msg: GamePto.S_ATTACK) {
         this.showSourceCard(msg.from);
+        this.showHpReduceEffect(this.tempCard, msg.strikeBackDamage); // 反击伤害
         const affectedList: GamePto.IAffectedCard[] = [];
         msg.targetList.forEach((targetCard) => {
             affectedList.push({ card: targetCard, type: GamePto.AffectedEnum.HpReduce, value: msg.damage })

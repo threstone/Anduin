@@ -107,6 +107,7 @@ message UserDetail{
 	int32 atkTimesLimit = 5;
 	int32 moveTimes = 6;
 	int32 moveTimesLimit = 7;
+	int32 discardTimes = 8;
 }
 
 //受影响卡数据
@@ -226,6 +227,7 @@ message S_ROUND_START_EVENT{
 	int32 atkTimesLimit = 5;
 	int32 moveTimes = 6;
 	int32 moveTimesLimit = 7;
+	int32 discardTimes = 8;
 }
 
 //回合结束
@@ -265,6 +267,7 @@ message S_DISCARD{
 	bool isSuccess = 3;
 	int32 cardIndex = 4;
 	int32 uid = 5;
+	int32 discardTimes = 6;
 }
 
 //使用卡牌
@@ -308,9 +311,9 @@ message S_ATTACK{
 	int32 cmd = 1[default = 200]; 
 	int32 scmd = 2[default = 10013];
 	int32 uid = 3;
-	repeated int32 dices = 4;
-	int32 leastAtkTimes = 5;
-	int32 damage = 6;
+	int32 leastAtkTimes = 4;
+	int32 damage = 5;
+	int32 strikeBackDamage = 6;
 	bool allowAtk = 7;
 	Card from = 8;
 	repeated Card targetList = 9;

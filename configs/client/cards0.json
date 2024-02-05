@@ -495,7 +495,7 @@
  "cardName":"药品走私贩",
  "cardType":1,
  "type2":1,
- "detailType":1,
+ "detailType":0,
  "fee":3,
  "attack":3,
  "hp":3,

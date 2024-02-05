@@ -1,4 +1,5 @@
 import { CardsPto, GamePto } from "../../../../common/CommonProto";
+import { GlobalVar } from "../GlobalVar";
 import { EventData, EventType } from "../game/EventDefine";
 import { EventFunction } from "../game/GameDefine";
 import { GameTable } from "../game/GameTable";
@@ -69,27 +70,39 @@ export class UnitCard extends BuildingCard {
         }
     }
 
-    public doAttack(atkEvent: EventData, targetCard: BuildingCard, damageCards: BuildingCard[], dices: number[]) {
+    public doAttack(atkEvent: EventData, targetCard: BuildingCard, damageCards: BuildingCard[]) {
         const user = this.table.getUser(this.uid);
         const table = this.table;
+        const replay = new GamePto.S_ATTACK();
 
-        //执行卡牌自身攻击前事件
-        this.emit(atkEvent.changeType(EventType.SelfPreAtk), this, targetCard, damageCards, dices);
+        // 执行卡牌自身攻击前事件
+        this.emit(atkEvent.changeType(EventType.SelfPreAtk), this, targetCard, damageCards);
         const firstTarget = damageCards[0];
-        //返回实际收到的伤害
+        // 受伤事件 返回实际受到的伤害
         firstTarget.emit(atkEvent.changeType(EventType.Damage), firstTarget, this);
         const damage = atkEvent.data;
+
+        // 近战攻击会被反击
+        if (this.detailType === CardsPto.AtkType.CloseRange) {
+            // 受到卡牌反击的伤害, 近战远程不一样,远程的反击能力稍弱
+            const damageRatio = firstTarget.detailType === CardsPto.AtkType.CloseRange ? GlobalVar.configMgr.common.closeRangeStrikeBackRatio : GlobalVar.configMgr.common.longRangeStrikeBackRatio;
+            const strikeBackDamage = Math.floor(firstTarget.attack * damageRatio);
+            const strikeBackEvent = new EventData(EventType.Damage);
+            strikeBackEvent.data = strikeBackDamage;
+            // 受伤事件
+            replay.strikeBackDamage = this.emit(strikeBackEvent, this, firstTarget).data;
+            // 受伤后事件
+            this.emit(strikeBackEvent.changeType(EventType.DamageAfter), this, firstTarget);
+        }
 
         //其他单位扣血
         for (let index = 1; index < damageCards.length; index++) {
             const tempCard = damageCards[index];
-            tempCard.incrHp(- damage);
+            tempCard.incrHp(-damage);
         }
 
         //广播卡牌攻击协议
-        const replay = new GamePto.S_ATTACK();
         replay.uid = user.uid;
-        replay.dices = dices;
         replay.leastAtkTimes = user.atkTimes;
         replay.damage = damage;
         replay.allowAtk = this.allowAtk;
@@ -104,6 +117,6 @@ export class UnitCard extends BuildingCard {
         })
 
         //执行卡牌自身攻击后事件
-        this.emit(atkEvent.changeType(EventType.SelfAtkAfter), this, targetCard, damageCards, dices);
+        this.emit(atkEvent.changeType(EventType.SelfAtkAfter), this, targetCard, damageCards);
     }
 }

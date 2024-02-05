@@ -11,5 +11,8 @@
 "roundAtkTimes":99,
 "roundAtkTimesLimit":99,
 "roundMoveTimes":99,
-"roundMoveTimesLimit":99
+"roundMoveTimesLimit":99,
+"closeRangeStrikeBackRatio":1,
+"longRangeStrikeBackRatio":0.5,
+"discardLimit":1
 }

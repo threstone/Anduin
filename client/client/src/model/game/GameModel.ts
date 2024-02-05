@@ -3,10 +3,18 @@ class GameModel extends BaseModel {
     handCards: GamePto.ICard[];
     targetUid: number;
 
+    /**可攻击次数 */
     atkTimes: number;
+    /* 可攻击次数上限 */
     atkTimesLimit: number;
+
+    /**可移动次数 */
     moveTimes: number;
+    /* 可移动次数上限 */
     moveTimesLimit: number;
+
+    /** 可弃牌次数 */
+    discardTimes: number;
 
     fee: number;
 
@@ -126,6 +134,7 @@ class GameModel extends BaseModel {
             this.atkTimesLimit = msg.atkTimesLimit;
             this.moveTimes = msg.moveTimes;
             this.moveTimesLimit = msg.moveTimesLimit;
+            this.discardTimes = msg.discardTimes;
         }
         this.emit('S_ROUND_START_EVENT', msg);
     }
@@ -159,6 +168,7 @@ class GameModel extends BaseModel {
     //弃牌
     private S_DISCARD(msg: GamePto.S_DISCARD) {
         if (msg.uid === UserModel.ins().uid && msg.isSuccess) {
+            GameModel.ins().discardTimes--;
             this.deadPool.push(this.handCards[msg.cardIndex]);
             this.handCards.splice(msg.cardIndex, 1);
         } else if (msg.uid !== UserModel.ins().uid) {
@@ -212,6 +222,7 @@ class GameModel extends BaseModel {
         this.atkTimesLimit = selfDetail.atkTimesLimit;
         this.moveTimes = selfDetail.moveTimes;
         this.moveTimesLimit = selfDetail.moveTimesLimit;
+        this.discardTimes = selfDetail.discardTimes;
 
         this.emit('S_RECONNECT', msg);
         this.emit('S_MAP_DATA', msg);

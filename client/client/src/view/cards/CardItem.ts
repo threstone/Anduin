@@ -37,6 +37,7 @@ class CardItem {
         cardItem.atkText.text = `${cardInfo.attack}`;
         cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.cardNum.visible = false;
+        cardItem.cardImg.alpha = 1;
         cardItem.slicencedGroup.visible = !!cardInfo.silenced;
         return cardItem;
     }

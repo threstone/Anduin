@@ -8,5 +8,11 @@
     <image id="n6_hzsg" name="healthBg" src="tb7e1v" fileName="common/res/H.png" xy="100,61" size="38,32" group="n8_hzsg" aspect="true"/>
     <text id="n7_hzsg" name="healthText" xy="107,63" size="25,27" group="n8_hzsg" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="1"/>
     <group id="n8_hzsg" name="healthGroup" xy="100,61" size="38,32" advanced="true"/>
+    <image id="n10_jdgb" name="closeRange" src="tb7e1w" fileName="common/res/guild_battle_ico.png" xy="2,58" group="n15_jdgb"/>
+    <image id="n11_jdgb" name="longRange1" src="hzsg2p" fileName="common/res/arrow.png" xy="38,95" group="n13_jdgb" rotation="-135"/>
+    <image id="n12_jdgb" name="longRange2" src="hzsg2p" fileName="common/res/arrow.png" xy="0,89" group="n13_jdgb" rotation="-45"/>
+    <group id="n13_jdgb" name="longRange" xy="0,89" size="88,14" group="n15_jdgb" advanced="true"/>
+    <text id="n14_jdgb" name="atkText" xy="9,62" size="25,27" group="n15_jdgb" fontSize="18" color="#ffffff" align="center" vAlign="middle" autoSize="none" bold="true" strokeColor="#000000" singleLine="true" text="99"/>
+    <group id="n15_jdgb" name="atkGroup" xy="0,58" size="88,45" advanced="true"/>
   </displayList>
 </component>

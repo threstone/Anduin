@@ -1,5 +1,5 @@
 type Long = protobuf.Long;
-// DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run build:types'.
+// DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run types'.
 
 /** Namespace CardsPto. */
 declare namespace CardsPto {
@@ -92,13 +92,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.Card;
-
-        /**
-         * Gets the default type url for Card
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a Deck. */
@@ -167,13 +160,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.Deck;
-
-        /**
-         * Gets the default type url for Deck
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_REQ_CARDS_INFO. */
@@ -218,13 +204,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.C_REQ_CARDS_INFO;
-
-        /**
-         * Gets the default type url for C_REQ_CARDS_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_CARDS_INFO. */
@@ -281,13 +260,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_CARDS_INFO;
-
-        /**
-         * Gets the default type url for S_CARDS_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_MAKE_CARD. */
@@ -338,13 +310,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.C_MAKE_CARD;
-
-        /**
-         * Gets the default type url for C_MAKE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MAKE_CARD. */
@@ -401,13 +366,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_MAKE_CARD;
-
-        /**
-         * Gets the default type url for S_MAKE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_DISASSEMBLE_CARD. */
@@ -458,13 +416,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DISASSEMBLE_CARD;
-
-        /**
-         * Gets the default type url for C_DISASSEMBLE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_DISASSEMBLE_CARD. */
@@ -521,13 +472,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DISASSEMBLE_CARD;
-
-        /**
-         * Gets the default type url for S_DISASSEMBLE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_SAVE_CARDS. */
@@ -578,13 +522,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.C_SAVE_CARDS;
-
-        /**
-         * Gets the default type url for C_SAVE_CARDS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_SAVE_DECK. */
@@ -635,13 +572,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_SAVE_DECK;
-
-        /**
-         * Gets the default type url for S_SAVE_DECK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_DELETE_DECK. */
@@ -692,13 +622,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.C_DELETE_DECK;
-
-        /**
-         * Gets the default type url for C_DELETE_DECK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_DELETE_DECK. */
@@ -749,13 +672,6 @@ declare namespace CardsPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): CardsPto.S_DELETE_DECK;
-
-        /**
-         * Gets the default type url for S_DELETE_DECK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -828,13 +744,6 @@ declare namespace ChatPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.C_SEND_MESSAGE;
-
-        /**
-         * Gets the default type url for C_SEND_MESSAGE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_CHAT_MESSAGE. */
@@ -903,13 +812,6 @@ declare namespace ChatPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): ChatPto.S_CHAT_MESSAGE;
-
-        /**
-         * Gets the default type url for S_CHAT_MESSAGE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -964,13 +866,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.C_ADD_FRIEND;
-
-        /**
-         * Gets the default type url for C_ADD_FRIEND
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ADD_FRIEND_REQ. */
@@ -1021,13 +916,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_ADD_FRIEND_REQ;
-
-        /**
-         * Gets the default type url for S_ADD_FRIEND_REQ
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_ADD_FRIEND_REQ_RESULT. */
@@ -1084,13 +972,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.C_ADD_FRIEND_REQ_RESULT;
-
-        /**
-         * Gets the default type url for C_ADD_FRIEND_REQ_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_FRIEND_CHANGE. */
@@ -1147,13 +1028,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_FRIEND_CHANGE;
-
-        /**
-         * Gets the default type url for S_FRIEND_CHANGE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ADD_FRIEND. */
@@ -1204,13 +1078,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.S_ADD_FRIEND;
-
-        /**
-         * Gets the default type url for S_ADD_FRIEND
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a Friend. */
@@ -1261,13 +1128,6 @@ declare namespace FriendPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendPto.Friend;
-
-        /**
-         * Gets the default type url for Friend
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -1322,13 +1182,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_REQ_MATCH;
-
-        /**
-         * Gets the default type url for C_REQ_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_REQ_MATCH. */
@@ -1385,13 +1238,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_REQ_MATCH;
-
-        /**
-         * Gets the default type url for S_REQ_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_CANCEL_REQ_MATCH. */
@@ -1436,13 +1282,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_CANCEL_REQ_MATCH;
-
-        /**
-         * Gets the default type url for C_CANCEL_REQ_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_REQ_MATCH_RESULT. */
@@ -1499,13 +1338,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_REQ_MATCH_RESULT;
-
-        /**
-         * Gets the default type url for S_REQ_MATCH_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MATCH. */
@@ -1562,13 +1394,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH;
-
-        /**
-         * Gets the default type url for S_MATCH
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_REQ_MATCH_RESULT. */
@@ -1619,13 +1444,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_REQ_MATCH_RESULT;
-
-        /**
-         * Gets the default type url for C_REQ_MATCH_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MATCH_DECK. */
@@ -1676,13 +1494,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_DECK;
-
-        /**
-         * Gets the default type url for S_MATCH_DECK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_DECK_CHOOSE. */
@@ -1733,13 +1544,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_DECK_CHOOSE;
-
-        /**
-         * Gets the default type url for C_DECK_CHOOSE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_MATCH_CANCEL_DECK. */
@@ -1784,13 +1588,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_CANCEL_DECK;
-
-        /**
-         * Gets the default type url for C_MATCH_CANCEL_DECK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_MATCH_LEAVE. */
@@ -1835,13 +1632,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.C_MATCH_LEAVE;
-
-        /**
-         * Gets the default type url for C_MATCH_LEAVE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MATCH_STOP. */
@@ -1892,13 +1682,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_MATCH_STOP;
-
-        /**
-         * Gets the default type url for S_MATCH_STOP
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_FRIEND_DECK_STATUS_CHANGE. */
@@ -1949,13 +1732,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE;
-
-        /**
-         * Gets the default type url for S_FRIEND_DECK_STATUS_CHANGE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_DECK_CHOOSE_RESULT. */
@@ -2006,13 +1782,6 @@ declare namespace FriendlyMatchPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): FriendlyMatchPto.S_DECK_CHOOSE_RESULT;
-
-        /**
-         * Gets the default type url for S_DECK_CHOOSE_RESULT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -2122,13 +1891,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.UserInfo;
-
-        /**
-         * Gets the default type url for UserInfo
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a Card. */
@@ -2245,13 +2007,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.Card;
-
-        /**
-         * Gets the default type url for Card
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a MapData. */
@@ -2296,13 +2051,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.MapData;
-
-        /**
-         * Gets the default type url for MapData
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a UserDetail. */
@@ -2328,6 +2076,9 @@ declare namespace GamePto {
 
         /** UserDetail moveTimesLimit */
         moveTimesLimit?: (number|null);
+
+        /** UserDetail discardTimes */
+        discardTimes?: (number|null);
     }
 
     /** Represents a UserDetail. */
@@ -2360,6 +2111,9 @@ declare namespace GamePto {
         /** UserDetail moveTimesLimit. */
         public moveTimesLimit: number;
 
+        /** UserDetail discardTimes. */
+        public discardTimes: number;
+
         /**
          * Encodes the specified UserDetail message. Does not implicitly {@link GamePto.UserDetail.verify|verify} messages.
          * @param message UserDetail message or plain object to encode
@@ -2377,13 +2131,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.UserDetail;
-
-        /**
-         * Gets the default type url for UserDetail
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of an AffectedCard. */
@@ -2434,13 +2181,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.AffectedCard;
-
-        /**
-         * Gets the default type url for AffectedCard
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_PREPARE_TO_START. */
@@ -2491,13 +2231,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_PREPARE_TO_START;
-
-        /**
-         * Gets the default type url for C_PREPARE_TO_START
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_END_ROUND. */
@@ -2542,13 +2275,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_END_ROUND;
-
-        /**
-         * Gets the default type url for C_END_ROUND
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_DISCARD. */
@@ -2599,13 +2325,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_DISCARD;
-
-        /**
-         * Gets the default type url for C_DISCARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_USE_CARD. */
@@ -2662,13 +2381,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_USE_CARD;
-
-        /**
-         * Gets the default type url for C_USE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_MOVE. */
@@ -2737,13 +2449,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_MOVE;
-
-        /**
-         * Gets the default type url for C_MOVE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_ATTACK. */
@@ -2812,13 +2517,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_ATTACK;
-
-        /**
-         * Gets the default type url for C_ATTACK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_RECONNECT. */
@@ -2863,13 +2561,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_RECONNECT;
-
-        /**
-         * Gets the default type url for C_RECONNECT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_SURRENDER. */
@@ -2914,13 +2605,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.C_SURRENDER;
-
-        /**
-         * Gets the default type url for C_SURRENDER
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_SERVER_ERROR. */
@@ -2971,13 +2655,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_SERVER_ERROR;
-
-        /**
-         * Gets the default type url for S_SERVER_ERROR
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_INIT_GAME. */
@@ -3028,13 +2705,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_INIT_GAME;
-
-        /**
-         * Gets the default type url for S_INIT_GAME
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_GAME_START. */
@@ -3109,13 +2779,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_START;
-
-        /**
-         * Gets the default type url for S_GAME_START
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_REPLACE_CARDS. */
@@ -3178,13 +2841,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_REPLACE_CARDS;
-
-        /**
-         * Gets the default type url for S_REPLACE_CARDS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ROUND_START_EVENT. */
@@ -3210,6 +2866,9 @@ declare namespace GamePto {
 
         /** S_ROUND_START_EVENT moveTimesLimit */
         moveTimesLimit?: (number|null);
+
+        /** S_ROUND_START_EVENT discardTimes */
+        discardTimes?: (number|null);
     }
 
     /** Represents a S_ROUND_START_EVENT. */
@@ -3242,6 +2901,9 @@ declare namespace GamePto {
         /** S_ROUND_START_EVENT moveTimesLimit. */
         public moveTimesLimit: number;
 
+        /** S_ROUND_START_EVENT discardTimes. */
+        public discardTimes: number;
+
         /**
          * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
          * @param message S_ROUND_START_EVENT message or plain object to encode
@@ -3259,13 +2921,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_START_EVENT;
-
-        /**
-         * Gets the default type url for S_ROUND_START_EVENT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ROUND_END_EVENT. */
@@ -3316,13 +2971,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_END_EVENT;
-
-        /**
-         * Gets the default type url for S_ROUND_END_EVENT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_DRAW_CARDS. */
@@ -3415,13 +3063,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_DRAW_CARDS;
-
-        /**
-         * Gets the default type url for S_DRAW_CARDS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_FEE_INFO. */
@@ -3484,13 +3125,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_FEE_INFO;
-
-        /**
-         * Gets the default type url for S_FEE_INFO
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_DISCARD. */
@@ -3510,6 +3144,9 @@ declare namespace GamePto {
 
         /** S_DISCARD uid */
         uid?: (number|null);
+
+        /** S_DISCARD discardTimes */
+        discardTimes?: (number|null);
     }
 
     /** Represents a S_DISCARD. */
@@ -3536,6 +3173,9 @@ declare namespace GamePto {
         /** S_DISCARD uid. */
         public uid: number;
 
+        /** S_DISCARD discardTimes. */
+        public discardTimes: number;
+
         /**
          * Encodes the specified S_DISCARD message. Does not implicitly {@link GamePto.S_DISCARD.verify|verify} messages.
          * @param message S_DISCARD message or plain object to encode
@@ -3553,13 +3193,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_DISCARD;
-
-        /**
-         * Gets the default type url for S_DISCARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_USE_CARD. */
@@ -3628,13 +3261,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_USE_CARD;
-
-        /**
-         * Gets the default type url for S_USE_CARD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ROUND_END_TIME. */
@@ -3691,13 +3317,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ROUND_END_TIME;
-
-        /**
-         * Gets the default type url for S_ROUND_END_TIME
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MAP_DATA. */
@@ -3748,13 +3367,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_MAP_DATA;
-
-        /**
-         * Gets the default type url for S_MAP_DATA
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_MOVE. */
@@ -3829,13 +3441,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_MOVE;
-
-        /**
-         * Gets the default type url for S_MOVE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ATTACK. */
@@ -3850,14 +3455,14 @@ declare namespace GamePto {
         /** S_ATTACK uid */
         uid?: (number|null);
 
-        /** S_ATTACK dices */
-        dices?: (number[]|null);
-
         /** S_ATTACK leastAtkTimes */
         leastAtkTimes?: (number|null);
 
         /** S_ATTACK damage */
         damage?: (number|null);
+
+        /** S_ATTACK strikeBackDamage */
+        strikeBackDamage?: (number|null);
 
         /** S_ATTACK allowAtk */
         allowAtk?: (boolean|null);
@@ -3887,14 +3492,14 @@ declare namespace GamePto {
         /** S_ATTACK uid. */
         public uid: number;
 
-        /** S_ATTACK dices. */
-        public dices: number[];
-
         /** S_ATTACK leastAtkTimes. */
         public leastAtkTimes: number;
 
         /** S_ATTACK damage. */
         public damage: number;
+
+        /** S_ATTACK strikeBackDamage. */
+        public strikeBackDamage: number;
 
         /** S_ATTACK allowAtk. */
         public allowAtk: boolean;
@@ -3922,13 +3527,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ATTACK;
-
-        /**
-         * Gets the default type url for S_ATTACK
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ENTITY_DEAD. */
@@ -3979,13 +3577,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ENTITY_DEAD;
-
-        /**
-         * Gets the default type url for S_ENTITY_DEAD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_EVENT_UPDATE. */
@@ -4036,13 +3627,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_EVENT_UPDATE;
-
-        /**
-         * Gets the default type url for S_EVENT_UPDATE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_UPDATE_ENTITYS. */
@@ -4099,13 +3683,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_UPDATE_ENTITYS;
-
-        /**
-         * Gets the default type url for S_UPDATE_ENTITYS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_COMMON_EFFECT. */
@@ -4162,13 +3739,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_COMMON_EFFECT;
-
-        /**
-         * Gets the default type url for S_COMMON_EFFECT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_FLY_EFFECT. */
@@ -4231,13 +3801,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_FLY_EFFECT;
-
-        /**
-         * Gets the default type url for S_FLY_EFFECT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_SELF_EFFECT. */
@@ -4306,13 +3869,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_SELF_EFFECT;
-
-        /**
-         * Gets the default type url for S_SELF_EFFECT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_CARD_DENY. */
@@ -4375,13 +3931,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_CARD_DENY;
-
-        /**
-         * Gets the default type url for S_CARD_DENY
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_GAME_OVER. */
@@ -4432,13 +3981,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_GAME_OVER;
-
-        /**
-         * Gets the default type url for S_GAME_OVER
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_RECONNECT. */
@@ -4537,13 +4079,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_RECONNECT;
-
-        /**
-         * Gets the default type url for S_RECONNECT
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_HANDCARDS_UPDATE. */
@@ -4600,13 +4135,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_HANDCARDS_UPDATE;
-
-        /**
-         * Gets the default type url for S_HANDCARDS_UPDATE
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_ACTION_RECORD. */
@@ -4669,13 +4197,6 @@ declare namespace GamePto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): GamePto.S_ACTION_RECORD;
-
-        /**
-         * Gets the default type url for S_ACTION_RECORD
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -4736,13 +4257,6 @@ declare namespace LoginPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): LoginPto.C_LOGIN;
-
-        /**
-         * Gets the default type url for C_LOGIN
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_LOGIN. */
@@ -4829,13 +4343,6 @@ declare namespace LoginPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): LoginPto.S_LOGIN;
-
-        /**
-         * Gets the default type url for S_LOGIN
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a C_REGISTER. */
@@ -4898,13 +4405,6 @@ declare namespace LoginPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): LoginPto.C_REGISTER;
-
-        /**
-         * Gets the default type url for C_REGISTER
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 
     /** Properties of a S_REGISTER. */
@@ -4955,13 +4455,6 @@ declare namespace LoginPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): LoginPto.S_REGISTER;
-
-        /**
-         * Gets the default type url for S_REGISTER
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }
 
@@ -5022,12 +4515,5 @@ declare namespace SystemPto {
          * @throws {protobuf.util.ProtocolError} If required fields are missing
          */
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): SystemPto.S_TIPS;
-
-        /**
-         * Gets the default type url for S_TIPS
-         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns The default type url
-         */
-        public static getTypeUrl(typeUrlPrefix?: string): string;
     }
 }

@@ -150,6 +150,7 @@ export class GameTable extends BaseTable {
                 detail.atkTimesLimit = u.atkTimesLimit;
                 detail.moveTimes = u.moveTimes;
                 detail.moveTimesLimit = u.moveTimesLimit;
+                detail.discardTimes = u.discardTimes;
                 detail.uid = u.uid;
                 detail.fee = u.fee;
                 detail.maxFee = u.feeMax;

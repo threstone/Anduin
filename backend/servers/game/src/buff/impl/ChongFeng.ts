@@ -1,4 +1,3 @@
-import { GamePto } from "../../../../../common/CommonProto";
 import { UnitCard } from "../../card/UnitCard";
 import { EventData, EventType } from "../../game/EventDefine";
 import { BuffEffectiveDefine } from "../../game/GameDefine";
@@ -32,9 +31,8 @@ export class ChongFeng extends GameBuff {
         source.attack += addAtk;
         source.tempAtkAdd = addAtk;
 
-        const notice = new GamePto.S_UPDATE_ENTITYS();
-        notice.entityCards.push(source);
-        source.table.broadcast(notice);
+        // 更新客户端卡牌实体数据
+        source.updateClientEntity();
         next();
     }
 
@@ -43,9 +41,9 @@ export class ChongFeng extends GameBuff {
         self.attack -= self.tempAtkAdd;
         self.tempAtkAdd = 0;
 
-        const notice = new GamePto.S_UPDATE_ENTITYS();
-        notice.entityCards.push(self);
-        self.table.broadcast(notice);
+        // 更新客户端卡牌实体数据
+        self.updateClientEntity();
+
         next();
     }
 }

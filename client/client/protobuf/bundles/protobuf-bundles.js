@@ -197,35 +197,18 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 0: {
-                        message.id = reader.int32();
-                        break;
-                    }
-                case 1: {
-                        message.count = reader.int32();
-                        break;
-                    }
+                case 0:
+                    message.id = reader.int32();
+                    break;
+                case 1:
+                    message.count = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for Card
-         * @function getTypeUrl
-         * @memberof CardsPto.Card
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.Card";
         };
 
         return Card;
@@ -355,53 +338,32 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 0: {
-                        message.deckId = reader.int32();
-                        break;
-                    }
-                case 1: {
-                        if (!(message.cards && message.cards.length))
-                            message.cards = [];
-                        message.cards.push($root.CardsPto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 2: {
-                        message.deckName = reader.string();
-                        break;
-                    }
-                case 3: {
-                        message.powerId = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.accessToUse = reader.bool();
-                        break;
-                    }
-                case 5: {
-                        message.heroId = reader.int32();
-                        break;
-                    }
+                case 0:
+                    message.deckId = reader.int32();
+                    break;
+                case 1:
+                    if (!(message.cards && message.cards.length))
+                        message.cards = [];
+                    message.cards.push($root.CardsPto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 2:
+                    message.deckName = reader.string();
+                    break;
+                case 3:
+                    message.powerId = reader.int32();
+                    break;
+                case 4:
+                    message.accessToUse = reader.bool();
+                    break;
+                case 5:
+                    message.heroId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for Deck
-         * @function getTypeUrl
-         * @memberof CardsPto.Deck
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Deck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.Deck";
         };
 
         return Deck;
@@ -485,35 +447,18 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_REQ_CARDS_INFO
-         * @function getTypeUrl
-         * @memberof CardsPto.C_REQ_CARDS_INFO
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_REQ_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_REQ_CARDS_INFO";
         };
 
         return C_REQ_CARDS_INFO;
@@ -623,47 +568,28 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.cardInfos && message.cardInfos.length))
-                            message.cardInfos = [];
-                        message.cardInfos.push($root.CardsPto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(message.deckList && message.deckList.length))
-                            message.deckList = [];
-                        message.deckList.push($root.CardsPto.Deck.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.cardInfos && message.cardInfos.length))
+                        message.cardInfos = [];
+                    message.cardInfos.push($root.CardsPto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.deckList && message.deckList.length))
+                        message.deckList = [];
+                    message.deckList.push($root.CardsPto.Deck.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_CARDS_INFO
-         * @function getTypeUrl
-         * @memberof CardsPto.S_CARDS_INFO
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_CARDS_INFO";
         };
 
         return S_CARDS_INFO;
@@ -758,39 +684,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardId = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_MAKE_CARD
-         * @function getTypeUrl
-         * @memberof CardsPto.C_MAKE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_MAKE_CARD";
         };
 
         return C_MAKE_CARD;
@@ -896,43 +804,24 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardId = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardId = reader.int32();
+                    break;
+                case 4:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MAKE_CARD
-         * @function getTypeUrl
-         * @memberof CardsPto.S_MAKE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_MAKE_CARD";
         };
 
         return S_MAKE_CARD;
@@ -1027,39 +916,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardId = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_DISASSEMBLE_CARD
-         * @function getTypeUrl
-         * @memberof CardsPto.C_DISASSEMBLE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_DISASSEMBLE_CARD";
         };
 
         return C_DISASSEMBLE_CARD;
@@ -1165,43 +1036,24 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardId = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardId = reader.int32();
+                    break;
+                case 4:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_DISASSEMBLE_CARD
-         * @function getTypeUrl
-         * @memberof CardsPto.S_DISASSEMBLE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_DISASSEMBLE_CARD";
         };
 
         return S_DISASSEMBLE_CARD;
@@ -1296,39 +1148,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_SAVE_CARDS
-         * @function getTypeUrl
-         * @memberof CardsPto.C_SAVE_CARDS
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_SAVE_CARDS";
         };
 
         return C_SAVE_CARDS;
@@ -1423,39 +1257,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deck = $root.CardsPto.Deck.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_SAVE_DECK
-         * @function getTypeUrl
-         * @memberof CardsPto.S_SAVE_DECK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_SAVE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_SAVE_DECK";
         };
 
         return S_SAVE_DECK;
@@ -1550,39 +1366,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deckId = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deckId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_DELETE_DECK
-         * @function getTypeUrl
-         * @memberof CardsPto.C_DELETE_DECK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_DELETE_DECK";
         };
 
         return C_DELETE_DECK;
@@ -1677,39 +1475,21 @@ $root.CardsPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deckId = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deckId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_DELETE_DECK
-         * @function getTypeUrl
-         * @memberof CardsPto.S_DELETE_DECK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_DELETE_DECK";
         };
 
         return S_DELETE_DECK;
@@ -1852,47 +1632,27 @@ $root.ChatPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.msg = reader.string();
-                        break;
-                    }
-                case 5: {
-                        message.msgType = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    message.msg = reader.string();
+                    break;
+                case 5:
+                    message.msgType = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_SEND_MESSAGE
-         * @function getTypeUrl
-         * @memberof ChatPto.C_SEND_MESSAGE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_SEND_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.C_SEND_MESSAGE";
         };
 
         return C_SEND_MESSAGE;
@@ -2020,51 +1780,30 @@ $root.ChatPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.msg = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.nick = reader.string();
-                        break;
-                    }
-                case 5: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.msgType = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.msg = reader.string();
+                    break;
+                case 4:
+                    message.nick = reader.string();
+                    break;
+                case 5:
+                    message.uid = reader.int32();
+                    break;
+                case 6:
+                    message.msgType = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_CHAT_MESSAGE
-         * @function getTypeUrl
-         * @memberof ChatPto.S_CHAT_MESSAGE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_CHAT_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.S_CHAT_MESSAGE";
         };
 
         return S_CHAT_MESSAGE;
@@ -2171,39 +1910,21 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_ADD_FRIEND
-         * @function getTypeUrl
-         * @memberof FriendPto.C_ADD_FRIEND
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_ADD_FRIEND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.C_ADD_FRIEND";
         };
 
         return C_ADD_FRIEND;
@@ -2298,39 +2019,21 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ADD_FRIEND_REQ
-         * @function getTypeUrl
-         * @memberof FriendPto.S_ADD_FRIEND_REQ
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ADD_FRIEND_REQ.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND_REQ";
         };
 
         return S_ADD_FRIEND_REQ;
@@ -2436,43 +2139,24 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.isApprove = reader.bool();
-                        break;
-                    }
-                case 4: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.isApprove = reader.bool();
+                    break;
+                case 4:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_ADD_FRIEND_REQ_RESULT
-         * @function getTypeUrl
-         * @memberof FriendPto.C_ADD_FRIEND_REQ_RESULT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_ADD_FRIEND_REQ_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.C_ADD_FRIEND_REQ_RESULT";
         };
 
         return C_ADD_FRIEND_REQ_RESULT;
@@ -2578,43 +2262,24 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.friend = $root.FriendPto.Friend.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 4: {
-                        message.isNewFriend = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.friend = $root.FriendPto.Friend.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.isNewFriend = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_FRIEND_CHANGE
-         * @function getTypeUrl
-         * @memberof FriendPto.S_FRIEND_CHANGE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_FRIEND_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_FRIEND_CHANGE";
         };
 
         return S_FRIEND_CHANGE;
@@ -2709,39 +2374,21 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.user = $root.FriendPto.Friend.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.user = $root.FriendPto.Friend.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ADD_FRIEND
-         * @function getTypeUrl
-         * @memberof FriendPto.S_ADD_FRIEND
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ADD_FRIEND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND";
         };
 
         return S_ADD_FRIEND;
@@ -2836,39 +2483,21 @@ $root.FriendPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.nick = reader.string();
-                        break;
-                    }
-                case 3: {
-                        message.isOnline = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.uid = reader.int32();
+                    break;
+                case 2:
+                    message.nick = reader.string();
+                    break;
+                case 3:
+                    message.isOnline = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for Friend
-         * @function getTypeUrl
-         * @memberof FriendPto.Friend
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Friend.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.Friend";
         };
 
         return Friend;
@@ -2975,39 +2604,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.targetUid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.targetUid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_REQ_MATCH
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_REQ_MATCH
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH";
         };
 
         return C_REQ_MATCH;
@@ -3113,43 +2724,24 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.code = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.endTime = reader.int64();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
+                case 4:
+                    message.endTime = reader.int64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_REQ_MATCH
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_REQ_MATCH
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH";
         };
 
         return S_REQ_MATCH;
@@ -3233,35 +2825,18 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_CANCEL_REQ_MATCH
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_CANCEL_REQ_MATCH
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_CANCEL_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_CANCEL_REQ_MATCH";
         };
 
         return C_CANCEL_REQ_MATCH;
@@ -3367,43 +2942,24 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.result = reader.bool();
-                        break;
-                    }
-                case 4: {
-                        message.targetUid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.result = reader.bool();
+                    break;
+                case 4:
+                    message.targetUid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_REQ_MATCH_RESULT
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_REQ_MATCH_RESULT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH_RESULT";
         };
 
         return S_REQ_MATCH_RESULT;
@@ -3509,43 +3065,24 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.friendUid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.endTime = reader.int64();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.friendUid = reader.int32();
+                    break;
+                case 4:
+                    message.endTime = reader.int64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MATCH
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_MATCH
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH";
         };
 
         return S_MATCH;
@@ -3640,39 +3177,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.result = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.result = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_REQ_MATCH_RESULT
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_REQ_MATCH_RESULT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH_RESULT";
         };
 
         return C_REQ_MATCH_RESULT;
@@ -3767,39 +3286,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.endTime = reader.int64();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.endTime = reader.int64();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MATCH_DECK
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_MATCH_DECK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MATCH_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_DECK";
         };
 
         return S_MATCH_DECK;
@@ -3894,39 +3395,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deckId = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deckId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_DECK_CHOOSE
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_DECK_CHOOSE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_DECK_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_DECK_CHOOSE";
         };
 
         return C_DECK_CHOOSE;
@@ -4010,35 +3493,18 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_MATCH_CANCEL_DECK
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_MATCH_CANCEL_DECK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_MATCH_CANCEL_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_DECK";
         };
 
         return C_MATCH_CANCEL_DECK;
@@ -4122,35 +3588,18 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_MATCH_LEAVE
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.C_MATCH_LEAVE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_LEAVE";
         };
 
         return C_MATCH_LEAVE;
@@ -4245,39 +3694,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MATCH_STOP
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_MATCH_STOP
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_STOP";
         };
 
         return S_MATCH_STOP;
@@ -4372,39 +3803,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.isChoose = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.isChoose = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_FRIEND_DECK_STATUS_CHANGE
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_FRIEND_DECK_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE";
         };
 
         return S_FRIEND_DECK_STATUS_CHANGE;
@@ -4499,39 +3912,21 @@ $root.FriendlyMatchPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_DECK_CHOOSE_RESULT
-         * @function getTypeUrl
-         * @memberof FriendlyMatchPto.S_DECK_CHOOSE_RESULT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_DECK_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_DECK_CHOOSE_RESULT";
         };
 
         return S_DECK_CHOOSE_RESULT;
@@ -4758,39 +4153,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 0: {
-                        message.nick = reader.string();
-                        break;
-                    }
-                case 1: {
-                        message.power = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 0:
+                    message.nick = reader.string();
+                    break;
+                case 1:
+                    message.power = reader.int32();
+                    break;
+                case 2:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for UserInfo
-         * @function getTypeUrl
-         * @memberof GamePto.UserInfo
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        UserInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.UserInfo";
         };
 
         return UserInfo;
@@ -5011,90 +4388,61 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 0: {
-                        message.id = reader.int32();
-                        break;
-                    }
-                case 1: {
-                        message.cardId = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.cardType = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.attack = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.hp = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.hpUpperLimit = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.cardFee = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 8: {
-                        message.blockX = reader.int32();
-                        break;
-                    }
-                case 9: {
-                        message.blockY = reader.int32();
-                        break;
-                    }
-                case 10: {
-                        message.allowAtk = reader.bool();
-                        break;
-                    }
-                case 11: {
-                        message.allowMove = reader.bool();
-                        break;
-                    }
-                case 12: {
-                        if (!(message.buffList && message.buffList.length))
-                            message.buffList = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.buffList.push(reader.int32());
-                        } else
+                case 0:
+                    message.id = reader.int32();
+                    break;
+                case 1:
+                    message.cardId = reader.int32();
+                    break;
+                case 2:
+                    message.cardType = reader.int32();
+                    break;
+                case 3:
+                    message.attack = reader.int32();
+                    break;
+                case 4:
+                    message.hp = reader.int32();
+                    break;
+                case 5:
+                    message.hpUpperLimit = reader.int32();
+                    break;
+                case 6:
+                    message.cardFee = reader.int32();
+                    break;
+                case 7:
+                    message.uid = reader.int32();
+                    break;
+                case 8:
+                    message.blockX = reader.int32();
+                    break;
+                case 9:
+                    message.blockY = reader.int32();
+                    break;
+                case 10:
+                    message.allowAtk = reader.bool();
+                    break;
+                case 11:
+                    message.allowMove = reader.bool();
+                    break;
+                case 12:
+                    if (!(message.buffList && message.buffList.length))
+                        message.buffList = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.buffList.push(reader.int32());
-                        break;
-                    }
-                case 13: {
-                        message.silenced = reader.bool();
-                        break;
-                    }
+                    } else
+                        message.buffList.push(reader.int32());
+                    break;
+                case 13:
+                    message.silenced = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for Card
-         * @function getTypeUrl
-         * @memberof GamePto.Card
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.Card";
         };
 
         return Card;
@@ -5182,39 +4530,22 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 0: {
-                        if (!(message.eventCards && message.eventCards.length))
-                            message.eventCards = [];
-                        message.eventCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 1: {
-                        if (!(message.entityCards && message.entityCards.length))
-                            message.entityCards = [];
-                        message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 0:
+                    if (!(message.eventCards && message.eventCards.length))
+                        message.eventCards = [];
+                    message.eventCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 1:
+                    if (!(message.entityCards && message.entityCards.length))
+                        message.entityCards = [];
+                    message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for MapData
-         * @function getTypeUrl
-         * @memberof GamePto.MapData
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        MapData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.MapData";
         };
 
         return MapData;
@@ -5233,6 +4564,7 @@ $root.GamePto = (function() {
          * @property {number|null} [atkTimesLimit] UserDetail atkTimesLimit
          * @property {number|null} [moveTimes] UserDetail moveTimes
          * @property {number|null} [moveTimesLimit] UserDetail moveTimesLimit
+         * @property {number|null} [discardTimes] UserDetail discardTimes
          */
 
         /**
@@ -5307,6 +4639,14 @@ $root.GamePto = (function() {
         UserDetail.prototype.moveTimesLimit = 0;
 
         /**
+         * UserDetail discardTimes.
+         * @member {number} discardTimes
+         * @memberof GamePto.UserDetail
+         * @instance
+         */
+        UserDetail.prototype.discardTimes = 0;
+
+        /**
          * Encodes the specified UserDetail message. Does not implicitly {@link GamePto.UserDetail.verify|verify} messages.
          * @function encode
          * @memberof GamePto.UserDetail
@@ -5332,6 +4672,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.moveTimes);
             if (message.moveTimesLimit != null && Object.hasOwnProperty.call(message, "moveTimesLimit"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.moveTimesLimit);
+            if (message.discardTimes != null && Object.hasOwnProperty.call(message, "discardTimes"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.discardTimes);
             return writer;
         };
 
@@ -5353,55 +4695,36 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.fee = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.maxFee = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.atkTimes = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.atkTimesLimit = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.moveTimes = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.moveTimesLimit = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.fee = reader.int32();
+                    break;
+                case 2:
+                    message.maxFee = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    message.atkTimes = reader.int32();
+                    break;
+                case 5:
+                    message.atkTimesLimit = reader.int32();
+                    break;
+                case 6:
+                    message.moveTimes = reader.int32();
+                    break;
+                case 7:
+                    message.moveTimesLimit = reader.int32();
+                    break;
+                case 8:
+                    message.discardTimes = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for UserDetail
-         * @function getTypeUrl
-         * @memberof GamePto.UserDetail
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        UserDetail.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.UserDetail";
         };
 
         return UserDetail;
@@ -5496,39 +4819,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 2: {
-                        message.type = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.value = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 2:
+                    message.type = reader.int32();
+                    break;
+                case 3:
+                    message.value = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for AffectedCard
-         * @function getTypeUrl
-         * @memberof GamePto.AffectedCard
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        AffectedCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.AffectedCard";
         };
 
         return AffectedCard;
@@ -5628,46 +4933,28 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.replaceCardIndexes && message.replaceCardIndexes.length))
-                            message.replaceCardIndexes = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.replaceCardIndexes.push(reader.int32());
-                        } else
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.replaceCardIndexes && message.replaceCardIndexes.length))
+                        message.replaceCardIndexes = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.replaceCardIndexes.push(reader.int32());
-                        break;
-                    }
+                    } else
+                        message.replaceCardIndexes.push(reader.int32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_PREPARE_TO_START
-         * @function getTypeUrl
-         * @memberof GamePto.C_PREPARE_TO_START
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_PREPARE_TO_START.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_PREPARE_TO_START";
         };
 
         return C_PREPARE_TO_START;
@@ -5751,35 +5038,18 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_END_ROUND
-         * @function getTypeUrl
-         * @memberof GamePto.C_END_ROUND
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_END_ROUND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_END_ROUND";
         };
 
         return C_END_ROUND;
@@ -5874,39 +5144,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardIndex = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardIndex = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_DISCARD
-         * @function getTypeUrl
-         * @memberof GamePto.C_DISCARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_DISCARD";
         };
 
         return C_DISCARD;
@@ -6017,50 +5269,31 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.cardIndex = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(message.dataArr && message.dataArr.length))
-                            message.dataArr = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.dataArr.push(reader.int32());
-                        } else
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.cardIndex = reader.int32();
+                    break;
+                case 4:
+                    if (!(message.dataArr && message.dataArr.length))
+                        message.dataArr = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.dataArr.push(reader.int32());
-                        break;
-                    }
+                    } else
+                        message.dataArr.push(reader.int32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_USE_CARD
-         * @function getTypeUrl
-         * @memberof GamePto.C_USE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_USE_CARD";
         };
 
         return C_USE_CARD;
@@ -6188,51 +5421,30 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.sourceX = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.sourceY = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.targetX = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.targetY = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.sourceX = reader.int32();
+                    break;
+                case 4:
+                    message.sourceY = reader.int32();
+                    break;
+                case 5:
+                    message.targetX = reader.int32();
+                    break;
+                case 6:
+                    message.targetY = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_MOVE
-         * @function getTypeUrl
-         * @memberof GamePto.C_MOVE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_MOVE";
         };
 
         return C_MOVE;
@@ -6360,51 +5572,30 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.sourceX = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.sourceY = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.targetX = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.targetY = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.sourceX = reader.int32();
+                    break;
+                case 4:
+                    message.sourceY = reader.int32();
+                    break;
+                case 5:
+                    message.targetX = reader.int32();
+                    break;
+                case 6:
+                    message.targetY = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_ATTACK
-         * @function getTypeUrl
-         * @memberof GamePto.C_ATTACK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_ATTACK";
         };
 
         return C_ATTACK;
@@ -6488,35 +5679,18 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_RECONNECT
-         * @function getTypeUrl
-         * @memberof GamePto.C_RECONNECT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_RECONNECT";
         };
 
         return C_RECONNECT;
@@ -6600,35 +5774,18 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_SURRENDER
-         * @function getTypeUrl
-         * @memberof GamePto.C_SURRENDER
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_SURRENDER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_SURRENDER";
         };
 
         return C_SURRENDER;
@@ -6723,39 +5880,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.message = reader.string();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.message = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_SERVER_ERROR
-         * @function getTypeUrl
-         * @memberof GamePto.S_SERVER_ERROR
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_SERVER_ERROR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_SERVER_ERROR";
         };
 
         return S_SERVER_ERROR;
@@ -6852,41 +5991,23 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.users && message.users.length))
-                            message.users = [];
-                        message.users.push($root.GamePto.UserInfo.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.users && message.users.length))
+                        message.users = [];
+                    message.users.push($root.GamePto.UserInfo.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_INIT_GAME
-         * @function getTypeUrl
-         * @memberof GamePto.S_INIT_GAME
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_INIT_GAME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_INIT_GAME";
         };
 
         return S_INIT_GAME;
@@ -7027,57 +6148,35 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.firstUid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(message.cards && message.cards.length))
-                            message.cards = [];
-                        message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 5: {
-                        message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 6: {
-                        message.replaceEndTime = reader.int64();
-                        break;
-                    }
-                case 7: {
-                        message.isReplace = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.firstUid = reader.int32();
+                    break;
+                case 4:
+                    if (!(message.cards && message.cards.length))
+                        message.cards = [];
+                    message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.replaceEndTime = reader.int64();
+                    break;
+                case 7:
+                    message.isReplace = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_GAME_START
-         * @function getTypeUrl
-         * @memberof GamePto.S_GAME_START
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_GAME_START.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_GAME_START";
         };
 
         return S_GAME_START;
@@ -7201,56 +6300,36 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.cards && message.cards.length))
-                            message.cards = [];
-                        message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(message.replaceCardIndexes && message.replaceCardIndexes.length))
-                            message.replaceCardIndexes = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.replaceCardIndexes.push(reader.int32());
-                        } else
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.cards && message.cards.length))
+                        message.cards = [];
+                    message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.replaceCardIndexes && message.replaceCardIndexes.length))
+                        message.replaceCardIndexes = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.replaceCardIndexes.push(reader.int32());
-                        break;
-                    }
-                case 5: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                    } else
+                        message.replaceCardIndexes.push(reader.int32());
+                    break;
+                case 5:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_REPLACE_CARDS
-         * @function getTypeUrl
-         * @memberof GamePto.S_REPLACE_CARDS
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_REPLACE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_REPLACE_CARDS";
         };
 
         return S_REPLACE_CARDS;
@@ -7269,6 +6348,7 @@ $root.GamePto = (function() {
          * @property {number|null} [atkTimesLimit] S_ROUND_START_EVENT atkTimesLimit
          * @property {number|null} [moveTimes] S_ROUND_START_EVENT moveTimes
          * @property {number|null} [moveTimesLimit] S_ROUND_START_EVENT moveTimesLimit
+         * @property {number|null} [discardTimes] S_ROUND_START_EVENT discardTimes
          */
 
         /**
@@ -7343,6 +6423,14 @@ $root.GamePto = (function() {
         S_ROUND_START_EVENT.prototype.moveTimesLimit = 0;
 
         /**
+         * S_ROUND_START_EVENT discardTimes.
+         * @member {number} discardTimes
+         * @memberof GamePto.S_ROUND_START_EVENT
+         * @instance
+         */
+        S_ROUND_START_EVENT.prototype.discardTimes = 0;
+
+        /**
          * Encodes the specified S_ROUND_START_EVENT message. Does not implicitly {@link GamePto.S_ROUND_START_EVENT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_ROUND_START_EVENT
@@ -7368,6 +6456,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.moveTimes);
             if (message.moveTimesLimit != null && Object.hasOwnProperty.call(message, "moveTimesLimit"))
                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.moveTimesLimit);
+            if (message.discardTimes != null && Object.hasOwnProperty.call(message, "discardTimes"))
+                writer.uint32(/* id 8, wireType 0 =*/64).int32(message.discardTimes);
             return writer;
         };
 
@@ -7389,55 +6479,36 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.atkTimes = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.atkTimesLimit = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.moveTimes = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.moveTimesLimit = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    message.atkTimes = reader.int32();
+                    break;
+                case 5:
+                    message.atkTimesLimit = reader.int32();
+                    break;
+                case 6:
+                    message.moveTimes = reader.int32();
+                    break;
+                case 7:
+                    message.moveTimesLimit = reader.int32();
+                    break;
+                case 8:
+                    message.discardTimes = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ROUND_START_EVENT
-         * @function getTypeUrl
-         * @memberof GamePto.S_ROUND_START_EVENT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ROUND_START_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_START_EVENT";
         };
 
         return S_ROUND_START_EVENT;
@@ -7532,39 +6603,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ROUND_END_EVENT
-         * @function getTypeUrl
-         * @memberof GamePto.S_ROUND_END_EVENT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ROUND_END_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_END_EVENT";
         };
 
         return S_ROUND_END_EVENT;
@@ -7745,78 +6798,53 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.inHandCards && message.inHandCards.length))
-                            message.inHandCards = [];
-                        message.inHandCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 4: {
-                        message.inHandCardCount = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        if (!(message.discards && message.discards.length))
-                            message.discards = [];
-                        message.discards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 6: {
-                        message.discardsCount = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        if (!(message.damages && message.damages.length))
-                            message.damages = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.damages.push(reader.int32());
-                        } else
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.inHandCards && message.inHandCards.length))
+                        message.inHandCards = [];
+                    message.inHandCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    message.inHandCardCount = reader.int32();
+                    break;
+                case 5:
+                    if (!(message.discards && message.discards.length))
+                        message.discards = [];
+                    message.discards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 6:
+                    message.discardsCount = reader.int32();
+                    break;
+                case 7:
+                    if (!(message.damages && message.damages.length))
+                        message.damages = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.damages.push(reader.int32());
-                        break;
-                    }
-                case 8: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 9: {
-                        message.cardPoolNum = reader.int32();
-                        break;
-                    }
-                case 10: {
-                        message.deadPoolNum = reader.int32();
-                        break;
-                    }
+                    } else
+                        message.damages.push(reader.int32());
+                    break;
+                case 8:
+                    message.uid = reader.int32();
+                    break;
+                case 9:
+                    message.cardPoolNum = reader.int32();
+                    break;
+                case 10:
+                    message.deadPoolNum = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_DRAW_CARDS
-         * @function getTypeUrl
-         * @memberof GamePto.S_DRAW_CARDS
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_DRAW_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_DRAW_CARDS";
         };
 
         return S_DRAW_CARDS;
@@ -7933,47 +6961,27 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.fee = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.maxFee = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.fee = reader.int32();
+                    break;
+                case 4:
+                    message.maxFee = reader.int32();
+                    break;
+                case 5:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_FEE_INFO
-         * @function getTypeUrl
-         * @memberof GamePto.S_FEE_INFO
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_FEE_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_FEE_INFO";
         };
 
         return S_FEE_INFO;
@@ -7990,6 +6998,7 @@ $root.GamePto = (function() {
          * @property {boolean|null} [isSuccess] S_DISCARD isSuccess
          * @property {number|null} [cardIndex] S_DISCARD cardIndex
          * @property {number|null} [uid] S_DISCARD uid
+         * @property {number|null} [discardTimes] S_DISCARD discardTimes
          */
 
         /**
@@ -8048,6 +7057,14 @@ $root.GamePto = (function() {
         S_DISCARD.prototype.uid = 0;
 
         /**
+         * S_DISCARD discardTimes.
+         * @member {number} discardTimes
+         * @memberof GamePto.S_DISCARD
+         * @instance
+         */
+        S_DISCARD.prototype.discardTimes = 0;
+
+        /**
          * Encodes the specified S_DISCARD message. Does not implicitly {@link GamePto.S_DISCARD.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_DISCARD
@@ -8069,6 +7086,8 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.cardIndex);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.uid);
+            if (message.discardTimes != null && Object.hasOwnProperty.call(message, "discardTimes"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.discardTimes);
             return writer;
         };
 
@@ -8090,47 +7109,30 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.isSuccess = reader.bool();
-                        break;
-                    }
-                case 4: {
-                        message.cardIndex = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.isSuccess = reader.bool();
+                    break;
+                case 4:
+                    message.cardIndex = reader.int32();
+                    break;
+                case 5:
+                    message.uid = reader.int32();
+                    break;
+                case 6:
+                    message.discardTimes = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_DISCARD
-         * @function getTypeUrl
-         * @memberof GamePto.S_DISCARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_DISCARD";
         };
 
         return S_DISCARD;
@@ -8258,51 +7260,30 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.isSuccess = reader.bool();
-                        break;
-                    }
-                case 4: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.cardIndex = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.isSuccess = reader.bool();
+                    break;
+                case 4:
+                    message.uid = reader.int32();
+                    break;
+                case 5:
+                    message.cardIndex = reader.int32();
+                    break;
+                case 6:
+                    message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_USE_CARD
-         * @function getTypeUrl
-         * @memberof GamePto.S_USE_CARD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_USE_CARD";
         };
 
         return S_USE_CARD;
@@ -8408,43 +7389,24 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.roundEndTime = reader.int64();
-                        break;
-                    }
-                case 4: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.roundEndTime = reader.int64();
+                    break;
+                case 4:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ROUND_END_TIME
-         * @function getTypeUrl
-         * @memberof GamePto.S_ROUND_END_TIME
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ROUND_END_TIME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_END_TIME";
         };
 
         return S_ROUND_END_TIME;
@@ -8539,39 +7501,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MAP_DATA
-         * @function getTypeUrl
-         * @memberof GamePto.S_MAP_DATA
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MAP_DATA.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_MAP_DATA";
         };
 
         return S_MAP_DATA;
@@ -8710,55 +7654,33 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.sourceX = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.sourceY = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 6: {
-                        message.allowMove = reader.bool();
-                        break;
-                    }
-                case 7: {
-                        message.uid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.sourceX = reader.int32();
+                    break;
+                case 4:
+                    message.sourceY = reader.int32();
+                    break;
+                case 5:
+                    message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    message.allowMove = reader.bool();
+                    break;
+                case 7:
+                    message.uid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_MOVE
-         * @function getTypeUrl
-         * @memberof GamePto.S_MOVE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_MOVE";
         };
 
         return S_MOVE;
@@ -8773,9 +7695,9 @@ $root.GamePto = (function() {
          * @property {number|null} [cmd] S_ATTACK cmd
          * @property {number|null} [scmd] S_ATTACK scmd
          * @property {number|null} [uid] S_ATTACK uid
-         * @property {Array.<number>|null} [dices] S_ATTACK dices
          * @property {number|null} [leastAtkTimes] S_ATTACK leastAtkTimes
          * @property {number|null} [damage] S_ATTACK damage
+         * @property {number|null} [strikeBackDamage] S_ATTACK strikeBackDamage
          * @property {boolean|null} [allowAtk] S_ATTACK allowAtk
          * @property {GamePto.ICard|null} [from] S_ATTACK from
          * @property {Array.<GamePto.ICard>|null} [targetList] S_ATTACK targetList
@@ -8790,7 +7712,6 @@ $root.GamePto = (function() {
          * @param {GamePto.IS_ATTACK=} [properties] Properties to set
          */
         function S_ATTACK(properties) {
-            this.dices = [];
             this.targetList = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -8823,14 +7744,6 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.uid = 0;
 
         /**
-         * S_ATTACK dices.
-         * @member {Array.<number>} dices
-         * @memberof GamePto.S_ATTACK
-         * @instance
-         */
-        S_ATTACK.prototype.dices = $util.emptyArray;
-
-        /**
          * S_ATTACK leastAtkTimes.
          * @member {number} leastAtkTimes
          * @memberof GamePto.S_ATTACK
@@ -8845,6 +7758,14 @@ $root.GamePto = (function() {
          * @instance
          */
         S_ATTACK.prototype.damage = 0;
+
+        /**
+         * S_ATTACK strikeBackDamage.
+         * @member {number} strikeBackDamage
+         * @memberof GamePto.S_ATTACK
+         * @instance
+         */
+        S_ATTACK.prototype.strikeBackDamage = 0;
 
         /**
          * S_ATTACK allowAtk.
@@ -8888,16 +7809,12 @@ $root.GamePto = (function() {
                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.scmd);
             if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.uid);
-            if (message.dices != null && message.dices.length) {
-                writer.uint32(/* id 4, wireType 2 =*/34).fork();
-                for (var i = 0; i < message.dices.length; ++i)
-                    writer.int32(message.dices[i]);
-                writer.ldelim();
-            }
             if (message.leastAtkTimes != null && Object.hasOwnProperty.call(message, "leastAtkTimes"))
-                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.leastAtkTimes);
+                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.leastAtkTimes);
             if (message.damage != null && Object.hasOwnProperty.call(message, "damage"))
-                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.damage);
+                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.damage);
+            if (message.strikeBackDamage != null && Object.hasOwnProperty.call(message, "strikeBackDamage"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.strikeBackDamage);
             if (message.allowAtk != null && Object.hasOwnProperty.call(message, "allowAtk"))
                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.allowAtk);
             if (message.from != null && Object.hasOwnProperty.call(message, "from"))
@@ -8926,72 +7843,41 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(message.dices && message.dices.length))
-                            message.dices = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.dices.push(reader.int32());
-                        } else
-                            message.dices.push(reader.int32());
-                        break;
-                    }
-                case 5: {
-                        message.leastAtkTimes = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.damage = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        message.allowAtk = reader.bool();
-                        break;
-                    }
-                case 8: {
-                        message.from = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 9: {
-                        if (!(message.targetList && message.targetList.length))
-                            message.targetList = [];
-                        message.targetList.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    message.leastAtkTimes = reader.int32();
+                    break;
+                case 5:
+                    message.damage = reader.int32();
+                    break;
+                case 6:
+                    message.strikeBackDamage = reader.int32();
+                    break;
+                case 7:
+                    message.allowAtk = reader.bool();
+                    break;
+                case 8:
+                    message.from = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 9:
+                    if (!(message.targetList && message.targetList.length))
+                        message.targetList = [];
+                    message.targetList.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ATTACK
-         * @function getTypeUrl
-         * @memberof GamePto.S_ATTACK
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ATTACK";
         };
 
         return S_ATTACK;
@@ -9086,39 +7972,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.deadCard = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.deadCard = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ENTITY_DEAD
-         * @function getTypeUrl
-         * @memberof GamePto.S_ENTITY_DEAD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ENTITY_DEAD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ENTITY_DEAD";
         };
 
         return S_ENTITY_DEAD;
@@ -9213,39 +8081,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_EVENT_UPDATE
-         * @function getTypeUrl
-         * @memberof GamePto.S_EVENT_UPDATE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_EVENT_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_EVENT_UPDATE";
         };
 
         return S_EVENT_UPDATE;
@@ -9355,47 +8205,28 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(message.entityCards && message.entityCards.length))
-                            message.entityCards = [];
-                        message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(message.tipsList && message.tipsList.length))
-                            message.tipsList = [];
-                        message.tipsList.push(reader.string());
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    if (!(message.entityCards && message.entityCards.length))
+                        message.entityCards = [];
+                    message.entityCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 4:
+                    if (!(message.tipsList && message.tipsList.length))
+                        message.tipsList = [];
+                    message.tipsList.push(reader.string());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_UPDATE_ENTITYS
-         * @function getTypeUrl
-         * @memberof GamePto.S_UPDATE_ENTITYS
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_UPDATE_ENTITYS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_UPDATE_ENTITYS";
         };
 
         return S_UPDATE_ENTITYS;
@@ -9506,50 +8337,31 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.effectId = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(message.dataArr && message.dataArr.length))
-                            message.dataArr = [];
-                        if ((tag & 7) === 2) {
-                            var end2 = reader.uint32() + reader.pos;
-                            while (reader.pos < end2)
-                                message.dataArr.push(reader.int32());
-                        } else
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.effectId = reader.int32();
+                    break;
+                case 4:
+                    if (!(message.dataArr && message.dataArr.length))
+                        message.dataArr = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
                             message.dataArr.push(reader.int32());
-                        break;
-                    }
+                    } else
+                        message.dataArr.push(reader.int32());
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_COMMON_EFFECT
-         * @function getTypeUrl
-         * @memberof GamePto.S_COMMON_EFFECT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_COMMON_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_COMMON_EFFECT";
         };
 
         return S_COMMON_EFFECT;
@@ -9666,47 +8478,27 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.from = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 4: {
-                        message.target = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 5: {
-                        message.targetShowTips = reader.string();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.from = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.target = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.targetShowTips = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_FLY_EFFECT
-         * @function getTypeUrl
-         * @memberof GamePto.S_FLY_EFFECT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_FLY_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_FLY_EFFECT";
         };
 
         return S_FLY_EFFECT;
@@ -9836,53 +8628,32 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.x = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.y = reader.int32();
-                        break;
-                    }
-                case 5: {
-                        message.card = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 6: {
-                        if (!(message.affectedList && message.affectedList.length))
-                            message.affectedList = [];
-                        message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.x = reader.int32();
+                    break;
+                case 4:
+                    message.y = reader.int32();
+                    break;
+                case 5:
+                    message.card = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 6:
+                    if (!(message.affectedList && message.affectedList.length))
+                        message.affectedList = [];
+                    message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_SELF_EFFECT
-         * @function getTypeUrl
-         * @memberof GamePto.S_SELF_EFFECT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_SELF_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_SELF_EFFECT";
         };
 
         return S_SELF_EFFECT;
@@ -9999,47 +8770,27 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.from = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 4: {
-                        message.target = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 5: {
-                        message.targetCardIndex = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.from = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.target = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    message.targetCardIndex = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_CARD_DENY
-         * @function getTypeUrl
-         * @memberof GamePto.S_CARD_DENY
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_CARD_DENY.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_CARD_DENY";
         };
 
         return S_CARD_DENY;
@@ -10134,39 +8885,21 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.winnerUid = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.winnerUid = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_GAME_OVER
-         * @function getTypeUrl
-         * @memberof GamePto.S_GAME_OVER
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_GAME_OVER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_GAME_OVER";
         };
 
         return S_GAME_OVER;
@@ -10355,77 +9088,51 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 4: {
-                        if (!(message.selfCards && message.selfCards.length))
-                            message.selfCards = [];
-                        message.selfCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 5: {
-                        message.targetHandCardNum = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.isFirst = reader.bool();
-                        break;
-                    }
-                case 7: {
-                        if (!(message.deadPool && message.deadPool.length))
-                            message.deadPool = [];
-                        message.deadPool.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 8: {
-                        message.targetDeadPoolNum = reader.int32();
-                        break;
-                    }
-                case 9: {
-                        message.roundEndTime = reader.int64();
-                        break;
-                    }
-                case 10: {
-                        message.isSelfRound = reader.bool();
-                        break;
-                    }
-                case 11: {
-                        if (!(message.users && message.users.length))
-                            message.users = [];
-                        message.users.push($root.GamePto.UserDetail.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.mapData = $root.GamePto.MapData.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    if (!(message.selfCards && message.selfCards.length))
+                        message.selfCards = [];
+                    message.selfCards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 5:
+                    message.targetHandCardNum = reader.int32();
+                    break;
+                case 6:
+                    message.isFirst = reader.bool();
+                    break;
+                case 7:
+                    if (!(message.deadPool && message.deadPool.length))
+                        message.deadPool = [];
+                    message.deadPool.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
+                case 8:
+                    message.targetDeadPoolNum = reader.int32();
+                    break;
+                case 9:
+                    message.roundEndTime = reader.int64();
+                    break;
+                case 10:
+                    message.isSelfRound = reader.bool();
+                    break;
+                case 11:
+                    if (!(message.users && message.users.length))
+                        message.users = [];
+                    message.users.push($root.GamePto.UserDetail.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_RECONNECT
-         * @function getTypeUrl
-         * @memberof GamePto.S_RECONNECT
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_RECONNECT";
         };
 
         return S_RECONNECT;
@@ -10533,45 +9240,26 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(message.cards && message.cards.length))
-                            message.cards = [];
-                        message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.uid = reader.int32();
+                    break;
+                case 4:
+                    if (!(message.cards && message.cards.length))
+                        message.cards = [];
+                    message.cards.push($root.GamePto.Card.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_HANDCARDS_UPDATE
-         * @function getTypeUrl
-         * @memberof GamePto.S_HANDCARDS_UPDATE
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_HANDCARDS_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_HANDCARDS_UPDATE";
         };
 
         return S_HANDCARDS_UPDATE;
@@ -10690,49 +9378,29 @@ $root.GamePto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.recordType = reader.int32();
-                        break;
-                    }
-                case 4: {
-                        message.source = $root.GamePto.Card.decode(reader, reader.uint32());
-                        break;
-                    }
-                case 5: {
-                        if (!(message.affectedList && message.affectedList.length))
-                            message.affectedList = [];
-                        message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.recordType = reader.int32();
+                    break;
+                case 4:
+                    message.source = $root.GamePto.Card.decode(reader, reader.uint32());
+                    break;
+                case 5:
+                    if (!(message.affectedList && message.affectedList.length))
+                        message.affectedList = [];
+                    message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_ACTION_RECORD
-         * @function getTypeUrl
-         * @memberof GamePto.S_ACTION_RECORD
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_ACTION_RECORD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ACTION_RECORD";
         };
 
         return S_ACTION_RECORD;
@@ -10862,43 +9530,24 @@ $root.LoginPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.account = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.password = reader.string();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.account = reader.string();
+                    break;
+                case 4:
+                    message.password = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_LOGIN
-         * @function getTypeUrl
-         * @memberof LoginPto.C_LOGIN
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_LOGIN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.C_LOGIN";
         };
 
         return C_LOGIN;
@@ -11063,67 +9712,43 @@ $root.LoginPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.isSuccess = reader.bool();
-                        break;
-                    }
-                case 4: {
-                        message.nick = reader.string();
-                        break;
-                    }
-                case 5: {
-                        message.headIndex = reader.int32();
-                        break;
-                    }
-                case 6: {
-                        message.uid = reader.int32();
-                        break;
-                    }
-                case 7: {
-                        if (!(message.friendList && message.friendList.length))
-                            message.friendList = [];
-                        message.friendList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 8: {
-                        if (!(message.reqAddList && message.reqAddList.length))
-                            message.reqAddList = [];
-                        message.reqAddList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
-                        break;
-                    }
-                case 9: {
-                        message.needReconnect = reader.bool();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.isSuccess = reader.bool();
+                    break;
+                case 4:
+                    message.nick = reader.string();
+                    break;
+                case 5:
+                    message.headIndex = reader.int32();
+                    break;
+                case 6:
+                    message.uid = reader.int32();
+                    break;
+                case 7:
+                    if (!(message.friendList && message.friendList.length))
+                        message.friendList = [];
+                    message.friendList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
+                    break;
+                case 8:
+                    if (!(message.reqAddList && message.reqAddList.length))
+                        message.reqAddList = [];
+                    message.reqAddList.push($root.FriendPto.Friend.decode(reader, reader.uint32()));
+                    break;
+                case 9:
+                    message.needReconnect = reader.bool();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_LOGIN
-         * @function getTypeUrl
-         * @memberof LoginPto.S_LOGIN
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_LOGIN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.S_LOGIN";
         };
 
         return S_LOGIN;
@@ -11240,47 +9865,27 @@ $root.LoginPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.account = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.password = reader.string();
-                        break;
-                    }
-                case 5: {
-                        message.nick = reader.string();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.account = reader.string();
+                    break;
+                case 4:
+                    message.password = reader.string();
+                    break;
+                case 5:
+                    message.nick = reader.string();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for C_REGISTER
-         * @function getTypeUrl
-         * @memberof LoginPto.C_REGISTER
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        C_REGISTER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.C_REGISTER";
         };
 
         return C_REGISTER;
@@ -11375,39 +9980,21 @@ $root.LoginPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.code = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.code = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_REGISTER
-         * @function getTypeUrl
-         * @memberof LoginPto.S_REGISTER
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_REGISTER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.S_REGISTER";
         };
 
         return S_REGISTER;
@@ -11525,43 +10112,24 @@ $root.SystemPto = (function() {
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
-                case 1: {
-                        message.cmd = reader.int32();
-                        break;
-                    }
-                case 2: {
-                        message.scmd = reader.int32();
-                        break;
-                    }
-                case 3: {
-                        message.msg = reader.string();
-                        break;
-                    }
-                case 4: {
-                        message.hoverTime = reader.int32();
-                        break;
-                    }
+                case 1:
+                    message.cmd = reader.int32();
+                    break;
+                case 2:
+                    message.scmd = reader.int32();
+                    break;
+                case 3:
+                    message.msg = reader.string();
+                    break;
+                case 4:
+                    message.hoverTime = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
                 }
             }
             return message;
-        };
-
-        /**
-         * Gets the default type url for S_TIPS
-         * @function getTypeUrl
-         * @memberof SystemPto.S_TIPS
-         * @static
-         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-         * @returns {string} The default type url
-         */
-        S_TIPS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/SystemPto.S_TIPS";
         };
 
         return S_TIPS;

@@ -34,6 +34,7 @@ export class NodeRoundStart extends BaseNode {
         roundStartMsg.atkTimesLimit = user.atkTimesLimit;
         roundStartMsg.moveTimes = user.moveTimes;
         roundStartMsg.moveTimesLimit = user.moveTimesLimit;
+        roundStartMsg.discardTimes = user.discardTimes;
 
         table.broadcast(roundStartMsg);
 

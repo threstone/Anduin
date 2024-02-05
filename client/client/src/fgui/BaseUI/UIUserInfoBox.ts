@@ -14,6 +14,7 @@ module BaseUI {
 		public atkTimes:fairygui.GTextField;
 		public moveTimes:fairygui.GTextField;
 		public deadCardNum:fairygui.GTextField;
+		public discardTimes:fairygui.GTextField;
 		public static URL:string = "ui://yaux2xpopg482d";
 
 		public static createInstance():UIUserInfoBox {
@@ -34,6 +35,7 @@ module BaseUI {
 			this.atkTimes = <fairygui.GTextField>(this.getChildAt(8));
 			this.moveTimes = <fairygui.GTextField>(this.getChildAt(9));
 			this.deadCardNum = <fairygui.GTextField>(this.getChildAt(10));
+			this.discardTimes = <fairygui.GTextField>(this.getChildAt(11));
 		}
 	}
 }

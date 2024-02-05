@@ -1,4 +1,3 @@
-import { GamePto } from "../../../../../../common/CommonProto";
 import { GlobalVar } from "../../../GlobalVar";
 import { ChuanTouGongJi } from "../../../buff/impl/ChuanTouGongJi";
 import { GameUser } from "../../../game/GameUser";
@@ -13,8 +12,7 @@ export class Card100007 extends MagicCard {
         targetEntity.buffModify(this.attack, this.getHp());
         GlobalVar.buffMgr.addBuff(targetEntity, ChuanTouGongJi.buffId);
 
-        const notice = new GamePto.S_UPDATE_ENTITYS();
-        notice.entityCards.push(targetEntity);
-        targetEntity.table.broadcast(notice);
+        /** 更新客户端卡牌实体数据 */
+        targetEntity.updateClientEntity();
     }
 }

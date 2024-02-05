@@ -50,22 +50,18 @@ $root.LoginPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.account = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.password = r.string();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.account = r.string();
+                    break;
+                case 4:
+                    m.password = r.string();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -120,13 +116,6 @@ $root.LoginPto = (function() {
 
         C_LOGIN.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_LOGIN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.C_LOGIN";
         };
 
         return C_LOGIN;
@@ -192,46 +181,37 @@ $root.LoginPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.isSuccess = r.bool();
-                        break;
-                    }
-                case 4: {
-                        m.nick = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.headIndex = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 7: {
-                        if (!(m.friendList && m.friendList.length))
-                            m.friendList = [];
-                        m.friendList.push($root.FriendPto.Friend.decode(r, r.uint32()));
-                        break;
-                    }
-                case 8: {
-                        if (!(m.reqAddList && m.reqAddList.length))
-                            m.reqAddList = [];
-                        m.reqAddList.push($root.FriendPto.Friend.decode(r, r.uint32()));
-                        break;
-                    }
-                case 9: {
-                        m.needReconnect = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.isSuccess = r.bool();
+                    break;
+                case 4:
+                    m.nick = r.string();
+                    break;
+                case 5:
+                    m.headIndex = r.int32();
+                    break;
+                case 6:
+                    m.uid = r.int32();
+                    break;
+                case 7:
+                    if (!(m.friendList && m.friendList.length))
+                        m.friendList = [];
+                    m.friendList.push($root.FriendPto.Friend.decode(r, r.uint32()));
+                    break;
+                case 8:
+                    if (!(m.reqAddList && m.reqAddList.length))
+                        m.reqAddList = [];
+                    m.reqAddList.push($root.FriendPto.Friend.decode(r, r.uint32()));
+                    break;
+                case 9:
+                    m.needReconnect = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -345,13 +325,6 @@ $root.LoginPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_LOGIN.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.S_LOGIN";
-        };
-
         return S_LOGIN;
     })();
 
@@ -397,26 +370,21 @@ $root.LoginPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.account = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.password = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.nick = r.string();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.account = r.string();
+                    break;
+                case 4:
+                    m.password = r.string();
+                    break;
+                case 5:
+                    m.nick = r.string();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -480,13 +448,6 @@ $root.LoginPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_REGISTER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.C_REGISTER";
-        };
-
         return C_REGISTER;
     })();
 
@@ -526,18 +487,15 @@ $root.LoginPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -587,13 +545,6 @@ $root.LoginPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_REGISTER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/LoginPto.S_REGISTER";
-        };
-
         return S_REGISTER;
     })();
 
@@ -640,18 +591,15 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -701,13 +649,6 @@ $root.FriendPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_ADD_FRIEND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.C_ADD_FRIEND";
-        };
-
         return C_ADD_FRIEND;
     })();
 
@@ -747,18 +688,15 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -808,13 +746,6 @@ $root.FriendPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_ADD_FRIEND_REQ.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND_REQ";
-        };
-
         return S_ADD_FRIEND_REQ;
     })();
 
@@ -857,22 +788,18 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.isApprove = r.bool();
-                        break;
-                    }
-                case 4: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.isApprove = r.bool();
+                    break;
+                case 4:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -929,13 +856,6 @@ $root.FriendPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_ADD_FRIEND_REQ_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.C_ADD_FRIEND_REQ_RESULT";
-        };
-
         return C_ADD_FRIEND_REQ_RESULT;
     })();
 
@@ -978,22 +898,18 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.friend = $root.FriendPto.Friend.decode(r, r.uint32());
-                        break;
-                    }
-                case 4: {
-                        m.isNewFriend = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.friend = $root.FriendPto.Friend.decode(r, r.uint32());
+                    break;
+                case 4:
+                    m.isNewFriend = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1052,13 +968,6 @@ $root.FriendPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_FRIEND_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_FRIEND_CHANGE";
-        };
-
         return S_FRIEND_CHANGE;
     })();
 
@@ -1098,18 +1007,15 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.user = $root.FriendPto.Friend.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.user = $root.FriendPto.Friend.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1161,13 +1067,6 @@ $root.FriendPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_ADD_FRIEND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.S_ADD_FRIEND";
-        };
-
         return S_ADD_FRIEND;
     })();
 
@@ -1207,18 +1106,15 @@ $root.FriendPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.nick = r.string();
-                        break;
-                    }
-                case 3: {
-                        m.isOnline = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.uid = r.int32();
+                    break;
+                case 2:
+                    m.nick = r.string();
+                    break;
+                case 3:
+                    m.isOnline = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1266,13 +1162,6 @@ $root.FriendPto = (function() {
 
         Friend.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        Friend.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendPto.Friend";
         };
 
         return Friend;
@@ -1334,26 +1223,21 @@ $root.ChatPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.msg = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.msgType = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
+                case 4:
+                    m.msg = r.string();
+                    break;
+                case 5:
+                    m.msgType = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1379,12 +1263,6 @@ $root.ChatPto = (function() {
                 m.msg = String(d.msg);
             }
             switch (d.msgType) {
-            default:
-                if (typeof d.msgType === "number") {
-                    m.msgType = d.msgType;
-                    break;
-                }
-                break;
             case "normal":
             case 0:
                 m.msgType = 0;
@@ -1421,20 +1299,13 @@ $root.ChatPto = (function() {
                 d.msg = m.msg;
             }
             if (m.msgType != null && m.hasOwnProperty("msgType")) {
-                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] === undefined ? m.msgType : $root.ChatPto.MsgType[m.msgType] : m.msgType;
+                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] : m.msgType;
             }
             return d;
         };
 
         C_SEND_MESSAGE.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_SEND_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.C_SEND_MESSAGE";
         };
 
         return C_SEND_MESSAGE;
@@ -1485,30 +1356,24 @@ $root.ChatPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.msg = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.nick = r.string();
-                        break;
-                    }
-                case 5: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.msgType = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.msg = r.string();
+                    break;
+                case 4:
+                    m.nick = r.string();
+                    break;
+                case 5:
+                    m.uid = r.int32();
+                    break;
+                case 6:
+                    m.msgType = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1537,12 +1402,6 @@ $root.ChatPto = (function() {
                 m.uid = d.uid | 0;
             }
             switch (d.msgType) {
-            default:
-                if (typeof d.msgType === "number") {
-                    m.msgType = d.msgType;
-                    break;
-                }
-                break;
             case "normal":
             case 0:
                 m.msgType = 0;
@@ -1583,20 +1442,13 @@ $root.ChatPto = (function() {
                 d.uid = m.uid;
             }
             if (m.msgType != null && m.hasOwnProperty("msgType")) {
-                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] === undefined ? m.msgType : $root.ChatPto.MsgType[m.msgType] : m.msgType;
+                d.msgType = o.enums === String ? $root.ChatPto.MsgType[m.msgType] : m.msgType;
             }
             return d;
         };
 
         S_CHAT_MESSAGE.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_CHAT_MESSAGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/ChatPto.S_CHAT_MESSAGE";
         };
 
         return S_CHAT_MESSAGE;
@@ -1655,22 +1507,18 @@ $root.SystemPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.msg = r.string();
-                        break;
-                    }
-                case 4: {
-                        m.hoverTime = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.msg = r.string();
+                    break;
+                case 4:
+                    m.hoverTime = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1725,13 +1573,6 @@ $root.SystemPto = (function() {
 
         S_TIPS.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_TIPS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/SystemPto.S_TIPS";
         };
 
         return S_TIPS;
@@ -1829,14 +1670,12 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 0: {
-                        m.id = r.int32();
-                        break;
-                    }
-                case 1: {
-                        m.count = r.int32();
-                        break;
-                    }
+                case 0:
+                    m.id = r.int32();
+                    break;
+                case 1:
+                    m.count = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1877,13 +1716,6 @@ $root.CardsPto = (function() {
 
         Card.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.Card";
         };
 
         return Card;
@@ -1937,32 +1769,26 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 0: {
-                        m.deckId = r.int32();
-                        break;
-                    }
-                case 1: {
-                        if (!(m.cards && m.cards.length))
-                            m.cards = [];
-                        m.cards.push($root.CardsPto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 2: {
-                        m.deckName = r.string();
-                        break;
-                    }
-                case 3: {
-                        m.powerId = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.accessToUse = r.bool();
-                        break;
-                    }
-                case 5: {
-                        m.heroId = r.int32();
-                        break;
-                    }
+                case 0:
+                    m.deckId = r.int32();
+                    break;
+                case 1:
+                    if (!(m.cards && m.cards.length))
+                        m.cards = [];
+                    m.cards.push($root.CardsPto.Card.decode(r, r.uint32()));
+                    break;
+                case 2:
+                    m.deckName = r.string();
+                    break;
+                case 3:
+                    m.powerId = r.int32();
+                    break;
+                case 4:
+                    m.accessToUse = r.bool();
+                    break;
+                case 5:
+                    m.heroId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -1992,12 +1818,6 @@ $root.CardsPto = (function() {
                 m.deckName = String(d.deckName);
             }
             switch (d.powerId) {
-            default:
-                if (typeof d.powerId === "number") {
-                    m.powerId = d.powerId;
-                    break;
-                }
-                break;
             case "Common":
             case 0:
                 m.powerId = 0;
@@ -2063,7 +1883,7 @@ $root.CardsPto = (function() {
                 d.deckName = m.deckName;
             }
             if (m.powerId != null && m.hasOwnProperty("powerId")) {
-                d.powerId = o.enums === String ? $root.CardsPto.PowerType[m.powerId] === undefined ? m.powerId : $root.CardsPto.PowerType[m.powerId] : m.powerId;
+                d.powerId = o.enums === String ? $root.CardsPto.PowerType[m.powerId] : m.powerId;
             }
             if (m.accessToUse != null && m.hasOwnProperty("accessToUse")) {
                 d.accessToUse = m.accessToUse;
@@ -2076,13 +1896,6 @@ $root.CardsPto = (function() {
 
         Deck.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        Deck.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.Deck";
         };
 
         return Deck;
@@ -2121,14 +1934,12 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2169,13 +1980,6 @@ $root.CardsPto = (function() {
 
         C_REQ_CARDS_INFO.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_REQ_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_REQ_CARDS_INFO";
         };
 
         return C_REQ_CARDS_INFO;
@@ -2226,26 +2030,22 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.cardInfos && m.cardInfos.length))
-                            m.cardInfos = [];
-                        m.cardInfos.push($root.CardsPto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(m.deckList && m.deckList.length))
-                            m.deckList = [];
-                        m.deckList.push($root.CardsPto.Deck.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.cardInfos && m.cardInfos.length))
+                        m.cardInfos = [];
+                    m.cardInfos.push($root.CardsPto.Card.decode(r, r.uint32()));
+                    break;
+                case 4:
+                    if (!(m.deckList && m.deckList.length))
+                        m.deckList = [];
+                    m.deckList.push($root.CardsPto.Deck.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2324,13 +2124,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_CARDS_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_CARDS_INFO";
-        };
-
         return S_CARDS_INFO;
     })();
 
@@ -2370,18 +2163,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardId = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2431,13 +2221,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_MAKE_CARD";
-        };
-
         return C_MAKE_CARD;
     })();
 
@@ -2480,22 +2263,18 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardId = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardId = r.int32();
+                    break;
+                case 4:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2552,13 +2331,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MAKE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_MAKE_CARD";
-        };
-
         return S_MAKE_CARD;
     })();
 
@@ -2598,18 +2370,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardId = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2659,13 +2428,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_DISASSEMBLE_CARD";
-        };
-
         return C_DISASSEMBLE_CARD;
     })();
 
@@ -2708,22 +2470,18 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardId = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardId = r.int32();
+                    break;
+                case 4:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2780,13 +2538,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_DISASSEMBLE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_DISASSEMBLE_CARD";
-        };
-
         return S_DISASSEMBLE_CARD;
     })();
 
@@ -2826,18 +2577,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2889,13 +2637,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_SAVE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_SAVE_CARDS";
-        };
-
         return C_SAVE_CARDS;
     })();
 
@@ -2935,18 +2676,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deck = $root.CardsPto.Deck.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -2998,13 +2736,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_SAVE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_SAVE_DECK";
-        };
-
         return S_SAVE_DECK;
     })();
 
@@ -3044,18 +2775,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deckId = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deckId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3105,13 +2833,6 @@ $root.CardsPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.C_DELETE_DECK";
-        };
-
         return C_DELETE_DECK;
     })();
 
@@ -3151,18 +2872,15 @@ $root.CardsPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deckId = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deckId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3210,13 +2928,6 @@ $root.CardsPto = (function() {
 
         S_DELETE_DECK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_DELETE_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/CardsPto.S_DELETE_DECK";
         };
 
         return S_DELETE_DECK;
@@ -3325,18 +3036,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 0: {
-                        m.nick = r.string();
-                        break;
-                    }
-                case 1: {
-                        m.power = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 0:
+                    m.nick = r.string();
+                    break;
+                case 1:
+                    m.power = r.int32();
+                    break;
+                case 2:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3384,13 +3092,6 @@ $root.GamePto = (function() {
 
         UserInfo.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        UserInfo.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.UserInfo";
         };
 
         return UserInfo;
@@ -3470,69 +3171,55 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 0: {
-                        m.id = r.int32();
-                        break;
-                    }
-                case 1: {
-                        m.cardId = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.cardType = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.attack = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.hp = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.hpUpperLimit = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.cardFee = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 8: {
-                        m.blockX = r.int32();
-                        break;
-                    }
-                case 9: {
-                        m.blockY = r.int32();
-                        break;
-                    }
-                case 10: {
-                        m.allowAtk = r.bool();
-                        break;
-                    }
-                case 11: {
-                        m.allowMove = r.bool();
-                        break;
-                    }
-                case 12: {
-                        if (!(m.buffList && m.buffList.length))
-                            m.buffList = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.buffList.push(r.int32());
-                        } else
+                case 0:
+                    m.id = r.int32();
+                    break;
+                case 1:
+                    m.cardId = r.int32();
+                    break;
+                case 2:
+                    m.cardType = r.int32();
+                    break;
+                case 3:
+                    m.attack = r.int32();
+                    break;
+                case 4:
+                    m.hp = r.int32();
+                    break;
+                case 5:
+                    m.hpUpperLimit = r.int32();
+                    break;
+                case 6:
+                    m.cardFee = r.int32();
+                    break;
+                case 7:
+                    m.uid = r.int32();
+                    break;
+                case 8:
+                    m.blockX = r.int32();
+                    break;
+                case 9:
+                    m.blockY = r.int32();
+                    break;
+                case 10:
+                    m.allowAtk = r.bool();
+                    break;
+                case 11:
+                    m.allowMove = r.bool();
+                    break;
+                case 12:
+                    if (!(m.buffList && m.buffList.length))
+                        m.buffList = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.buffList.push(r.int32());
-                        break;
-                    }
-                case 13: {
-                        m.silenced = r.bool();
-                        break;
-                    }
+                    } else
+                        m.buffList.push(r.int32());
+                    break;
+                case 13:
+                    m.silenced = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3669,13 +3356,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        Card.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.Card";
-        };
-
         return Card;
     })();
 
@@ -3718,18 +3398,16 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 0: {
-                        if (!(m.eventCards && m.eventCards.length))
-                            m.eventCards = [];
-                        m.eventCards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 1: {
-                        if (!(m.entityCards && m.entityCards.length))
-                            m.entityCards = [];
-                        m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
+                case 0:
+                    if (!(m.eventCards && m.eventCards.length))
+                        m.eventCards = [];
+                    m.eventCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 1:
+                    if (!(m.entityCards && m.entityCards.length))
+                        m.entityCards = [];
+                    m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3792,13 +3470,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        MapData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.MapData";
-        };
-
         return MapData;
     })();
 
@@ -3818,6 +3489,7 @@ $root.GamePto = (function() {
         UserDetail.prototype.atkTimesLimit = 0;
         UserDetail.prototype.moveTimes = 0;
         UserDetail.prototype.moveTimesLimit = 0;
+        UserDetail.prototype.discardTimes = 0;
 
         UserDetail.create = function create(properties) {
             return new UserDetail(properties);
@@ -3840,6 +3512,8 @@ $root.GamePto = (function() {
                 w.uint32(48).int32(m.moveTimes);
             if (m.moveTimesLimit != null && Object.hasOwnProperty.call(m, "moveTimesLimit"))
                 w.uint32(56).int32(m.moveTimesLimit);
+            if (m.discardTimes != null && Object.hasOwnProperty.call(m, "discardTimes"))
+                w.uint32(64).int32(m.discardTimes);
             return w;
         };
 
@@ -3850,34 +3524,30 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.fee = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.maxFee = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.atkTimes = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.atkTimesLimit = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.moveTimes = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.moveTimesLimit = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.fee = r.int32();
+                    break;
+                case 2:
+                    m.maxFee = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
+                case 4:
+                    m.atkTimes = r.int32();
+                    break;
+                case 5:
+                    m.atkTimesLimit = r.int32();
+                    break;
+                case 6:
+                    m.moveTimes = r.int32();
+                    break;
+                case 7:
+                    m.moveTimesLimit = r.int32();
+                    break;
+                case 8:
+                    m.discardTimes = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -3911,6 +3581,9 @@ $root.GamePto = (function() {
             if (d.moveTimesLimit != null) {
                 m.moveTimesLimit = d.moveTimesLimit | 0;
             }
+            if (d.discardTimes != null) {
+                m.discardTimes = d.discardTimes | 0;
+            }
             return m;
         };
 
@@ -3926,6 +3599,7 @@ $root.GamePto = (function() {
                 d.atkTimesLimit = 0;
                 d.moveTimes = 0;
                 d.moveTimesLimit = 0;
+                d.discardTimes = 0;
             }
             if (m.fee != null && m.hasOwnProperty("fee")) {
                 d.fee = m.fee;
@@ -3948,18 +3622,14 @@ $root.GamePto = (function() {
             if (m.moveTimesLimit != null && m.hasOwnProperty("moveTimesLimit")) {
                 d.moveTimesLimit = m.moveTimesLimit;
             }
+            if (m.discardTimes != null && m.hasOwnProperty("discardTimes")) {
+                d.discardTimes = m.discardTimes;
+            }
             return d;
         };
 
         UserDetail.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        UserDetail.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.UserDetail";
         };
 
         return UserDetail;
@@ -4001,18 +3671,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.card = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 2: {
-                        m.type = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.value = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.card = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 2:
+                    m.type = r.int32();
+                    break;
+                case 3:
+                    m.value = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4031,12 +3698,6 @@ $root.GamePto = (function() {
                 m.card = $root.GamePto.Card.fromObject(d.card);
             }
             switch (d.type) {
-            default:
-                if (typeof d.type === "number") {
-                    m.type = d.type;
-                    break;
-                }
-                break;
             case "Show":
             case 0:
                 m.type = 0;
@@ -4069,7 +3730,7 @@ $root.GamePto = (function() {
                 d.card = $root.GamePto.Card.toObject(m.card, o);
             }
             if (m.type != null && m.hasOwnProperty("type")) {
-                d.type = o.enums === String ? $root.GamePto.AffectedEnum[m.type] === undefined ? m.type : $root.GamePto.AffectedEnum[m.type] : m.type;
+                d.type = o.enums === String ? $root.GamePto.AffectedEnum[m.type] : m.type;
             }
             if (m.value != null && m.hasOwnProperty("value")) {
                 d.value = m.value;
@@ -4079,13 +3740,6 @@ $root.GamePto = (function() {
 
         AffectedCard.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        AffectedCard.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.AffectedCard";
         };
 
         return AffectedCard;
@@ -4132,25 +3786,22 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.replaceCardIndexes && m.replaceCardIndexes.length))
-                            m.replaceCardIndexes = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.replaceCardIndexes.push(r.int32());
-                        } else
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.replaceCardIndexes && m.replaceCardIndexes.length))
+                        m.replaceCardIndexes = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.replaceCardIndexes.push(r.int32());
-                        break;
-                    }
+                    } else
+                        m.replaceCardIndexes.push(r.int32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4210,13 +3861,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_PREPARE_TO_START.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_PREPARE_TO_START";
-        };
-
         return C_PREPARE_TO_START;
     })();
 
@@ -4253,14 +3897,12 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4303,13 +3945,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_END_ROUND.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_END_ROUND";
-        };
-
         return C_END_ROUND;
     })();
 
@@ -4349,18 +3984,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardIndex = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardIndex = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4410,13 +4042,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_DISCARD";
-        };
-
         return C_DISCARD;
     })();
 
@@ -4464,29 +4089,25 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.cardIndex = r.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(m.dataArr && m.dataArr.length))
-                            m.dataArr = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.dataArr.push(r.int32());
-                        } else
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.cardIndex = r.int32();
+                    break;
+                case 4:
+                    if (!(m.dataArr && m.dataArr.length))
+                        m.dataArr = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.dataArr.push(r.int32());
-                        break;
-                    }
+                    } else
+                        m.dataArr.push(r.int32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4553,13 +4174,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_USE_CARD";
-        };
-
         return C_USE_CARD;
     })();
 
@@ -4608,30 +4222,24 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.sourceX = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.sourceY = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.targetX = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.targetY = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.sourceX = r.int32();
+                    break;
+                case 4:
+                    m.sourceY = r.int32();
+                    break;
+                case 5:
+                    m.targetX = r.int32();
+                    break;
+                case 6:
+                    m.targetY = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4702,13 +4310,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_MOVE";
-        };
-
         return C_MOVE;
     })();
 
@@ -4757,30 +4358,24 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.sourceX = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.sourceY = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.targetX = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.targetY = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.sourceX = r.int32();
+                    break;
+                case 4:
+                    m.sourceY = r.int32();
+                    break;
+                case 5:
+                    m.targetX = r.int32();
+                    break;
+                case 6:
+                    m.targetY = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4851,13 +4446,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_ATTACK";
-        };
-
         return C_ATTACK;
     })();
 
@@ -4894,14 +4482,12 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -4944,13 +4530,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_RECONNECT";
-        };
-
         return C_RECONNECT;
     })();
 
@@ -4987,14 +4566,12 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5037,13 +4614,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_SURRENDER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.C_SURRENDER";
-        };
-
         return C_SURRENDER;
     })();
 
@@ -5083,18 +4653,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.message = r.string();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.message = r.string();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5144,13 +4711,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_SERVER_ERROR.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_SERVER_ERROR";
-        };
-
         return S_SERVER_ERROR;
     })();
 
@@ -5193,20 +4753,17 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.users && m.users.length))
-                            m.users = [];
-                        m.users.push($root.GamePto.UserInfo.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.users && m.users.length))
+                        m.users = [];
+                    m.users.push($root.GamePto.UserInfo.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5268,13 +4825,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_INIT_GAME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_INIT_GAME";
-        };
-
         return S_INIT_GAME;
     })();
 
@@ -5329,36 +4879,29 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.firstUid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(m.cards && m.cards.length))
-                            m.cards = [];
-                        m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 5: {
-                        m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
-                        break;
-                    }
-                case 6: {
-                        m.replaceEndTime = r.int64();
-                        break;
-                    }
-                case 7: {
-                        m.isReplace = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.firstUid = r.int32();
+                    break;
+                case 4:
+                    if (!(m.cards && m.cards.length))
+                        m.cards = [];
+                    m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 5:
+                    m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
+                    break;
+                case 6:
+                    m.replaceEndTime = r.int64();
+                    break;
+                case 7:
+                    m.isReplace = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5464,13 +5007,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_GAME_START.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_GAME_START";
-        };
-
         return S_GAME_START;
     })();
 
@@ -5524,35 +5060,30 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.cards && m.cards.length))
-                            m.cards = [];
-                        m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(m.replaceCardIndexes && m.replaceCardIndexes.length))
-                            m.replaceCardIndexes = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.replaceCardIndexes.push(r.int32());
-                        } else
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.cards && m.cards.length))
+                        m.cards = [];
+                    m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 4:
+                    if (!(m.replaceCardIndexes && m.replaceCardIndexes.length))
+                        m.replaceCardIndexes = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.replaceCardIndexes.push(r.int32());
-                        break;
-                    }
-                case 5: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                    } else
+                        m.replaceCardIndexes.push(r.int32());
+                    break;
+                case 5:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5636,13 +5167,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_REPLACE_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_REPLACE_CARDS";
-        };
-
         return S_REPLACE_CARDS;
     })();
 
@@ -5662,6 +5186,7 @@ $root.GamePto = (function() {
         S_ROUND_START_EVENT.prototype.atkTimesLimit = 0;
         S_ROUND_START_EVENT.prototype.moveTimes = 0;
         S_ROUND_START_EVENT.prototype.moveTimesLimit = 0;
+        S_ROUND_START_EVENT.prototype.discardTimes = 0;
 
         S_ROUND_START_EVENT.create = function create(properties) {
             return new S_ROUND_START_EVENT(properties);
@@ -5684,6 +5209,8 @@ $root.GamePto = (function() {
                 w.uint32(48).int32(m.moveTimes);
             if (m.moveTimesLimit != null && Object.hasOwnProperty.call(m, "moveTimesLimit"))
                 w.uint32(56).int32(m.moveTimesLimit);
+            if (m.discardTimes != null && Object.hasOwnProperty.call(m, "discardTimes"))
+                w.uint32(64).int32(m.discardTimes);
             return w;
         };
 
@@ -5694,34 +5221,30 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.atkTimes = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.atkTimesLimit = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.moveTimes = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.moveTimesLimit = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
+                case 4:
+                    m.atkTimes = r.int32();
+                    break;
+                case 5:
+                    m.atkTimesLimit = r.int32();
+                    break;
+                case 6:
+                    m.moveTimes = r.int32();
+                    break;
+                case 7:
+                    m.moveTimesLimit = r.int32();
+                    break;
+                case 8:
+                    m.discardTimes = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5755,6 +5278,9 @@ $root.GamePto = (function() {
             if (d.moveTimesLimit != null) {
                 m.moveTimesLimit = d.moveTimesLimit | 0;
             }
+            if (d.discardTimes != null) {
+                m.discardTimes = d.discardTimes | 0;
+            }
             return m;
         };
 
@@ -5770,6 +5296,7 @@ $root.GamePto = (function() {
                 d.atkTimesLimit = 0;
                 d.moveTimes = 0;
                 d.moveTimesLimit = 0;
+                d.discardTimes = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -5792,18 +5319,14 @@ $root.GamePto = (function() {
             if (m.moveTimesLimit != null && m.hasOwnProperty("moveTimesLimit")) {
                 d.moveTimesLimit = m.moveTimesLimit;
             }
+            if (m.discardTimes != null && m.hasOwnProperty("discardTimes")) {
+                d.discardTimes = m.discardTimes;
+            }
             return d;
         };
 
         S_ROUND_START_EVENT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_ROUND_START_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_START_EVENT";
         };
 
         return S_ROUND_START_EVENT;
@@ -5845,18 +5368,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -5904,13 +5424,6 @@ $root.GamePto = (function() {
 
         S_ROUND_END_EVENT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_ROUND_END_EVENT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_END_EVENT";
         };
 
         return S_ROUND_END_EVENT;
@@ -5984,57 +5497,47 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.inHandCards && m.inHandCards.length))
-                            m.inHandCards = [];
-                        m.inHandCards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 4: {
-                        m.inHandCardCount = r.int32();
-                        break;
-                    }
-                case 5: {
-                        if (!(m.discards && m.discards.length))
-                            m.discards = [];
-                        m.discards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 6: {
-                        m.discardsCount = r.int32();
-                        break;
-                    }
-                case 7: {
-                        if (!(m.damages && m.damages.length))
-                            m.damages = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.damages.push(r.int32());
-                        } else
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.inHandCards && m.inHandCards.length))
+                        m.inHandCards = [];
+                    m.inHandCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 4:
+                    m.inHandCardCount = r.int32();
+                    break;
+                case 5:
+                    if (!(m.discards && m.discards.length))
+                        m.discards = [];
+                    m.discards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 6:
+                    m.discardsCount = r.int32();
+                    break;
+                case 7:
+                    if (!(m.damages && m.damages.length))
+                        m.damages = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.damages.push(r.int32());
-                        break;
-                    }
-                case 8: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 9: {
-                        m.cardPoolNum = r.int32();
-                        break;
-                    }
-                case 10: {
-                        m.deadPoolNum = r.int32();
-                        break;
-                    }
+                    } else
+                        m.damages.push(r.int32());
+                    break;
+                case 8:
+                    m.uid = r.int32();
+                    break;
+                case 9:
+                    m.cardPoolNum = r.int32();
+                    break;
+                case 10:
+                    m.deadPoolNum = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6163,13 +5666,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_DRAW_CARDS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_DRAW_CARDS";
-        };
-
         return S_DRAW_CARDS;
     })();
 
@@ -6215,26 +5711,21 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.fee = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.maxFee = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.fee = r.int32();
+                    break;
+                case 4:
+                    m.maxFee = r.int32();
+                    break;
+                case 5:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6298,13 +5789,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_FEE_INFO.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_FEE_INFO";
-        };
-
         return S_FEE_INFO;
     })();
 
@@ -6322,6 +5806,7 @@ $root.GamePto = (function() {
         S_DISCARD.prototype.isSuccess = false;
         S_DISCARD.prototype.cardIndex = 0;
         S_DISCARD.prototype.uid = 0;
+        S_DISCARD.prototype.discardTimes = 0;
 
         S_DISCARD.create = function create(properties) {
             return new S_DISCARD(properties);
@@ -6340,6 +5825,8 @@ $root.GamePto = (function() {
                 w.uint32(32).int32(m.cardIndex);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(40).int32(m.uid);
+            if (m.discardTimes != null && Object.hasOwnProperty.call(m, "discardTimes"))
+                w.uint32(48).int32(m.discardTimes);
             return w;
         };
 
@@ -6350,26 +5837,24 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.isSuccess = r.bool();
-                        break;
-                    }
-                case 4: {
-                        m.cardIndex = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.isSuccess = r.bool();
+                    break;
+                case 4:
+                    m.cardIndex = r.int32();
+                    break;
+                case 5:
+                    m.uid = r.int32();
+                    break;
+                case 6:
+                    m.discardTimes = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6397,6 +5882,9 @@ $root.GamePto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
+            if (d.discardTimes != null) {
+                m.discardTimes = d.discardTimes | 0;
+            }
             return m;
         };
 
@@ -6410,6 +5898,7 @@ $root.GamePto = (function() {
                 d.isSuccess = false;
                 d.cardIndex = 0;
                 d.uid = 0;
+                d.discardTimes = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -6426,18 +5915,14 @@ $root.GamePto = (function() {
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
             }
+            if (m.discardTimes != null && m.hasOwnProperty("discardTimes")) {
+                d.discardTimes = m.discardTimes;
+            }
             return d;
         };
 
         S_DISCARD.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_DISCARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_DISCARD";
         };
 
         return S_DISCARD;
@@ -6488,30 +5973,24 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.isSuccess = r.bool();
-                        break;
-                    }
-                case 4: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.cardIndex = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.card = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.isSuccess = r.bool();
+                    break;
+                case 4:
+                    m.uid = r.int32();
+                    break;
+                case 5:
+                    m.cardIndex = r.int32();
+                    break;
+                case 6:
+                    m.card = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6584,13 +6063,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_USE_CARD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_USE_CARD";
-        };
-
         return S_USE_CARD;
     })();
 
@@ -6633,22 +6105,18 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.roundEndTime = r.int64();
-                        break;
-                    }
-                case 4: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.roundEndTime = r.int64();
+                    break;
+                case 4:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6719,13 +6187,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_ROUND_END_TIME.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ROUND_END_TIME";
-        };
-
         return S_ROUND_END_TIME;
     })();
 
@@ -6765,18 +6226,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6826,13 +6284,6 @@ $root.GamePto = (function() {
 
         S_MAP_DATA.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_MAP_DATA.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_MAP_DATA";
         };
 
         return S_MAP_DATA;
@@ -6886,34 +6337,27 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.sourceX = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.sourceY = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.card = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 6: {
-                        m.allowMove = r.bool();
-                        break;
-                    }
-                case 7: {
-                        m.uid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.sourceX = r.int32();
+                    break;
+                case 4:
+                    m.sourceY = r.int32();
+                    break;
+                case 5:
+                    m.card = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 6:
+                    m.allowMove = r.bool();
+                    break;
+                case 7:
+                    m.uid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -6993,20 +6437,12 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MOVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_MOVE";
-        };
-
         return S_MOVE;
     })();
 
     GamePto.S_ATTACK = (function() {
 
         function S_ATTACK(p) {
-            this.dices = [];
             this.targetList = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -7017,9 +6453,9 @@ $root.GamePto = (function() {
         S_ATTACK.prototype.cmd = 200;
         S_ATTACK.prototype.scmd = 10013;
         S_ATTACK.prototype.uid = 0;
-        S_ATTACK.prototype.dices = $util.emptyArray;
         S_ATTACK.prototype.leastAtkTimes = 0;
         S_ATTACK.prototype.damage = 0;
+        S_ATTACK.prototype.strikeBackDamage = 0;
         S_ATTACK.prototype.allowAtk = false;
         S_ATTACK.prototype.from = null;
         S_ATTACK.prototype.targetList = $util.emptyArray;
@@ -7037,16 +6473,12 @@ $root.GamePto = (function() {
                 w.uint32(16).int32(m.scmd);
             if (m.uid != null && Object.hasOwnProperty.call(m, "uid"))
                 w.uint32(24).int32(m.uid);
-            if (m.dices != null && m.dices.length) {
-                w.uint32(34).fork();
-                for (var i = 0; i < m.dices.length; ++i)
-                    w.int32(m.dices[i]);
-                w.ldelim();
-            }
             if (m.leastAtkTimes != null && Object.hasOwnProperty.call(m, "leastAtkTimes"))
-                w.uint32(40).int32(m.leastAtkTimes);
+                w.uint32(32).int32(m.leastAtkTimes);
             if (m.damage != null && Object.hasOwnProperty.call(m, "damage"))
-                w.uint32(48).int32(m.damage);
+                w.uint32(40).int32(m.damage);
+            if (m.strikeBackDamage != null && Object.hasOwnProperty.call(m, "strikeBackDamage"))
+                w.uint32(48).int32(m.strikeBackDamage);
             if (m.allowAtk != null && Object.hasOwnProperty.call(m, "allowAtk"))
                 w.uint32(56).bool(m.allowAtk);
             if (m.from != null && Object.hasOwnProperty.call(m, "from"))
@@ -7065,51 +6497,35 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(m.dices && m.dices.length))
-                            m.dices = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.dices.push(r.int32());
-                        } else
-                            m.dices.push(r.int32());
-                        break;
-                    }
-                case 5: {
-                        m.leastAtkTimes = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.damage = r.int32();
-                        break;
-                    }
-                case 7: {
-                        m.allowAtk = r.bool();
-                        break;
-                    }
-                case 8: {
-                        m.from = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 9: {
-                        if (!(m.targetList && m.targetList.length))
-                            m.targetList = [];
-                        m.targetList.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
+                case 4:
+                    m.leastAtkTimes = r.int32();
+                    break;
+                case 5:
+                    m.damage = r.int32();
+                    break;
+                case 6:
+                    m.strikeBackDamage = r.int32();
+                    break;
+                case 7:
+                    m.allowAtk = r.bool();
+                    break;
+                case 8:
+                    m.from = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 9:
+                    if (!(m.targetList && m.targetList.length))
+                        m.targetList = [];
+                    m.targetList.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7131,19 +6547,14 @@ $root.GamePto = (function() {
             if (d.uid != null) {
                 m.uid = d.uid | 0;
             }
-            if (d.dices) {
-                if (!Array.isArray(d.dices))
-                    throw TypeError(".GamePto.S_ATTACK.dices: array expected");
-                m.dices = [];
-                for (var i = 0; i < d.dices.length; ++i) {
-                    m.dices[i] = d.dices[i] | 0;
-                }
-            }
             if (d.leastAtkTimes != null) {
                 m.leastAtkTimes = d.leastAtkTimes | 0;
             }
             if (d.damage != null) {
                 m.damage = d.damage | 0;
+            }
+            if (d.strikeBackDamage != null) {
+                m.strikeBackDamage = d.strikeBackDamage | 0;
             }
             if (d.allowAtk != null) {
                 m.allowAtk = Boolean(d.allowAtk);
@@ -7171,7 +6582,6 @@ $root.GamePto = (function() {
                 o = {};
             var d = {};
             if (o.arrays || o.defaults) {
-                d.dices = [];
                 d.targetList = [];
             }
             if (o.defaults) {
@@ -7180,6 +6590,7 @@ $root.GamePto = (function() {
                 d.uid = 0;
                 d.leastAtkTimes = 0;
                 d.damage = 0;
+                d.strikeBackDamage = 0;
                 d.allowAtk = false;
                 d.from = null;
             }
@@ -7192,17 +6603,14 @@ $root.GamePto = (function() {
             if (m.uid != null && m.hasOwnProperty("uid")) {
                 d.uid = m.uid;
             }
-            if (m.dices && m.dices.length) {
-                d.dices = [];
-                for (var j = 0; j < m.dices.length; ++j) {
-                    d.dices[j] = m.dices[j];
-                }
-            }
             if (m.leastAtkTimes != null && m.hasOwnProperty("leastAtkTimes")) {
                 d.leastAtkTimes = m.leastAtkTimes;
             }
             if (m.damage != null && m.hasOwnProperty("damage")) {
                 d.damage = m.damage;
+            }
+            if (m.strikeBackDamage != null && m.hasOwnProperty("strikeBackDamage")) {
+                d.strikeBackDamage = m.strikeBackDamage;
             }
             if (m.allowAtk != null && m.hasOwnProperty("allowAtk")) {
                 d.allowAtk = m.allowAtk;
@@ -7221,13 +6629,6 @@ $root.GamePto = (function() {
 
         S_ATTACK.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_ATTACK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ATTACK";
         };
 
         return S_ATTACK;
@@ -7269,18 +6670,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deadCard = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deadCard = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7332,13 +6730,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_ENTITY_DEAD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ENTITY_DEAD";
-        };
-
         return S_ENTITY_DEAD;
     })();
 
@@ -7378,18 +6769,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.card = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.card = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7441,13 +6829,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_EVENT_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_EVENT_UPDATE";
-        };
-
         return S_EVENT_UPDATE;
     })();
 
@@ -7496,26 +6877,22 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        if (!(m.entityCards && m.entityCards.length))
-                            m.entityCards = [];
-                        m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 4: {
-                        if (!(m.tipsList && m.tipsList.length))
-                            m.tipsList = [];
-                        m.tipsList.push(r.string());
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    if (!(m.entityCards && m.entityCards.length))
+                        m.entityCards = [];
+                    m.entityCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 4:
+                    if (!(m.tipsList && m.tipsList.length))
+                        m.tipsList = [];
+                    m.tipsList.push(r.string());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7592,13 +6969,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_UPDATE_ENTITYS.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_UPDATE_ENTITYS";
-        };
-
         return S_UPDATE_ENTITYS;
     })();
 
@@ -7646,29 +7016,25 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.effectId = r.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(m.dataArr && m.dataArr.length))
-                            m.dataArr = [];
-                        if ((t & 7) === 2) {
-                            var c2 = r.uint32() + r.pos;
-                            while (r.pos < c2)
-                                m.dataArr.push(r.int32());
-                        } else
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.effectId = r.int32();
+                    break;
+                case 4:
+                    if (!(m.dataArr && m.dataArr.length))
+                        m.dataArr = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
                             m.dataArr.push(r.int32());
-                        break;
-                    }
+                    } else
+                        m.dataArr.push(r.int32());
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7735,13 +7101,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_COMMON_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_COMMON_EFFECT";
-        };
-
         return S_COMMON_EFFECT;
     })();
 
@@ -7787,26 +7146,21 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.from = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 4: {
-                        m.target = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 5: {
-                        m.targetShowTips = r.string();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.from = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 4:
+                    m.target = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 5:
+                    m.targetShowTips = r.string();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -7874,13 +7228,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_FLY_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_FLY_EFFECT";
-        };
-
         return S_FLY_EFFECT;
     })();
 
@@ -7932,32 +7279,26 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.x = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.y = r.int32();
-                        break;
-                    }
-                case 5: {
-                        m.card = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 6: {
-                        if (!(m.affectedList && m.affectedList.length))
-                            m.affectedList = [];
-                        m.affectedList.push($root.GamePto.AffectedCard.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.x = r.int32();
+                    break;
+                case 4:
+                    m.y = r.int32();
+                    break;
+                case 5:
+                    m.card = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 6:
+                    if (!(m.affectedList && m.affectedList.length))
+                        m.affectedList = [];
+                    m.affectedList.push($root.GamePto.AffectedCard.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8042,13 +7383,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_SELF_EFFECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_SELF_EFFECT";
-        };
-
         return S_SELF_EFFECT;
     })();
 
@@ -8094,26 +7428,21 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.from = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 4: {
-                        m.target = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 5: {
-                        m.targetCardIndex = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.from = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 4:
+                    m.target = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 5:
+                    m.targetCardIndex = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8181,13 +7510,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_CARD_DENY.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_CARD_DENY";
-        };
-
         return S_CARD_DENY;
     })();
 
@@ -8227,18 +7549,15 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.winnerUid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.winnerUid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8286,13 +7605,6 @@ $root.GamePto = (function() {
 
         S_GAME_OVER.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_GAME_OVER.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_GAME_OVER";
         };
 
         return S_GAME_OVER;
@@ -8367,56 +7679,45 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
-                        break;
-                    }
-                case 4: {
-                        if (!(m.selfCards && m.selfCards.length))
-                            m.selfCards = [];
-                        m.selfCards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 5: {
-                        m.targetHandCardNum = r.int32();
-                        break;
-                    }
-                case 6: {
-                        m.isFirst = r.bool();
-                        break;
-                    }
-                case 7: {
-                        if (!(m.deadPool && m.deadPool.length))
-                            m.deadPool = [];
-                        m.deadPool.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
-                case 8: {
-                        m.targetDeadPoolNum = r.int32();
-                        break;
-                    }
-                case 9: {
-                        m.roundEndTime = r.int64();
-                        break;
-                    }
-                case 10: {
-                        m.isSelfRound = r.bool();
-                        break;
-                    }
-                case 11: {
-                        if (!(m.users && m.users.length))
-                            m.users = [];
-                        m.users.push($root.GamePto.UserDetail.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.mapData = $root.GamePto.MapData.decode(r, r.uint32());
+                    break;
+                case 4:
+                    if (!(m.selfCards && m.selfCards.length))
+                        m.selfCards = [];
+                    m.selfCards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 5:
+                    m.targetHandCardNum = r.int32();
+                    break;
+                case 6:
+                    m.isFirst = r.bool();
+                    break;
+                case 7:
+                    if (!(m.deadPool && m.deadPool.length))
+                        m.deadPool = [];
+                    m.deadPool.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
+                case 8:
+                    m.targetDeadPoolNum = r.int32();
+                    break;
+                case 9:
+                    m.roundEndTime = r.int64();
+                    break;
+                case 10:
+                    m.isSelfRound = r.bool();
+                    break;
+                case 11:
+                    if (!(m.users && m.users.length))
+                        m.users = [];
+                    m.users.push($root.GamePto.UserDetail.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8570,13 +7871,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_RECONNECT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_RECONNECT";
-        };
-
         return S_RECONNECT;
     })();
 
@@ -8622,24 +7916,20 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.uid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        if (!(m.cards && m.cards.length))
-                            m.cards = [];
-                        m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.uid = r.int32();
+                    break;
+                case 4:
+                    if (!(m.cards && m.cards.length))
+                        m.cards = [];
+                    m.cards.push($root.GamePto.Card.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8708,13 +7998,6 @@ $root.GamePto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_HANDCARDS_UPDATE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_HANDCARDS_UPDATE";
-        };
-
         return S_HANDCARDS_UPDATE;
     })();
 
@@ -8763,28 +8046,23 @@ $root.GamePto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.recordType = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.source = $root.GamePto.Card.decode(r, r.uint32());
-                        break;
-                    }
-                case 5: {
-                        if (!(m.affectedList && m.affectedList.length))
-                            m.affectedList = [];
-                        m.affectedList.push($root.GamePto.AffectedCard.decode(r, r.uint32()));
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.recordType = r.int32();
+                    break;
+                case 4:
+                    m.source = $root.GamePto.Card.decode(r, r.uint32());
+                    break;
+                case 5:
+                    if (!(m.affectedList && m.affectedList.length))
+                        m.affectedList = [];
+                    m.affectedList.push($root.GamePto.AffectedCard.decode(r, r.uint32()));
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -8804,12 +8082,6 @@ $root.GamePto = (function() {
                 m.scmd = d.scmd | 0;
             }
             switch (d.recordType) {
-            default:
-                if (typeof d.recordType === "number") {
-                    m.recordType = d.recordType;
-                    break;
-                }
-                break;
             case "Common":
             case 0:
                 m.recordType = 0;
@@ -8873,7 +8145,7 @@ $root.GamePto = (function() {
                 d.scmd = m.scmd;
             }
             if (m.recordType != null && m.hasOwnProperty("recordType")) {
-                d.recordType = o.enums === String ? $root.GamePto.RecordType[m.recordType] === undefined ? m.recordType : $root.GamePto.RecordType[m.recordType] : m.recordType;
+                d.recordType = o.enums === String ? $root.GamePto.RecordType[m.recordType] : m.recordType;
             }
             if (m.source != null && m.hasOwnProperty("source")) {
                 d.source = $root.GamePto.Card.toObject(m.source, o);
@@ -8889,13 +8161,6 @@ $root.GamePto = (function() {
 
         S_ACTION_RECORD.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_ACTION_RECORD.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/GamePto.S_ACTION_RECORD";
         };
 
         return S_ACTION_RECORD;
@@ -8944,18 +8209,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.targetUid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9005,13 +8267,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH";
-        };
-
         return C_REQ_MATCH;
     })();
 
@@ -9054,22 +8309,18 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.endTime = r.int64();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.code = r.int32();
+                    break;
+                case 4:
+                    m.endTime = r.int64();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9140,13 +8391,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH";
-        };
-
         return S_REQ_MATCH;
     })();
 
@@ -9183,14 +8427,12 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9231,13 +8473,6 @@ $root.FriendlyMatchPto = (function() {
 
         C_CANCEL_REQ_MATCH.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        C_CANCEL_REQ_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_CANCEL_REQ_MATCH";
         };
 
         return C_CANCEL_REQ_MATCH;
@@ -9282,22 +8517,18 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.result = r.bool();
-                        break;
-                    }
-                case 4: {
-                        m.targetUid = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.result = r.bool();
+                    break;
+                case 4:
+                    m.targetUid = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9354,13 +8585,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_REQ_MATCH_RESULT";
-        };
-
         return S_REQ_MATCH_RESULT;
     })();
 
@@ -9403,22 +8627,18 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.friendUid = r.int32();
-                        break;
-                    }
-                case 4: {
-                        m.endTime = r.int64();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.friendUid = r.int32();
+                    break;
+                case 4:
+                    m.endTime = r.int64();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9489,13 +8709,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MATCH.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH";
-        };
-
         return S_MATCH;
     })();
 
@@ -9535,18 +8748,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.result = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.result = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9596,13 +8806,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_REQ_MATCH_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_REQ_MATCH_RESULT";
-        };
-
         return C_REQ_MATCH_RESULT;
     })();
 
@@ -9642,18 +8845,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.endTime = r.int64();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.endTime = r.int64();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9717,13 +8917,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MATCH_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_DECK";
-        };
-
         return S_MATCH_DECK;
     })();
 
@@ -9763,18 +8956,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.deckId = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.deckId = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9824,13 +9014,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_DECK_CHOOSE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_DECK_CHOOSE";
-        };
-
         return C_DECK_CHOOSE;
     })();
 
@@ -9867,14 +9050,12 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -9917,13 +9098,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_MATCH_CANCEL_DECK.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_CANCEL_DECK";
-        };
-
         return C_MATCH_CANCEL_DECK;
     })();
 
@@ -9960,14 +9134,12 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -10010,13 +9182,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        C_MATCH_LEAVE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.C_MATCH_LEAVE";
-        };
-
         return C_MATCH_LEAVE;
     })();
 
@@ -10056,18 +9221,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -10117,13 +9279,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_MATCH_STOP.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_MATCH_STOP";
-        };
-
         return S_MATCH_STOP;
     })();
 
@@ -10163,18 +9318,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.isChoose = r.bool();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.isChoose = r.bool();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -10224,13 +9376,6 @@ $root.FriendlyMatchPto = (function() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        S_FRIEND_DECK_STATUS_CHANGE.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_FRIEND_DECK_STATUS_CHANGE";
-        };
-
         return S_FRIEND_DECK_STATUS_CHANGE;
     })();
 
@@ -10270,18 +9415,15 @@ $root.FriendlyMatchPto = (function() {
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
-                case 1: {
-                        m.cmd = r.int32();
-                        break;
-                    }
-                case 2: {
-                        m.scmd = r.int32();
-                        break;
-                    }
-                case 3: {
-                        m.code = r.int32();
-                        break;
-                    }
+                case 1:
+                    m.cmd = r.int32();
+                    break;
+                case 2:
+                    m.scmd = r.int32();
+                    break;
+                case 3:
+                    m.code = r.int32();
+                    break;
                 default:
                     r.skipType(t & 7);
                     break;
@@ -10329,13 +9471,6 @@ $root.FriendlyMatchPto = (function() {
 
         S_DECK_CHOOSE_RESULT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-        };
-
-        S_DECK_CHOOSE_RESULT.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-            if (typeUrlPrefix === undefined) {
-                typeUrlPrefix = "type.googleapis.com";
-            }
-            return typeUrlPrefix + "/FriendlyMatchPto.S_DECK_CHOOSE_RESULT";
         };
 
         return S_DECK_CHOOSE_RESULT;

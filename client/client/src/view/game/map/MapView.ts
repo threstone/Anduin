@@ -51,7 +51,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         //增加悬浮事件
         this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OVER, this.onEntityHover, this);
-        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, () => {
+        this.addEvent(cardItem, mouse.MouseEvent.MOUSE_OUT, (evt: egret.TouchEvent) => {
             this.view.removeChild(this._detailCard);
             this._detailCard = null;
         }, this);
@@ -172,7 +172,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-
+        if (this._detailCard) {
+            this.view.removeChild(this._detailCard);
+        }
         this._detailCard = CardItem.getCardDetail(cardInfo);
         this.view.addChild(this._detailCard);
 
@@ -258,11 +260,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     private async onAttack(msg: GamePto.S_ATTACK) {
         const sourceEntity = this.entityMap.get(msg.from.id) as BaseUI.UIMapUnit;
         const targetEntity = this.entityMap.get(msg.targetList[0].id);
-
         const sourceCardInfo = msg.from;
-        const targetCardInfo = msg.targetList[0];
-
-        await RightCtrlView.ins().showDices(msg.dices);
 
         //攻击效果
         const sourceConfig = CardsModel.ins().getCardConfigById(sourceCardInfo.cardId);
@@ -275,11 +273,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             this.updateMapItem(target);
         });
 
+        this.entityShowTips(sourceEntity, `-${msg.strikeBackDamage}`);
         this.updateMapItem(sourceCardInfo);
-        this.updateMapItem(targetCardInfo);
     }
 
-    /**攻击效果 根据近战远程区分效果 */
+    /** 攻击效果 根据近战远程区分效果 */
     private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface) {
         //近战
         if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
@@ -523,26 +521,25 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         tips.color = color;
         tips.bold = true;
         tips.text = text;
-        const point = entity.localToRoot((entity.width - tips.width) / 2, (entity.height - tips.height) / 2);
-        tips.x = point.x;
-        tips.y = point.y;
-        fairygui.GRoot.inst.addChild(tips)
+        tips.x = (entity.width - tips.width) / 2;
+        tips.y = (entity.height - tips.height) / 2;
+        entity.addChild(tips);
         egret.Tween.get(tips).to({ y: tips.y - entity.height }, 2500).call(() => {
-            fairygui.GRoot.inst.removeChild(tips)
+            entity.removeChild(tips);
         })
     }
 
     /** 恢复提示 */
     public showEntityRecoveryTips(entity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, text: string) {
-        const atkTips = BaseUI.UIRecoveryTips.createInstance();
-        atkTips.setPivot(0.5, 0.5, true);
-        atkTips.countText.text = text;
-        const point = entity.localToRoot((entity.width) / 2, (entity.height) / 2);
-        atkTips.x = point.x;
-        atkTips.y = point.y;
-        fairygui.GRoot.inst.addChild(atkTips);
-        egret.Tween.get(atkTips).to({ scaleX: 0.7, scaleY: 0.7 }, 400, egret.Ease.quintOut).to({}, 1000).call(() => {
-            fairygui.GRoot.inst.removeChild(atkTips)
+        const recoveryTips = BaseUI.UIRecoveryTips.createInstance();
+        recoveryTips.setPivot(0.5, 0.5, true);
+        recoveryTips.countText.text = text;
+        entity.addChild(recoveryTips);
+        recoveryTips.x = (entity.width) / 2;
+        recoveryTips.y = (entity.height) / 2;
+        entity.addChild(recoveryTips);
+        egret.Tween.get(recoveryTips).to({ scaleX: 0.7, scaleY: 0.7 }, 400, egret.Ease.quintOut).to({}, 1000).call(() => {
+            entity.removeChild(recoveryTips);
         })
     }
 
@@ -553,12 +550,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         atkTips.damageDetail.text = text;
         atkTips.scaleX = 0.2;
         atkTips.scaleY = 0.2;
-        const point = entity.localToRoot((entity.width) / 2, (entity.height) / 2);
-        atkTips.x = point.x;
-        atkTips.y = point.y;
-        fairygui.GRoot.inst.addChild(atkTips);
+        entity.addChild(atkTips);
+        atkTips.x = (entity.width) / 2;
+        atkTips.y = (entity.height) / 2;
         egret.Tween.get(atkTips).to({ scaleX: 0.7, scaleY: 0.7 }, 400, egret.Ease.quintOut).to({}, 1000).call(() => {
-            fairygui.GRoot.inst.removeChild(atkTips)
+            entity.removeChild(atkTips);
         })
     }
 

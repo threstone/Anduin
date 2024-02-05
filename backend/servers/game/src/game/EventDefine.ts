@@ -62,19 +62,19 @@ export interface BaseEvent {
      * 战场卡牌攻击前
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
-    onPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[], dices: number[]): void
+    onPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[]): void
 
     /**战场卡牌攻击后 */
-    onAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[], dices: number[]): void
+    onAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[]): void
 
     /**
      * 卡牌自身攻击前
      * @returns 返回是否可以攻击 | 攻击的伤害
      */
-    onSelfPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[], dices: number[]): void
+    onSelfPreAtk(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[]): void
 
     /**卡牌自身攻击后 */
-    onSelfAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[], dices: number[]): void
+    onSelfAtkAfter(eventData: EventData, next: Function, sourceCard: UnitCard, targetCard: BuildingCard, damageCards: BuildingCard[]): void
 }
 
 export enum EventType {

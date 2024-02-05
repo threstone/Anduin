@@ -88,7 +88,7 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
             //回合开始动画
             egret.Tween.get(this.view.roundStartImg).to({ x: (this.view.width - this.view.roundStartImg.width / 2) * this.view.roundStartImg.scaleX }, 500, egret.Ease.quintInOut).
                 to({}, 1000).call(() => {
-                    SoundMgr.ins().playSoundEffect('round_start1', 0, 1);
+                    SoundMgr.ins().playSoundEffect('round_start', 0, 1);
                 }).
                 to({ x: this.view.width }, 500, egret.Ease.quintInOut).call(() => {
                     this.view.roundStartImg.x = - this.view.roundStartImg.width * this.view.roundStartImg.scaleX;

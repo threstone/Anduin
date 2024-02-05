@@ -156,6 +156,10 @@ class UseCardView extends BaseView<BaseUI.UIUseCardCom>{
             this._resolve = resolve;
             //弃牌
             if (SelfInfoBox.ins().isInDeadPool(event.stageX, event.stageY)) {
+                if (GameModel.ins().discardTimes < 1) {
+                    TipsView.ins().showTips('已无弃牌次数,请下回合再弃牌哦');
+                    return;
+                }
                 GameModel.ins().C_DISCARD(GameModel.ins().getHandCardIndex(this._card.cardInfo));
                 this.close();
                 return;

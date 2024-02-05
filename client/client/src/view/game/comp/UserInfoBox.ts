@@ -28,6 +28,14 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         this.addEffectListener('S_ATTACK', this.onAttack);
         this.addEffectListener('UpdateDeadCardNum', this.updateDeadCardNum);
         this.addEffectListener('S_RECONNECT', this.reconnect);
+        this.addEffectListener('S_DISCARD', this.onDiscard);
+    }
+
+    private onDiscard(msg: GamePto.S_DISCARD) {
+        if (this.isHandler(msg.uid)) {
+            this.view.discardTimes.text = `本回合剩余弃牌次数:${GameModel.ins().discardTimes || 0}`;
+        }
+
     }
 
     private reconnect(msg: GamePto.S_RECONNECT) {
@@ -36,6 +44,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
                 this.feeSet(detail.fee, detail.maxFee);
                 this.setAtkTimesInfo(detail.atkTimes, detail.atkTimesLimit);
                 this.setMoveTimesInfo(detail.moveTimes, detail.moveTimesLimit);
+                this.view.discardTimes.text = `本回合剩余弃牌次数:${detail.discardTimes || 0}`;
             }
         })
     }
@@ -59,6 +68,7 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
         if (this.isHandler(msg.uid)) {
             this.setAtkTimesInfo(msg.atkTimes, msg.atkTimesLimit);
             this.setMoveTimesInfo(msg.moveTimes, msg.moveTimesLimit);
+            this.view.discardTimes.text = `本回合剩余弃牌次数:${msg.discardTimes}`;
         }
     }
 
