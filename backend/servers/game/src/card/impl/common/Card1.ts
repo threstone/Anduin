@@ -24,6 +24,7 @@ export class Card1 extends MagicCard {
         msg.from = this;
         msg.target = targetEntity;
         msg.targetShowTips = `-${damageEvent.data}`;
+        msg.effectId = this.effectList[0];
         this.table.broadcast(msg);
         //执行卡牌受伤后事件
         targetEntity.emit(damageEvent.changeType(EventType.DamageAfter), targetEntity, this);

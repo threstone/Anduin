@@ -108,7 +108,6 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
 
     /**
      * 设置费用
-     * TODO 暂时没有写支持超出10费上限的逻辑
      */
     public feeSet(fee: number, maxFee: number) {
         if (maxFee < fee) {

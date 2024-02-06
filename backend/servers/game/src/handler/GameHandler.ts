@@ -151,12 +151,16 @@ export class GameHandler extends BaseHandler {
         //获取到真正会受到伤害的卡牌例如远程攻击会被挡住、一些贯穿伤害逻辑要重写此方法
         const damageCards = sourceCard.getBeAttackCard(targetCard, sourceCard);
 
+        const damage = sourceCard.attack;
+        // 攻击力少于0不能攻击
+        if (!damage) {
+            return;
+        }
+
         // 攻击次数减少
         user.atkTimes--;
         // 卡牌本回合禁止攻击
         sourceCard.allowAtk = false;
-
-        const damage = sourceCard.attack;
         const atkEvent = new EventData(EventType.UnitPreAtk);
         atkEvent.data = damage;
 

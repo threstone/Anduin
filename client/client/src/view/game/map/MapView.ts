@@ -28,6 +28,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         this.addEffectListener('S_UPDATE_ENTITYS', this.entitysUpdate);
         this.addEffectListener('S_SELF_EFFECT', this.entitysSelfEffect);
         this.addEffectListener('S_FLY_EFFECT', this.flyEffect);
+        this.addEffectListener('S_SPECIAL_EFFECT', this.specialEffect);
     }
 
     private onRoundEnd(msg: GamePto.S_ROUND_END_EVENT) {
@@ -110,7 +111,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 }
             }
 
-            if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+            if (cardInfo.allowAtk && cardInfo.attack > 0 && GameModel.ins().atkTimes > 0) {
                 /**检查是否有可攻击的目标 */
                 if (MapModel.ins().getAttackablePoint(cardInfo.blockX, cardInfo.blockY, config).size) {
                     unit.allowOperate.visible = true;
@@ -155,7 +156,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
 
         //显示可攻击
-        if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+        if (cardInfo.allowAtk && cardInfo.attack > 0 && GameModel.ins().atkTimes > 0) {
             const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
             if (atkPointMap.size !== 0) {
                 MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
@@ -222,7 +223,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         }
 
         //显示可攻击
-        if (cardInfo.allowAtk && GameModel.ins().atkTimes > 0) {
+        if (cardInfo.allowAtk && cardInfo.attack > 0 && GameModel.ins().atkTimes > 0) {
             const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
             if (atkPointMap.size !== 0) {
                 MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
@@ -264,8 +265,13 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
         //攻击效果
         const sourceConfig = CardsModel.ins().getCardConfigById(sourceCardInfo.cardId);
-        await this.showAttack(sourceEntity, targetEntity, sourceConfig);
+        await this.showAttack(sourceEntity, targetEntity, sourceConfig, msg);
 
+        this.updateMapItem(sourceCardInfo);
+    }
+
+    /** 攻击飘提示 */
+    private showAttackTips(sourceEntity: BaseUI.UIMapUnit, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
         //执行完效果后就飘血扣血
         msg.targetList.forEach((target) => {
             const entity = this.entityMap.get(target.id);
@@ -273,12 +279,14 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             this.updateMapItem(target);
         });
 
-        this.entityShowTips(sourceEntity, `-${msg.strikeBackDamage}`);
-        this.updateMapItem(sourceCardInfo);
+        // 近战攻击其他元素会受到反击
+        if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
+            this.entityShowTips(sourceEntity, `-${msg.strikeBackDamage}`);
+        }
     }
 
     /** 攻击效果 根据近战远程区分效果 */
-    private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface) {
+    private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
         //近战
         if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
             const cacheX = source.x;
@@ -289,27 +297,21 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 this.view.setChildIndex(source, oldIndex);
             });
             await this.wait(500);
+            this.showAttackTips(source, sourceConfig, msg);
+            await this.wait(300);
         }//远程 
         else if (sourceConfig.detailType === CardsPto.AtkType.LongRange) {
-            const effectData = ConfigMgr.ins().getEffectDataById(sourceConfig.effectId);
+            const effectData = ConfigMgr.ins().getFlyEffectDataById(sourceConfig.effectList[0]);
             if (!effectData) {
                 return;
             }
-            const effect = await EffectMgr.ins().loadEffectById(effectData);
+            const effect = await EffectMgr.ins().loadFlyEffectById(effectData);
 
             effect.x = source.x;
             effect.y = source.y;
 
-            let skew = 0;
-            let time = 0;
-            //确定旋转角度及飞行时间
-            if (source.x === target.x) {
-                skew = source.y > target.y ? 0 : 180;
-                time = Math.abs(source.y - target.y) * PXNeedMs;
-            } else {
-                skew = source.x > target.x ? 270 : 90;
-                time = Math.abs(source.x - target.x) * PXNeedMs;
-            }
+            let skew = Utils.getPointAngle(source.x, source.y, target.x, target.y);
+            const time = Utils.getDistance(source.x, source.y, target.x, target.y) * PXNeedMs;
             effect.skewX = skew - effectData.defaultRotation;
             effect.skewY = skew - effectData.defaultRotation;
 
@@ -318,6 +320,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
                 this.view.displayListContainer.removeChild(effect);
             });
             await this.wait(time);
+            this.showAttackTips(source, sourceConfig, msg);
         }
     }
 
@@ -369,16 +372,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const cardConfig = CardsModel.ins().getCardConfigById(card.cardId);
-        if (!cardConfig) {
-            return;
-        }
-
-        const effectData = ConfigMgr.ins().getEffectDataById(cardConfig.effectId);
+        const effectData = ConfigMgr.ins().getSelfEffectDataById(msg.effectId);
         if (!effectData) {
             return;
         }
-        const effect = await EffectMgr.ins().loadEffectById(effectData);
+        const effect = await EffectMgr.ins().loadSelfEffectById(effectData);
         const entityItem = this.entityMap.get(card.id);
         effect.x = entityItem.width / 2;
         effect.y = entityItem.height / 2;
@@ -416,13 +414,12 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             sourceEntity = this.entityMap.get(hero.id);
         }
 
-        const sourceConfig = CardsModel.ins().getCardConfigById(msg.from.cardId);
-        const effectData = ConfigMgr.ins().getEffectDataById(sourceConfig.effectId);
+        const effectData = ConfigMgr.ins().getFlyEffectDataById(msg.effectId);
         if (!effectData) {
             return;
         }
 
-        const effect = await EffectMgr.ins().loadEffectById(effectData);
+        const effect = await EffectMgr.ins().loadFlyEffectById(effectData);
         effect.x = sourceEntity.x;
         effect.y = sourceEntity.y;
         this.view.displayListContainer.addChild(effect);
@@ -450,6 +447,11 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             });
         });
 
+    }
+
+    /** 需要特殊实现的特效 */
+    private async specialEffect(msg: GamePto.S_SPECIAL_EFFECT) {
+        await SpecialEffectMgr.ins().handleEffect(msg.effectId, msg.dataArr);
     }
 
     /**传入一个位置，检查是否在地图范围中 */

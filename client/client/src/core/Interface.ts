@@ -46,7 +46,6 @@ interface BuffData {
 
 interface EffectData {
     id: number;
-    effectName: string,
     effectType: number,
     defaultRotation: number
 }

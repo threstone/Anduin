@@ -13,7 +13,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[1,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "atkRange":0
   },
@@ -31,7 +31,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -50,7 +50,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -69,7 +69,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -88,7 +88,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":0,
+ "effectList":[4],
  "soundId":-1,
  "movement":2,
  "atkRange":3
@@ -107,7 +107,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":3,
+ "effectList":[4],
  "soundId":-1,
  "movement":2,
  "atkRange":3
@@ -126,7 +126,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -145,7 +145,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":4,
+ "effectList":[4],
  "soundId":-1,
  "movement":2,
  "atkRange":3
@@ -164,7 +164,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -183,7 +183,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":5,
+ "effectList":[4],
  "soundId":-1,
  "movement":2,
  "atkRange":3

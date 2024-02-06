@@ -14,6 +14,11 @@ export class Card100009 extends MagicCard {
         const distance = this.hp;
         const cards = this.table.mapData.getEffectCardsByDistance(x, y, distance);
 
+        const effectMsg = new GamePto.S_SPECIAL_EFFECT();
+        effectMsg.effectId = this.effectList[0];
+        effectMsg.dataArr.push(x, y);
+        user.table.broadcast(effectMsg);
+
         const msg = new GamePto.S_UPDATE_ENTITYS();
         this._cacheCards = [];
         this._cacheDamages = [];

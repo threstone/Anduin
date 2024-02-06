@@ -34,6 +34,7 @@ export class BaseCard implements CardInterface {
     cardFee: number;
     quality: CardsPto.QualityType;
     buffs: number[];
+    effectList: number[];
     isDerivation: number;
     useCondition: number[];
     movement: number;

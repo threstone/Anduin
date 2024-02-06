@@ -109,7 +109,7 @@ class Utils {
         return angle;
     }
 
-    /**获取两点之间的像素距离 */
+    /** 获取两点之间的像素距离 */
     public static getDistance(sx: number, sy: number, tx: number, ty: number) {
         const difX = tx - sx;
         const difY = ty - sy;

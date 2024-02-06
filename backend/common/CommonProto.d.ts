@@ -5822,102 +5822,102 @@ export namespace GamePto {
         public toJSON(): { [k: string]: any };
     }
 
-    /** Properties of a S_COMMON_EFFECT. */
-    interface IS_COMMON_EFFECT {
+    /** Properties of a S_SPECIAL_EFFECT. */
+    interface IS_SPECIAL_EFFECT {
 
-        /** S_COMMON_EFFECT cmd */
+        /** S_SPECIAL_EFFECT cmd */
         cmd?: (number|null);
 
-        /** S_COMMON_EFFECT scmd */
+        /** S_SPECIAL_EFFECT scmd */
         scmd?: (number|null);
 
-        /** S_COMMON_EFFECT effectId */
+        /** S_SPECIAL_EFFECT effectId */
         effectId?: (number|null);
 
-        /** S_COMMON_EFFECT dataArr */
+        /** S_SPECIAL_EFFECT dataArr */
         dataArr?: (number[]|null);
     }
 
-    /** Represents a S_COMMON_EFFECT. */
-    class S_COMMON_EFFECT implements IS_COMMON_EFFECT {
+    /** Represents a S_SPECIAL_EFFECT. */
+    class S_SPECIAL_EFFECT implements IS_SPECIAL_EFFECT {
 
         /**
-         * Constructs a new S_COMMON_EFFECT.
+         * Constructs a new S_SPECIAL_EFFECT.
          * @param [properties] Properties to set
          */
-        constructor(properties?: GamePto.IS_COMMON_EFFECT);
+        constructor(properties?: GamePto.IS_SPECIAL_EFFECT);
 
-        /** S_COMMON_EFFECT cmd. */
+        /** S_SPECIAL_EFFECT cmd. */
         public cmd: number;
 
-        /** S_COMMON_EFFECT scmd. */
+        /** S_SPECIAL_EFFECT scmd. */
         public scmd: number;
 
-        /** S_COMMON_EFFECT effectId. */
+        /** S_SPECIAL_EFFECT effectId. */
         public effectId: number;
 
-        /** S_COMMON_EFFECT dataArr. */
+        /** S_SPECIAL_EFFECT dataArr. */
         public dataArr: number[];
 
         /**
-         * Encodes the specified S_COMMON_EFFECT message. Does not implicitly {@link GamePto.S_COMMON_EFFECT.verify|verify} messages.
-         * @param message S_COMMON_EFFECT message or plain object to encode
+         * Encodes the specified S_SPECIAL_EFFECT message. Does not implicitly {@link GamePto.S_SPECIAL_EFFECT.verify|verify} messages.
+         * @param message S_SPECIAL_EFFECT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encode(message: GamePto.IS_COMMON_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encode(message: GamePto.IS_SPECIAL_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Encodes the specified S_COMMON_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_COMMON_EFFECT.verify|verify} messages.
-         * @param message S_COMMON_EFFECT message or plain object to encode
+         * Encodes the specified S_SPECIAL_EFFECT message, length delimited. Does not implicitly {@link GamePto.S_SPECIAL_EFFECT.verify|verify} messages.
+         * @param message S_SPECIAL_EFFECT message or plain object to encode
          * @param [writer] Writer to encode to
          * @returns Writer
          */
-        public static encodeDelimited(message: GamePto.IS_COMMON_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
+        public static encodeDelimited(message: GamePto.IS_SPECIAL_EFFECT, writer?: $protobuf.Writer): $protobuf.Writer;
 
         /**
-         * Decodes a S_COMMON_EFFECT message from the specified reader or buffer.
+         * Decodes a S_SPECIAL_EFFECT message from the specified reader or buffer.
          * @param reader Reader or buffer to decode from
          * @param [length] Message length if known beforehand
-         * @returns S_COMMON_EFFECT
+         * @returns S_SPECIAL_EFFECT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_COMMON_EFFECT;
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): GamePto.S_SPECIAL_EFFECT;
 
         /**
-         * Decodes a S_COMMON_EFFECT message from the specified reader or buffer, length delimited.
+         * Decodes a S_SPECIAL_EFFECT message from the specified reader or buffer, length delimited.
          * @param reader Reader or buffer to decode from
-         * @returns S_COMMON_EFFECT
+         * @returns S_SPECIAL_EFFECT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_COMMON_EFFECT;
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): GamePto.S_SPECIAL_EFFECT;
 
         /**
-         * Verifies a S_COMMON_EFFECT message.
+         * Verifies a S_SPECIAL_EFFECT message.
          * @param message Plain object to verify
          * @returns `null` if valid, otherwise the reason why it is not
          */
         public static verify(message: { [k: string]: any }): (string|null);
 
         /**
-         * Creates a S_COMMON_EFFECT message from a plain object. Also converts values to their respective internal types.
+         * Creates a S_SPECIAL_EFFECT message from a plain object. Also converts values to their respective internal types.
          * @param object Plain object
-         * @returns S_COMMON_EFFECT
+         * @returns S_SPECIAL_EFFECT
          */
-        public static fromObject(object: { [k: string]: any }): GamePto.S_COMMON_EFFECT;
+        public static fromObject(object: { [k: string]: any }): GamePto.S_SPECIAL_EFFECT;
 
         /**
-         * Creates a plain object from a S_COMMON_EFFECT message. Also converts values to other types if specified.
-         * @param message S_COMMON_EFFECT
+         * Creates a plain object from a S_SPECIAL_EFFECT message. Also converts values to other types if specified.
+         * @param message S_SPECIAL_EFFECT
          * @param [options] Conversion options
          * @returns Plain object
          */
-        public static toObject(message: GamePto.S_COMMON_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
+        public static toObject(message: GamePto.S_SPECIAL_EFFECT, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
         /**
-         * Converts this S_COMMON_EFFECT to JSON.
+         * Converts this S_SPECIAL_EFFECT to JSON.
          * @returns JSON object
          */
         public toJSON(): { [k: string]: any };
@@ -5940,6 +5940,9 @@ export namespace GamePto {
 
         /** S_FLY_EFFECT targetShowTips */
         targetShowTips?: (string|null);
+
+        /** S_FLY_EFFECT effectId */
+        effectId?: (number|null);
     }
 
     /** Represents a S_FLY_EFFECT. */
@@ -5965,6 +5968,9 @@ export namespace GamePto {
 
         /** S_FLY_EFFECT targetShowTips. */
         public targetShowTips: string;
+
+        /** S_FLY_EFFECT effectId. */
+        public effectId: number;
 
         /**
          * Encodes the specified S_FLY_EFFECT message. Does not implicitly {@link GamePto.S_FLY_EFFECT.verify|verify} messages.
@@ -6050,6 +6056,9 @@ export namespace GamePto {
 
         /** S_SELF_EFFECT affectedList */
         affectedList?: (GamePto.IAffectedCard[]|null);
+
+        /** S_SELF_EFFECT effectId */
+        effectId?: (number|null);
     }
 
     /** Represents a S_SELF_EFFECT. */
@@ -6078,6 +6087,9 @@ export namespace GamePto {
 
         /** S_SELF_EFFECT affectedList. */
         public affectedList: GamePto.IAffectedCard[];
+
+        /** S_SELF_EFFECT effectId. */
+        public effectId: number;
 
         /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.

@@ -138,22 +138,40 @@ class MapModel extends BaseModel {
 
     /**获取可攻击位置 */
     public getAttackablePoint(baseX: number, baseY: number, config: CardInterface, resultMap = new Map<number, number>()) {
+        // 如果可以攻击不同行不同列的元素将使用以下代码，但是就会导致远程攻击无法被中途单元挡住
         //获取攻击距离
         const atkRange = CardsModel.ins().getCardAtkRange(config);
         const basePoint = baseY * MapWidth + baseX;
         for (let x = baseX - atkRange; x <= baseX + atkRange; x++) {
-            const targetPoint = baseY * MapWidth + x;
-            if (!resultMap.has(targetPoint) && this.allowAtk(x, baseY)) {
-                resultMap.set(targetPoint, basePoint);
-            }
-        }
-        for (let y = baseY - atkRange; y <= baseY + atkRange; y++) {
-            const targetPoint = y * MapWidth + baseX;
-            if (!resultMap.has(targetPoint) && this.allowAtk(baseX, y)) {
-                resultMap.set(targetPoint, basePoint);
+            for (let y = baseY - atkRange; y <= baseY + atkRange; y++) {
+                if (x >= 0 && y >= 0) {
+                    const tempDistance = Math.abs(baseX - x) + Math.abs(baseY - y);
+                    const targetPoint = y * MapWidth + x;
+                    if (tempDistance <= atkRange && !resultMap.has(targetPoint) && this.allowAtk(x, y)) {
+                        resultMap.set(targetPoint, basePoint);
+                    }
+                }
             }
         }
         return resultMap;
+
+        // 以下注释为只能攻击同行同列单位时的获取代码
+        // //获取攻击距离
+        // const atkRange = CardsModel.ins().getCardAtkRange(config);
+        // const basePoint = baseY * MapWidth + baseX;
+        // for (let x = baseX - atkRange; x <= baseX + atkRange; x++) {
+        //     const targetPoint = baseY * MapWidth + x;
+        //     if (!resultMap.has(targetPoint) && this.allowAtk(x, baseY)) {
+        //         resultMap.set(targetPoint, basePoint);
+        //     }
+        // }
+        // for (let y = baseY - atkRange; y <= baseY + atkRange; y++) {
+        //     const targetPoint = y * MapWidth + baseX;
+        //     if (!resultMap.has(targetPoint) && this.allowAtk(baseX, y)) {
+        //         resultMap.set(targetPoint, basePoint);
+        //     }
+        // }
+        // return resultMap;
     }
 
     /**是否允许攻击 */
@@ -323,9 +341,9 @@ class MapModel extends BaseModel {
         this.emit('S_UPDATE_ENTITYS', msg);
     }
 
-    //公共卡牌效果
-    private S_COMMON_EFFECT(msg: GamePto.S_COMMON_EFFECT) {
-        //TODO
+    //一些需要特殊实现的特效
+    private S_SPECIAL_EFFECT(msg: GamePto.S_SPECIAL_EFFECT) {
+        this.emit('S_SPECIAL_EFFECT', msg);
     }
 
     //飞行弹道效果 类似火球术、魔法箭

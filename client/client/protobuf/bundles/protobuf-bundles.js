@@ -8232,27 +8232,27 @@ $root.GamePto = (function() {
         return S_UPDATE_ENTITYS;
     })();
 
-    GamePto.S_COMMON_EFFECT = (function() {
+    GamePto.S_SPECIAL_EFFECT = (function() {
 
         /**
-         * Properties of a S_COMMON_EFFECT.
+         * Properties of a S_SPECIAL_EFFECT.
          * @memberof GamePto
-         * @interface IS_COMMON_EFFECT
-         * @property {number|null} [cmd] S_COMMON_EFFECT cmd
-         * @property {number|null} [scmd] S_COMMON_EFFECT scmd
-         * @property {number|null} [effectId] S_COMMON_EFFECT effectId
-         * @property {Array.<number>|null} [dataArr] S_COMMON_EFFECT dataArr
+         * @interface IS_SPECIAL_EFFECT
+         * @property {number|null} [cmd] S_SPECIAL_EFFECT cmd
+         * @property {number|null} [scmd] S_SPECIAL_EFFECT scmd
+         * @property {number|null} [effectId] S_SPECIAL_EFFECT effectId
+         * @property {Array.<number>|null} [dataArr] S_SPECIAL_EFFECT dataArr
          */
 
         /**
-         * Constructs a new S_COMMON_EFFECT.
+         * Constructs a new S_SPECIAL_EFFECT.
          * @memberof GamePto
-         * @classdesc Represents a S_COMMON_EFFECT.
-         * @implements IS_COMMON_EFFECT
+         * @classdesc Represents a S_SPECIAL_EFFECT.
+         * @implements IS_SPECIAL_EFFECT
          * @constructor
-         * @param {GamePto.IS_COMMON_EFFECT=} [properties] Properties to set
+         * @param {GamePto.IS_SPECIAL_EFFECT=} [properties] Properties to set
          */
-        function S_COMMON_EFFECT(properties) {
+        function S_SPECIAL_EFFECT(properties) {
             this.dataArr = [];
             if (properties)
                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -8261,47 +8261,47 @@ $root.GamePto = (function() {
         }
 
         /**
-         * S_COMMON_EFFECT cmd.
+         * S_SPECIAL_EFFECT cmd.
          * @member {number} cmd
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @instance
          */
-        S_COMMON_EFFECT.prototype.cmd = 200;
+        S_SPECIAL_EFFECT.prototype.cmd = 200;
 
         /**
-         * S_COMMON_EFFECT scmd.
+         * S_SPECIAL_EFFECT scmd.
          * @member {number} scmd
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @instance
          */
-        S_COMMON_EFFECT.prototype.scmd = 10017;
+        S_SPECIAL_EFFECT.prototype.scmd = 10017;
 
         /**
-         * S_COMMON_EFFECT effectId.
+         * S_SPECIAL_EFFECT effectId.
          * @member {number} effectId
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @instance
          */
-        S_COMMON_EFFECT.prototype.effectId = 0;
+        S_SPECIAL_EFFECT.prototype.effectId = 0;
 
         /**
-         * S_COMMON_EFFECT dataArr.
+         * S_SPECIAL_EFFECT dataArr.
          * @member {Array.<number>} dataArr
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @instance
          */
-        S_COMMON_EFFECT.prototype.dataArr = $util.emptyArray;
+        S_SPECIAL_EFFECT.prototype.dataArr = $util.emptyArray;
 
         /**
-         * Encodes the specified S_COMMON_EFFECT message. Does not implicitly {@link GamePto.S_COMMON_EFFECT.verify|verify} messages.
+         * Encodes the specified S_SPECIAL_EFFECT message. Does not implicitly {@link GamePto.S_SPECIAL_EFFECT.verify|verify} messages.
          * @function encode
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @static
-         * @param {GamePto.IS_COMMON_EFFECT} message S_COMMON_EFFECT message or plain object to encode
+         * @param {GamePto.IS_SPECIAL_EFFECT} message S_SPECIAL_EFFECT message or plain object to encode
          * @param {$protobuf.Writer} [writer] Writer to encode to
          * @returns {$protobuf.Writer} Writer
          */
-        S_COMMON_EFFECT.encode = function encode(message, writer) {
+        S_SPECIAL_EFFECT.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
             if (message.cmd != null && Object.hasOwnProperty.call(message, "cmd"))
@@ -8320,20 +8320,20 @@ $root.GamePto = (function() {
         };
 
         /**
-         * Decodes a S_COMMON_EFFECT message from the specified reader or buffer.
+         * Decodes a S_SPECIAL_EFFECT message from the specified reader or buffer.
          * @function decode
-         * @memberof GamePto.S_COMMON_EFFECT
+         * @memberof GamePto.S_SPECIAL_EFFECT
          * @static
          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
          * @param {number} [length] Message length if known beforehand
-         * @returns {GamePto.S_COMMON_EFFECT} S_COMMON_EFFECT
+         * @returns {GamePto.S_SPECIAL_EFFECT} S_SPECIAL_EFFECT
          * @throws {Error} If the payload is not a reader or valid buffer
          * @throws {$protobuf.util.ProtocolError} If required fields are missing
          */
-        S_COMMON_EFFECT.decode = function decode(reader, length) {
+        S_SPECIAL_EFFECT.decode = function decode(reader, length) {
             if (!(reader instanceof $Reader))
                 reader = $Reader.create(reader);
-            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_COMMON_EFFECT();
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.GamePto.S_SPECIAL_EFFECT();
             while (reader.pos < end) {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
@@ -8364,7 +8364,7 @@ $root.GamePto = (function() {
             return message;
         };
 
-        return S_COMMON_EFFECT;
+        return S_SPECIAL_EFFECT;
     })();
 
     GamePto.S_FLY_EFFECT = (function() {
@@ -8378,6 +8378,7 @@ $root.GamePto = (function() {
          * @property {GamePto.ICard|null} [from] S_FLY_EFFECT from
          * @property {GamePto.ICard|null} [target] S_FLY_EFFECT target
          * @property {string|null} [targetShowTips] S_FLY_EFFECT targetShowTips
+         * @property {number|null} [effectId] S_FLY_EFFECT effectId
          */
 
         /**
@@ -8436,6 +8437,14 @@ $root.GamePto = (function() {
         S_FLY_EFFECT.prototype.targetShowTips = "";
 
         /**
+         * S_FLY_EFFECT effectId.
+         * @member {number} effectId
+         * @memberof GamePto.S_FLY_EFFECT
+         * @instance
+         */
+        S_FLY_EFFECT.prototype.effectId = 0;
+
+        /**
          * Encodes the specified S_FLY_EFFECT message. Does not implicitly {@link GamePto.S_FLY_EFFECT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_FLY_EFFECT
@@ -8457,6 +8466,8 @@ $root.GamePto = (function() {
                 $root.GamePto.Card.encode(message.target, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
             if (message.targetShowTips != null && Object.hasOwnProperty.call(message, "targetShowTips"))
                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.targetShowTips);
+            if (message.effectId != null && Object.hasOwnProperty.call(message, "effectId"))
+                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.effectId);
             return writer;
         };
 
@@ -8493,6 +8504,9 @@ $root.GamePto = (function() {
                 case 5:
                     message.targetShowTips = reader.string();
                     break;
+                case 6:
+                    message.effectId = reader.int32();
+                    break;
                 default:
                     reader.skipType(tag & 7);
                     break;
@@ -8516,6 +8530,7 @@ $root.GamePto = (function() {
          * @property {number|null} [y] S_SELF_EFFECT y
          * @property {GamePto.ICard|null} [card] S_SELF_EFFECT card
          * @property {Array.<GamePto.IAffectedCard>|null} [affectedList] S_SELF_EFFECT affectedList
+         * @property {number|null} [effectId] S_SELF_EFFECT effectId
          */
 
         /**
@@ -8583,6 +8598,14 @@ $root.GamePto = (function() {
         S_SELF_EFFECT.prototype.affectedList = $util.emptyArray;
 
         /**
+         * S_SELF_EFFECT effectId.
+         * @member {number} effectId
+         * @memberof GamePto.S_SELF_EFFECT
+         * @instance
+         */
+        S_SELF_EFFECT.prototype.effectId = 0;
+
+        /**
          * Encodes the specified S_SELF_EFFECT message. Does not implicitly {@link GamePto.S_SELF_EFFECT.verify|verify} messages.
          * @function encode
          * @memberof GamePto.S_SELF_EFFECT
@@ -8607,6 +8630,8 @@ $root.GamePto = (function() {
             if (message.affectedList != null && message.affectedList.length)
                 for (var i = 0; i < message.affectedList.length; ++i)
                     $root.GamePto.AffectedCard.encode(message.affectedList[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+            if (message.effectId != null && Object.hasOwnProperty.call(message, "effectId"))
+                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.effectId);
             return writer;
         };
 
@@ -8647,6 +8672,9 @@ $root.GamePto = (function() {
                     if (!(message.affectedList && message.affectedList.length))
                         message.affectedList = [];
                     message.affectedList.push($root.GamePto.AffectedCard.decode(reader, reader.uint32()));
+                    break;
+                case 7:
+                    message.effectId = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);

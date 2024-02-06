@@ -1,43 +1,36 @@
 [
 {
  "id":0,
- "effectName":"弓箭",
  "effectType":0,
  "defaultRotation":90
   },
 {
  "id":1,
- "effectName":"魔法箭",
  "effectType":0,
  "defaultRotation":90
   },
 {
  "id":2,
- "effectName":"自身特效",
  "effectType":0,
  "defaultRotation":0
   },
 {
  "id":3,
- "effectName":"红色球",
  "effectType":0,
  "defaultRotation":90
   },
 {
  "id":4,
- "effectName":"雷球",
  "effectType":0,
  "defaultRotation":90
   },
 {
  "id":5,
- "effectName":"雷球",
  "effectType":0,
  "defaultRotation":90
   },
 {
  "id":6,
- "effectName":"法术箭",
  "effectType":0,
  "defaultRotation":90
   }

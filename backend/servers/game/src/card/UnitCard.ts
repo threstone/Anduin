@@ -47,27 +47,30 @@ export class UnitCard extends BuildingCard {
 
     /**获取被攻击的目标 */
     public getBeAttackCard(targetCard: BuildingCard, self: UnitCard): BuildingCard[] {
-        const mapData = self.table.mapData;
-        if (self.detailType === CardsPto.AtkType.CloseRange) {
-            return [targetCard];
-        } else {
-            let beAttackCard: BuildingCard;
+        return [targetCard];
+        // 以下注释为当远程攻击时可被挡住时的代码
+        // 获取真正被攻击的单位, 因为远程有可能能被路径上的敌人挡住
+        // const mapData = self.table.mapData;
+        // if (self.detailType === CardsPto.AtkType.CloseRange) {
+        //     return [targetCard];
+        // } else {
+        //     let beAttackCard: BuildingCard;
 
-            if (self.blockX === targetCard.blockX) {
-                const changeNum = self.blockY > targetCard.blockY ? -1 : 1;
-                let y = self.blockY + changeNum;
-                while ((beAttackCard = mapData.getCard(self.blockX, y)) == null || beAttackCard.uid === self.uid) {
-                    y += changeNum;
-                }
-            } else if (self.blockY === targetCard.blockY) {
-                const changeNum = self.blockX > targetCard.blockX ? -1 : 1;
-                let x = self.blockX + changeNum;
-                while ((beAttackCard = mapData.getCard(x, self.blockY)) == null || beAttackCard.uid === self.uid) {
-                    x += changeNum;
-                }
-            }
-            return [beAttackCard];
-        }
+        //     if (self.blockX === targetCard.blockX) {
+        //         const changeNum = self.blockY > targetCard.blockY ? -1 : 1;
+        //         let y = self.blockY + changeNum;
+        //         while ((beAttackCard = mapData.getCard(self.blockX, y)) == null || beAttackCard.uid === self.uid) {
+        //             y += changeNum;
+        //         }
+        //     } else if (self.blockY === targetCard.blockY) {
+        //         const changeNum = self.blockX > targetCard.blockX ? -1 : 1;
+        //         let x = self.blockX + changeNum;
+        //         while ((beAttackCard = mapData.getCard(x, self.blockY)) == null || beAttackCard.uid === self.uid) {
+        //             x += changeNum;
+        //         }
+        //     }
+        //     return [beAttackCard];
+        // }
     }
 
     public doAttack(atkEvent: EventData, targetCard: BuildingCard, damageCards: BuildingCard[]) {
@@ -83,16 +86,16 @@ export class UnitCard extends BuildingCard {
         const damage = atkEvent.data;
 
         // 近战攻击会被反击
+        let strikeBackEvent: EventData;
         if (this.detailType === CardsPto.AtkType.CloseRange) {
             // 受到卡牌反击的伤害, 近战远程不一样,远程的反击能力稍弱
             const damageRatio = firstTarget.detailType === CardsPto.AtkType.CloseRange ? GlobalVar.configMgr.common.closeRangeStrikeBackRatio : GlobalVar.configMgr.common.longRangeStrikeBackRatio;
             const strikeBackDamage = Math.floor(firstTarget.attack * damageRatio);
-            const strikeBackEvent = new EventData(EventType.Damage);
+            strikeBackEvent = new EventData(EventType.Damage);
             strikeBackEvent.data = strikeBackDamage;
             // 受伤事件
             replay.strikeBackDamage = this.emit(strikeBackEvent, this, firstTarget).data;
-            // 受伤后事件
-            this.emit(strikeBackEvent.changeType(EventType.DamageAfter), this, firstTarget);
+
         }
 
         //其他单位扣血
@@ -115,6 +118,11 @@ export class UnitCard extends BuildingCard {
         damageCards.forEach((damgaCard) => {
             damgaCard.emit(atkEvent, damgaCard, this);
         })
+
+        if (replay.strikeBackDamage) {
+            // 受伤后事件
+            this.emit(strikeBackEvent.changeType(EventType.DamageAfter), this, firstTarget);
+        }
 
         //执行卡牌自身攻击后事件
         this.emit(atkEvent.changeType(EventType.SelfAtkAfter), this, targetCard, damageCards);

@@ -14,7 +14,7 @@ interface CardInterface {
     count: number;
     isDerivation: number;
     useCondition: number[];
-    effectId: number;
+    effectList: number[];
     soundId: number;
     /**
      * 移动力(负值代表飞行)

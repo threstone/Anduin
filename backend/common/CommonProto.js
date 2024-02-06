@@ -6972,9 +6972,9 @@ $root.GamePto = (function() {
         return S_UPDATE_ENTITYS;
     })();
 
-    GamePto.S_COMMON_EFFECT = (function() {
+    GamePto.S_SPECIAL_EFFECT = (function() {
 
-        function S_COMMON_EFFECT(p) {
+        function S_SPECIAL_EFFECT(p) {
             this.dataArr = [];
             if (p)
                 for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
@@ -6982,16 +6982,16 @@ $root.GamePto = (function() {
                         this[ks[i]] = p[ks[i]];
         }
 
-        S_COMMON_EFFECT.prototype.cmd = 200;
-        S_COMMON_EFFECT.prototype.scmd = 10017;
-        S_COMMON_EFFECT.prototype.effectId = 0;
-        S_COMMON_EFFECT.prototype.dataArr = $util.emptyArray;
+        S_SPECIAL_EFFECT.prototype.cmd = 200;
+        S_SPECIAL_EFFECT.prototype.scmd = 10017;
+        S_SPECIAL_EFFECT.prototype.effectId = 0;
+        S_SPECIAL_EFFECT.prototype.dataArr = $util.emptyArray;
 
-        S_COMMON_EFFECT.create = function create(properties) {
-            return new S_COMMON_EFFECT(properties);
+        S_SPECIAL_EFFECT.create = function create(properties) {
+            return new S_SPECIAL_EFFECT(properties);
         };
 
-        S_COMMON_EFFECT.encode = function encode(m, w) {
+        S_SPECIAL_EFFECT.encode = function encode(m, w) {
             if (!w)
                 w = $Writer.create();
             if (m.cmd != null && Object.hasOwnProperty.call(m, "cmd"))
@@ -7009,10 +7009,10 @@ $root.GamePto = (function() {
             return w;
         };
 
-        S_COMMON_EFFECT.decode = function decode(r, l) {
+        S_SPECIAL_EFFECT.decode = function decode(r, l) {
             if (!(r instanceof $Reader))
                 r = $Reader.create(r);
-            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_COMMON_EFFECT();
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.GamePto.S_SPECIAL_EFFECT();
             while (r.pos < c) {
                 var t = r.uint32();
                 switch (t >>> 3) {
@@ -7043,10 +7043,10 @@ $root.GamePto = (function() {
             return m;
         };
 
-        S_COMMON_EFFECT.fromObject = function fromObject(d) {
-            if (d instanceof $root.GamePto.S_COMMON_EFFECT)
+        S_SPECIAL_EFFECT.fromObject = function fromObject(d) {
+            if (d instanceof $root.GamePto.S_SPECIAL_EFFECT)
                 return d;
-            var m = new $root.GamePto.S_COMMON_EFFECT();
+            var m = new $root.GamePto.S_SPECIAL_EFFECT();
             if (d.cmd != null) {
                 m.cmd = d.cmd | 0;
             }
@@ -7058,7 +7058,7 @@ $root.GamePto = (function() {
             }
             if (d.dataArr) {
                 if (!Array.isArray(d.dataArr))
-                    throw TypeError(".GamePto.S_COMMON_EFFECT.dataArr: array expected");
+                    throw TypeError(".GamePto.S_SPECIAL_EFFECT.dataArr: array expected");
                 m.dataArr = [];
                 for (var i = 0; i < d.dataArr.length; ++i) {
                     m.dataArr[i] = d.dataArr[i] | 0;
@@ -7067,7 +7067,7 @@ $root.GamePto = (function() {
             return m;
         };
 
-        S_COMMON_EFFECT.toObject = function toObject(m, o) {
+        S_SPECIAL_EFFECT.toObject = function toObject(m, o) {
             if (!o)
                 o = {};
             var d = {};
@@ -7097,11 +7097,11 @@ $root.GamePto = (function() {
             return d;
         };
 
-        S_COMMON_EFFECT.prototype.toJSON = function toJSON() {
+        S_SPECIAL_EFFECT.prototype.toJSON = function toJSON() {
             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
         };
 
-        return S_COMMON_EFFECT;
+        return S_SPECIAL_EFFECT;
     })();
 
     GamePto.S_FLY_EFFECT = (function() {
@@ -7118,6 +7118,7 @@ $root.GamePto = (function() {
         S_FLY_EFFECT.prototype.from = null;
         S_FLY_EFFECT.prototype.target = null;
         S_FLY_EFFECT.prototype.targetShowTips = "";
+        S_FLY_EFFECT.prototype.effectId = 0;
 
         S_FLY_EFFECT.create = function create(properties) {
             return new S_FLY_EFFECT(properties);
@@ -7136,6 +7137,8 @@ $root.GamePto = (function() {
                 $root.GamePto.Card.encode(m.target, w.uint32(34).fork()).ldelim();
             if (m.targetShowTips != null && Object.hasOwnProperty.call(m, "targetShowTips"))
                 w.uint32(42).string(m.targetShowTips);
+            if (m.effectId != null && Object.hasOwnProperty.call(m, "effectId"))
+                w.uint32(48).int32(m.effectId);
             return w;
         };
 
@@ -7160,6 +7163,9 @@ $root.GamePto = (function() {
                     break;
                 case 5:
                     m.targetShowTips = r.string();
+                    break;
+                case 6:
+                    m.effectId = r.int32();
                     break;
                 default:
                     r.skipType(t & 7);
@@ -7192,6 +7198,9 @@ $root.GamePto = (function() {
             if (d.targetShowTips != null) {
                 m.targetShowTips = String(d.targetShowTips);
             }
+            if (d.effectId != null) {
+                m.effectId = d.effectId | 0;
+            }
             return m;
         };
 
@@ -7205,6 +7214,7 @@ $root.GamePto = (function() {
                 d.from = null;
                 d.target = null;
                 d.targetShowTips = "";
+                d.effectId = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -7220,6 +7230,9 @@ $root.GamePto = (function() {
             }
             if (m.targetShowTips != null && m.hasOwnProperty("targetShowTips")) {
                 d.targetShowTips = m.targetShowTips;
+            }
+            if (m.effectId != null && m.hasOwnProperty("effectId")) {
+                d.effectId = m.effectId;
             }
             return d;
         };
@@ -7247,6 +7260,7 @@ $root.GamePto = (function() {
         S_SELF_EFFECT.prototype.y = 0;
         S_SELF_EFFECT.prototype.card = null;
         S_SELF_EFFECT.prototype.affectedList = $util.emptyArray;
+        S_SELF_EFFECT.prototype.effectId = 0;
 
         S_SELF_EFFECT.create = function create(properties) {
             return new S_SELF_EFFECT(properties);
@@ -7269,6 +7283,8 @@ $root.GamePto = (function() {
                 for (var i = 0; i < m.affectedList.length; ++i)
                     $root.GamePto.AffectedCard.encode(m.affectedList[i], w.uint32(50).fork()).ldelim();
             }
+            if (m.effectId != null && Object.hasOwnProperty.call(m, "effectId"))
+                w.uint32(56).int32(m.effectId);
             return w;
         };
 
@@ -7298,6 +7314,9 @@ $root.GamePto = (function() {
                     if (!(m.affectedList && m.affectedList.length))
                         m.affectedList = [];
                     m.affectedList.push($root.GamePto.AffectedCard.decode(r, r.uint32()));
+                    break;
+                case 7:
+                    m.effectId = r.int32();
                     break;
                 default:
                     r.skipType(t & 7);
@@ -7338,6 +7357,9 @@ $root.GamePto = (function() {
                     m.affectedList[i] = $root.GamePto.AffectedCard.fromObject(d.affectedList[i]);
                 }
             }
+            if (d.effectId != null) {
+                m.effectId = d.effectId | 0;
+            }
             return m;
         };
 
@@ -7354,6 +7376,7 @@ $root.GamePto = (function() {
                 d.x = 0;
                 d.y = 0;
                 d.card = null;
+                d.effectId = 0;
             }
             if (m.cmd != null && m.hasOwnProperty("cmd")) {
                 d.cmd = m.cmd;
@@ -7375,6 +7398,9 @@ $root.GamePto = (function() {
                 for (var j = 0; j < m.affectedList.length; ++j) {
                     d.affectedList[j] = $root.GamePto.AffectedCard.toObject(m.affectedList[j], o);
                 }
+            }
+            if (m.effectId != null && m.hasOwnProperty("effectId")) {
+                d.effectId = m.effectId;
             }
             return d;
         };

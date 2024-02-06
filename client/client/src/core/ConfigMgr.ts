@@ -38,7 +38,15 @@ class ConfigMgr extends BaseClass {
         return this._allConfig['buff'][id];
     }
 
-    public getEffectDataById(id: number): EffectData {
-        return this._allConfig['effect'][id];
+    public getFlyEffectDataById(id: number): EffectData {
+        return this._allConfig['flyEffect'][id];
+    }
+
+    public getSelfEffectDataById(id: number): EffectData {
+        return this._allConfig['selfEffect'][id];
+    }
+
+    public getSpecialEffectDataById(id: number): EffectData {
+        return this._allConfig['specialEffect'][id];
     }
 }

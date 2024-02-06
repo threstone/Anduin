@@ -13,7 +13,7 @@
  "buffs":[3,4],
  "isDerivation":0,
  "useCondition":[0,0],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -32,7 +32,7 @@
  "buffs":[1],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -51,7 +51,7 @@
  "buffs":[0],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":2,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -70,7 +70,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1,12,1],
- "effectId":3,
+ "effectList":[3],
  "soundId":-1,
  "movement":2,
  "atkRange":3
@@ -89,7 +89,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[1,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "atkRange":0
   },
@@ -107,7 +107,7 @@
  "buffs":[2,5],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":3,
  "atkRange":0
@@ -126,7 +126,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[10,1],
- "effectId":1,
+ "effectList":[],
  "soundId":-1,
  "atkRange":0
   },
@@ -144,7 +144,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[10,1],
- "effectId":1,
+ "effectList":[],
  "soundId":-1,
  "atkRange":0
   },
@@ -162,7 +162,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[14,1],
- "effectId":1,
+ "effectList":[],
  "soundId":-1,
  "atkRange":0
   },
@@ -180,7 +180,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[19,1],
- "effectId":1,
+ "effectList":[0],
  "soundId":-1,
  "atkRange":0
   },
@@ -198,7 +198,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -217,7 +217,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":4,
+ "effectList":[4],
  "soundId":-1,
  "movement":2,
  "atkRange":3
@@ -236,7 +236,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":-1,
+ "effectList":[],
  "soundId":-1,
  "movement":2,
  "atkRange":0
@@ -255,7 +255,7 @@
  "buffs":[],
  "isDerivation":0,
  "useCondition":[2,1],
- "effectId":5,
+ "effectList":[5],
  "soundId":-1,
  "movement":2,
  "atkRange":3

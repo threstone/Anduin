@@ -32,6 +32,8 @@ export class CardInterface {
     /**是否衍生 */
     isDerivation: number;
 
+    effectList: number[];
+
     /**
      * 使用条件
      * 下标0数据表示:{0:无条件,1:友方单位,2:友方建筑,3:敌方单位,4:敌方建筑,5:所有单位,6:所有建筑,7:友方地图实体,8:敌方地图实体,9:所有地图实体,10:空格子}
