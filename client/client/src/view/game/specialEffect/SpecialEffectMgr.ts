@@ -1,6 +1,6 @@
 class SpecialEffectMgr extends BaseClass {
 
-    private _classMap: Map<number, SpecialEffectImpl>;
+    private _classMap: Map<number, typeof BaseSpecialEffect>;
 
     constructor() {
         super();
@@ -19,7 +19,7 @@ class SpecialEffectMgr extends BaseClass {
                 if (this._classMap.has(id)) {
                     console.error(`特殊特效${id}已有实现记录!`)
                 }
-                this._classMap.set(id, effectClass.ins());
+                this._classMap.set(id, effectClass);
             }
         }
     }
@@ -31,6 +31,6 @@ class SpecialEffectMgr extends BaseClass {
             console.error(`特殊特效${specialEffectId}未实现!`)
             return;
         }
-        return effectClass.handleEffect(specialEffectId, dataArray);
+        return effectClass.prototype.handleEffect(specialEffectId, dataArray);
     }
 }

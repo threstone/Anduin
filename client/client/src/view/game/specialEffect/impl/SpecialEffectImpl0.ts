@@ -1,4 +1,4 @@
-class SpecialEffectImpl0 extends BaseClass implements SpecialEffectImpl {
+class SpecialEffectImpl0 extends BaseSpecialEffect {
     async handleEffect(specialEffectId: number, dataArray: number[]) {
         const effectData = ConfigMgr.ins().getSpecialEffectDataById(specialEffectId);
         const effect = await EffectMgr.ins().loadSpecialSource(effectData);
