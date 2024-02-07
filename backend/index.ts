@@ -1,6 +1,6 @@
 declare var nodeId: string;
 declare var env: string;
-declare var startupParam:ILauncherOption
+declare var startupParam: ILauncherOption
 
 //游戏封包的结构
 declare interface IGameMessage {
@@ -42,6 +42,7 @@ declare interface ServerConfig {
     port: number
     env: string
     autuResume: boolean
+    serverType: string
 }
 
 //日志记录对象

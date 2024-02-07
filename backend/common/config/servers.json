@@ -1,6 +1,9 @@
 {
     "dev": {
-        "gate": [
+        "master": {
+            "port": 1000
+        },
+        "gate": [ 
             {
                 "nodeId": "Gate1",
                 "ip": "127.0.0.1",
