@@ -16,7 +16,8 @@
    },
    "include": [
       "./servers",
-      "./common"
+      "./common",
+      "index.ts"
    ],
    "exclude": [
       "**/node_modules/",

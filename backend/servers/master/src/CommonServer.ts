@@ -59,7 +59,10 @@ export class CommonServer {
 
     private async stopAll(ctx: Koa.Context, next: Koa.Next) {
         ctx.response.status = 200;
-        logger.info('process exit')
+        logger.info('process exit');
+        GlobalVar.nodeMgr.serverMap.forEach((node)=>{
+            node.kill();
+        })
         setTimeout(() => {
             process.exit();
         }, 500);
