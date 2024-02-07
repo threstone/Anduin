@@ -10,7 +10,7 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
 
     private loadLocalStorage() {
         let loginAccount = egret.localStorage.getItem('LoginAccount');
-        if(loginAccount){
+        if (loginAccount) {
             this.view.accountInput.text = loginAccount;
         }
     }
@@ -96,8 +96,12 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
             GlobalView.showTips('账号不超过长度不超过16个字符,密码长度不超过32个字符', 5000)
             return;
         }
+
+        GameDispatcher.getInstance().once('WebsocketConnected', () => {
+            LoginModel.ins().C_LOGIN(account, password);
+        }, this)
+        Socket.ins().connect();
         //发消息后不允许点击了
-        LoginModel.ins().C_LOGIN(account, password);
         this.view.touchable = false;
     }
 

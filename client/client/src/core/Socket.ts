@@ -5,17 +5,22 @@ class Socket extends BaseClass {
 
     public constructor() {
         super();
-        let serverConfig = RES.getRes('server_json')
         this._webSocket = new egret.WebSocket();
         this._webSocket.type = egret.WebSocket.TYPE_BINARY;
+
+    }
+
+    public connect() {
+        let serverConfig = RES.getRes('server_json')
         this._webSocket.connectByUrl(serverConfig.address);
-        console.log("开始连接服务器:", serverConfig.address)
+        console.log("开始连接服务器:", serverConfig.address);
         this._webSocket.addEventListener(egret.ProgressEvent.CONNECT, this.onConnection, this);
         this._webSocket.addEventListener(egret.Event.CLOSE, this.onClose, this);
         this._webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onError, this);
     }
 
     private onConnection() {
+        GameDispatcher.getInstance().emit('WebsocketConnected');
         console.log("服务器连接成功");
         this._webSocket.removeEventListener(egret.ProgressEvent.CONNECT, this.onConnection, this);
         this._webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onRcvMsg, this);
