@@ -1,5 +1,4 @@
-import { launcherOption } from "../../../../common/LauncherOption";
-global.startupParam = launcherOption;
-
+import { ServerInit } from "../../../../common/core/ServerInit";
+ServerInit.init();
 import { GlobalVar } from '../GlobalVar';
 GlobalVar.init();

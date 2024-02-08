@@ -1,7 +1,10 @@
 declare var nodeId: string;
 declare var env: string;
 declare var startupParam: ILauncherOption
-
+declare var serviceConfig:{
+    mysql:IMysqlOption,
+    redis:IRedisOption
+}
 //游戏封包的结构
 declare interface IGameMessage {
     cmd: number

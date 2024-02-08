@@ -6,7 +6,6 @@ import { RedisMgr } from '../../../common/redis/RedisMgr';
 import { RedisType } from '../../../common/ConstDefine';
 import * as allProto from '../../../common/CommonProto';
 import * as path from 'path';
-import * as serviceConfig from '../../../common/config/service.json';
 import { UserMgr } from './UserMgr';
 
 const logger = getLogger(startupParam?.nodeId);
@@ -26,7 +25,7 @@ export class GlobalVar {
 
         //init redisMgr
         this.redisMgr = new RedisMgr(
-            serviceConfig[startupParam.env].redis,
+            serviceConfig.redis,
             [RedisType.userGate, RedisType.userRelation]
         );
 
