@@ -11,7 +11,7 @@ export class ServersConfigMgr {
     static init() {
         if (!this._watcher) {
             logger = getLogger(startupParam?.nodeId);
-            this._configFilePath = path.join(__dirname, '../config/service.json');
+            this._configFilePath = path.join(__dirname, '../config/servers.json');
             this._watcher = fs.watch(this._configFilePath, () => {
                 logger.info('update servers.json');
                 // 删除缓存

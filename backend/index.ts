@@ -44,6 +44,7 @@ declare interface ServerConfig {
     env: string
     autuResume: boolean
     serverType: string
+    isTest: boolean
 }
 
 //日志记录对象
