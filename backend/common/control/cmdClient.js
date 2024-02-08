@@ -19,9 +19,6 @@ let environment;
 if (envIndex !== -1) {
     environment = args[envIndex + 1];
     args.splice(envIndex, 2);
-} else {
-    console.log('缺少环境参数');
-    return;
 }
 
 // 是否后台启动
@@ -54,7 +51,7 @@ function startall(environmentArgs) {
     environment = environmentArgs || environment;
     const path = require('path');
     const childProcess = require('child_process');
-    const scriptPath = path.join(__dirname, '../../servers/master/src/bin/main.js');
+    const scriptPath = path.join(__dirname, '../master/src/bin/main.js');
     if (isBackgroud) {
         if (os.platform() == 'win32') {
             console.error('windows下暂时不支持后台启动');
@@ -127,12 +124,12 @@ Options:
 
 Commands:
 
-anduin startAll [environment]     启动服务          eg: ${cmdStart}anduin startAll dev
-anduin stopAll  [environment]     停止所有进程      eg: ${cmdStart}anduin stopAll dev
-anduin list     [environment]     展示所有进程      eg: ${cmdStart}anduin list dev
-anduin kill     [nodeId]          杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
-anduin start    [nodeId]          启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
-anduin restart  [nodeId]          重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
+anduin startAll [environment]   启动服务          eg: ${cmdStart}anduin startAll dev
+anduin stopAll [environment]    停止所有进程      eg: ${cmdStart}anduin stopAll dev
+anduin list [environment]       展示所有进程      eg: ${cmdStart}anduin list dev
+anduin kill [nodeId]            杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
+anduin start [nodeId]           启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
+anduin restart [nodeId]         重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
         `
     );
 }
