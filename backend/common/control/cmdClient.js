@@ -119,7 +119,7 @@ function showHelp() {
 Options:
 
     -h --help                 展示所有帮助
-    -e --environment          指定启动环境
+    -e --environment          指定命令运行环境
     -b                        后台启动  
 
 Commands:
