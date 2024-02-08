@@ -36,7 +36,7 @@ export class ConnectorMgr<T extends RPCClient>{
             }
             searchNum++;
         }
-        this.logger.error('未找到存货的connector');
+        this.logger.error('未找到存活的connector');
     }
 
     /**获得指定的connecotr */
