@@ -8,8 +8,7 @@ import { SequelizeRegister } from './SequelizeRegister';
 import { DbHelper } from './DbHelper';
 import * as allProto from '../../../common/CommonProto';
 import * as path from 'path';
-import * as mysqlConfig from '../../../common/config/mysql.json';
-import * as redisConfig from '../../../common/config/redis.json';
+import * as serviceConfig from '../../../common/config/service.json';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
 
 const logger = getLogger(startupParam?.nodeId);
@@ -32,9 +31,12 @@ export class GlobalVar {
         //init socket server
         this.socketServer = new SocketServer(startupParam.port || 2001, logger);
         //init db register
-        this.sequelizeRegister = new SequelizeRegister(mysqlConfig);
+        this.sequelizeRegister = new SequelizeRegister(serviceConfig[startupParam.env].mysql);
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo, RedisType.userRelation, RedisType.userGame]);
+        this.redisMgr = new RedisMgr(
+            serviceConfig[startupParam.env].redis,
+            [RedisType.userGate, RedisType.userInfo, RedisType.userRelation, RedisType.userGame]
+        );
 
         this.dbHelper = new DbHelper();
     }

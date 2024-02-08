@@ -115,12 +115,14 @@ function restart(nodeId) {
 function showHelp() {
     console.log(
         `
-参数:
+Options:
+
 -h --help                 展示所有帮助
 -e --environment          指定启动环境
 -b                        后台启动  
 
-命令:
+Commands:
+
 anduin startAll {environment}               启动服务
 anduin stopAll  {environment}               停止所有进程
 anduin list     {environment}               展示所有进程

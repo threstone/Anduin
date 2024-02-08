@@ -6,7 +6,7 @@ import { RedisMgr } from '../../../common/redis/RedisMgr';
 import { RedisType } from '../../../common/ConstDefine';
 import * as allProto from '../../../common/CommonProto';
 import * as path from 'path';
-import * as redisConfig from '../../../common/config/redis.json';
+import * as serviceConfig from '../../../common/config/service.json';
 import { TableMgr } from './core/TableMgr';
 import { UserMgr } from './core/UserMgr';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
@@ -34,7 +34,10 @@ export class GlobalVar {
         this.initMsgHandler();
 
         //init redisMgr
-        this.redisMgr = new RedisMgr(redisConfig, [RedisType.userGate, RedisType.userInfo, RedisType.userRelation, RedisType.userGame]);
+        this.redisMgr = new RedisMgr(
+            serviceConfig[startupParam.env].redis,
+            [RedisType.userGate, RedisType.userInfo, RedisType.userRelation, RedisType.userGame]
+        );
 
         this.userMgr = new UserMgr();
         this.cardMgr = new CardMgr();
