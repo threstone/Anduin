@@ -1,15 +1,13 @@
-import * as servers from '../../../common/config/servers.json';
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as BodyParser from 'koa-bodyparser';
 import { getLogger } from 'log4js';
-import { GlobalVar } from './GlobalVar';
+import { GlobalVar } from './master';
 
 const logger = getLogger(startupParam?.nodeId);
 export class CommonServer {
     constructor() {
-        const serversConfigs = servers[startupParam.env];
-        const port = serversConfigs.master?.port || 1000;
+        const port = serversConfigMap.get('master')?.port || 1000;
         const app = new Koa();
         app.use(BodyParser());
 
@@ -60,7 +58,7 @@ export class CommonServer {
     private async stopAll(ctx: Koa.Context, next: Koa.Next) {
         ctx.response.status = 200;
         logger.info('process exit');
-        GlobalVar.nodeMgr.serverMap.forEach((node)=>{
+        GlobalVar.nodeMgr.serverMap.forEach((node) => {
             node.kill();
         })
         setTimeout(() => {

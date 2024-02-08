@@ -24,5 +24,4 @@ class LauncherOption implements ILauncherOption {
         global.env = this.env;
     }
 }
-
 export const launcherOption = new LauncherOption();

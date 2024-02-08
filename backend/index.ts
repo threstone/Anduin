@@ -1,10 +1,12 @@
 declare var nodeId: string;
 declare var env: string;
 declare var startupParam: ILauncherOption
-declare var serviceConfig:{
-    mysql:IMysqlOption,
-    redis:IRedisOption
+declare var serviceConfig: {
+    mysql: IMysqlOption,
+    redis: IRedisOption
 }
+declare var serversConfigMap: Map<string, ServerConfig>;
+declare var eventEmitter: NodeJS.EventEmitter;
 //游戏封包的结构
 declare interface IGameMessage {
     cmd: number
@@ -33,10 +35,6 @@ declare interface ILauncherOption {
     maxUser: number
     nodeId: string
     env: string
-    // redisServer: string
-    // redisPass: string
-    // saveRecordHost: String
-    // processName: string //进程名称 影响日志命名
 }
 
 declare interface ServerConfig {

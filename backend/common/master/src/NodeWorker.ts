@@ -15,7 +15,7 @@ export class NodeWorker {
     private _nodeMgr: NodeMgr;
 
     constructor(serverType: string, serverConfig: ServerConfig, nodeMgr: NodeMgr) {
-        this._execPath = Path.join(__dirname, `../../${serverType}/src/bin/main`);
+        this._execPath = Path.join(__dirname, `../../../servers/${serverType}/src/bin/main`);
         this.serverConfig = serverConfig;
         this._nodeMgr = nodeMgr;
     }

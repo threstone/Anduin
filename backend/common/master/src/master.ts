@@ -5,6 +5,7 @@ import { CommonServer } from './CommonServer';
 const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
+
     public static nodeMgr: NodeMgr;
     public static commonServer: CommonServer;
 
@@ -21,4 +22,3 @@ export class GlobalVar {
         this.nodeMgr.startServers();
     }
 }
-
