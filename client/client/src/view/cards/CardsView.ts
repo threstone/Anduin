@@ -213,14 +213,15 @@ class CardsView extends BaseView<BaseUI.UICardsCom> {
             fairygui.GRoot.inst.removeChild(this._hoverItem);
         }, this);
 
-        // 拖动效果
-        this.addDragEvent(miniCard, miniCard.dragLoader, null, (evt: fairygui.DragEvent) => {
-            if (evt.stageX < list.x) {
-                onClick(index, info);
-                return;
-            }
-            isDrag = true;
-        });
+        // 去掉拖动效果,否则无法上下拉动list
+        // // 拖动效果 
+        // this.addDragEvent(miniCard, miniCard.dragLoader, null, (evt: fairygui.DragEvent) => {
+        //     if (evt.stageX < list.x) {
+        //         onClick(index, info);
+        //         return;
+        //     }
+        //     isDrag = true;
+        // });
     }
 
     private showCardDetail(cardInfo: CardInterface, x: number, y: number) {
