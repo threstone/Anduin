@@ -118,18 +118,18 @@ function showHelp() {
         `
 Options:
 
--h --help                 展示所有帮助
--e --environment          指定启动环境
--b                        后台启动  
+    -h --help                 展示所有帮助
+    -e --environment          指定启动环境
+    -b                        后台启动  
 
 Commands:
 
-anduin startAll [environment]   启动服务          eg: ${cmdStart}anduin startAll dev
-anduin stopAll [environment]    停止所有进程      eg: ${cmdStart}anduin stopAll dev
-anduin list [environment]       展示所有进程      eg: ${cmdStart}anduin list dev
-anduin kill [nodeId]            杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
-anduin start [nodeId]           启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
-anduin restart [nodeId]         重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
+    anduin startAll [environment]   启动服务          eg: ${cmdStart}anduin startAll dev
+    anduin stopAll [environment]    停止所有进程      eg: ${cmdStart}anduin stopAll dev
+    anduin list [environment]       展示所有进程      eg: ${cmdStart}anduin list dev
+    anduin kill [nodeId]            杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
+    anduin start [nodeId]           启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
+    anduin restart [nodeId]         重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
         `
     );
 }
