@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./dist/servers/*/src/test/*.test.js",
-    "start_dev": "node --enable-source-maps ./dist/servers/master/src/bin/main.js env=dev nodeId=master",
-    "start_prod": "nohup node --title=master ./servers/master/src/bin/main.js env=dev nodeId=master > logfile.log 2>&1 &"
+    "start_dev": "anduin -e dev startAll",
+    "start": "sh anduin -e prod startAll -b",
+    "stop": "sh anduin -e prod stopAll"
   },
   "author": "",
   "license": "ISC",

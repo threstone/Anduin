@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./dist/servers/*/src/test/*.test.js",
-    "start_dev": "anduin -e dev startAll",
-    "start_prod": "sh anduin -e dev startAll -b"
+    "start_dev": "anduin startAll dev",
+    "start": "sh anduin startAll prod -b",
+    "stop": "sh anduin stopAll prod",
+    "list":"sh anduin list prod"
   },
   "author": "",
   "license": "ISC",

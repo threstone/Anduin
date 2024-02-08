@@ -1,10 +1,49 @@
 {
     "dev": {
         "master": {
-            "ip":"127.0.0.1",
+            "ip": "127.0.0.1",
             "port": 1000
         },
-        "gate": [ 
+        "gate": [
+            {
+                "nodeId": "Gate1",
+                "ip": "127.0.0.1",
+                "port": 1001,
+                "autuResume": true,
+                "maxUser": 1000
+            }
+        ],
+        "hall": [
+            {
+                "nodeId": "Hall1",
+                "ip": "127.0.0.1",
+                "port": 2001,
+                "autuResume": true
+            }
+        ],
+        "game": [
+            {
+                "nodeId": "Game1",
+                "ip": "127.0.0.1",
+                "port": 3001,
+                "autuResume": true
+            }
+        ],
+        "relation": [
+            {
+                "nodeId": "Relation",
+                "ip": "127.0.0.1",
+                "port": 9001,
+                "autuResume": true
+            }
+        ]
+    },
+    "prod": {
+        "master": {
+            "ip": "127.0.0.1",
+            "port": 1000
+        },
+        "gate": [
             {
                 "nodeId": "Gate1",
                 "ip": "127.0.0.1",

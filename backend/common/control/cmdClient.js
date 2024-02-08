@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const os = require('os');
 const servers = require('../config/servers.json');
 const args = process.argv.slice(2);
 if (args.length === 0) {
@@ -49,12 +50,12 @@ function handleCmd() {
 }
 
 /** 启动服务 */
-function startall() {
+function startall(environmentArgs) {
+    environment = environmentArgs || environment;
     const path = require('path');
     const childProcess = require('child_process');
     const scriptPath = path.join(__dirname, '../../servers/master/src/bin/main.js');
     if (isBackgroud) {
-        const os = require('os');
         if (os.platform() == 'win32') {
             console.error('windows下暂时不支持后台启动');
             return;
@@ -87,12 +88,14 @@ function startall() {
 }
 
 /** 停止所有进程 */
-function stopall() {
+function stopall(environmentArgs) {
+    environment = environmentArgs || environment;
     sendCMD('stopAll');
 }
 
 /** 展示所有进程 */
-function list() {
+function list(environmentArgs) {
+    environment = environmentArgs || environment;
     sendCMD('list');
 }
 
@@ -113,6 +116,7 @@ function restart(nodeId) {
 
 /** 展示帮助 */
 function showHelp() {
+    const cmdStart = os.platform() == 'win32' ? '' : 'sh ';
     console.log(
         `
 Options:
@@ -123,12 +127,12 @@ Options:
 
 Commands:
 
-anduin startAll {environment}               启动服务
-anduin stopAll  {environment}               停止所有进程
-anduin list     {environment}               展示所有进程
-anduin kill    -e {environment} {nodeId}    杀死指定进程
-anduin start   -e {environment} {nodeId}    启动指定进程
-anduin restart -e {environment} {nodeId}    重新启动指定进程
+anduin startAll [environment]     启动服务          eg: ${cmdStart}anduin startAll dev
+anduin stopAll  [environment]     停止所有进程      eg: ${cmdStart}anduin stopAll dev
+anduin list     [environment]     展示所有进程      eg: ${cmdStart}anduin list dev
+anduin kill     [nodeId]          杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
+anduin start    [nodeId]          启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
+anduin restart  [nodeId]          重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
         `
     );
 }
