@@ -8,7 +8,7 @@
     "start_dev": "anduin startAll dev",
     "start": "sh anduin startAll prod -b",
     "stop": "sh anduin stopAll prod",
-    "list":"sh anduin list prod"
+    "list": "sh anduin list prod"
   },
   "author": "",
   "license": "ISC",

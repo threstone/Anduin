@@ -16,4 +16,12 @@ export class CommonUtils {
         }
         return fileList;
     }
+
+    static firstCharToUpperCase(str: string) {
+        return str.charAt(0).toUpperCase() + str.substring(1);
+    }
+
+    static firstCharToLowerCase(str: string) {
+        return str.charAt(0).toLocaleLowerCase() + str.substring(1);
+    }
 }

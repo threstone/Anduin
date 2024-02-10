@@ -2,7 +2,8 @@
     "dev": {
         "master": {
             "ip": "127.0.0.1",
-            "port": 1000,
+            "port": 999,
+            "rpcPort": 998,
             "isTest": true
         },
         "gate": [

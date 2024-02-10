@@ -4,13 +4,13 @@ const servers = require('../config/servers.json');
 const args = process.argv.slice(2);
 if (args.length === 0) {
     showHelp();
-    return;
+    process.exit();
 }
 
 // 帮助命令
 if (args.indexOf('-h') !== -1 || args.indexOf('--help') !== -1) {
     showHelp();
-    return;
+    process.exit();
 }
 
 // 环境命令
@@ -46,8 +46,14 @@ function handleCmd() {
     }
 }
 
+/** 检查是否build js */
+function checkBuild() {
+    // todo
+}
+
 /** 启动服务 */
 function startall(environmentArgs) {
+    checkBuild()
     environment = environmentArgs || environment;
     const path = require('path');
     const childProcess = require('child_process');

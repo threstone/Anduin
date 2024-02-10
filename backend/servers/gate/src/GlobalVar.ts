@@ -1,5 +1,5 @@
-import * as loggerConfig from '../config/log4js.json';
-import { configure, getLogger } from 'log4js';
+ 
+import {  getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { SocketServer } from './SocketServer';
 import { RelationConnector } from './connector/RelationConnector';
@@ -18,9 +18,7 @@ export class GlobalVar {
     public static gameConnectorMgr: ConnectorMgr<GameConnector>;
     public static relationConnectorMgr: ConnectorMgr<RelationConnector>;
 
-    public static init() {
-        // init logger configuration
-        configure(loggerConfig);
+    public static init() { 
         ProtoBufEncoder.init(logger);
         //init socket server
         this.socketServer = new SocketServer(startupParam.port || 1001, startupParam.maxUser, logger);

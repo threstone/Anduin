@@ -1,5 +1,5 @@
-import * as loggerConfig from '../config/log4js.json';
-import { configure, getLogger } from 'log4js';
+
+import { getLogger } from 'log4js';
 import { NodeMgr } from './NodeMgr';
 import { CommonServer } from './CommonServer';
 const logger = getLogger(startupParam?.nodeId);
@@ -10,8 +10,6 @@ export class GlobalVar {
     public static commonServer: CommonServer;
 
     static init() {
-        // init logger configuration
-        configure(loggerConfig);
         logger.info('init ...');
 
         // 命令模块
