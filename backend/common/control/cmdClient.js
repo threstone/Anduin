@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 const os = require('os');
+const fs = require('fs');
+const path = require('path');
+const childProcess = require('child_process');
 const servers = require('../config/servers.json');
 const args = process.argv.slice(2);
 if (args.length === 0) {
@@ -48,16 +51,39 @@ function handleCmd() {
 
 /** 检查是否build js */
 function checkBuild() {
-    // todo
+    const mainPath = path.join(__dirname, '../master/src/bin/');
+    const files = fs.readdirSync(mainPath);
+    if (files.indexOf('main.js') !== -1) {
+        return;
+    }
+
+    const scriptPath = path.join(__dirname, '../../dist/common/master/src/bin/main.js');
+    // 判断文件是否存在的办法
+    try {
+        fs.accessSync(scriptPath);
+        return;
+    } catch (e) {
+    }
+    try {
+        console.log('building...');
+        childProcess.execSync('tsc', {});
+        console.log('build success');
+    } catch (error) {
+        console.error('tsc error ', error);
+    }
 }
 
 /** 启动服务 */
 function startall(environmentArgs) {
-    checkBuild()
     environment = environmentArgs || environment;
-    const path = require('path');
-    const childProcess = require('child_process');
-    const scriptPath = path.join(__dirname, '../master/src/bin/main.js');
+    let scriptPath = path.join(__dirname, '../master/src/bin/main.js');
+    // 判断文件是否存在的办法
+    try {
+        fs.accessSync(scriptPath);
+    } catch (error) {
+        checkBuild();
+        scriptPath = path.join(__dirname, '../../dist/common/master/src/bin/main.js');
+    }
     if (isBackgroud) {
         if (os.platform() == 'win32') {
             console.error('windows下暂时不支持后台启动');
