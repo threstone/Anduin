@@ -1,9 +1,11 @@
 {
-    "dev": {
+    "dev1": {
         "master": {
             "ip": "127.0.0.1",
             "port": 999,
-            "rpcPort": 998,
+            "rpcPorts": [
+                995
+            ],
             "isTest": true
         },
         "gate": [
@@ -36,6 +38,24 @@
                 "nodeId": "Relation",
                 "ip": "127.0.0.1",
                 "port": 9001,
+                "autuResume": true
+            }
+        ]
+    },
+    "dev": {
+        "master": {
+            "ip": "127.0.0.1",
+            "port": 999,
+            "rpcPorts": [
+                995
+            ],
+            "isTest": true
+        },
+        "hall": [
+            {
+                "nodeId": "Hall1",
+                "ip": "127.0.0.1",
+                "port": 2001,
                 "autuResume": true
             }
         ]

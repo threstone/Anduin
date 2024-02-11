@@ -5,7 +5,12 @@ declare var serviceConfig: {
     mysql: IMysqlOption,
     redis: IRedisOption
 }
+
+/** 服务器配置map */
 declare var serversConfigMap: Map<string, ServerConfig>;
+/** 当前服务器配置 */
+declare var serverConfig: ServerConfig;
+/** 全局时间对象 */
 declare var eventEmitter: NodeJS.EventEmitter;
 //游戏封包的结构
 declare interface IGameMessage {
@@ -34,17 +39,20 @@ declare interface ILauncherOption {
     port: number
     maxUser: number
     nodeId: string
-    env: string
+    env: string,
+    serverType: string
+    isTest: boolean
 }
 
 declare interface ServerConfig {
-    nodeId: string
-    ip: string
-    port: number
-    env: string
-    autuResume: boolean
-    serverType: string
-    isTest: boolean
+    nodeId?: string
+    ip?: string
+    port?: number
+    env?: string
+    autuResume?: boolean
+    serverType?: string
+    isTest?: boolean
+    rpcPorts?: number[]
 }
 
 //日志记录对象

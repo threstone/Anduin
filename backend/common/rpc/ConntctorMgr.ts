@@ -7,7 +7,7 @@ export class ConnectorMgr<T extends RPCClient>{
     private _hashMap: Map<string, number>;
     private _curIndex = -1;
 
-    constructor(logger: ILog, nodeId: string, configs: { ip: string, port: number, nodeId: string }[], ConnectorClass: any) {
+    constructor(logger: ILog, nodeId: string, configs: ServerConfig[], ConnectorClass: any) {
         this.logger = logger;
         this._connectorArr = [];
         this._hashMap = new Map<string, number>();

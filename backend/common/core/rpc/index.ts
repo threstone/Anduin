@@ -1,7 +1,14 @@
-declare class rpc {
-    static call(functionName: string, args: any[]): Promise<any>;
-    static send(functionName: string, args: any[]): void;
 
+declare interface RPCMessage {
+    sessionId: number;
+    type: string;
+    serverName: string;
+    className: string;
+    funcName: string;
+    args: any[];
+    result:any;
+}
+declare class rpc {
     static gate: typeof Gate;
 }
 declare class Gate {

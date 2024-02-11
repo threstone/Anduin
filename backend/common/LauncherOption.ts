@@ -10,7 +10,9 @@ class LauncherOption implements ILauncherOption {
 
     nodeId: string;
     env: string;
-
+    serverType: string;
+    isTest: boolean;
+    
     constructor() {
         const args = process.argv.splice(2);
         for (let index = 0; index < args.length; index++) {

@@ -24,6 +24,7 @@ export class ServersConfigMgr {
             });
 
             this.ininConfigMap(serversConfig);
+            global.serverConfig = serversConfigMap.get(startupParam.nodeId);
         }
     }
 

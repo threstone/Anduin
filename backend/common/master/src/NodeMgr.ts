@@ -1,6 +1,5 @@
 import { NodeWorker } from './NodeWorker';
 export class NodeMgr {
-
     public serverMap: Map<string, NodeWorker>;
 
     constructor() {

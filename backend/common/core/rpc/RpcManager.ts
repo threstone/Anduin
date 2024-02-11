@@ -3,16 +3,72 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { CommonUtils } from '../../CommonUtils';
 import { getLogger, Logger } from 'log4js';
+import { BaseWorker } from '../../master/src/BaseWorker';
+import { RpcClient } from './RpcClient';
 let logger: Logger;
-export class RpcInit {
+export class RpcManager {
+
+    private static _index: number = 0;
+    private static _clients: RpcClient[];
+    private static _serverWorker: BaseWorker[];
 
     static init() {
         logger = getLogger(startupParam?.nodeId)
+
         const serverRemoteMap = this.getRemoteInfo();
         this.initRpcDeclare(serverRemoteMap);
         this.initRpcModule(serverRemoteMap);
-        rpc.gate.commonRemote.callTransferToGate(123, Buffer.from([1, 2]));
-        rpc.gate.commonRemote.sendTransferToGate(999, Buffer.from([3, 5]));
+        this.initRpcServers();
+        this.initRpcClient();
+    }
+
+    private static getClient() {
+        if (this._clients) {
+            return;
+        }
+        const len = this._clients.length;
+        for (let index = 0; index < len; index++) {
+            const c = this._clients[(this._index + index) % len];
+            if (c.isClose === false) {
+                return c;
+            }
+        }
+    }
+
+    /** 启动rpc服务器 */
+    private static initRpcServers() {
+        if (startupParam.nodeId !== 'master') {
+            return;
+        }
+        this._serverWorker = [];
+        const rpcPorts = serversConfigMap.get('master').rpcPorts;
+        rpcPorts.forEach((port) => {
+            const worker = new BaseWorker(path.join(__dirname, './RPCServer.js'), {
+                nodeId: `RPC${port}`,
+                port: port,
+                autuResume: true,
+                serverType: 'RPC',
+                env
+            });
+            this._serverWorker.push(worker);
+            worker.fork();
+        });
+    }
+
+    /** 启动rpc客户端 */
+    private static initRpcClient() {
+        this._clients = [];
+        if (startupParam.nodeId !== 'master' && serversConfigMap.get(startupParam.nodeId)) {
+            setTimeout(() => {
+                const config = serversConfigMap.get('master'); serverConfig
+                const rpcPorts = config.rpcPorts;
+                rpcPorts.forEach((port) => {
+                    this._clients.push(new RpcClient(config.ip, port));
+                });
+            }, 1500);
+        } else {
+            console.log();
+        }
     }
 
     /** 获取服务remote信息 */
@@ -49,12 +105,14 @@ export class RpcInit {
         return serverRemoteMap;
     }
 
-    private static call(functionName: string, ...args: any[]) {
-        console.log('call', functionName, args);
+    /** RPC 远程call调用,等待调用返回值 */
+    private static call(serverName: string, className: string, funcName: string, ...args: any[]): Promise<any> {
+        return this.getClient()?.call(serverName, className, funcName, args);
     }
 
-    private static send(functionName: string, ...args: any[]) {
-        console.log('send', functionName, args);
+    /** RPC 远程send调用,不关注返回值 */
+    private static send(serverName: string, className: string, funcName: string, ...args: any[]): void {
+        this.getClient()?.send(serverName, className, funcName, args);
     }
 
     /** 生成调用序列 */
@@ -70,12 +128,12 @@ export class RpcInit {
                 rpcAny[serverName][name] = {};
                 const classAny = rpcAny[serverName][name];
                 const functionList = Object.getOwnPropertyNames(remoteClass.prototype);
-                functionList.forEach((functionName) => {
-                    if (functionName === 'constructor') {
+                functionList.forEach((funcName) => {
+                    if (funcName === 'constructor') {
                         return;
                     }
-                    classAny[`call${CommonUtils.firstCharToUpperCase(functionName)}`] = rpc.call.bind(this, functionName);
-                    classAny[`send${CommonUtils.firstCharToUpperCase(functionName)}`] = rpc.send.bind(this, functionName);
+                    classAny[`call${CommonUtils.firstCharToUpperCase(funcName)}`] = this.call.bind(this, serverName, className, funcName);
+                    classAny[`send${CommonUtils.firstCharToUpperCase(funcName)}`] = this.send.bind(this, serverName, className, funcName);
                 })
             });
         })
@@ -86,9 +144,18 @@ export class RpcInit {
         if (startupParam.nodeId !== 'master' || serversConfigMap.get('master').isTest !== true) {
             return;
         }
-        let rpcDeclare = 'declare class rpc {\n'
-            + '    static call(functionName: string, args: any[]): Promise<any>;\n'
-            + '    static send(functionName: string, args: any[]): void;\n\n';
+        let rpcDeclare = `
+declare interface RPCMessage {
+    sessionId: number;
+    type: string;
+    serverName: string;
+    className: string;
+    funcName: string;
+    args: any[];
+    result:any;
+}
+declare class rpc {
+`;
         let serverDeclare = '';
         let remoteDeclare = '';
         serverRemoteMap.forEach((remoteClassMap, serverName) => {
@@ -118,17 +185,17 @@ export class RpcInit {
         fs.writeFileSync(indexPath, rpcDeclare);
     }
 
-
+    /** 获取remote class所有函数的描述信息 */
     private static getClassFunctionDesc(serverType: string, className: string, functionList: string[]) {
         const funcDescList: string[] = [];
         try {
             const filePath = path.join(__dirname, `../../../../servers/${serverType}/src/remote/${className}.ts`);
             const fileText = fs.readFileSync(filePath, { encoding: 'utf8' });
-            functionList.forEach((functionName) => {
-                if (functionName === 'constructor') {
+            functionList.forEach((funcName) => {
+                if (funcName === 'constructor') {
                     return;
                 }
-                const res = this.getFunctionDesc(functionName, fileText);
+                const res = this.getFunctionDesc(funcName, fileText);
                 if (res) {
                     funcDescList.push(...res);
                 }
@@ -139,8 +206,9 @@ export class RpcInit {
         return funcDescList;
     }
 
-    private static getFunctionDesc(functionName: string, fileText: string) {
-        const index = fileText.indexOf(functionName);
+    /** 获取remote class指定函数的描述信息 */
+    private static getFunctionDesc(funcName: string, fileText: string) {
+        const index = fileText.indexOf(funcName);
         if (index === -1) {
             return;
         }
