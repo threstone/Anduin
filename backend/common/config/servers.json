@@ -51,11 +51,11 @@
             ],
             "isTest": true
         },
-        "hall": [
+        "relation": [
             {
-                "nodeId": "Hall1",
+                "nodeId": "Relation",
                 "ip": "127.0.0.1",
-                "port": 2001,
+                "port": 9001,
                 "autuResume": true
             }
         ]

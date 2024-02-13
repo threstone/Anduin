@@ -11,30 +11,61 @@ export class RpcUtils {
         return JSON.parse(argsStr);
     }
 
-    static encodeCallReqest(serverName: string, className: string, funcName: string, sessionId: number, args: any[]) {
-        const json = JSON.stringify({ sessionId: sessionId, type: RPCMessageType.call, serverName, className, funcName, args });
+    //todo
+    static encodeCallReqest(serverName: string, className: string, funcName: string, sessionId: number, routeOption: RpcRouterOption, args: any) {
+        const json = JSON.stringify({
+            sessionId: sessionId,
+            type: RpcMessageType.call,
+            serverName,
+            className,
+            funcName,
+            routeOption,
+            args,
+            fromNodeId: serverConfig.nodeId
+        });
         return Buffer.from(json);
     }
 
-    static encodeSendReqest(serverName: string, className: string, funcName: string, args: any[]) {
-        const json = JSON.stringify({ type: RPCMessageType.send, serverName, className, funcName, args });
+    //todo
+    static encodeSendReqest(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args: any) {
+        const json = JSON.stringify({
+            type: RpcMessageType.send,
+            serverName,
+            className,
+            funcName,
+            routeOption,
+            args,
+            fromNodeId: serverConfig.nodeId
+        });
         return Buffer.from(json);
     }
 
-    static decodeMessage(buffer: Buffer): RPCMessage {
-        return JSON.parse(buffer.toString());
+    static decodeMessage(buffer: Buffer): RpcReqMsg {
+        return JSON.parse(buffer.toString());//todo
     }
 
-    // static encodeResult(sessionId: number, args: any[]) {
 
-    // }
+    //todo
+    static getRpcMsgType(buffer: Buffer): RpcMessageType {
+        return RpcUtils.decodeMessage(buffer).type;
+    }
+
+    /** 获取roter信息 todo */
+    static getRouteInfo(buffer: Buffer) {
+        return RpcUtils.decodeMessage(buffer);
+    }
+
+    //todo 
+    static encodeResult(replay: RpcTransferResult) {
+        return Buffer.from(JSON.stringify(replay));
+    }
 
     // static decodeResult(buffer: Buffer): RPCMessage {
     //     return
     // }
 }
 
-export enum RPCMessageType {
+export enum RpcMessageType {
     call,
     send,
     result

@@ -23,7 +23,7 @@ export class RpcManager {
     }
 
     private static getClient() {
-        if (this._clients) {
+        if (!this._clients) {
             return;
         }
         const len = this._clients.length;
@@ -106,13 +106,13 @@ export class RpcManager {
     }
 
     /** RPC 远程call调用,等待调用返回值 */
-    private static call(serverName: string, className: string, funcName: string, ...args: any[]): Promise<any> {
-        return this.getClient()?.call(serverName, className, funcName, args);
+    private static call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, ...args: any[]): Promise<any> {
+        return this.getClient()?.call(serverName, className, funcName, routeOption, args);
     }
 
     /** RPC 远程send调用,不关注返回值 */
-    private static send(serverName: string, className: string, funcName: string, ...args: any[]): void {
-        this.getClient()?.send(serverName, className, funcName, args);
+    private static send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, ...args: any[]): void {
+        this.getClient()?.send(serverName, className, funcName, routeOption, args);
     }
 
     /** 生成调用序列 */
@@ -145,15 +145,33 @@ export class RpcManager {
             return;
         }
         let rpcDeclare = `
-declare interface RPCMessage {
-    sessionId: number;
-    type: string;
+/** rpc 请求结构 */
+declare interface RpcReqMsg {
+    // rpc server根据type来决定作何操作
+    type: number;
+    routeOption: RpcRouterOption;
     serverName: string;
     className: string;
     funcName: string;
     args: any[];
-    result:any;
+    fromNodeId: string;
+    sessionId?: number;
 }
+
+/** rpc 转发信息的返回结构 */
+declare interface RpcTransferResult {
+    // rpc server根据type来决定作何操作
+    type: number;
+    result: any;
+    fromNodeId: string;
+    sessionId?: number;
+}
+
+declare interface RpcRouterOption {
+    type?: 'all' | 'random' | 'target';
+    nodeId?: string;
+}
+
 declare class rpc {
 `;
         let serverDeclare = '';
@@ -173,11 +191,11 @@ declare class rpc {
                 funcDescList.forEach((funcDesc) => {
                     remoteDeclare += `    static ${funcDesc}\n`;
                 });
-                remoteDeclare += '}';
+                remoteDeclare += '}\n';
             });
-            serverDeclare += '}';
+            serverDeclare += '}\n';
         });
-        rpcDeclare += '}';
+        rpcDeclare += '}\n';
         rpcDeclare += serverDeclare;
         rpcDeclare += remoteDeclare;
 
@@ -218,11 +236,11 @@ declare class rpc {
         const resultTypeIndex = fileText.indexOf('):');
         const resultType = resultTypeIndex !== -1 ? fileText.substring(resultTypeIndex + 2).trim() : '';
 
-        let call = `call${CommonUtils.firstCharToUpperCase(fileText.substring(0, resultTypeIndex + 1))}`;
-        if (resultTypeIndex !== -1) {
-            call += `: Promise<${resultType}>;`
-        }
-        const send = `send${CommonUtils.firstCharToUpperCase(fileText.substring(0, resultTypeIndex + 1))}: void;`;
+        let modelFunc = CommonUtils.firstCharToUpperCase(fileText.substring(0, resultTypeIndex + 1));
+        const argsStr = `${modelFunc.substring(modelFunc.indexOf('(') + 1, modelFunc.indexOf(')'))}`;
+        modelFunc = `${modelFunc.substring(0, modelFunc.indexOf('('))}(routeOption: RpcRouterOption, ${argsStr})`
+        const call = `call${modelFunc}${resultTypeIndex !== -1 ? `: Promise<${resultType}>;` : ''}`;
+        const send = `send${modelFunc}: void;`;
         return [call, send];
     }
 }
