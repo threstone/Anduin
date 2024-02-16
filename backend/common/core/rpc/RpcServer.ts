@@ -10,6 +10,7 @@ const logger = getLogger(startupParam.nodeId);
 class RpcServer {
 
     private _serverMapList = new Map<string, RpcSession[]>();
+    private _nodeIdMap = new Map<string, RpcSession>();
     private randIndex = 0;
 
     constructor(port = startupParam.port) {
@@ -24,6 +25,7 @@ class RpcServer {
             });
 
             ws.on("close", () => {
+                this._nodeIdMap.delete(session.nodeId);
                 const nodeList = this._serverMapList.get(session.serverType);
                 for (let index = 0; index < nodeList.length; index++) {
                     const tempSession = nodeList[index];
@@ -38,7 +40,7 @@ class RpcServer {
 
     private handleMessage(session: RpcSession, buffer: Buffer) {
         if (session.isInit === false) {
-            const rpcMsg = RpcUtils.decodeMessage(buffer);
+            const rpcMsg = RpcUtils.decodeReqMsg(buffer);
             session.isInit = true;
             session.serverType = rpcMsg.serverName;
             session.nodeId = rpcMsg.className;
@@ -49,6 +51,7 @@ class RpcServer {
                 this._serverMapList.set(session.serverType, nodeList);
             }
             nodeList.push(session);
+            this._nodeIdMap.set(session.nodeId, session);
             return;
         }
 
@@ -62,7 +65,9 @@ class RpcServer {
                 });
                 break;
             case RpcMessageType.result:
-                // todo
+                const nodeId = RpcUtils.getResultTo(buffer);
+                this._nodeIdMap.get(nodeId)?.socket.send(buffer);
+                break;
         }
 
     }

@@ -6,8 +6,22 @@ import { RpcMessageType, RpcUtils } from "./RpcUtils";
 let logger: Logger;
 export class RpcClient {
 
-    private _sessionMap = new Map<number, CallReq>();
-    private _sessionId: number = 1;
+    private static _classMap = new Map<string, any>();
+    private static getRpcFunc(rpcMsg: RpcReqMsg): Function {
+        try {
+            let remoteClass = this._classMap.get(rpcMsg.className);
+            if (!remoteClass) {
+                remoteClass = require(path.join(__dirname, `../../../servers/${rpcMsg.serverName}/src/remote/${rpcMsg.className}`))[rpcMsg.className];
+                this._classMap.set(rpcMsg.className, remoteClass);
+            }
+            return remoteClass.prototype[rpcMsg.funcName];
+        } catch (error) {
+            logger.error(`无法找到Remote,${JSON.stringify(rpcMsg)}`);
+        }
+    }
+
+    private _requestMap = new Map<number, CallReq>();
+    private _requestId: number = 1;
     private _socket: WS;
     public isClose: boolean = true;
     private _ip: string;
@@ -25,11 +39,11 @@ export class RpcClient {
     /** 清理过期请求 */
     private clearTimeOutReq() {
         const now = Date.now();
-        this._sessionMap.forEach((req, sessionId, map) => {
+        this._requestMap.forEach((req, requestId, map) => {
             if (req.sendTime + 15000 < now) {
                 logger.error(`reqest time out :${req.reqInfo}`)
                 req.reject();
-                map.delete(sessionId);
+                map.delete(requestId);
             }
         })
     }
@@ -51,12 +65,14 @@ export class RpcClient {
         const socket: WS = new WS(url);
         this._socket = socket;
 
-        socket.on("open", async () => {
+        socket.on("open", () => {
             this.isClose = false;
             // 第一条消息告知客户端信息
             this.send(serverConfig.serverType, serverConfig.nodeId, 'clientInfo', {}, []);
             rpc.relation.userRemote.sendUserOffline({}, 123455);
-            rpc.relation.userRemote.callUserOffline({}, 444); logger.log('111');
+            rpc.relation.userRemote.callUserOffline({}, 444).then((result)=>{
+                console.log(result);
+            });
         })
 
         socket.on('message', this.handleMessage.bind(this));
@@ -76,51 +92,41 @@ export class RpcClient {
 
     private handleMessage(buffer: Buffer) {
         // 客户端收到 call  send  result
-        const rpcMsg = RpcUtils.decodeMessage(buffer);
-        switch (rpcMsg.type) {
+        const type = RpcUtils.getRpcMsgType(buffer);
+        switch (type) {
             case RpcMessageType.call:
-                return this.handleCall(rpcMsg);
+                return this.handleCall(buffer);
             case RpcMessageType.send:
-                return this.handleSend(rpcMsg);
+                return this.handleSend(buffer);
             case RpcMessageType.result:
-                this.handleResult(rpcMsg);
+                this.handleResult(buffer);
                 break;
         }
     }
 
-    private handleResult(rpcMsg: RpcReqMsg) {
-        console.log('handleResult ', rpcMsg);
-
+    private handleResult(buffer: Buffer) {
+        const rpcResult = RpcUtils.decodeResult(buffer);
+        const requestCache = this._requestMap.get(rpcResult.requestId);
+        if (!requestCache) return;
+        requestCache.resolve(rpcResult.result);
+        this._requestMap.delete(rpcResult.requestId);
     }
 
-    private static _classMap = new Map<string, any>();
-    private static getRpcFunc(rpcMsg: RpcReqMsg): Function {
-        try {
-            let remoteClass = this._classMap.get(rpcMsg.className);
-            if (!remoteClass) {
-                remoteClass = require(path.join(__dirname, `../../../servers/${rpcMsg.serverName}/src/remote/${rpcMsg.className}`))[rpcMsg.className];
-                this._classMap.set(rpcMsg.className, remoteClass);
-            }
-            return remoteClass.prototype[rpcMsg.funcName];
-        } catch (error) {
-            logger.error(`无法找到Remote,${JSON.stringify(rpcMsg)}`);
-        }
-
-    }
-
-    private async handleCall(rpcMsg: RpcReqMsg) {
+    private async handleCall(buffer: Buffer) {
+        const rpcMsg = RpcUtils.decodeReqMsg(buffer);
         const func = RpcClient.getRpcFunc(rpcMsg);
         const replay: RpcTransferResult = {
-            fromNodeId: rpcMsg.fromNodeId,
             type: RpcMessageType.result,
-            sessionId: rpcMsg.sessionId,
+            fromNodeId: rpcMsg.fromNodeId,
+            requestId: rpcMsg.requestId,
             result: null
         };
         replay.result = await func(...rpcMsg.args);
         this._socket.send(RpcUtils.encodeResult(replay));
     }
 
-    private handleSend(rpcMsg: RpcReqMsg) {
+    private handleSend(buffer: Buffer) {
+        const rpcMsg = RpcUtils.decodeReqMsg(buffer);
         console.log('handleSend ', rpcMsg);
         const func = RpcClient.getRpcFunc(rpcMsg);
         func(...rpcMsg.args);
@@ -132,11 +138,11 @@ export class RpcClient {
             return;
         }
         return new Promise((resolve, reject) => {
-            const sessionId = this._sessionId++;
-            const buffer = RpcUtils.encodeCallReqest(serverName, className, funcName, sessionId, routeOption, args);
+            const requestId = this._requestId++;
+            const buffer = RpcUtils.encodeCallReqest(serverName, className, funcName, requestId, routeOption, args);
             this._socket.send(buffer);
-            this._sessionMap.set(sessionId, {
-                sessionId,
+            this._requestMap.set(requestId, {
+                requestId,
                 resolve,
                 reject,
                 sendTime: Date.now(),
@@ -156,7 +162,7 @@ export class RpcClient {
 }
 
 interface CallReq {
-    sessionId: number;
+    requestId: number;
     resolve: Function;
     reject: Function;
     sendTime: number;

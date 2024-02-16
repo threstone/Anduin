@@ -11,10 +11,10 @@ export class RpcUtils {
         return JSON.parse(argsStr);
     }
 
-    //todo
-    static encodeCallReqest(serverName: string, className: string, funcName: string, sessionId: number, routeOption: RpcRouterOption, args: any) {
-        const json = JSON.stringify({
-            sessionId: sessionId,
+    /** 序列化call请求 */
+    static encodeCallReqest(serverName: string, className: string, funcName: string, requestId: number, routeOption: RpcRouterOption, args: any) {
+        return RpcUtils.encodeReqMsg({
+            requestId,
             type: RpcMessageType.call,
             serverName,
             className,
@@ -23,12 +23,11 @@ export class RpcUtils {
             args,
             fromNodeId: serverConfig.nodeId
         });
-        return Buffer.from(json);
     }
 
-    //todo
+    /** 序列化send请求 */
     static encodeSendReqest(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args: any) {
-        const json = JSON.stringify({
+        return RpcUtils.encodeReqMsg({
             type: RpcMessageType.send,
             serverName,
             className,
@@ -37,32 +36,48 @@ export class RpcUtils {
             args,
             fromNodeId: serverConfig.nodeId
         });
-        return Buffer.from(json);
     }
 
-    static decodeMessage(buffer: Buffer): RpcReqMsg {
+    //todo
+    /** 序列化rpc请求 */
+    static encodeReqMsg(msg: RpcReqMsg): Buffer {
+        return Buffer.from(JSON.stringify(msg));
+    }
+
+    /** 反序列化rpc请求 */
+    static decodeReqMsg(buffer: Buffer): RpcReqMsg {
         return JSON.parse(buffer.toString());//todo
     }
 
 
     //todo
+    /** 所有rpc message的首位都标识信息类型 */
     static getRpcMsgType(buffer: Buffer): RpcMessageType {
-        return RpcUtils.decodeMessage(buffer).type;
+        return RpcUtils.decodeReqMsg(buffer).type;
     }
 
     /** 获取roter信息 todo */
     static getRouteInfo(buffer: Buffer) {
-        return RpcUtils.decodeMessage(buffer);
+        return RpcUtils.decodeReqMsg(buffer);
     }
 
     //todo 
+    /** 序列化结果结构体 */
     static encodeResult(replay: RpcTransferResult) {
         return Buffer.from(JSON.stringify(replay));
     }
 
-    // static decodeResult(buffer: Buffer): RPCMessage {
-    //     return
-    // }
+    // todo
+    /** 反序列化结果结构体 */
+    static decodeResult(buffer: Buffer): RpcTransferResult {
+        return JSON.parse(buffer.toString());
+    }
+
+    // todo
+    /** 获得rpc返回结果需要给到的node */
+    static getResultTo(buffer: Buffer): string {
+        return RpcUtils.decodeReqMsg(buffer).fromNodeId;
+    }
 }
 
 export enum RpcMessageType {

@@ -9,7 +9,7 @@ declare interface RpcReqMsg {
     funcName: string;
     args: any[];
     fromNodeId: string;
-    sessionId?: number;
+    requestId?: number;
 }
 
 /** rpc 转发信息的返回结构 */
@@ -18,7 +18,7 @@ declare interface RpcTransferResult {
     type: number;
     result: any;
     fromNodeId: string;
-    sessionId?: number;
+    requestId?: number;
 }
 
 declare interface RpcRouterOption {
