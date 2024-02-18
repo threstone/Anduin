@@ -1,7 +1,7 @@
 import * as assert from 'assert';
 import { RpcUtils, RpcUtilsByJson } from '../RpcUtils';
 describe('rpc test', () => {
-    it("耗时比对", async function () {
+    it("json buffer耗时比对", () => {
         const times = 100000;
         let lenAvg = 0;
         let now = Date.now();
@@ -30,5 +30,14 @@ describe('rpc test', () => {
             assert.strictEqual(msg.requestId, index);
         }
         console.log(`  BUFFER ${times}次序列化反序列化用时 : ${Date.now() - now}ms   平均包体大小${lenAvg / times}`);
+    });
+
+    it("路由信息获取", () => {
+        const sourceRoute = { serverName: 'serverName', className: 'className', funcName: 'funcName', type: 11, nodeId: 'abc汉字' }
+        const buffer = RpcUtils.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 1, sourceRoute, []);
+        const routeInfo: RpcRouterOptions = {};
+        RpcUtils.readRouteOptions(routeInfo, buffer);
+        assert.strictEqual(routeInfo.type, sourceRoute.type);
+        assert.strictEqual(routeInfo.nodeId, sourceRoute.nodeId);
     });
 });

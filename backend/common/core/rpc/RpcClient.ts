@@ -11,7 +11,11 @@ export class RpcClient {
         try {
             let remoteClass = this._classMap.get(rpcMsg.className);
             if (!remoteClass) {
-                remoteClass = require(path.join(__dirname, `../../../servers/${rpcMsg.serverName}/src/remote/${rpcMsg.className}`))[rpcMsg.className];
+                remoteClass = require(
+                    path.join(
+                        __dirname, `../../../servers/${rpcMsg.serverName}/src/remote/${rpcMsg.className}`
+                    )
+                )[rpcMsg.className];
                 this._classMap.set(rpcMsg.className, remoteClass);
             }
             return remoteClass.prototype[rpcMsg.funcName];
@@ -132,7 +136,7 @@ export class RpcClient {
         func(...rpcMsg.args);
     }
 
-    public call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any[]): Promise<any> {
+    public call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args?: any[]): Promise<any> {
         if (this.isClose) {
             logger.warn(`rpc${this._port} is not connected`);
             return;
@@ -151,7 +155,7 @@ export class RpcClient {
         });
     }
 
-    public send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any[]) {
+    public send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args?: any[]) {
         if (this.isClose) {
             logger.warn(`rpc${this._port} is not connected`);
             return;

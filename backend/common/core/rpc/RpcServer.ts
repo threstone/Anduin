@@ -74,19 +74,16 @@ class RpcServer {
     }
 
     private getRouteClient(buffer: Buffer) {
-        const rpcMsg = RpcUtils.getRouteInfo(buffer);
-        if (rpcMsg.routeOption.type === 1/* target */) {
-            return this._serverMapList.get(rpcMsg.serverName);
-        } else if (rpcMsg.routeOption.type === 2/* all */) {
-            const nodeList = this._serverMapList.get(rpcMsg.serverName);
-            for (let index = 0; index < nodeList?.length; index++) {
-                const session = nodeList[index];
-                if (session.nodeId === rpcMsg.routeOption.nodeId) {
-                    return [session];
-                }
-            }
+        const routeOptions: RpcRouterOptions = {};
+        const offset = RpcUtils.readRouteOptions(routeOptions, buffer);
+        if (routeOptions.type === 1/* target */) {
+            return [this._nodeIdMap.get(routeOptions.nodeId)];
+        } else if (routeOptions.type === 2/* all */) {
+            const serverName = RpcUtils.getStringFromBuffer(buffer, offset);
+            return this._serverMapList.get(serverName);
         } else {/* random */
-            const nodeList = this._serverMapList.get(rpcMsg.serverName);
+            const serverName = RpcUtils.getStringFromBuffer(buffer, offset);
+            const nodeList = this._serverMapList.get(serverName);
             return [nodeList[(this.randIndex++) % nodeList.length]]
         }
     }

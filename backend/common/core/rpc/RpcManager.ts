@@ -106,12 +106,12 @@ export class RpcManager {
     }
 
     /** RPC 远程call调用,等待调用返回值 */
-    private static call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, ...args: any[]): Promise<any> {
-        return this.getClient()?.call(serverName, className, funcName, routeOption, args);
+    private static call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, ...args: any[]): Promise<any> {
+        return this.getClient()?.call(serverName, className, funcName,routeOption, args);
     }
 
     /** RPC 远程send调用,不关注返回值 */
-    private static send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, ...args: any[]): void {
+    private static send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, ...args: any[]): void {
         this.getClient()?.send(serverName, className, funcName, routeOption, args);
     }
 
@@ -150,11 +150,11 @@ declare interface RpcReqMsg {
     // rpc server根据type来决定作何操作
     type: number;
     requestId?: number;
+    routeOption: RpcRouterOptions;
     serverName: string;
     className: string;
     funcName: string;
     fromNodeId: string;
-    routeOption: RpcRouterOption;
     args: any[];
 }
 
@@ -167,10 +167,11 @@ declare interface RpcTransferResult {
     requestId?: number;
 }
 
-declare interface RpcRouterOption {
+declare interface RpcRouterOptions {
     type?: number | 0/* random */ | 1/* target */ | 2/* all */;
     nodeId?: string;
 }
+        
 
 declare class rpc {
 `;
@@ -238,7 +239,7 @@ declare class rpc {
 
         let modelFunc = CommonUtils.firstCharToUpperCase(fileText.substring(0, resultTypeIndex + 1));
         const argsStr = `${modelFunc.substring(modelFunc.indexOf('(') + 1, modelFunc.indexOf(')'))}`;
-        modelFunc = `${modelFunc.substring(0, modelFunc.indexOf('('))}(routeOption: RpcRouterOption, ${argsStr})`
+        modelFunc = `${modelFunc.substring(0, modelFunc.indexOf('('))}(routeOption: RpcRouterOptions, ${argsStr})`
         const call = `call${modelFunc}${resultTypeIndex !== -1 ? `: Promise<${resultType}>;` : ''}`;
         const send = `send${modelFunc}: void;`;
         return [call, send];
