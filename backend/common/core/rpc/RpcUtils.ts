@@ -42,24 +42,19 @@ export class RpcUtils {
     static encodeReqMsg(msg: RpcReqMsg): Buffer {
         const buffer = Buffer.alloc(
             20 +
-            Buffer.byteLength(msg.serverName) +
-            Buffer.byteLength(msg.className) +
-            Buffer.byteLength(msg.funcName) +
-            (Buffer.byteLength(msg.routeOption.nodeId || '')) +
-            Buffer.byteLength(msg.fromNodeId)
+            this.getByteLen(msg.serverName) +
+            this.getByteLen(msg.className) +
+            this.getByteLen(msg.funcName) +
+            this.getByteLen(msg.routeOption.nodeId) +
+            this.getByteLen(msg.fromNodeId)
         )
-        let offset = 0;
         // write type 
-        buffer.writeUint8(msg.type, offset);
-        offset++;
+        let offset = buffer.writeUint8(msg.type);
 
         // write requestId 
-        buffer.writeDoubleLE(msg.requestId || 0, offset);
-        offset += 8;
-
+        offset = buffer.writeDoubleLE(msg.requestId || 0, offset)
         // write route options
         offset = this.writeRouteOptions(msg.routeOption, buffer, offset);
-
         // write routeOption.serverName 
         offset = this.writeStrToBuffer(buffer, msg.serverName, offset);
         // write routeOption.className 
@@ -131,8 +126,7 @@ export class RpcUtils {
     /** 写入路由信息 */
     static writeRouteOptions(routeOption: RpcRouterOptions, buffer: Buffer, offset: number) {
         // write routeOption.type
-        buffer.writeUint8(routeOption.type || 0, offset);
-        offset++;
+        offset = buffer.writeUint8(routeOption.type || 0, offset);
         // write routeOption.nodeId
         offset = this.writeStrToBuffer(buffer, routeOption.nodeId, offset);
         return offset;
@@ -161,26 +155,27 @@ export class RpcUtils {
         return JSON.parse(buffer.toString());
     }
 
-    // todo
     /** 获得rpc返回结果需要给到的node */
     static getResultTo(buffer: Buffer): string {
-        return RpcUtils.decodeReqMsg(buffer).fromNodeId;
+        return RpcUtils.readStringFromBuffer(buffer, 1);
     }
 
     /** 将string写入buffer */
     static writeStrToBuffer(buffer: Buffer, str: string = '', offset: number) {
-        buffer.writeUInt16LE(Buffer.byteLength(str), offset);
-        offset += 2;
+        offset = buffer.writeUInt16LE(this.getByteLen(str), offset);
         offset += buffer.write(str, offset, 'utf8');
         return offset;
     }
 
-
     /** 从buffer中读取string */
-    static getStringFromBuffer(buffer: Buffer, offset: number) {
+    static readStringFromBuffer(buffer: Buffer, offset: number) {
         const len = buffer.readUint16LE(offset);
         offset += 2;
         return buffer.toString('utf8', offset, offset + len);
+    }
+
+    static getByteLen(str: string) {
+        return str ? Buffer.byteLength(str) : 0;
     }
 }
 
@@ -256,7 +251,7 @@ export class RpcUtilsByJson {
 
     /** 获得rpc返回结果需要给到的node */
     static getResultTo(buffer: Buffer): string {
-        return RpcUtilsByJson.decodeReqMsg(buffer).fromNodeId;
+        return RpcUtilsByJson.decodeResult(buffer).fromNodeId;
     }
 }
 

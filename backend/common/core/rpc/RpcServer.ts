@@ -79,10 +79,10 @@ class RpcServer {
         if (routeOptions.type === 1/* target */) {
             return [this._nodeIdMap.get(routeOptions.nodeId)];
         } else if (routeOptions.type === 2/* all */) {
-            const serverName = RpcUtils.getStringFromBuffer(buffer, offset);
+            const serverName = RpcUtils.readStringFromBuffer(buffer, offset);
             return this._serverMapList.get(serverName);
         } else {/* random */
-            const serverName = RpcUtils.getStringFromBuffer(buffer, offset);
+            const serverName = RpcUtils.readStringFromBuffer(buffer, offset);
             const nodeList = this._serverMapList.get(serverName);
             return [nodeList[(this.randIndex++) % nodeList.length]]
         }

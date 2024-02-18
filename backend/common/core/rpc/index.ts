@@ -15,8 +15,8 @@ declare interface RpcReqMsg {
 declare interface RpcTransferResult {
     // rpc server根据type来决定作何操作
     type: number;
-    result: any;
     fromNodeId: string;
+    result: any;
     requestId?: number;
 }
 
