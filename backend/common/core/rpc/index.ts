@@ -3,13 +3,13 @@
 declare interface RpcReqMsg {
     // rpc server根据type来决定作何操作
     type: number;
-    routeOption: RpcRouterOption;
+    requestId?: number;
     serverName: string;
     className: string;
     funcName: string;
-    args: any[];
     fromNodeId: string;
-    requestId?: number;
+    routeOption: RpcRouterOption;
+    args: any[];
 }
 
 /** rpc 转发信息的返回结构 */
@@ -22,7 +22,7 @@ declare interface RpcTransferResult {
 }
 
 declare interface RpcRouterOption {
-    type?: 'all' | 'random' | 'target';
+    type?: number | 0/* random */ | 1/* target */ | 2/* all */;
     nodeId?: string;
 }
 

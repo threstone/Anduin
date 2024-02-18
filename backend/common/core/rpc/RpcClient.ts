@@ -70,7 +70,7 @@ export class RpcClient {
             // 第一条消息告知客户端信息
             this.send(serverConfig.serverType, serverConfig.nodeId, 'clientInfo', {}, []);
             rpc.relation.userRemote.sendUserOffline({}, 123455);
-            rpc.relation.userRemote.callUserOffline({}, 444).then((result)=>{
+            rpc.relation.userRemote.callUserOffline({}, 444).then((result) => {
                 console.log(result);
             });
         })
@@ -132,14 +132,14 @@ export class RpcClient {
         func(...rpcMsg.args);
     }
 
-    public call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any): Promise<any> {
+    public call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any[]): Promise<any> {
         if (this.isClose) {
             logger.warn(`rpc${this._port} is not connected`);
             return;
         }
         return new Promise((resolve, reject) => {
             const requestId = this._requestId++;
-            const buffer = RpcUtils.encodeCallReqest(serverName, className, funcName, requestId, routeOption, args);
+            const buffer = RpcUtils.encodeCallReqest(serverConfig.nodeId, serverName, className, funcName, requestId, routeOption, args);
             this._socket.send(buffer);
             this._requestMap.set(requestId, {
                 requestId,
@@ -151,12 +151,12 @@ export class RpcClient {
         });
     }
 
-    public send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any) {
+    public send(serverName: string, className: string, funcName: string, routeOption: RpcRouterOption, args?: any[]) {
         if (this.isClose) {
             logger.warn(`rpc${this._port} is not connected`);
             return;
         }
-        const buffer = RpcUtils.encodeSendReqest(serverName, className, funcName, routeOption, args);
+        const buffer = RpcUtils.encodeSendReqest(serverConfig.nodeId, serverName, className, funcName, routeOption, args);
         this._socket.send(buffer);
     }
 }

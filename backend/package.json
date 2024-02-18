@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./dist/servers/*/src/test/*.test.js",
+    "test": "mocha ./dist/**/test/*.test.js",
     "start_dev": "anduin startAll dev",
     "start": "sh anduin startAll prod -b",
     "stop": "sh anduin stopAll prod",
