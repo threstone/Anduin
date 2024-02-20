@@ -1,11 +1,106 @@
+import { RpcSession } from "./RpcServer";
+
+export enum RpcMessageType {
+    call,
+    send,
+    result
+}
+/**
+ * 要避免json循环引用的问题,如无法避免,引入如下库
+ * https://www.npmjs.com/package/json-stringify-safe
+ */
+export class RpcUtilsByJson {
+
+    private static _randIndex: number = 1;
+
+    /** 转发rpc信息 */
+    static transferMessage(jsonStr: string, serverMapList: Map<string, RpcSession[]>, nodeIdMap: Map<string, RpcSession>) {
+        const reqMsg = RpcUtilsByJson.decodeRpcMsg(jsonStr);
+        switch (reqMsg.type) {
+            case RpcMessageType.call:
+            case RpcMessageType.send:
+                // 转发
+                const clients = RpcUtilsByJson.getRouteClient(reqMsg as RpcReqMsg, serverMapList, nodeIdMap);
+                clients?.forEach((c) => {
+                    c.socket.send(jsonStr);
+                });
+                break;
+            case RpcMessageType.result:
+                nodeIdMap.get(reqMsg.fromNodeId)?.socket.send(jsonStr);
+                break;
+        }
+    }
+
+    /** 序列化call请求 */
+    static encodeCallReqest(nodeId: string, serverName: string, className: string, funcName: string, requestId: number, routeOption: RpcRouterOptions, args: any[]) {
+        return JSON.stringify({
+            type: RpcMessageType.call,
+            requestId,
+            routeOptions: routeOption,
+            serverName,
+            className,
+            funcName,
+            fromNodeId: nodeId,
+            args
+        });
+    }
+
+    /** 序列化send请求 */
+    static encodeSendReqest(nodeId: string, serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args: any[]) {
+        return JSON.stringify({
+            type: RpcMessageType.send,
+            routeOptions: routeOption,
+            serverName,
+            className,
+            funcName,
+            fromNodeId: nodeId,
+            args
+        });
+    }
+
+    /** 反序列化rpc 信息,返回rpc请求或结果 */
+    static decodeRpcMsg(jsonStr: string): RpcReqMsg | RpcTransferResult {
+        return JSON.parse(jsonStr);
+    }
+
+    /** 序列化结果结构体 */
+    static encodeResult(replay: RpcTransferResult): string {
+        return JSON.stringify(replay);
+    }
+
+    /** 获取转发的clients */
+    static getRouteClient(reqMsg: RpcReqMsg, serverMapList: Map<string, RpcSession[]>, nodeIdMap: Map<string, RpcSession>) {
+        if (reqMsg.routeOptions.type === 1/* target */) {
+            return [nodeIdMap.get(reqMsg.routeOptions.nodeId)];
+        } else if (reqMsg.routeOptions.type === 2/* all */) {
+            return serverMapList.get(reqMsg.serverName);
+        } else {/* random */
+            const nodeList = serverMapList.get(reqMsg.serverName);
+            return [nodeList[(this._randIndex++) % nodeList.length]]
+        }
+    }
+}
+
 enum TypeEnum {
     String,
     Number,
-    Boolean
+    Boolean,
+    Undefine,
 }
-export class RpcUtils {
+
+/** 
+ * 经过单元测试无奈地发现 自定义buffer序列化的速度并没有JSON快,优势仅为包体更小50+%,但在内网rpc下优势可以忽略
+ * 反而在易用性上远远比不过JSON,需要将常见数据类型一一手动实现
+ * 原因估计是因为nodejs各方法调用的开销过大,Buffer声明也费事费时,JSON反而只有一次
+ * 综上,还是使用JSON来做rpc传输好了
+ * 详情测试报告运行npm test查看
+ **/
+export class RpcUtilsByBuffer {
+
+    private static _randIndex: number = 1;
     private static _bufferCache: Buffer[] = [];
-    static AllocBuffer(size: number) {
+
+    private static allocBuffer(size: number) {
         return Buffer.alloc(size);
         let buffer = this._bufferCache[size];
         if (!buffer) {
@@ -18,7 +113,7 @@ export class RpcUtils {
     }
 
     /** 序列化参数列表 */
-    static encodeArgs(args: any[]) {
+    private static encodeArgs(args: any[]) {
         const bufferList = [];
         for (let index = 0; index < args.length; index++) {
             const arg = args[index];
@@ -28,12 +123,12 @@ export class RpcUtils {
     }
 
     /** 序列化参数 */
-    static encodeArg(arg: any) {
+    private static encodeArg(arg: any) {
         switch (typeof (arg)) {
             case 'string':
                 {
                     const len = Buffer.byteLength(arg);
-                    const buffer = this.AllocBuffer(len + 4 + 1);
+                    const buffer = this.allocBuffer(len + 4 + 1);
                     buffer.writeUint8(TypeEnum.String);
                     buffer.writeUint32LE(len, 1);
                     buffer.write(arg, 5, 'utf8');
@@ -41,16 +136,22 @@ export class RpcUtils {
                 }
             case 'number':
                 {
-                    const buffer = this.AllocBuffer(8 + 1);
+                    const buffer = this.allocBuffer(8 + 1);
                     buffer.writeUint8(TypeEnum.Number);
                     buffer.writeDoubleLE(arg, 1);
                     return buffer;
                 }
             case 'boolean':
                 {
-                    const buffer = this.AllocBuffer(1 + 1);
+                    const buffer = this.allocBuffer(1 + 1);
                     buffer.writeUint8(TypeEnum.Boolean);
                     buffer.writeUint8(arg ? 1 : 0, 1);
+                    return buffer;
+                }
+            case 'undefined':
+                {
+                    const buffer = this.allocBuffer(1);
+                    buffer.writeUint8(TypeEnum.Undefine);
                     return buffer;
                 }
             default:
@@ -59,7 +160,7 @@ export class RpcUtils {
     }
 
     /** 反序列化参数列表 */
-    static decodeArgs(buffer: Buffer, offset: number) {
+    private static decodeArgs(buffer: Buffer, offset: number) {
         const args = [];
         while (true) {
             if (offset >= buffer.length) {
@@ -73,7 +174,7 @@ export class RpcUtils {
     }
 
     /** 反序列化参数 */
-    static decodeArg(buffer: Buffer, offset: number = 0) {
+    private static decodeArg(buffer: Buffer, offset: number = 0) {
         let result;
         const type = buffer.readUint8(offset);
         offset++;
@@ -98,16 +199,20 @@ export class RpcUtils {
                     offset += 1;
                     break;
                 }
+            case TypeEnum.Undefine:
+                {
+                    result = undefined;
+                }
         }
         return [result, offset];
     }
 
     /** 序列化call请求 */
-    static encodeCallReqest(nodeId: string, serverName: string, className: string, funcName: string, requestId: number, routeOption: RpcRouterOptions, args: any[]) {
-        return RpcUtils.encodeReqMsg({
+    static encodeCallReqest(nodeId: string, serverName: string, className: string, funcName: string, requestId: number, routeOptions: RpcRouterOptions, args: any[]) {
+        return RpcUtilsByBuffer.encodeReqMsg({
             type: RpcMessageType.call,
             requestId,
-            routeOption,
+            routeOptions,
             serverName,
             className,
             funcName,
@@ -117,10 +222,10 @@ export class RpcUtils {
     }
 
     /** 序列化send请求 */
-    static encodeSendReqest(nodeId: string, serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args: any[]) {
-        return RpcUtils.encodeReqMsg({
+    static encodeSendReqest(nodeId: string, serverName: string, className: string, funcName: string, routeOptions: RpcRouterOptions, args: any[]) {
+        return RpcUtilsByBuffer.encodeReqMsg({
             type: RpcMessageType.send,
-            routeOption,
+            routeOptions,
             serverName,
             className,
             funcName,
@@ -130,13 +235,13 @@ export class RpcUtils {
     }
 
     /** 序列化rpc请求 */
-    static encodeReqMsg(msg: RpcReqMsg): Buffer {
-        const buffer = this.AllocBuffer(
+    private static encodeReqMsg(msg: RpcReqMsg): Buffer {
+        const buffer = this.allocBuffer(
             20 +
             this.getByteLength(msg.serverName) +
             this.getByteLength(msg.className) +
             this.getByteLength(msg.funcName) +
-            this.getByteLength(msg.routeOption.nodeId) +
+            this.getByteLength(msg.routeOptions.nodeId) +
             this.getByteLength(msg.fromNodeId)
         )
         // write type 
@@ -145,7 +250,7 @@ export class RpcUtils {
         // write requestId 
         offset = buffer.writeDoubleLE(msg.requestId || 0, offset)
         // write route options
-        offset = this.writeRouteOptions(msg.routeOption, buffer, offset);
+        offset = this.writeRouteOptions(msg.routeOptions, buffer, offset);
         // write routeOption.serverName 
         offset = this.writeStrToBuffer(buffer, msg.serverName, offset);
         // write routeOption.className 
@@ -159,10 +264,10 @@ export class RpcUtils {
     }
 
     /** 反序列化rpc请求 */
-    static decodeReqMsg(buffer: Buffer): RpcReqMsg {
+    private static decodeReqMsg(buffer: Buffer): RpcReqMsg {
         const result: RpcReqMsg = {
             type: 0,
-            routeOption: {},
+            routeOptions: {},
             serverName: "",
             className: "",
             funcName: "",
@@ -179,7 +284,7 @@ export class RpcUtils {
         offset += 8;
 
         // read route options
-        offset = this.readRouteOptions(result.routeOption, buffer, offset);
+        offset = this.readRouteOptions(result.routeOptions, buffer, offset);
 
         // serverName read
         let len = buffer.readUint16LE(offset);
@@ -212,7 +317,7 @@ export class RpcUtils {
     }
 
     /** 写入路由信息 */
-    static writeRouteOptions(routeOption: RpcRouterOptions, buffer: Buffer, offset: number) {
+    private static writeRouteOptions(routeOption: RpcRouterOptions, buffer: Buffer, offset: number) {
         // write routeOption.type
         offset = buffer.writeUint8(routeOption.type || 0, offset);
         // write routeOption.nodeId
@@ -235,7 +340,7 @@ export class RpcUtils {
     static encodeResult(replay: RpcTransferResult) {
         const argBuffer = this.encodeArg(replay.result);
 
-        const buffer = this.AllocBuffer(3 + argBuffer.length + this.getByteLength(replay.fromNodeId) + (replay.requestId ? 8 : 0));
+        const buffer = this.allocBuffer(3 + argBuffer.length + this.getByteLength(replay.fromNodeId) + (replay.requestId ? 8 : 0));
         // write type 
         let offset = buffer.writeUint8(replay.type);
         // write routeOption.serverName 
@@ -280,11 +385,11 @@ export class RpcUtils {
 
     /** 获得rpc返回结果需要给到的node */
     static getResultTo(buffer: Buffer): string {
-        return RpcUtils.readStringFromBuffer(buffer, 1);
+        return RpcUtilsByBuffer.readStringFromBuffer(buffer, 1);
     }
 
     /** 将string写入buffer */
-    static writeStrToBuffer(buffer: Buffer, str: string = '', offset: number) {
+    private static writeStrToBuffer(buffer: Buffer, str: string = '', offset: number) {
         offset = buffer.writeUInt16LE(this.getByteLength(str), offset);
         offset += buffer.write(str, offset, 'utf8');
         return offset;
@@ -297,91 +402,57 @@ export class RpcUtils {
         return buffer.toString('utf8', offset, offset + len);
     }
 
-    static getByteLength(str: string) {
+    private static getByteLength(str: string) {
         return str ? Buffer.byteLength(str) : 0;
         // 使用str?.length || 0在不遇到单个字符占多字节情况下性能更好
         return str?.length || 0;
     }
-}
 
-export class RpcUtilsByJson {
-    /** 序列化参数 */
-    static encodeArgs(args: any[]) {
-        // 暂时实现流程,后续优化成二进制流
-        return JSON.stringify(args);
+    /** 获取转发的clients */
+    static getRouteClient(buffer: Buffer, serverMapList: Map<string, RpcSession[]>, nodeIdMap: Map<string, RpcSession>) {
+        const routeOptions: RpcRouterOptions = {};
+        const offset = RpcUtilsByBuffer.readRouteOptions(routeOptions, buffer);
+        if (routeOptions.type === 1/* target */) {
+            return [nodeIdMap.get(routeOptions.nodeId)];
+        } else if (routeOptions.type === 2/* all */) {
+            const serverName = RpcUtilsByBuffer.readStringFromBuffer(buffer, offset);
+            return serverMapList.get(serverName);
+        } else {/* random */
+            const serverName = RpcUtilsByBuffer.readStringFromBuffer(buffer, offset);
+            const nodeList = serverMapList.get(serverName);
+            return [nodeList[(this._randIndex++) % nodeList.length]]
+        }
     }
 
-    /** 反序列化参数 */
-    static decodeArgs(argsStr: string) {
-        // 暂时实现流程,后续优化成二进制流
-        return JSON.parse(argsStr);
+    /** 转发rpc信息 */
+    static transferMessage(buffer: Buffer, serverMapList: Map<string, RpcSession[]>, nodeIdMap: Map<string, RpcSession>) {
+        const type = RpcUtilsByBuffer.getRpcMsgType(buffer);
+        switch (type) {
+            case RpcMessageType.call:
+            case RpcMessageType.send:
+                // 转发
+                const clients = RpcUtilsByBuffer.getRouteClient(buffer, serverMapList, nodeIdMap);
+                clients?.forEach((c) => {
+                    c.socket.send(buffer);
+                });
+                break;
+            case RpcMessageType.result:
+                const nodeId = RpcUtilsByBuffer.getResultTo(buffer);
+                nodeIdMap.get(nodeId)?.socket.send(buffer);
+                break;
+        }
     }
 
-    /** 序列化call请求 */
-    static encodeCallReqest(nodeId: string, serverName: string, className: string, funcName: string, requestId: number, routeOption: RpcRouterOptions, args: any[]) {
-        return RpcUtilsByJson.encodeReqMsg({
-            type: RpcMessageType.call,
-            requestId,
-            routeOption,
-            serverName,
-            className,
-            funcName,
-            fromNodeId: nodeId,
-            args
-        });
-    }
-
-    /** 序列化send请求 */
-    static encodeSendReqest(nodeId: string, serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args: any[]) {
-        return RpcUtilsByJson.encodeReqMsg({
-            type: RpcMessageType.send,
-            routeOption,
-            serverName,
-            className,
-            funcName,
-            fromNodeId: nodeId,
-            args
-        });
-    }
-
-    /** 序列化rpc请求 */
-    static encodeReqMsg(msg: RpcReqMsg): Buffer {
-        return Buffer.from(JSON.stringify(msg));
-    }
-
-    /** 反序列化rpc请求 */
-    static decodeReqMsg(buffer: Buffer): RpcReqMsg {
-        return JSON.parse(buffer.toString());
-    }
-
-    /** 所有rpc message的首位都标识信息类型 */
-    static getRpcMsgType(buffer: Buffer): RpcMessageType {
-        return RpcUtilsByJson.decodeReqMsg(buffer).type;
-    }
-
-    /** 获取roter信息 */
-    static getRouteInfo(buffer: Buffer) {
-        return RpcUtilsByJson.decodeReqMsg(buffer);
-    }
-
-    /** 序列化结果结构体 */
-    static encodeResult(replay: RpcTransferResult) {
-        return Buffer.from(JSON.stringify(replay));
-    }
-
-    /** 反序列化结果结构体 */
-    static decodeResult(buffer: Buffer): RpcTransferResult {
-        return JSON.parse(buffer.toString());
-    }
-
-    /** 获得rpc返回结果需要给到的node */
-    static getResultTo(buffer: Buffer): string {
-        return RpcUtilsByJson.decodeResult(buffer).fromNodeId;
+    /** 反序列化rpc 信息,返回rpc请求或结果 */
+    static decodeRpcMsg(buffer: Buffer): RpcReqMsg | RpcTransferResult {
+        const type: RpcMessageType = buffer.readUint8();
+        if (type === RpcMessageType.result) {
+            return this.decodeResult(buffer);
+        } else {
+            return this.decodeReqMsg(buffer);
+        }
     }
 }
 
-export enum RpcMessageType {
-    call,
-    send,
-    result
-}
+// export const RpcUtils = RpcUtilsByBuffer;
+export const RpcUtils = RpcUtilsByJson;

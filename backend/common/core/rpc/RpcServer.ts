@@ -11,7 +11,6 @@ class RpcServer {
 
     private _serverMapList = new Map<string, RpcSession[]>();
     private _nodeIdMap = new Map<string, RpcSession>();
-    private randIndex = 0;
 
     constructor(port = startupParam.port) {
         // todo 暂时先用ws把功能实现,实现后再修改传输层
@@ -39,9 +38,9 @@ class RpcServer {
         })
     }
 
-    private handleMessage(session: RpcSession, buffer: Buffer) {
+    private handleMessage(session: RpcSession, msg: Buffer | string) {
         if (session.isInit === false) {
-            const rpcMsg = RpcUtils.decodeReqMsg(buffer);
+            const rpcMsg = RpcUtils.decodeRpcMsg(msg as any) as RpcReqMsg;
             session.isInit = true;
             session.serverType = rpcMsg.serverName;
             session.nodeId = rpcMsg.className;
@@ -56,41 +55,11 @@ class RpcServer {
             return;
         }
 
-        switch (RpcUtils.getRpcMsgType(buffer)) {
-            case RpcMessageType.call:
-            case RpcMessageType.send:
-                // 转发
-                const clients = this.getRouteClient(buffer);
-                clients?.forEach((c) => {
-                    c.socket.send(buffer);
-                });
-                break;
-            case RpcMessageType.result:
-                const nodeId = RpcUtils.getResultTo(buffer);
-                this._nodeIdMap.get(nodeId)?.socket.send(buffer);
-                break;
-        }
-
+        RpcUtils.transferMessage(msg as any, this._serverMapList, this._nodeIdMap);
     }
-
-    private getRouteClient(buffer: Buffer) {
-        const routeOptions: RpcRouterOptions = {};
-        const offset = RpcUtils.readRouteOptions(routeOptions, buffer);
-        if (routeOptions.type === 1/* target */) {
-            return [this._nodeIdMap.get(routeOptions.nodeId)];
-        } else if (routeOptions.type === 2/* all */) {
-            const serverName = RpcUtils.readStringFromBuffer(buffer, offset);
-            return this._serverMapList.get(serverName);
-        } else {/* random */
-            const serverName = RpcUtils.readStringFromBuffer(buffer, offset);
-            const nodeList = this._serverMapList.get(serverName);
-            return [nodeList[(this.randIndex++) % nodeList.length]]
-        }
-    }
-
 }
 
-interface RpcSession {
+export interface RpcSession {
     socket: WS;
     isInit: boolean;
     serverType?: string;

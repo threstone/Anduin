@@ -150,7 +150,7 @@ declare interface RpcReqMsg {
     // rpc server根据type来决定作何操作
     type: number;
     requestId?: number;
-    routeOption: RpcRouterOptions;
+    routeOptions: RpcRouterOptions;
     serverName: string;
     className: string;
     funcName: string;

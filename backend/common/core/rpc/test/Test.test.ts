@@ -1,19 +1,19 @@
 import * as assert from 'assert';
-import { RpcMessageType, RpcUtils, RpcUtilsByJson } from '../RpcUtils';
+import { RpcMessageType, RpcUtilsByBuffer, RpcUtilsByJson } from '../RpcUtils';
 import { TestPto } from '../../../CommonProto';
 describe('rpc test', () => {
 
     it(`rpc request encode&decode 字段验证`, () => {
         const args = [1, 2, 3]
         const buffer = RpcUtilsByJson.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, args);
-        const msg = RpcUtilsByJson.decodeReqMsg(buffer);
+        const msg = RpcUtilsByJson.decodeRpcMsg(buffer) as RpcReqMsg;
         assert.strictEqual(msg.fromNodeId, 'nodeId');
         assert.strictEqual(msg.requestId, 2);
         assert.strictEqual(msg.serverName, 'serverName');
         assert.strictEqual(msg.className, 'className');
         assert.strictEqual(msg.funcName, 'funcName');
-        assert.strictEqual(msg.routeOption.type, 1);
-        assert.strictEqual(msg.routeOption.nodeId, 'asd');
+        assert.strictEqual(msg.routeOptions.type, 1);
+        assert.strictEqual(msg.routeOptions.nodeId, 'asd');
         for (let index = 0; index < msg.args.length; index++) {
             const element = msg.args[index];
             assert.strictEqual(element, args[index]);
@@ -26,29 +26,20 @@ describe('rpc test', () => {
             fromNodeId: 'fromNodeId',
             result: 1
         });
-        const jsonMsg = RpcUtilsByJson.decodeResult(jsonBuffer);
+        const jsonMsg = RpcUtilsByJson.decodeRpcMsg(jsonBuffer) as RpcTransferResult;
         assert.strictEqual(jsonMsg.type, RpcMessageType.result);
         assert.strictEqual(jsonMsg.fromNodeId, 'fromNodeId');
         assert.strictEqual(jsonMsg.result, 1);
 
-        const buffer = RpcUtils.encodeResult({
+        const buffer = RpcUtilsByBuffer.encodeResult({
             type: RpcMessageType.result,
             fromNodeId: 'fromNodeId',
             result: 1
         });
-        const msg = RpcUtils.decodeResult(buffer);
+        const msg = RpcUtilsByBuffer.decodeRpcMsg(buffer) as RpcTransferResult;
         assert.strictEqual(msg.type, RpcMessageType.result);
         assert.strictEqual(msg.fromNodeId, 'fromNodeId');
         assert.strictEqual(msg.result, 1);
-    });
-
-    it("路由信息获取验证", () => {
-        const sourceRoute = { serverName: 'serverName', className: 'className', funcName: 'funcName', type: 11, nodeId: 'abc' }
-        const buffer = RpcUtils.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 1, sourceRoute, []);
-        const routeInfo: RpcRouterOptions = {};
-        RpcUtils.readRouteOptions(routeInfo, buffer);
-        assert.strictEqual(routeInfo.type, sourceRoute.type);
-        assert.strictEqual(routeInfo.nodeId, sourceRoute.nodeId);
     });
 
     it("rpc request encode&decode json buffer耗时比对", () => {
@@ -62,7 +53,7 @@ describe('rpc test', () => {
             const buffer = RpcUtilsByJson.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
             encodeTime += (Date.now() - encodeStart);
             const decodeStart = Date.now();
-            const msg = RpcUtilsByJson.decodeReqMsg(buffer);
+            const msg = RpcUtilsByJson.decodeRpcMsg(buffer);
             decodeTime += (Date.now() - decodeStart);
             lenAvg += buffer.length;
         }
@@ -74,10 +65,10 @@ describe('rpc test', () => {
         now = Date.now();
         for (let index = 0; index < times; index++) {
             const encodeStart = Date.now();
-            const buffer = RpcUtils.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
+            const buffer = RpcUtilsByBuffer.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
             encodeTime += (Date.now() - encodeStart);
             const decodeStart = Date.now();
-            const msg = RpcUtils.decodeReqMsg(buffer);
+            const msg = RpcUtilsByBuffer.decodeRpcMsg(buffer);
             decodeTime += (Date.now() - decodeStart);
             lenAvg += buffer.length;
         }
@@ -141,20 +132,20 @@ describe('rpc test', () => {
                 result: 1
             });
             lenAvg += buffer.length;
-            const msg = RpcUtilsByJson.decodeResult(buffer);
+            const msg = RpcUtilsByJson.decodeRpcMsg(buffer);
         }
         console.log(`\n  JSON   结果${times}次序列化反序列化用时 : ${Date.now() - now}ms   平均包体大小${lenAvg / times}`);
 
         lenAvg = 0;
         now = Date.now();
         for (let index = 0; index < times; index++) {
-            const buffer = RpcUtils.encodeResult({
+            const buffer = RpcUtilsByBuffer.encodeResult({
                 type: RpcMessageType.result,
                 fromNodeId: 'fromNodeId',
                 result: 1
             });
             lenAvg += buffer.length;
-            const msg = RpcUtils.decodeResult(buffer);
+            const msg = RpcUtilsByBuffer.decodeRpcMsg(buffer);
         }
         console.log(`  BUFFER 结果${times}次序列化反序列化用时 : ${Date.now() - now}ms   平均包体大小${lenAvg / times}`);
         console.log();
@@ -168,9 +159,9 @@ describe('rpc test', () => {
             // 发送
             const buffer = RpcUtilsByJson.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
             // 路由信息
-            const msg4RpcServer = RpcUtilsByJson.decodeReqMsg(buffer);
+            const msg4RpcServer = RpcUtilsByJson.decodeRpcMsg(buffer);
             // 请求解析
-            const msg = RpcUtilsByJson.decodeReqMsg(buffer);
+            const msg = RpcUtilsByJson.decodeRpcMsg(buffer);
             // 结果序列化
             const resultBuffer = RpcUtilsByJson.encodeResult({
                 type: 0,
@@ -179,9 +170,9 @@ describe('rpc test', () => {
                 requestId: 111111
             })
             // 结果返回node
-            const nodeId = RpcUtilsByJson.decodeResult(resultBuffer).fromNodeId;
+            const nodeId = RpcUtilsByJson.decodeRpcMsg(resultBuffer).fromNodeId;
             // 结果反序列化
-            const result = RpcUtilsByJson.decodeResult(resultBuffer);
+            const result = RpcUtilsByJson.decodeRpcMsg(resultBuffer);
             lenAvg += resultBuffer.length;
             lenAvg += buffer.length;
         }
@@ -191,26 +182,26 @@ describe('rpc test', () => {
         now = Date.now();
         for (let index = 0; index < times; index++) {
             // 发送
-            const buffer = RpcUtils.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
+            const buffer = RpcUtilsByBuffer.encodeCallReqest('nodeId', 'serverName', 'className', 'funcName', 2, { type: 1, nodeId: 'asd' }, [1, 2, 3]);
             // 获取类型
-            const type = RpcUtils.getRpcMsgType(buffer);
+            const type = RpcUtilsByBuffer.getRpcMsgType(buffer);
             // 路由信息
             const routeOptions: RpcRouterOptions = {};
-            const offset = RpcUtils.readRouteOptions(routeOptions, buffer);
-            const serverName = RpcUtils.readStringFromBuffer(buffer, offset);
+            const offset = RpcUtilsByBuffer.readRouteOptions(routeOptions, buffer);
+            const serverName = RpcUtilsByBuffer.readStringFromBuffer(buffer, offset);
             // 请求解析
-            const reqMsg = RpcUtils.decodeReqMsg(buffer)
+            const reqMsg = RpcUtilsByBuffer.decodeRpcMsg(buffer)
             // 结果序列化
-            const resultBuffer = RpcUtils.encodeResult({
+            const resultBuffer = RpcUtilsByBuffer.encodeResult({
                 type: 0,
                 fromNodeId: 'fromNodeId',
                 result: 'test',
                 requestId: 111111
             })
             // 结果返回到指定node
-            const nodeId = RpcUtils.getResultTo(buffer);
+            const nodeId = RpcUtilsByBuffer.getResultTo(buffer);
             // 结果反序列化
-            const result = RpcUtils.decodeResult(resultBuffer);
+            const result = RpcUtilsByBuffer.decodeResult(resultBuffer);
             lenAvg += buffer.length;
             lenAvg += resultBuffer.length;
         }

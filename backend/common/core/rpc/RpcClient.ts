@@ -94,30 +94,28 @@ export class RpcClient {
         })
     }
 
-    private handleMessage(buffer: Buffer) {
+    private handleMessage(msg: Buffer | string) {
         // 客户端收到 call  send  result
-        const type = RpcUtils.getRpcMsgType(buffer);
-        switch (type) {
+        const rpcMsg = RpcUtils.decodeRpcMsg(msg as any);
+        switch (rpcMsg.type) {
             case RpcMessageType.call:
-                return this.handleCall(buffer);
+                return this.handleCall(rpcMsg as RpcReqMsg);
             case RpcMessageType.send:
-                return this.handleSend(buffer);
+                return this.handleSend(rpcMsg as RpcReqMsg);
             case RpcMessageType.result:
-                this.handleResult(buffer);
+                this.handleResult(rpcMsg as RpcTransferResult);
                 break;
         }
     }
 
-    private handleResult(buffer: Buffer) {
-        const rpcResult = RpcUtils.decodeResult(buffer);
+    private handleResult(rpcResult: RpcTransferResult) {
         const requestCache = this._requestMap.get(rpcResult.requestId);
         if (!requestCache) return;
         requestCache.resolve(rpcResult.result);
         this._requestMap.delete(rpcResult.requestId);
     }
 
-    private async handleCall(buffer: Buffer) {
-        const rpcMsg = RpcUtils.decodeReqMsg(buffer);
+    private async handleCall(rpcMsg: RpcReqMsg) {
         const func = RpcClient.getRpcFunc(rpcMsg);
         const replay: RpcTransferResult = {
             type: RpcMessageType.result,
@@ -129,8 +127,7 @@ export class RpcClient {
         this._socket.send(RpcUtils.encodeResult(replay));
     }
 
-    private handleSend(buffer: Buffer) {
-        const rpcMsg = RpcUtils.decodeReqMsg(buffer);
+    private handleSend(rpcMsg: RpcReqMsg) {
         console.log('handleSend ', rpcMsg);
         const func = RpcClient.getRpcFunc(rpcMsg);
         func(...rpcMsg.args);
