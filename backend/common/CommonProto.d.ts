@@ -7947,3 +7947,221 @@ export namespace FriendlyMatchPto {
         public toJSON(): { [k: string]: any };
     }
 }
+
+/** Namespace TestPto. */
+export namespace TestPto {
+
+    /** Properties of a RouteOption. */
+    interface IRouteOption {
+
+        /** RouteOption type */
+        type?: (number|null);
+
+        /** RouteOption nodeId */
+        nodeId?: (string|null);
+    }
+
+    /** Represents a RouteOption. */
+    class RouteOption implements IRouteOption {
+
+        /**
+         * Constructs a new RouteOption.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: TestPto.IRouteOption);
+
+        /** RouteOption type. */
+        public type: number;
+
+        /** RouteOption nodeId. */
+        public nodeId: string;
+
+        /**
+         * Encodes the specified RouteOption message. Does not implicitly {@link TestPto.RouteOption.verify|verify} messages.
+         * @param message RouteOption message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: TestPto.IRouteOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RouteOption message, length delimited. Does not implicitly {@link TestPto.RouteOption.verify|verify} messages.
+         * @param message RouteOption message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: TestPto.IRouteOption, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RouteOption message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RouteOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): TestPto.RouteOption;
+
+        /**
+         * Decodes a RouteOption message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RouteOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): TestPto.RouteOption;
+
+        /**
+         * Verifies a RouteOption message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RouteOption message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RouteOption
+         */
+        public static fromObject(object: { [k: string]: any }): TestPto.RouteOption;
+
+        /**
+         * Creates a plain object from a RouteOption message. Also converts values to other types if specified.
+         * @param message RouteOption
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: TestPto.RouteOption, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RouteOption to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of a RpcTest. */
+    interface IRpcTest {
+
+        /** RpcTest type */
+        type?: (number|null);
+
+        /** RpcTest requestId */
+        requestId?: (number|null);
+
+        /** RpcTest routeOption */
+        routeOption?: (TestPto.IRouteOption|null);
+
+        /** RpcTest serverName */
+        serverName?: (string|null);
+
+        /** RpcTest className */
+        className?: (string|null);
+
+        /** RpcTest funcName */
+        funcName?: (string|null);
+
+        /** RpcTest fromNodeId */
+        fromNodeId?: (string|null);
+
+        /** RpcTest args */
+        args?: (number[]|null);
+    }
+
+    /** Represents a RpcTest. */
+    class RpcTest implements IRpcTest {
+
+        /**
+         * Constructs a new RpcTest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: TestPto.IRpcTest);
+
+        /** RpcTest type. */
+        public type: number;
+
+        /** RpcTest requestId. */
+        public requestId: number;
+
+        /** RpcTest routeOption. */
+        public routeOption?: (TestPto.IRouteOption|null);
+
+        /** RpcTest serverName. */
+        public serverName: string;
+
+        /** RpcTest className. */
+        public className: string;
+
+        /** RpcTest funcName. */
+        public funcName: string;
+
+        /** RpcTest fromNodeId. */
+        public fromNodeId: string;
+
+        /** RpcTest args. */
+        public args: number[];
+
+        /**
+         * Encodes the specified RpcTest message. Does not implicitly {@link TestPto.RpcTest.verify|verify} messages.
+         * @param message RpcTest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: TestPto.IRpcTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified RpcTest message, length delimited. Does not implicitly {@link TestPto.RpcTest.verify|verify} messages.
+         * @param message RpcTest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: TestPto.IRpcTest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a RpcTest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RpcTest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): TestPto.RpcTest;
+
+        /**
+         * Decodes a RpcTest message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns RpcTest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): TestPto.RpcTest;
+
+        /**
+         * Verifies a RpcTest message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a RpcTest message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns RpcTest
+         */
+        public static fromObject(object: { [k: string]: any }): TestPto.RpcTest;
+
+        /**
+         * Creates a plain object from a RpcTest message. Also converts values to other types if specified.
+         * @param message RpcTest
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: TestPto.RpcTest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this RpcTest to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+}

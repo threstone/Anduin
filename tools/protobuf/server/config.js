@@ -16,6 +16,7 @@ let configs = [
             '../../../proto/cards.proto',
 			'../../../proto/game.proto',
 			'../../../proto/friendlyMatch.proto',
+			'../../../proto/test.proto',
         ]
     }
 ];

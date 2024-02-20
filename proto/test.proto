@@ -1,0 +1,18 @@
+syntax = "proto3";
+package TestPto;
+
+message RouteOption{
+	int32 type = 1;
+	string nodeId = 2;
+}
+
+message RpcTest{
+	int32 type = 1;
+	int64 requestId = 2;
+	RouteOption routeOption = 3;
+	string serverName = 4;
+	string className = 5;
+	string funcName = 6;
+	string fromNodeId = 7;
+	repeated int32 args = 8;
+}

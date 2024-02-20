@@ -9505,4 +9505,295 @@ $root.FriendlyMatchPto = (function() {
     return FriendlyMatchPto;
 })();
 
+$root.TestPto = (function() {
+
+    var TestPto = {};
+
+    TestPto.RouteOption = (function() {
+
+        function RouteOption(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RouteOption.prototype.type = 0;
+        RouteOption.prototype.nodeId = "";
+
+        RouteOption.create = function create(properties) {
+            return new RouteOption(properties);
+        };
+
+        RouteOption.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.type != null && Object.hasOwnProperty.call(m, "type"))
+                w.uint32(8).int32(m.type);
+            if (m.nodeId != null && Object.hasOwnProperty.call(m, "nodeId"))
+                w.uint32(18).string(m.nodeId);
+            return w;
+        };
+
+        RouteOption.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.TestPto.RouteOption();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1:
+                    m.type = r.int32();
+                    break;
+                case 2:
+                    m.nodeId = r.string();
+                    break;
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        RouteOption.fromObject = function fromObject(d) {
+            if (d instanceof $root.TestPto.RouteOption)
+                return d;
+            var m = new $root.TestPto.RouteOption();
+            if (d.type != null) {
+                m.type = d.type | 0;
+            }
+            if (d.nodeId != null) {
+                m.nodeId = String(d.nodeId);
+            }
+            return m;
+        };
+
+        RouteOption.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.type = 0;
+                d.nodeId = "";
+            }
+            if (m.type != null && m.hasOwnProperty("type")) {
+                d.type = m.type;
+            }
+            if (m.nodeId != null && m.hasOwnProperty("nodeId")) {
+                d.nodeId = m.nodeId;
+            }
+            return d;
+        };
+
+        RouteOption.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RouteOption;
+    })();
+
+    TestPto.RpcTest = (function() {
+
+        function RpcTest(p) {
+            this.args = [];
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        RpcTest.prototype.type = 0;
+        RpcTest.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        RpcTest.prototype.routeOption = null;
+        RpcTest.prototype.serverName = "";
+        RpcTest.prototype.className = "";
+        RpcTest.prototype.funcName = "";
+        RpcTest.prototype.fromNodeId = "";
+        RpcTest.prototype.args = $util.emptyArray;
+
+        RpcTest.create = function create(properties) {
+            return new RpcTest(properties);
+        };
+
+        RpcTest.encode = function encode(m, w) {
+            if (!w)
+                w = $Writer.create();
+            if (m.type != null && Object.hasOwnProperty.call(m, "type"))
+                w.uint32(8).int32(m.type);
+            if (m.requestId != null && Object.hasOwnProperty.call(m, "requestId"))
+                w.uint32(16).int64(m.requestId);
+            if (m.routeOption != null && Object.hasOwnProperty.call(m, "routeOption"))
+                $root.TestPto.RouteOption.encode(m.routeOption, w.uint32(26).fork()).ldelim();
+            if (m.serverName != null && Object.hasOwnProperty.call(m, "serverName"))
+                w.uint32(34).string(m.serverName);
+            if (m.className != null && Object.hasOwnProperty.call(m, "className"))
+                w.uint32(42).string(m.className);
+            if (m.funcName != null && Object.hasOwnProperty.call(m, "funcName"))
+                w.uint32(50).string(m.funcName);
+            if (m.fromNodeId != null && Object.hasOwnProperty.call(m, "fromNodeId"))
+                w.uint32(58).string(m.fromNodeId);
+            if (m.args != null && m.args.length) {
+                w.uint32(66).fork();
+                for (var i = 0; i < m.args.length; ++i)
+                    w.int32(m.args[i]);
+                w.ldelim();
+            }
+            return w;
+        };
+
+        RpcTest.decode = function decode(r, l) {
+            if (!(r instanceof $Reader))
+                r = $Reader.create(r);
+            var c = l === undefined ? r.len : r.pos + l, m = new $root.TestPto.RpcTest();
+            while (r.pos < c) {
+                var t = r.uint32();
+                switch (t >>> 3) {
+                case 1:
+                    m.type = r.int32();
+                    break;
+                case 2:
+                    m.requestId = r.int64();
+                    break;
+                case 3:
+                    m.routeOption = $root.TestPto.RouteOption.decode(r, r.uint32());
+                    break;
+                case 4:
+                    m.serverName = r.string();
+                    break;
+                case 5:
+                    m.className = r.string();
+                    break;
+                case 6:
+                    m.funcName = r.string();
+                    break;
+                case 7:
+                    m.fromNodeId = r.string();
+                    break;
+                case 8:
+                    if (!(m.args && m.args.length))
+                        m.args = [];
+                    if ((t & 7) === 2) {
+                        var c2 = r.uint32() + r.pos;
+                        while (r.pos < c2)
+                            m.args.push(r.int32());
+                    } else
+                        m.args.push(r.int32());
+                    break;
+                default:
+                    r.skipType(t & 7);
+                    break;
+                }
+            }
+            return m;
+        };
+
+        RpcTest.fromObject = function fromObject(d) {
+            if (d instanceof $root.TestPto.RpcTest)
+                return d;
+            var m = new $root.TestPto.RpcTest();
+            if (d.type != null) {
+                m.type = d.type | 0;
+            }
+            if (d.requestId != null) {
+                if ($util.Long)
+                    (m.requestId = $util.Long.fromValue(d.requestId)).unsigned = false;
+                else if (typeof d.requestId === "string")
+                    m.requestId = parseInt(d.requestId, 10);
+                else if (typeof d.requestId === "number")
+                    m.requestId = d.requestId;
+                else if (typeof d.requestId === "object")
+                    m.requestId = new $util.LongBits(d.requestId.low >>> 0, d.requestId.high >>> 0).toNumber();
+            }
+            if (d.routeOption != null) {
+                if (typeof d.routeOption !== "object")
+                    throw TypeError(".TestPto.RpcTest.routeOption: object expected");
+                m.routeOption = $root.TestPto.RouteOption.fromObject(d.routeOption);
+            }
+            if (d.serverName != null) {
+                m.serverName = String(d.serverName);
+            }
+            if (d.className != null) {
+                m.className = String(d.className);
+            }
+            if (d.funcName != null) {
+                m.funcName = String(d.funcName);
+            }
+            if (d.fromNodeId != null) {
+                m.fromNodeId = String(d.fromNodeId);
+            }
+            if (d.args) {
+                if (!Array.isArray(d.args))
+                    throw TypeError(".TestPto.RpcTest.args: array expected");
+                m.args = [];
+                for (var i = 0; i < d.args.length; ++i) {
+                    m.args[i] = d.args[i] | 0;
+                }
+            }
+            return m;
+        };
+
+        RpcTest.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.arrays || o.defaults) {
+                d.args = [];
+            }
+            if (o.defaults) {
+                d.type = 0;
+                if ($util.Long) {
+                    var n = new $util.Long(0, 0, false);
+                    d.requestId = o.longs === String ? n.toString() : o.longs === Number ? n.toNumber() : n;
+                } else
+                    d.requestId = o.longs === String ? "0" : 0;
+                d.routeOption = null;
+                d.serverName = "";
+                d.className = "";
+                d.funcName = "";
+                d.fromNodeId = "";
+            }
+            if (m.type != null && m.hasOwnProperty("type")) {
+                d.type = m.type;
+            }
+            if (m.requestId != null && m.hasOwnProperty("requestId")) {
+                if (typeof m.requestId === "number")
+                    d.requestId = o.longs === String ? String(m.requestId) : m.requestId;
+                else
+                    d.requestId = o.longs === String ? $util.Long.prototype.toString.call(m.requestId) : o.longs === Number ? new $util.LongBits(m.requestId.low >>> 0, m.requestId.high >>> 0).toNumber() : m.requestId;
+            }
+            if (m.routeOption != null && m.hasOwnProperty("routeOption")) {
+                d.routeOption = $root.TestPto.RouteOption.toObject(m.routeOption, o);
+            }
+            if (m.serverName != null && m.hasOwnProperty("serverName")) {
+                d.serverName = m.serverName;
+            }
+            if (m.className != null && m.hasOwnProperty("className")) {
+                d.className = m.className;
+            }
+            if (m.funcName != null && m.hasOwnProperty("funcName")) {
+                d.funcName = m.funcName;
+            }
+            if (m.fromNodeId != null && m.hasOwnProperty("fromNodeId")) {
+                d.fromNodeId = m.fromNodeId;
+            }
+            if (m.args && m.args.length) {
+                d.args = [];
+                for (var j = 0; j < m.args.length; ++j) {
+                    d.args[j] = m.args[j];
+                }
+            }
+            return d;
+        };
+
+        RpcTest.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return RpcTest;
+    })();
+
+    return TestPto;
+})();
+
 module.exports = $root;

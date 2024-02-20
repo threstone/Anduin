@@ -10165,3 +10165,301 @@ $root.SystemPto = (function() {
 
     return SystemPto;
 })();
+
+$root.TestPto = (function() {
+
+    /**
+     * Namespace TestPto.
+     * @exports TestPto
+     * @namespace
+     */
+    var TestPto = {};
+
+    TestPto.RouteOption = (function() {
+
+        /**
+         * Properties of a RouteOption.
+         * @memberof TestPto
+         * @interface IRouteOption
+         * @property {number|null} [type] RouteOption type
+         * @property {string|null} [nodeId] RouteOption nodeId
+         */
+
+        /**
+         * Constructs a new RouteOption.
+         * @memberof TestPto
+         * @classdesc Represents a RouteOption.
+         * @implements IRouteOption
+         * @constructor
+         * @param {TestPto.IRouteOption=} [properties] Properties to set
+         */
+        function RouteOption(properties) {
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RouteOption type.
+         * @member {number} type
+         * @memberof TestPto.RouteOption
+         * @instance
+         */
+        RouteOption.prototype.type = 0;
+
+        /**
+         * RouteOption nodeId.
+         * @member {string} nodeId
+         * @memberof TestPto.RouteOption
+         * @instance
+         */
+        RouteOption.prototype.nodeId = "";
+
+        /**
+         * Encodes the specified RouteOption message. Does not implicitly {@link TestPto.RouteOption.verify|verify} messages.
+         * @function encode
+         * @memberof TestPto.RouteOption
+         * @static
+         * @param {TestPto.IRouteOption} message RouteOption message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RouteOption.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+            if (message.nodeId != null && Object.hasOwnProperty.call(message, "nodeId"))
+                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeId);
+            return writer;
+        };
+
+        /**
+         * Decodes a RouteOption message from the specified reader or buffer.
+         * @function decode
+         * @memberof TestPto.RouteOption
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {TestPto.RouteOption} RouteOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RouteOption.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TestPto.RouteOption();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.type = reader.int32();
+                    break;
+                case 2:
+                    message.nodeId = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        return RouteOption;
+    })();
+
+    TestPto.RpcTest = (function() {
+
+        /**
+         * Properties of a RpcTest.
+         * @memberof TestPto
+         * @interface IRpcTest
+         * @property {number|null} [type] RpcTest type
+         * @property {number|Long|null} [requestId] RpcTest requestId
+         * @property {TestPto.IRouteOption|null} [routeOption] RpcTest routeOption
+         * @property {string|null} [serverName] RpcTest serverName
+         * @property {string|null} [className] RpcTest className
+         * @property {string|null} [funcName] RpcTest funcName
+         * @property {string|null} [fromNodeId] RpcTest fromNodeId
+         * @property {Array.<number>|null} [args] RpcTest args
+         */
+
+        /**
+         * Constructs a new RpcTest.
+         * @memberof TestPto
+         * @classdesc Represents a RpcTest.
+         * @implements IRpcTest
+         * @constructor
+         * @param {TestPto.IRpcTest=} [properties] Properties to set
+         */
+        function RpcTest(properties) {
+            this.args = [];
+            if (properties)
+                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                    if (properties[keys[i]] != null)
+                        this[keys[i]] = properties[keys[i]];
+        }
+
+        /**
+         * RpcTest type.
+         * @member {number} type
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.type = 0;
+
+        /**
+         * RpcTest requestId.
+         * @member {number|Long} requestId
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.requestId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+
+        /**
+         * RpcTest routeOption.
+         * @member {TestPto.IRouteOption|null|undefined} routeOption
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.routeOption = null;
+
+        /**
+         * RpcTest serverName.
+         * @member {string} serverName
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.serverName = "";
+
+        /**
+         * RpcTest className.
+         * @member {string} className
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.className = "";
+
+        /**
+         * RpcTest funcName.
+         * @member {string} funcName
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.funcName = "";
+
+        /**
+         * RpcTest fromNodeId.
+         * @member {string} fromNodeId
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.fromNodeId = "";
+
+        /**
+         * RpcTest args.
+         * @member {Array.<number>} args
+         * @memberof TestPto.RpcTest
+         * @instance
+         */
+        RpcTest.prototype.args = $util.emptyArray;
+
+        /**
+         * Encodes the specified RpcTest message. Does not implicitly {@link TestPto.RpcTest.verify|verify} messages.
+         * @function encode
+         * @memberof TestPto.RpcTest
+         * @static
+         * @param {TestPto.IRpcTest} message RpcTest message or plain object to encode
+         * @param {$protobuf.Writer} [writer] Writer to encode to
+         * @returns {$protobuf.Writer} Writer
+         */
+        RpcTest.encode = function encode(message, writer) {
+            if (!writer)
+                writer = $Writer.create();
+            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.requestId);
+            if (message.routeOption != null && Object.hasOwnProperty.call(message, "routeOption"))
+                $root.TestPto.RouteOption.encode(message.routeOption, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+            if (message.serverName != null && Object.hasOwnProperty.call(message, "serverName"))
+                writer.uint32(/* id 4, wireType 2 =*/34).string(message.serverName);
+            if (message.className != null && Object.hasOwnProperty.call(message, "className"))
+                writer.uint32(/* id 5, wireType 2 =*/42).string(message.className);
+            if (message.funcName != null && Object.hasOwnProperty.call(message, "funcName"))
+                writer.uint32(/* id 6, wireType 2 =*/50).string(message.funcName);
+            if (message.fromNodeId != null && Object.hasOwnProperty.call(message, "fromNodeId"))
+                writer.uint32(/* id 7, wireType 2 =*/58).string(message.fromNodeId);
+            if (message.args != null && message.args.length) {
+                writer.uint32(/* id 8, wireType 2 =*/66).fork();
+                for (var i = 0; i < message.args.length; ++i)
+                    writer.int32(message.args[i]);
+                writer.ldelim();
+            }
+            return writer;
+        };
+
+        /**
+         * Decodes a RpcTest message from the specified reader or buffer.
+         * @function decode
+         * @memberof TestPto.RpcTest
+         * @static
+         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+         * @param {number} [length] Message length if known beforehand
+         * @returns {TestPto.RpcTest} RpcTest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        RpcTest.decode = function decode(reader, length) {
+            if (!(reader instanceof $Reader))
+                reader = $Reader.create(reader);
+            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.TestPto.RpcTest();
+            while (reader.pos < end) {
+                var tag = reader.uint32();
+                switch (tag >>> 3) {
+                case 1:
+                    message.type = reader.int32();
+                    break;
+                case 2:
+                    message.requestId = reader.int64();
+                    break;
+                case 3:
+                    message.routeOption = $root.TestPto.RouteOption.decode(reader, reader.uint32());
+                    break;
+                case 4:
+                    message.serverName = reader.string();
+                    break;
+                case 5:
+                    message.className = reader.string();
+                    break;
+                case 6:
+                    message.funcName = reader.string();
+                    break;
+                case 7:
+                    message.fromNodeId = reader.string();
+                    break;
+                case 8:
+                    if (!(message.args && message.args.length))
+                        message.args = [];
+                    if ((tag & 7) === 2) {
+                        var end2 = reader.uint32() + reader.pos;
+                        while (reader.pos < end2)
+                            message.args.push(reader.int32());
+                    } else
+                        message.args.push(reader.int32());
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+                }
+            }
+            return message;
+        };
+
+        return RpcTest;
+    })();
+
+    return TestPto;
+})();

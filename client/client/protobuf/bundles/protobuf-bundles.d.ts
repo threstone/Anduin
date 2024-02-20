@@ -4529,3 +4529,131 @@ declare namespace SystemPto {
         public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): SystemPto.S_TIPS;
     }
 }
+
+/** Namespace TestPto. */
+declare namespace TestPto {
+
+    /** Properties of a RouteOption. */
+    interface IRouteOption {
+
+        /** RouteOption type */
+        type?: (number|null);
+
+        /** RouteOption nodeId */
+        nodeId?: (string|null);
+    }
+
+    /** Represents a RouteOption. */
+    class RouteOption implements IRouteOption {
+
+        /**
+         * Constructs a new RouteOption.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: TestPto.IRouteOption);
+
+        /** RouteOption type. */
+        public type: number;
+
+        /** RouteOption nodeId. */
+        public nodeId: string;
+
+        /**
+         * Encodes the specified RouteOption message. Does not implicitly {@link TestPto.RouteOption.verify|verify} messages.
+         * @param message RouteOption message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: TestPto.IRouteOption, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a RouteOption message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RouteOption
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): TestPto.RouteOption;
+    }
+
+    /** Properties of a RpcTest. */
+    interface IRpcTest {
+
+        /** RpcTest type */
+        type?: (number|null);
+
+        /** RpcTest requestId */
+        requestId?: (number|Long|null);
+
+        /** RpcTest routeOption */
+        routeOption?: (TestPto.IRouteOption|null);
+
+        /** RpcTest serverName */
+        serverName?: (string|null);
+
+        /** RpcTest className */
+        className?: (string|null);
+
+        /** RpcTest funcName */
+        funcName?: (string|null);
+
+        /** RpcTest fromNodeId */
+        fromNodeId?: (string|null);
+
+        /** RpcTest args */
+        args?: (number[]|null);
+    }
+
+    /** Represents a RpcTest. */
+    class RpcTest implements IRpcTest {
+
+        /**
+         * Constructs a new RpcTest.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: TestPto.IRpcTest);
+
+        /** RpcTest type. */
+        public type: number;
+
+        /** RpcTest requestId. */
+        public requestId: (number|Long);
+
+        /** RpcTest routeOption. */
+        public routeOption?: (TestPto.IRouteOption|null);
+
+        /** RpcTest serverName. */
+        public serverName: string;
+
+        /** RpcTest className. */
+        public className: string;
+
+        /** RpcTest funcName. */
+        public funcName: string;
+
+        /** RpcTest fromNodeId. */
+        public fromNodeId: string;
+
+        /** RpcTest args. */
+        public args: number[];
+
+        /**
+         * Encodes the specified RpcTest message. Does not implicitly {@link TestPto.RpcTest.verify|verify} messages.
+         * @param message RpcTest message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: TestPto.IRpcTest, writer?: protobuf.Writer): protobuf.Writer;
+
+        /**
+         * Decodes a RpcTest message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns RpcTest
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: (protobuf.Reader|Uint8Array), length?: number): TestPto.RpcTest;
+    }
+}

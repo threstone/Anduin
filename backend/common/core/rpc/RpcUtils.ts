@@ -6,6 +6,7 @@ enum TypeEnum {
 export class RpcUtils {
     private static _bufferCache: Buffer[] = [];
     static AllocBuffer(size: number) {
+        return Buffer.alloc(size);
         let buffer = this._bufferCache[size];
         if (!buffer) {
             buffer = Buffer.alloc(size);
@@ -61,41 +62,44 @@ export class RpcUtils {
     static decodeArgs(buffer: Buffer, offset: number) {
         const args = [];
         while (true) {
-            const type = buffer.readUint8(offset);
-            offset++;
-            switch (type) {
-                case TypeEnum.String:
-                    {
-                        const len = buffer.readUint32LE(offset);
-                        offset += 4;
-                        args.push(buffer.toString('utf8', offset, offset + len));
-                        offset += len;
-                        break;
-                    }
-                case TypeEnum.Number:
-                    {
-                        args.push(buffer.readDoubleLE(offset));
-                        offset += 8;
-                        break;
-                    }
-                case TypeEnum.Boolean:
-                    {
-                        args.push(buffer.readUint8(offset) === 1);
-                        offset += 1;
-                        break;
-                    }
-            }
             if (offset >= buffer.length) {
                 break;
             }
+            let [result, offsetTemp] = this.decodeArg(buffer, offset);
+            args.push(result);
+            offset = offsetTemp;
         }
         return args;
     }
 
     /** 反序列化参数 */
-    static decodeArg(buffer: Buffer, offset?: number) {
-        // todo 暂时实现流程,后续优化成二进制流
-        return JSON.parse(buffer.toString('utf8', offset));
+    static decodeArg(buffer: Buffer, offset: number = 0) {
+        let result;
+        const type = buffer.readUint8(offset);
+        offset++;
+        switch (type) {
+            case TypeEnum.String:
+                {
+                    const len = buffer.readUint32LE(offset);
+                    offset += 4;
+                    result = buffer.toString('utf8', offset, offset + len);
+                    offset += len;
+                    break;
+                }
+            case TypeEnum.Number:
+                {
+                    result = buffer.readDoubleLE(offset);
+                    offset += 8;
+                    break;
+                }
+            case TypeEnum.Boolean:
+                {
+                    result = buffer.readUint8(offset) === 1;
+                    offset += 1;
+                    break;
+                }
+        }
+        return [result, offset];
     }
 
     /** 序列化call请求 */
@@ -151,8 +155,6 @@ export class RpcUtils {
 
         // write fromNodeId 
         offset = this.writeStrToBuffer(buffer, msg.fromNodeId, offset);
-
-        // todo args to buffer
         return Buffer.concat([buffer, this.encodeArgs(msg.args)]);
     }
 
@@ -201,7 +203,6 @@ export class RpcUtils {
         result.fromNodeId = buffer.toString('utf8', offset, offset + len);
         offset += len;
         result.args = this.decodeArgs(buffer, offset);
-        // todo buffer to args
         return result;
     }
 
@@ -230,16 +231,51 @@ export class RpcUtils {
         return offset;
     }
 
-    //todo 
     /** 序列化结果结构体 */
     static encodeResult(replay: RpcTransferResult) {
-        return Buffer.from(JSON.stringify(replay));
+        const argBuffer = this.encodeArg(replay.result);
+
+        const buffer = this.AllocBuffer(3 + argBuffer.length + this.getByteLength(replay.fromNodeId) + (replay.requestId ? 8 : 0));
+        // write type 
+        let offset = buffer.writeUint8(replay.type);
+        // write routeOption.serverName 
+        offset = this.writeStrToBuffer(buffer, replay.fromNodeId, offset);
+
+        argBuffer.copy(buffer, offset);
+        offset += argBuffer.length;
+        if (replay.requestId) {
+            // write requestId 
+            offset = buffer.writeDoubleLE(replay.requestId || 0, offset)
+        }
+        return buffer;
     }
 
-    // todo
     /** 反序列化结果结构体 */
     static decodeResult(buffer: Buffer): RpcTransferResult {
-        return JSON.parse(buffer.toString());
+        const result: RpcTransferResult = {
+            type: 0,
+            fromNodeId: "",
+            result: undefined
+        };
+        let offset = 0;
+        result.type = buffer.readUint8();
+        offset++;
+
+        // fromNodeId read
+        let len = buffer.readUint16LE(offset);
+        offset += 2;
+        result.fromNodeId = buffer.toString('utf8', offset, offset + len);
+        offset += len;
+        // result read
+        const [tempRes, temOffset] = this.decodeArg(buffer, offset);
+        offset = temOffset;
+        result.result = tempRes;
+
+        // requestId read
+        if (offset < buffer.length) {
+            result.requestId = buffer.readDoubleLE(offset);
+        }
+        return result;
     }
 
     /** 获得rpc返回结果需要给到的node */
@@ -263,8 +299,8 @@ export class RpcUtils {
 
     static getByteLength(str: string) {
         return str ? Buffer.byteLength(str) : 0;
-        // 使用str?.length在不遇到单个字符占多字节情况下性能更好
-        return str?.length;
+        // 使用str?.length || 0在不遇到单个字符占多字节情况下性能更好
+        return str?.length || 0;
     }
 }
 
