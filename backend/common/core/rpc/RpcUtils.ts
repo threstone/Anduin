@@ -89,10 +89,10 @@ enum TypeEnum {
 }
 
 /** 
- * 经过单元测试无奈地发现 自定义buffer序列化的速度并没有JSON快,优势仅为包体更小50+%,但在内网rpc下优势可以忽略
+ * 经过单元测试发现 自定义buffer序列化的速度并没有JSON快特别多,包体更小的优势在内网rpc下可以忽略
  * 反而在易用性上远远比不过JSON,需要将常见数据类型一一手动实现
- * 原因估计是因为nodejs各方法调用的开销过大,Buffer声明也费事费时,JSON反而只有一次
- * 综上,还是使用JSON来做rpc传输好了
+ * 原因估计是因为nodejs各方法调用的开销过大,JSON由于是内置函数反而调用开销小
+ * 综合考虑下来,还是使用JSON来做rpc传输好了
  * 详情测试报告运行npm test查看
  **/
 export class RpcUtilsByBuffer {

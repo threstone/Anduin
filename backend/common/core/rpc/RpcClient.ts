@@ -73,10 +73,6 @@ export class RpcClient {
             this.isClose = false;
             // 第一条消息告知客户端信息
             this.send(serverConfig.serverType, serverConfig.nodeId, 'clientInfo', {}, []);
-            rpc.relation.userRemote.sendUserOffline({}, 123455);
-            rpc.relation.userRemote.callUserOffline({}, 444).then((result) => {
-                console.log(result);
-            });
         })
 
         socket.on('message', this.handleMessage.bind(this));
