@@ -98,61 +98,42 @@ enum TypeEnum {
 export class RpcUtilsByBuffer {
 
     private static _randIndex: number = 1;
-    private static _bufferCache: Buffer[] = [];
-
-    private static allocBuffer(size: number) {
-        return Buffer.alloc(size);
-        let buffer = this._bufferCache[size];
-        if (!buffer) {
-            buffer = Buffer.alloc(size);
-            this._bufferCache[size] = buffer;
-        } else {
-            buffer.fill(0);
-        }
-        return buffer;
-    }
+    private static _sourceBuffer: Buffer = Buffer.alloc(65536);
 
     /** 序列化参数列表 */
-    private static encodeArgs(args: any[]) {
-        const bufferList = [];
+    private static encodeArgs(buffer: Buffer, offset: number, args: any[]) {
         for (let index = 0; index < args.length; index++) {
             const arg = args[index];
-            bufferList.push(this.encodeArg(arg));
+            offset = this.encodeArg(buffer, offset, arg)
         }
-        return Buffer.concat(bufferList);
+        return offset;
     }
 
     /** 序列化参数 */
-    private static encodeArg(arg: any) {
+    private static encodeArg(buffer: Buffer, offset: number, arg: any) {
         switch (typeof (arg)) {
             case 'string':
                 {
-                    const len = Buffer.byteLength(arg);
-                    const buffer = this.allocBuffer(len + 4 + 1);
-                    buffer.writeUint8(TypeEnum.String);
-                    buffer.writeUint32LE(len, 1);
-                    buffer.write(arg, 5, 'utf8');
-                    return buffer;
+                    offset = buffer.writeUint8(TypeEnum.String, offset);
+                    // 跨4字节去写,然后得到长度
+                    const len = buffer.write(arg, offset + 4, 'utf8');
+                    // 将长度写回string前
+                    offset = buffer.writeUint32LE(len, offset);
+                    return offset + len;
                 }
             case 'number':
                 {
-                    const buffer = this.allocBuffer(8 + 1);
-                    buffer.writeUint8(TypeEnum.Number);
-                    buffer.writeDoubleLE(arg, 1);
-                    return buffer;
+                    offset = buffer.writeUint8(TypeEnum.Number, offset);
+                    return buffer.writeDoubleLE(arg, offset);
                 }
             case 'boolean':
                 {
-                    const buffer = this.allocBuffer(1 + 1);
-                    buffer.writeUint8(TypeEnum.Boolean);
-                    buffer.writeUint8(arg ? 1 : 0, 1);
-                    return buffer;
+                    offset = buffer.writeUint8(TypeEnum.Boolean, offset);
+                    return buffer.writeUint8(arg ? 1 : 0, offset);
                 }
             case 'undefined':
                 {
-                    const buffer = this.allocBuffer(1);
-                    buffer.writeUint8(TypeEnum.Undefine);
-                    return buffer;
+                    return buffer.writeUint8(TypeEnum.Undefine, offset);
                 }
             default:
                 throw new Error('不支持的传递类型')
@@ -175,7 +156,7 @@ export class RpcUtilsByBuffer {
 
     /** 反序列化参数 */
     private static decodeArg(buffer: Buffer, offset: number = 0) {
-        let result;
+        let result: any;
         const type = buffer.readUint8(offset);
         offset++;
         switch (type) {
@@ -236,14 +217,7 @@ export class RpcUtilsByBuffer {
 
     /** 序列化rpc请求 */
     private static encodeReqMsg(msg: RpcReqMsg): Buffer {
-        const buffer = this.allocBuffer(
-            20 +
-            this.getByteLength(msg.serverName) +
-            this.getByteLength(msg.className) +
-            this.getByteLength(msg.funcName) +
-            this.getByteLength(msg.routeOptions.nodeId) +
-            this.getByteLength(msg.fromNodeId)
-        )
+        const buffer = this._sourceBuffer;
         // write type 
         let offset = buffer.writeUint8(msg.type);
 
@@ -260,7 +234,8 @@ export class RpcUtilsByBuffer {
 
         // write fromNodeId 
         offset = this.writeStrToBuffer(buffer, msg.fromNodeId, offset);
-        return Buffer.concat([buffer, this.encodeArgs(msg.args)]);
+        offset = this.encodeArgs(buffer, offset, msg.args);
+        return buffer.slice(0, offset);
     }
 
     /** 反序列化rpc请求 */
@@ -287,24 +262,24 @@ export class RpcUtilsByBuffer {
         offset = this.readRouteOptions(result.routeOptions, buffer, offset);
 
         // serverName read
-        let len = buffer.readUint16LE(offset);
-        offset += 2;
+        let len = buffer.readUint32LE(offset);
+        offset += 4;
         result.serverName = buffer.toString('utf8', offset, offset + len);
         offset += len;
         // className read
-        len = buffer.readUint16LE(offset);
-        offset += 2;
+        len = buffer.readUint32LE(offset);
+        offset += 4;
         result.className = buffer.toString('utf8', offset, offset + len);
         offset += len;
         // funcName read
-        len = buffer.readUint16LE(offset);
-        offset += 2;
+        len = buffer.readUint32LE(offset);
+        offset += 4;
         result.funcName = buffer.toString('utf8', offset, offset + len);
         offset += len;
 
         // read fromNodeId 
-        len = buffer.readUint16LE(offset);
-        offset += 2;
+        len = buffer.readUint32LE(offset);
+        offset += 4;
         result.fromNodeId = buffer.toString('utf8', offset, offset + len);
         offset += len;
         result.args = this.decodeArgs(buffer, offset);
@@ -329,8 +304,8 @@ export class RpcUtilsByBuffer {
     static readRouteOptions(routeOption: RpcRouterOptions, buffer: Buffer, offset = 9) {
         routeOption.type = buffer.readUint8(offset);
         offset++;
-        let len = buffer.readUint16LE(offset);
-        offset += 2;
+        let len = buffer.readUint32LE(offset);
+        offset += 4;
         routeOption.nodeId = buffer.toString('utf8', offset, offset + len);
         offset += len;
         return offset;
@@ -338,21 +313,15 @@ export class RpcUtilsByBuffer {
 
     /** 序列化结果结构体 */
     static encodeResult(replay: RpcTransferResult) {
-        const argBuffer = this.encodeArg(replay.result);
-
-        const buffer = this.allocBuffer(3 + argBuffer.length + this.getByteLength(replay.fromNodeId) + (replay.requestId ? 8 : 0));
-        // write type 
+        const buffer = this._sourceBuffer;
         let offset = buffer.writeUint8(replay.type);
-        // write routeOption.serverName 
         offset = this.writeStrToBuffer(buffer, replay.fromNodeId, offset);
-
-        argBuffer.copy(buffer, offset);
-        offset += argBuffer.length;
+        offset = this.encodeArg(buffer, offset, replay.result);
         if (replay.requestId) {
             // write requestId 
             offset = buffer.writeDoubleLE(replay.requestId || 0, offset)
         }
-        return buffer;
+        return buffer.slice(0, offset);
     }
 
     /** 反序列化结果结构体 */
@@ -367,8 +336,8 @@ export class RpcUtilsByBuffer {
         offset++;
 
         // fromNodeId read
-        let len = buffer.readUint16LE(offset);
-        offset += 2;
+        let len = buffer.readUint32LE(offset);
+        offset += 4;
         result.fromNodeId = buffer.toString('utf8', offset, offset + len);
         offset += len;
         // result read
@@ -390,22 +359,15 @@ export class RpcUtilsByBuffer {
 
     /** 将string写入buffer */
     private static writeStrToBuffer(buffer: Buffer, str: string = '', offset: number) {
-        offset = buffer.writeUInt16LE(this.getByteLength(str), offset);
-        offset += buffer.write(str, offset, 'utf8');
-        return offset;
+        const len = buffer.write(str, offset + 4, 'utf8');
+        return buffer.writeUint32LE(len, offset) + len;
     }
 
     /** 从buffer中读取string */
     static readStringFromBuffer(buffer: Buffer, offset: number) {
-        const len = buffer.readUint16LE(offset);
-        offset += 2;
+        const len = buffer.readUint32LE(offset);
+        offset += 4;
         return buffer.toString('utf8', offset, offset + len);
-    }
-
-    private static getByteLength(str: string) {
-        return str ? Buffer.byteLength(str) : 0;
-        // 使用str?.length || 0在不遇到单个字符占多字节情况下性能更好
-        return str?.length || 0;
     }
 
     /** 获取转发的clients */
