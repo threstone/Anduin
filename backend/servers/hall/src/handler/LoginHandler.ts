@@ -96,7 +96,7 @@ export class LoginHandler extends BaseHandler {
         //如果玩家在线,把旧的玩家踢掉
         const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(uid);
         if (oldClient) {
-            GlobalVar.socketServer.sendTips(oldClient, uid, '您的账号在别处登录了!', 60000);
+            this.sendTips(oldClient, uid, '您的账号在别处登录了!', 60000);
             GlobalVar.socketServer.callCloseUserSocket(oldClient, uid);
         }
 

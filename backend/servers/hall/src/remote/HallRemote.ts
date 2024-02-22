@@ -1,10 +1,8 @@
-import { getLogger } from 'log4js';
-import { SystemPto } from '../../../common/CommonProto';
-import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
-import * as RpcCommon from '../../../common/rpc/rpc_class/RpcCommonHall';
+import { getLogger } from "log4js";
+import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 
 const logger = getLogger(startupParam?.nodeId);
-export class SocketServer extends RpcCommon.HallRPCServer {
+export class HallRemote {
     async reqRegister(clientName: string, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientName, null, buff);
     }

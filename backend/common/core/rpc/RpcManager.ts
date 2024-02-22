@@ -107,7 +107,7 @@ export class RpcManager {
 
     /** RPC 远程call调用,等待调用返回值 */
     private static call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, ...args: any[]): Promise<any> {
-        return this.getClient()?.call(serverName, className, funcName,routeOption, args);
+        return this.getClient()?.call(serverName, className, funcName, routeOption, args);
     }
 
     /** RPC 远程send调用,不关注返回值 */
@@ -227,11 +227,11 @@ declare class rpc {
 
     /** 获取remote class指定函数的描述信息 */
     private static getFunctionDesc(funcName: string, fileText: string) {
-        const index = fileText.indexOf(funcName);
+        const index = fileText.indexOf(` ${funcName}`);
         if (index === -1) {
             return;
         }
-        fileText = fileText.substring(index);
+        fileText = fileText.substring(index+1);
         fileText = fileText.substring(0, fileText.indexOf(' {'));
 
         const resultTypeIndex = fileText.indexOf('):');

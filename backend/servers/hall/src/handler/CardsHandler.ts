@@ -113,14 +113,14 @@ export class CardsHandler extends BaseHandler {
     //保存卡组
     static async C_SAVE_CARDS(clientName: string, uid: number, msg: CardsPto.C_SAVE_CARDS) {
         if (this.checkDeck(msg.deck) === false) {
-            GlobalVar.socketServer.sendTips(clientName, uid, '保存卡组失败,卡组非法!');
+            this.sendTips(clientName, uid, '保存卡组失败,卡组非法!');
             return;
         }
         const redis = GlobalVar.redisMgr.getClient(RedisType.userInfo);
         const lockId = `lock${uid}`;
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
-            GlobalVar.socketServer.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
+            this.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
             return;
         }
 
@@ -161,7 +161,7 @@ export class CardsHandler extends BaseHandler {
         const lockId = `lock${uid}`;
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
-            GlobalVar.socketServer.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
+            this.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
             return;
         }
 

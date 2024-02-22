@@ -21,13 +21,13 @@ export class SocketServer {
         this.logger.info('socket 启动 监听端口:' + listenPort);
     }
 
-    bindGameNode(uid: number, clientName: string) {
+    bindGameNode(uid: number, nodeId: string) {
         const socket = this.socketMap.get(uid);
         if (!socket) {
             this.logger.error(`bindGameNode 未找到指定user socket:${uid}`);
             return false;
         }
-        socket.gameNodeId = clientName;
+        socket.gameNodeId = nodeId;
         return true;
     }
 

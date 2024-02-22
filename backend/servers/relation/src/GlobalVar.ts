@@ -18,6 +18,7 @@ export class GlobalVar {
         //initMsgHandler
         this.initMsgHandler();
         //init socket server
+        // todo 启动参数的port是否没用了？
         this.socketServer = new SocketServer(startupParam.port || 9001, logger);
 
         //init redisMgr

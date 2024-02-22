@@ -8,4 +8,8 @@ export class CommonRemote {
     broadcast(buffer: Buffer): void {
         GlobalVar.socketServer.broadcast(buffer);
     }
+
+    closeUserSocket(uid: number): void {
+        GlobalVar.socketServer.closeUserSocket(uid);
+    }
 }
