@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "command": "npm run updateRpcDesc",
+            "name": "生成并更新rpc类型描述文件",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "command": "npm test",
             "name": "npm test",
             "request": "launch",

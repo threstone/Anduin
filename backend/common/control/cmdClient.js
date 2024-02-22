@@ -37,8 +37,7 @@ function handleCmd() {
             args.splice(index, 1);
         }
     }
-
-    const cmdList = ['startall', 'stopall', 'list', 'kill', 'start', 'restart']
+    const cmdList = ['startall', 'stopall', 'list', 'kill', 'start', 'restart', 'updaterpcdesc']
     const argv = args.shift().toLowerCase();
     const index = cmdList.indexOf(argv);
     if (index !== -1) {
@@ -143,6 +142,23 @@ function restart(nodeId) {
     sendCMD('restart', JSON.stringify({ nodeId: nodeId }));
 }
 
+/** 生成并更新rpc类型描述文件 */
+function updaterpcdesc() {
+    let scriptPath = path.join(__dirname, '../../dist/common/core/rpc/RpcManager.js');
+    // 判断文件是否存在的办法
+    try {
+        fs.accessSync(scriptPath);
+    } catch (error) {
+        checkBuild();
+    }
+    const rpcMgr = require(scriptPath);
+    global.serversConfigMap = new Map();
+    global.startupParam = {};
+    serversConfigMap.set('master', { isTest: true });
+    rpcMgr.RpcManager.initRpcDeclare()
+    console.log('完成');
+}
+
 /** 展示帮助 */
 function showHelp() {
     const cmdStart = os.platform() == 'win32' ? '' : 'sh ';
@@ -156,12 +172,13 @@ Options:
 
 Commands:
 
-    anduin startAll [environment]   启动服务          eg: ${cmdStart}anduin startAll dev
-    anduin stopAll [environment]    停止所有进程      eg: ${cmdStart}anduin stopAll dev
-    anduin list [environment]       展示所有进程      eg: ${cmdStart}anduin list dev
-    anduin kill [nodeId]            杀死指定进程      eg: ${cmdStart}anduin -e dev kill Hall1
-    anduin start [nodeId]           启动指定进程      eg: ${cmdStart}anduin -e dev start Hall1
-    anduin restart [nodeId]         重新启动指定进程  eg: ${cmdStart}anduin -e dev restart Hall1
+    anduin startAll [environment]   启动服务                    eg: ${cmdStart}anduin startAll dev
+    anduin stopAll [environment]    停止所有进程                eg: ${cmdStart}anduin stopAll dev
+    anduin list [environment]       展示所有进程                eg: ${cmdStart}anduin list dev
+    anduin kill [nodeId]            杀死指定进程                eg: ${cmdStart}anduin -e dev kill Hall1
+    anduin start [nodeId]           启动指定进程                eg: ${cmdStart}anduin -e dev start Hall1
+    anduin restart [nodeId]         重新启动指定进程            eg: ${cmdStart}anduin -e dev restart Hall1
+    anduin updateRpcDesc            生成并更新rpc类型描述文件   eg: ${cmdStart}anduin updateRpcDesc
         `
     );
 }

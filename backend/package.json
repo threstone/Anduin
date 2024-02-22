@@ -8,7 +8,8 @@
     "start_dev": "anduin startAll dev",
     "start": "sh anduin startAll prod -b",
     "stop": "sh anduin stopAll prod",
-    "list": "sh anduin list prod"
+    "list": "sh anduin list prod",
+    "updateRpcDesc": "echo 生成并更新rpc类型描述文件 && anduin updateRpcDesc"
   },
   "author": "",
   "license": "ISC",

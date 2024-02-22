@@ -158,9 +158,9 @@ export class RpcManager {
         })
     }
 
-    /** 测试环境生成声明文件 */
-    private static initRpcDeclare() {
-        if (startupParam.nodeId !== 'master' || serversConfigMap.get('master').isTest !== true) {
+    /** 测试环境 生成并更新rpc类型描述文件 */
+    static initRpcDeclare() {
+        if (serversConfigMap.get('master').isTest !== true) {
             return;
         }
         let rpcDeclare = `
@@ -191,7 +191,6 @@ declare interface RpcRouterOptions {
     nodeId?: string;
 }
         
-
 declare class rpc {
 `;
         const serverRemoteMap = this.getRemoteInfo();
