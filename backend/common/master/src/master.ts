@@ -10,7 +10,7 @@ export class GlobalVar {
     public static commonServer: CommonServer;
 
     static init() {
-        logger.info('init ...');
+        logger.info(`[${process.pid}] init ...`);
 
         // 命令模块
         this.commonServer = new CommonServer();

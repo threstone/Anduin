@@ -103,7 +103,7 @@ function startall(environmentArgs) {
             process.exit();
         }, 1500);
     } else {
-        const worker = childProcess.fork(scriptPath, [`env=${environment}`, 'nodeId=master']);
+        const worker = childProcess.fork(scriptPath, [`env=${environment}`, 'nodeId=master'], { execArgv: ['-r', 'source-map-support/register'] });
         worker.on('exit', (code, signal) => {
             console.log(`exit code:${code}, signal:${signal}`);
         });

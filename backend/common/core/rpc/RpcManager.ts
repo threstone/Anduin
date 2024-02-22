@@ -11,15 +11,23 @@ export class RpcManager {
     private static _index: number = 0;
     private static _clients: RpcClient[];
     private static _serverWorker: BaseWorker[];
+    private static _serverRemoteMap: Map<string, Map<string, any>>;
 
     static init() {
-        logger = getLogger(startupParam?.nodeId)
+        logger = getLogger(startupParam?.nodeId);
 
-        const serverRemoteMap = this.getRemoteInfo();
-        this.initRpcDeclare(serverRemoteMap);
-        this.initRpcModule(serverRemoteMap);
-        this.initRpcServers();
+        this.doMasterTask();
+        this.initRpcModule();
         this.initRpcClient();
+    }
+
+    /** 执行master任务 */
+    static doMasterTask() {
+        if (startupParam.nodeId !== 'master') {
+            return;
+        }
+        this.initRpcDeclare();
+        this.initRpcServers();
     }
 
     private static getClient() {
@@ -35,11 +43,13 @@ export class RpcManager {
         }
     }
 
+    /** 是否是server */
+    private static isServer() {
+        return (startupParam.nodeId !== 'master' && serversConfigMap.has(startupParam.nodeId))
+    }
+
     /** 启动rpc服务器 */
     private static initRpcServers() {
-        if (startupParam.nodeId !== 'master') {
-            return;
-        }
         this._serverWorker = [];
         const rpcPorts = serversConfigMap.get('master').rpcPorts;
         rpcPorts.forEach((port) => {
@@ -57,22 +67,24 @@ export class RpcManager {
 
     /** 启动rpc客户端 */
     private static initRpcClient() {
-        this._clients = [];
-        if (startupParam.nodeId !== 'master' && serversConfigMap.get(startupParam.nodeId)) {
-            setTimeout(() => {
-                const config = serversConfigMap.get('master'); serverConfig
-                const rpcPorts = config.rpcPorts;
-                rpcPorts.forEach((port) => {
-                    this._clients.push(new RpcClient(config.ip, port));
-                });
-            }, 1500);
-        } else {
-            console.log();
+        if (this.isServer() === false) {
+            return;
         }
+        this._clients = [];
+        setTimeout(() => {
+            const config = serversConfigMap.get('master'); serverConfig
+            const rpcPorts = config.rpcPorts;
+            rpcPorts.forEach((port) => {
+                this._clients.push(new RpcClient(config.ip, port));
+            });
+        }, 1500);
     }
 
     /** 获取服务remote信息 */
     private static getRemoteInfo() {
+        if (this._serverRemoteMap) {
+            return this._serverRemoteMap;
+        }
         // 遍历所有服务的remote目录
         const serverRemoteMap = new Map<string, Map<string, any>>();
         const serversPath = path.join(__dirname, '../../../servers');
@@ -102,6 +114,7 @@ export class RpcManager {
             });
             serverRemoteMap.set(dirName, remoteMap);
         }
+        this._serverRemoteMap = serverRemoteMap;
         return serverRemoteMap;
     }
 
@@ -115,8 +128,14 @@ export class RpcManager {
         this.getClient()?.send(serverName, className, funcName, routeOption, args);
     }
 
+
+
     /** 生成调用序列 */
-    private static initRpcModule(serverRemoteMap: Map<string, Map<string, any>>) {
+    private static initRpcModule() {
+        if (this.isServer() === false) {
+            return;
+        }
+        const serverRemoteMap = this.getRemoteInfo();
         (global as any).rpc = {};
         const rpcAny = rpc as any;
         rpcAny.call = this.call;
@@ -140,7 +159,7 @@ export class RpcManager {
     }
 
     /** 测试环境生成声明文件 */
-    private static initRpcDeclare(serverRemoteMap: Map<string, Map<string, any>>) {
+    private static initRpcDeclare() {
         if (startupParam.nodeId !== 'master' || serversConfigMap.get('master').isTest !== true) {
             return;
         }
@@ -175,6 +194,7 @@ declare interface RpcRouterOptions {
 
 declare class rpc {
 `;
+        const serverRemoteMap = this.getRemoteInfo();
         let serverDeclare = '';
         let remoteDeclare = '';
         serverRemoteMap.forEach((remoteClassMap, serverName) => {

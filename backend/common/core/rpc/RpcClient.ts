@@ -74,6 +74,7 @@ export class RpcClient {
             this.isClose = false;
             // 第一条消息告知客户端信息
             this.send(serverConfig.serverType, serverConfig.nodeId, 'clientInfo', {}, []);
+            logger.info(`${serverConfig.nodeId}[${process.pid}] connect rpc server successfully`)
         })
 
         socket.on('message', this.handleMessage.bind(this));
