@@ -231,16 +231,16 @@ declare class rpc {
         if (index === -1) {
             return;
         }
-        fileText = fileText.substring(index+1);
+        fileText = fileText.substring(index + 1);
         fileText = fileText.substring(0, fileText.indexOf(' {'));
 
         const resultTypeIndex = fileText.indexOf('):');
         const resultType = resultTypeIndex !== -1 ? fileText.substring(resultTypeIndex + 2).trim() : '';
-
+        const isPromiseResult = resultType.indexOf('Promise<') !== -1;
         let modelFunc = CommonUtils.firstCharToUpperCase(fileText.substring(0, resultTypeIndex + 1));
         const argsStr = `${modelFunc.substring(modelFunc.indexOf('(') + 1, modelFunc.indexOf(')'))}`;
         modelFunc = `${modelFunc.substring(0, modelFunc.indexOf('('))}(routeOption: RpcRouterOptions, ${argsStr})`
-        const call = `call${modelFunc}${resultTypeIndex !== -1 ? `: Promise<${resultType}>;` : ''}`;
+        const call = `call${modelFunc}${resultTypeIndex !== -1 ? `: ${isPromiseResult ? resultType : `Promise<${resultType}>`};` : ''}`;
         const send = `send${modelFunc}: void;`;
         return [call, send];
     }

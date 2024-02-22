@@ -3,7 +3,7 @@ import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 import { GlobalVar } from "../GlobalVar";
 const logger = getLogger(startupParam?.nodeId);
 export class GameRemote {
-    userOffline(clientName: string, uid: number): void {
+    userOffline(uid: number): void {
         const user = GlobalVar.userMgr.getUser(uid);
         //如果在游戏中的
         if (user) {

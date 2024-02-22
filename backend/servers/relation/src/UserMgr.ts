@@ -11,21 +11,13 @@ export class UserMgr {
         this._userMap = new Map<number, UserInfo>();
     }
 
-    getAllClientName() {
-        const clients = new Set<string>();
-        this._userMap.forEach((v) => {
-            clients.add(v.clientName);
-        });
-        return clients;
-    }
-
     getUserInfo(uid: number) {
         return this._userMap.get(uid);
     }
 
     //玩家上线
-    async onUserOnline(clientName: string, uid: number, nick: string) {
-        const user = new UserInfo(clientName, uid, nick);
+    async onUserOnline(gateNodeId: string, uid: number, nick: string) {
+        const user = new UserInfo(gateNodeId, uid, nick);
         this._userMap.set(uid, user);
         //通知好友上线
         const uids = await GlobalVar.redisMgr.getClient(RedisType.userRelation).smembers(uid);
@@ -38,7 +30,7 @@ export class UserMgr {
             const uid = uids[index];
             const friendInfo = this._userMap.get(parseInt(uid));
             if (friendInfo) {
-                GlobalVar.socketServer.sendTransferToGate(friendInfo.clientName, friendInfo.uid, buffer);
+                rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: friendInfo.gateNodeId }, friendInfo.uid, buffer)
             }
         }
     }
@@ -58,7 +50,7 @@ export class UserMgr {
             const uid = uids[index];
             const friendInfo = this._userMap.get(parseInt(uid));
             if (friendInfo) {
-                GlobalVar.socketServer.sendTransferToGate(friendInfo.clientName, friendInfo.uid, buffer);
+                rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: friendInfo.gateNodeId }, friendInfo.uid, buffer)
             }
         }
     }
@@ -66,11 +58,11 @@ export class UserMgr {
 }
 
 class UserInfo {
-    clientName: string
+    gateNodeId: string
     nick: string = 'unkonw'
     uid: number
-    constructor(clientName: string, uid: number, nick: string) {
-        this.clientName = clientName;
+    constructor(gateNodeId: string, uid: number, nick: string) {
+        this.gateNodeId = gateNodeId;
         this.uid = uid;
         this.nick = nick;
     }

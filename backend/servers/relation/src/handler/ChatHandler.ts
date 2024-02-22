@@ -21,10 +21,7 @@ export class ChatHandler extends BaseHandler {
             //综合消息
             case ChatPto.MsgType.normal: {
                 const buffer = ProtoBufEncoder.encode(data);
-                const clients = GlobalVar.userMgr.getAllClientName();
-                clients.forEach((value) => {
-                    GlobalVar.socketServer.sendBroadcast(value, buffer);
-                });
+                rpc.gate.commonRemote.sendBroadcast({ type: 2 }, buffer);
                 break;
             }
             //私聊消息
@@ -34,7 +31,7 @@ export class ChatHandler extends BaseHandler {
                 if (!targetUser) {
                     return;
                 }
-                this.sendMsg(targetUser.clientName, targetUser.uid, data);
+                this.sendMsg(targetUser.gateNodeId, targetUser.uid, data);
                 break;
             }
         }

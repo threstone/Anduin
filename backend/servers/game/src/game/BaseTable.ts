@@ -87,7 +87,7 @@ export class BaseTable {
             //clear user manager cache
             GlobalVar.userMgr.clearUser(user.uid);
             //unbind
-            GlobalVar.socketServer.sendUnbindUserGameNode(user.clientName, user.uid);
+            rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: user.clientName }, user.uid);
         }
         this._isDestroy = true;
     }

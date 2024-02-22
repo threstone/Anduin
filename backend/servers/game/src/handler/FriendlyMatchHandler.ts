@@ -38,11 +38,11 @@ export class FriendlyMatchHandler extends BaseHandler {
         }
 
         let bindResult = true;
-        bindResult = bindResult && await GlobalVar.socketServer.callBindUserGameNode(clientName, uid);
-        bindResult = bindResult && await GlobalVar.socketServer.callBindUserGameNode(friendClientName, msg.targetUid);
+        bindResult = bindResult && await rpc.gate.gameRemote.callBindUserGameNode({ type: 1, nodeId: clientName }, uid, serverConfig.nodeId);
+        bindResult = bindResult && await rpc.gate.gameRemote.callBindUserGameNode({ type: 1, nodeId: friendClientName }, msg.targetUid, serverConfig.nodeId);
         if (!bindResult) {
-            GlobalVar.socketServer.sendUnbindUserGameNode(clientName, uid);
-            GlobalVar.socketServer.sendUnbindUserGameNode(friendClientName, msg.targetUid);
+            rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: clientName }, uid);
+            rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: friendClientName }, msg.targetUid);
             replay.code = 4;
             this.sendMsg(clientName, uid, replay);
             return;

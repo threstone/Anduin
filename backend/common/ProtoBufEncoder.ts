@@ -167,6 +167,9 @@ export class ProtoBufEncoder {
 			logger.error("protobuf decode err! buffer长度小于8")
 			return
 		}
+		if (Buffer.isBuffer(buffer) === false) {
+			buffer = Buffer.from(buffer);
+		}
 		const cmd = buffer.readInt32BE(offset)
 		const scmd = buffer.readInt32BE(offset + 4)
 		const messageIndex = cmd + "_" + scmd

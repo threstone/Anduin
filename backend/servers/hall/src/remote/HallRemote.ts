@@ -3,11 +3,11 @@ import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 
 const logger = getLogger(startupParam?.nodeId);
 export class HallRemote {
-    async reqRegister(clientName: string, buff: Buffer): Promise<Buffer> {
+    reqRegister(clientName: string, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientName, null, buff);
     }
 
-    async reqLogin(clientName: string, buff: Buffer): Promise<Buffer> {
+    reqLogin(clientName: string, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(clientName, null, buff);
     }
 

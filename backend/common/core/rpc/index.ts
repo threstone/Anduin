@@ -52,9 +52,9 @@ declare class Relation {
 }
 
 declare class Game_GameRemote {
-    static callUserOffline(routeOption: RpcRouterOptions, clientName: string, uid: number): Promise<void>;
-    static sendUserOffline(routeOption: RpcRouterOptions, clientName: string, uid: number): void;
-    static callTransferToGame(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Promise<Buffer>>;
+    static callUserOffline(routeOption: RpcRouterOptions, uid: number): Promise<void>;
+    static sendUserOffline(routeOption: RpcRouterOptions, uid: number): void;
+    static callTransferToGame(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
     static sendTransferToGame(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
 }
 
@@ -68,20 +68,18 @@ declare class Gate_CommonRemote {
 }
 
 declare class Gate_GameRemote {
-    static callBindUserGameNode(routeOption: RpcRouterOptions, uid: number, nodeId: string): Promise<Promise<boolean>>;
+    static callBindUserGameNode(routeOption: RpcRouterOptions, uid: number, nodeId: string): Promise<boolean>;
     static sendBindUserGameNode(routeOption: RpcRouterOptions, uid: number, nodeId: string): void;
-    static callUnbindUserGameNode(routeOption: RpcRouterOptions, uid: number): Promise<Promise<boolean>>;
+    static callUnbindUserGameNode(routeOption: RpcRouterOptions, uid: number): Promise<boolean>;
     static sendUnbindUserGameNode(routeOption: RpcRouterOptions, uid: number): void;
-    static callBindToGame(routeOption: RpcRouterOptions, uid: number, nodeId: string): Promise<void>;
-    static sendBindToGame(routeOption: RpcRouterOptions, uid: number, nodeId: string): void;
 }
 
 declare class Hall_HallRemote {
-    static callReqRegister(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Promise<Buffer>>;
+    static callReqRegister(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Buffer>;
     static sendReqRegister(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): void;
-    static callReqLogin(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Promise<Buffer>>;
+    static callReqLogin(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Buffer>;
     static sendReqLogin(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): void;
-    static callTransferToHall(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Promise<Buffer>>;
+    static callTransferToHall(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
     static sendTransferToHall(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
 }
 
@@ -90,6 +88,6 @@ declare class Relation_UserRemote {
     static sendUserOnline(routeOption: RpcRouterOptions, nodeId: string, uid: number, nick: string): void;
     static callUserOffline(routeOption: RpcRouterOptions, uid: number): Promise<void>;
     static sendUserOffline(routeOption: RpcRouterOptions, uid: number): void;
-    static callTransferToRelation(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Promise<Buffer>>;
+    static callTransferToRelation(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
     static sendTransferToRelation(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
 }

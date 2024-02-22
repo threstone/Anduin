@@ -1,7 +1,6 @@
 
 import { getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
-import { SocketServer } from './SocketServer';
 import { RedisMgr } from '../../../common/redis/RedisMgr';
 import { RedisType } from '../../../common/ConstDefine';
 import { SequelizeRegister } from './SequelizeRegister';
@@ -13,7 +12,6 @@ import { ConfigMgr } from '../../../common/config/ConfigMgr';
 const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
-    public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     private static sequelizeRegister: SequelizeRegister;
     public static dbHelper: DbHelper;
@@ -25,8 +23,6 @@ export class GlobalVar {
 
         //initMsgHandler
         this.initMsgHandler();
-        //init socket server
-        this.socketServer = new SocketServer(startupParam.port || 2001, logger);
         //init db register
         this.sequelizeRegister = new SequelizeRegister(serviceConfig.mysql);
         //init redisMgr

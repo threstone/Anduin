@@ -6,6 +6,6 @@ export class BaseHandler {
         if (!clientName || !uid || !message) {
             return;
         }
-        GlobalVar.socketServer.sendTransferToGate(clientName, uid, ProtoBufEncoder.encode(message));
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: clientName }, uid, ProtoBufEncoder.encode(message));
     }
 }

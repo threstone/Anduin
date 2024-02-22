@@ -231,14 +231,15 @@ export class GameUser {
             return;
         }
         console.log(`send message [${(ProtoBufEncoder as any).protoBufClass.get(message.cmd + "_" + message.scmd).name}] : ${JSON.stringify(message)}`);
-        GlobalVar.socketServer.sendMsg(this.clientName, this.uid, message);
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.clientName }, this.uid, ProtoBufEncoder.encode(message));
+
     }
 
     public sendBuffer(messageBuffer: Buffer) {
         if (this.isOnline === false) {
             return;
         }
-        GlobalVar.socketServer.sendBuffer(this.clientName, this.uid, messageBuffer);
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.clientName }, this.uid, messageBuffer);
     }
 
     /**

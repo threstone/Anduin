@@ -6,19 +6,20 @@ import { RpcMessageType, RpcUtils } from "./RpcUtils";
 let logger: Logger;
 export class RpcClient {
 
-    private static _classMap = new Map<string, any>();
-    private static getRpcFunc(rpcMsg: RpcReqMsg): Function {
+    private static _remoteMap = new Map<string, any>();
+    private static getRemoteObject(rpcMsg: RpcReqMsg): Function {
         try {
-            let remoteClass = this._classMap.get(rpcMsg.className);
-            if (!remoteClass) {
-                remoteClass = require(
+            let remoteObject = this._remoteMap.get(rpcMsg.className);
+            if (!remoteObject) {
+                let remoteClass = require(
                     path.join(
                         __dirname, `../../../servers/${rpcMsg.serverName}/src/remote/${rpcMsg.className}`
                     )
                 )[rpcMsg.className];
-                this._classMap.set(rpcMsg.className, remoteClass);
+                remoteObject = new remoteClass;
+                this._remoteMap.set(rpcMsg.className, remoteObject);
             }
-            return remoteClass.prototype[rpcMsg.funcName];
+            return remoteObject;
         } catch (error) {
             logger.error(`无法找到Remote,${JSON.stringify(rpcMsg)}`);
         }
@@ -107,26 +108,29 @@ export class RpcClient {
     private handleResult(rpcResult: RpcTransferResult) {
         const requestCache = this._requestMap.get(rpcResult.requestId);
         if (!requestCache) return;
+        // 返回值结果如果是buffer,需要单独处理
+        if (rpcResult.result?.type === 'Buffer') {
+            rpcResult.result = Buffer.from(rpcResult.result);
+        }
         requestCache.resolve(rpcResult.result);
         this._requestMap.delete(rpcResult.requestId);
     }
 
     private async handleCall(rpcMsg: RpcReqMsg) {
-        const func = RpcClient.getRpcFunc(rpcMsg);
+        const remote = RpcClient.getRemoteObject(rpcMsg);
         const replay: RpcTransferResult = {
             type: RpcMessageType.result,
             fromNodeId: rpcMsg.fromNodeId,
             requestId: rpcMsg.requestId,
             result: null
         };
-        replay.result = await func(...rpcMsg.args);
+        replay.result = await remote[rpcMsg.funcName](...rpcMsg.args);
         this._socket.send(RpcUtils.encodeResult(replay));
     }
 
     private handleSend(rpcMsg: RpcReqMsg) {
-        console.log('handleSend ', rpcMsg);
-        const func = RpcClient.getRpcFunc(rpcMsg);
-        func(...rpcMsg.args);
+        const remote = RpcClient.getRemoteObject(rpcMsg);
+        remote[rpcMsg.funcName](...rpcMsg.args);
     }
 
     public call(serverName: string, className: string, funcName: string, routeOption: RpcRouterOptions, args?: any[]): Promise<any> {

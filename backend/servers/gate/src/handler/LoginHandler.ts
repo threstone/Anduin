@@ -7,25 +7,21 @@ export class LoginHandler {
         if (socket.isAuthorized) {
             return;
         }
-        const login = GlobalVar.hallConnectorMgr.getAliveConnector();
-        if (!login) {
-            return;
-        }
 
         if (scmd === LoginPto.C_LOGIN.prototype.scmd) {
-            login.callReqLogin(buffer).then((buffer) => {
+            rpc.hall.hallRemote.callReqLogin({}, serverConfig.nodeId, buffer).then((buffer) => {
                 const buf = buffer.slice(8);
                 const msg = LoginPto.S_LOGIN.decode(buf);
                 if (msg.isSuccess) {
                     socket.isAuthorized = true;
                     socket.uid = msg.uid;
                     GlobalVar.socketServer.addSocketToMap(msg.uid, socket);
-                    GlobalVar.relationConnectorMgr.getAliveConnector().sendUserOnline(socket.uid, msg.nick);
+                    rpc.relation.userRemote.sendUserOnline({}, serverConfig.nodeId, socket.uid, msg.nick);
                 }
                 socket.send(buffer);
             });
         } else if (scmd === LoginPto.C_REGISTER.prototype.scmd) {
-            login.callReqRegister(buffer).then((buff) => {
+            rpc.hall.hallRemote.callReqRegister({}, serverConfig.nodeId, buffer).then((buff) => {
                 if (buff) {
                     socket.send(buff);
                 }

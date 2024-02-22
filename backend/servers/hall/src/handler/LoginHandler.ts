@@ -97,7 +97,7 @@ export class LoginHandler extends BaseHandler {
         const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(uid);
         if (oldClient) {
             this.sendTips(oldClient, uid, '您的账号在别处登录了!', 60000);
-            GlobalVar.socketServer.callCloseUserSocket(oldClient, uid);
+            rpc.gate.commonRemote.callCloseUserSocket({ type: 1, nodeId: oldClient }, uid);
         }
 
         replyMsg.isSuccess = true;
@@ -115,7 +115,7 @@ export class LoginHandler extends BaseHandler {
         if (gameName) {
             replyMsg.needReconnect = true;
             process.nextTick(() => {
-                GlobalVar.socketServer.sendBindToGame(clientName, uid, gameName);
+                rpc.gate.gameRemote.sendBindUserGameNode({ type: 1, nodeId: clientName }, uid, gameName)
             });
         }
     }

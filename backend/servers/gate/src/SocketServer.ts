@@ -102,9 +102,9 @@ export class SocketServer {
         /**授权用户 */
         if (socket.isAuthorized) {
             this.socketMap.delete(socket.uid);
-            GlobalVar.relationConnectorMgr.getAliveConnector().sendUserOffline(socket.uid);
+            rpc.relation.userRemote.sendUserOffline({}, socket.uid);
             if (socket.gameNodeId) {
-                GlobalVar.gameConnectorMgr.getConnectorByName(socket.gameNodeId).sendUserOffline(socket.uid);
+                rpc.game.gameRemote.sendUserOffline({ type: 1, nodeId: socket.gameNodeId }, socket.uid);
             }
         }
     }
@@ -141,17 +141,16 @@ export class SocketServer {
         // TODO 改成可配置路由目标,需配置是否需要登录才路由消息(isAuthorized)
         //routing to hall server 
         if (cmd >= 0 && cmd <= 99) {
-            GlobalVar.hallConnectorMgr.getAliveConnector()?.sendTransferToHall(socket.uid, buffer);
+            rpc.hall.hallRemote.sendTransferToHall({}, serverConfig.nodeId, socket.uid, buffer)
         }//routing to relation server 
         else if (cmd === 100) {
-            GlobalVar.relationConnectorMgr.getAliveConnector().sendTransferToRelation(socket.uid, buffer);
+            rpc.relation.userRemote.sendTransferToRelation({}, serverConfig.nodeId, socket.uid, buffer)
         }//routing to game server 
         else if (cmd >= 200) {
             if (!socket.gameNodeId) {
-                GlobalVar.gameConnectorMgr.getAliveConnector()?.sendTransferToGame(socket.uid, buffer);
+                rpc.game.gameRemote.sendTransferToGame({}, serverConfig.nodeId, socket.uid, buffer);
             } else {
-                const connector = GlobalVar.gameConnectorMgr.getConnectorByName(socket.gameNodeId);
-                connector.sendTransferToGame(socket.uid, buffer);
+                rpc.game.gameRemote.sendTransferToGame({ type: 1, nodeId: socket.gameNodeId }, serverConfig.nodeId, socket.uid, buffer);
             }
         } else {
             this.logger.error(`unknow routing cmd${cmd}`);

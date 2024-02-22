@@ -1,6 +1,5 @@
 import { getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
-import { SocketServer } from './core/SocketServer';
 import { RedisMgr } from '../../../common/redis/RedisMgr';
 import { RedisType } from '../../../common/ConstDefine';
 import * as allProto from '../../../common/CommonProto';
@@ -14,7 +13,6 @@ import { BuffMgr } from './core/BuffMgr';
 const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
-    public static socketServer: SocketServer;
     public static redisMgr: RedisMgr;
     public static tableMgr: TableMgr;
     public static userMgr: UserMgr;
@@ -41,9 +39,6 @@ export class GlobalVar {
 
         this.tableMgr = new TableMgr();
         this.tableMgr.startLogic();
-
-        //init socket server
-        this.socketServer = new SocketServer(startupParam.port || 3001, logger);
     }
 
     /**
