@@ -2,8 +2,6 @@
 import {  getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { SocketServer } from './SocketServer';
-import { ConnectorMgr } from '../../../common/rpc/ConntctorMgr';
-import { ServersConfigMgr } from '../../../common/core/ServersConfigMgr';
 
 const logger = getLogger(startupParam?.nodeId);
 
