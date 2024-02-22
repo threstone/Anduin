@@ -181,9 +181,9 @@ export class GameHandler extends BaseHandler {
     static C_RECONNECT(user: GameUser, table: GameTable, msg: GamePto.C_ATTACK) {
         //说明没有取到user的话说明进程中没有对应的信息了,取消绑定
         if (typeof (user) === 'string' && typeof (table) === 'number') {
-            const clientName: string = user;
+            const gateNodeId: string = user;
             const uid = table;
-            rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: clientName }, uid);
+            rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: gateNodeId }, uid);
             return;
         }
 

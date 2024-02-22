@@ -12,16 +12,16 @@ const DeckCardsNum = 40;
 const logger = getLogger(startupParam?.nodeId);
 export class CardsHandler extends BaseHandler {
     //请求卡牌收藏数据
-    static async C_REQ_CARDS_INFO(clientName: string, uid: number) {
+    static async C_REQ_CARDS_INFO(gateNodeId: string, uid: number) {
         const response = new CardsPto.S_CARDS_INFO();
         const user = await UserModel.findOne({ attributes: ['cardsInfo', 'decks'], where: { uid } });
         response.cardInfos = user.cardsInfo;
         response.deckList = user.decks;
-        this.sendMsg(clientName, uid, response);
+        this.sendMsg(gateNodeId, uid, response);
     }
 
     //请求制作卡牌
-    static async C_MAKE_CARD(clientName: string, uid: number, msg: CardsPto.C_MAKE_CARD) {
+    static async C_MAKE_CARD(gateNodeId: string, uid: number, msg: CardsPto.C_MAKE_CARD) {
         const replay = new CardsPto.S_MAKE_CARD();
         replay.cardId = msg.cardId;
         replay.code = 1;
@@ -30,7 +30,7 @@ export class CardsHandler extends BaseHandler {
         const lockId = `lock${uid}`;
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
-            this.sendMsg(clientName, uid, replay);
+            this.sendMsg(gateNodeId, uid, replay);
             return;
         }
 
@@ -64,11 +64,11 @@ export class CardsHandler extends BaseHandler {
         }
         //解锁
         redis.unlock(lockId);
-        this.sendMsg(clientName, uid, replay);
+        this.sendMsg(gateNodeId, uid, replay);
     }
 
     //请求分解卡牌
-    static async C_DISASSEMBLE_CARD(clientName: string, uid: number, msg: CardsPto.C_DISASSEMBLE_CARD) {
+    static async C_DISASSEMBLE_CARD(gateNodeId: string, uid: number, msg: CardsPto.C_DISASSEMBLE_CARD) {
         const replay = new CardsPto.S_DISASSEMBLE_CARD();
         replay.cardId = msg.cardId;
         replay.code = 2;
@@ -78,7 +78,7 @@ export class CardsHandler extends BaseHandler {
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
             replay.code = 1;
-            this.sendMsg(clientName, uid, replay);
+            this.sendMsg(gateNodeId, uid, replay);
             return;
         }
 
@@ -107,20 +107,20 @@ export class CardsHandler extends BaseHandler {
         }
         //解锁
         redis.unlock(lockId);
-        this.sendMsg(clientName, uid, replay);
+        this.sendMsg(gateNodeId, uid, replay);
     }
 
     //保存卡组
-    static async C_SAVE_CARDS(clientName: string, uid: number, msg: CardsPto.C_SAVE_CARDS) {
+    static async C_SAVE_CARDS(gateNodeId: string, uid: number, msg: CardsPto.C_SAVE_CARDS) {
         if (this.checkDeck(msg.deck) === false) {
-            this.sendTips(clientName, uid, '保存卡组失败,卡组非法!');
+            this.sendTips(gateNodeId, uid, '保存卡组失败,卡组非法!');
             return;
         }
         const redis = GlobalVar.redisMgr.getClient(RedisType.userInfo);
         const lockId = `lock${uid}`;
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
-            this.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
+            this.sendTips(gateNodeId, uid, '保存卡组失败,请稍后再试!');
             return;
         }
 
@@ -151,17 +151,17 @@ export class CardsHandler extends BaseHandler {
 
         const replay = new CardsPto.S_SAVE_DECK();
         replay.deck = msg.deck;
-        this.sendMsg(clientName, uid, replay);
+        this.sendMsg(gateNodeId, uid, replay);
     }
 
 
     /**请求删除卡组 */
-    static async C_DELETE_DECK(clientName: string, uid: number, msg: CardsPto.C_DELETE_DECK) {
+    static async C_DELETE_DECK(gateNodeId: string, uid: number, msg: CardsPto.C_DELETE_DECK) {
         const redis = GlobalVar.redisMgr.getClient(RedisType.userInfo);
         const lockId = `lock${uid}`;
         //已经上锁了
         if (!(await redis.lock(lockId, 60))) {
-            this.sendTips(clientName, uid, '保存卡组失败,请稍后再试!');
+            this.sendTips(gateNodeId, uid, '保存卡组失败,请稍后再试!');
             return;
         }
 
@@ -182,7 +182,7 @@ export class CardsHandler extends BaseHandler {
         GlobalVar.dbHelper.syncUserInfoToMysql(uid, user);
         //解锁
         redis.unlock(lockId);
-        this.sendMsg(clientName, uid, reply);
+        this.sendMsg(gateNodeId, uid, reply);
     }
 
     /**通过品质确定制作卡牌的消耗 */

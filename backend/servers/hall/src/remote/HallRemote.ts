@@ -3,15 +3,15 @@ import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 
 const logger = getLogger(startupParam?.nodeId);
 export class HallRemote {
-    reqRegister(clientName: string, buff: Buffer): Promise<Buffer> {
-        return this.transferToHall(clientName, null, buff);
+    reqRegister(gateNodeId: string, buff: Buffer): Promise<Buffer> {
+        return this.transferToHall(gateNodeId, null, buff);
     }
 
-    reqLogin(clientName: string, buff: Buffer): Promise<Buffer> {
-        return this.transferToHall(clientName, null, buff);
+    reqLogin(gateNodeId: string, buff: Buffer): Promise<Buffer> {
+        return this.transferToHall(gateNodeId, null, buff);
     }
 
-    async transferToHall(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
+    async transferToHall(gateNodeId: string, uid: number, buff: Buffer): Promise<Buffer> {
         const msg = ProtoBufEncoder.decode(buff, 0);
         if (!msg) {
             logger.error(`无法解析的数据 buff:${buff}`);
@@ -22,6 +22,6 @@ export class HallRemote {
             logger.error(`未知的协议 cmd:${msg.cmd} scmd:${msg.scmd}`);
             return;
         }
-        return await fun(clientName, uid, msg);
+        return await fun(gateNodeId, uid, msg);
     }
 }

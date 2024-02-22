@@ -26,7 +26,6 @@ declare interface RpcRouterOptions {
     nodeId?: string;
 }
         
-
 declare class rpc {
     static game: typeof Game;
     static gate: typeof Gate;
@@ -54,8 +53,8 @@ declare class Relation {
 declare class Game_GameRemote {
     static callUserOffline(routeOption: RpcRouterOptions, uid: number): Promise<void>;
     static sendUserOffline(routeOption: RpcRouterOptions, uid: number): void;
-    static callTransferToGame(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
-    static sendTransferToGame(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
+    static callTransferToGame(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): Promise<Buffer>;
+    static sendTransferToGame(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): void;
 }
 
 declare class Gate_CommonRemote {
@@ -75,12 +74,12 @@ declare class Gate_GameRemote {
 }
 
 declare class Hall_HallRemote {
-    static callReqRegister(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Buffer>;
-    static sendReqRegister(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): void;
-    static callReqLogin(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): Promise<Buffer>;
-    static sendReqLogin(routeOption: RpcRouterOptions, clientName: string, buff: Buffer): void;
-    static callTransferToHall(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
-    static sendTransferToHall(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
+    static callReqRegister(routeOption: RpcRouterOptions, gateNodeId: string, buff: Buffer): Promise<Buffer>;
+    static sendReqRegister(routeOption: RpcRouterOptions, gateNodeId: string, buff: Buffer): void;
+    static callReqLogin(routeOption: RpcRouterOptions, gateNodeId: string, buff: Buffer): Promise<Buffer>;
+    static sendReqLogin(routeOption: RpcRouterOptions, gateNodeId: string, buff: Buffer): void;
+    static callTransferToHall(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): Promise<Buffer>;
+    static sendTransferToHall(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): void;
 }
 
 declare class Relation_UserRemote {
@@ -88,6 +87,6 @@ declare class Relation_UserRemote {
     static sendUserOnline(routeOption: RpcRouterOptions, nodeId: string, uid: number, nick: string): void;
     static callUserOffline(routeOption: RpcRouterOptions, uid: number): Promise<void>;
     static sendUserOffline(routeOption: RpcRouterOptions, uid: number): void;
-    static callTransferToRelation(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): Promise<Buffer>;
-    static sendTransferToRelation(routeOption: RpcRouterOptions, clientName: string, uid: number, buff: Buffer): void;
+    static callTransferToRelation(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): Promise<Buffer>;
+    static sendTransferToRelation(routeOption: RpcRouterOptions, gateNodeId: string, uid: number, buff: Buffer): void;
 }

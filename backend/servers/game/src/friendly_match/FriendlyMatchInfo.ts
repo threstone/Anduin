@@ -7,28 +7,28 @@ export class FriendlyMatchInfo extends GameMatchInfo {
 
     endTime: number
 
-    constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number, endTime: number) {
-        super(souceClient, souceUid, targetClient, targetUid);
+    constructor(souceGateNode: string, souceUid: number, targetGateNode: string, targetUid: number, endTime: number) {
+        super(souceGateNode, souceUid, targetGateNode, targetUid);
         this.endTime = endTime;
     }
 
     destroy() {
         //unbind
-        rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: this.souceUser.clientName }, this.souceUser.uid);
-        rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: this.targetUser.clientName }, this.targetUser.uid);
+        rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: this.souceUser.gateNodeId }, this.souceUser.uid);
+        rpc.gate.gameRemote.sendUnbindUserGameNode({ type: 1, nodeId: this.targetUser.gateNodeId }, this.targetUser.uid);
         //send stop message to user
         const stopMsg = new FriendlyMatchPto.S_MATCH_STOP();
         const stopBuffer = ProtoBufEncoder.encode(stopMsg);
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.souceUser.clientName }, this.souceUser.uid, stopBuffer);
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.targetUser.clientName }, this.targetUser.uid, stopBuffer);
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.souceUser.gateNodeId }, this.souceUser.uid, stopBuffer);
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.targetUser.gateNodeId }, this.targetUser.uid, stopBuffer);
     }
 
     sendToSource(message: IGameMessage) {
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.souceUser.clientName }, this.souceUser.uid, ProtoBufEncoder.encode(message));
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.souceUser.gateNodeId }, this.souceUser.uid, ProtoBufEncoder.encode(message));
     }
 
     sendToTarget(message: IGameMessage) {
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.targetUser.clientName }, this.targetUser.uid, ProtoBufEncoder.encode(message));
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.targetUser.gateNodeId }, this.targetUser.uid, ProtoBufEncoder.encode(message));
     }
 
     isComplete() {

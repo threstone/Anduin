@@ -4,7 +4,7 @@ import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
 export class ChatHandler extends BaseHandler {
-    static C_SEND_MESSAGE(clientName: string, uid: number, msg: ChatPto.C_SEND_MESSAGE) {
+    static C_SEND_MESSAGE(gateNodeId: string, uid: number, msg: ChatPto.C_SEND_MESSAGE) {
         if (msg.msg.length > 128) {
             return;
         }

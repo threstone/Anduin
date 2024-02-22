@@ -4,9 +4,9 @@ export class GameMatchInfo {
     souceUser: MatchUser;
     targetUser: MatchUser;
 
-    constructor(souceClient: string, souceUid: number, targetClient: string, targetUid: number) {
-        this.souceUser = new MatchUser(souceClient, souceUid);
-        this.targetUser = new MatchUser(targetClient, targetUid);
+    constructor(souceGateNode: string, souceUid: number, targetGateNode: string, targetUid: number) {
+        this.souceUser = new MatchUser(souceGateNode, souceUid);
+        this.targetUser = new MatchUser(targetGateNode, targetUid);
     }
 
     public setDeck(uid: number, deck: CardsPto.Deck) {
@@ -35,12 +35,12 @@ export class GameMatchInfo {
 
 export class MatchUser {
     uid: number
-    clientName: string
+    gateNodeId: string
     nick: string
     deck: CardsPto.Deck
 
-    constructor(clientName: string, uid: number) {
+    constructor(gateNodeId: string, uid: number) {
         this.uid = uid;
-        this.clientName = clientName;
+        this.gateNodeId = gateNodeId;
     }
 }

@@ -25,8 +25,8 @@ export class FriendlyMatchInfoMgr {
         return this._map.get(uid);
     }
 
-    regFriendlyMatchInfo(clientName: string, uid: number, targetClient: string, targetUid: number, endTime: number) {
-        const matchInfo = new FriendlyMatchInfo(clientName, uid, targetClient, targetUid, endTime);
+    regFriendlyMatchInfo(gateNodeId: string, uid: number, targetClient: string, targetUid: number, endTime: number) {
+        const matchInfo = new FriendlyMatchInfo(gateNodeId, uid, targetClient, targetUid, endTime);
         this._map.set(uid, matchInfo);
         this._map.set(targetUid, matchInfo);
         return matchInfo;

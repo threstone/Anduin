@@ -65,9 +65,3 @@ declare interface ILog {
     fatal(...args: any[]): void
     log(...args: any[]): void
 }
-
-declare interface ISession {
-    clientName: string
-    uid: number
-    sendMsg(message: IGameMessage): void
-}

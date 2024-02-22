@@ -15,7 +15,7 @@ export class GameRemote {
         }
     }
 
-    transferToGame(clientName: string, uid: number, buff: Buffer): Promise<Buffer> {
+    transferToGame(gateNodeId: string, uid: number, buff: Buffer): Promise<Buffer> {
         const msg = ProtoBufEncoder.decode(buff, 0);
         const fun = ProtoBufEncoder.getHandlerFunction(msg.cmd, msg.scmd);
         if (!fun) {
@@ -27,7 +27,7 @@ export class GameRemote {
             if (user) {
                 return fun(user, user.table, msg);
             }
-            return fun(clientName, uid, msg);
+            return fun(gateNodeId, uid, msg);
         } catch (error) {
             if (user?.table) {
                 user.table.destroy(true);

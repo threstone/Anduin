@@ -11,7 +11,7 @@ import { BaseHandler } from './BaseHandler';
 const logger = getLogger(startupParam?.nodeId);
 export class LoginHandler extends BaseHandler {
 
-    static async C_LOGIN(clientName: string, uid: number, msg: LoginPto.C_LOGIN) {
+    static async C_LOGIN(gateNodeId: string, uid: number, msg: LoginPto.C_LOGIN) {
         if (!msg.account || !msg.password || msg.account.length > 16 || msg.password.length > 32) {
             return;
         }
@@ -21,7 +21,7 @@ export class LoginHandler extends BaseHandler {
         if (!userInfo) {
             replyMsg.isSuccess = false;
         } else {
-            await this.onLoginSuccess(clientName, userInfo, replyMsg);
+            await this.onLoginSuccess(gateNodeId, userInfo, replyMsg);
         }
         return ProtoBufEncoder.encode(replyMsg);
     }
@@ -74,8 +74,8 @@ export class LoginHandler extends BaseHandler {
             }).catch((err) => {
                 logger.error(`C_FRIEND_INFO ${uid}获取用户昵称出错${err}`);
             });
-            const onlineInfoPromise = GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${friendUId}`).then((friendClientName) => {
-                if (friendClientName) {
+            const onlineInfoPromise = GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${friendUId}`).then((friendGateNode) => {
+                if (friendGateNode) {
                     friendInfo.isOnline = true;
                 }
             }).catch((err) => {
@@ -91,7 +91,7 @@ export class LoginHandler extends BaseHandler {
         await Promise.all(promArr);
     }
 
-    private static async onLoginSuccess(clientName: string, userInfo: UserModel, replyMsg: LoginPto.S_LOGIN) {
+    private static async onLoginSuccess(gateNodeId: string, userInfo: UserModel, replyMsg: LoginPto.S_LOGIN) {
         const uid = userInfo.uid;
         //如果玩家在线,把旧的玩家踢掉
         const oldClient = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(uid);
@@ -107,7 +107,7 @@ export class LoginHandler extends BaseHandler {
 
         //设置玩家信息
         GlobalVar.redisMgr.getClient(RedisType.userInfo).hmset(uid, (userInfo as any).dataValues, -1);
-        GlobalVar.redisMgr.getClient(RedisType.userGate).setData(uid, `${clientName}`, -1);
+        GlobalVar.redisMgr.getClient(RedisType.userGate).setData(uid, `${gateNodeId}`, -1);
         await this.initFriendInfo(uid, replyMsg);
 
         //如果玩家在游戏中提示玩家重连
@@ -115,7 +115,7 @@ export class LoginHandler extends BaseHandler {
         if (gameName) {
             replyMsg.needReconnect = true;
             process.nextTick(() => {
-                rpc.gate.gameRemote.sendBindUserGameNode({ type: 1, nodeId: clientName }, uid, gameName)
+                rpc.gate.gameRemote.sendBindUserGameNode({ type: 1, nodeId: gateNodeId }, uid, gameName)
             });
         }
     }

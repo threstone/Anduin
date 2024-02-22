@@ -7,7 +7,7 @@ import { BaseHandler } from './BaseHandler';
 
 export class FriendHandler extends BaseHandler {
     //请求添加好友
-    static async C_ADD_FRIEND(clientName: string, uid: number, msg: FriendPto.C_ADD_FRIEND) {
+    static async C_ADD_FRIEND(gateNodeId: string, uid: number, msg: FriendPto.C_ADD_FRIEND) {
         const res = new FriendPto.S_ADD_FRIEND_REQ();
         if (!msg.uid) {
             //缺少uid
@@ -29,23 +29,23 @@ export class FriendHandler extends BaseHandler {
             if (await AddFriendRecordModel.recordAddFreind(uid, msg.uid)) {
                 res.code = 0;
                 //判断对方是否在线,在线就通知对方有人加你
-                const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${msg.uid}`);
-                if (friendClientName) {
+                const friendGateNode = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${msg.uid}`);
+                if (friendGateNode) {
                     let tips = new FriendPto.S_ADD_FRIEND();
                     tips.user = new FriendPto.Friend();
                     tips.user.uid = uid;
                     tips.user.nick = await GlobalVar.dbHelper.getUserInfoByKey(uid, 'nick');
-                    this.sendMsg(friendClientName, msg.uid, tips);
+                    this.sendMsg(friendGateNode, msg.uid, tips);
                 }
             } else {
                 res.code = 5;//请输入正确的id
             }
         }
-        this.sendMsg(clientName, uid, res);
+        this.sendMsg(gateNodeId, uid, res);
     }
 
     //同意或者拒绝好友请求
-    static async C_ADD_FRIEND_REQ_RESULT(clientName: string, uid: number, msg: FriendPto.C_ADD_FRIEND_REQ_RESULT) {
+    static async C_ADD_FRIEND_REQ_RESULT(gateNodeId: string, uid: number, msg: FriendPto.C_ADD_FRIEND_REQ_RESULT) {
         if (!msg.uid) {
             return;
         }
@@ -69,8 +69,8 @@ export class FriendHandler extends BaseHandler {
             GlobalVar.redisMgr.getClient(RedisType.userRelation).sadd(targetUid, uid);
 
             //判断对方是否在线,在线就通知对方
-            const friendClientName = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${targetUid}`);
-            if (friendClientName) {
+            const friendGateNode = await GlobalVar.redisMgr.getClient(RedisType.userGate).getData(`${targetUid}`);
+            if (friendGateNode) {
                 res.friend.isOnline = true;
                 const notice = new FriendPto.S_FRIEND_CHANGE();
                 notice.isNewFriend = true;
@@ -78,9 +78,9 @@ export class FriendHandler extends BaseHandler {
                 notice.friend.isOnline = true;
                 notice.friend.uid = uid;
                 notice.friend.nick = await GlobalVar.dbHelper.getUserInfoByKey(uid, 'nick');
-                this.sendMsg(friendClientName, targetUid, notice);
+                this.sendMsg(friendGateNode, targetUid, notice);
             }
-            this.sendMsg(clientName, uid, res);
+            this.sendMsg(gateNodeId, uid, res);
         }
         AddFriendRecordModel.destroy({ where: { target_uid: uid, from_uid: targetUid } });
     }

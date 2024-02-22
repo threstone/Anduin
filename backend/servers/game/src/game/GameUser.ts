@@ -13,7 +13,7 @@ import { GameTable } from './GameTable';
 export class GameUser {
 
     uid: number;
-    clientName: string;
+    gateNodeId: string;
     nick: string;
     isOnline: boolean;
 
@@ -105,7 +105,7 @@ export class GameUser {
     replaceIndexes: number[];
 
     constructor(matchUser: MatchUser, table: GameTable) {
-        this.clientName = matchUser.clientName;
+        this.gateNodeId = matchUser.gateNodeId;
         this.uid = matchUser.uid;
         this._table = table;
         this.isOnline = true;
@@ -231,7 +231,7 @@ export class GameUser {
             return;
         }
         console.log(`send message [${(ProtoBufEncoder as any).protoBufClass.get(message.cmd + "_" + message.scmd).name}] : ${JSON.stringify(message)}`);
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.clientName }, this.uid, ProtoBufEncoder.encode(message));
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.gateNodeId }, this.uid, ProtoBufEncoder.encode(message));
 
     }
 
@@ -239,7 +239,7 @@ export class GameUser {
         if (this.isOnline === false) {
             return;
         }
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.clientName }, this.uid, messageBuffer);
+        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.gateNodeId }, this.uid, messageBuffer);
     }
 
     /**
