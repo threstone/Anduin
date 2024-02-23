@@ -39,7 +39,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public close(): void {
         super.close();
-        this.entityMap.clear();
+        this.entityMap?.clear();
         this.view.removeChildren();
         this.view.addChild(this.view.bg);
     }

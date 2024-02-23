@@ -11,6 +11,7 @@ class MatchDeckChooseView extends DeckChooseView {
     }
 
     public open(evt: EventData): void {
+        GameSceneView.ins().close();
         super.open();
 
         this.observe('S_FRIEND_DECK_STATUS_CHANGE', this.onFriendChooseStatusChange);
@@ -63,7 +64,7 @@ class MatchDeckChooseView extends DeckChooseView {
 
     private chooseDeckSuccess() {
         TipsView.ins().open('选择成功,等待好友选择卡组', '取消').then((res) => {
-            if(this.isOnStage()){
+            if (this.isOnStage()) {
                 FriendlyMatchModel.ins().C_MATCH_CANCEL_DECK();
             }
         })
@@ -72,8 +73,8 @@ class MatchDeckChooseView extends DeckChooseView {
     private onFriendStatusUpdate(evt: EventData) {
         const friendUid: number = evt.data;
         if (friendUid === FriendlyMatchModel.ins().friendUid && false === FriendModel.ins().isOnline(friendUid)) {
-            TipsView.ins().showTips(`${FriendModel.ins().getFriendNick(friendUid)}离线了!`)
             this.close();
+            TipsView.ins().open(`${FriendModel.ins().getFriendNick(friendUid)}离线了!`,'确认');
             FriendlyMatchModel.ins().C_MATCH_LEAVE();
         }
     }

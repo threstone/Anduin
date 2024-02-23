@@ -7,6 +7,7 @@ class TipsView extends BaseView<BaseUI.UITipsCom> {
     }
 
     public open(text: string, btnText: string = '确定'): Promise<boolean> {
+        this.close(false);
         return new Promise((resolve) => {
             this.view.btn.describe.text = btnText;
             super.open();
