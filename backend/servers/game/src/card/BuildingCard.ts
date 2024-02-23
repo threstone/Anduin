@@ -173,7 +173,9 @@ export class BuildingCard extends EventCard {
         next();
         //死亡了
         if (this.getHp() <= 0) {
-            this.emit(EventType.Dead, damageTarget, damageSource)
+            process.nextTick(() => {
+                this.emit(EventType.Dead, damageTarget, damageSource);
+            });
         }
     }
 
