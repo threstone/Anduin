@@ -1,7 +1,5 @@
-import { getLogger } from "log4js";
 import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 import { GlobalVar } from "../GlobalVar";
-const logger = getLogger(startupParam?.nodeId);
 export class GameRemote {
     userOffline(uid: number): void {
         const user = GlobalVar.userMgr.getUser(uid);

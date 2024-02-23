@@ -1,6 +1,4 @@
-import { getLogger, Logger } from 'log4js';
 import * as ChildProcess from 'child_process';
-let logger: Logger;
 export class BaseWorker {
 
     protected _execPath: string;
@@ -12,7 +10,6 @@ export class BaseWorker {
 
 
     constructor(execPath: string, serverConfig: ServerConfig) {
-        logger = getLogger(startupParam?.nodeId);
         this._execPath = execPath;
         this.serverConfig = serverConfig;
     }

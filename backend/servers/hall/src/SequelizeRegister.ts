@@ -2,9 +2,7 @@ import { BaseSequelize } from '../../../common/sequelize/BaseSequelize';
 import { UserModel } from '../../../common/sequelize/model/UserModel';
 import { FriendModel } from '../../../common/sequelize/model/FriendModel';
 import { AddFriendRecordModel } from '../../../common/sequelize/model/AddFriendRecord';
-import { getLogger } from 'log4js';
 
-const logger = getLogger(startupParam?.nodeId);
 export class SequelizeRegister extends BaseSequelize {
     constructor(config: IMysqlOption) {
         super({

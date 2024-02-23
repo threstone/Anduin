@@ -1,8 +1,6 @@
 
-import { getLogger } from 'log4js';
 import { NodeMgr } from './NodeMgr';
 import { CommonServer } from './CommonServer';
-const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
 

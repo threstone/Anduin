@@ -1,12 +1,10 @@
-import { getLogger, configure } from "log4js";
 import { ServerInit } from "../ServerInit";
 import * as loggerConfig from './config/log4js.json';
 import * as WS from "ws"
 import { RpcUtils } from "./RpcUtils";
 
 ServerInit.init();
-configure(loggerConfig);
-const logger = getLogger(startupParam.nodeId);
+ServerInit.initLogger(loggerConfig)
 class RpcServer {
 
     private _serverMapList = new Map<string, RpcSession[]>();

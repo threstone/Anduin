@@ -2,10 +2,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { CommonUtils } from '../../CommonUtils';
-import { getLogger, Logger } from 'log4js';
 import { BaseWorker } from '../../master/src/BaseWorker';
 import { RpcClient } from './RpcClient';
-let logger: Logger;
 export class RpcManager {
 
     private static _index: number = 0;
@@ -14,8 +12,6 @@ export class RpcManager {
     private static _serverRemoteMap: Map<string, Map<string, any>>;
 
     static init() {
-        logger = getLogger(startupParam?.nodeId);
-
         this.doMasterTask();
         this.initRpcModule();
         this.initRpcClient();

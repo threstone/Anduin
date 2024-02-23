@@ -1,10 +1,8 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
 import * as BodyParser from 'koa-bodyparser';
-import { getLogger } from 'log4js';
 import { GlobalVar } from './master';
 
-const logger = getLogger(startupParam?.nodeId);
 export class CommonServer {
     constructor() {
         const port = serversConfigMap.get('master')?.port || 1000;

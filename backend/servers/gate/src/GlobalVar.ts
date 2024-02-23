@@ -1,9 +1,6 @@
  
-import {  getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { SocketServer } from './SocketServer';
-
-const logger = getLogger(startupParam?.nodeId);
 
 export class GlobalVar {
 

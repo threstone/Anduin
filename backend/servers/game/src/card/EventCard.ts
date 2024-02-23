@@ -1,4 +1,3 @@
-import { getLogger } from "log4js";
 import { GamePto } from "../../../../common/CommonProto";
 import { CardsPto } from "../../../../common/CommonProto";
 import { EventData, EventType } from "../game/EventDefine";
@@ -7,7 +6,6 @@ import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { BaseCard } from "./BaseCard";
 
-const logger = getLogger(startupParam?.nodeId);
 /**event card用hp来决定持续回合数 */
 export class EventCard extends BaseCard {
 

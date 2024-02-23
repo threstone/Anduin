@@ -1,8 +1,6 @@
-import { getLogger } from "log4js";
 import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 import { GlobalVar } from "../GlobalVar";
 
-const logger = getLogger(startupParam?.nodeId);
 export class UserRemote {
     userOnline(nodeId: string, uid: number, nick: string): void {
         //玩家上线

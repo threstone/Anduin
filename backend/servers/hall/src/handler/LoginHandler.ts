@@ -1,4 +1,3 @@
-import { getLogger } from 'log4js';
 import { RedisType } from '../../../../common/ConstDefine';
 import { ProtoBufEncoder } from '../../../../common/ProtoBufEncoder';
 import { AddFriendRecordModel } from '../../../../common/sequelize/model/AddFriendRecord';
@@ -8,7 +7,6 @@ import { FriendPto, LoginPto } from '../../../../common/CommonProto';
 import { GlobalVar } from '../GlobalVar';
 import { BaseHandler } from './BaseHandler';
 
-const logger = getLogger(startupParam?.nodeId);
 export class LoginHandler extends BaseHandler {
 
     static async C_LOGIN(gateNodeId: string, uid: number, msg: LoginPto.C_LOGIN) {

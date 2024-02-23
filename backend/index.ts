@@ -12,6 +12,9 @@ declare var serversConfigMap: Map<string, ServerConfig>;
 declare var serverConfig: ServerConfig;
 /** 全局时间对象 */
 declare var eventEmitter: NodeJS.EventEmitter;
+/** 全局logger */
+declare var logger: ILog;
+
 //游戏封包的结构
 declare interface IGameMessage {
     cmd: number

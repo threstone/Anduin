@@ -1,5 +1,4 @@
 
-import { getLogger } from 'log4js';
 import { ProtoBufEncoder } from '../../../common/ProtoBufEncoder';
 import { RedisMgr } from '../../../common/redis/RedisMgr';
 import { RedisType } from '../../../common/ConstDefine';
@@ -9,7 +8,6 @@ import * as allProto from '../../../common/CommonProto';
 import * as path from 'path';
 import { ConfigMgr } from '../../../common/config/ConfigMgr';
 
-const logger = getLogger(startupParam?.nodeId);
 export class GlobalVar {
 
     public static redisMgr: RedisMgr;

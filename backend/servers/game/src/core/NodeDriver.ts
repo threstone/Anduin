@@ -1,10 +1,8 @@
-import { getLogger } from 'log4js';
 import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
 import { BaseNode } from '../game/node/BaseNode';
 import { NodeDriverResult } from '../game/GameDefine';
 
-const logger = getLogger(startupParam?.nodeId);
 export class NodeDriver {
 
     private _nodeIndex: number

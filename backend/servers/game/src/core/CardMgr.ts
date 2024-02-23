@@ -1,7 +1,6 @@
 import * as path from 'path';
 import { CommonUtils } from "../../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
-import { getLogger } from "log4js";
 import { GlobalVar } from '../GlobalVar';
 import { CardsPto } from '../../../../common/CommonProto';
 import { BuildingCard } from '../card/BuildingCard';
@@ -11,7 +10,6 @@ import { MagicCard } from '../card/MagicCard';
 import { HeroCard } from '../card/HeroCard';
 import { GameTable } from '../game/GameTable';
 
-const logger = getLogger(startupParam?.nodeId);
 export class CardMgr {
 
     private _cardClassMap: Map<number, typeof BaseCard>;

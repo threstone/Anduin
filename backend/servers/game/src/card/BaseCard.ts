@@ -1,4 +1,3 @@
-import { getLogger } from "log4js";
 import { GamePto } from "../../../../common/CommonProto";
 import { CardsPto } from "../../../../common/CommonProto";
 import { CardInterface } from "../../../../common/I";
@@ -7,7 +6,6 @@ import { GameTable } from "../game/GameTable";
 import { GameUser } from "../game/GameUser";
 import { GlobalVar } from "../GlobalVar";
 
-const logger = getLogger(startupParam?.nodeId);
 export class BaseCard implements CardInterface {
 
     uid: number;

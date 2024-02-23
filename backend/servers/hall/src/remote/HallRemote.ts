@@ -1,7 +1,5 @@
-import { getLogger } from "log4js";
 import { ProtoBufEncoder } from "../../../../common/ProtoBufEncoder";
 
-const logger = getLogger(startupParam?.nodeId);
 export class HallRemote {
     reqRegister(gateNodeId: string, buff: Buffer): Promise<Buffer> {
         return this.transferToHall(gateNodeId, null, buff);

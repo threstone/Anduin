@@ -3,13 +3,11 @@ import { CardsPto } from '../../../../common/CommonProto';
 import { BaseHandler } from './BaseHandler';
 import { GlobalVar } from '../GlobalVar';
 import { RedisType } from '../../../../common/ConstDefine';
-import { getLogger } from 'log4js';
 
 //禁止枚举值改为枚举name
 CardsPto.Deck.prototype.toJSON = null;
 
 const DeckCardsNum = 40;
-const logger = getLogger(startupParam?.nodeId);
 export class CardsHandler extends BaseHandler {
     //请求卡牌收藏数据
     static async C_REQ_CARDS_INFO(gateNodeId: string, uid: number) {

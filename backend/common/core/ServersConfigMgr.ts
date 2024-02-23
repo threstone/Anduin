@@ -1,8 +1,6 @@
-import { getLogger, Logger } from 'log4js';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as serversConfig from '../config/servers.json';
-let logger: Logger;
 export class ServersConfigMgr {
 
     private static _watcher: fs.FSWatcher;
@@ -10,7 +8,6 @@ export class ServersConfigMgr {
 
     static init() {
         if (!this._watcher) {
-            logger = getLogger(startupParam?.nodeId);
             this._configFilePath = path.join(__dirname, '../config/servers.json');
             this._watcher = fs.watch(this._configFilePath, () => {
                 logger.info('update servers.json');

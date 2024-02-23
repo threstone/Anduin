@@ -1,9 +1,7 @@
-import { Logger, getLogger } from "log4js";
 import * as WS from "ws";
 import * as path from "path";
 import { RpcMessageType, RpcUtils } from "./RpcUtils";
 
-let logger: Logger;
 export class RpcClient {
 
     private static _remoteMap = new Map<string, any>();
@@ -33,7 +31,6 @@ export class RpcClient {
     private _port: number;
 
     constructor(ip: string, port: number) {
-        logger = getLogger(startupParam.nodeId);
         this._ip = ip;
         this._port = port;
         setInterval(this.clearTimeOutReq.bind(this), 3000);

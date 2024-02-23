@@ -1,4 +1,3 @@
-import { getLogger } from "log4js";
 import { CardsPto } from "../../../../common/CommonProto";
 import { GamePto } from "../../../../common/CommonProto";
 import { BuffData, BuffTypeEnum } from "../buff/BuffDataClass";
@@ -10,7 +9,6 @@ import { GlobalVar } from "../GlobalVar";
 import { BaseCard } from "./BaseCard";
 import { EventCard } from "./EventCard";
 
-const logger = getLogger(startupParam?.nodeId);
 export class BuildingCard extends EventCard {
 
     /**上一次在的位置 */

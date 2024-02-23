@@ -4,12 +4,10 @@ import { BuffEffectiveDefine } from "../game/GameDefine";
 import { GlobalBuff } from "../buff/GlobalBuff";
 import { GameBuff } from "../buff/GameBuff";
 import { PositionBuff } from "../buff/PositionBuff";
-import { getLogger } from "log4js";
 import * as path from "path";
 import { CommonUtils } from "../../../../common/CommonUtils";
 import { BaseCard } from "../card/BaseCard";
 
-const logger = getLogger(startupParam?.nodeId);
 export class BuffMgr {
 
     private _buffMap: Map<number, GameBuff>;
