@@ -9,7 +9,7 @@ export class GlobalVar {
     public static init() { 
         ProtoBufEncoder.init(logger);
         //init socket server
-        this.socketServer = new SocketServer(startupParam.port || 1001, startupParam.maxUser, logger);
+        this.socketServer = new SocketServer(startupParam.port || 1001, startupParam.maxUser);
 
         logger.info('init connector');
     }

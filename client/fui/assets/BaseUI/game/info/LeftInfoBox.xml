@@ -16,7 +16,7 @@
     <group id="n12_h89h" name="healthGroup" xy="120,177" size="38,32" advanced="true"/>
     <text id="n13_h89h" name="powerText" xy="175,62" size="124,17" fontSize="10" color="#ffffff" align="center" autoSize="none" strokeColor="#000000" text="圣堂.单位.人类"/>
     <text id="n14_h89h" name="cardName" xy="175,84" size="124,32" fontSize="22" color="#66ffcc" align="center" autoSize="none" strokeColor="#000000" text="民兵"/>
-    <text id="n15_h89h" name="desc" xy="159,120" size="161,84" fontSize="12" color="#ffff00" autoSize="none" strokeColor="#000000" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
+    <text id="n15_h89h" name="desc" xy="159,120" size="161,84" fontSize="14" color="#ffffff" autoSize="none" bold="true" strokeColor="#000000" text="务农: 回合开始时获得一点费用&#xA;晋升1：将卡牌返回卡组，并从卡组选择一张高一费的单位部署"/>
     <list id="n19_h89h" name="eventList" xy="4,4" size="314,48" layout="flow_hz" overflow="scroll" lineGap="1" colGap="7" align="center" vAlign="middle" autoClearItems="true">
       <item url="ui://yaux2xpoh89h45"/>
       <item url="ui://yaux2xpoh89h45"/>

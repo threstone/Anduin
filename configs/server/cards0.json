@@ -443,5 +443,21 @@
  "effectList":[],
  "movement":2,
  "atkRange":0
+  },
+{
+ "cardId":28,
+ "cardType":3,
+ "type2":1,
+ "detailType":1,
+ "fee":4,
+ "attack":3,
+ "hp":10,
+ "quality":1,
+ "buffs":[],
+ "isDerivation":0,
+ "useCondition":[1,1],
+ "effectList":[0],
+ "movement":0,
+ "atkRange":3
   }
 ]

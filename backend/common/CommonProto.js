@@ -1632,8 +1632,7 @@ $root.CardsPto = (function() {
 
     CardsPto.BuilingType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Base"] = 0;
-        values[valuesById[1] = "Camp"] = 1;
+        values[valuesById[0] = "Camp"] = 0;
         return values;
     })();
 

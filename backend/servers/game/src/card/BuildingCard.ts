@@ -18,6 +18,9 @@ export class BuildingCard extends EventCard {
     public blockX: number;
     public blockY: number;
 
+    public allowAtk: boolean = false;
+    public allowMove: boolean = false;
+
     /**自身的所有buff,包括全局buff、位置buff、普通buff */
     private _buffMap: Map<number, BuffData>;
 
@@ -121,7 +124,7 @@ export class BuildingCard extends EventCard {
     /** 沉默 */
     public handleSilence() {
         this.silenced = true;
-        this._buffMap.forEach((buff) => {
+        this._buffMap?.forEach((buff) => {
             switch (buff.buffType) {
                 case BuffTypeEnum.Normal:
                     GlobalVar.buffMgr.deleteBuff(this, buff);
@@ -206,7 +209,7 @@ export class BuildingCard extends EventCard {
 
         //如果造成伤害方式对方,则对方增加一点费用
         if (damageSource.uid !== this.uid) {
-            const enemyUser = this.table.getOtherUser(damageSource.uid);
+            const enemyUser = this.table.getUser(damageSource.uid);
             //加费用
             if (enemyUser.fee < enemyUser.feeUpperLimit) {
                 enemyUser.fee += 1;
@@ -235,5 +238,60 @@ export class BuildingCard extends EventCard {
             notice.tipsList.push(tips);
         }
         this.table.broadcast(notice);
+    }
+
+    public doAttack(atkEvent: EventData, targetCard: BuildingCard, damageCards: BuildingCard[]) {
+        const user = this.table.getUser(this.uid);
+        const table = this.table;
+        const replay = new GamePto.S_ATTACK();
+
+        // 执行卡牌自身攻击前事件
+        this.emit(atkEvent.changeType(EventType.SelfPreAtk), this, targetCard, damageCards);
+        const firstTarget = damageCards[0];
+        // 受伤事件 返回实际受到的伤害
+        firstTarget.emit(atkEvent.changeType(EventType.Damage), firstTarget, this);
+        const damage = atkEvent.data;
+
+        // 近战攻击会被反击
+        let strikeBackEvent: EventData;
+        if (this.detailType === CardsPto.AtkType.CloseRange) {
+            // 受到卡牌反击的伤害, 近战远程不一样,远程的反击能力稍弱
+            const damageRatio = firstTarget.detailType === CardsPto.AtkType.CloseRange ? GlobalVar.configMgr.common.closeRangeStrikeBackRatio : GlobalVar.configMgr.common.longRangeStrikeBackRatio;
+            const strikeBackDamage = Math.floor(firstTarget.attack * damageRatio);
+            strikeBackEvent = new EventData(EventType.Damage);
+            strikeBackEvent.data = strikeBackDamage;
+            // 受伤事件
+            replay.strikeBackDamage = this.emit(strikeBackEvent, this, firstTarget).data;
+
+        }
+
+        //其他单位扣血
+        for (let index = 1; index < damageCards.length; index++) {
+            const tempCard = damageCards[index];
+            tempCard.incrHp(-damage);
+        }
+
+        //广播卡牌攻击协议
+        replay.uid = user.uid;
+        replay.leastAtkTimes = user.atkTimes;
+        replay.damage = damage;
+        replay.allowAtk = this.allowAtk;
+        replay.from = this;
+        replay.targetList = damageCards;
+        table.broadcast(replay);
+
+        //执行卡牌受伤后事件
+        atkEvent.changeType(EventType.DamageAfter);
+        damageCards.forEach((damgaCard) => {
+            damgaCard.emit(atkEvent, damgaCard, this);
+        })
+
+        if (replay.strikeBackDamage) {
+            // 受伤后事件
+            this.emit(strikeBackEvent.changeType(EventType.DamageAfter), this, firstTarget);
+        }
+
+        //执行卡牌自身攻击后事件
+        this.emit(atkEvent.changeType(EventType.SelfAtkAfter), this, targetCard, damageCards);
     }
 }

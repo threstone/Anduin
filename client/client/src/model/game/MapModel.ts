@@ -54,7 +54,7 @@ class MapModel extends BaseModel {
             const entity = this.entityCards[index];
             if (entity.uid === uid && entity.cardType === CardsPto.CardType.Building) {
                 const cardConfig = CardsModel.ins().getCardConfigById(entity.cardId);
-                if (cardConfig.detailType === CardsPto.BuilingType.Base || cardConfig.detailType === CardsPto.BuilingType.Camp) {
+                if (cardConfig.detailType === CardsPto.BuilingType.Camp) {
                     return true;
                 }
             }
@@ -69,7 +69,7 @@ class MapModel extends BaseModel {
             const entity = this.entityCards[index];
             if (entity.uid === uid && entity.cardType === CardsPto.CardType.Building) {
                 const cardConfig = CardsModel.ins().getCardConfigById(entity.cardId);
-                if (cardConfig.detailType === CardsPto.BuilingType.Base || cardConfig.detailType === CardsPto.BuilingType.Camp) {
+                if (cardConfig.detailType === CardsPto.BuilingType.Camp) {
                     res.push(entity)
                 }
             }

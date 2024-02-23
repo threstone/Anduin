@@ -50,8 +50,10 @@ export class CardMgr {
         this._baseCampCards = [];
         cardConfigs.forEach((cardConfig) => {
             // 设置基础兵营建筑
-            if (cardConfig.cardType === CardsPto.CardType.Building && cardConfig.detailType === CardsPto.BuilingType.Base) {
-                this._baseCampCards[cardConfig.powerId] = cardConfig.cardId
+            if (this._baseCampCards[cardConfig.powerId] == null &&
+                cardConfig.cardType === CardsPto.CardType.Building &&
+                cardConfig.detailType === CardsPto.BuilingType.Camp) {
+                this._baseCampCards[cardConfig.powerId] = cardConfig.cardId;
             }
 
             if (!this._cardClassMap.has(cardConfig.cardId)) {

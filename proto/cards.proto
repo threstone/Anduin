@@ -37,10 +37,8 @@ enum EventType{
 }
 
 enum BuilingType{
-	//基础兵营建筑
-	Base = 0;
-	//营地:出兵建筑
-	Camp = 1;
+	//出兵建筑
+	Camp = 0;
 }
 
 message Card{

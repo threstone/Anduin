@@ -9,22 +9,20 @@ export class SocketServer {
     private clientSocket_: WS.Server
     private socketMap = new Map<number, GateSocket>();
     private clientConnectedCount_: number = 0;
-    private logger: ILog
     private maxSocket: number;
 
-    constructor(listenPort: number, maxUser: number, logger: ILog) {
+    constructor(listenPort: number, maxUser: number) {
         this.maxSocket = maxUser;
-        this.logger = logger;
 
         this.clientSocket_ = new WS.Server({ port: listenPort });
         this.clientSocket_.on('connection', this.onClientConnect.bind(this));
-        this.logger.info('socket 启动 监听端口:' + listenPort);
+        logger.info('socket 启动 监听端口:' + listenPort);
     }
 
     bindGameNode(uid: number, nodeId: string) {
         const socket = this.socketMap.get(uid);
         if (!socket) {
-            this.logger.error(`bindGameNode 未找到指定user socket:${uid}`);
+            logger.error(`bindGameNode 未找到指定user socket:${uid}`);
             return false;
         }
         socket.gameNodeId = nodeId;
@@ -34,7 +32,7 @@ export class SocketServer {
     unBindGameNode(uid: number) {
         const socket = this.socketMap.get(uid);
         if (!socket) {
-            this.logger.error(`unBindGameNode 未找到指定user socket:${uid}`);
+            logger.error(`unBindGameNode 未找到指定user socket:${uid}`);
             return false;
         }
         delete socket.gameNodeId;
@@ -111,15 +109,19 @@ export class SocketServer {
 
     // 客户端信息到达
     private onClientMessage(socket: GateSocket, message: WS.Data) {
-        if (!Buffer.isBuffer(message)) {
-            return;
-        }
-        const buffer = message as Buffer;
-        if (buffer.length < 8) {
-            return;
-        }
+        try {
+            if (!Buffer.isBuffer(message)) {
+                return;
+            }
+            const buffer = message as Buffer;
+            if (buffer.length < 8) {
+                return;
+            }
 
-        this.routeMsg(socket, message);
+            this.routeMsg(socket, message);
+        } catch (error) {
+            logger.error('处理客户端信息出错:', error)
+        }
     }
 
     //分发路由消息
@@ -153,7 +155,7 @@ export class SocketServer {
                 rpc.game.gameRemote.sendTransferToGame({ type: 1, nodeId: socket.gameNodeId }, serverConfig.nodeId, socket.uid, buffer);
             }
         } else {
-            this.logger.error(`unknow routing cmd${cmd}`);
+            logger.error(`unknow routing cmd${cmd}`);
         }
     }
 }

@@ -527,5 +527,24 @@
  "soundId":-1,
  "movement":2,
  "atkRange":0
+  },
+{
+ "cardId":28,
+ "cardName":"箭塔",
+ "cardType":3,
+ "type2":1,
+ "detailType":1,
+ "fee":4,
+ "attack":3,
+ "hp":10,
+ "quality":1,
+ "desc":"回合结束时,对射程内的一个随机敌人发动攻击",
+ "buffs":[],
+ "isDerivation":0,
+ "useCondition":[1,1],
+ "effectList":[0],
+ "soundId":-1,
+ "movement":0,
+ "atkRange":3
   }
 ]

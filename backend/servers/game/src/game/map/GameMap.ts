@@ -289,6 +289,18 @@ export class GameMap {
         return cards;
     }
 
+    /** 根据距离和基准获取附近的敌方地图实体(不包含基准坐标) */
+    public getAroundEnemyEntityByDistance(baseX: number, baseY: number, distance: number, enemyUid: number) {
+        const cards: BuildingCard[] = [];
+        this.getAroundByDistance(baseX, baseY, distance).forEach((p) => {
+            const card = this.getCard(p.x, p.y);
+            if (card && card.uid === enemyUid) {
+                cards.push(card);
+            }
+        });
+        return cards;
+    }
+
     /** 根据距离和基准获取附近的坐标数组(不包含基准坐标) */
     public getAroundByDistance(baseX: number, baseY: number, distance: number) {
         const result: { x: number, y: number }[] = [];
@@ -369,7 +381,7 @@ export class GameMap {
         for (let index = 0; index < this._mapCards.length; index++) {
             const card = this._mapCards[index];
             if (card.uid === uid && card.cardType === CardsPto.CardType.Building) {
-                if (card.detailType === CardsPto.BuilingType.Base || card.detailType === CardsPto.BuilingType.Camp) {
+                if (card.detailType === CardsPto.BuilingType.Camp) {
                     res.push(card as BuildingCard);
                 }
             }

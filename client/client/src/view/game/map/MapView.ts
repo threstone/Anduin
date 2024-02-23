@@ -39,7 +39,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
 
     public close(): void {
         super.close();
-        this.entityMap?.clear();
+        this.entityMap && this.entityMap.clear();
         this.view.removeChildren();
         this.view.addChild(this.view.bg);
     }
@@ -271,7 +271,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     }
 
     /** 攻击飘提示 */
-    private showAttackTips(sourceEntity: BaseUI.UIMapUnit, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
+    private showAttackTips(sourceEntity: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
         //执行完效果后就飘血扣血
         msg.targetList.forEach((target) => {
             const entity = this.entityMap.get(target.id);
@@ -286,21 +286,9 @@ class MapView extends BaseView<BaseUI.UIMapView> {
     }
 
     /** 攻击效果 根据近战远程区分效果 */
-    private async showAttack(source: BaseUI.UIMapUnit, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
-        //近战
-        if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
-            const cacheX = source.x;
-            const cacheY = source.y;
-            let oldIndex = this.view.getChildIndex(source);
-            this.view.setChildIndex(source, 999);
-            egret.Tween.get(source).to({ x: target.x, y: target.y }, 500, egret.Ease.quintIn).to({ x: cacheX, y: cacheY }, 300).call(() => {
-                this.view.setChildIndex(source, oldIndex);
-            });
-            await this.wait(500);
-            this.showAttackTips(source, sourceConfig, msg);
-            await this.wait(300);
-        }//远程 
-        else if (sourceConfig.detailType === CardsPto.AtkType.LongRange) {
+    private async showAttack(source: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, target: BaseUI.UIMapUnit | BaseUI.UIMapBuilding, sourceConfig: CardInterface, msg: GamePto.S_ATTACK) {
+        //远程 或建筑
+        if (sourceConfig.cardType === CardsPto.CardType.Building || sourceConfig.detailType === CardsPto.AtkType.LongRange) {
             const effectData = ConfigMgr.ins().getFlyEffectDataById(sourceConfig.effectList[0]);
             if (!effectData) {
                 return;
@@ -321,6 +309,18 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             });
             await this.wait(time);
             this.showAttackTips(source, sourceConfig, msg);
+        }//近战
+        else if (sourceConfig.detailType === CardsPto.AtkType.CloseRange) {
+            const cacheX = source.x;
+            const cacheY = source.y;
+            let oldIndex = this.view.getChildIndex(source);
+            this.view.setChildIndex(source, 999);
+            egret.Tween.get(source).to({ x: target.x, y: target.y }, 500, egret.Ease.quintIn).to({ x: cacheX, y: cacheY }, 300).call(() => {
+                this.view.setChildIndex(source, oldIndex);
+            });
+            await this.wait(500);
+            this.showAttackTips(source, sourceConfig, msg);
+            await this.wait(300);
         }
     }
 

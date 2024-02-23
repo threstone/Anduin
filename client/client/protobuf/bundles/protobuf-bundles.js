@@ -109,13 +109,11 @@ $root.CardsPto = (function() {
      * BuilingType enum.
      * @name CardsPto.BuilingType
      * @enum {number}
-     * @property {number} Base=0 Base value
-     * @property {number} Camp=1 Camp value
+     * @property {number} Camp=0 Camp value
      */
     CardsPto.BuilingType = (function() {
         var valuesById = {}, values = Object.create(valuesById);
-        values[valuesById[0] = "Base"] = 0;
-        values[valuesById[1] = "Camp"] = 1;
+        values[valuesById[0] = "Camp"] = 0;
         return values;
     })();
 

@@ -23,7 +23,7 @@
     <text id="n9_pg48" name="nick" xy="179,95" size="80,32" fontSize="22" color="#00ff00" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="陈婷"/>
     <text id="n13_pg48" name="feeDesc" xy="173,57" size="94,32" fontSize="22" color="#ff00ff" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="能量 : 10"/>
     <text id="n14_pg48" name="power" xy="179,133" size="80,32" fontSize="22" color="#ffffff" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="圣堂"/>
-    <text id="n15_pg48" name="atkTimes" xy="12,173" size="150,32" fontSize="22" color="#ff0000" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="攻击次数:3/5"/>
+    <text id="n15_pg48" name="atkTimes" xy="12,173" size="150,32" fontSize="22" color="#ff3300" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="攻击次数:3/5"/>
     <text id="n16_pg48" name="moveTimes" xy="287,173" size="150,32" fontSize="22" color="#0099ff" align="center" vAlign="middle" autoSize="none" strokeColor="#333333" text="移动次数:3/5"/>
     <text id="n17_sbft" name="deadCardNum" xy="321,79" size="92,62" fontSize="22" color="#666633" align="center" vAlign="middle" strokeColor="#333333" text="墓地卡牌&#xA;0"/>
     <text id="n18_jdgb" name="discardTimes" xy="296,143" size="142,22" fontSize="14" color="#666600" align="center" vAlign="middle" strokeColor="#99cc33" text="本回合剩余弃牌次数:1"/>

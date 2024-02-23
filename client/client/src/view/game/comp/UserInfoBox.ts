@@ -110,15 +110,12 @@ class UserInfoBox extends BaseView<BaseUI.UIUserInfoBox> {
      * 设置费用
      */
     public feeSet(fee: number, maxFee: number) {
-        if (maxFee < fee) {
-            maxFee = fee;
-        }
         const feeList = this.view.feeList;
         for (let index = feeList.numChildren - 1; index >= 0; index--) {
             const feeBtn = feeList.getChildAt(index) as BaseUI.UIFeeBtn;
             feeBtn.visible = index < fee;
         }
-        this.view.feeDesc.text = `能量 : ${fee}`;
+        this.view.feeDesc.text = `能量 : ${fee}/${maxFee}`;
     }
 
     /**设置剩余卡牌数量 */

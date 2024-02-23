@@ -46,8 +46,7 @@ declare namespace CardsPto {
 
     /** BuilingType enum. */
     enum BuilingType {
-        Base = 0,
-        Camp = 1
+        Camp = 0
     }
 
     /** Properties of a Card. */

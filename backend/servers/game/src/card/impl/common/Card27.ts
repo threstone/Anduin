@@ -4,7 +4,6 @@ import { BuildingCard } from "../../BuildingCard";
 import { UnitCard } from "../../UnitCard";
 
 /** 猫头鹰 */
-const AddNum = 3;
 export class Card27 extends UnitCard {
 
     private _cacheEntity: BuildingCard;
@@ -26,7 +25,7 @@ export class Card27 extends UnitCard {
     public noticeUseActionRecord() {
         const notice = new GamePto.S_ACTION_RECORD();
         notice.source = this;
-        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.Show, value: AddNum })
+        notice.affectedList.push({ card: this._cacheEntity, type: GamePto.AffectedEnum.Show })
         this.table.broadcast(notice);
         this._cacheEntity = null;
     }
