@@ -17,5 +17,6 @@
     <component id="n16_fjki" name="miniChat" src="fjki1d" fileName="chat/MiniChat.xml" xy="17,1080">
       <relation target="" sidePair="left-left,bottom-bottom"/>
     </component>
+    <component id="n19_bmrc" name="helpBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1398,1095"/>
   </displayList>
 </component>

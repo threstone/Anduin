@@ -12,6 +12,7 @@ module BaseUI {
 		public fightBtn:UIButton1;
 		public pveBtn:UIButton1;
 		public miniChat:UIMiniChat;
+		public helpBtn:UIButton1;
 		public static URL:string = "ui://yaux2xporu1k8";
 
 		public static createInstance():UIHallCom {
@@ -30,6 +31,7 @@ module BaseUI {
 			this.fightBtn = <UIButton1>(this.getChildAt(7));
 			this.pveBtn = <UIButton1>(this.getChildAt(8));
 			this.miniChat = <UIMiniChat>(this.getChildAt(9));
+			this.helpBtn = <UIButton1>(this.getChildAt(10));
 		}
 	}
 }

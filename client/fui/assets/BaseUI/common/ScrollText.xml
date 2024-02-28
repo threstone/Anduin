@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="111,55" overflow="scroll">
+  <displayList>
+    <text id="n0_bmrc" name="contentText" xy="0,0" size="111,122" fontSize="30" vAlign="middle" autoSize="height" text="111111111122223333">
+      <relation target="" sidePair="width-width"/>
+    </text>
+  </displayList>
+</component>

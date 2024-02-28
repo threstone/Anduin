@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1600,1200" designImageLayer="1" bgColorEnabled="true" bgColor="#6699cc">
+<component size="1600,1200" overflow="hidden" designImageLayer="1" bgColorEnabled="true" bgColor="#6699cc">
   <displayList>
     <image id="n17_ru1k" name="accountInputBg" src="ru1k7" fileName="common/res/comp_696_152.png" xy="674,486" size="252,35" group="n18_kkcr"/>
     <text id="n2_inlo" name="accountInput" xy="674,483" size="252,43" group="n18_kkcr" fontSize="26" color="#3333ff" align="center" ubb="true" autoSize="none" text="qqqq" input="true" prompt="  点此输入用户名"/>
@@ -13,5 +13,6 @@
     <component id="n15_ru1k" name="regCom" src="ru1k3" fileName="login/RegisterCom.xml" xy="600,400" visible="false">
       <relation target="" sidePair="center-center,middle-middle"/>
     </component>
+    <component id="n23_bmrc" name="helpBtn" src="ru1k2" fileName="common/btn/Button1.xml" xy="1412,13"/>
   </displayList>
 </component>

@@ -21,18 +21,19 @@
     <component id="n33_pg48" name="targetHand" src="pg482e" fileName="game/HandCardsCom.xml" xy="337,0">
       <relation target="" sidePair="center-center%,top-top"/>
     </component>
-    <component id="n36_hzsg" name="close" src="fjkiy" fileName="common/btn/Button3.xml" xy="29,259"/>
+    <component id="n36_hzsg" name="closeBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="65,857"/>
     <component id="n38_h89h" name="selfLeftInfoBox" src="h89h32" fileName="game/info/LeftInfoBox.xml" xy="5,990" size="322,210">
       <relation target="n32_pg48" sidePair="right-left,top-top"/>
     </component>
     <component id="n39_h89h" name="targetLeftInfoBox" src="h89h32" fileName="game/info/LeftInfoBox.xml" xy="5,0" size="322,210">
       <relation target="n33_pg48" sidePair="right-left,top-top"/>
     </component>
-    <component id="n41_ncgh" name="surrender" src="fjkiy" fileName="common/btn/Button3.xml" xy="1433,259"/>
+    <component id="n41_ncgh" name="surrenderBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="1385,273"/>
     <component id="n42_ncgh" name="record" src="ncgh4e" fileName="game/record/ActionRecordCom.xml" xy="-1,400">
       <relation target="" sidePair="middle-middle"/>
       <relation target="n37_hzsg" sidePair="right-left"/>
     </component>
-    <image id="n46_682o" name="roundStartImg" src="682o4y" fileName="game/youRound.png" xy="-507,519" aspect="true"/>
+    <image id="n46_682o" name="roundStartImg" src="682o4y" fileName="game/res/youRound.png" xy="-507,519" aspect="true"/>
+    <component id="n47_bmrc" name="helpBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="70,273"/>
   </displayList>
 </component>

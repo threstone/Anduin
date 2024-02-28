@@ -11,6 +11,7 @@ module BaseUI {
 		public regBtn:UIButton1;
 		public loginGrou:fairygui.GGroup;
 		public regCom:UIRegisterCom;
+		public helpBtn:UIButton1;
 		public static URL:string = "ui://yaux2xporu1k4";
 
 		public static createInstance():UILoginCom {
@@ -28,6 +29,7 @@ module BaseUI {
 			this.regBtn = <UIButton1>(this.getChildAt(5));
 			this.loginGrou = <fairygui.GGroup>(this.getChildAt(6));
 			this.regCom = <UIRegisterCom>(this.getChildAt(7));
+			this.helpBtn = <UIButton1>(this.getChildAt(8));
 		}
 	}
 }

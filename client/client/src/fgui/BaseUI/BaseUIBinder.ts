@@ -6,6 +6,8 @@ module BaseUI {
 		public static bindAll():void {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordDetail.URL, UIActionRecordDetail);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIDamageTips.URL, UIDamageTips);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIScrollText.URL, UIScrollText);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIGameHelpsCom.URL, UIGameHelpsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRecoveryTips.URL, UIRecoveryTips);
 			fairygui.UIObjectFactory.setPackageItemExtension(UITipsCom.URL, UITipsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIChatBtn.URL, UIChatBtn);

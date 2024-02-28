@@ -4,6 +4,7 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
 
         this.view.accountInput.text;
         this.view.regBtn.describe.text = '注册';
+        this.view.helpBtn.describe.text = '玩法帮助';
         this.initRegCom();
         this.loadLocalStorage();
     }
@@ -26,6 +27,7 @@ class LoginView extends BaseView<BaseUI.UILoginCom> {
         this.AddClick(this.view.regBtn, this.onRegBtnClick);
         this.AddClick(this.view.regCom.close, this.onRegComCloseClick);
         this.AddClick(this.view.regCom.regBtn, this.onReqReg);
+        this.AddClick(this.view.helpBtn, GameHelpsView.ins().open.bind(GameHelpsView.ins()));
 
         this.observe('S_REGISTER', this.onRegisterResult);
         this.observe('S_LOGIN', this.onLoginResult);

@@ -10,12 +10,13 @@ module BaseUI {
 		public targetInfoBox:UIUserInfoBox;
 		public selfHand:UIHandCardsCom;
 		public targetHand:UIHandCardsCom;
-		public close:UIButton3;
+		public closeBtn:UIButton3;
 		public selfLeftInfoBox:UILeftInfoBox;
 		public targetLeftInfoBox:UILeftInfoBox;
-		public surrender:UIButton3;
+		public surrenderBtn:UIButton3;
 		public record:UIActionRecordCom;
 		public roundStartImg:fairygui.GImage;
+		public helpBtn:UIButton3;
 		public static URL:string = "ui://yaux2xpojig14";
 
 		public static createInstance():UIGameSceneCom {
@@ -32,12 +33,13 @@ module BaseUI {
 			this.targetInfoBox = <UIUserInfoBox>(this.getChildAt(4));
 			this.selfHand = <UIHandCardsCom>(this.getChildAt(5));
 			this.targetHand = <UIHandCardsCom>(this.getChildAt(6));
-			this.close = <UIButton3>(this.getChildAt(7));
+			this.closeBtn = <UIButton3>(this.getChildAt(7));
 			this.selfLeftInfoBox = <UILeftInfoBox>(this.getChildAt(8));
 			this.targetLeftInfoBox = <UILeftInfoBox>(this.getChildAt(9));
-			this.surrender = <UIButton3>(this.getChildAt(10));
+			this.surrenderBtn = <UIButton3>(this.getChildAt(10));
 			this.record = <UIActionRecordCom>(this.getChildAt(11));
 			this.roundStartImg = <fairygui.GImage>(this.getChildAt(12));
+			this.helpBtn = <UIButton3>(this.getChildAt(13));
 		}
 	}
 }

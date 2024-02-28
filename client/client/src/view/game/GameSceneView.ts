@@ -24,8 +24,11 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.bindView(TargetLeftInfoBox.ins());
         this.bindView(MapView.ins());
 
-        this.view.close.describe.text = 'tempCloseBtn';
-        this.view.surrender.describe.text = '投降';
+        this.view.closeBtn.describe.text = 'tempCloseBtn';
+        this.view.surrenderBtn.describe.text = '投降';
+
+        this.view.helpBtn.describe.text = '帮助';
+        this.AddClick(this.view.helpBtn, GameHelpsView.ins().open.bind(GameHelpsView.ins()));
 
         this.view.roundStartImg.scaleX = 0.5;
         this.view.roundStartImg.scaleY = 0.5;
@@ -57,8 +60,8 @@ class GameSceneView extends BaseView<BaseUI.UIGameSceneCom> {
         this.addEffectListener('S_ROUND_END_EVENT', this.onRoundEnd);
         this.addEffectListener('S_GAME_OVER', this.onGameOver);
 
-        this.AddClick(this.view.close, this.close);
-        this.AddClick(this.view.surrender, this.surrender);
+        this.AddClick(this.view.closeBtn, this.close);
+        this.AddClick(this.view.surrenderBtn, this.surrender);
     }
 
     /**将函数加入特效池 */

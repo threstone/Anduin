@@ -37,6 +37,9 @@ class HallView extends BaseView<BaseUI.UIHallCom>{
         });
         this.observe('S_MATCH_DECK', MatchDeckChooseView.ins().open.bind(MatchDeckChooseView.ins()));
         this.observe('S_INIT_GAME', GameSceneView.ins().open.bind(GameSceneView.ins()));
+
+        this.view.helpBtn.describe.text = '玩法帮助';
+        this.AddClick(this.view.helpBtn, GameHelpsView.ins().open.bind(GameHelpsView.ins()));
     }
 
     /**将迷你聊天组件重新加入到自身 */
