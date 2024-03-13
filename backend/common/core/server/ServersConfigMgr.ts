@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as serversConfig from '../config/servers.json';
+import * as serversConfig from '../../config/servers.json';
 export class ServersConfigMgr {
 
     private static _watcher: fs.FSWatcher;
@@ -8,7 +8,7 @@ export class ServersConfigMgr {
 
     static init() {
         if (!this._watcher) {
-            this._configFilePath = path.join(__dirname, '../config/servers.json');
+            this._configFilePath = path.join(__dirname, '../../config/servers.json');
             this._watcher = fs.watch(this._configFilePath, () => {
                 logger.info('update servers.json');
                 // 删除缓存

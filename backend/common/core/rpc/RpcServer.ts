@@ -1,4 +1,4 @@
-import { ServerInit } from "../ServerInit";
+import { ServerInit } from "../server/ServerInit";
 import * as loggerConfig from './config/log4js.json';
 import * as WS from "ws"
 import { RpcUtils } from "./RpcUtils";

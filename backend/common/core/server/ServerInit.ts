@@ -1,7 +1,7 @@
-import { launcherOption } from "../LauncherOption";
+import { launcherOption } from "../../LauncherOption";
 import { ServersConfigMgr } from "./ServersConfigMgr";
-import * as serviceConfig from '../config/service.json';
-import { RpcManager } from "./rpc/RpcManager";
+import * as serviceConfig from '../../config/service.json';
+import { RpcManager } from "../rpc/RpcManager";
 import { EventEmitter } from 'events';
 import { configure, getLogger } from 'log4js';
 export class ServerInit {
