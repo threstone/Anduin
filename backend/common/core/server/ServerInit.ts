@@ -17,10 +17,66 @@ export class ServerInit {
         ServersConfigMgr.init();
 
         RpcManager.init();
+
+        ServerInit.initLogger();
     }
 
-    static initLogger(loggerConfig: any) {
+    static initLogger() {
+        const nodeId = startupParam?.nodeId || 'app'
+        const loggerConfig = {
+            "appenders": {
+                "console": {
+                    "type": "console",
+                    "category": "console",
+                    "layout": {
+                        "type": "pattern",
+                        "pattern": "%[[%f:%l:%o] [%d] [%p] [%c]%] %m"
+                    }
+                },
+                "debug": {
+                    "type": "dateFile",
+                    "filename": `./logs/${nodeId}`,
+                    "alwaysIncludePattern": true,
+                    "pattern": "yyyy-MM-dd.log",
+                    "layout": {
+                        "type": "pattern",
+                        "pattern": "[%f:%l:%o] [%d] [%p] [%c] %m"
+                    }
+                },
+                "err": {
+                    "type": "dateFile",
+                    "filename": `./logs/${nodeId}-err`,
+                    "alwaysIncludePattern": true,
+                    "pattern": "yyyy-MM-dd.log",
+                    "layout": {
+                        "type": "pattern",
+                        "pattern": "[%f:%l:%o] [%d] [%p] [%c] %m"
+                    }
+                }
+            },
+            "replaceConsole": true,
+            "categories": {
+                "default": {
+                    "appenders": [
+                        "console",
+                        "debug"
+                    ],
+                    "level": "ALL",
+                    "enableCallStack": true
+                },
+                [nodeId + ' error']: {
+                    "appenders": [
+                        "console",
+                        "err"
+                    ],
+                    "level": "error",
+                    "enableCallStack": true
+                }
+            }
+        };
         configure(loggerConfig);
-        global.logger = getLogger(startupParam?.nodeId);
+        global.logger = getLogger(nodeId);
+        const errLogger = getLogger(nodeId + ' error');
+        logger.error = errLogger.error.bind(errLogger);
     }
 }
