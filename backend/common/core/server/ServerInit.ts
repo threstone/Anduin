@@ -6,19 +6,18 @@ import { EventEmitter } from 'events';
 import { configure, getLogger } from 'log4js';
 export class ServerInit {
     static init() {
-        // 初始化全局事件对象
-        global.eventEmitter = new EventEmitter();
         // 初始化启动参数
         global.startupParam = launcherOption;
-
+        // 初始化全局事件对象
+        global.eventEmitter = new EventEmitter();
+        // 依赖配置
         global.serviceConfig = serviceConfig[startupParam.env];
-
+        // 日志初始化
+        ServerInit.initLogger();
         // 初始化service config manager
         ServersConfigMgr.init();
-
+        // RPC模块初始化
         RpcManager.init();
-
-        ServerInit.initLogger();
     }
 
     static initLogger() {
@@ -45,7 +44,7 @@ export class ServerInit {
                 },
                 "err": {
                     "type": "dateFile",
-                    "filename": `./logs/${nodeId}-err`,
+                    "filename": `./logs/err`,
                     "alwaysIncludePattern": true,
                     "pattern": "yyyy-MM-dd.log",
                     "layout": {

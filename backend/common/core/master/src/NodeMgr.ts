@@ -9,7 +9,8 @@ export class NodeMgr {
     public getServerInfo() {
         const list: ServerConfig[] = [];
         this.serverMap.forEach((node) => {
-            list.push(node.serverConfig);
+            const config: any = { "pid": node.pid, ...node.serverConfig };
+            list.push(config);
         })
         return list;
     }

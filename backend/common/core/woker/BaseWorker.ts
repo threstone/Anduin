@@ -8,6 +8,7 @@ export class BaseWorker {
     worker: ChildProcess.ChildProcess;
     exitedAfterKill: boolean = false;
 
+    get pid() { return this.worker?.pid }
 
     constructor(execPath: string, serverConfig: ServerConfig) {
         this._execPath = execPath;
