@@ -1,6 +1,6 @@
 
 import { NodeMgr } from './NodeMgr';
-import { CommonServer } from './CommonServer';
+import { CommonServer } from './CommandServer';
 export class GlobalVar {
 
 

@@ -2,7 +2,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { CommonUtils } from '../../CommonUtils';
-import { BaseWorker } from '../../master/src/BaseWorker';
+import { BaseWorker } from '../woker/BaseWorker';
 import { RpcClient } from './RpcClient';
 export class RpcManager {
 
