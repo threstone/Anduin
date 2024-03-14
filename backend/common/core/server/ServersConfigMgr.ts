@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import * as serversConfig from '../../config/servers.json';
+import * as serversConfig from '../../../config/servers.json';
 export class ServersConfigMgr {
 
     private static _watcher: fs.FSWatcher;

@@ -3,7 +3,7 @@ const os = require('os');
 const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
-const servers = require('../config/servers.json');
+const servers = require('../../config/servers.json');
 const args = process.argv.slice(2);
 if (args.length === 0) {
     showHelp();

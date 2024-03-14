@@ -1,4 +1,4 @@
-import * as config from './config.json';
+import * as config from '../../config/config.json';
 import { CardInterface } from '../I';
 export class ConfigMgr {
 
