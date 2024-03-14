@@ -1,5 +1,5 @@
 import * as Path from 'path';
-import { NodeMgr } from '../../master/src/NodeMgr';
+import { NodeMgr } from '../master/src/NodeMgr';
 import { BaseWorker } from './BaseWorker';
 export class NodeWorker extends BaseWorker {
 

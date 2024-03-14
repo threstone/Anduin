@@ -50,13 +50,13 @@ function handleCmd() {
 
 /** 检查是否build js */
 function checkBuild() {
-    const mainPath = path.join(__dirname, '../master/src/bin/');
+    const mainPath = path.join(__dirname, '../core/master/src/bin/');
     const files = fs.readdirSync(mainPath);
     if (files.indexOf('main.js') !== -1) {
         return;
     }
 
-    const scriptPath = path.join(__dirname, '../../dist/common/master/src/bin/main.js');
+    const scriptPath = path.join(__dirname, '../../dist/common/core/master/src/bin/main.js');
     // 判断文件是否存在的办法
     try {
         fs.accessSync(scriptPath);
@@ -75,13 +75,13 @@ function checkBuild() {
 /** 启动服务 */
 function startall(environmentArgs) {
     environment = environmentArgs || environment;
-    let scriptPath = path.join(__dirname, '../master/src/bin/main.js');
+    let scriptPath = path.join(__dirname, '../core/master/src/bin/main.js');
     // 判断文件是否存在的办法
     try {
         fs.accessSync(scriptPath);
     } catch (error) {
         checkBuild();
-        scriptPath = path.join(__dirname, '../../dist/common/master/src/bin/main.js');
+        scriptPath = path.join(__dirname, '../../dist/common/core/master/src/bin/main.js');
     }
     if (isBackgroud) {
         if (os.platform() == 'win32') {

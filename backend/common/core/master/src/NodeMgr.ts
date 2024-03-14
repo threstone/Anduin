@@ -1,4 +1,4 @@
-import { NodeWorker } from '../../core/woker/NodeWorker';
+import { NodeWorker } from '../../woker/NodeWorker';
 export class NodeMgr {
     public serverMap: Map<string, NodeWorker>;
 
