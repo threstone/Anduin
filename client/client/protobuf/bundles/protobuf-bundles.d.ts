@@ -1936,6 +1936,12 @@ declare namespace GamePto {
 
         /** Card silenced */
         silenced?: (boolean|null);
+
+        /** Card movement */
+        movement?: (number|null);
+
+        /** Card atkRange */
+        atkRange?: (number|null);
     }
 
     /** Represents a Card. */
@@ -1988,6 +1994,12 @@ declare namespace GamePto {
 
         /** Card silenced. */
         public silenced: boolean;
+
+        /** Card movement. */
+        public movement: number;
+
+        /** Card atkRange. */
+        public atkRange: number;
 
         /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.

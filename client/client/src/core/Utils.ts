@@ -73,13 +73,14 @@ class Utils {
      * @param baseValue 
      */
     public static defineTextFieldSet(textField: fairygui.GTextField, baseValue: number, moreColor = 0x00FF00, lessColor = 0xFF0000) {
+        const defaultColor = textField.color;
         Object.defineProperty(textField, 'text', {
             get: function () {
                 return this._text;
             },
             set: function (value) {
                 this._text = value;
-                textField.color = 0xFFFFFF;
+                textField.color = defaultColor;
                 const intValue = parseInt(value);
                 if (!Number.isNaN(intValue)) {
                     if (intValue > baseValue) {

@@ -126,21 +126,21 @@ class MapModel extends BaseModel {
     }
 
     /**获取可攻击位置 */
-    public getAttackablePointSet(pointSet: Set<number>, config: CardInterface) {
+    public getAttackablePointSet(pointSet: Set<number>, cardInfo: GamePto.ICard) {
         const resultMap = new Map<number, number>();
         pointSet.forEach((point) => {
             const baseX = point % MapWidth;
             const baseY = Math.floor(point / MapWidth);
-            this.getAttackablePoint(baseX, baseY, config, resultMap);
+            this.getAttackablePoint(baseX, baseY, cardInfo, resultMap);
         })
         return resultMap;
     }
 
     /**获取可攻击位置 */
-    public getAttackablePoint(baseX: number, baseY: number, config: CardInterface, resultMap = new Map<number, number>()) {
+    public getAttackablePoint(baseX: number, baseY: number, cardInfo:  GamePto.ICard, resultMap = new Map<number, number>()) {
         // 如果可以攻击不同行不同列的元素将使用以下代码，但是就会导致远程攻击无法被中途单元挡住
         //获取攻击距离
-        const atkRange = CardsModel.ins().getCardAtkRange(config);
+        const atkRange = CardsModel.ins().getCardAtkRange(cardInfo);
         const basePoint = baseY * MapWidth + baseX;
         for (let x = baseX - atkRange; x <= baseX + atkRange; x++) {
             for (let y = baseY - atkRange; y <= baseY + atkRange; y++) {
@@ -188,9 +188,9 @@ class MapModel extends BaseModel {
     }
 
     /**获取可移动坐标 */
-    public getMovablePoint(cardInfo: GamePto.ICard, config: CardInterface, movePointSet = new Set<number>()) {
+    public getMovablePoint(cardInfo: GamePto.ICard, movePointSet = new Set<number>()) {
         //要根据卡片配置决定是飞行还是行走
-        const step = CardsModel.ins().getCardMoveStep(config);
+        const step = CardsModel.ins().getCardMoveStep(cardInfo);
         const isFly = step < 0;
         if (isFly) {
             this.getFlyablePoint(cardInfo.blockX, cardInfo.blockY, step, movePointSet);

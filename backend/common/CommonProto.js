@@ -3120,6 +3120,8 @@ $root.GamePto = (function() {
         Card.prototype.allowMove = false;
         Card.prototype.buffList = $util.emptyArray;
         Card.prototype.silenced = false;
+        Card.prototype.movement = 0;
+        Card.prototype.atkRange = 0;
 
         Card.create = function create(properties) {
             return new Card(properties);
@@ -3160,6 +3162,10 @@ $root.GamePto = (function() {
             }
             if (m.silenced != null && Object.hasOwnProperty.call(m, "silenced"))
                 w.uint32(104).bool(m.silenced);
+            if (m.movement != null && Object.hasOwnProperty.call(m, "movement"))
+                w.uint32(112).int32(m.movement);
+            if (m.atkRange != null && Object.hasOwnProperty.call(m, "atkRange"))
+                w.uint32(120).int32(m.atkRange);
             return w;
         };
 
@@ -3218,6 +3224,12 @@ $root.GamePto = (function() {
                     break;
                 case 13:
                     m.silenced = r.bool();
+                    break;
+                case 14:
+                    m.movement = r.int32();
+                    break;
+                case 15:
+                    m.atkRange = r.int32();
                     break;
                 default:
                     r.skipType(t & 7);
@@ -3278,6 +3290,12 @@ $root.GamePto = (function() {
             if (d.silenced != null) {
                 m.silenced = Boolean(d.silenced);
             }
+            if (d.movement != null) {
+                m.movement = d.movement | 0;
+            }
+            if (d.atkRange != null) {
+                m.atkRange = d.atkRange | 0;
+            }
             return m;
         };
 
@@ -3302,6 +3320,8 @@ $root.GamePto = (function() {
                 d.allowAtk = false;
                 d.allowMove = false;
                 d.silenced = false;
+                d.movement = 0;
+                d.atkRange = 0;
             }
             if (m.id != null && m.hasOwnProperty("id")) {
                 d.id = m.id;
@@ -3347,6 +3367,12 @@ $root.GamePto = (function() {
             }
             if (m.silenced != null && m.hasOwnProperty("silenced")) {
                 d.silenced = m.silenced;
+            }
+            if (m.movement != null && m.hasOwnProperty("movement")) {
+                d.movement = m.movement;
+            }
+            if (m.atkRange != null && m.hasOwnProperty("atkRange")) {
+                d.atkRange = m.atkRange;
             }
             return d;
         };

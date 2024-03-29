@@ -1,4 +1,4 @@
-import { CardsPto, GamePto } from '../../../../common/CommonProto';
+import { GamePto } from '../../../../common/CommonProto';
 import { GameTable } from '../game/GameTable';
 import { GameUser } from '../game/GameUser';
 import { NodeDefine } from '../game/GameDefine';
@@ -6,7 +6,6 @@ import { BaseHandler } from './BaseHandler';
 import { UnitCard } from '../card/UnitCard';
 import { AttackUtils } from '../game/AttackUtils';
 import { EventData, EventType } from '../game/EventDefine';
-import { GlobalVar } from '../GlobalVar';
 
 export class GameHandler extends BaseHandler {
 

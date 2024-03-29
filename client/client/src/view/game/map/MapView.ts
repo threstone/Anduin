@@ -105,7 +105,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             }
             const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
             if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
-                if (MapModel.ins().getMovablePoint(cardInfo, config).size > 0) {
+                if (MapModel.ins().getMovablePoint(cardInfo).size > 0) {
                     unit.allowOperate.visible = true;
                     return;
                 }
@@ -145,19 +145,19 @@ class MapView extends BaseView<BaseUI.UIMapView> {
             return;
         }
 
-        const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
+        // const config = CardsModel.ins().getCardConfigById(cardInfo.cardId);
         // 显示所有可移动路径
         const movePointSet = new Set<number>();
         movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
         //检查是否允许移动
         if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
-            MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
+            MapModel.ins().getMovablePoint(cardInfo, movePointSet);
             MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
         }
 
         //显示可攻击
         if (cardInfo.allowAtk && cardInfo.attack > 0 && GameModel.ins().atkTimes > 0) {
-            const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, config);
+            const atkPointMap = MapModel.ins().getAttackablePointSet(movePointSet, cardInfo);
             if (atkPointMap.size !== 0) {
                 MapTipsView.ins().showAtkTips(cardInfo, atkPointMap);
             }
@@ -218,7 +218,7 @@ class MapView extends BaseView<BaseUI.UIMapView> {
         movePointSet.add(cardInfo.blockY * MapWidth + cardInfo.blockX);
         //检查是否允许移动
         if (cardInfo.allowMove && GameModel.ins().moveTimes > 0) {
-            MapModel.ins().getMovablePoint(cardInfo, config, movePointSet);
+            MapModel.ins().getMovablePoint(cardInfo, movePointSet);
             MapTipsView.ins().showMoveTips(cardInfo, movePointSet);
         }
 

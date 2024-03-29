@@ -1,6 +1,5 @@
 import * as WS from 'ws';
 import * as http from 'http';
-import { GlobalVar } from './GlobalVar';
 import { LoginHandler } from './handler/LoginHandler';
 import { GateSocket } from './GateSocket';
 
@@ -60,7 +59,6 @@ export class SocketServer {
             this.socketMap.delete(uid);
         }
     }
-
 
     public addSocketToMap(uid: number, socket: GateSocket) {
         const temp = this.socketMap.get(uid);

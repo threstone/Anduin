@@ -92,6 +92,8 @@ message Card{
 	bool allowMove = 11;
 	repeated int32 buffList = 12;
 	bool silenced = 13;
+	int32 movement = 14;
+	int32 atkRange = 15;
 }
 
 message MapData{

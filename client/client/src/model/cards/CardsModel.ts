@@ -19,17 +19,13 @@ class CardsModel extends BaseModel {
     }
 
     /**返回卡牌可移动步数,负值代表飞行 */
-    public getCardMoveStep(cardInfo: CardInterface) {
+    public getCardMoveStep(cardInfo: GamePto.ICard) {
         return cardInfo.movement;
     }
 
     /**返回卡牌可攻击距离 */
-    public getCardAtkRange(cardInfo: CardInterface) {
-        if (CardsPto.AtkType.CloseRange === cardInfo.detailType) {
-            return 1;
-        } else {
-            return cardInfo.atkRange;
-        }
+    public getCardAtkRange(cardInfo: GamePto.ICard) {
+        return cardInfo.atkRange;
     }
 
     /**用于用户创建卡组没有设置卡组名时的逻辑 */

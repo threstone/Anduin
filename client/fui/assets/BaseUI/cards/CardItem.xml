@@ -33,7 +33,20 @@
     <text id="n21_tb7e" name="heroCardTips" xy="86,0" size="46,22" visible="false" fontSize="14" color="#cc0033" strokeColor="#333399" text="英雄卡"/>
     <text id="n4_tb7e" name="typeText" xy="49,22" size="124,16" fontSize="10" align="center" autoSize="height" text="圣堂.单位.人类"/>
     <text id="n23_tb7e" name="cardNum" xy="167,12" size="50,32" fontSize="22" color="#ffcc00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="x22"/>
-    <text id="n37_ocey" name="atkRange" xy="160,169" size="50,32" fontSize="16" color="#ffff00" align="center" vAlign="middle" autoSize="none" strokeColor="#333399" text="射程:4"/>
+    <text id="n42_kri4" name="movementDesc" xy="12,169" size="56,24" group="n45_kri4" fontSize="16" color="#ffff00" vAlign="middle" strokeColor="#333399" text="移动力:">
+      <relation target="n13_tb7e" sidePair="left-left"/>
+    </text>
+    <text id="n43_kri4" name="movementVaule" xy="69,169" size="13,24" group="n45_kri4" fontSize="16" color="#ffff00" vAlign="middle" strokeColor="#333399" text="4">
+      <relation target="n42_kri4" sidePair="left-right,top-top"/>
+    </text>
+    <group id="n45_kri4" name="movementGroup" xy="12,169" size="70,24" advanced="true"/>
+    <text id="n37_ocey" name="atkRangeDesc" xy="157,169" size="40,24" group="n46_kri4" fontSize="16" color="#ffff00" align="center" vAlign="middle" strokeColor="#333399" text="射程:">
+      <relation target="n44_kri4" sidePair="right-left,top-top"/>
+    </text>
+    <text id="n44_kri4" name="atkRangeValue" xy="197,169" size="13,24" group="n46_kri4" fontSize="16" color="#ffff00" align="center" vAlign="middle" strokeColor="#333399" text="2">
+      <relation target="n13_tb7e" sidePair="right-left"/>
+    </text>
+    <group id="n46_kri4" name="atkRangeGroup" xy="157,169" size="53,24" advanced="true"/>
     <loader id="n24_oo95" name="dragLoader" xy="0,0" size="218,368" fill="scaleFree"/>
     <list id="n32_sgbw" name="buffDesc" xy="223,10" size="168,358" visible="false" overflow="scroll"/>
   </displayList>

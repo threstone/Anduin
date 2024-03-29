@@ -28,7 +28,12 @@ module BaseUI {
 		public heroCardTips:fairygui.GTextField;
 		public typeText:fairygui.GTextField;
 		public cardNum:fairygui.GTextField;
-		public atkRange:fairygui.GTextField;
+		public movementDesc:fairygui.GTextField;
+		public movementVaule:fairygui.GTextField;
+		public movementGroup:fairygui.GGroup;
+		public atkRangeDesc:fairygui.GTextField;
+		public atkRangeValue:fairygui.GTextField;
+		public atkRangeGroup:fairygui.GGroup;
 		public dragLoader:fairygui.GLoader;
 		public buffDesc:fairygui.GList;
 		public static URL:string = "ui://yaux2xpotb7e1s";
@@ -65,9 +70,14 @@ module BaseUI {
 			this.heroCardTips = <fairygui.GTextField>(this.getChildAt(25));
 			this.typeText = <fairygui.GTextField>(this.getChildAt(26));
 			this.cardNum = <fairygui.GTextField>(this.getChildAt(27));
-			this.atkRange = <fairygui.GTextField>(this.getChildAt(28));
-			this.dragLoader = <fairygui.GLoader>(this.getChildAt(29));
-			this.buffDesc = <fairygui.GList>(this.getChildAt(30));
+			this.movementDesc = <fairygui.GTextField>(this.getChildAt(28));
+			this.movementVaule = <fairygui.GTextField>(this.getChildAt(29));
+			this.movementGroup = <fairygui.GGroup>(this.getChildAt(30));
+			this.atkRangeDesc = <fairygui.GTextField>(this.getChildAt(31));
+			this.atkRangeValue = <fairygui.GTextField>(this.getChildAt(32));
+			this.atkRangeGroup = <fairygui.GGroup>(this.getChildAt(33));
+			this.dragLoader = <fairygui.GLoader>(this.getChildAt(34));
+			this.buffDesc = <fairygui.GList>(this.getChildAt(35));
 		}
 	}
 }

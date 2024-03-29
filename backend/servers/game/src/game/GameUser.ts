@@ -231,8 +231,7 @@ export class GameUser {
             return;
         }
         console.log(`send message [${(ProtoBufEncoder as any).protoBufClass.get(message.cmd + "_" + message.scmd).name}] : ${JSON.stringify(message)}`);
-        rpc.gate.commonRemote.sendTransferToGate({ type: 1, nodeId: this.gateNodeId }, this.uid, ProtoBufEncoder.encode(message));
-
+        this.sendBuffer(ProtoBufEncoder.encode(message));
     }
 
     public sendBuffer(messageBuffer: Buffer) {

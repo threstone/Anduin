@@ -25,6 +25,10 @@ class CardItem {
         Utils.defineTextFieldSet(cardItem.healthText, cardInfo.hp);
         //攻击设置会变色
         Utils.defineTextFieldSet(cardItem.atkText, cardInfo.attack);
+        //射程设置会变色
+        Utils.defineTextFieldSet(cardItem.atkRangeValue, cardInfo.atkRange);
+        //移动力设置会变色
+        Utils.defineTextFieldSet(cardItem.movementVaule, cardInfo.movement);
         //费用设置会变色
         Utils.defineTextFieldSet(cardItem.feeText, cardInfo.fee, 0xFF0000, 0x00FF00);
         this.updateCard(cardItem, cardInfo);
@@ -36,6 +40,8 @@ class CardItem {
         cardItem.feeText.text = `${Math.max(0, cardInfo.cardFee)}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
         cardItem.healthText.text = `${cardInfo.hp}`;
+        cardItem.atkRangeValue.text = `${cardInfo.atkRange}`;
+        cardItem.movementVaule.text = `${cardInfo.movement}`;
         cardItem.cardNum.visible = false;
         cardItem.cardImg.alpha = 1;
         cardItem.slicencedGroup.visible = !!cardInfo.silenced;
@@ -61,8 +67,9 @@ class CardItem {
         card.atkText.text = `${cardInfo.attack}`;
         card.healthText.text = `${cardInfo.hp}`;
         card.quality.url = this.getQualityUrl(cardInfo.quality);
-        card.atkRange.visible = !!cardInfo.atkRange && cardInfo.detailType === CardsPto.AtkType.LongRange;
-        card.atkRange.text = `射程:${cardInfo.atkRange}`;
+        card.atkRangeGroup.visible = !!cardInfo.atkRange && cardInfo.detailType === CardsPto.AtkType.LongRange;
+        card.atkRangeValue.text = `${cardInfo.atkRange}`;
+        card.movementVaule.text = `${cardInfo.movement}`;
         CardItem.updateNum(card, cardInfo);
         switch (cardInfo.cardType) {
             case CardsPto.CardType.Hero:
@@ -73,13 +80,16 @@ class CardItem {
                 break;
             case CardsPto.CardType.Magic:
                 card.healthGroup.visible = false;
+                card.movementGroup.visible = false;
             case CardsPto.CardType.Building:
                 card.atkGroup.visible = false;
+                card.movementGroup.visible = false;
                 break;
             case CardsPto.CardType.Event:
                 card.atkGroup.visible = false;
                 card.healthBg.visible = false;
                 card.times.visible = true;
+                card.movementGroup.visible = false;
                 break;
         }
     }
@@ -103,6 +113,8 @@ class CardItem {
         cardItem.cardNum.visible = false;
         cardItem.healthText.text = `${cardInfo.hp}`;
         cardItem.atkText.text = `${cardInfo.attack}`;
+        cardItem.atkRangeValue.text = `${cardInfo.atkRange}`;
+        cardItem.movementVaule.text = `${cardInfo.movement}`;
         cardItem.slicencedGroup.visible = !!cardInfo.silenced;
         this.showBuffDesc(cardItem, cardInfo);
         return cardItem;

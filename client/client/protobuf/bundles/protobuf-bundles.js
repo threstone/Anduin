@@ -4191,6 +4191,8 @@ $root.GamePto = (function() {
          * @property {boolean|null} [allowMove] Card allowMove
          * @property {Array.<number>|null} [buffList] Card buffList
          * @property {boolean|null} [silenced] Card silenced
+         * @property {number|null} [movement] Card movement
+         * @property {number|null} [atkRange] Card atkRange
          */
 
         /**
@@ -4322,6 +4324,22 @@ $root.GamePto = (function() {
         Card.prototype.silenced = false;
 
         /**
+         * Card movement.
+         * @member {number} movement
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.movement = 0;
+
+        /**
+         * Card atkRange.
+         * @member {number} atkRange
+         * @memberof GamePto.Card
+         * @instance
+         */
+        Card.prototype.atkRange = 0;
+
+        /**
          * Encodes the specified Card message. Does not implicitly {@link GamePto.Card.verify|verify} messages.
          * @function encode
          * @memberof GamePto.Card
@@ -4365,6 +4383,10 @@ $root.GamePto = (function() {
             }
             if (message.silenced != null && Object.hasOwnProperty.call(message, "silenced"))
                 writer.uint32(/* id 13, wireType 0 =*/104).bool(message.silenced);
+            if (message.movement != null && Object.hasOwnProperty.call(message, "movement"))
+                writer.uint32(/* id 14, wireType 0 =*/112).int32(message.movement);
+            if (message.atkRange != null && Object.hasOwnProperty.call(message, "atkRange"))
+                writer.uint32(/* id 15, wireType 0 =*/120).int32(message.atkRange);
             return writer;
         };
 
@@ -4434,6 +4456,12 @@ $root.GamePto = (function() {
                     break;
                 case 13:
                     message.silenced = reader.bool();
+                    break;
+                case 14:
+                    message.movement = reader.int32();
+                    break;
+                case 15:
+                    message.atkRange = reader.int32();
                     break;
                 default:
                     reader.skipType(tag & 7);
