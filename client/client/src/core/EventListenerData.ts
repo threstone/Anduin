@@ -16,6 +16,13 @@ class EventListenerData {
         // this.priority = priority
     }
 
+    public isSame(addObj: egret.EventDispatcher, type: string, func: Function, thisObj: any) {
+        if (this.addObject === addObj && this.type === type && this.listener === func && this.thisObject === thisObj) {
+            return true;
+        }
+        return false;
+    }
+
     alive() {
         if (this.addObject) {
             this.addObject.addEventListener(this.type, this.listener, this.thisObject)

@@ -31,6 +31,8 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIFriendOpCom.URL, UIFriendOpCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordCom.URL, UIActionRecordCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIActionRecordItem.URL, UIActionRecordItem);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIDisplayBar.URL, UIDisplayBar);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIFish.URL, UIFish);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICreateDeckCom.URL, UICreateDeckCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIMiniCard.URL, UIMiniCard);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardsCom.URL, UIShowCardsCom);
@@ -58,6 +60,7 @@ module BaseUI {
 			fairygui.UIObjectFactory.setPackageItemExtension(UIPowerBtn.URL, UIPowerBtn);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIShowCardDetail.URL, UIShowCardDetail);
 			fairygui.UIObjectFactory.setPackageItemExtension(UIRightCtrlCom.URL, UIRightCtrlCom);
+			fairygui.UIObjectFactory.setPackageItemExtension(UIFishCom.URL, UIFishCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsCom.URL, UICardsCom);
 			fairygui.UIObjectFactory.setPackageItemExtension(UICardsBtn.URL, UICardsBtn);
 		}

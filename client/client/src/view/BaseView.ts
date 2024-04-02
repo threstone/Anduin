@@ -37,6 +37,10 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.addEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
     }
 
+    public removeClick(target: egret.DisplayObject | fairygui.GObject, func: Function) {
+        this.removeEvent(target, egret.TouchEvent.TOUCH_TAP, func, this);
+    }
+
     protected addDragEvent(base: fairygui.GComponent, dragLoader: fairygui.GLoader, dragStartFun?: Function, dragStartEnd?: Function) {
         //拖动效果
         dragLoader.draggable = true;
@@ -140,6 +144,10 @@ abstract class BaseView<T extends fairygui.GComponent> {
         this.eventList.push(eventData);
     }
 
+    protected removeObserve(event: string, func: (evt: EventData) => void) {
+        this.removeEvent(null, event, func, this);
+    }
+
     protected addEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any) {
         if (targetObj == null) {
             return;
@@ -147,6 +155,22 @@ abstract class BaseView<T extends fairygui.GComponent> {
         const eventData = new EventListenerData(targetObj, event, func, thisObject);
         eventData.alive();
         this.eventList.push(eventData);
+    }
+
+    protected removeEvent(targetObj: egret.EventDispatcher = null, event: string, func: Function, thisObject: any) {
+        for (let index = 0; index < this.eventList.length; index++) {
+            const eventData = this.eventList[index];
+            if (eventData.isSame(targetObj, event, func, thisObject)) {
+                //如果不存在addObject则说明是通过observe注册的
+                if (!eventData.addObject) {
+                    GameDispatcher.getInstance().removeEventListener(eventData.type, eventData.listener, eventData.thisObject);
+                } else {
+                    eventData.clean();
+                }
+                this.eventList.splice(index, 1);
+                break;
+            }
+        }
     }
 
     protected removeAllEvents(): void {

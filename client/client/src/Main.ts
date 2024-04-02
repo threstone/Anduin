@@ -9,7 +9,7 @@ class Main extends egret.DisplayObjectContainer {
             // custom lifecycle plugin
 
             context.onUpdate = () => {
-                // GameDispatcher.getInstance().emit('GameBeat');
+                GameDispatcher.getInstance().emit('GameBeat');
             }
         })
 

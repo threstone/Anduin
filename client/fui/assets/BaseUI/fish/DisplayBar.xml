@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="40,480">
+  <displayList>
+    <graph id="n0_ols2" name="greenBg" xy="-3,-3" size="46,486" type="rect" lineSize="3" fillColor="#00ffffff"/>
+    <graph id="n1_ols2" name="green" xy="0,399" size="40,80" type="rect" lineSize="0" fillColor="#ff66ff00"/>
+    <component id="n4_ols2" name="fish" src="ols25p" fileName="fish/Fish.xml" xy="0,438" size="40,40" visible="false"/>
+    <component id="n5_ols2" name="progressBar" src="ols25s" fileName="fish/FishProgressBar.xml" xy="49,479" skew="-90,-90" visible="false">
+      <ProgressBar value="14" max="100"/>
+    </component>
+  </displayList>
+</component>

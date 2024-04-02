@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="750,1334" overflow="hidden" bgColor="#333333">
+  <displayList>
+    <graph id="n5_ols2" name="bg" xy="0,0" size="750,1334" type="rect" lineSize="3" fillColor="#ff999933">
+      <relation target="" sidePair="width-width,height-height"/>
+    </graph>
+    <component id="n4_ols2" name="displayBar" src="ols25o" fileName="fish/DisplayBar.xml" xy="251,412"/>
+    <component id="n6_ols2" name="startBtn" src="fjkiy" fileName="common/btn/Button3.xml" xy="305,1018"/>
+  </displayList>
+</component>

@@ -135,6 +135,11 @@
     <image id="dja35k" name="recovery.png" path="/game/res/"/>
     <component id="bmrc5l" name="ScrollText.xml" path="/common/" exported="true"/>
     <component id="bmrc5m" name="GameHelpsCom.xml" path="/game/" exported="true"/>
+    <component id="wpcm5n" name="FishCom.xml" path="/fish/" exported="true"/>
+    <component id="ols25o" name="DisplayBar.xml" path="/fish/" exported="true"/>
+    <component id="ols25p" name="Fish.xml" path="/fish/"/>
+    <image id="ols25r" name="fish.png" path="/fish/res/"/>
+    <component id="ols25s" name="FishProgressBar.xml" path="/fish/"/>
   </resources>
   <publish name="BaseUI" genCode="true"/>
 </packageDescription>
