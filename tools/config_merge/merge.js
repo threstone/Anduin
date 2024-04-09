@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const configsPath = process.argv[2];
+const configsPath = process.argv[2] || '../../../configs/';
 
 doMerge(configsPath + 'client/')
 doMerge(configsPath + 'server/')
