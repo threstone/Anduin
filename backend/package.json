@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha ./dist/**/test/*.test.js",
-    "start_dev": "anduin startAll dev",
-    "start": "sh anduin startAll prod -b",
-    "stop": "sh anduin stopAll prod",
-    "list": "sh anduin list prod",
-    "updateRpcDesc": "echo 生成并更新rpc类型描述文件 && anduin updateRpcDesc"
+    "start_dev": "stone startAll dev",
+    "start": "sh stone startAll prod -b",
+    "stop": "sh stone stopAll prod",
+    "list": "sh stone list prod",
+    "updateRpcDesc": "echo 生成并更新rpc类型描述文件 && stone updateRpcDesc"
   },
   "author": "",
   "license": "ISC",

@@ -13,7 +13,7 @@ export class SocketServer {
     constructor(listenPort: number, maxUser: number) {
         this.maxSocket = maxUser;
 
-        this.clientSocket_ = new WS.Server({ port: listenPort });
+        this.clientSocket_ = new WS.Server({ port: listenPort, maxPayload: 1024 * 1024 });
         this.clientSocket_.on('connection', this.onClientConnect.bind(this));
         logger.info('socket 启动 监听端口:' + listenPort);
     }
