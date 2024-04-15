@@ -21,7 +21,6 @@
             {
                 "nodeId": "Hall1",
                 "ip": "127.0.0.1",
-                "port": 2001,
                 "autuResume": true
             }
         ],
@@ -29,7 +28,6 @@
             {
                 "nodeId": "Game1",
                 "ip": "127.0.0.1",
-                "port": 3001,
                 "autuResume": true
             }
         ],
@@ -37,7 +35,6 @@
             {
                 "nodeId": "Relation",
                 "ip": "127.0.0.1",
-                "port": 9001,
                 "autuResume": true
             }
         ]

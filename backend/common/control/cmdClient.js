@@ -172,13 +172,13 @@ Options:
 
 Commands:
 
-    anduin startAll [environment]   启动服务                    eg: ${cmdStart}anduin startAll dev
-    anduin stopAll [environment]    停止所有进程                eg: ${cmdStart}anduin stopAll dev
-    anduin list [environment]       展示所有进程                eg: ${cmdStart}anduin list dev
-    anduin kill [nodeId]            杀死指定进程                eg: ${cmdStart}anduin -e dev kill Hall1
-    anduin start [nodeId]           启动指定进程                eg: ${cmdStart}anduin -e dev start Hall1
-    anduin restart [nodeId]         重新启动指定进程            eg: ${cmdStart}anduin -e dev restart Hall1
-    anduin updateRpcDesc            生成并更新rpc类型描述文件   eg: ${cmdStart}anduin updateRpcDesc
+    stone startAll [environment]   启动服务                    eg: ${cmdStart}stone startAll dev
+    stone stopAll [environment]    停止所有进程                eg: ${cmdStart}stone stopAll dev
+    stone list [environment]       展示所有进程                eg: ${cmdStart}stone list dev
+    stone kill [nodeId]            杀死指定进程                eg: ${cmdStart}stone -e dev kill Hall1
+    stone start [nodeId]           启动指定进程                eg: ${cmdStart}stone -e dev start Hall1
+    stone restart [nodeId]         重新启动指定进程            eg: ${cmdStart}stone -e dev restart Hall1
+    stone updateRpcDesc            生成并更新rpc类型描述文件   eg: ${cmdStart}stone updateRpcDesc
         `
     );
 }
