@@ -13,21 +13,5 @@
             "password": "123456",
             "timezone": "+08:00"
         }
-    },
-    
-    "prod": {
-        "redis": {
-            "host": "43.139.238.178",
-            "port": 6379,
-            "password": "Lilei199869",
-            "enableOfflineQueue": false
-        },
-        "mysql": {
-            "host": "43.139.238.178",
-            "port": 3306,
-            "user": "root",
-            "password": "Admin2022!",
-            "timezone": "+08:00"
-        }
     }
 }
