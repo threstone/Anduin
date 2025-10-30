@@ -79,7 +79,7 @@ export class BuildingCard extends EventCard {
 
     /**执行将指定的函数数组,当函数返回false的时候终止执行后续流程 */
     public deleteFunById(funcArr: EventFunction[], id: number) {
-        for (let index = 0; index < funcArr.length; index++) {
+        for (let index = funcArr.length - 1; index >= 0; index--) {
             const funcInfo = funcArr[index];
             if (funcInfo.id === id) {
                 funcArr.splice(index, 1);

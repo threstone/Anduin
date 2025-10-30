@@ -30,7 +30,7 @@ export class EventCard extends BaseCard {
     public off(eventType: EventType, id: number) {
         const eventFunArr = this.eventMap.get(eventType);
         if (eventFunArr) {
-            for (let index = 0; index < eventFunArr.length; index++) {
+            for (let index = eventFunArr.length - 1; index >= 0; index--) {
                 const funcInfo = eventFunArr[index];
                 if (funcInfo.id === id) {
                     eventFunArr.splice(index, 1);
